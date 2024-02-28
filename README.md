@@ -17,3 +17,10 @@ Here are some ideas to get you started:
 <p align="center">
 <a href="https://github.com/szmyty"><img alt="GitHub Status" src="https://github-readme-stats.vercel.app/api?username=szmyty&show_icons=true&include_all_commits=true&count_private=true"/></a>
 </p>
+
+<h4>
+  <img src="./assets/emojis/zap.png" alt="zap" style="vertical-align: middle;" /> Recent Activity
+</h4>
+
+<!--START_SECTION:activity-->
+<!--END_SECTION:activity-->
