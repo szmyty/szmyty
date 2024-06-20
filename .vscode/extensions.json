@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "Dart-Code.dart-code",
+        "Dart-Code.flutter",
+        "esbenp.prettier-vscode",
+        "ms-vscode-remote.remote-containers",
+        "pkief.material-icon-theme",
+        "william-voyek.vscode-nginx",
+        "ms-vscode-remote.remote-wsl",
+        "adpyke.codesnap",
+        "adamhartford.vscode-base64",
+        "tal7aouy.rainbow-bracket",
+        "chrmarti.regex",
+        "equinusocio.vsc-material-theme-icons"
+    ]
+}
