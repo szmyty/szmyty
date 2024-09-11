@@ -23,4 +23,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
+1. ❗ Opened issue [#13](https://github.com/szmyty/sanctuary/issues/13) in [szmyty/sanctuary](https://github.com/szmyty/sanctuary)
 <!--END_SECTION:activity-->
