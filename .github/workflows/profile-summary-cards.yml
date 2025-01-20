@@ -20,3 +20,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_KEY }}
         with:
           USERNAME: ${{ github.repository_owner }}
+          AUTO_PUSH: true
