@@ -57,5 +57,10 @@ jobs:
           plugin_steam_achievements_limit: 2
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_playtime_threshold
           plugin_steam_playtime_threshold: 2
+
+          ### Language Plugin  ###
+          # https://github.com/lowlighter/metrics/tree/master/source/plugins/languages#plugin_languages
+          plugin_languages: yes
+          
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#token
           token: ${{ secrets.METRICS_TOKEN }}
