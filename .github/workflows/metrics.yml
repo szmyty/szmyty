@@ -14,6 +14,8 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Enable Debugging
+        run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
       - name: MBTI Personality profile
         uses: lowlighter/metrics@latest
         with:
