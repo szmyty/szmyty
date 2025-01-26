@@ -69,7 +69,7 @@ jobs:
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_secrets
           plugin_achievements_secrets: yes
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_display
-          plugin_achievements_display: detailed
+          plugin_achievements_display: compact
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_limit
           plugin_achievements_limit: 0
           
