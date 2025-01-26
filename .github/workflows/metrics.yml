@@ -25,6 +25,7 @@ jobs:
           retries_delay: 300
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#%EF%B8%8F-optimize-svg-output
           optimize: css, xml, svg
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#experimental_features
           experimental_features: --optimize-svg
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#-faster-execution-with-prebuilt-docker-images
           use_prebuilt_image: yes
@@ -40,5 +41,21 @@ jobs:
           config_base64: yes
           template: "@terminal"
           setup_community_templates: "lowlighter/metrics@master:terminal+trust"
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam
+          plugin_steam: no
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_user
+          plugin_steam_user: "0"
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_token
+          #plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_sections
+          plugin_steam_sections: player, most-played, recently-played
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_games_limit
+          plugin_steam_games_limit: 1
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_recent_games_limit
+          plugin_steam_recent_games_limit: 1
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_achievements_limit
+          plugin_steam_achievements_limit: 2
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_playtime_threshold
+          plugin_steam_playtime_threshold: 2
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#token
           token: ${{ secrets.METRICS_TOKEN }}
