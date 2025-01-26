@@ -14,6 +14,16 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: MBTI Personality profile
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.plugin.16personalities.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_16personalities: yes
+          plugin_16personalities_url: ${{ secrets.SIXTEEN_PERSONALITIES_URL }}
+          plugin_16personalities_sections: personality, traits
+          plugin_16personalities_scores: no
       - uses: lowlighter/metrics@latest
         with:
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#-configure-used-timezone
