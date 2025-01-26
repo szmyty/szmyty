@@ -45,11 +45,11 @@ jobs:
           # template: "@classic"
           # setup_community_templates: "lowlighter/metrics@master:terminal+trust"
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam
-          plugin_steam: no
+          plugin_steam: yes
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_user
           plugin_steam_user: "0"
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_token
-          #plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
+          plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_sections
           plugin_steam_sections: player, most-played, recently-played
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_games_limit
