@@ -74,6 +74,16 @@ jobs:
           ### Language Plugin  ###
           # https://github.com/lowlighter/metrics/tree/master/source/plugins/languages#plugin_languages
           plugin_languages: yes
+
+          ### 16Personalities Plugin ###
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities
+          plugin_16personalities: yes
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities_url
+          plugin_16personalities_url: ${{ secrets.SIXTEEN_PERSONALITIES_URL }}
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities_sections
+          plugin_16personalities_sections: personality, profile, traits
+          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities_scores
+          plugin_16personalities_scores: yes
           
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#token
           token: ${{ secrets.METRICS_TOKEN }}
