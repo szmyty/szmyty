@@ -38,5 +38,7 @@ jobs:
           config_animations: yes
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#config_base64
           config_base64: yes
+          template: "@terminal"
+          setup_community_templates: "lowlighter/metrics@master:terminal+trust"
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#token
           token: ${{ secrets.METRICS_TOKEN }}
