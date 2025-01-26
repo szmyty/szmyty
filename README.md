@@ -14,6 +14,10 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+<picture>
+  <img src="/github-metrics.svg" alt="Metrics">
+</picture>
+
 <p align="center">
 <a href="https://github.com/szmyty"><img alt="GitHub Status" src="https://github-readme-stats.vercel.app/api?username=szmyty&show_icons=true&include_all_commits=true&count_private=true"/></a>
 </p>
