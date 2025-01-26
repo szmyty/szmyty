@@ -40,7 +40,7 @@ jobs:
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#config_base64
           config_base64: yes
           # https://github.com/lowlighter/metrics/tree/master/source/plugins/core#template
-          template: "@classic"
+          # template: "@classic"
           # setup_community_templates: "lowlighter/metrics@master:terminal+trust"
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam
           plugin_steam: no
