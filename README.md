@@ -27,5 +27,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#14](https://github.com/szmyty/sanctuary/issues/14) in [szmyty/sanctuary](https://github.com/szmyty/sanctuary)
+1. 💪 Opened PR [#1](https://github.com/szmyty/template/pull/1) in [szmyty/template](https://github.com/szmyty/template)
 <!--END_SECTION:activity-->
