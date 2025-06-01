@@ -27,5 +27,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#2](https://github.com/szmyty/react-vite-template/pull/2) in [szmyty/react-vite-template](https://github.com/szmyty/react-vite-template)
+1. 🎉 Merged PR [#31](https://github.com/egohygiene/wealth/pull/31) in [egohygiene/wealth](https://github.com/egohygiene/wealth)
 <!--END_SECTION:activity-->
