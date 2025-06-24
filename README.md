@@ -27,5 +27,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#3](https://github.com/szmyty/universal-api/pull/3) in [szmyty/universal-api](https://github.com/szmyty/universal-api)
+1. 🎉 Merged PR [#4](https://github.com/szmyty/universal-api/pull/4) in [szmyty/universal-api](https://github.com/szmyty/universal-api)
 <!--END_SECTION:activity-->
