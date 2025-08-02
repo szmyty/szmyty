@@ -27,5 +27,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#2](https://github.com/szmyty/gitreport/pull/2) in [szmyty/gitreport](https://github.com/szmyty/gitreport)
+1. 🎉 Merged PR [#23](https://github.com/egohygiene/website/pull/23) in [egohygiene/website](https://github.com/egohygiene/website)
 <!--END_SECTION:activity-->
