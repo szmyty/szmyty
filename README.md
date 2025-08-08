@@ -27,5 +27,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#24](https://github.com/egohygiene/website/pull/24) in [egohygiene/website](https://github.com/egohygiene/website)
+1. ❗ Opened issue [#1](https://github.com/egohygiene/egohygiene/issues/1) in [egohygiene/egohygiene](https://github.com/egohygiene/egohygiene)
 <!--END_SECTION:activity-->
