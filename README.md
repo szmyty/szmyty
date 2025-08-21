@@ -27,5 +27,5 @@ Here are some ideas to get you started:
 </h4>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#1](https://github.com/egohygiene/egohygiene/issues/1) in [egohygiene/egohygiene](https://github.com/egohygiene/egohygiene)
+1. ❗ Opened issue [#11](https://github.com/egohygiene/base/issues/11) in [egohygiene/base](https://github.com/egohygiene/base)
 <!--END_SECTION:activity-->
