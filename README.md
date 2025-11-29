@@ -254,7 +254,7 @@
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#5](https://github.com/szmyty/szmyty/issues/5) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
+1.  Assigned issue [#7](https://github.com/szmyty/szmyty/issues/7) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
 <!--END_SECTION:activity-->
 
 <br/>
