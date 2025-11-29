@@ -264,7 +264,7 @@
 </div>
 
 <!--START_SECTION:activity-->
-1.  Assigned issue [#8](https://github.com/szmyty/szmyty/issues/8) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
+1.  Assigned issue [#9](https://github.com/szmyty/szmyty/issues/9) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
 <!--END_SECTION:activity-->
 
 <br/>
