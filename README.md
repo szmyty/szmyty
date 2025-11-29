@@ -212,51 +212,40 @@
 
 <table align="center">
 <tr>
-<td width="50%" valign="top">
+<td width="33%" align="center" valign="top">
 
-### 📦 Project Name 1
-> *Short description of the project and what it does.*
+### 📱 android-app
+> *Native Android application with modern architecture and Material Design.*
 
-![Java](https://img.shields.io/badge/-Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/-Spring-6DB33F?style=flat-square&logo=spring&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Kotlin](https://img.shields.io/badge/-Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
+![Android](https://img.shields.io/badge/-Android-3DDC84?style=flat-square&logo=android&logoColor=white)
+![Jetpack](https://img.shields.io/badge/-Jetpack-4285F4?style=flat-square&logo=android&logoColor=white)
 
-[📂 View Repository](#)
+[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/android-app)
 
 </td>
-<td width="50%" valign="top">
+<td width="33%" align="center" valign="top">
 
-### 📦 Project Name 2
-> *Short description of the project and what it does.*
+### 🐍 python-pipeline
+> *Automated data processing pipeline with ETL workflows and scheduling.*
 
 ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white)
+![Apache Airflow](https://img.shields.io/badge/-Airflow-017CEE?style=flat-square&logo=apache-airflow&logoColor=white)
+![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 
-[📂 View Repository](#)
+[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/python-pipeline)
 
 </td>
-</tr>
-<tr>
-<td width="50%" valign="top">
+<td width="33%" align="center" valign="top">
 
-### 📦 Project Name 3
-> *Short description of the project and what it does.*
+### 📊 react-dashboards
+> *Interactive data visualization dashboards built with React and modern charting libraries.*
 
-![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/-React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![D3.js](https://img.shields.io/badge/-D3.js-F9A03C?style=flat-square&logo=d3.js&logoColor=white)
 
-[📂 View Repository](#)
-
-</td>
-<td width="50%" valign="top">
-
-### 📦 Project Name 4
-> *Short description of the project and what it does.*
-
-![Vue.js](https://img.shields.io/badge/-Vue.js-35495E?style=flat-square&logo=vue.js&logoColor=4FC08D)
-![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-
-[📂 View Repository](#)
+[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/react-dashboards)
 
 </td>
 </tr>
