@@ -198,7 +198,7 @@
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#1](https://github.com/szmyty/szmyty/issues/1) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
+1.  Assigned issue [#5](https://github.com/szmyty/szmyty/issues/5) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
 <!--END_SECTION:activity-->
 
 <br/>
