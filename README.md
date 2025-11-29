@@ -87,6 +87,62 @@
 <br/>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- 💡 DEVELOPER EXPERIENCE                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+## 💡 Developer Experience
+
+</div>
+
+<table align="center">
+<tr>
+<td width="33%" align="center" valign="top">
+
+### 🎯 DX Philosophy
+
+> *Great developer experience is the foundation of great software.*
+
+**Principles I Live By:**
+- ⚡ Automate the mundane
+- 🔄 Fast feedback loops
+- 📚 Self-documenting code
+- 🧩 Composable architectures
+
+</td>
+<td width="33%" align="center" valign="top">
+
+### 🏛️ Engineering Pillars
+
+> *Building on solid foundations for lasting impact.*
+
+**Core Values:**
+- 🔒 Security by design
+- 📈 Scalability first
+- 🧪 Test-driven quality
+- 🔧 Continuous improvement
+
+</td>
+<td width="33%" align="center" valign="top">
+
+### 🚀 What I Build
+
+> *Crafting tools and systems that empower developers.*
+
+**Focus Areas:**
+- 🛠️ Developer tooling & CLIs
+- ☁️ Cloud-native platforms
+- 🤖 AI-assisted workflows
+- 🔁 CI/CD pipelines
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
 <!-- 🛠️ TECH STACK                                                               -->
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
