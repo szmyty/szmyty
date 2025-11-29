@@ -4,10 +4,10 @@
 
 <div align="center">
 
-# Alan Szmyt
+<!-- Branded Header Banner -->
+<img src="branding/header.svg" alt="Alan Szmyt - Software Engineer • DevOps & Cloud • AI-Assisted Systems" width="100%"/>
 
-### Software Engineer • DevOps & Cloud • AI-Assisted Systems
-
+<br/>
 <br/>
 
 <!-- Badges Row 1 -->
