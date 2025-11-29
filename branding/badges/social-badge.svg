@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" width="160" height="28">
+  <defs>
+    <linearGradient id="socialGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Badge background -->
+  <rect width="160" height="28" rx="6" fill="url(#socialGradient)"/>
+  
+  <!-- Badge border -->
+  <rect x="0.5" y="0.5" width="159" height="27" rx="5.5" fill="none" stroke="#4a4e69" stroke-width="1" opacity="0.5"/>
+  
+  <!-- GitHub icon placeholder -->
+  <circle cx="18" cy="14" r="9" fill="url(#iconGradient)" opacity="0.3"/>
+  <path d="M18 6a8 8 0 00-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.51-1.07-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.21c0 .21.14.46.55.38A8 8 0 0018 6z" fill="#e2e8f0" transform="scale(0.7) translate(7, 6)"/>
+  
+  <!-- Badge text -->
+  <text x="95" y="18" font-family="'SF Mono', 'Fira Code', 'Monaco', monospace" font-size="11" fill="#e2e8f0" text-anchor="middle" font-weight="500">@username</text>
+</svg>
