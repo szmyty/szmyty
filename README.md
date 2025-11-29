@@ -10,11 +10,15 @@
 
 <br/>
 
-<!-- Badges Row -->
+<!-- Badges Row 1 -->
 [![GitHub followers](https://img.shields.io/github/followers/szmyty?style=for-the-badge&logo=github&logoColor=white&labelColor=1a1a2e&color=4a4e69)](https://github.com/szmyty?tab=followers)
 [![Profile Views](https://komarev.com/ghpvc/?username=szmyty&style=for-the-badge&color=4a4e69&labelColor=1a1a2e)](https://github.com/szmyty)
 [![GitHub Stars](https://img.shields.io/github/stars/szmyty?style=for-the-badge&logo=github&logoColor=white&labelColor=1a1a2e&color=4a4e69)](https://github.com/szmyty?tab=repositories)
-[![Last Commit](https://img.shields.io/github/last-commit/szmyty/szmyty?style=for-the-badge&logo=git&logoColor=white&labelColor=1a1a2e&color=4a4e69)](https://github.com/szmyty/szmyty/commits)
+
+<!-- Badges Row 2 -->
+[![Commit Activity](https://img.shields.io/github/commit-activity/m/szmyty/szmyty?style=for-the-badge&logo=git&logoColor=white&labelColor=1a1a2e&color=4a4e69)](https://github.com/szmyty/szmyty/commits)
+[![Top Language](https://img.shields.io/github/languages/top/szmyty/szmyty?style=for-the-badge&logo=github&logoColor=white&labelColor=1a1a2e&color=4a4e69)](https://github.com/szmyty/szmyty)
+[![CI](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/metrics.yml?style=for-the-badge&logo=github-actions&logoColor=white&labelColor=1a1a2e&color=4a4e69&label=CI)](https://github.com/szmyty/szmyty/actions)
 
 </div>
 
