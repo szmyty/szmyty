@@ -270,6 +270,27 @@
 <br/>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- 🤖 AUTOMATION & WORKFLOWS                                                   -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+## 🤖 Automation & Workflows
+
+*This profile is automatically updated daily via GitHub Actions.*
+
+| Workflow | Description | Status |
+|----------|-------------|--------|
+| [Metrics](/.github/workflows/metrics.yml) | Generates GitHub metrics SVG | [![Metrics](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/metrics.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/metrics.yml) |
+| [Update README](/.github/workflows/update-readme.yml) | Updates recent activity section | [![Update README](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/update-readme.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/update-readme.yml) |
+| [Profile Cards](/.github/workflows/profile-summary-cards.yml) | Generates profile summary cards | [![Profile Cards](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/profile-summary-cards.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/profile-summary-cards.yml) |
+| [Update Stats](/.github/workflows/update-stats.yml) | Updates GitHub stats badges | [![Update Stats](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/update-stats.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/update-stats.yml) |
+
+</div>
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
 <!-- 📫 FOOTER                                                                   -->
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 

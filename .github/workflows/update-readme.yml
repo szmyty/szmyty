@@ -1,8 +1,10 @@
 name: Update README
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    # Run daily at midnight UTC
+    - cron: "0 0 * * *"
   workflow_dispatch:
+
 jobs:
   build:
     name: Update this repo's README with recent activity
@@ -11,7 +13,17 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      # Cache GitHub API responses to prevent rate limiting
+      - name: Cache GitHub API responses
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/github-activity
+          key: github-activity-${{ github.run_id }}
+          restore-keys: |
+            github-activity-
+
       - uses: jamesgeorge007/github-activity-readme@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
