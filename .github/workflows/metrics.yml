@@ -18,6 +18,10 @@ jobs:
       - name: Enable Debugging
         run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
 
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
       # Cache metrics data to prevent rate limiting
       - name: Cache metrics data
         uses: actions/cache@v4
@@ -25,7 +29,7 @@ jobs:
           path: |
             /tmp/.metrics-cache
             ~/.cache/metrics
-          key: metrics-cache-${{ github.run_id }}
+          key: metrics-cache-${{ steps.date.outputs.date }}
           restore-keys: |
             metrics-cache-
 

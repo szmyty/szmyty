@@ -15,12 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
       # Cache GitHub API responses to prevent rate limiting
       - name: Cache GitHub API responses
         uses: actions/cache@v4
         with:
           path: ~/.cache/github-activity
-          key: github-activity-${{ github.run_id }}
+          key: github-activity-${{ steps.date.outputs.date }}
           restore-keys: |
             github-activity-
 
