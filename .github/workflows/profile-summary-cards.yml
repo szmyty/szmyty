@@ -15,8 +15,10 @@ jobs:
     steps:
       - name: Check if secrets are available
         id: check-secrets
+        env:
+          HAS_SECRET: ${{ secrets.PERSONAL_ACCESS_KEY != '' }}
         run: |
-          if [ -z "${{ secrets.PERSONAL_ACCESS_KEY }}" ]; then
+          if [ "$HAS_SECRET" != "true" ]; then
             echo "secret_available=false" >> $GITHUB_OUTPUT
             echo "::warning::PERSONAL_ACCESS_KEY secret is not configured. Skipping profile cards generation."
           else
