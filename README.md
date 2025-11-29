@@ -36,7 +36,7 @@
 <tr>
 <td width="50%" align="center">
   
-<img src="/github-metrics.svg" alt="GitHub Metrics" width="100%"/>
+<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/github-metrics.svg" alt="GitHub Metrics" width="100%"/>
 
 </td>
 <td width="50%" align="center">

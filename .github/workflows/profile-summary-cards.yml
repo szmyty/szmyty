@@ -1,7 +1,6 @@
 name: GitHub-Profile-Summary-Cards
 
 on:
-  create:
   schedule: # execute every 24 hours
     - cron: "0 0 * * *" # Executes at midnight UTC daily
   workflow_dispatch:
@@ -14,12 +13,24 @@ jobs:
       contents: write
 
     steps:
+      - name: Check if secrets are available
+        id: check-secrets
+        run: |
+          if [ -z "${{ secrets.PERSONAL_ACCESS_KEY }}" ]; then
+            echo "secret_available=false" >> $GITHUB_OUTPUT
+            echo "::warning::PERSONAL_ACCESS_KEY secret is not configured. Skipping profile cards generation."
+          else
+            echo "secret_available=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Get current date
+        if: steps.check-secrets.outputs.secret_available == 'true'
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       # Cache npm dependencies and GitHub API responses
       - name: Cache dependencies
+        if: steps.check-secrets.outputs.secret_available == 'true'
         uses: actions/cache@v4
         with:
           path: |
@@ -29,19 +40,23 @@ jobs:
           restore-keys: |
             profile-summary-
 
-      # Step 1: Check out the private repository where the action resides
+      # Check out the private repository where the action resides
       - name: Check out private action repository
+        if: steps.check-secrets.outputs.secret_available == 'true'
         uses: actions/checkout@v4
         with:
           repository: szmyty/github-profile-summary-cards
           ref: main
           token: ${{ secrets.PERSONAL_ACCESS_KEY }}
           path: ./
+        continue-on-error: true
 
-      # Step 2: Use the action from the private repository
+      # Run the action from the private repository
       - name: Run the action from the private repo
+        if: steps.check-secrets.outputs.secret_available == 'true'
         uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_KEY }}
         with:
           USERNAME: ${{ github.repository_owner }}
+        continue-on-error: true
