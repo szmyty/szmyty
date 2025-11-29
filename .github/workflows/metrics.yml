@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
   # (optional) Run workflow when pushing on master/main
   push: {branches: ["master", "main"]}
+
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
@@ -16,6 +17,22 @@ jobs:
     steps:
       - name: Enable Debugging
         run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      # Cache metrics data to prevent rate limiting
+      - name: Cache metrics data
+        uses: actions/cache@v4
+        with:
+          path: |
+            /tmp/.metrics-cache
+            ~/.cache/metrics
+          key: metrics-cache-${{ steps.date.outputs.date }}
+          restore-keys: |
+            metrics-cache-
+
       - uses: lowlighter/metrics@latest
         with:
           # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#-configure-used-timezone
