@@ -42,23 +42,80 @@ jobs:
           restore-keys: |
             profile-summary-
 
-      # Check out the private repository where the action resides
-      - name: Check out private action repository
+      # CRITICAL: First checkout this profile repository
+      - name: Checkout profile repository
+        if: steps.check-secrets.outputs.secret_available == 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PERSONAL_ACCESS_KEY }}
+
+      # Then checkout the private action to a nested path
+      - name: Checkout private action repository
         if: steps.check-secrets.outputs.secret_available == 'true'
         uses: actions/checkout@v4
         with:
           repository: szmyty/github-profile-summary-cards
           ref: main
           token: ${{ secrets.PERSONAL_ACCESS_KEY }}
-          path: ./
+          path: .github/actions/profile-summary-cards
         continue-on-error: true
 
-      # Run the action from the private repository
-      - name: Run the action from the private repo
+      # Configure git for committing
+      - name: Configure git
         if: steps.check-secrets.outputs.secret_available == 'true'
-        uses: ./
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Run the action from the nested path
+      - name: Generate profile summary cards
+        if: steps.check-secrets.outputs.secret_available == 'true'
+        uses: ./.github/actions/profile-summary-cards
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_KEY }}
         with:
           USERNAME: ${{ github.repository_owner }}
         continue-on-error: true
+
+      # Verify output files were generated
+      - name: Verify generated files
+        if: steps.check-secrets.outputs.secret_available == 'true'
+        id: verify
+        run: |
+          echo "=== Checking for generated output ==="
+          if [ -d "profile-summary-card-output" ]; then
+            echo "output_exists=true" >> $GITHUB_OUTPUT
+            echo "✅ profile-summary-card-output directory exists"
+            echo "Files generated:"
+            find profile-summary-card-output -type f -name "*.svg" | head -20
+            SVG_COUNT=$(find profile-summary-card-output -type f -name "*.svg" | wc -l)
+            echo "svg_count=$SVG_COUNT" >> $GITHUB_OUTPUT
+            echo "Total SVG files: $SVG_COUNT"
+          else
+            echo "output_exists=false" >> $GITHUB_OUTPUT
+            echo "❌ profile-summary-card-output directory not found"
+          fi
+
+      # Commit and push generated cards
+      - name: Commit and push changes
+        if: steps.check-secrets.outputs.secret_available == 'true' && steps.verify.outputs.output_exists == 'true'
+        run: |
+          # Remove the nested action directory before committing
+          rm -rf .github/actions/profile-summary-cards
+
+          # Check if there are changes to commit
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git add profile-summary-card-output/
+            git commit -m "Update profile summary cards - $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+            git push origin HEAD
+            echo "✅ Changes committed and pushed successfully"
+          fi
+
+      # Log if generation failed
+      - name: Log generation status
+        if: steps.check-secrets.outputs.secret_available == 'true' && steps.verify.outputs.output_exists != 'true'
+        run: |
+          echo "::warning::Profile summary cards were not generated. Check the action logs for details."

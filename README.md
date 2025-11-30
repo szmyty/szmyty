@@ -53,6 +53,32 @@
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=szmyty&theme=tokyonight&hide_border=true&background=0d1117" alt="GitHub Streak" width="60%"/>
 
+<br/>
+<br/>
+
+### 📈 Profile Summary Cards
+
+<table>
+<tr>
+<td width="50%" align="center">
+<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/0-profile-details.svg" alt="Profile Details" width="100%"/>
+</td>
+<td width="50%" align="center">
+<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/3-stats.svg" alt="Stats" width="100%"/>
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/1-repos-per-language.svg" alt="Repos per Language" width="100%"/>
+</td>
+<td width="50%" align="center">
+<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/2-most-commit-language.svg" alt="Most Commit Language" width="100%"/>
+</td>
+</tr>
+</table>
+
+<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/4-productive-time.svg" alt="Productive Time" width="60%"/>
+
 </div>
 
 <br/>
@@ -284,7 +310,6 @@
 | [Metrics](/.github/workflows/metrics.yml) | Generates GitHub metrics SVG | [![Metrics](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/metrics.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/metrics.yml) |
 | [Update README](/.github/workflows/update-readme.yml) | Updates recent activity section | [![Update README](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/update-readme.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/update-readme.yml) |
 | [Profile Cards](/.github/workflows/profile-summary-cards.yml) | Generates profile summary cards | [![Profile Cards](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/profile-summary-cards.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/profile-summary-cards.yml) |
-| [Update Stats](/.github/workflows/update-stats.yml) | Updates GitHub stats badges | [![Update Stats](https://img.shields.io/github/actions/workflow/status/szmyty/szmyty/update-stats.yml?style=flat-square&label=status)](https://github.com/szmyty/szmyty/actions/workflows/update-stats.yml) |
 
 </div>
 
