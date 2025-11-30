@@ -10,13 +10,15 @@ on:
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: production
     permissions:
       contents: write
     steps:
-      - name: Enable Debugging
-        run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Get current date
         id: date
@@ -33,76 +35,161 @@ jobs:
           restore-keys: |
             metrics-cache-
 
-      - uses: lowlighter/metrics@latest
+      # Create metrics directory
+      - name: Create metrics directory
+        run: mkdir -p metrics
+
+      # Generate Overview/Main Metrics SVG
+      - name: Generate overview metrics
+        uses: lowlighter/metrics@latest
         with:
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#-configure-used-timezone
+          filename: metrics/overview.svg
+          token: ${{ secrets.METRICS_TOKEN }}
           config_timezone: America/New_York
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#-skipping-repositories-in-plugins
-          # repositories_skipped: user/my-repo
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#%EF%B8%8F-retrying-automatically-failed-rendering-and-output-action
           retries: 3
           retries_delay: 300
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#%EF%B8%8F-optimize-svg-output
           optimize: css, xml, svg
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#experimental_features
           experimental_features: --optimize-svg
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#-faster-execution-with-prebuilt-docker-images
           use_prebuilt_image: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#output_condition
           output_condition: always
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#config_twemoji
           config_twemoji: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#config_gemoji
           config_gemoji: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#config_animations
           config_animations: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#config_base64
           config_base64: yes
-          # https://github.com/lowlighter/metrics/tree/master/source/plugins/core#template
-          # template: "@classic"
-          # setup_community_templates: "lowlighter/metrics@master:terminal+trust"
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam
-          plugin_steam: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_user
-          plugin_steam_user: "0"
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_token
-          plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_sections
-          plugin_steam_sections: player, most-played, recently-played
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_games_limit
-          plugin_steam_games_limit: 1
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_recent_games_limit
-          plugin_steam_recent_games_limit: 1
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_achievements_limit
-          plugin_steam_achievements_limit: 2
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/steam/README.md#plugin_steam_playtime_threshold
-          plugin_steam_playtime_threshold: 2
-
-          ### Achievements Plugin ###
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements
+          # Base metrics
+          base: header, activity, community, repositories
+          # Achievements plugin
           plugin_achievements: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_threshold
           plugin_achievements_threshold: C
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_secrets
           plugin_achievements_secrets: yes
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_display
           plugin_achievements_display: compact
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/achievements/README.md#plugin_achievements_limit
           plugin_achievements_limit: 0
-          
-          ### Language Plugin  ###
-          # https://github.com/lowlighter/metrics/tree/master/source/plugins/languages#plugin_languages
+
+      # Generate GitHub Stats SVG
+      - name: Generate GitHub stats
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/github-stats.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_timezone: America/New_York
+          retries: 3
+          retries_delay: 300
+          optimize: css, xml, svg
+          experimental_features: --optimize-svg
+          use_prebuilt_image: yes
+          output_condition: always
+          config_twemoji: yes
+          config_gemoji: yes
+          config_animations: yes
+          config_base64: yes
+          # Focus on stats
+          base: header, repositories
+          plugin_followup: yes
+          plugin_followup_sections: repositories, user
+
+      # Generate Top Languages SVG
+      - name: Generate top languages
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/top-languages.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_timezone: America/New_York
+          retries: 3
+          retries_delay: 300
+          optimize: css, xml, svg
+          experimental_features: --optimize-svg
+          use_prebuilt_image: yes
+          output_condition: always
+          config_twemoji: yes
+          config_gemoji: yes
+          config_animations: yes
+          config_base64: yes
+          # Languages only
+          base: ""
+          plugin_languages: yes
+          plugin_languages_analysis_timeout: 15
+          plugin_languages_categories: markup, programming
+          plugin_languages_colors: github
+          plugin_languages_limit: 8
+          plugin_languages_recent_days: 365
+          plugin_languages_sections: most-used
+          plugin_languages_threshold: 0%
+
+      # Generate Contributions/Streaks SVG
+      - name: Generate contributions
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/contributions.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_timezone: America/New_York
+          retries: 3
+          retries_delay: 300
+          optimize: css, xml, svg
+          experimental_features: --optimize-svg
+          use_prebuilt_image: yes
+          output_condition: always
+          config_twemoji: yes
+          config_gemoji: yes
+          config_animations: yes
+          config_base64: yes
+          # Contributions focus
+          base: header
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          plugin_habits: yes
+          plugin_habits_from: 200
+          plugin_habits_days: 30
+          plugin_habits_charts: yes
+
+      # Also generate the legacy github-metrics.svg for backward compatibility
+      - name: Generate main metrics (legacy)
+        uses: lowlighter/metrics@latest
+        with:
+          filename: github-metrics.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_timezone: America/New_York
+          retries: 3
+          retries_delay: 300
+          optimize: css, xml, svg
+          experimental_features: --optimize-svg
+          use_prebuilt_image: yes
+          output_condition: always
+          config_twemoji: yes
+          config_gemoji: yes
+          config_animations: yes
+          config_base64: yes
+          # Steam plugin (if configured)
+          plugin_steam: yes
+          plugin_steam_user: "0"
+          plugin_steam_token: ${{ secrets.STEAM_TOKEN }}
+          plugin_steam_sections: player, most-played, recently-played
+          plugin_steam_games_limit: 1
+          plugin_steam_recent_games_limit: 1
+          plugin_steam_achievements_limit: 2
+          plugin_steam_playtime_threshold: 2
+          # Achievements plugin
+          plugin_achievements: yes
+          plugin_achievements_threshold: C
+          plugin_achievements_secrets: yes
+          plugin_achievements_display: compact
+          plugin_achievements_limit: 0
+          # Languages plugin
           plugin_languages: yes
 
-          ### 16Personalities Plugin ###
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities
-          plugin_16personalities: no
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities_url
-          plugin_16personalities_url: ${{ secrets.SIXTEEN_PERSONALITIES_URL }}
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities_sections
-          plugin_16personalities_sections: personality, profile, traits
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/community/16personalities/README.md#plugin_16personalities_scores
-          plugin_16personalities_scores: yes
-          
-          # https://github.com/lowlighter/metrics/blob/master/source/plugins/core/README.md#token
-          token: ${{ secrets.METRICS_TOKEN }}
+      # Configure git for committing
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Commit and push generated SVGs
+      - name: Commit and push changes
+        run: |
+          git add metrics/ github-metrics.svg
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update metrics SVGs [skip ci]"
+            git push
+            echo "✅ Metrics SVGs updated successfully"
+          fi

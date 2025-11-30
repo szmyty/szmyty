@@ -26,6 +26,7 @@
 
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 <!-- 📊 METRICS DASHBOARD                                                        -->
+<!-- Self-hosted GitHub stats using lowlighter/metrics - no external API deps   -->
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
 <div align="center">
@@ -35,49 +36,35 @@
 <table>
 <tr>
 <td width="50%" align="center">
-  
-<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/github-metrics.svg" alt="GitHub Metrics" width="100%"/>
+
+<!-- Self-hosted: Overview metrics -->
+<img src="./metrics/overview.svg" alt="GitHub Overview" width="100%"/>
 
 </td>
 <td width="50%" align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=szmyty&show_icons=true&include_all_commits=true&count_private=true&theme=tokyonight&hide_border=true&bg_color=0d1117" alt="GitHub Stats" width="100%"/>
+<!-- Self-hosted: GitHub stats -->
+<img src="./metrics/github-stats.svg" alt="GitHub Stats" width="100%"/>
 
 <br/>
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=szmyty&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&langs_count=8" alt="Top Languages" width="100%"/>
+<!-- Self-hosted: Top Languages -->
+<img src="./metrics/top-languages.svg" alt="Top Languages" width="100%"/>
 
 </td>
 </tr>
 </table>
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=szmyty&theme=tokyonight&hide_border=true&background=0d1117" alt="GitHub Streak" width="60%"/>
+<!-- Self-hosted: Contributions/Streaks -->
+<img src="./metrics/contributions.svg" alt="Contributions" width="80%"/>
 
 <br/>
 <br/>
 
-### 📈 Profile Summary Cards
+### 📈 Full Metrics
 
-<table>
-<tr>
-<td width="50%" align="center">
-<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/0-profile-details.svg" alt="Profile Details" width="100%"/>
-</td>
-<td width="50%" align="center">
-<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/3-stats.svg" alt="Stats" width="100%"/>
-</td>
-</tr>
-<tr>
-<td width="50%" align="center">
-<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/1-repos-per-language.svg" alt="Repos per Language" width="100%"/>
-</td>
-<td width="50%" align="center">
-<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/2-most-commit-language.svg" alt="Most Commit Language" width="100%"/>
-</td>
-</tr>
-</table>
-
-<img src="https://raw.githubusercontent.com/szmyty/szmyty/master/profile-summary-card-output/default/4-productive-time.svg" alt="Productive Time" width="60%"/>
+<!-- Self-hosted: Complete metrics panel -->
+<img src="./github-metrics.svg" alt="GitHub Metrics" width="70%"/>
 
 </div>
 
@@ -332,6 +319,6 @@
 
 *Made with ❤️ by Alan*
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
+<img src="branding/header.svg" alt="Alan Szmyt" width="100%"/>
 
 </div>
