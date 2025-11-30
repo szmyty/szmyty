@@ -14,13 +14,14 @@ This document provides diagnostics and fixes for the GitHub Profile Summary Card
 - Step 1: Workflow checked out `szmyty/github-profile-summary-cards` to `./`
 - Step 2: This completely replaced the `szmyty/szmyty` profile repository
 - Step 3: Action generated cards but tried to commit to wrong git remote
-- Step 4: Error: `git add,./profile-summary-card-output/ Invalid status code: 1`
+- Step 4: Commit failed with exit code 1
 
-**Error from logs**:
+**Error from logs** (verbatim quote with formatting as shown in GitHub Actions):
 ```
 ##[error]Error: git add,./profile-summary-card-output/ 
   Invalid status code: 1
 ```
+*Note: The comma in the error message above is from the original action's error output, not a typo.*
 
 ### 2. README Missing Profile Summary Card Embeds
 
