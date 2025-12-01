@@ -232,6 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
+1. 🔒 Closed issue [#31](https://github.com/szmyty/theatre/issues/31) in [szmyty/theatre](https://github.com/szmyty/theatre)
+2. ❗ Opened issue [#31](https://github.com/szmyty/theatre/issues/31) in [szmyty/theatre](https://github.com/szmyty/theatre)
+3.  Assigned issue [#31](https://github.com/szmyty/theatre/issues/31) in [szmyty/theatre](https://github.com/szmyty/theatre)
+4. 🔒 Closed issue [#29](https://github.com/szmyty/theatre/issues/29) in [szmyty/theatre](https://github.com/szmyty/theatre)
+5. ❗ Opened issue [#29](https://github.com/szmyty/theatre/issues/29) in [szmyty/theatre](https://github.com/szmyty/theatre)
 <!--END_SECTION:activity-->
 
 <br/>
