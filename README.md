@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#31](https://github.com/szmyty/theatre/issues/31) in [szmyty/theatre](https://github.com/szmyty/theatre)
-2. ❗ Opened issue [#31](https://github.com/szmyty/theatre/issues/31) in [szmyty/theatre](https://github.com/szmyty/theatre)
-3.  Assigned issue [#31](https://github.com/szmyty/theatre/issues/31) in [szmyty/theatre](https://github.com/szmyty/theatre)
-4. 🔒 Closed issue [#29](https://github.com/szmyty/theatre/issues/29) in [szmyty/theatre](https://github.com/szmyty/theatre)
-5. ❗ Opened issue [#29](https://github.com/szmyty/theatre/issues/29) in [szmyty/theatre](https://github.com/szmyty/theatre)
+1. 🔒 Closed issue [#11](https://github.com/szmyty/profile/issues/11) in [szmyty/profile](https://github.com/szmyty/profile)
+2. ❗ Opened issue [#13](https://github.com/szmyty/profile/issues/13) in [szmyty/profile](https://github.com/szmyty/profile)
+3.  Assigned issue [#11](https://github.com/szmyty/profile/issues/11) in [szmyty/profile](https://github.com/szmyty/profile)
+4. ❗ Opened issue [#11](https://github.com/szmyty/profile/issues/11) in [szmyty/profile](https://github.com/szmyty/profile)
+5. 🔒 Closed issue [#9](https://github.com/szmyty/profile/issues/9) in [szmyty/profile](https://github.com/szmyty/profile)
 <!--END_SECTION:activity-->
 
 <br/>
