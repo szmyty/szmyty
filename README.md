@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. 🗣 Commented on [#116](https://github.com/szmyty/profile/pull/116#issuecomment-3608964710) in [szmyty/profile](https://github.com/szmyty/profile)
-2. 🗣 Commented on [#114](https://github.com/szmyty/profile/pull/114#issuecomment-3608962180) in [szmyty/profile](https://github.com/szmyty/profile)
-3. 🔒 Closed issue [#123](https://github.com/szmyty/profile/issues/123) in [szmyty/profile](https://github.com/szmyty/profile)
-4.  Assigned issue [#123](https://github.com/szmyty/profile/issues/123) in [szmyty/profile](https://github.com/szmyty/profile)
-5. 🔒 Closed issue [#121](https://github.com/szmyty/profile/issues/121) in [szmyty/profile](https://github.com/szmyty/profile)
+1. ❗ Opened issue [#135](https://github.com/szmyty/profile/issues/135) in [szmyty/profile](https://github.com/szmyty/profile)
+2.  Assigned issue [#133](https://github.com/szmyty/profile/issues/133) in [szmyty/profile](https://github.com/szmyty/profile)
+3. ❗ Opened issue [#133](https://github.com/szmyty/profile/issues/133) in [szmyty/profile](https://github.com/szmyty/profile)
+4.  Assigned issue [#132](https://github.com/szmyty/profile/issues/132) in [szmyty/profile](https://github.com/szmyty/profile)
+5. ❗ Opened issue [#132](https://github.com/szmyty/profile/issues/132) in [szmyty/profile](https://github.com/szmyty/profile)
 <!--END_SECTION:activity-->
 
 <br/>
