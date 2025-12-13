@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#3](https://github.com/egohygiene/ubi/issues/3) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-2. ❗ Opened issue [#3](https://github.com/egohygiene/ubi/issues/3) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-3.  Assigned issue [#3](https://github.com/egohygiene/ubi/issues/3) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-4.  Assigned issue [#3](https://github.com/egohygiene/ubi/issues/3) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-5. 🔒 Closed issue [#1](https://github.com/egohygiene/ubi/issues/1) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+1. 🔒 Closed issue [#25](https://github.com/egohygiene/ubi/issues/25) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+2. 🔒 Closed issue [#27](https://github.com/egohygiene/ubi/issues/27) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+3. 🔒 Closed issue [#29](https://github.com/egohygiene/ubi/issues/29) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+4. 🔒 Closed issue [#31](https://github.com/egohygiene/ubi/issues/31) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+5.  Assigned issue [#33](https://github.com/egohygiene/ubi/issues/33) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
 <!--END_SECTION:activity-->
 
 <br/>
