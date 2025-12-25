@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1.  Assigned issue [#86](https://github.com/egohygiene/ubi/issues/86) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-2.  Assigned issue [#85](https://github.com/egohygiene/ubi/issues/85) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-3. 🔒 Closed issue [#84](https://github.com/egohygiene/ubi/issues/84) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-4.  Assigned issue [#84](https://github.com/egohygiene/ubi/issues/84) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
-5. 🔒 Closed issue [#89](https://github.com/egohygiene/ubi/issues/89) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+1. 🔒 Closed issue [#1](https://github.com/incomprisllc/proposals/issues/1) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
+2. ❗ Opened issue [#3](https://github.com/incomprisllc/proposals/issues/3) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
+3.  Assigned issue [#3](https://github.com/incomprisllc/proposals/issues/3) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
+4. ❗ Opened issue [#1](https://github.com/incomprisllc/proposals/issues/1) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
+5.  Assigned issue [#1](https://github.com/incomprisllc/proposals/issues/1) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
 <!--END_SECTION:activity-->
 
 <br/>
