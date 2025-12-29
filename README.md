@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#1](https://github.com/incomprisllc/proposals/issues/1) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
-2. ❗ Opened issue [#3](https://github.com/incomprisllc/proposals/issues/3) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
-3.  Assigned issue [#3](https://github.com/incomprisllc/proposals/issues/3) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
-4. ❗ Opened issue [#1](https://github.com/incomprisllc/proposals/issues/1) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
-5.  Assigned issue [#1](https://github.com/incomprisllc/proposals/issues/1) in [incomprisllc/proposals](https://github.com/incomprisllc/proposals)
+1. 🔒 Closed issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
+2. ❗ Opened issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
+3.  Assigned issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
+4.  Assigned issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
+5. 🔒 Closed issue [#5](https://github.com/szmyty/resume/issues/5) in [szmyty/resume](https://github.com/szmyty/resume)
 <!--END_SECTION:activity-->
 
 <br/>
