@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
-2. ❗ Opened issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
-3.  Assigned issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
-4.  Assigned issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
-5. 🔒 Closed issue [#5](https://github.com/szmyty/resume/issues/5) in [szmyty/resume](https://github.com/szmyty/resume)
+1. 🔒 Closed issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
+2. ❗ Opened issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
+3.  Assigned issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
+4.  Assigned issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
+5. 🔒 Closed issue [#18](https://github.com/szmyty/resume/issues/18) in [szmyty/resume](https://github.com/szmyty/resume)
 <!--END_SECTION:activity-->
 
 <br/>
