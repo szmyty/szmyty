@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
-2. ❗ Opened issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
-3.  Assigned issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
-4.  Assigned issue [#20](https://github.com/szmyty/resume/issues/20) in [szmyty/resume](https://github.com/szmyty/resume)
-5. 🔒 Closed issue [#18](https://github.com/szmyty/resume/issues/18) in [szmyty/resume](https://github.com/szmyty/resume)
+1. ❗ Opened issue [#113](https://github.com/egohygiene/ubi/issues/113) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+2.  Assigned issue [#113](https://github.com/egohygiene/ubi/issues/113) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+3. ❗ Opened issue [#112](https://github.com/egohygiene/ubi/issues/112) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+4.  Assigned issue [#112](https://github.com/egohygiene/ubi/issues/112) in [egohygiene/ubi](https://github.com/egohygiene/ubi)
+5. ❗ Opened issue [#161](https://github.com/szmyty/profile/issues/161) in [szmyty/profile](https://github.com/szmyty/profile)
 <!--END_SECTION:activity-->
 
 <br/>
