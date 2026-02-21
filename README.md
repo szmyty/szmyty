@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#18](https://github.com/egohygiene/signal/issues/18) in [egohygiene/signal](https://github.com/egohygiene/signal)
-2. 🔒 Closed issue [#17](https://github.com/egohygiene/signal/issues/17) in [egohygiene/signal](https://github.com/egohygiene/signal)
-3. ℹ️ Assigned issue [#17](https://github.com/egohygiene/signal/issues/17) in [egohygiene/signal](https://github.com/egohygiene/signal)
-4. 🔒 Closed issue [#16](https://github.com/egohygiene/signal/issues/16) in [egohygiene/signal](https://github.com/egohygiene/signal)
-5. ℹ️ Assigned issue [#16](https://github.com/egohygiene/signal/issues/16) in [egohygiene/signal](https://github.com/egohygiene/signal)
+1. 🔒 Closed issue [#13](https://github.com/egohygiene/articles/issues/13) in [egohygiene/articles](https://github.com/egohygiene/articles)
+2. ℹ️ Assigned issue [#13](https://github.com/egohygiene/articles/issues/13) in [egohygiene/articles](https://github.com/egohygiene/articles)
+3. ℹ️ Assigned issue [#13](https://github.com/egohygiene/articles/issues/13) in [egohygiene/articles](https://github.com/egohygiene/articles)
+4. ❗ Opened issue [#13](https://github.com/egohygiene/articles/issues/13) in [egohygiene/articles](https://github.com/egohygiene/articles)
+5. 🔒 Closed issue [#11](https://github.com/egohygiene/articles/issues/11) in [egohygiene/articles](https://github.com/egohygiene/articles)
 <!--END_SECTION:activity-->
 
 <br/>
