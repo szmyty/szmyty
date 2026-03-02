@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#97](https://github.com/egohygiene/signal/issues/97) in [egohygiene/signal](https://github.com/egohygiene/signal)
-2. 🔒 Closed issue [#96](https://github.com/egohygiene/signal/issues/96) in [egohygiene/signal](https://github.com/egohygiene/signal)
-3. ℹ️ Assigned issue [#96](https://github.com/egohygiene/signal/issues/96) in [egohygiene/signal](https://github.com/egohygiene/signal)
-4. 🔒 Closed issue [#95](https://github.com/egohygiene/signal/issues/95) in [egohygiene/signal](https://github.com/egohygiene/signal)
-5. ❗ Opened issue [#106](https://github.com/egohygiene/signal/issues/106) in [egohygiene/signal](https://github.com/egohygiene/signal)
+1. ℹ️ Assigned issue [#122](https://github.com/egohygiene/signal/issues/122) in [egohygiene/signal](https://github.com/egohygiene/signal)
+2. 🔒 Closed issue [#120](https://github.com/egohygiene/signal/issues/120) in [egohygiene/signal](https://github.com/egohygiene/signal)
+3. ℹ️ Assigned issue [#120](https://github.com/egohygiene/signal/issues/120) in [egohygiene/signal](https://github.com/egohygiene/signal)
+4. 🔒 Closed issue [#119](https://github.com/egohygiene/signal/issues/119) in [egohygiene/signal](https://github.com/egohygiene/signal)
+5. ❗ Opened issue [#122](https://github.com/egohygiene/signal/issues/122) in [egohygiene/signal](https://github.com/egohygiene/signal)
 <!--END_SECTION:activity-->
 
 <br/>
