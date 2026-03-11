@@ -232,11 +232,11 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#20](https://github.com/egohygiene/articles/issues/20) in [egohygiene/articles](https://github.com/egohygiene/articles)
-2. ℹ️ Assigned issue [#20](https://github.com/egohygiene/articles/issues/20) in [egohygiene/articles](https://github.com/egohygiene/articles)
-3. ℹ️ Assigned issue [#19](https://github.com/egohygiene/articles/issues/19) in [egohygiene/articles](https://github.com/egohygiene/articles)
-4. ❗ Opened issue [#19](https://github.com/egohygiene/articles/issues/19) in [egohygiene/articles](https://github.com/egohygiene/articles)
-5. 🔒 Closed issue [#141](https://github.com/egohygiene/signal/issues/141) in [egohygiene/signal](https://github.com/egohygiene/signal)
+1. 🔒 Closed issue [#55](https://github.com/egohygiene/flutter-foundation/issues/55) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+2. ℹ️ Assigned issue [#55](https://github.com/egohygiene/flutter-foundation/issues/55) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+3. ℹ️ Assigned issue [#55](https://github.com/egohygiene/flutter-foundation/issues/55) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+4. ❗ Opened issue [#55](https://github.com/egohygiene/flutter-foundation/issues/55) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+5. 🔒 Closed issue [#53](https://github.com/egohygiene/flutter-foundation/issues/53) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
 <!--END_SECTION:activity-->
 
 <br/>
