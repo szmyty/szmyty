@@ -51,6 +51,7 @@ xcuserdata/
 # Logs
 logs
 *.log
+!audits/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
