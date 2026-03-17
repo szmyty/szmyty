@@ -189,28 +189,31 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 
 <td width="33%" align="center">
 
-### 📱 android-app  
-> Native Android application with modern architecture and Material Design.
+### 🎮 OpenAI-Retro-SuperMarioWorld-SNES  
+> NEAT-Python recurrent neural network that trains an AI agent to complete levels in Super Mario World on SNES via gym-retro.  
+> **Stack:** Python · NEAT · OpenAI Gym Retro
 
-[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/android-app)
-
-</td>
-
-<td width="33%" align="center">
-
-### 🐍 python-pipeline  
-> Automated ETL pipeline with containerized deployment.
-
-[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/python-pipeline)
+[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES)
 
 </td>
 
 <td width="33%" align="center">
 
-### 📊 react-dashboards  
-> Interactive data visualization dashboards using React + D3.js.
+### 🗣️ soliloquy  
+> Privately chat with and summarize PDFs using a fully local LLM — no data leaves your machine.  
+> **Stack:** Python · Docker · Ollama
 
-[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/react-dashboards)
+[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/soliloquy)
+
+</td>
+
+<td width="33%" align="center">
+
+### ⚙️ universal  
+> All-in-one universal monorepo DX: formatting, linting, spellcheck, and CI-ready automation in a single shell toolkit.  
+> **Stack:** Shell · GitHub Actions
+
+[![Open Repo](https://img.shields.io/badge/Open_Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/universal)
 
 </td>
 
