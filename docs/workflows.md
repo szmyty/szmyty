@@ -14,13 +14,13 @@ statistics using [lowlighter/metrics](https://github.com/lowlighter/metrics).
 
 **Generates:**
 
-| File                        | Contents                                       |
-| --------------------------- | ---------------------------------------------- |
-| `metrics/overview.svg`      | Header, activity, community, achievements      |
-| `metrics/github-stats.svg`  | Repository stats and follow-up issue breakdown |
-| `metrics/top-languages.svg` | Most-used programming languages                |
-| `metrics/contributions.svg` | ISO calendar heatmap and coding habits         |
-| `github-metrics.svg`        | Consolidated legacy SVG (Steam + achievements) |
+| File                                        | Contents                                       |
+| ------------------------------------------- | ---------------------------------------------- |
+| `generated/metrics/overview.svg`            | Header, activity, community, achievements      |
+| `generated/metrics/github-stats.svg`        | Repository stats and follow-up issue breakdown |
+| `generated/metrics/top-languages.svg`       | Most-used programming languages                |
+| `generated/metrics/contributions.svg`       | ISO calendar heatmap and coding habits         |
+| `generated/metrics/github-metrics.svg`      | Consolidated legacy SVG (Steam + achievements) |
 
 Requires the `METRICS_TOKEN` secret. Optionally uses `STEAM_TOKEN` for the
 Steam plugin in the legacy SVG.
@@ -34,7 +34,7 @@ Steam plugin in the legacy SVG.
 **Purpose:** Run the private `szmyty/github-profile-summary-cards` action to
 produce a themed set of profile card SVGs.
 
-**Generates:** `profile-summary-card-output/*.svg`
+**Generates:** `generated/profile-cards/*.svg`
 
 Requires the `PERSONAL_ACCESS_KEY` secret. If the secret is absent, all steps
 are skipped and the workflow exits cleanly without error.

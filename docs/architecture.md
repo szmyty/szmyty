@@ -24,17 +24,17 @@ GitHub API and renders activity, statistics, language breakdowns, habits, and
 achievements as self-hosted SVG files. This eliminates dependency on external
 badge services and prevents content gaps caused by third-party downtime.
 
-Generated files are stored in two locations:
+Generated files are stored under `generated/`:
 
-- `metrics/` — individual focused SVGs (overview, stats, languages,
+- `generated/metrics/` — individual focused SVGs (overview, stats, languages,
   contributions)
-- `github-metrics.svg` — consolidated legacy SVG retained for backward
+- `generated/metrics/github-metrics.svg` — consolidated legacy SVG retained for backward
   compatibility
 
 ### Profile Summary Cards
 
 A private action (`szmyty/github-profile-summary-cards`) generates a set of
-themed summary cards and writes them to the `profile-summary-card-output/`
+themed summary cards and writes them to the `generated/profile-cards/`
 directory. The workflow degrades gracefully: if the required secret is absent
 all card-generation steps are skipped without failing the run.
 
@@ -51,10 +51,10 @@ The action appends or refreshes an activity section on every scheduled run.
 ```text
 GitHub API
     │
-    ├─► lowlighter/metrics ──► metrics/*.svg
-    │                    └──► github-metrics.svg
+    ├─► lowlighter/metrics ──► generated/metrics/*.svg
+    │                    └──► generated/metrics/github-metrics.svg
     │
-    ├─► github-profile-summary-cards ──► profile-summary-card-output/*.svg
+    ├─► github-profile-summary-cards ──► generated/profile-cards/*.svg
     │
     └─► github-activity-readme ──► README.md (activity section)
 ```

@@ -36,17 +36,17 @@
 
 <!-- Overview -->
 <td width="33%" align="center">
-<img src="./metrics/overview.svg" alt="GitHub Overview" width="100%"/>
+<img src="./generated/metrics/overview.svg" alt="GitHub Overview" width="100%"/>
 </td>
 
 <!-- Stats -->
 <td width="33%" align="center">
-<img src="./metrics/github-stats.svg" alt="GitHub Stats" width="100%"/>
+<img src="./generated/metrics/github-stats.svg" alt="GitHub Stats" width="100%"/>
 </td>
 
 <!-- Languages -->
 <td width="33%" align="center">
-<img src="./metrics/top-languages.svg" alt="Top Languages" width="100%"/>
+<img src="./generated/metrics/top-languages.svg" alt="Top Languages" width="100%"/>
 </td>
 
 </tr>
@@ -55,12 +55,12 @@
 <br/>
 
 <!-- Contributions / Streaks -->
-<img src="./metrics/contributions.svg" alt="Contributions Graph" width="85%"/>
+<img src="./generated/metrics/contributions.svg" alt="Contributions Graph" width="85%"/>
 
 <br/><br/>
 
 <!-- Full metrics -->
-<img src="./github-metrics.svg" alt="Complete GitHub Metrics" width="70%"/>
+<img src="./generated/metrics/github-metrics.svg" alt="Complete GitHub Metrics" width="70%"/>
 
 </div>
 

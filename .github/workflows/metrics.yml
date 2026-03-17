@@ -35,15 +35,15 @@ jobs:
           restore-keys: |
             metrics-cache-
 
-      # Create metrics directory
+      # Create generated/metrics directory
       - name: Create metrics directory
-        run: mkdir -p metrics
+        run: mkdir -p generated/metrics
 
       # Generate Overview/Main Metrics SVG
       - name: Generate overview metrics
         uses: lowlighter/metrics@v3.34
         with:
-          filename: metrics/overview.svg
+          filename: generated/metrics/overview.svg
           token: ${{ secrets.METRICS_TOKEN }}
           config_timezone: America/New_York
           retries: 3
@@ -69,7 +69,7 @@ jobs:
       - name: Generate GitHub stats
         uses: lowlighter/metrics@v3.34
         with:
-          filename: metrics/github-stats.svg
+          filename: generated/metrics/github-stats.svg
           token: ${{ secrets.METRICS_TOKEN }}
           config_timezone: America/New_York
           retries: 3
@@ -91,7 +91,7 @@ jobs:
       - name: Generate top languages
         uses: lowlighter/metrics@v3.34
         with:
-          filename: metrics/top-languages.svg
+          filename: generated/metrics/top-languages.svg
           token: ${{ secrets.METRICS_TOKEN }}
           config_timezone: America/New_York
           retries: 3
@@ -119,7 +119,7 @@ jobs:
       - name: Generate contributions
         uses: lowlighter/metrics@v3.34
         with:
-          filename: metrics/contributions.svg
+          filename: generated/metrics/contributions.svg
           token: ${{ secrets.METRICS_TOKEN }}
           config_timezone: America/New_York
           retries: 3
@@ -145,7 +145,7 @@ jobs:
       - name: Generate main metrics (legacy)
         uses: lowlighter/metrics@v3.34
         with:
-          filename: github-metrics.svg
+          filename: generated/metrics/github-metrics.svg
           token: ${{ secrets.METRICS_TOKEN }}
           config_timezone: America/New_York
           retries: 3
@@ -185,7 +185,7 @@ jobs:
       # Commit and push generated SVGs
       - name: Commit and push changes
         run: |
-          git add metrics/ github-metrics.svg
+          git add generated/metrics/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else

@@ -78,23 +78,33 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
         continue-on-error: true
 
+      # Move generated cards to generated/profile-cards/
+      - name: Move cards to generated/profile-cards
+        if: steps.check-secrets.outputs.secret_available == 'true'
+        run: |
+          if [ -d "profile-summary-card-output" ]; then
+            mkdir -p generated
+            mv profile-summary-card-output generated/profile-cards
+            echo "✅ Moved profile-summary-card-output → generated/profile-cards"
+          fi
+
       # Verify output files were generated
       - name: Verify generated files
         if: steps.check-secrets.outputs.secret_available == 'true'
         id: verify
         run: |
           echo "=== Checking for generated output ==="
-          if [ -d "profile-summary-card-output" ]; then
+          if [ -d "generated/profile-cards" ]; then
             echo "output_exists=true" >> $GITHUB_OUTPUT
-            echo "✅ profile-summary-card-output directory exists"
+            echo "✅ generated/profile-cards directory exists"
             echo "Files generated:"
-            find profile-summary-card-output -type f -name "*.svg" | head -20
-            SVG_COUNT=$(find profile-summary-card-output -type f -name "*.svg" | wc -l)
+            find generated/profile-cards -type f -name "*.svg" | head -20
+            SVG_COUNT=$(find generated/profile-cards -type f -name "*.svg" | wc -l)
             echo "svg_count=$SVG_COUNT" >> $GITHUB_OUTPUT
             echo "Total SVG files: $SVG_COUNT"
           else
             echo "output_exists=false" >> $GITHUB_OUTPUT
-            echo "❌ profile-summary-card-output directory not found"
+            echo "❌ generated/profile-cards directory not found"
           fi
 
       # Commit and push generated cards
@@ -108,7 +118,7 @@ jobs:
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git add profile-summary-card-output/
+            git add generated/profile-cards/
             git commit -m "Update profile summary cards - ${{ steps.date.outputs.date }}" || echo "Nothing to commit"
             git push origin HEAD
             echo "✅ Changes committed and pushed successfully"
