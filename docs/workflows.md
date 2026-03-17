@@ -20,10 +20,8 @@ statistics using [lowlighter/metrics](https://github.com/lowlighter/metrics).
 | `metrics/github-stats.svg`  | Repository stats and follow-up issue breakdown |
 | `metrics/top-languages.svg` | Most-used programming languages                |
 | `metrics/contributions.svg` | ISO calendar heatmap and coding habits         |
-| `github-metrics.svg`        | Consolidated legacy SVG (Steam + achievements) |
 
-Requires the `METRICS_TOKEN` secret. Optionally uses `STEAM_TOKEN` for the
-Steam plugin in the legacy SVG.
+Requires the `METRICS_TOKEN` secret.
 
 ---
 

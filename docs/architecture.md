@@ -24,12 +24,8 @@ GitHub API and renders activity, statistics, language breakdowns, habits, and
 achievements as self-hosted SVG files. This eliminates dependency on external
 badge services and prevents content gaps caused by third-party downtime.
 
-Generated files are stored in two locations:
-
-- `metrics/` — individual focused SVGs (overview, stats, languages,
-  contributions)
-- `github-metrics.svg` — consolidated legacy SVG retained for backward
-  compatibility
+Generated files are stored in `metrics/` — individual focused SVGs (overview,
+stats, languages, contributions).
 
 ### Profile Summary Cards
 

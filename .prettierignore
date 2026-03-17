@@ -13,7 +13,6 @@ out/
 *.min.js
 *.min.css
 *.svg
-github-metrics.svg
 metrics.plugin.*.svg
 
 # Package manager files
