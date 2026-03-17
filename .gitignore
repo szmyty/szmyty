@@ -975,5 +975,7 @@ cython_debug/
 
 .autoversion
 
+# Diagnostic log files (should live in audits/ not root)
+/*-diagnostics.md
 
 !resources/os/linux/*
