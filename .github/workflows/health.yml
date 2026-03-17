@@ -1,0 +1,64 @@
+name: Repository Health Check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  health:
+    name: Validate Repository Structure
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check README.md exists
+        run: |
+          if [ -f "README.md" ]; then
+            echo "✅ README.md found"
+          else
+            echo "❌ README.md is missing"
+            exit 1
+          fi
+
+      - name: Check .github/workflows/ directory exists
+        run: |
+          if [ -d ".github/workflows" ]; then
+            echo "✅ .github/workflows/ directory found"
+          else
+            echo "❌ .github/workflows/ directory is missing"
+            exit 1
+          fi
+
+      - name: Check .editorconfig exists
+        run: |
+          if [ -f ".editorconfig" ]; then
+            echo "✅ .editorconfig found"
+          else
+            echo "❌ .editorconfig is missing"
+            exit 1
+          fi
+
+      - name: Check docs/ is not empty
+        run: |
+          if [ -d "docs" ] && [ -n "$(find docs -maxdepth 1 -not -name '.gitkeep' | head -1)" ]; then
+            echo "✅ docs/ directory contains files"
+          else
+            echo "⚠️  docs/ is empty or missing (non-blocking)"
+          fi
+
+      - name: Check for unexpected root clutter
+        run: |
+          UNEXPECTED=$(find . -maxdepth 1 \( -name "*.log" -o -name "*.tmp" -o -name "*.bak" \) || true)
+          if [ -z "$UNEXPECTED" ]; then
+            echo "✅ No unexpected clutter files found in root"
+          else
+            echo "⚠️  Unexpected files found in root (non-blocking):"
+            echo "$UNEXPECTED"
+          fi
+
+      - name: Health check summary
+        run: echo "✅ Repository health check passed"
