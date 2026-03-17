@@ -88,6 +88,35 @@ I build high-quality, scalable platforms with strong emphasis on automation, sec
 
 
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- 🧠 HOW THIS REPOSITORY WORKS                                                -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+## 🧠 How This Repository Works
+
+This is an **automated GitHub profile system** — all content is generated and
+kept current via GitHub Actions. No manual updates are needed after initial
+setup.
+
+</div>
+
+- 📊 **Metrics are generated daily** — GitHub activity, stats, and language
+  breakdowns are rendered as self-hosted SVGs using
+  [lowlighter/metrics](https://github.com/lowlighter/metrics)
+- 🃏 **Profile cards are auto-generated** — themed summary cards are produced
+  on a daily schedule and committed directly to the repository
+- 🔄 **README activity is updated automatically** — the Recent Activity section
+  is refreshed each day with the latest public GitHub events
+
+> 📖 See [docs/architecture.md](docs/architecture.md) for a full system
+> overview and [docs/workflows.md](docs/workflows.md) for workflow details.
+
+<br/>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
 <!-- 💡 DEVELOPER EXPERIENCE                                                      -->
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
