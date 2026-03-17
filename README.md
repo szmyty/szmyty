@@ -57,10 +57,7 @@
 <!-- Contributions / Streaks -->
 <img src="./metrics/contributions.svg" alt="Contributions Graph" width="85%"/>
 
-<br/><br/>
-
-<!-- Full metrics -->
-<img src="./github-metrics.svg" alt="Complete GitHub Metrics" width="70%"/>
+<br/>
 
 </div>
 
