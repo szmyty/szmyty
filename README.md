@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#64](https://github.com/szmyty/szmyty/issues/64) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
-2. ℹ️ Assigned issue [#64](https://github.com/szmyty/szmyty/issues/64) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
-3. ℹ️ Assigned issue [#63](https://github.com/szmyty/szmyty/issues/63) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
-4. ❗ Opened issue [#63](https://github.com/szmyty/szmyty/issues/63) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
-5. ℹ️ Assigned issue [#62](https://github.com/szmyty/szmyty/issues/62) in [szmyty/szmyty](https://github.com/szmyty/szmyty)
+1. ℹ️ Labeled issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+2. ℹ️ Labeled issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+3. ❗ Opened issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+4. ℹ️ Assigned issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+5. ℹ️ Labeled issue [#77](https://github.com/egohygiene/flutter-foundation/issues/77) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
 <!--END_SECTION:activity-->
 
 <br/>
