@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Labeled issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
-2. ℹ️ Labeled issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
-3. ❗ Opened issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
-4. ℹ️ Assigned issue [#78](https://github.com/egohygiene/flutter-foundation/issues/78) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
-5. ℹ️ Labeled issue [#77](https://github.com/egohygiene/flutter-foundation/issues/77) in [egohygiene/flutter-foundation](https://github.com/egohygiene/flutter-foundation)
+1. ℹ️ Assigned issue [#8](https://github.com/egohygiene/foundations/issues/8) in [egohygiene/foundations](https://github.com/egohygiene/foundations)
+2. ℹ️ Assigned issue [#8](https://github.com/egohygiene/foundations/issues/8) in [egohygiene/foundations](https://github.com/egohygiene/foundations)
+3. ❗ Opened issue [#8](https://github.com/egohygiene/foundations/issues/8) in [egohygiene/foundations](https://github.com/egohygiene/foundations)
+4. ℹ️ Assigned issue [#7](https://github.com/egohygiene/foundations/issues/7) in [egohygiene/foundations](https://github.com/egohygiene/foundations)
+5. ❗ Opened issue [#7](https://github.com/egohygiene/foundations/issues/7) in [egohygiene/foundations](https://github.com/egohygiene/foundations)
 <!--END_SECTION:activity-->
 
 <br/>
