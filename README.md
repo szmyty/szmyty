@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#217](https://github.com/egohygiene/renderflow/issues/217) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-2. 🔒 Closed issue [#216](https://github.com/egohygiene/renderflow/issues/216) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-3. ℹ️ Assigned issue [#229](https://github.com/egohygiene/renderflow/issues/229) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-4. ❗ Opened issue [#229](https://github.com/egohygiene/renderflow/issues/229) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-5. ❗ Opened issue [#228](https://github.com/egohygiene/renderflow/issues/228) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+1. ❗ Opened issue [#35](https://github.com/szmyty/visionlog/issues/35) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+2. ℹ️ Assigned issue [#35](https://github.com/szmyty/visionlog/issues/35) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+3. ℹ️ Assigned issue [#18](https://github.com/szmyty/visionlog/issues/18) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+4. 🔒 Closed issue [#16](https://github.com/szmyty/visionlog/issues/16) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+5. ℹ️ Assigned issue [#16](https://github.com/szmyty/visionlog/issues/16) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
 <!--END_SECTION:activity-->
 
 <br/>
