@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#35](https://github.com/szmyty/visionlog/issues/35) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-2. ℹ️ Assigned issue [#35](https://github.com/szmyty/visionlog/issues/35) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-3. ℹ️ Assigned issue [#18](https://github.com/szmyty/visionlog/issues/18) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-4. 🔒 Closed issue [#16](https://github.com/szmyty/visionlog/issues/16) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-5. ℹ️ Assigned issue [#16](https://github.com/szmyty/visionlog/issues/16) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+1. ℹ️ Assigned issue [#8](https://github.com/egohygiene/base/issues/8) in [egohygiene/base](https://github.com/egohygiene/base)
+2. ℹ️ Assigned issue [#8](https://github.com/egohygiene/base/issues/8) in [egohygiene/base](https://github.com/egohygiene/base)
+3. 🔒 Closed issue [#16](https://github.com/egohygiene/base/issues/16) in [egohygiene/base](https://github.com/egohygiene/base)
+4. ℹ️ Assigned issue [#16](https://github.com/egohygiene/base/issues/16) in [egohygiene/base](https://github.com/egohygiene/base)
+5. ℹ️ Assigned issue [#16](https://github.com/egohygiene/base/issues/16) in [egohygiene/base](https://github.com/egohygiene/base)
 <!--END_SECTION:activity-->
 
 <br/>
