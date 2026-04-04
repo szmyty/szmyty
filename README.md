@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#62](https://github.com/szmyty/visionlog/issues/62) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-2. 🔒 Closed issue [#60](https://github.com/szmyty/visionlog/issues/60) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-3. ℹ️ Assigned issue [#45](https://github.com/egohygiene/base/issues/45) in [egohygiene/base](https://github.com/egohygiene/base)
-4. ℹ️ Assigned issue [#45](https://github.com/egohygiene/base/issues/45) in [egohygiene/base](https://github.com/egohygiene/base)
-5. ℹ️ Assigned issue [#21](https://github.com/egohygiene/base/issues/21) in [egohygiene/base](https://github.com/egohygiene/base)
+1. ℹ️ Assigned issue [#12](https://github.com/egohygiene/realignment/issues/12) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
+2. 🔒 Closed issue [#67](https://github.com/szmyty/visionlog/issues/67) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+3. 🔒 Closed issue [#11](https://github.com/egohygiene/realignment/issues/11) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
+4. ℹ️ Assigned issue [#67](https://github.com/szmyty/visionlog/issues/67) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+5. 🔒 Closed issue [#66](https://github.com/szmyty/visionlog/issues/66) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
 <!--END_SECTION:activity-->
 
 <br/>
