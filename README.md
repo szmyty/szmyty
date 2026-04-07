@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#20](https://github.com/egohygiene/realignment/issues/20) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
-2. ℹ️ Assigned issue [#20](https://github.com/egohygiene/realignment/issues/20) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
-3. 🔒 Closed issue [#19](https://github.com/egohygiene/realignment/issues/19) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
-4. 🔒 Closed issue [#73](https://github.com/szmyty/visionlog/issues/73) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
-5. ℹ️ Assigned issue [#73](https://github.com/szmyty/visionlog/issues/73) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
+1. 🔒 Closed issue [#31](https://github.com/egohygiene/articles/issues/31) in [egohygiene/articles](https://github.com/egohygiene/articles)
+2. 🔒 Closed issue [#20](https://github.com/egohygiene/realignment/issues/20) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
+3. ℹ️ Assigned issue [#20](https://github.com/egohygiene/realignment/issues/20) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
+4. 🔒 Closed issue [#19](https://github.com/egohygiene/realignment/issues/19) in [egohygiene/realignment](https://github.com/egohygiene/realignment)
+5. 🔒 Closed issue [#73](https://github.com/szmyty/visionlog/issues/73) in [szmyty/visionlog](https://github.com/szmyty/visionlog)
 <!--END_SECTION:activity-->
 
 <br/>
