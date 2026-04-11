@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#255](https://github.com/egohygiene/renderflow/issues/255) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-2. ℹ️ Assigned issue [#256](https://github.com/egohygiene/renderflow/issues/256) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-3. ℹ️ Assigned issue [#274](https://github.com/egohygiene/renderflow/issues/274) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-4. ❗ Opened issue [#274](https://github.com/egohygiene/renderflow/issues/274) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-5. ℹ️ Assigned issue [#273](https://github.com/egohygiene/renderflow/issues/273) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+1. ℹ️ Assigned issue [#264](https://github.com/egohygiene/renderflow/issues/264) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+2. 🔒 Closed issue [#263](https://github.com/egohygiene/renderflow/issues/263) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+3. ℹ️ Assigned issue [#14](https://github.com/szmyty/portfolio/issues/14) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+4. 🔒 Closed issue [#13](https://github.com/szmyty/portfolio/issues/13) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+5. ℹ️ Assigned issue [#263](https://github.com/egohygiene/renderflow/issues/263) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
 <!--END_SECTION:activity-->
 
 <br/>
