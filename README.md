@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#97](https://github.com/szmyty/portfolio/issues/97) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-2. 🔒 Closed issue [#96](https://github.com/szmyty/portfolio/issues/96) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-3. ❗ Opened issue [#112](https://github.com/szmyty/portfolio/issues/112) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-4. ℹ️ Assigned issue [#112](https://github.com/szmyty/portfolio/issues/112) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-5. ❗ Opened issue [#111](https://github.com/szmyty/portfolio/issues/111) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+1. ℹ️ Assigned issue [#196](https://github.com/szmyty/portfolio/issues/196) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+2. 🔒 Closed issue [#195](https://github.com/szmyty/portfolio/issues/195) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+3. ℹ️ Assigned issue [#195](https://github.com/szmyty/portfolio/issues/195) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+4. 🔒 Closed issue [#193](https://github.com/szmyty/portfolio/issues/193) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+5. ℹ️ Assigned issue [#197](https://github.com/szmyty/portfolio/issues/197) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
 <!--END_SECTION:activity-->
 
 <br/>
