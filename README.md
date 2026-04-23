@@ -264,10 +264,10 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#32](https://github.com/egohygiene/articles/issues/32) in [egohygiene/articles](https://github.com/egohygiene/articles)
-2. ℹ️ Assigned issue [#32](https://github.com/egohygiene/articles/issues/32) in [egohygiene/articles](https://github.com/egohygiene/articles)
-3. ℹ️ Assigned issue [#237](https://github.com/szmyty/portfolio/issues/237) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-4. ℹ️ Unassigned issue [#237](https://github.com/szmyty/portfolio/issues/237) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+1. ❗ Opened issue [#33](https://github.com/egohygiene/articles/issues/33) in [egohygiene/articles](https://github.com/egohygiene/articles)
+2. ℹ️ Assigned issue [#33](https://github.com/egohygiene/articles/issues/33) in [egohygiene/articles](https://github.com/egohygiene/articles)
+3. ❗ Opened issue [#32](https://github.com/egohygiene/articles/issues/32) in [egohygiene/articles](https://github.com/egohygiene/articles)
+4. ℹ️ Assigned issue [#32](https://github.com/egohygiene/articles/issues/32) in [egohygiene/articles](https://github.com/egohygiene/articles)
 5. ℹ️ Assigned issue [#237](https://github.com/szmyty/portfolio/issues/237) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
 <!--END_SECTION:activity-->
 
