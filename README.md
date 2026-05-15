@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#241](https://github.com/szmyty/portfolio/issues/241) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-2. ❗ Opened issue [#241](https://github.com/szmyty/portfolio/issues/241) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-3. ℹ️ Assigned issue [#241](https://github.com/szmyty/portfolio/issues/241) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-4. ❗ Opened issue [#33](https://github.com/egohygiene/articles/issues/33) in [egohygiene/articles](https://github.com/egohygiene/articles)
-5. ℹ️ Assigned issue [#33](https://github.com/egohygiene/articles/issues/33) in [egohygiene/articles](https://github.com/egohygiene/articles)
+1. ❗ Opened issue [#5](https://github.com/egohygiene/papers/issues/5) in [egohygiene/papers](https://github.com/egohygiene/papers)
+2. ℹ️ Assigned issue [#5](https://github.com/egohygiene/papers/issues/5) in [egohygiene/papers](https://github.com/egohygiene/papers)
+3. ℹ️ Assigned issue [#5](https://github.com/egohygiene/papers/issues/5) in [egohygiene/papers](https://github.com/egohygiene/papers)
+4. 🔒 Closed issue [#3](https://github.com/egohygiene/papers/issues/3) in [egohygiene/papers](https://github.com/egohygiene/papers)
+5. ❗ Opened issue [#3](https://github.com/egohygiene/papers/issues/3) in [egohygiene/papers](https://github.com/egohygiene/papers)
 <!--END_SECTION:activity-->
 
 <br/>
