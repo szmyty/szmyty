@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#7](https://github.com/egohygiene/papers/issues/7) in [egohygiene/papers](https://github.com/egohygiene/papers)
-2. 🗣 Commented on [#7](https://github.com/egohygiene/papers/issues/7#issuecomment-4500698270) in [egohygiene/papers](https://github.com/egohygiene/papers)
-3. ℹ️ Assigned issue [#7](https://github.com/egohygiene/papers/issues/7) in [egohygiene/papers](https://github.com/egohygiene/papers)
-4. ❗ Opened issue [#7](https://github.com/egohygiene/papers/issues/7) in [egohygiene/papers](https://github.com/egohygiene/papers)
-5. ℹ️ Assigned issue [#7](https://github.com/egohygiene/papers/issues/7) in [egohygiene/papers](https://github.com/egohygiene/papers)
+1. 🔒 Closed issue [#9](https://github.com/egohygiene/papers/issues/9) in [egohygiene/papers](https://github.com/egohygiene/papers)
+2. ❗ Opened issue [#9](https://github.com/egohygiene/papers/issues/9) in [egohygiene/papers](https://github.com/egohygiene/papers)
+3. ℹ️ Assigned issue [#9](https://github.com/egohygiene/papers/issues/9) in [egohygiene/papers](https://github.com/egohygiene/papers)
+4. ℹ️ Assigned issue [#9](https://github.com/egohygiene/papers/issues/9) in [egohygiene/papers](https://github.com/egohygiene/papers)
+5. 🔒 Closed issue [#7](https://github.com/egohygiene/papers/issues/7) in [egohygiene/papers](https://github.com/egohygiene/papers)
 <!--END_SECTION:activity-->
 
 <br/>
