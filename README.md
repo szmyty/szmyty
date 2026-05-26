@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#248](https://github.com/szmyty/portfolio/issues/248) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-2. ℹ️ Assigned issue [#248](https://github.com/szmyty/portfolio/issues/248) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-3. ℹ️ Assigned issue [#248](https://github.com/szmyty/portfolio/issues/248) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-4. 🔒 Closed issue [#246](https://github.com/szmyty/portfolio/issues/246) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-5. ❗ Opened issue [#246](https://github.com/szmyty/portfolio/issues/246) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+1. 🔒 Closed issue [#250](https://github.com/szmyty/portfolio/issues/250) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+2. 🔒 Closed issue [#9](https://github.com/egohygiene/reflector/issues/9) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+3. ℹ️ Assigned issue [#9](https://github.com/egohygiene/reflector/issues/9) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+4. 🔒 Closed issue [#20](https://github.com/egohygiene/reflector/issues/20) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+5. ℹ️ Assigned issue [#20](https://github.com/egohygiene/reflector/issues/20) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
 <!--END_SECTION:activity-->
 
 <br/>
