@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#101](https://github.com/egohygiene/reflector/issues/101) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-2. 🔒 Closed issue [#97](https://github.com/egohygiene/reflector/issues/97) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-3. ℹ️ Assigned issue [#97](https://github.com/egohygiene/reflector/issues/97) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-4. 🔒 Closed issue [#96](https://github.com/egohygiene/reflector/issues/96) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-5. ℹ️ Assigned issue [#96](https://github.com/egohygiene/reflector/issues/96) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+1. 🔒 Closed issue [#125](https://github.com/egohygiene/reflector/issues/125) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+2. ℹ️ Assigned issue [#125](https://github.com/egohygiene/reflector/issues/125) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+3. ℹ️ Assigned issue [#132](https://github.com/egohygiene/reflector/issues/132) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+4. ❗ Opened issue [#132](https://github.com/egohygiene/reflector/issues/132) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+5. 🔒 Closed issue [#130](https://github.com/egohygiene/reflector/issues/130) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
 <!--END_SECTION:activity-->
 
 <br/>
