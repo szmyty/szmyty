@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🚀 Published release [v0.1.0](https://github.com/egohygiene/reflector/releases/tag/v0.1.0) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-2. ℹ️ Assigned issue [#167](https://github.com/egohygiene/reflector/issues/167) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-3. ❗ Opened issue [#167](https://github.com/egohygiene/reflector/issues/167) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-4. 🔒 Closed issue [#165](https://github.com/egohygiene/reflector/issues/165) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-5. ℹ️ Assigned issue [#165](https://github.com/egohygiene/reflector/issues/165) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+1. ℹ️ Assigned issue [#257](https://github.com/szmyty/portfolio/issues/257) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+2. ℹ️ Assigned issue [#257](https://github.com/szmyty/portfolio/issues/257) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+3. ❗ Opened issue [#257](https://github.com/szmyty/portfolio/issues/257) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+4. 🔒 Closed issue [#175](https://github.com/egohygiene/reflector/issues/175) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+5. ℹ️ Assigned issue [#175](https://github.com/egohygiene/reflector/issues/175) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
 <!--END_SECTION:activity-->
 
 <br/>
