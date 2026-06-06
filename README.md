@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+1. 🔒 Closed issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
 2. ℹ️ Assigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-3. ℹ️ Assigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-4. 🔒 Closed issue [#274](https://github.com/szmyty/portfolio/issues/274) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-5. ℹ️ Assigned issue [#274](https://github.com/szmyty/portfolio/issues/274) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+3. ℹ️ Unassigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+4. ❗ Opened issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+5. ℹ️ Assigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
 <!--END_SECTION:activity-->
 
 <br/>
