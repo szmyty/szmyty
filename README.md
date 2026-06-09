@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-2. ℹ️ Assigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-3. ℹ️ Unassigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-4. ❗ Opened issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
-5. ℹ️ Assigned issue [#276](https://github.com/szmyty/portfolio/issues/276) in [szmyty/portfolio](https://github.com/szmyty/portfolio)
+1. ❗ Opened issue [#5](https://github.com/szmyty/obsgod/issues/5) in [szmyty/obsgod](https://github.com/szmyty/obsgod)
+2. ℹ️ Assigned issue [#5](https://github.com/szmyty/obsgod/issues/5) in [szmyty/obsgod](https://github.com/szmyty/obsgod)
+3. ℹ️ Assigned issue [#5](https://github.com/szmyty/obsgod/issues/5) in [szmyty/obsgod](https://github.com/szmyty/obsgod)
+4. 🔒 Closed issue [#3](https://github.com/szmyty/obsgod/issues/3) in [szmyty/obsgod](https://github.com/szmyty/obsgod)
+5. ℹ️ Assigned issue [#3](https://github.com/szmyty/obsgod/issues/3) in [szmyty/obsgod](https://github.com/szmyty/obsgod)
 <!--END_SECTION:activity-->
 
 <br/>
