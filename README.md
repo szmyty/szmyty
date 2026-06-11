@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#9](https://github.com/szmyty/resume/issues/9) in [szmyty/resume](https://github.com/szmyty/resume)
-2. ❗ Opened issue [#9](https://github.com/szmyty/resume/issues/9) in [szmyty/resume](https://github.com/szmyty/resume)
-3. ℹ️ Assigned issue [#9](https://github.com/szmyty/resume/issues/9) in [szmyty/resume](https://github.com/szmyty/resume)
-4. ℹ️ Assigned issue [#9](https://github.com/szmyty/resume/issues/9) in [szmyty/resume](https://github.com/szmyty/resume)
-5. 🔒 Closed issue [#7](https://github.com/szmyty/resume/issues/7) in [szmyty/resume](https://github.com/szmyty/resume)
+1. 🔒 Closed issue [#13](https://github.com/szmyty/resume/issues/13) in [szmyty/resume](https://github.com/szmyty/resume)
+2. ℹ️ Assigned issue [#13](https://github.com/szmyty/resume/issues/13) in [szmyty/resume](https://github.com/szmyty/resume)
+3. ❗ Opened issue [#13](https://github.com/szmyty/resume/issues/13) in [szmyty/resume](https://github.com/szmyty/resume)
+4. ℹ️ Assigned issue [#13](https://github.com/szmyty/resume/issues/13) in [szmyty/resume](https://github.com/szmyty/resume)
+5. 🔒 Closed issue [#11](https://github.com/szmyty/resume/issues/11) in [szmyty/resume](https://github.com/szmyty/resume)
 <!--END_SECTION:activity-->
 
 <br/>
