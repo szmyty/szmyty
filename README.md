@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❗ Opened issue [#1](https://github.com/egohygiene/sanctuary/issues/1) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-2. ℹ️ Assigned issue [#1](https://github.com/egohygiene/sanctuary/issues/1) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-3. ℹ️ Assigned issue [#1](https://github.com/egohygiene/sanctuary/issues/1) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-4. 🔒 Closed issue [#13](https://github.com/szmyty/resume/issues/13) in [szmyty/resume](https://github.com/szmyty/resume)
-5. ℹ️ Assigned issue [#13](https://github.com/szmyty/resume/issues/13) in [szmyty/resume](https://github.com/szmyty/resume)
+1. 🔒 Closed issue [#3](https://github.com/egohygiene/sanctuary/issues/3) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+2. ❗ Opened issue [#3](https://github.com/egohygiene/sanctuary/issues/3) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+3. ℹ️ Assigned issue [#3](https://github.com/egohygiene/sanctuary/issues/3) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+4. ℹ️ Assigned issue [#3](https://github.com/egohygiene/sanctuary/issues/3) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+5. 🔒 Closed issue [#193](https://github.com/egohygiene/reflector/issues/193) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
 <!--END_SECTION:activity-->
 
 <br/>
