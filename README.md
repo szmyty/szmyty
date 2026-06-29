@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#51](https://github.com/167guild/167guild.io/issues/51) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
-2. ℹ️ Assigned issue [#51](https://github.com/167guild/167guild.io/issues/51) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
-3. ❗ Opened issue [#51](https://github.com/167guild/167guild.io/issues/51) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
-4. 🔒 Closed issue [#49](https://github.com/167guild/167guild.io/issues/49) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
-5. ℹ️ Assigned issue [#49](https://github.com/167guild/167guild.io/issues/49) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
+1. ❗ Opened issue [#56](https://github.com/167guild/167guild.io/issues/56) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
+2. ℹ️ Assigned issue [#56](https://github.com/167guild/167guild.io/issues/56) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
+3. ℹ️ Assigned issue [#56](https://github.com/167guild/167guild.io/issues/56) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
+4. 🔒 Closed issue [#51](https://github.com/167guild/167guild.io/issues/51) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
+5. ℹ️ Assigned issue [#51](https://github.com/167guild/167guild.io/issues/51) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
 <!--END_SECTION:activity-->
 
 <br/>
