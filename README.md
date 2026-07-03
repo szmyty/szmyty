@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#63](https://github.com/167guild/167guild.io/issues/63) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
-2. ❗ Opened issue [#20](https://github.com/egohygiene/sanctuary/issues/20) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-3. ℹ️ Assigned issue [#20](https://github.com/egohygiene/sanctuary/issues/20) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-4. ❗ Opened issue [#63](https://github.com/167guild/167guild.io/issues/63) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
-5. ℹ️ Assigned issue [#63](https://github.com/167guild/167guild.io/issues/63) in [167guild/167guild.io](https://github.com/167guild/167guild.io)
+1. ❗ Opened issue [#32](https://github.com/egohygiene/sanctuary/issues/32) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+2. 🔒 Closed issue [#24](https://github.com/egohygiene/sanctuary/issues/24) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+3. ℹ️ Assigned issue [#24](https://github.com/egohygiene/sanctuary/issues/24) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+4. 🔒 Closed issue [#25](https://github.com/egohygiene/sanctuary/issues/25) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+5. ℹ️ Assigned issue [#25](https://github.com/egohygiene/sanctuary/issues/25) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
 <!--END_SECTION:activity-->
 
 <br/>
