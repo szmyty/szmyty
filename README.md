@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#44](https://github.com/egohygiene/sanctuary/issues/44) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-2. ❗ Opened issue [#44](https://github.com/egohygiene/sanctuary/issues/44) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-3. 🔒 Closed issue [#42](https://github.com/egohygiene/sanctuary/issues/42) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-4. 🗣 Commented on [#43](https://github.com/egohygiene/sanctuary/pull/43#issuecomment-4946057657) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
-5. ❗ Opened issue [#42](https://github.com/egohygiene/sanctuary/issues/42) in [egohygiene/sanctuary](https://github.com/egohygiene/sanctuary)
+1. ℹ️ Assigned issue [#204](https://github.com/egohygiene/reflector/issues/204) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+2. 🔒 Closed issue [#202](https://github.com/egohygiene/reflector/issues/202) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+3. ℹ️ Assigned issue [#208](https://github.com/egohygiene/reflector/issues/208) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+4. ❗ Opened issue [#208](https://github.com/egohygiene/reflector/issues/208) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+5. ❗ Opened issue [#207](https://github.com/egohygiene/reflector/issues/207) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
 <!--END_SECTION:activity-->
 
 <br/>
