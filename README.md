@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ❌ Closed PR [#293](https://github.com/egohygiene/renderflow/pull/293) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-2. 🔒 Closed issue [#241](https://github.com/egohygiene/renderflow/issues/241) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-3. 🔒 Closed issue [#274](https://github.com/egohygiene/renderflow/issues/274) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-4. 🔒 Closed issue [#237](https://github.com/egohygiene/reflector/issues/237) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
-5. ❗ Opened issue [#237](https://github.com/egohygiene/reflector/issues/237) in [egohygiene/reflector](https://github.com/egohygiene/reflector)
+1. ℹ️ Assigned issue [#307](https://github.com/egohygiene/renderflow/issues/307) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+2. 🔒 Closed issue [#305](https://github.com/egohygiene/renderflow/issues/305) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+3. ℹ️ Assigned issue [#305](https://github.com/egohygiene/renderflow/issues/305) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+4. 🔒 Closed issue [#304](https://github.com/egohygiene/renderflow/issues/304) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+5. ℹ️ Assigned issue [#304](https://github.com/egohygiene/renderflow/issues/304) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
 <!--END_SECTION:activity-->
 
 <br/>
