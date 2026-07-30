@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. ℹ️ Assigned issue [#330](https://github.com/egohygiene/renderflow/issues/330) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-2. 🔒 Closed issue [#329](https://github.com/egohygiene/renderflow/issues/329) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-3. ℹ️ Assigned issue [#329](https://github.com/egohygiene/renderflow/issues/329) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-4. 🔒 Closed issue [#327](https://github.com/egohygiene/renderflow/issues/327) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
-5. ℹ️ Assigned issue [#330](https://github.com/egohygiene/renderflow/issues/330) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+1. 🔒 Closed issue [#8](https://github.com/egohygiene/mindcap/issues/8) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
+2. ℹ️ Assigned issue [#8](https://github.com/egohygiene/mindcap/issues/8) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
+3. ❗ Opened issue [#8](https://github.com/egohygiene/mindcap/issues/8) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
+4. ℹ️ Assigned issue [#8](https://github.com/egohygiene/mindcap/issues/8) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
+5. 🔒 Closed issue [#6](https://github.com/egohygiene/mindcap/issues/6) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
 <!--END_SECTION:activity-->
 
 <br/>
