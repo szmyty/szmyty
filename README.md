@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#1](https://github.com/egohygiene/website/issues/1) in [egohygiene/website](https://github.com/egohygiene/website)
-2. ❗ Opened issue [#1](https://github.com/egohygiene/website/issues/1) in [egohygiene/website](https://github.com/egohygiene/website)
-3. ℹ️ Assigned issue [#1](https://github.com/egohygiene/website/issues/1) in [egohygiene/website](https://github.com/egohygiene/website)
-4. ℹ️ Assigned issue [#1](https://github.com/egohygiene/website/issues/1) in [egohygiene/website](https://github.com/egohygiene/website)
-5. 🔒 Closed issue [#334](https://github.com/egohygiene/renderflow/issues/334) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+1. 🔒 Closed issue [#342](https://github.com/egohygiene/renderflow/issues/342) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+2. ℹ️ Assigned issue [#342](https://github.com/egohygiene/renderflow/issues/342) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+3. ℹ️ Assigned issue [#342](https://github.com/egohygiene/renderflow/issues/342) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+4. ❗ Opened issue [#342](https://github.com/egohygiene/renderflow/issues/342) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+5. 🔒 Closed issue [#340](https://github.com/egohygiene/renderflow/issues/340) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
 <!--END_SECTION:activity-->
 
 <br/>
