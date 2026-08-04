@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#23](https://github.com/egohygiene/mindcap/issues/23) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
-2. ℹ️ Assigned issue [#23](https://github.com/egohygiene/mindcap/issues/23) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
-3. ℹ️ Assigned issue [#23](https://github.com/egohygiene/mindcap/issues/23) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
-4. ❗ Opened issue [#23](https://github.com/egohygiene/mindcap/issues/23) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
-5. 🔒 Closed issue [#342](https://github.com/egohygiene/renderflow/issues/342) in [egohygiene/renderflow](https://github.com/egohygiene/renderflow)
+1. 🔒 Closed issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
+2. ❗ Opened issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
+3. ℹ️ Assigned issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
+4. ℹ️ Assigned issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
+5. 🔒 Closed issue [#23](https://github.com/egohygiene/mindcap/issues/23) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
 <!--END_SECTION:activity-->
 
 <br/>
