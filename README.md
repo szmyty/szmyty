@@ -264,11 +264,11 @@ setup.
 </div>
 
 <!--START_SECTION:activity-->
-1. 🔒 Closed issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
-2. ❗ Opened issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
-3. ℹ️ Assigned issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
-4. ℹ️ Assigned issue [#2](https://github.com/egohygiene/awesome/issues/2) in [egohygiene/awesome](https://github.com/egohygiene/awesome)
-5. 🔒 Closed issue [#23](https://github.com/egohygiene/mindcap/issues/23) in [egohygiene/mindcap](https://github.com/egohygiene/mindcap)
+1. 🔒 Closed issue [#3](https://github.com/egohygiene/mantle/issues/3) in [egohygiene/mantle](https://github.com/egohygiene/mantle)
+2. ❗ Opened issue [#3](https://github.com/egohygiene/mantle/issues/3) in [egohygiene/mantle](https://github.com/egohygiene/mantle)
+3. ℹ️ Assigned issue [#3](https://github.com/egohygiene/mantle/issues/3) in [egohygiene/mantle](https://github.com/egohygiene/mantle)
+4. ℹ️ Assigned issue [#3](https://github.com/egohygiene/mantle/issues/3) in [egohygiene/mantle](https://github.com/egohygiene/mantle)
+5. 🔒 Closed issue [#1](https://github.com/egohygiene/mantle/issues/1) in [egohygiene/mantle](https://github.com/egohygiene/mantle)
 <!--END_SECTION:activity-->
 
 <br/>
