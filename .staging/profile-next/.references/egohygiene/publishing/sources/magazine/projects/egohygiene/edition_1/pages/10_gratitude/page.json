@@ -1,0 +1,138 @@
+{
+  "page_type": "practice",
+  "practice_id": "gratitude",
+  "title": "Gratitude",
+  "subtitle": "Practices for Attunement & Appreciation",
+
+  "edition": {
+    "name": "Ego Hygiene",
+    "number": 1,
+    "theme": "Orientation"
+  },
+
+  "intent": {
+    "role": "regulation_and_softening",
+    "primary_function": "shift_attention_from_threat_to_safety",
+    "secondary_function": "reinforce_positive_memory_association",
+    "tone": [
+      "grounding",
+      "non-preachy",
+      "collectible",
+      "calm"
+    ]
+  },
+
+  "visual_style": {
+    "world": "post_collapse_retro_mystic",
+    "era_inspiration": "mid_20th_century_pulp_magazine",
+    "texture": [
+      "aged_paper",
+      "worn_ink",
+      "grain",
+      "scuffed_edges"
+    ],
+    "color_palette": {
+      "primary": ["warm_yellow", "burnt_orange", "rust_red"],
+      "secondary": ["deep_brown", "charcoal", "muted_teal"],
+      "accent": ["glowing_red", "soft_gold"]
+    },
+    "iconography": [
+      "crystals",
+      "glowing_heart",
+      "skull_sun_emblem",
+      "brain_icon",
+      "mountain_symbol"
+    ],
+    "typography": {
+      "title": {
+        "style": "bold_retro_serif",
+        "case": "uppercase",
+        "texture": "distressed"
+      },
+      "body": {
+        "style": "legible_serif",
+        "contrast": "high",
+        "print_safe": true
+      }
+    }
+  },
+
+  "layout": {
+    "composition": "central_focus_with_surrounding_panels",
+    "central_element": "hands_holding_glowing_heart",
+    "panel_style": {
+      "shape": "rounded_rectangle",
+      "has_speech_tail": false,
+      "appearance": "printed_instructional_panel"
+    },
+    "flow": "non_linear_loop"
+  },
+
+  "practice_panels": [
+    {
+      "id": "reflect",
+      "label": "REFLECT",
+      "text": "Write down a few things you’re thankful for.",
+      "domain": "internal",
+      "modality": "written",
+      "visual_reference": "journal_and_crystals"
+    },
+    {
+      "id": "share",
+      "label": "SHARE",
+      "text": "Express gratitude directly in conversation: “I’m really grateful for…”",
+      "domain": "relational",
+      "modality": "spoken",
+      "visual_reference": "silhouetted_conversation_with_heart"
+    },
+    {
+      "id": "appreciate",
+      "label": "APPRECIATE",
+      "text": "Take a moment to observe the small, good things.",
+      "domain": "sensory",
+      "modality": "perceptual",
+      "visual_reference": "warm_drink_and_plant"
+    },
+    {
+      "id": "notice",
+      "label": "NOTICE",
+      "text": "Allow a moment of gratitude for the beauty that exists here.",
+      "domain": "attentional",
+      "modality": "awareness",
+      "visual_reference": "crystals_in_environment"
+    }
+  ],
+
+  "effect_section": {
+    "label": "EFFECT",
+    "text": "Activates serotonin circuits associated with positive memories & experiences.",
+    "scientific_status": "simplified_placeholder",
+    "visual_reference": "brain_icon",
+    "arrow_flow_to": "outcome_section"
+  },
+
+  "outcome_section": {
+    "text": "Cultivates a sense of abundance instead of lack.",
+    "symbol": "mountain",
+    "role": "meaning_integration"
+  },
+
+  "footer_banner": {
+    "text": "EASY TO DO, HARD TO FAKE, BENEFICIAL IN ANY STATE OF MIND!",
+    "tone": "reassuring",
+    "intent": "reduce_performance_pressure"
+  },
+
+  "constraints": {
+    "no_medical_claims": true,
+    "no_prescriptive_language": true,
+    "no_spiritual_superiority": true,
+    "no_required_actions": true
+  },
+
+  "notes": {
+    "research_to_add_later": true,
+    "serves_as_schema_reference": true,
+    "canonical_visual_language": true
+  }
+}

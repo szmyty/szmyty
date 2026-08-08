@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="136.75" height="28" role="img"
+     aria-label="GOOGLE MEET">
+    <title>GOOGLE MEET</title>
+    <g shape-rendering="crispEdges">
+        <rect width="136.75" height="28" fill="#00897b"/>
+    </g>
+    <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif"
+       text-rendering="geometricPrecision" font-size="100">
+        <image x="9" y="7" width="14" height="14"
+               xlink:href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPkdvb2dsZSBNZWV0PC90aXRsZT48cGF0aCBkPSJNNS41MyAyLjEzIDAgNy43NWg1LjUzem0uMzk4IDB2NS42Mmg3LjYwOHYzLjY1bDUuNDctNC40NWMtLjAxNC0xLjIyLjAzMS0yLjI1LS4wMjUtMy40Ni0uMTQ4LTEuMDktMS4yODctMS40Ny0yLjIzNi0xLjM2ek0yMy4xIDQuMzJjLS44MDIuMjk1LTEuMzU4Ljk5NS0yLjA0NyAxLjQ5LTIuNTA2IDIuMDUtNC45ODIgNC4xMi03LjQ2OCA2LjE5IDMuMDI1IDIuNTkgNi4wNCA1LjE4IDkuMDY1IDcuNzYgMS4yMTguNjcxIDEuNDI4LS44MTQgMS4zMjgtMS42NHYtMTNhLjgyOC44MjggMCAwIDAtLjg3Ny0uODI1ek0uMDM4IDguMTV2Ny43aDUuNTN2LTcuN3ptMTMuNTc3IDguMUg2LjAwOHY1LjYyYzMuODY0LS4wMDYgNy43MzcuMDExIDExLjU4LS4wMDkgMS4wMi0uMDcgMS42MTgtMS4xMiAxLjQ2OC0yLjA3di0yLjUxbC01LjQ3LTQuNjh2My42NXptLTEzLjU3NyAwYy4wMiAxLjQ0LS4wNDEgMi44OC4wMzMgNC4zMS4xNjIuOTQ4IDEuMTU4IDEuNDMgMi4wNDcgMS4zMWgzLjQ2NHYtNS42MnoiLz48L3N2Zz4="/>
+        <text transform="scale(.1)" x="783.75" y="175" textLength="927.5" fill="#fff" font-weight="bold">GOOGLE MEET
+        </text>
+    </g>
+</svg>

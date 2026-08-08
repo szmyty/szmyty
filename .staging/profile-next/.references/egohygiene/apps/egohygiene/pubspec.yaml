@@ -1,0 +1,140 @@
+name: egohygiene
+description: "A local-first Flutter application for reflection, practices, insight, and human-centered self-maintenance.."
+publish_to: 'none'
+version: 0.1.0+1
+homepage: https://egohygiene.io
+repository: https://github.com/egohygiene/egohygiene
+issue_tracker: https://github.com/egohygiene/egohygiene/issues
+documentation: https://github.com/egohygiene/egohygiene/wiki
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  connectivity_plus: ^7.1.1
+  cryptography: ^2.9.0
+  cupertino_icons: ^1.0.8
+  device_info_plus: ^13.1.0
+  dio: ^5.9.2
+  drift: ^2.34.0
+  dynamic_color: ^1.8.1
+  fl_chart: ^1.2.0
+  flex_color_scheme: ^8.4.0
+  flutter_animate: ^4.5.2
+  flutter_form_builder: ^10.3.0+2
+  flutter_local_notifications: ^22.0.1
+  flutter_riverpod: ^3.3.2
+  flutter_secure_storage: ^10.3.1
+  flutter_svg: ^2.3.0
+  form_builder_validators: ^11.3.0
+  freezed_annotation: ^3.1.0
+  go_router: ^17.3.0
+  google_fonts: ^8.1.0
+  intl: ^0.20.2
+  json_annotation: ^4.12.0
+  local_auth: ^3.0.1
+  lottie: ^3.3.3
+  package_info_plus: ^10.1.0
+  path_provider: ^2.1.6
+  riverpod_annotation: ^4.0.3
+  shared_preferences: ^2.5.5
+  slang_flutter: ^4.16.0
+  slang: ^4.16.0
+  timezone: ^0.11.0
+  collection: ^1.19.1
+  uuid: ^4.5.3
+  url_launcher: ^6.3.2
+  path: ^1.9.1
+  share_plus: ^13.1.0
+  talker_flutter: ^5.1.17
+  talker_riverpod_logger: ^5.1.17
+  platform: ^3.1.6
+  pretty_string: ^1.0.1
+  battery_plus: ^7.0.0
+  sensors_plus: ^7.0.0
+  network_info_plus: ^8.1.0
+  rive: ^0.14.9
+  jiffy: ^6.4.5
+  quiver: ^3.2.2
+  universal_io: ^2.3.1
+  stack_trace: ^1.12.1
+  auto_size_text: ^3.0.0
+  english_words: ^4.0.0
+  visibility_detector: ^0.4.0+2
+  flutter_helper_utils: ^9.2.0
+  flutter_use: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  build_runner: ^2.15.0
+  flutter_lints: ^6.0.0
+  freezed: ^3.2.5
+  golden_toolkit: ^0.15.0
+  json_serializable: ^6.14.0
+  mocktail: ^1.0.5
+  pretty_dio_logger: ^1.4.0
+  riverpod: ^3.0.0
+  riverpod_generator: ^4.0.4
+  very_good_analysis: ^10.3.0
+  drift_dev: ^2.34.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # Animations – Lottie (.json) and future Rive (.riv) files.
+    # Add new animation assets to assets/animations/ and declare them here.
+    - assets/animations/
+
+    # Images – raster images (PNG, JPEG, WebP).
+    # Uncomment and populate as assets are added to assets/images/.
+    # - assets/images/
+
+    # SVGs – vector graphics.
+    # Uncomment and populate as assets are added to assets/svgs/.
+    # - assets/svgs/
+
+    # Icons – standalone icon files not covered by an icon font.
+    # Uncomment and populate as assets are added to assets/icons/.
+    # - assets/icons/
+
+    # Illustrations – decorative illustration assets.
+    # Uncomment and populate as assets are added to assets/illustrations/.
+    # - assets/illustrations/
+
+    # Branding – logos, wordmarks, and splash graphics.
+    # Uncomment and populate as assets are added to assets/branding/.
+    # - assets/branding/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package

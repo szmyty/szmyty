@@ -1,0 +1,27 @@
+name: 'Generate Quote Card'
+description: 'Generate the quote of the day card SVG'
+
+inputs:
+  input-json:
+    description: 'Path to the quote JSON file'
+    required: false
+    default: 'quotes/quote.json'
+  output-svg:
+    description: 'Path to the output SVG file'
+    required: false
+    default: 'quotes/quote_card.svg'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: ✨ Generate Quote of the Day Card
+      shell: bash
+      run: |
+        echo "Generating quote card..."
+        if python scripts/generate_quote_card.py "${{ inputs.input-json }}" "${{ inputs.output-svg }}"; then
+          echo "✅ Quote card generated successfully"
+        else
+          echo "⚠️ Warning: Failed to generate quote card"
+          # Create fallback card
+          echo '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="230"><text x="240" y="115" text-anchor="middle" fill="#666">Quote Card Unavailable</text></svg>' > "${{ inputs.output-svg }}"
+        fi

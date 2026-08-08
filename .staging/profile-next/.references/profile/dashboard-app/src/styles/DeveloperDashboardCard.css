@@ -1,0 +1,90 @@
+.developer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.developer-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.commit-activity,
+.languages {
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.commit-activity h3,
+.languages h3 {
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+}
+
+.activity-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.activity-label {
+  color: var(--text-secondary);
+}
+
+.activity-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.language-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.language-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.language-name {
+  color: var(--text-primary);
+}
+
+.language-percent {
+  color: var(--text-accent);
+  font-weight: 600;
+}

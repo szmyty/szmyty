@@ -1,0 +1,156 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Canonical color tokens extracted from editions/edition_1/visual_dna.json and cross-referenced against the finalized front cover reference (references/edition_1/cover/outside.png)",
+  "color": {
+    "burnt_orange": {
+      "$value": "#C4622D",
+      "$type": "color",
+      "$description": "Primary warm accent; evokes aged print and distressed artifacts"
+    },
+    "warm_yellow": {
+      "$value": "#F5C842",
+      "$type": "color",
+      "$description": "Highlight tone; sun-bleached paper and vintage poster warmth"
+    },
+    "charcoal": {
+      "$value": "#333333",
+      "$type": "color",
+      "$description": "Primary text and ink tone; deep neutral grounding the palette"
+    },
+    "soft_gold": {
+      "$value": "#D4AF37",
+      "$type": "color",
+      "$description": "Accent metallic; used for decorative rules, borders, and emphasis"
+    },
+    "warm_parchment": {
+      "$value": "#F5ECD7",
+      "$type": "color",
+      "$description": "Background base; aged paper surface tone"
+    },
+    "soft_amber": {
+      "$value": "#FFBF00",
+      "$type": "color",
+      "$description": "Secondary warm highlight; candlelight and sepia-tinted glow"
+    },
+    "deep_brown": {
+      "$value": "#4A2C2A",
+      "$type": "color",
+      "$description": "Dark grounding tone; worn leather and shadow areas"
+    },
+    "deep_blue": {
+      "$value": "#1B3A6B",
+      "$type": "color",
+      "$description": "Cool contrast anchor; night sky and archival ink"
+    },
+    "deep_teal": {
+      "$value": "#3D6B67",
+      "$type": "color",
+      "$description": "Secondary cool accent observed in the cover figure region; muted blue-green evoking shadow and depth behind the central crystal element"
+    },
+    "near_black": {
+      "$value": "#161117",
+      "$type": "color",
+      "$description": "Deep shadow tone extracted from the cover background; the dominant dark base across the outer edges and vignette areas of the reference image"
+    },
+    "crimson": {
+      "$value": "#880B02",
+      "$type": "color",
+      "$description": "Deep rust-red extracted from the cover title band and edge burn areas; evokes worn ink and aged print oxidation"
+    },
+    "rose_quartz": {
+      "$value": "#CE6B70",
+      "$type": "color",
+      "$description": "Prismatic crystal accent observed in the cover's central figure area; a dusty rose tone evoking iridescent mineral reflections"
+    }
+  },
+  "palette": {
+    "$description": "Organized color groupings derived from canonical_colors in visual_dna.json and the reference cover artifact",
+    "primary": {
+      "$description": "Dominant warm tones that appear most frequently as primary colors across edition_1 pages",
+      "base": {
+        "$value": "{color.burnt_orange}",
+        "$type": "color",
+        "$description": "Primary brand color; dominant warm accent used across all practice pages"
+      },
+      "highlight": {
+        "$value": "{color.warm_yellow}",
+        "$type": "color",
+        "$description": "Primary highlight; sun-bleached warmth used alongside burnt_orange in headers and titles"
+      },
+      "rust": {
+        "$value": "{color.crimson}",
+        "$type": "color",
+        "$description": "Deep rust-red accent; worn ink oxidation visible in the cover title band and edge burn"
+      }
+    },
+    "secondary": {
+      "$description": "Supporting tones that provide depth, contrast, and complementary warmth to the primary palette",
+      "warm": {
+        "$value": "{color.soft_amber}",
+        "$type": "color",
+        "$description": "Secondary warm accent; candlelight glow used for mid-tone warmth"
+      },
+      "cool": {
+        "$value": "{color.deep_blue}",
+        "$type": "color",
+        "$description": "Secondary cool contrast; archival ink and night-sky depth"
+      },
+      "teal": {
+        "$value": "{color.deep_teal}",
+        "$type": "color",
+        "$description": "Secondary teal accent; the muted blue-green shadow behind the cover's crystal cluster and human silhouette"
+      },
+      "dark": {
+        "$value": "{color.deep_brown}",
+        "$type": "color",
+        "$description": "Secondary dark tone; worn leather and shadow grounding"
+      }
+    },
+    "accent": {
+      "$description": "Highlight and crystal accent tones observed on the reference cover",
+      "crystal": {
+        "$value": "{color.rose_quartz}",
+        "$type": "color",
+        "$description": "Prismatic crystal accent; iridescent rose tone from the cover's central crystal cluster element"
+      },
+      "shadow": {
+        "$value": "{color.near_black}",
+        "$type": "color",
+        "$description": "Deep vignette shadow; the near-black outer edge tone dominating the cover background and borders"
+      }
+    }
+  },
+  "semantic": {
+    "$description": "Role-based color tokens mapping visual_dna colors to structural UI functions",
+    "background": {
+      "$value": "{color.warm_parchment}",
+      "$type": "color",
+      "$description": "Page and panel background; aged paper surface"
+    },
+    "text": {
+      "$value": "{color.charcoal}",
+      "$type": "color",
+      "$description": "Primary body text and ink; deep neutral for maximum legibility"
+    },
+    "primary": {
+      "$value": "{color.burnt_orange}",
+      "$type": "color",
+      "$description": "Primary action and emphasis color; the dominant visual anchor across all pages"
+    },
+    "accent": {
+      "$value": "{color.soft_gold}",
+      "$type": "color",
+      "$description": "Decorative accent; metallic emphasis for rules, borders, and ornamental detail"
+    },
+    "border": {
+      "$value": "{color.deep_brown}",
+      "$type": "color",
+      "$description": "Frame and border color; worn-ink tone for content edges and section dividers"
+    },
+    "shadow": {
+      "$value": "{color.near_black}",
+      "$type": "color",
+      "$description": "Deep shadow and vignette color; the near-black tone that edges the cover and creates the aged-artifact depth effect"
+    }
+  }
+}

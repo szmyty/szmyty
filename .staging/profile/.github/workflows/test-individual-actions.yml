@@ -1,0 +1,130 @@
+name: Test Individual Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to test'
+        required: true
+        type: choice
+        options:
+          - fetch-developer
+          - fetch-location
+          - fetch-weather
+          - fetch-soundcloud
+          - fetch-oura
+          - fetch-quote
+          - generate-developer-dashboard
+          - generate-quote-card
+          - generate-weather-card
+          - generate-location-card
+          - generate-soundcloud-card
+          - generate-oura-dashboard
+          - generate-oura-mood
+          - optimize-svgs
+          - update-readme
+
+permissions:
+  contents: write
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      
+      - name: 🔧 Setup environment
+        uses: ./.github/actions/setup
+      
+      # Fetch actions
+      - name: Test fetch-developer
+        if: inputs.action == 'fetch-developer'
+        uses: ./.github/actions/fetch-developer
+        with:
+          github-token: ${{ github.token }}
+          username: ${{ github.repository_owner }}
+      
+      - name: Test fetch-location
+        if: inputs.action == 'fetch-location'
+        uses: ./.github/actions/fetch-location
+        with:
+          github-token: ${{ github.token }}
+          username: ${{ github.repository_owner }}
+          mapbox-token: ${{ secrets.MAPBOX_TOKEN }}
+      
+      - name: Test fetch-weather
+        if: inputs.action == 'fetch-weather'
+        uses: ./.github/actions/fetch-weather
+        with:
+          github-token: ${{ github.token }}
+          username: ${{ github.repository_owner }}
+      
+      - name: Test fetch-soundcloud
+        if: inputs.action == 'fetch-soundcloud'
+        uses: ./.github/actions/fetch-soundcloud
+        with:
+          soundcloud-user: playfunction
+      
+      - name: Test fetch-oura
+        if: inputs.action == 'fetch-oura'
+        uses: ./.github/actions/fetch-oura
+        with:
+          oura-pat: ${{ secrets.OURA_PAT }}
+      
+      - name: Test fetch-quote
+        if: inputs.action == 'fetch-quote'
+        uses: ./.github/actions/fetch-quote
+      
+      # Generation actions
+      - name: Test generate-developer-dashboard
+        if: inputs.action == 'generate-developer-dashboard'
+        uses: ./.github/actions/generate-developer-dashboard
+      
+      - name: Test generate-quote-card
+        if: inputs.action == 'generate-quote-card'
+        uses: ./.github/actions/generate-quote-card
+      
+      - name: Test generate-weather-card
+        if: inputs.action == 'generate-weather-card'
+        uses: ./.github/actions/generate-weather-card
+      
+      - name: Test generate-location-card
+        if: inputs.action == 'generate-location-card'
+        uses: ./.github/actions/generate-location-card
+      
+      - name: Test generate-soundcloud-card
+        if: inputs.action == 'generate-soundcloud-card'
+        uses: ./.github/actions/generate-soundcloud-card
+      
+      - name: Test generate-oura-dashboard
+        if: inputs.action == 'generate-oura-dashboard'
+        uses: ./.github/actions/generate-oura-dashboard
+      
+      - name: Test generate-oura-mood
+        if: inputs.action == 'generate-oura-mood'
+        uses: ./.github/actions/generate-oura-mood
+      
+      # Utility actions
+      - name: Test optimize-svgs
+        if: inputs.action == 'optimize-svgs'
+        uses: ./.github/actions/optimize-svgs
+      
+      - name: Test update-readme
+        if: inputs.action == 'update-readme'
+        uses: ./.github/actions/update-readme
+      
+      # Show results
+      - name: 📊 Show results
+        run: |
+          echo "=============================================="
+          echo "  Test Results for: ${{ inputs.action }}"
+          echo "=============================================="
+          echo ""
+          echo "Generated files:"
+          find developer weather location assets oura quotes -type f -name "*.json" -o -name "*.svg" 2>/dev/null | sort || echo "No files found"
+          echo ""
+          echo "Logs:"
+          find logs -type f 2>/dev/null | sort || echo "No logs found"

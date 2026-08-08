@@ -1,0 +1,70 @@
+name: 'Optimize SVG Files'
+description: 'Optimize all SVG files using SVGO'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🎨 Optimize SVGs with SVGO
+      shell: bash
+      run: |
+        echo "Optimizing SVG files..."
+        
+        # Create optimized SVGO config
+        cat > /tmp/svgo.config.js << 'EOF'
+        module.exports = {
+          multipass: true,
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  cleanupIds: {
+                    minify: true,
+                    preserve: [],
+                    preservePrefixes: [],
+                    force: true
+                  },
+                  removeViewBox: false,
+                  removeUselessDefs: true,
+                  cleanupNumericValues: {
+                    floatPrecision: 2
+                  },
+                  convertPathData: {
+                    floatPrecision: 2,
+                    transformPrecision: 5,
+                    applyTransforms: true,
+                    removeUseless: true,
+                    straightCurves: true,
+                    lineShorthands: true,
+                    curveSmoothShorthands: true
+                  }
+                }
+              }
+            },
+            'removeXMLNS',
+            'removeScriptElement',
+            {
+              name: 'convertStyleToAttrs',
+              params: {
+                onlyMatchedOnce: false
+              }
+            }
+          ]
+        };
+        EOF
+        
+        # Optimize all SVG files
+        find developer weather location assets oura quotes -name "*.svg" -type f 2>/dev/null | while read svg; do
+          if [ -f "$svg" ]; then
+            ORIGINAL_SIZE=$(stat -c%s "$svg" 2>/dev/null || echo "0")
+            if [ "$ORIGINAL_SIZE" -gt 0 ]; then
+              svgo "$svg" -o "$svg" --config=/tmp/svgo.config.js --quiet 2>/dev/null || true
+              OPTIMIZED_SIZE=$(stat -c%s "$svg" 2>/dev/null || echo "0")
+              if [ "$OPTIMIZED_SIZE" -gt 0 ] && [ "$ORIGINAL_SIZE" -gt 0 ]; then
+                # Use bc for safer division to avoid potential arithmetic errors
+                REDUCTION=$(echo "100 - ($OPTIMIZED_SIZE * 100 / $ORIGINAL_SIZE)" | bc)
+                echo "✅ $(basename "$svg"): ${ORIGINAL_SIZE} → ${OPTIMIZED_SIZE} bytes (${REDUCTION}% reduction)"
+              fi
+            fi
+          fi
+        done

@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0.0",
+  "page_id": "cover.front",
+  "page_type": "front_cover",
+
+  "title": "Ego Hygiene",
+  "edition": {
+    "number": 1,
+    "name": "Orientation",
+    "series": "Ego Hygiene Magazine"
+  },
+
+  "asset_files": {
+    "master_image": "cover.front.final.png",
+    "print_variant": "variants/cover.front.print.png",
+    "animation": "cover.front.animation.mp4",
+    "prompt": "cover.front.prompt"
+  },
+
+  "image_metadata": {
+    "format": "PNG",
+    "color_mode": "RGB",
+    "dimensions_px": {
+      "width": 1024,
+      "height": 1536
+    },
+    "aspect_ratio": "2:3",
+    "orientation": "portrait",
+    "intended_print_dpi": 300,
+    "print_safe_dimensions_at_300dpi_inches": {
+      "width": 3.41,
+      "height": 5.12
+    },
+    "file_size_bytes": 3452045,
+    "color_profile": "sRGB (assumed)",
+    "compression": "lossless_png"
+  },
+
+  "intent": {
+    "role": "entry_and_atmosphere_setting",
+    "primary_function": "signal_tone_and_world",
+    "secondary_function": "invite_curiosity_without_instruction",
+    "tone": [
+      "mysterious",
+      "grounded",
+      "retro",
+      "inviting"
+    ]
+  },
+
+  "visual_style": {
+    "world": "retro_mystic_field_manual",
+    "aesthetic_reference": "mid_20th_century_pulp_print_artifact",
+    "texture": [
+      "aged_paper",
+      "worn_ink",
+      "organic_grain",
+      "scuffed_edges",
+      "analog_print_noise"
+    ],
+    "color_palette": {
+      "primary": ["burnt_yellow", "rust_red"],
+      "secondary": ["deep_teal", "shadow_black"],
+      "accent": ["prismatic_crystal", "warm_gold_glow"]
+    },
+    "iconography": [
+      "crystal_cluster",
+      "silhouetted_figure",
+      "skull_emblem",
+      "retro_price_tag",
+      "issue_badge"
+    ],
+    "typography": {
+      "title": {
+        "style": "bold_distressed_retro_display",
+        "case": "uppercase",
+        "texture": "ink_wear",
+        "hierarchy_rank": 1
+      },
+      "edition_label": {
+        "style": "clean_serif",
+        "case": "title_case",
+        "hierarchy_rank": 2
+      },
+      "tagline": {
+        "style": "retro_emphasis_sans_serif",
+        "case": "title_case",
+        "hierarchy_rank": 3
+      }
+    }
+  },
+
+  "layout": {
+    "composition": "foreground_object_with_depth_background",
+    "central_element": "large_iridescent_crystal_cluster",
+    "secondary_element": "shadowed_human_silhouette",
+    "foreground_weight": "high",
+    "depth_layers": 3,
+    "text_hierarchy": [
+      "title",
+      "edition_label",
+      "tagline"
+    ],
+    "balance_axis": "vertical_symmetry_weighted_bottom"
+  },
+
+  "text_elements": {
+    "title": "EGO HYGIENE",
+    "edition_label": "Edition 1: Orientation",
+    "tagline": "A Mystic Guide for Self-Maintenance",
+    "price_badge": "25¢",
+    "issue_badge": "Issue No. 1",
+    "tone_badge": "Scary! Fun!"
+  },
+
+  "animation_profile": {
+    "type": "artifact_animation",
+    "allowed_effects": [
+      "subtle_light_pass",
+      "ambient_particle_drift",
+      "crystal_edge_glow",
+      "micro_parallax"
+    ],
+    "forbidden_effects": [
+      "text_movement",
+      "scene_recomposition",
+      "character_animation",
+      "over_sharpening",
+      "modern_clean_texture"
+    ]
+  },
+
+  "constraints": {
+    "no_instructional_content": true,
+    "no_practice_steps": true,
+    "no_required_reading_order": true,
+    "preserve_texture_authenticity": true
+  },
+
+  "print_considerations": {
+    "requires_upscale_for_large_format": true,
+    "recommended_upscale_factor": "2x",
+    "max_safe_print_size_inches_at_native": {
+      "width": 3.4,
+      "height": 5.1
+    }
+  },
+
+  "notes": {
+    "cover_is_artifact_not_practice": true,
+    "serves_as_visual_anchor_for_entire_edition": true,
+    "digital_first_distribution": true,
+    "print_optional": true
+  }
+}

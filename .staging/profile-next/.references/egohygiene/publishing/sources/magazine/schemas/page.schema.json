@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "https://egohygiene.com/schemas/page.schema.json",
+  "title": "Page Schema",
+  "description": "Canonical schema for page.json files used across all Ego Hygiene Magazine pages (v1.1.0)",
+  "type": "object",
+  "required": ["schema_version", "page_id", "page_type", "title", "edition"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.1.0",
+      "description": "Schema version for this page definition. Must be '1.1.0' for this schema."
+    },
+    "page_id": {
+      "type": "string",
+      "description": "Unique, dot-namespaced identifier for the page within its edition.",
+      "examples": ["cover.front", "presence.front", "gratitude.front", "solitude.front"]
+    },
+    "page_type": {
+      "type": "string",
+      "description": "Type classification of the page.",
+      "enum": [
+        "cover_front",
+        "cover_back",
+        "inside_front_cover",
+        "inside_back_cover",
+        "practice_front",
+        "practice_back",
+        "section_divider"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title for the page.",
+      "minLength": 1
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Optional subtitle providing additional context."
+    },
+    "edition": {
+      "type": "object",
+      "description": "Edition metadata block identifying which magazine edition this page belongs to.",
+      "required": ["number", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Edition number (1-indexed)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Edition name (e.g., 'Orientation')."
+        },
+        "series": {
+          "type": "string",
+          "description": "Series name (e.g., 'Ego Hygiene Magazine')."
+        },
+        "theme": {
+          "type": "string",
+          "description": "Edition theme, used as an alternative to 'series' in newer pages."
+        }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "description": "Intended purpose and emotional tone of the page.",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Functional role of the page within the edition (e.g., 'applied_practice_instruction')."
+        },
+        "primary_function": {
+          "type": "string",
+          "description": "Primary function this page serves for the reader."
+        },
+        "secondary_function": {
+          "type": "string",
+          "description": "Secondary function this page serves for the reader."
+        },
+        "tone": {
+          "type": "array",
+          "description": "Tone descriptors that guide visual and copy direction.",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "visual_style": {
+      "type": "object",
+      "description": "Visual design specification including palette, texture, iconography, and typography.",
+      "additionalProperties": false,
+      "properties": {
+        "world": {
+          "type": "string",
+          "description": "Design world or aesthetic universe (e.g., 'retro_mystic_field_manual')."
+        },
+        "aesthetic_reference": {
+          "type": "string",
+          "description": "Historical or cultural aesthetic reference."
+        },
+        "era_inspiration": {
+          "type": "string",
+          "description": "Era that inspires the visual style."
+        },
+        "intensity_level": {
+          "type": "string",
+          "description": "Visual intensity level descriptor (e.g., 'medium_low')."
+        },
+        "texture": {
+          "type": "array",
+          "description": "Texture descriptors applied to the page surface.",
+          "items": { "type": "string" }
+        },
+        "color_palette": {
+          "type": "object",
+          "description": "Named color groups for the page.",
+          "additionalProperties": false,
+          "properties": {
+            "primary": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Primary color names."
+            },
+            "secondary": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Secondary color names."
+            },
+            "accent": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Accent color names."
+            }
+          }
+        },
+        "iconography": {
+          "type": "array",
+          "description": "Iconographic elements used in the visual composition.",
+          "items": { "type": "string" }
+        },
+        "typography": {
+          "type": "object",
+          "description": "Typography specification keyed by text role (e.g., 'title', 'body').",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "style": { "type": "string" },
+              "case": { "type": "string" },
+              "texture": { "type": "string" },
+              "hierarchy_rank": { "type": "integer", "minimum": 1 },
+              "contrast": { "type": "string" },
+              "print_safe": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "description": "Layout and visual composition specification.",
+      "additionalProperties": false,
+      "properties": {
+        "composition": {
+          "type": "string",
+          "description": "Overall composition approach."
+        },
+        "central_element": {
+          "type": "string",
+          "description": "Primary focal element of the layout."
+        },
+        "secondary_element": {
+          "type": "string",
+          "description": "Single secondary element (use secondary_elements for multiple)."
+        },
+        "secondary_elements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Multiple secondary layout elements."
+        },
+        "foreground_elements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Elements placed in the foreground layer."
+        },
+        "background_elements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Elements placed in the background layer."
+        },
+        "foreground_weight": {
+          "type": "string",
+          "description": "Descriptive weight of the foreground layer."
+        },
+        "depth_layers": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of visual depth layers."
+        },
+        "text_hierarchy": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ordered list of text roles by visual hierarchy."
+        },
+        "balance_axis": {
+          "type": "string",
+          "description": "Compositional balance axis description."
+        },
+        "flow": {
+          "type": "string",
+          "description": "Reader flow or panel navigation pattern."
+        },
+        "panel_style": {
+          "type": "object",
+          "description": "Style specification for practice panels.",
+          "additionalProperties": false,
+          "properties": {
+            "shape": { "type": "string" },
+            "has_speech_tail": { "type": "boolean" },
+            "appearance": { "type": "string" }
+          }
+        },
+        "banner_style": {
+          "type": "object",
+          "description": "Position-keyed banner style overrides.",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "alignment": { "type": "string" },
+              "emphasis": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "practice_panels": {
+      "type": "array",
+      "description": "Structured practice instruction panels. Canonical form for practice pages (v1.1.0+).",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "text"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Machine-readable panel identifier."
+          },
+          "label": {
+            "type": "string",
+            "description": "Displayed label for the panel (e.g., 'BREATHE')."
+          },
+          "text": {
+            "type": "string",
+            "description": "Instructional text shown in the panel."
+          },
+          "domain": {
+            "type": "string",
+            "description": "Psychological or behavioral domain this panel targets."
+          },
+          "modality": {
+            "type": "string",
+            "description": "Practice modality (e.g., 'written', 'spoken', 'internal')."
+          },
+          "visual_reference": {
+            "type": "string",
+            "description": "Optional visual element that accompanies this panel."
+          }
+        }
+      }
+    },
+    "text_elements": {
+      "type": "object",
+      "description": "Freeform keyed text elements. Legacy format — prefer practice_panels for new practice pages.",
+      "additionalProperties": true
+    },
+    "effect_section": {
+      "type": "object",
+      "description": "Section describing the expected effect or outcome of the practice.",
+      "required": ["label", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Section label (typically 'EFFECT')."
+        },
+        "text": {
+          "type": "string",
+          "description": "Descriptive text explaining the effect."
+        },
+        "scientific_status": {
+          "type": "string",
+          "description": "Status of the scientific claim (e.g., 'conceptual_placeholder', 'peer_reviewed')."
+        },
+        "visual_reference": {
+          "type": "string",
+          "description": "Optional visual element accompanying the effect section."
+        },
+        "arrow_flow": {
+          "type": "boolean",
+          "description": "Whether an arrow flow graphic is shown."
+        }
+      }
+    },
+    "footer_banner": {
+      "type": "object",
+      "description": "Footer banner carrying an affirming or instructional message.",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Banner message text."
+        },
+        "tone": {
+          "type": "string",
+          "description": "Tonal descriptor for the message (e.g., 'reassuring', 'encouraging')."
+        },
+        "intent": {
+          "type": "string",
+          "description": "Intended psychological function of the banner."
+        }
+      }
+    },
+    "asset_files": {
+      "type": "object",
+      "description": "References to generated asset files for this page.",
+      "additionalProperties": false,
+      "properties": {
+        "master_image": {
+          "type": "string",
+          "description": "Filename of the primary master image."
+        },
+        "print_variant": {
+          "type": "string",
+          "description": "Relative path to the print-optimized image variant."
+        },
+        "animation": {
+          "type": "string",
+          "description": "Filename of the animation asset."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Filename of the AI image prompt file."
+        }
+      }
+    },
+    "image_metadata": {
+      "type": "object",
+      "description": "Technical metadata describing the master image file.",
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Image format (e.g., 'PNG')."
+        },
+        "color_mode": {
+          "type": "string",
+          "description": "Color mode (e.g., 'RGB')."
+        },
+        "dimensions_px": {
+          "type": "object",
+          "description": "Pixel dimensions of the image.",
+          "required": ["width", "height"],
+          "additionalProperties": false,
+          "properties": {
+            "width": { "type": "integer", "minimum": 1 },
+            "height": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "description": "Aspect ratio expressed as W:H (e.g., '2:3')."
+        },
+        "orientation": {
+          "type": "string",
+          "description": "Image orientation (e.g., 'portrait', 'landscape')."
+        },
+        "intended_print_dpi": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Target print resolution in DPI."
+        },
+        "print_safe_dimensions_at_300dpi_inches": {
+          "type": "object",
+          "description": "Maximum safe print dimensions at 300 DPI in inches.",
+          "additionalProperties": false,
+          "properties": {
+            "width": { "type": "number", "exclusiveMinimum": 0 },
+            "height": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        },
+        "file_size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes (0 if not yet generated)."
+        },
+        "color_profile": {
+          "type": "string",
+          "description": "Color profile (e.g., 'sRGB (assumed)')."
+        },
+        "compression": {
+          "type": "string",
+          "description": "Compression method (e.g., 'lossless_png')."
+        }
+      }
+    },
+    "animation_profile": {
+      "type": "object",
+      "description": "Animation specification for the digital version of the page.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Animation type descriptor."
+        },
+        "allowed_effects": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Permitted animation effects."
+        },
+        "forbidden_effects": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Explicitly prohibited animation effects."
+        }
+      }
+    },
+    "print_considerations": {
+      "type": "object",
+      "description": "Print-specific metadata and requirements.",
+      "additionalProperties": false,
+      "properties": {
+        "requires_upscale_for_large_format": {
+          "type": "boolean",
+          "description": "Whether the image must be upscaled for large-format printing."
+        },
+        "recommended_upscale_factor": {
+          "type": "string",
+          "description": "Recommended upscale multiplier (e.g., '2x')."
+        },
+        "max_safe_print_size_inches_at_native": {
+          "type": "object",
+          "description": "Maximum safe print size at native resolution in inches.",
+          "additionalProperties": false,
+          "properties": {
+            "width": { "type": "number", "exclusiveMinimum": 0 },
+            "height": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "description": "Production and content constraints expressed as boolean flags.",
+      "additionalProperties": { "type": "boolean" }
+    },
+    "notes": {
+      "type": "object",
+      "description": "Freeform contextual notes about the page.",
+      "additionalProperties": true
+    }
+  }
+}

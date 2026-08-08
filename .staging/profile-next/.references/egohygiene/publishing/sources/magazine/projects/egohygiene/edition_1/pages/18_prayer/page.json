@@ -1,0 +1,133 @@
+{
+  "page_type": "practice",
+  "practice_id": "prayer",
+  "title": "Prayer",
+  "subtitle": "Practices for Humility & Surrender",
+
+  "edition": {
+    "name": "Ego Hygiene",
+    "number": 1,
+    "theme": "Orientation"
+  },
+
+  "intent": {
+    "role": "decentering_and_surrender",
+    "primary_function": "reduce_ego_rigidity_and_control_loops",
+    "secondary_function": "restore_perspective_beyond_self",
+    "tone": [
+      "humble",
+      "grounding",
+      "non-dogmatic",
+      "reassuring"
+    ]
+  },
+
+  "visual_style": {
+    "world": "post_collapse_retro_mystic",
+    "era_inspiration": "mid_20th_century_pulp_magazine",
+    "texture": [
+      "aged_paper",
+      "worn_ink",
+      "grain",
+      "scuffed_edges"
+    ],
+    "color_palette": {
+      "primary": ["warm_yellow", "burnt_orange", "rust_red"],
+      "secondary": ["deep_brown", "charcoal", "night_sky_blue"],
+      "accent": ["soft_gold", "crystal_violet"]
+    },
+    "iconography": [
+      "praying_hands",
+      "crescent_moon",
+      "crystals",
+      "radio_tower",
+      "brain_icon"
+    ],
+    "typography": {
+      "title": {
+        "style": "bold_retro_serif",
+        "case": "uppercase",
+        "texture": "distressed"
+      },
+      "body": {
+        "style": "legible_serif",
+        "contrast": "high",
+        "print_safe": true
+      }
+    }
+  },
+
+  "layout": {
+    "composition": "central_focus_with_quadrant_panels",
+    "central_element": "hands_in_prayer_with_soft_glow",
+    "panel_style": {
+      "shape": "rounded_rectangle",
+      "has_speech_tail": false,
+      "appearance": "printed_instructional_panel"
+    },
+    "flow": "surrounding_loop"
+  },
+
+  "practice_panels": [
+    {
+      "id": "release",
+      "label": "RELEASE",
+      "text": "Let go of what you can’t control.",
+      "domain": "cognitive",
+      "modality": "letting_go",
+      "visual_reference": "open_landscape_and_sky"
+    },
+    {
+      "id": "address",
+      "label": "ADDRESS",
+      "text": "Speak to the universe, to nature, or to the unknown.",
+      "domain": "transpersonal",
+      "modality": "spoken_or_silent",
+      "visual_reference": "crystals_and_radio_tower"
+    },
+    {
+      "id": "surrender",
+      "label": "SURRENDER",
+      "text": "Acknowledge your limits without judgment.",
+      "domain": "ego",
+      "modality": "acceptance",
+      "visual_reference": "ruins_and_horizon"
+    },
+    {
+      "id": "trust",
+      "label": "TRUST",
+      "text": "Allow yourself to not know what comes next.",
+      "domain": "uncertainty",
+      "modality": "openness",
+      "visual_reference": "crystals_in_night_environment"
+    }
+  ],
+
+  "effect_section": {
+    "label": "EFFECT",
+    "text": "Reduces ego rigidity, calms the nervous system, restores perspective beyond the self.",
+    "scientific_status": "conceptual_placeholder",
+    "visual_reference": "brain_icon",
+    "arrow_flow": false
+  },
+
+  "footer_banner": {
+    "text": "LET GO, REST THE EGO, TAP INTO SOMETHING GREATER!",
+    "tone": "encouraging",
+    "intent": "release_control_and_pressure"
+  },
+
+  "constraints": {
+    "no_religious_doctrine": true,
+    "no_medical_claims": true,
+    "no_required_belief": true,
+    "no_prescriptive_language": true
+  },
+
+  "notes": {
+    "non_theistic_framing": true,
+    "research_to_add_later": true,
+    "serves_as_schema_reference": true,
+    "paired_with_self_acceptance_practice": true
+  }
+}

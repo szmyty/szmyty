@@ -1,0 +1,12 @@
+{
+  "inputs": {},
+  "ref": "refs/heads/main",
+  "repository": {
+    "name": "profile",
+    "full_name": "szmyty/profile",
+    "owner": {
+      "name": "szmyty",
+      "login": "szmyty"
+    }
+  }
+}

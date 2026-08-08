@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="480" height="144" viewBox="0 0 480 144">
+  <defs>
+    <clipPath id="artwork-clip">
+      <rect x="10" y="10" width="100" height="100" rx="8"/>
+    </clipPath>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="480" height="144" rx="12" fill="url(#bg-gradient)"/>
+  <rect width="480" height="144" rx="12" fill="none" stroke="#ff5500" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Artwork -->
+  <g clip-path="url(#artwork-clip)">
+    <image x="10" y="10" width="100" height="100" preserveAspectRatio="xMidYMid slice" href="data:image/png;base64,PHN2ZyB3aWR0aD0iNDgwIiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDQ4MCAxNDQiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjAlIiB4Mj0iMTAwJSIgeTE9IjAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFhMWEyZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzE2MjEzZSIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJiIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeD0iMTAiIHk9IjEwIiByeD0iOCIvPjwvY2xpcFBhdGg+PC9kZWZzPjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iMTQ0IiBmaWxsPSJ1cmwoI2EpIiByeD0iMTIiLz48cmVjdCB3aWR0aD0iNDgwIiBoZWlnaHQ9IjE0NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjUwIiBzdHJva2Utb3BhY2l0eT0iLjMiIHJ4PSIxMiIvPjxnIGNsaXAtcGF0aD0idXJsKCNiKSI+PGltYWdlIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB4PSIxMCIgeT0iMTAiIGhyZWY9ImRhdGE6aW1hZ2UvanBlZztiYXNlNjQsLzlqLzRBQVFTa1pKUmdBQkFRQUFBUUFCQUFELzJ3QkRBQVVEQkFRRUF3VUVCQVFGQlFVR0J3d0lCd2NIQnc4TEN3a01FUThTRWhFUEVSRVRGaHdYRXhRYUZSRVJHQ0VZR2gwZEh4OGZFeGNpSkNJZUpCd2VIeDcvMndCREFRVUZCUWNHQnc0SUNBNGVGQkVVSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNy93QUFSQ0FCa0FHUURBU0lBQWhFQkF4RUIvOFFBSEFBQUFnTUJBUUVCQUFBQUFBQUFBQUFBQXdRQUJRWUNCd0VJLzhRQU5CQUFBZ0VEQXdJRkFnUUZCUUVBQUFBQUFRSURBQVFSQlJJaE1VRUdFeUpSWVhHUkJ4UXlnU05DVXFIUlluS3h3ZUh3LzhRQUdnRUJBQU1CQVFFQUFBQUFBQUFBQUFBQUJBSURCUUVBQnYvRUFDRVJBQUlEQUFJREFRRUJBUUFBQUFBQUFBRUNBQU1SQkNFU0V6RWlVVEpCLzlvQURBTUJBQUlSQXhFQVB3RDhsQURGZlFLN0F6eWE3Q2pIZi8ydFlMQTdCN2NZcjd0d2E3QUo1TkZoaGVRN1VWbVk5QUJtdWhkK1NKYklIYWM1b2lSRXJuR2FNa1l6NnUxSGpSdWdHUDJxMWE1VzFtUVZ2RHVPS0sxc0FDT2QzZW5iZTNta3dCbkdlZUtldXJhS0MyQlpnWlg1S2p0U2xwNmczNUdOZ21ka1RiMSsxQWxWZHhLWng4MWFYbHRJRUVtQXdQdDIrbzdVaVU3cm5OSHNRZzVGMXZvaWJBakpCK3RGdDRHZkxBSEE3MTlaT2UzTk55ZndyTUtHUHFQVEhXcWxUdlRMdktLTmxUZ1ZLR3hKYk5TdWVVN0N4ampwMW9raWpBeDJITmZZU1FTcXFNRVlPZWFkaWdFZ1ZpQ1FUdGJBcTVWMFE3UGhsZXFla2tkYWJRR05VOHNzSDducCsxZlpZUWx5NnFEdEI0ejdkcVpnamphQUVGdk5EWXhnWXhVNjBrTExJS09JbGdTdkJQNmZlclRUN0R6M1ZXVUtGNzQvNXBpenRpWVN5cHU0MmxzSEEvZXJUVG5GcUdkb1ZjYmZTMjN2OGU5TnFxRzl6TXY1SndoWjludEcwaTNSNW9rSmNIQVk4N2ZjZjVyUFh6UHVWblFqSXlwOXg3MWU2M2UzbXBCRGNTU3krV3V5TUhvcTU0QStQaXFSNDJVbGNjZzhnaXAyNThFanhQbXYvcUl2S0ZiMHFlZXVlYzBLNmdDQ09hTmdWa0djQThxZTROTlNvSDU3ZTVyaU5HYk1YQnp5UGcwVmwzcWFBWURzUk8zdGpMTUVIT2FOcW9Dc3NLcjBHUHFhdklZSXJHeUZ4SXA4MDlpUGJrVm43d21XVjI1T1RVR1R3V2RydDlyZGZCSzVsNXFVUjE1d2UxU2grTWFER0lnUE1YQTV6VmhwYnNyZVYxeVFSU2t3L2k1VVk3MDBGMnlJK09HNXo5YVlnd3dsZzBaTHk1MDZPNGpNaXg0Y25ibGVSeDJwTzMwK1F6TXFKaHVnQklwL3c3cUppamtpWnNMSXV3bkhUSXhtdERKWUlzZHZkWUxCc2NrajFuNEk3VXRVVnU1bXZhOVlJTVUwWFRaaENOeDJxakFxb1k3bVk5Z1BuM3IwT0R3aFpyQkxlNm0vbEdPSVBKYnhFQXhMeGdzeDZFK3dHYXAvQjIyYldyZVM0QzdyZU41U0FPR0txU3VmZm5GWG1uNmRhNnZMY1hWL2RTUlJQSXFCZ2hrWjNJSkJ4N1lGTVJSa3d1VGFRL2tma3FwUjRNa3RQSld5dnJlWU1CNWlTK1p1SDB4L2lzMTR0OFBqVHBZcmkzTVUxdEtOOEU4V1FKQUR5ZWVqRHVLOUUxRDhQNE5IZUpkUXZwSXBic0Eyb2pUZnVCUERFOWdmdjhWUXoyaU5wZXFXS041c1ZyL0dYSTVSd3dCKzRKcmpBTU5FczQvSVh5L0JQWDJlYmFsWnh5YlpZZDIyUmNuUDlZNjExNGYwL04ySjUxMlFvTnhkaHdEMnJSNmZwUjh0TGk1VlJiK2NRTnhJeWNkQjlxcWRhMWFTY05hd3BIRkFoMnFxcmdzQU85SFpRTzQ4Y2hyQ2EwNy9BS1pSNjNjL21aZkxqY2xCMVk5NnJMMVZpUWhWd3hBVTg1eHhSWDlDRUtRV0o1T2VsQnVVSGx4cnpsanVZKzJlbjl2K2FNNTBHYTFDaEFBSWtzSllaQXlLbE9FS25wVEdQbXBSc0VkSU1HRmd3em5rSDJvMXUrKzNXM1laWlNTcDl3ZW8vd0N4KzlBalpmMHR1QXh6bWpMSGgxR09EME9ldFdLZTVVU0FOaFlzcEp4MFlZUHg4MXF2REdyTkVCQmNKSEltY05HL2Y2ZXhyTmdDWEtzZHNuWTlqL2ltWXpLOGtjSlJWZFJ0SEdOMzFQdjgwcERrenVRcXVNbnAraHpSV041YjNTSURDU1R0N2xHRzExK3VEeFZ0YUpxK2czUkdtU0xMYlRETVQ3UXdkYzVWaG51UHVEa1Y1OXBPc3ZheENDZitQSGtob21ISy9JUFkxdXZEZmlDUzF0b3phWEN6eEU1YUtWQXdVL0lQeDNGTlU3OG56OXlHc1l3MFMyZSs4VVJSTWwzTUdNeHlwZE43eGs5V0dSa0g2VlU2cVlkSzBtUzBNTG05dTVBY2M3dkx6a1pIdXh4Z2V3TmFyeEQ0eHZwYmEzaHRyYTBoWXhBSHlZZ0dYNzV4NzE1VnIycU1icVZvM2FTYko5WmJPRDNKUHZYdXd1dDFJMEZMWEFxWEJFdFh2Si95cGplVmhGQmxpdTdvN2NZQTducFdTdXAzWlNGQVV2d01kY1U1ZXN6dHVabUk2LzdqU2trVE1ESXg0eUFDQi9ZVVN4aTAzS0tsckVVV0hZZk1rR1l4MCtmaXVyaFVmRWpjbGhrZ2RxWnUwYjhuRXBCd2R6S283ZHNta0hiZ1JEamoxSEdhTlljR1RTb3hqNUdBbGFQZWMvMnFVTmdBeEJCSnFVYUwySEtuQjR6KzFOUTdIVFlBZHc2YzlhR2d3Y0RuUFlpandybkE2WTcxYUJEa2oreHd4eHl4RFlwU2RQMUEvd0F3N1lydTNFZ0FTUkE0OWlNR2lXTUhtc0drM0tSZ2JoMEZYdGhBekR5NXJkWk0vd0F3NmtVdERzSTliS1B6OGxmYjJ5dGpERUhQQWIvTmFEU3JhVzNtVmdlU1JrRHZYZHJwVVpkZkxIWGpZM0dhMDJpNkZkQ2ZtTTdEeUNSOXFRQ0Y3bWU2R3o4d092eHl2YXd3eHFZaThlK1RzVDdEUHRXT3ZZUlp2SWpoQzVCVWgxemo5dmV2VC9FK2pYcXh4SXNMZ21GU3pLT09mL3NWaWRRMFNTTkc4MEZkeDZIclhQWUhFN1Z3enh4Zyt6SFlielFFakRzMlFHY1p4OUsrTmJ4THRhUmlVSExIK28rd3E4ZTNFQ3NSYm1Rait2aGYzOS9wVlJmN2R2SU1rbWM1NktQZ1ZTekFSMVZCelRLMi93QnBtZVFQc0dNQmUyUGFxeVk3dlRFdTFlNUo2MDVQR1dKWnprbnNCMHBPVURPY1pIWURwUkhCTWFycU9oRm5WUWNCcy9TcFhUTTI3OUtqNmlwVmVHV2VRZ283cHM1NzA1SGZ1cEJKWEE3WXFqU1lqdWFNa3dQVlFmaW9wZE9OU0QveWFXMjFkVi9VcUhQK21ybXk4UlN3YkdWWThBNUhweC8zV0hpblVFZW5qdU0wNWJYb1g5VVlPTzNTa3BkdjJGc3BLOXJQVmRKOFhMSHRaclNCMngxZU1rZjJOYmp3NStJY1Z1OGUreDA4SVAxQmtaY2ZUSnJDWHZqVHd4YTI4TU5ocHNGekpIYTdFYzJrU3BISWJkVitzbUpOelpjWkJIR2MxWlIvaUg0UmR0cWVIUkNuNUJvTUxieGxnNXhqMUU5TWcrdkdlVHgzRjNrampDc0F5MnFkRFQwdnhuK0pOcEpid3ZEcDl2TkdzTWZtU0pFeFZHSU9CbmdEb2NWNWRxbmpKYnAzSjAyMlhCNFljOGZmaXJXZjhRUER2NTRUUHBMejJiTEdWaS9LeElzRzBTQURBT0pOcGRjRnVUam5GVUQrUGZESnZYMytINEk0Zk5hU01wYlJGbzNMdVEyQ2ZVQXJMNkNkdVZ4ODF4SzBxR0JaTDIyMkhTMnlpdmRmU1Z5V2dqei9BTFAvQUdxTzkxTnQ1QmpqKzNOYUh4TjRzMERVUERCMDZ4MGxWdnpjR1Jybjh0SEdYOVRIZDZENmNxVlhZQVZHM2cxNTlOSVdjbDIrMVJhenJvUk5kZW5zeXdtdjl4NDI1eDhVblBkY0hKK3dwSjVFQlBWdjJvTHk0QkhTalBjWXBLQkR0Y0VucmlwU0pjMUtQN1RFZXNRUUpycEdOU3BWQWx4aEZrYjNveU8zdmlwVXE5REtXRU1qc1c1TlBXY2poeGc0cVZLWFVlNFM0REkvcUZ4S3hSQ3d3RkE2VlhUNFFaQTVQdlVxVWl5RnBHQVpFM2RnU2MwdThqbGprMUtsWjloTTBxeEJNN0h2WEJOU3BSMmlCT1QxcVZLbFJrNS8vOWs9IiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSIvPjwvZz48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeD0iMTAiIHk9IjEwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmNTAiIHN0cm9rZS1vcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iOCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM3MCAxMCkiPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEwIiBmaWxsPSIjZjUwIi8+PHRleHQgeD0iMTAiIHk9IjE0IiBmaWxsPSIjZmZmIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TQzwvdGV4dD48L2c+PHRleHQgeT0iMTIiIGZpbGw9IiM0YTU1NjgiIGZvbnQtZmFtaWx5PSInU2Vnb2UgVUknLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4IiB0ZXh0LWFuY2hvcj0iZW5kIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NzAgMTApIj5VcGRhdGVkOiBqdXN0IG5vdzwvdGV4dD48dGV4dCBmaWxsPSIjZmZmIiBmb250LWZhbWlseT0iJ1NlZ29lIFVJJywgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSJib2xkIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjUgMjUpIj4KICAgICAgcHJlc2NpZW5jZQogICAgPC90ZXh0Pjx0ZXh0IHk9IjIyIiBmaWxsPSIjZjUwIiBmb250LWZhbWlseT0iJ1NlZ29lIFVJJywgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyNSAyNSkiPgogICAgICAucGxheSgpCiAgICA8L3RleHQ+PHRleHQgeT0iNDIiIGZpbGw9IiM4ODkyYjAiIGZvbnQtZmFtaWx5PSInU2Vnb2UgVUknLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI1IDI1KSI+CiAgICAgIDx0c3BhbiBmaWxsPSIjNjRmZmRhIj5mdXR1cmUgemVuIGJhc3M8L3RzcGFuPgogICAgICA8dHNwYW4gZmlsbD0iIzRhNTU2OCI+IMK3IDwvdHNwYW4+CiAgICAgIDx0c3Bhbj4zOjQ0PC90c3Bhbj4KICAgIDwvdGV4dD48ZyBmaWxsPSIjODg5MmIwIj48cGF0aCBkPSJNMTI1IDgzdjEwbDgtNXoiLz48dGV4dCB4PSIxMiIgeT0iOSIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjUgODMpIj4xNzEgcGxheXM8L3RleHQ+PHRleHQgeD0iODAiIHk9IjkiIGZvbnQtZmFtaWx5PSInU2Vnb2UgVUknLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI1IDgzKSI+UmVsZWFzZWQgMjAyNS0xMS0yOCAxMTo1OSBQTTwvdGV4dD48L2c+PGEgdGFyZ2V0PSJfYmxhbmsiPgogICAgPHBhdGggZmlsbD0idHJhbnNwYXJlbnQiIGQ9Ik0wIDBoNDgwdjE0NEgweiIgY3Vyc29yPSJwb2ludGVyIi8+CiAgPC9hPjwvc3ZnPg=="/>
+  </g>
+  <rect x="10" y="10" width="100" height="100" rx="8" fill="none" stroke="#ff5500" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- SoundCloud Logo/Icon -->
+  <g transform="translate(370, 10)">
+    <circle cx="10" cy="10" r="10" fill="#ff5500"/>
+    <text x="10" y="14" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle" font-weight="bold">SC</text>
+  </g>
+
+  <!-- Staleness Badge -->
+  <g transform="translate(470, 10)">
+    <text x="0" y="12" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#4a5568" text-anchor="end">Updated: just now</text>
+  </g>
+
+  <!-- Track Info -->
+  <g transform="translate(125, 25)">
+    <!-- Title -->
+    <text font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">
+      starme
+    </text>
+
+    <!-- Artist -->
+    <text y="22" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#ff5500">
+      .play()
+    </text>
+
+    <!-- Genre & Duration -->
+    <text y="42" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">
+      <tspan fill="#64ffda">rage cloud bass</tspan>
+      <tspan fill="#4a5568"> · </tspan>
+      <tspan>2:28</tspan>
+    </text>
+
+    <!-- Stats -->
+    <g transform="translate(0, 58)">
+      <!-- Play count icon -->
+      <polygon points="0,0 0,10 8,5" fill="#8892b0"/>
+      <text x="12" y="9" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">144 plays</text>
+
+      <!-- Date -->
+      <text x="80" y="9" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">Released 2025-12-06 06:29 AM</text>
+    </g>
+  </g>
+
+  <!-- Clickable overlay (for GitHub markdown) -->
+  <a href="https://soundcloud.com/playfunction/starme" target="_blank">
+    <rect width="480" height="144" fill="transparent" style="cursor: pointer;"/>
+  </a>
+</svg>

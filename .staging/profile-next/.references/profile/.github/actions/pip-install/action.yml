@@ -1,0 +1,85 @@
+name: 'Install Python Packages with Caching'
+description: 'Install Python packages using pip with optimized caching based on package names'
+inputs:
+  packages:
+    description: 'Space-separated list of Python packages to install (e.g., "Pillow jsonschema")'
+    required: true
+  cache-key-suffix:
+    description: 'Optional suffix for cache key to allow multiple caches per workflow'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get Python version
+      id: python-version
+      shell: bash
+      run: |
+        PYTHON_VERSION=$(python --version | cut -d' ' -f2)
+        echo "version=${PYTHON_VERSION}" >> $GITHUB_OUTPUT
+        echo "Python version: ${PYTHON_VERSION}"
+
+    - name: Generate cache key from packages
+      id: cache-key
+      shell: bash
+      run: |
+        # Sort packages alphabetically for consistent cache keys
+        # Quote PACKAGES to prevent word splitting issues
+        PACKAGES="${{ inputs.packages }}"
+        # Use read array for safe splitting, then sort
+        read -ra PKG_ARRAY <<< "$PACKAGES"
+        SORTED_PACKAGES=$(printf '%s\n' "${PKG_ARRAY[@]}" | sort | tr '\n' ' ' | xargs)
+        
+        # Create a hash of the package list for cache key
+        PACKAGE_HASH=$(printf '%s' "$SORTED_PACKAGES" | sha256sum | cut -d' ' -f1 | cut -c1-8)
+        
+        # Construct cache key
+        CACHE_KEY="pip-packages-${{ runner.os }}-py${{ steps.python-version.outputs.version }}-${PACKAGE_HASH}"
+        if [ -n "${{ inputs.cache-key-suffix }}" ]; then
+          CACHE_KEY="${CACHE_KEY}-${{ inputs.cache-key-suffix }}"
+        fi
+        
+        echo "key=${CACHE_KEY}" >> $GITHUB_OUTPUT
+        echo "packages=${SORTED_PACKAGES}" >> $GITHUB_OUTPUT
+        echo "Cache key: ${CACHE_KEY}"
+        echo "Packages: ${SORTED_PACKAGES}"
+
+    - name: Cache pip packages
+      uses: actions/cache@v4
+      id: pip-cache
+      with:
+        path: ~/.cache/pip
+        key: ${{ steps.cache-key.outputs.key }}
+        restore-keys: |
+          pip-packages-${{ runner.os }}-py${{ steps.python-version.outputs.version }}-
+          pip-packages-${{ runner.os }}-
+
+    - name: Install packages
+      shell: bash
+      run: |
+        # Activate venv if it exists
+        if [ -d ".venv" ]; then
+          source .venv/bin/activate
+          echo "Using virtual environment at .venv"
+        fi
+        
+        PACKAGES="${{ steps.cache-key.outputs.packages }}"
+        
+        if [ "${{ steps.pip-cache.outputs.cache-hit }}" = "true" ]; then
+          echo "✓ Cache hit for packages: $PACKAGES"
+          echo "Installing from cache..."
+        else
+          echo "✗ Cache miss for packages: $PACKAGES"
+          echo "Installing and caching..."
+        fi
+        
+        # Quote packages to prevent command injection
+        pip install $PACKAGES
+        
+        # Show installed package versions for debugging
+        # Iterate through each package for proper validation
+        echo "Installed package versions:"
+        for pkg in $PACKAGES; do
+          pip list | grep -F "$pkg" || true
+        done

@@ -1,0 +1,40 @@
+name: 'Generate Oura Mood Dashboard'
+description: 'Generate the Oura mood dashboard SVG'
+
+inputs:
+  input-json:
+    description: 'Path to the Oura metrics JSON file'
+    required: false
+    default: 'oura/metrics.json'
+  mood-json:
+    description: 'Path to the mood JSON file'
+    required: false
+    default: 'oura/mood.json'
+  output-svg:
+    description: 'Path to the output SVG file'
+    required: false
+    default: 'oura/mood_dashboard.svg'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🧬 Compute Mood State
+      shell: bash
+      run: |
+        echo "Computing mood state..."
+        if python scripts/oura-mood-engine.py "${{ inputs.input-json }}" "${{ inputs.mood-json }}"; then
+          echo "✅ Mood state computed"
+        else
+          echo "⚠️ Warning: Failed to compute mood state"
+        fi
+    
+    - name: 🧬 Generate Oura Mood Dashboard
+      shell: bash
+      run: |
+        echo "Generating Oura mood dashboard..."
+        if python scripts/incremental-generate.py "${{ inputs.mood-json }}" "${{ inputs.output-svg }}" scripts/generate-oura-mood-card.py oura_mood "${{ inputs.input-json }}"; then
+          echo "✅ Oura mood dashboard generated successfully"
+        else
+          echo "⚠️ Warning: Failed to generate Oura mood dashboard"
+          echo '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><text x="400" y="200" text-anchor="middle" fill="#666">Mood Dashboard Unavailable</text></svg>' > "${{ inputs.output-svg }}"
+        fi

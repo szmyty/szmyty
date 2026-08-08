@@ -1,0 +1,44 @@
+# poetry.toml - Project-level Poetry configuration
+# https://python-poetry.org/docs/configuration/
+
+# ─── Global Cache & Git ──────────────────────────────────────────────────────────
+cache-dir = ".cache/poetry"
+data-dir = ".cache/poetry/data"
+system-git-client = false
+
+# ─── Virtualenvs ─────────────────────────────────────────────────────────────────
+[virtualenvs]
+create = true
+in-project = true
+path = "{cache-dir}/virtualenvs"
+prompt = "{project_name}-py{python_version}"
+
+[virtualenvs.options]
+always-copy = false
+no-pip = false
+system-site-packages = false
+use-poetry-python = false
+
+# ─── Installer ───────────────────────────────────────────────────────────────────
+[installer]
+no-binary = false
+only-binary = false
+parallel = true
+re-resolve = true
+max-workers = 4
+
+# ─── Requests / HTTP ─────────────────────────────────────────────────────────────
+[requests]
+max-retries = 0
+
+# ─── Python Install Location (Optional) ──────────────────────────────────────────
+[python]
+installation-dir = "{data-dir}/python"
+
+# ─── Solver Options ──────────────────────────────────────────────────────────────
+[solver]
+lazy-wheel = true
+
+# ─── Security / Credentials ──────────────────────────────────────────────────────
+[keyring]
+enabled = false

@@ -1,0 +1,102 @@
+[
+  {
+    "text": "The only way to do great work is to love what you do.",
+    "author": "Steve Jobs",
+    "category": "motivation"
+  },
+  {
+    "text": "Code is like humor. When you have to explain it, it's bad.",
+    "author": "Cory House",
+    "category": "programming"
+  },
+  {
+    "text": "First, solve the problem. Then, write the code.",
+    "author": "John Johnson",
+    "category": "programming"
+  },
+  {
+    "text": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "author": "Martin Fowler",
+    "category": "programming"
+  },
+  {
+    "text": "The best error message is the one that never shows up.",
+    "author": "Thomas Fuchs",
+    "category": "programming"
+  },
+  {
+    "text": "Simplicity is the soul of efficiency.",
+    "author": "Austin Freeman",
+    "category": "wisdom"
+  },
+  {
+    "text": "Make it work, make it right, make it fast.",
+    "author": "Kent Beck",
+    "category": "programming"
+  },
+  {
+    "text": "Testing leads to failure, and failure leads to understanding.",
+    "author": "Burt Rutan",
+    "category": "learning"
+  },
+  {
+    "text": "It's not a bug – it's an undocumented feature.",
+    "author": "Anonymous",
+    "category": "humor"
+  },
+  {
+    "text": "Programs must be written for people to read, and only incidentally for machines to execute.",
+    "author": "Harold Abelson",
+    "category": "programming"
+  },
+  {
+    "text": "The function of good software is to make the complex appear to be simple.",
+    "author": "Grady Booch",
+    "category": "software"
+  },
+  {
+    "text": "Walking on water and developing software from a specification are easy if both are frozen.",
+    "author": "Edward V. Berard",
+    "category": "humor"
+  },
+  {
+    "text": "Before software can be reusable it first has to be usable.",
+    "author": "Ralph Johnson",
+    "category": "software"
+  },
+  {
+    "text": "Quality is not an act, it is a habit.",
+    "author": "Aristotle",
+    "category": "wisdom"
+  },
+  {
+    "text": "The only constant in the technology industry is change.",
+    "author": "Marc Benioff",
+    "category": "technology"
+  },
+  {
+    "text": "Don't comment bad code – rewrite it.",
+    "author": "Brian Kernighan",
+    "category": "programming"
+  },
+  {
+    "text": "Innovation distinguishes between a leader and a follower.",
+    "author": "Steve Jobs",
+    "category": "innovation"
+  },
+  {
+    "text": "The best way to predict the future is to invent it.",
+    "author": "Alan Kay",
+    "category": "innovation"
+  },
+  {
+    "text": "Good design is as little design as possible.",
+    "author": "Dieter Rams",
+    "category": "design"
+  },
+  {
+    "text": "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away.",
+    "author": "Antoine de Saint-Exupéry",
+    "category": "wisdom"
+  }
+]

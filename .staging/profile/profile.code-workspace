@@ -1,0 +1,216 @@
+{
+  "folders": [
+    { "path": "." },
+    { "path": "services/api" },
+    { "path": "apps/ui" }
+  ],
+  "settings": {
+    // --- General VSCode Behavior ---
+    "git.ignoreLimitWarning": true,
+    "telemetry.feedback.enabled": false,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always",
+    },
+    "files.trimTrailingWhitespace": true,
+
+    // --- Terminal ---
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.gpuAcceleration": "off",
+    "terminal.integrated.enablePersistentSessions": true,
+
+    // --- Spell Checker ---
+    "cSpell.enabled": true,
+    "cSpell.language": "en",
+    "cSpell.caseSensitive": false,
+    "cSpell.useGitignore": true,
+    "cSpell.logFile": "${workspaceFolder}/.cache/cspell/cspell.log",
+    "cSpell.trustedWorkspace": true,
+    "cSpell.mergeCSpellSettings": true,
+    "cSpell.words": ["cspell", "TASKFILE"],
+    "cSpell.ignorePaths": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.next/**",
+      "**/.vercel/**",
+      "**/.turbo/**",
+      "**/coverage/**",
+      "**/out/**",
+      "**/tmp/**",
+      "**/temp/**",
+      "**/logs/**",
+      "**/log/**",
+      "**/vendor/**",
+      "**/bower_components/**",
+      "**/pnpm-lock.yaml",
+      "**/yarn.lock",
+      "**/package-lock.json",
+      "**/.cache/**",
+      "**/reports/**",
+      "**/.vscode/**",
+      "**/.git/**",
+      "**/package.json",
+      "**/.spectral.yaml"
+    ],
+    "cSpell.customDictionaries": {
+      "project-words": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/project-words.dictionary",
+        "addWords": true
+      },
+      "backend-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/backend-terms.dictionary",
+        "addWords": false
+      },
+      "devops-cloud-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/devops-cloud-terms.dictionary",
+        "addWords": false
+      },
+      "frontend-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/frontend-terms.dictionary",
+        "addWords": false
+      },
+      "programming-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/programming-terms.dictionary",
+        "addWords": false
+      },
+      "software-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/software-terms.dictionary",
+        "addWords": false
+      }
+    },
+
+    // --- Formatter overrides ---
+    "prettier.useEditorConfig": true,
+    "prettier.configPath": "${workspaceFolder}/config/.prettier.config.mjs",
+    "[shellscript]": {
+      "editor.defaultFormatter": "foxundermoon.shell-format",
+      "editor.formatOnSave": false
+    },
+    "[dockerfile]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+    },
+    "[ignore]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": null
+    },
+    "[gitignore]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": null
+    },
+    "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[yaml]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+    // --- JSON/YAML Schema support ---
+    "json.schemas": [
+      { "fileMatch": ["manifest.webmanifest"], "url": "https://json.schemastore.org/web-manifest-combined.json" },
+      { "fileMatch": [".htmlhintrc"], "url": "https://json.schemastore.org/htmlhint.json" },
+      { "fileMatch": [".npmpackagejsonlintrc.json"], "url": "https://json.schemastore.org/npm-package-json-lint.json" },
+      { "fileMatch": [".prettierrc", ".prettierrc.*"], "url": "https://json.schemastore.org/prettierrc.json" },
+      { "fileMatch": [".luacheckrc"], "url": "https://json.schemastore.org/luacheckrc.json" },
+      { "fileMatch": [".markdown-link-check.json"], "url": "https://www.schemastore.org/markdown-link-check.json" },
+      { "fileMatch": [".yamllint.yml", ".yamllint.yaml"], "url": "https://www.schemastore.org/yamllint.json" }
+    ],
+    "yaml.schemas": {
+      "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json": "**/.ansible-lint",
+      "https://taskfile.dev/schema.json": "**/Taskfile.yml",
+      "https://json.schemastore.org/github-issue-config.json": "**/.github/ISSUE_TEMPLATE/config.yml",
+      "https://json.schemastore.org/github-workflow.json": "**/.github/workflows/*.yml",
+      "https://json.schemastore.org/github-action.json": "**/.github/actions/*.yml"
+    },
+
+    // --- HTMLHint ---
+    "htmlhint.ignoreGitignore": true,
+    "htmlhint.options": {
+      "config": "${workspaceFolder}/config/.htmlhintrc"
+    },
+
+    // --- ShellCheck ---
+    "shellcheck.enable": true,
+    "shellcheck.disableVersionCheck": false,
+    "shellcheck.enableQuickFix": true,
+    "shellcheck.useWorkspaceRootAsCwd": false,
+    "shellcheck.run": "onSave",
+
+    // --- Extensions behavior ---
+    "local-history.enabled": 1,
+    "local-history.daysLimit": 3,
+    "local-history.maxDisplay": 10,
+    "local-history.saveDelay": 0,
+    "local-history.dateLocale": "en-US",
+    "local-history.exclude": [
+      "**/.history/**",
+      "**/.vscode/**",
+      "**/node_modules/**",
+      "**/typings/**",
+      "**/out/**",
+      "**/Code/User/**",
+      "**/*.code-workspace",
+      "**/build/**",
+      "**/dist/**",
+      "**/Notes/**"
+    ],
+    "local-history.path": "${workspaceFolder}/.cache/vscode",
+
+    // --- Peacock Colors ---
+    "peacock.color": "#5B1A53",
+    "peacock.affectActivityBar": true,
+    "peacock.affectDebuggingStatusBar": true,
+    "peacock.affectEditorGroupBorder": true,
+    "peacock.affectPanelBorder": true,
+    "peacock.affectSashHover": true,
+    "peacock.affectSideBarBorder": true,
+    "peacock.affectStatusAndTitleBorders": true,
+    "peacock.affectStatusBar": true,
+    "peacock.affectTabActiveBorder": true,
+    "peacock.affectTitleBar": true,
+    "peacock.darkForegroundColor": "#15202b",
+    "peacock.lightForegroundColor": "#e7e7e7",
+    "peacock.keepBadgeColor": false,
+    "peacock.keepForegroundColor": false,
+    "peacock.darkenLightenPercentage": 5,
+    "peacock.showColorInStatusBar": true,
+    "peacock.surpriseMeFromFavoritesOnly": true,
+    "peacock.surpriseMeOnStartup": true,
+
+    // --- Workbench Colors ---
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#832577",
+      "statusBar.background": "#5b1a53",
+      "statusBar.border": "#5b1a53",
+      "editorGroup.border": "#832577",
+      "tab.activeBorder": "#832577",
+      "titleBar.activeBackground": "#5b1a53",
+      "titleBar.border": "#5b1a53",
+      "activityBar.activeBackground": "#832577",
+      "activityBar.foreground": "#e7e7e7",
+      "activityBar.inactiveForeground": "#e7e7e799",
+      "activityBarBadge.background": "#171907",
+      "activityBarBadge.foreground": "#e7e7e7",
+      "commandCenter.border": "#e7e7e799",
+      "panel.border": "#832577",
+      "sash.hoverBorder": "#832577",
+      "sideBar.border": "#832577",
+      "statusBar.debuggingBackground": "#1a5b22",
+      "statusBar.debuggingBorder": "#1a5b22",
+      "statusBar.debuggingForeground": "#e7e7e7",
+      "statusBar.foreground": "#e7e7e7",
+      "statusBarItem.hoverBackground": "#832577",
+      "statusBarItem.remoteBackground": "#5b1a53",
+      "statusBarItem.remoteForeground": "#e7e7e7",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveBackground": "#5b1a5399",
+      "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.remoteColor": "#42b883",
+    "notebook.formatOnSave.enabled": true
+  }
+}

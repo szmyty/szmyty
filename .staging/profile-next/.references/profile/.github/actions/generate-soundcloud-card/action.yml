@@ -1,0 +1,31 @@
+name: 'Generate SoundCloud Card'
+description: 'Generate the SoundCloud track card SVG'
+
+inputs:
+  input-json:
+    description: 'Path to the SoundCloud metadata JSON file'
+    required: false
+    default: 'assets/metadata.json'
+  output-svg:
+    description: 'Path to the output SVG file'
+    required: false
+    default: 'assets/soundcloud-card.svg'
+  artwork-image:
+    description: 'Path to the SoundCloud artwork image'
+    required: false
+    default: 'assets/soundcloud-artwork.jpg'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🎵 Generate SoundCloud Card
+      shell: bash
+      run: |
+        echo "Generating SoundCloud card..."
+        if python scripts/incremental-generate.py "${{ inputs.input-json }}" "${{ inputs.output-svg }}" scripts/generate-card.py soundcloud "${{ inputs.artwork-image }}"; then
+          echo "✅ SoundCloud card generated successfully"
+        else
+          echo "⚠️ Warning: Failed to generate SoundCloud card"
+          # Create fallback card
+          echo '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><text x="400" y="200" text-anchor="middle" fill="#666">SoundCloud Card Unavailable</text></svg>' > "${{ inputs.output-svg }}"
+        fi

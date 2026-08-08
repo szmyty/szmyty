@@ -1,0 +1,32 @@
+{
+  "workflow_name": "parallel-fetch",
+  "total_runs": 3,
+  "successful_runs": 0,
+  "failed_runs": 3,
+  "consecutive_failures": 3,
+  "last_success": null,
+  "last_failure": "2025-12-03T04:24:32Z",
+  "last_run_time_seconds": null,
+  "avg_run_time_seconds": null,
+  "api_calls": {},
+  "run_history": [
+    {
+      "timestamp": "2025-12-03T04:24:31Z",
+      "success": false,
+      "run_time_seconds": null,
+      "error_message": "Network timeout"
+    },
+    {
+      "timestamp": "2025-12-03T04:24:31Z",
+      "success": false,
+      "run_time_seconds": null,
+      "error_message": "API rate limit"
+    },
+    {
+      "timestamp": "2025-12-03T04:24:32Z",
+      "success": false,
+      "run_time_seconds": null,
+      "error_message": "Service unavailable"
+    }
+  ]
+}

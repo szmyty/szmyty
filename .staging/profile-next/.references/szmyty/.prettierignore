@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Version control
+.git/
+
+# Generated files
+*.min.js
+*.min.css
+*.svg
+github-metrics.svg
+metrics.plugin.*.svg
+
+# Package manager files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# IDE and editor files
+.idea/
+.vscode/
+*.code-workspace
+
+# Documentation build
+docs/_build/

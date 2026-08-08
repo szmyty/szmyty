@@ -1,0 +1,57 @@
+name: Visual DNA Validation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'editions/*/pages/*/page.json'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'editions/*/pages/*/page.json'
+
+jobs:
+  validate-visual-dna:
+    name: Validate Visual DNA
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Detect changed page.json files
+        id: changed-files
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+            # Handle first-ever push where before is the null SHA
+            if [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+              BASE="$(git hash-object -t tree /dev/null)"
+            fi
+          fi
+          git diff --name-only "$BASE" HEAD -- 'editions/*/pages/*/page.json' \
+            > /tmp/changed_pages.txt
+          echo "Changed page.json files:"
+          cat /tmp/changed_pages.txt
+
+      - name: Run Visual DNA Validation
+        run: |
+          if [ ! -s /tmp/changed_pages.txt ]; then
+            echo "No page.json changes detected, skipping validation."
+            exit 0
+          fi
+          xargs python3 scripts/validate_visual_dna.py < /tmp/changed_pages.txt

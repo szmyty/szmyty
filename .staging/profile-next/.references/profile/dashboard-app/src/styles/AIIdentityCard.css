@@ -1,0 +1,62 @@
+.ai-identity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ai-identity-content .persona,
+.ai-identity-content .traits,
+.ai-identity-content .insights {
+  padding: 16px 0;
+}
+
+.ai-identity-content .persona:not(:last-child),
+.ai-identity-content .traits:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ai-identity-content h3 {
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+}
+
+.ai-identity-content .persona p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.traits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trait-tag {
+  padding: 6px 12px;
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--color-accent);
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.ai-identity-content .insights ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-secondary);
+}
+
+.ai-identity-content .insights li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.ai-timestamp {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding-top: 8px;
+}

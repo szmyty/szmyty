@@ -1,0 +1,27 @@
+name: 'Generate Weather Card'
+description: 'Generate the weather card SVG'
+
+inputs:
+  input-json:
+    description: 'Path to the weather data JSON file'
+    required: false
+    default: 'weather/weather.json'
+  output-svg:
+    description: 'Path to the output SVG file'
+    required: false
+    default: 'weather/weather-today.svg'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🌦️ Generate Weather Card
+      shell: bash
+      run: |
+        echo "Generating weather card..."
+        if python scripts/incremental-generate.py "${{ inputs.input-json }}" "${{ inputs.output-svg }}" scripts/generate-weather-card.py weather; then
+          echo "✅ Weather card generated successfully"
+        else
+          echo "⚠️ Warning: Failed to generate weather card"
+          # Create fallback card
+          echo '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><text x="400" y="200" text-anchor="middle" fill="#666">Weather Card Unavailable</text></svg>' > "${{ inputs.output-svg }}"
+        fi

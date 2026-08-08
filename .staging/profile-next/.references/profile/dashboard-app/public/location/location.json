@@ -1,0 +1,10 @@
+{
+  "display_name": "Boston, Suffolk County, Massachusetts, United States",
+  "lat": 42.3588336,
+  "lon": -71.0578303,
+  "address": {
+    "city": "Boston",
+    "state": "Massachusetts",
+    "country": "United States"
+  }
+}

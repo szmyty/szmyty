@@ -1,0 +1,477 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
+
+# This is a configuration file for MegaLinter, a code quality tool.
+# Configuration Options: https://megalinter.io/latest/json-schemas/configuration.html
+
+# Common variables: https://megalinter.io/latest/config-variables/
+ADDITIONAL_EXCLUDED_DIRECTORIES: []
+APPLY_FIXES: none
+CLEAR_REPORT_FOLDER: true
+CONFIG_PROPERTIES_TO_APPEND: []
+DISABLE_ERRORS: false
+DISABLE: []
+DISABLE_LINTERS:
+  - REPOSITORY_DEVSKIM
+  - JSON_ESLINT_PLUGIN_JSONC
+DISABLE_ERRORS_LINTERS: []
+ENABLE_ERRORS_LINTERS: []
+ERROR_ON_MISSING_EXEC_BIT: true
+# ENABLE:
+# ENABLE_LINTERS:
+EXCLUDED_DIRECTORIES:
+  - node_modules
+  - .git
+  - .idea
+  - reports
+  - dist
+  - logs
+  - build
+  - coverage
+  - .history
+  - .cache
+  - .next
+  - .nuxt
+  - .vercel
+  - .output
+  - venv
+  - .venv
+  - .history
+  - .pytest_cache
+  - .mypy_cache
+  - .ruff_cache
+EXTENDS: []
+FAIL_IF_MISSING_LINTER_IN_FLAVOR: true
+FAIL_IF_UPDATED_SOURCES: false
+# FILTER_REGEX_INCLUDE: ".*"
+# FILTER_REGEX_EXCLUDE: ""
+FLAVOR_SUGGESTIONS: false
+FORMATTERS_DISABLE_ERRORS: false
+GITHUB_API_URL: https://api.github.com
+GITHUB_SERVER_URL: https://github.com
+GITLAB_ACCESS_TOKEN_MEGALINTER: ""
+GITLAB_CERTIFICATE_PATH: ""
+GITLAB_CUSTOM_CERTIFICATE: ""
+IGNORE_GENERATED_FILES: true
+IGNORE_GITIGNORED_FILES: true
+JAVASCRIPT_DEFAULT_STYLE: prettier
+KUBERNETES_HELM_DIRECTORY: "any"
+KUBERNETES_KUBECONFORM_DIRECTORY: "any"
+KUBERNETES_KUBESCAPE_DIRECTORY: "any"
+LINTER_RULES_PATH: .github/linters
+LOG_FILE: mega-linter.log
+LOG_LEVEL: INFO
+MARKDOWN_DEFAULT_STYLE: markdownlint
+PARALLEL: true
+PARALLEL_PROCESS_NUMBER: 4
+PLUGINS: []
+POST_COMMANDS: []
+PRE_COMMANDS: []
+PRINT_ALPACA: true
+PRINT_ALL_FILES: true
+PYTHON_DEFAULT_STYLE: ruff
+REPORTERS_MARKDOWN_TYPE: advanced
+REPORT_OUTPUT_FOLDER: reports/megalinter
+SECURED_ENV_VARIABLES: []
+SHOW_ELAPSED_TIME: true
+SHOW_SKIPPED_LINTERS: false
+SKIP_CLI_LINT_MODES: []
+TYPESCRIPT_DEFAULT_STYLE: prettier
+VALIDATE_ALL_CODEBASE: true
+
+# Linter configuration: https://megalinter.io/latest/supported-linters/
+# https://megalinter.io/latest/json-schemas/configuration.html
+
+# actionlint: https://github.com/rhysd/actionlint
+# https://megalinter.io/latest/descriptors/action_actionlint/
+ACTION_ACTIONLINT_CONFIG_FILE: .github/actionlint.yaml
+
+# ansible-lint: https://ansible.readthedocs.io/projects/lint/
+# https://megalinter.io/latest/descriptors/ansible_ansible_lint/
+ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: config/.ansible-lint
+ANSIBLE_DIRECTORY: ansible
+
+# spectral: https://stoplight.io/open-source/spectral
+# https://megalinter.io/latest/descriptors/api_spectral/
+API_SPECTRAL_CONFIG_FILE: config/.spectral.yaml
+
+# arm-ttk: https://github.com/Azure/arm-ttk
+# https://megalinter.io/latest/descriptors/arm_arm_ttk/
+ARM_ARM_TTK_CONFIG_FILE: config/.arm-ttk.psd1
+
+# cljstyle: https://github.com/greglook/cljstyle
+# https://megalinter.io/latest/descriptors/clojure_cljstyle/
+CLOJURE_CLJSTYLE_CONFIG_FILE: config/.cljstyle
+
+# clj-kondo: https://github.com/clj-kondo/clj-kondo
+# https://megalinter.io/latest/descriptors/clojure_clj_kondo/
+CLOJURE_CLJ_KONDO_CONFIG_FILE: config/.clj-kondo/config.edn
+
+# cfn-lint: https://github.com/aws-cloudformation/cfn-lint
+# https://megalinter.io/latest/descriptors/cloudformation_cfn_lint/
+CLOUDFORMATION_CFN_LINT_CONFIG_FILE: config/.cfnlintrc.yaml
+
+# coffeelint: https://github.com/coffeelint/coffeelint
+# https://megalinter.io/latest/descriptors/coffee_coffee_lint/
+COFFEE_COFFEELINT_CONFIG_FILE: config/.coffee-lint.json
+
+# jscpd: https://github.com/kucherenko/jscpd
+# https://megalinter.io/latest/descriptors/copypaste_jscpd/
+COPYPASTE_JSCPD_CONFIG_FILE: config/.jscpd.json
+
+# clang-format: https://clang.llvm.org/docs/ClangFormat.html
+# https://megalinter.io/latest/descriptors/cpp_clang_format/
+CPP_CLANG_FORMAT_CONFIG_FILE: config/.clang-format
+
+# stylelint: https://stylelint.io/
+# https://megalinter.io/latest/descriptors/css_stylelint/
+CSS_STYLELINT_CONFIG_FILE: config/.stylelintrc.json
+
+# clang-format: https://clang.llvm.org/docs/ClangFormat.html
+# https://megalinter.io/latest/descriptors/c_clang_format/
+C_CLANG_FORMAT_CONFIG_FILE: config/.clang-format
+
+# dart-analyze: https://dart.dev/tools/dart-analyze
+# https://megalinter.io/latest/descriptors/dart_dartanalyzer/
+DART_DARTANALYZER_CONFIG_FILE: config/analysis_options.yml
+
+# hadolint: https://github.com/hadolint/hadolint
+# https://megalinter.io/latest/descriptors/dockerfile_hadolint/
+DOCKERFILE_HADOLINT_CONFIG_FILE: config/.hadolint.yaml
+
+# editorconfig-checker: https://github.com/editorconfig-checker/editorconfig-checker
+# https://megalinter.io/latest/descriptors/editorconfig_editorconfig_checker/
+EDITORCONFIG_EDITORCONFIG_CHECKER_CONFIG_FILE: config/.ecrc
+
+# gherkin-lint: https://github.com/gherkin-lint/gherkin-lint
+# https://megalinter.io/latest/descriptors/gherkin_gherkin_lint/
+GHERKIN_GHERKIN_LINT_CONFIG_FILE: config/.gherkin-lintrc
+
+# revive: https://github.com/mgechev/revive
+# https://megalinter.io/latest/descriptors/go_revive/
+GO_REVIVE_CONFIG_FILE: config/.revive.toml
+
+# graphql-schema-linter: https://github.com/cjoudrey/graphql-schema-linter
+# https://megalinter.io/latest/descriptors/graphql_graphql_schema_linter/
+GRAPHQL_GRAPHQL_SCHEMA_LINTER_CONFIG_FILE: config/.graphql-schema-linter.yml
+
+# npm-groovy-lint: https://github.com/nvuillam/npm-groovy-lint
+# https://megalinter.io/latest/descriptors/groovy_npm_groovy_lint/
+GROOVY_NPM_GROOVY_LINT_CONFIG_FILE: config/.groovylintrc.json
+
+# htmlhint:
+# https://megalinter.io/latest/descriptors/html_htmlhint/
+HTML_HTMLHINT_CONFIG_FILE: config/.htmlhintrc
+
+# eslint: https://eslint.org/
+# https://megalinter.io/latest/descriptors/javascript_eslint/
+JAVASCRIPT_ES_CONFIG_FILE: config/.eslint.config.mjs
+
+# prettier: https://prettier.io/
+# https://megalinter.io/latest/descriptors/javascript_prettier/
+JAVASCRIPT_PRETTIER_CONFIG_FILE: config/.prettier.config.mjs
+
+# checkstyle: https://checkstyle.org/
+# https://megalinter.io/latest/descriptors/java_checkstyle/
+JAVA_CHECKSTYLE_CONFIG_FILE: config/sun_checks.xml
+
+# pmd: https://pmd.github.io/
+# https://megalinter.io/latest/descriptors/java_pmd/
+JAVA_PMD_CONFIG_FILE: config/java-pmd-ruleset.xml
+
+# eslint-plugin-jsonc: https://github.com/ota-meshi/eslint-plugin-jsonc
+# https://megalinter.io/latest/descriptors/json_eslint_plugin_jsonc/
+JSON_ESLINT_PLUGIN_JSONC_CONFIG_FILE: config/.eslintrc-json.json
+
+# jsonlint: https://github.com/zaach/jsonlint
+# https://megalinter.io/latest/descriptors/json_jsonlint/
+JSON_JSONLINT_CONFIG_FILE: config/.jsonlintrc
+
+# npm-package-json-lint: https://github.com/tclindner/npm-package-json-lint
+# https://megalinter.io/latest/descriptors/json_npm_package_json_lint/
+JSON_NPM_PACKAGE_JSON_LINT_CONFIG_FILE: config/.npmpackagejsonlintrc.json
+
+# prettier: https://prettier.io/
+# https://megalinter.io/latest/descriptors/json_prettier/
+JSON_PRETTIER_CONFIG_FILE: config/.prettier.config.mjs
+
+# eslint: https://eslint.org/
+# https://megalinter.io/latest/descriptors/jsx_eslint/
+JSX_ESLINT_CONFIG_FILE: config/.eslint.config.mjs
+
+# chktex: https://www.nongnu.org/chktex/
+# https://megalinter.io/latest/descriptors/latex_chktex/
+LATEX_CHKTEX_CONFIG_FILE: config/.chktexrc
+
+# luacheck: https://github.com/mpeterv/luacheck
+# https://megalinter.io/latest/descriptors/lua_luacheck/
+LUA_LUACHECK_CONFIG_FILE: config/.luacheckrc
+
+# checkmake: https://github.com/checkmake/checkmake
+# https://megalinter.io/latest/descriptors/makefile_checkmake/
+MAKEFILE_CHECKMAKE_CONFIG_FILE: config/.checkmake.ini
+
+# markdownlint: https://github.com/DavidAnson/markdownlint
+# https://megalinter.io/latest/descriptors/markdown_markdownlint/
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: config/.markdownlint.json
+
+# markdown-link-check: https://github.com/tcort/markdown-link-check
+# https://megalinter.io/latest/descriptors/markdown_markdown_link_check/
+MARKDOWN_MARKDOWN_LINK_CHECK_CONFIG_FILE: config/.markdown-link-check.json
+
+# remark-lint: https://github.com/remarkjs/remark-lint
+# https://megalinter.io/latest/descriptors/markdown_remark_lint/
+MARKDOWN_REMARK_LINT_CONFIG_FILE: config/.remarkrc.json
+
+# PHP_CodeSniffer: https://github.com/PHPCSStandards/PHP_CodeSniffer/
+# https://megalinter.io/latest/descriptors/php_phpcs/
+PHP_PHPCS_CONFIG_FILE: config/phpcs.xml
+
+# phplint: https://github.com/overtrue/phplint
+# https://megalinter.io/latest/descriptors/php_phplint/
+PHP_PHPLINT_CONFIG_FILE: config/.phplint.yml
+
+# phpstan: https://phpstan.org/
+# https://megalinter.io/latest/descriptors/php_phpstan/
+PHP_PHPSTAN_CONFIG_FILE: config/phpstan.neon.dist
+
+# psalm: https://psalm.dev/
+# https://megalinter.io/latest/descriptors/php_psalm/
+PHP_PSALM_CONFIG_FILE: config/psalm.xml
+
+# powershell-psscriptanalyzer: https://github.com/PowerShell/PSScriptAnalyzer
+# https://megalinter.io/latest/descriptors/powershell_powershell/
+POWERSHELL_POWERSHELL_CONFIG_FILE: config/.powershell-psscriptanalyzer.psd1
+
+# powershell-formatter: https://github.com/PowerShell/PSScriptAnalyzer
+# https://megalinter.io/latest/descriptors/powershell_powershell_formatter/
+POWERSHELL_POWERSHELL_FORMATTER_CONFIG_FILE: config/.powershell-formatter.psd1
+
+# protolint: https://github.com/yoheimuta/protolint
+# https://megalinter.io/latest/descriptors/protobuf_protolint/
+PROTOBUF_PROTOLINT_CONFIG_FILE: config/.protolintrc.yml
+
+# puppet-lint: https://github.com/puppetlabs/puppet-lint
+# https://megalinter.io/latest/descriptors/puppet_puppet_lint/
+PUPPET_PUPPET_LINT_CONFIG_FILE: config/.puppet-lint.rc
+
+# bandit: https://bandit.readthedocs.io/en/latest/
+# https://megalinter.io/latest/descriptors/python_bandit/
+PYTHON_BANDIT_CONFIG_FILE: config/.bandit.yml
+
+# black: https://black.readthedocs.io/en/stable/
+# https://megalinter.io/latest/descriptors/python_black/
+PYTHON_BLACK_CONFIG_FILE: pyproject.toml
+
+# flake8: https://flake8.pycqa.org/en/latest/
+# https://megalinter.io/latest/descriptors/python_flake8/
+PYTHON_FLAKE8_CONFIG_FILE: config/.flake8
+
+# isort: https://pycqa.github.io/isort/
+# https://megalinter.io/latest/descriptors/python_isort/
+PYTHON_ISORT_CONFIG_FILE: config/pyproject.toml
+
+# mypy: https://mypy.readthedocs.io/en/stable/
+# https://megalinter.io/latest/descriptors/python_mypy/
+PYTHON_MYPY_CONFIG_FILE: config/.mypy.ini
+
+# pylint: https://pylint.pycqa.org/en/latest/
+# https://megalinter.io/latest/descriptors/python_pylint/
+PYTHON_PYLINT_CONFIG_FILE: config/.pylintrc
+
+# pyright: https://pyrightlang.org/
+# https://megalinter.io/latest/descriptors/python_pyright/
+PYTHON_PYRIGHT_CONFIG_FILE: config/pyrightconfig.json
+
+# ruff: https://ruff.rs/
+# https://megalinter.io/latest/descriptors/python_ruff/
+PYTHON_RUFF_CONFIG_FILE: config/pyproject.toml
+
+# raku: https://raku.org/
+# https://megalinter.io/latest/descriptors/raku_raku/
+RAKU_RAKU_CONFIG_FILE: config/META6.json
+
+# checkov: https://www.checkov.io/
+# https://megalinter.io/latest/descriptors/repository_checkov/
+REPOSITORY_CHECKOV_CONFIG_FILE: config/.checkov.yml
+
+# devskim: https://github.com/microsoft/DevSkim
+# https://megalinter.io/latest/descriptors/repository_devskim/
+REPOSITORY_DEVSKIM_CONFIG_FILE: config/.devskim.json
+
+# gitleaks: https://github.com/gitleaks/gitleaks
+# https://megalinter.io/latest/descriptors/repository_gitleaks/
+REPOSITORY_GITLEAKS_CONFIG_FILE: config/.gitleaks.toml
+
+# grype: https://github.com/anchore/grype
+# https://megalinter.io/latest/descriptors/repository_grype/
+REPOSITORY_GRYPE_CONFIG_FILE: config/.grype.yaml
+
+# kics: https://github.com/checkmarx/kics
+# https://megalinter.io/latest/descriptors/repository_kics/
+REPOSITORY_KICS_CONFIG_FILE: config/.kics.config.json
+
+# secretlint: https://github.com/checkmarx/kics
+# https://megalinter.io/latest/descriptors/repository_secretlint/
+REPOSITORY_SECRETLINT_CONFIG_FILE: config/.secretlintrc.json
+REPOSITORY_SECRETLINT_ARGUMENTS: "--secretlintignore config/.secretlintignore"
+
+# syft: https://github.com/anchore/syft
+# https://megalinter.io/latest/descriptors/repository_syft/
+REPOSITORY_SYFT_CONFIG_FILE: config/.syft.yaml
+
+# trivy: https://github.com/aquasecurity/trivy
+# https://megalinter.io/latest/descriptors/repository_trivy/
+REPOSITORY_TRIVY_CONFIG_FILE: config/trivy.yaml
+
+# trivy-sbom: https://github.com/aquasecurity/trivy
+# https://megalinter.io/latest/descriptors/repository_trivy_sbom/
+REPOSITORY_TRIVY_SBOM_CONFIG_FILE: config/trivy-sbom.yaml
+
+# trufflehog: https://github.com/trufflesecurity/trufflehog
+# https://megalinter.io/latest/descriptors/repository_trufflehog/
+REPOSITORY_TRUFFLEHOG_CONFIG_FILE: config/.trufflehog.yml
+REPOSITORY_TRUFFLEHOG_ARGUMENTS: "--exclude-paths=config/.trufflehogignore"
+
+# rstcheck: https://github.com/rstcheck/rstcheck
+# https://megalinter.io/latest/descriptors/rst_rstcheck/
+RST_RSTCHECK_CONFIG_FILE: config/.rstcheck.cfg
+
+# rubocop: https://rubocop.org/
+# https://megalinter.io/latest/descriptors/ruby_rubocop/
+RUBY_RUBOCOP_CONFIG_FILE: config/.ruby-lint.yml
+
+# rust-clippy: https://github.com/rust-lang/rust-clippy
+# https://megalinter.io/latest/descriptors/rust_clippy/
+RUST_CLIPPY_CONFIG_FILE: config/.clippy.toml
+
+# lintr: https://github.com/r-lib/lintr
+# https://megalinter.io/latest/descriptors/r_lintr/
+R_LINTR_CONFIG_FILE: config/.lintr
+
+# lightning-flow-scanner-sfdx: https://github.com/Lightning-Flow-Scanner/lightning-flow-scanner-sfdx
+# https://megalinter.io/latest/descriptors/salesforce_lightning_flow_scanner/
+SALESFORCE_LIGHTNING_FLOW_SCANNER_CONFIG_FILE: config/.flow-scanner.json
+
+# sfdx-scanner: https://github.com/forcedotcom/code-analyzer
+# https://megalinter.io/latest/descriptors/salesforce_sfdx_scanner_apex/
+SALESFORCE_SFDX_SCANNER_APEX_CONFIG_FILE: config/apex-pmd-ruleset.xml
+
+# scalafix: https://github.com/scalacenter/scalafix
+# https://megalinter.io/latest/descriptors/scala_scalafix/
+SCALA_SCALAFIX_CONFIG_FILE: config/.scalafix.conf
+
+# snakefmt: https://github.com/snakemake/snakefmt
+# https://megalinter.io/latest/descriptors/snakemake_snakefmt/
+SNAKEMAKE_SNAKEFMT_CONFIG_FILE: config/.snakefmt.toml
+
+# cspell: https://github.com/streetsidesoftware/cspell
+# https://megalinter.io/latest/descriptors/spell_cspell/
+SPELL_CSPELL_CONFIG_FILE: config/.cspell.config.mjs
+
+# lychee: https://github.com/lycheeverse/lychee
+# https://megalinter.io/latest/descriptors/spell_lychee/
+SPELL_LYCHEE_CONFIG_FILE: config/lychee.toml
+SPELL_LYCHEE_ARGUMENTS: "--exclude-path config/.lycheeignore"
+
+# proselint: https://github.com/amperser/proselint
+# https://megalinter.io/latest/descriptors/spell_proselint/
+SPELL_PROSELINT_CONFIG_FILE: config/.proselintrc
+
+# vale: https://github.com/errata-ai/vale
+# https://megalinter.io/latest/descriptors/spell_vale/
+SPELL_VALE_CONFIG_FILE: config/.vale.ini
+
+# sqlfluff: https://github.com/sqlfluff/sqlfluff
+# https://megalinter.io/latest/descriptors/sql_sqlfluff/
+SQL_SQLFLUFF_CONFIG_FILE: config/.sqlfluff
+
+# tsqllint: https://github.com/tsqllint/tsqllint
+# https://megalinter.io/latest/descriptors/sql_tsqllint/
+SQL_TSQLLINT_CONFIG_FILE: config/.tsqllintrc.json
+
+# swiftlint: https://github.com/realm/SwiftLint
+# https://megalinter.io/latest/descriptors/swift_swiftlint/
+SWIFT_SWIFTLINT_CONFIG_FILE: config/.swiftlint.yml
+
+# tekton-lint: https://github.com/IBM/tekton-lint
+# https://megalinter.io/latest/descriptors/tekton_tekton_lint/
+TEKTON_TEKTON_LINT_CONFIG_FILE: config/.tektonlintrc.yaml
+
+# terragrunt: https://github.com/gruntwork-io/terragrunt
+# https://megalinter.io/latest/descriptors/terraform_terragrunt/
+TERRAFORM_TERRAGRUNT_CONFIG_FILE: config/terragrunt.hcl
+
+# terrascan: https://github.com/tenable/terrascan
+# https://megalinter.io/latest/descriptors/terraform_terrascan/
+TERRAFORM_TERRASCAN_CONFIG_FILE: config/terrascan-config.toml
+
+# tflint: https://github.com/terraform-linters/tflint
+# https://megalinter.io/latest/descriptors/terraform_tflint/
+TERRAFORM_TFLINT_CONFIG_FILE: config/.tflint.hcl
+
+# eslint: https://eslint.org/
+# https://megalinter.io/latest/descriptors/typescript_eslint/
+TSX_ESLINT_CONFIG_FILE: config/.eslint.config.mjs
+
+# eslint: https://eslint.org/
+# https://megalinter.io/latest/descriptors/typescript_eslint/
+TYPESCRIPT_ES_CONFIG_FILE: config/.eslint.config.mjs
+
+# prettier: https://prettier.io/
+# https://megalinter.io/latest/descriptors/typescript_prettier/
+TYPESCRIPT_PRETTIER_CONFIG_FILE: config/.prettier.config.mjs
+
+# prettier: https://prettier.io/
+# https://megalinter.io/latest/descriptors/yaml_prettier/
+YAML_PRETTIER_CONFIG_FILE: config/.prettier.config.mjs
+
+# v8r: https://github.com/chris48s/v8r
+# https://megalinter.io/latest/descriptors/yaml_v8r/
+YAML_V8R_CONFIG_FILE: config/.v8rrc.yml
+
+# yamllint: https://yamllint.readthedocs.io/en/stable/
+# https://megalinter.io/latest/descriptors/yaml_yamllint/
+YAML_YAMLLINT_CONFIG_FILE: config/.yamllint.yml
+
+# Reporters configuration
+AZURE_COMMENT_REPORTER: false
+BITBUCKET_COMMENT_REPORTER: false
+
+CONFIG_REPORTER: true
+CONFIG_REPORTER_SUB_FOLDER: IDE-config
+
+CONSOLE_REPORTER: true
+CONSOLE_REPORTER_SECTIONS: true
+
+EMAIL_REPORTER: false
+EMAIL_REPORTER_EMAIL: szmyty@gmail.com
+EMAIL_REPORTER_SENDER: szmyty@gmail.com
+EMAIL_REPORTER_SEND_SUCCESS: true
+EMAIL_REPORTER_SMTP_HOST: smtp.gmail.com
+EMAIL_REPORTER_SMTP_PORT: 465
+EMAIL_REPORTER_SMTP_USERNAME: szmyty@gmail.com
+
+FILEIO_REPORTER: false
+FILEIO_REPORTER_SEND_SUCCESS: false
+
+GITHUB_COMMENT_REPORTER: true
+GITHUB_STATUS_REPORTER: true
+
+GITLAB_COMMENT_REPORTER: false
+GITLAB_COMMENT_REPORTER_OVERWRITE_COMMENT: true
+
+JSON_REPORTER: true
+JSON_REPORTER_OUTPUT_DETAIL: detailed
+
+MARKDOWN_SUMMARY_REPORTER: true
+MARKDOWN_SUMMARY_REPORTER_FILE_NAME: SUMMARY.md
+
+TAP_REPORTER: true
+TAP_REPORTER_SUB_FOLDER: tap
+
+TEXT_REPORTER: true
+TEXT_REPORTER_SUB_FOLDER: linters_logs
+
+UPDATED_SOURCES_REPORTER: true
+UPDATED_SOURCES_REPORTER_DIR: updated_sources

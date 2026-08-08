@@ -1,0 +1,45 @@
+name: Greetings
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Send first-interaction greeting
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          issue-message: |
+            👋 **Welcome to the repository!**
+
+            Thanks for opening your first issue here ✨  
+            This project auto-generates a fully dynamic personal dashboard using AI, GitHub Actions, and multi-source data integrations.  
+
+            Your contribution is appreciated — feel free to ask any questions or explore the system architecture.  
+
+            _May your debugging be smooth and your commits clean._ 🚀
+
+          pr-message: |
+            🎉 **Welcome, and thanks for your first PR!**
+
+            This repo uses:
+            • AI-generated SVG dashboards  
+            • Oura + SoundCloud + Weather integrations  
+            • React-based visualization layer  
+            • Automated workflows & monitoring  
+            • A fully themed design system  
+
+            Your pull request helps improve a living engineering-art project.  
+            The CI system will run checks shortly — feel free to reach out if you have questions.
+
+            _Appreciate you contributing to the cosmic dashboard._ 🌌

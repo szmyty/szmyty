@@ -1,0 +1,40 @@
+name: 'Generate Oura Health Dashboard'
+description: 'Generate the Oura health dashboard SVG'
+
+inputs:
+  input-json:
+    description: 'Path to the Oura metrics JSON file'
+    required: false
+    default: 'oura/metrics.json'
+  snapshot-json:
+    description: 'Path to the health snapshot JSON file'
+    required: false
+    default: 'oura/health_snapshot.json'
+  output-svg:
+    description: 'Path to the output SVG file'
+    required: false
+    default: 'oura/health_dashboard.svg'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🧬 Generate Oura Health Snapshot
+      shell: bash
+      run: |
+        echo "Generating Oura health snapshot..."
+        if python scripts/generate-health-snapshot.py "${{ inputs.input-json }}" "${{ inputs.snapshot-json }}"; then
+          echo "✅ Health snapshot generated"
+        else
+          echo "⚠️ Warning: Failed to generate health snapshot"
+        fi
+    
+    - name: 🧬 Generate Oura Health Dashboard
+      shell: bash
+      run: |
+        echo "Generating Oura health dashboard..."
+        if python scripts/incremental-generate.py "${{ inputs.snapshot-json }}" "${{ inputs.output-svg }}" scripts/generate-health-dashboard.py oura_health; then
+          echo "✅ Oura health dashboard generated successfully"
+        else
+          echo "⚠️ Warning: Failed to generate Oura health dashboard"
+          echo '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><text x="400" y="200" text-anchor="middle" fill="#666">Health Dashboard Unavailable</text></svg>' > "${{ inputs.output-svg }}"
+        fi

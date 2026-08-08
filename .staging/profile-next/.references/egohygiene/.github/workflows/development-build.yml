@@ -1,0 +1,83 @@
+name: Development Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: development-build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  ci:
+    name: Flutter CI
+    uses: ./.github/workflows/reusable/flutter-ci.yml
+    permissions:
+      contents: read
+    with:
+      collect-coverage: true
+      coverage-threshold: ${{ vars.COVERAGE_THRESHOLD || '' }}
+
+  publish:
+    name: Publish Development Build
+    needs: [ci]
+    if: needs.ci.outputs.flutter-app-changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download Android artifact
+        id: download-android
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: android-apk
+          path: release-assets/android/
+
+      - name: Download Web artifact
+        id: download-web
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: web-build
+          path: release-assets/web/
+
+      - name: Download Linux artifact
+        id: download-linux
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: linux-bundle
+          path: release-assets/linux/
+
+      - name: Prepare Release Assets
+        run: |
+          mkdir -p dist
+          if [ -f "release-assets/android/app-release.apk" ]; then
+            cp release-assets/android/app-release.apk dist/egohygiene-development.apk
+          fi
+          if [ -d "release-assets/web" ] && [ "$(ls -A release-assets/web 2>/dev/null)" ]; then
+            tar -czf dist/egohygiene-web-development.tar.gz -C release-assets/web .
+          fi
+          if [ -d "release-assets/linux" ] && [ "$(ls -A release-assets/linux 2>/dev/null)" ]; then
+            tar -czf dist/egohygiene-linux-development.tar.gz -C release-assets/linux .
+          fi
+
+      - name: Publish Development Build Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: development
+          name: Development Build
+          body: |
+            Latest successful development build from `main`.
+
+            These assets are replaced on every successful merge to `main`.
+          prerelease: true
+          make_latest: false
+          files: dist/*
+          overwrite_files: true

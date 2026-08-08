@@ -1,0 +1,116 @@
+{
+  "page_id": "10_gratitude",
+  "sequence_index": "10",
+  "generated_at": "2026-02-18T21:24:29Z",
+  "project_context": {
+    "author": "Alan R Szmyt",
+    "alias": "Play Function",
+    "location": "Wilmington, MA"
+  },
+  "raw_exif": {
+    "SourceFile": "editions/edition_1/pages/10_gratitude/page.png",
+    "ExifTool": {
+      "ExifToolVersion": 13.5
+    },
+    "System": {
+      "FileName": "page.png",
+      "Directory": "editions/edition_1/pages/10_gratitude",
+      "FileSize": "3.6 MB",
+      "FileModifyDate": "2026:02:18 15:15:15-05:00",
+      "FileAccessDate": "2026:02:18 16:15:02-05:00",
+      "FileInodeChangeDate": "2026:02:18 15:15:15-05:00",
+      "FilePermissions": "-rw-r--r--"
+    },
+    "File": {
+      "FileType": "PNG",
+      "FileTypeExtension": "png",
+      "MIMEType": "image/png"
+    },
+    "PNG": {
+      "ImageWidth": 1024,
+      "ImageHeight": 1536,
+      "BitDepth": 8,
+      "ColorType": "RGB",
+      "Compression": "Deflate/Inflate",
+      "Filter": "Adaptive",
+      "Interlace": "Noninterlaced"
+    },
+    "JUMBF": {
+      "JUMDType": "(c2pa)-0011-0010-800000aa00389b71",
+      "JUMDLabel": "c2pa"
+    },
+    "CBOR": {
+      "ActionsAction": [
+        "c2pa.created",
+        "c2pa.converted"
+      ],
+      "ActionsSoftwareAgentName": "GPT-4o",
+      "ActionsDigitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+      "ExclusionsStart": 33,
+      "ExclusionsLength": 14118,
+      "Name": "jumbf manifest",
+      "Alg": "sha256",
+      "Hash": "(Binary data 32 bytes, use -b option to extract)",
+      "Pad": "(Binary data 8 bytes, use -b option to extract)",
+      "InstanceID": "xmp:iid:48a8d707-fe14-45a4-bfec-01707c10971b",
+      "Claim_Generator_InfoName": "ChatGPT",
+      "Claim_Generator_InfoOrgContentauthC2Pa_Rs": "0.0.0",
+      "Signature": "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.signature",
+      "Created_AssertionsUrl": [
+        "self#jumbf=c2pa.assertions/c2pa.actions.v2",
+        "self#jumbf=c2pa.assertions/c2pa.hash.data"
+      ],
+      "Created_AssertionsHash": [
+        "(Binary data 32 bytes, use -b option to extract)",
+        "(Binary data 32 bytes, use -b option to extract)"
+      ],
+      "Title": "image.png",
+      "Item0": "(Binary data 1979 bytes, use -b option to extract)",
+      "Item1Pad": "(Binary data 10932 bytes, use -b option to extract)",
+      "Item2": "null",
+      "Item3": "(Binary data 64 bytes, use -b option to extract)",
+      "Relationship": "parentOf",
+      "Format": "png",
+      "ValidationResultsActiveManifestSuccessCode": [
+        "claimSignature.insideValidity",
+        "claimSignature.validated",
+        "assertion.hashedURI.match",
+        "assertion.hashedURI.match",
+        "assertion.dataHash.match"
+      ],
+      "ValidationResultsActiveManifestSuccessUrl": [
+        "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.signature",
+        "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.signature",
+        "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.assertions/c2pa.actions.v2",
+        "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.assertions/c2pa.hash.data",
+        "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.assertions/c2pa.hash.data"
+      ],
+      "ValidationResultsActiveManifestSuccessExplanation": [
+        "claim signature valid",
+        "claim signature valid",
+        "hashed uri matched: self#jumbf=c2pa.assertions/c2pa.actions.v2",
+        "hashed uri matched: self#jumbf=c2pa.assertions/c2pa.hash.data",
+        "data hash valid"
+      ],
+      "ActiveManifestUrl": "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92",
+      "ActiveManifestAlg": "sha256",
+      "ActiveManifestHash": "(Binary data 32 bytes, use -b option to extract)",
+      "ClaimSignatureUrl": "self#jumbf=/c2pa/urn:c2pa:8f5cf82f-0107-4254-a4da-116cffc38f92/c2pa.signature",
+      "ClaimSignatureAlg": "sha256",
+      "ClaimSignatureHash": "(Binary data 32 bytes, use -b option to extract)",
+      "ThumbnailURL": "self#jumbf=c2pa.assertions/c2pa.thumbnail.ingredient",
+      "ThumbnailHash": "(Binary data 32 bytes, use -b option to extract)",
+      "ActionsParametersIngredientsUrl": "self#jumbf=c2pa.assertions/c2pa.ingredient.v3",
+      "ActionsParametersIngredientsHash": "(Binary data 32 bytes, use -b option to extract)"
+    },
+    "Jpeg2000": {
+      "C2PAThumbnailIngredientSalt": "368d99e56c56ae171a79ed0d215d0533",
+      "C2PAThumbnailIngredientType": "image/jpeg",
+      "C2PAThumbnailIngredientData": "(Binary data 82497 bytes, use -b option to extract)"
+    },
+    "Composite": {
+      "ImageSize": "1024x1536",
+      "Megapixels": 1.6
+    }
+  }
+}

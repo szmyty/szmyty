@@ -1,0 +1,27 @@
+# Trivy configuration for SBOM scanning
+
+input: sbom.spdx.json
+
+scanners:
+  - license
+  - vuln
+
+vuln-type:
+  - library
+
+severity:
+  - CRITICAL
+  - HIGH
+  - MEDIUM
+
+ignore-unfixed: true
+
+exit-code: 1
+
+format: table
+
+timeout: 5m
+
+list-all-pkgs: false
+
+offline-scan: false

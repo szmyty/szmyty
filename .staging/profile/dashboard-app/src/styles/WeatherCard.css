@@ -1,0 +1,70 @@
+.weather-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.weather-location {
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.weather-current {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.weather-emoji {
+  font-size: 4rem;
+  margin-bottom: 12px;
+}
+
+.weather-temp {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.weather-condition {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.weather-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-detail .label {
+  color: var(--text-secondary);
+}
+
+.weather-detail .value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.weather-sun {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 8px;
+}
+
+.sun-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+}

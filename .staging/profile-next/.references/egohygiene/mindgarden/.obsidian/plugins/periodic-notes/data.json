@@ -1,0 +1,32 @@
+{
+  "daily": {
+    "enabled": true,
+    "format": "YYYY-MM-DD",
+    "folder": "journal/daily",
+    "template": "templates/daily-note"
+  },
+  "weekly": {
+    "enabled": true,
+    "format": "YYYY-[W]WW",
+    "folder": "journal/weekly",
+    "template": "templates/weekly-review"
+  },
+  "monthly": {
+    "enabled": true,
+    "format": "YYYY-MM",
+    "folder": "journal/monthly",
+    "template": "templates/monthly-review"
+  },
+  "quarterly": {
+    "enabled": false,
+    "format": "YYYY-[Q]Q",
+    "folder": "journal/quarterly",
+    "template": ""
+  },
+  "yearly": {
+    "enabled": false,
+    "format": "YYYY",
+    "folder": "journal/yearly",
+    "template": ""
+  }
+}

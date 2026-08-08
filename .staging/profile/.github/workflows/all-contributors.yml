@@ -1,0 +1,28 @@
+name: All Contributors Bot
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  add-contributors:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issue_comment' && 
+      contains(github.event.comment.body, '@all-contributors')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: All Contributors Action
+        uses: allcontributors/action@v1.7.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

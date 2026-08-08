@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "mindlint"
+version = "0.1.0"
+description = "Spec-driven article linter for Ego Hygiene articles"
+authors = ["Alan Szmyt <szmyty@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "mindlint" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+markdown-it-py = "^4.0.0"
+pyyaml = "^6.0.3"
+click = "^8.3.3"
+rich = "^15.0.0"
+httpx = "^0.28.1"
+emoji = "^2.15.0"
+structlog = "^25.5.0"
+
+[tool.poetry.scripts]
+mindlint = "mindlint.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.3,<10.0.0)",
+    "mypy (>=1.20.2,<2.0.0)",
+    "ruff (>=0.15.12,<0.16.0)"
+]

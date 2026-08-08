@@ -1,0 +1,25 @@
+{
+  "location": "San Francisco, CA",
+  "display_name": "San Francisco, California, United States",
+  "coordinates": {
+    "lat": 37.7749,
+    "lon": -122.4194
+  },
+  "current": {
+    "temperature": 18.5,
+    "wind_speed": 12.0,
+    "weathercode": 2,
+    "is_day": 1,
+    "condition": "Partly cloudy",
+    "emoji": "⛅"
+  },
+  "daily": {
+    "temperature_max": 22.0,
+    "temperature_min": 15.0,
+    "sunrise": "2024-12-03T07:15:00Z",
+    "sunset": "2024-12-03T17:00:00Z",
+    "weathercode": 2
+  },
+  "timezone": "America/Los_Angeles",
+  "updated_at": "2024-12-03T00:00:00Z"
+}

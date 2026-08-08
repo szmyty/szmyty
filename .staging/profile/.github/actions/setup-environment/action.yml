@@ -1,0 +1,93 @@
+name: 'Setup Environment'
+description: 'Set up the development environment with checkout, Python, and dependencies'
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.11'
+  install-jq:
+    description: 'Install jq'
+    required: false
+    default: 'true'
+  install-curl:
+    description: 'Install curl'
+    required: false
+    default: 'true'
+  install-python-deps:
+    description: 'Install Python dependencies (uses Poetry if pyproject.toml exists, otherwise pip with requirements.txt)'
+    required: false
+    default: 'true'
+  use-poetry:
+    description: 'Force use of Poetry for dependency management'
+    required: false
+    default: 'auto'
+  extra-apt-packages:
+    description: 'Additional apt packages to install (space-separated)'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      with:
+        fetch-depth: 1
+
+    - name: Set up Python
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+        cache-dependency-path: |
+          **/requirements*.txt
+          **/pyproject.toml
+          **/poetry.lock
+
+    - name: Install system dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        PACKAGES=""
+        if [ "${{ inputs.install-jq }}" = "true" ]; then
+          PACKAGES="$PACKAGES jq"
+        fi
+        if [ "${{ inputs.install-curl }}" = "true" ]; then
+          PACKAGES="$PACKAGES curl"
+        fi
+        if [ -n "${{ inputs.extra-apt-packages }}" ]; then
+          PACKAGES="$PACKAGES ${{ inputs.extra-apt-packages }}"
+        fi
+        if [ -n "$PACKAGES" ]; then
+          sudo apt-get install -y $PACKAGES
+        fi
+
+    - name: Install Python dependencies
+      if: inputs.install-python-deps == 'true'
+      shell: bash
+      run: |
+        python3 -m venv .venv
+        source .venv/bin/activate
+        python -m pip install --upgrade pip
+        
+        # Determine whether to use Poetry
+        USE_POETRY="false"
+        if [ "${{ inputs.use-poetry }}" = "true" ]; then
+          USE_POETRY="true"
+        elif [ "${{ inputs.use-poetry }}" = "auto" ] && [ -f pyproject.toml ]; then
+          USE_POETRY="true"
+        fi
+        
+        if [ "$USE_POETRY" = "true" ]; then
+          echo "Installing dependencies using Poetry..."
+          pip install poetry
+          poetry install --no-root
+        elif [ -f requirements.txt ]; then
+          echo "Installing dependencies using pip..."
+          pip install -r requirements.txt
+        else
+          echo "No dependency file found (requirements.txt or pyproject.toml)"
+        fi
+        
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+        echo "✅ Python dependencies installed in virtual environment"

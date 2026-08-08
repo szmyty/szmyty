@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0.0",
+  "page_id": "rest.front",
+  "page_type": "practice_page",
+
+  "title": "Rest",
+  "edition": {
+    "number": 1,
+    "name": "Orientation",
+    "series": "Ego Hygiene Magazine"
+  },
+
+  "asset_files": {
+    "master_image": "rest.front.page.png",
+    "print_variant": "variants/rest.front.print.png",
+    "animation": "rest.front.animation.mp4",
+    "prompt": "rest.front.prompt"
+  },
+
+  "image_metadata": {
+    "format": "PNG",
+    "color_mode": "RGB",
+    "dimensions_px": {
+      "width": 1024,
+      "height": 1536
+    },
+    "aspect_ratio": "2:3",
+    "orientation": "portrait",
+    "intended_print_dpi": 300,
+    "print_safe_dimensions_at_300dpi_inches": {
+      "width": 3.41,
+      "height": 5.12
+    },
+    "file_size_bytes": 0,
+    "color_profile": "sRGB (assumed)",
+    "compression": "lossless_png"
+  },
+
+  "intent": {
+    "role": "parasympathetic_regulation_pillar",
+    "primary_function": "support_recovery_and_integration",
+    "secondary_function": "reduce_cognitive_and_sensory_load",
+    "tone": [
+      "calm",
+      "deep",
+      "nightlike",
+      "restorative",
+      "retro_field_manual"
+    ]
+  },
+
+  "visual_style": {
+    "world": "retro_mystic_field_manual",
+    "aesthetic_reference": "mid_20th_century_pulp_print_artifact",
+    "texture": [
+      "aged_paper",
+      "edge_burn",
+      "organic_grain",
+      "ink_wear",
+      "print_noise"
+    ],
+    "color_palette": {
+      "primary": ["deep_brown", "midnight_amber"],
+      "secondary": ["muted_gold", "shadow_umber"],
+      "accent": ["soft_moon_glow"]
+    },
+    "iconography": [
+      "resting_figure",
+      "crescent_moon",
+      "thought_cloud",
+      "ornamental_border",
+      "infinity_divider"
+    ],
+    "typography": {
+      "header": {
+        "style": "bold_distressed_retro_display",
+        "case": "uppercase",
+        "hierarchy_rank": 1
+      },
+      "subtitle": {
+        "style": "retro_serif_small_caps",
+        "hierarchy_rank": 2
+      },
+      "panel_headers": {
+        "style": "bold_retro_sans",
+        "hierarchy_rank": 3
+      },
+      "body_text": {
+        "style": "classic_serif",
+        "hierarchy_rank": 4
+      },
+      "effect_band": {
+        "style": "retro_emphasis_serif",
+        "hierarchy_rank": 5
+      },
+      "closing_declaration": {
+        "style": "bold_retro_caps",
+        "hierarchy_rank": 6
+      }
+    }
+  },
+
+  "layout": {
+    "composition": "central_resting_figure_with_quadrant_instruction_panels",
+    "central_element": "resting_silhouette",
+    "secondary_elements": [
+      "four_practice_panels",
+      "effect_band"
+    ],
+    "depth_layers": 3,
+    "balance_axis": "vertical_symmetry_weighted_center",
+    "text_hierarchy": [
+      "header",
+      "subtitle",
+      "panel_headers",
+      "panel_body",
+      "effect_band",
+      "closing_declaration"
+    ]
+  },
+
+  "text_elements": {
+    "header": "REST",
+    "subtitle": "Practices for Allowing Rest & Recovery",
+    "panels": {
+      "pause": "Stop adding input. No fixing. No optimizing.",
+      "dim": "Lower light, sound, and stimulation.",
+      "dream": "Allow dreaming and deep imagery.",
+      "stay": "Remain at rest when the urge to act appears."
+    },
+    "effect": "Allows the nervous system to downshift, restores baseline regulation, and reduces cognitive load.",
+    "closing_declaration": "NOTHING IS REQUIRED RIGHT NOW"
+  },
+
+  "animation_profile": {
+    "type": "artifact_animation",
+    "allowed_effects": [
+      "ambient_particle_drift",
+      "grain_breathing",
+      "subtle_star_twinkle",
+      "soft_moon_shimmer"
+    ],
+    "forbidden_effects": [
+      "camera_motion",
+      "body_animation",
+      "panel_animation",
+      "dramatic_energy_effects",
+      "modern_clean_render"
+    ]
+  },
+
+  "constraints": {
+    "must_remain_print_authentic": true,
+    "avoid_sleep_app_aesthetic": true,
+    "preserve_pulp_texture": true,
+    "loop_safe_if_animated": true
+  },
+
+  "notes": {
+    "third_primary_pillar_after_presence_and_movement": true,
+    "focuses_on_recovery_and_downshift": true,
+    "emphasizes_permission_and_non_action": true
+  }
+}

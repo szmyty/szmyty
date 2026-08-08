@@ -1,0 +1,26 @@
+{
+  "mood_name": "Energetic Compression",
+  "mood_score": 70.5,
+  "mood_icon": "\u26a1",
+  "mood_color_gradient": [
+    "#11998e",
+    "#38ef7d"
+  ],
+  "mood_description": "Building energy, readying for action",
+  "mood_key": "energetic_compression",
+  "interpreted_metrics": {
+    "sleep": "Good sleep",
+    "readiness": "Peak performance ready",
+    "activity": "Low activity",
+    "hrv": "Moderate variability"
+  },
+  "raw_scores": {
+    "sleep_score": 75,
+    "readiness_score": 87,
+    "activity_score": 44,
+    "hrv": null,
+    "resting_hr": 86,
+    "temp_deviation": 96
+  },
+  "computed_at": "2025-12-03T00:36:53Z"
+}

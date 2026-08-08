@@ -1,0 +1,12 @@
+# Core dependencies for profile card generators
+# Python standard library modules are used extensively (json, pathlib, datetime, etc.)
+# Optional dependencies for enhanced functionality:
+
+# JSON Schema validation (optional but recommended)
+jsonschema==4.23.0
+
+# Image optimization for SoundCloud and other cards with images
+Pillow==10.4.0
+
+# Testing framework
+pytest==8.3.3

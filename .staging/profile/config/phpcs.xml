@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset name="super-linter">
+    <description>
+        Default coding standard for MegaLinter PHP analysis.
+        Enforces PSR-12 and disables select noisy or project-specific rules.
+    </description>
+
+    <!-- Base standard -->
+    <rule ref="PSR12" />
+
+    <!-- Optionally include other standards -->
+    <!-- <rule ref="Generic" /> -->
+    <!-- <rule ref="Squiz" /> -->
+
+    <!-- Exclude rules that may be too opinionated or noisy -->
+    <exclude name="Generic.WhiteSpace.DisallowTabIndent" />
+    <exclude name="Generic.Files.LineLength.TooLong" />
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.CloseBracketLine" />
+
+    <!-- Include specific files/folders -->
+    <file>src/</file>
+    <file>app/</file>
+    <file>tests/</file>
+
+    <!-- Ignore vendor and build assets -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>build/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+</ruleset>

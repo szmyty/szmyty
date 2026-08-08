@@ -1,0 +1,45 @@
+name: 'Fetch SoundCloud Data'
+description: 'Fetch SoundCloud track data'
+
+inputs:
+  soundcloud-user:
+    description: 'SoundCloud username'
+    required: false
+    default: 'playfunction'
+
+outputs:
+  skip:
+    description: 'Whether this step should be skipped (true/false)'
+    value: ${{ steps.fetch.outputs.skip }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🎵 Fetch SoundCloud Data
+      id: fetch
+      shell: bash
+      env:
+        SOUNDCLOUD_USER: ${{ inputs.soundcloud-user }}
+        OUTPUT_DIR: assets
+      run: |
+        mkdir -p assets logs/soundcloud
+        
+        echo "Fetching SoundCloud data..."
+        if ! scripts/fetch-soundcloud.sh > assets/metadata.json.tmp 2>> logs/soundcloud/soundcloud.log; then
+          echo "⚠️ Warning: Failed to fetch SoundCloud data"
+          echo "Using cached data if available"
+          if [ ! -f assets/metadata.json ]; then
+            echo '{"error": "Failed to fetch data"}' > assets/metadata.json
+          fi
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          if jq empty assets/metadata.json.tmp 2>/dev/null; then
+            mv assets/metadata.json.tmp assets/metadata.json
+            echo "✅ SoundCloud data fetched successfully"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Invalid JSON in metadata file"
+            rm -f assets/metadata.json.tmp
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+        fi

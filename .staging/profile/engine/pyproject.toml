@@ -1,0 +1,52 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "profile-engine"
+version = "1.0.0"
+description = "GitHub Profile Engine - CLI and API for dynamic profile cards"
+authors = ["szmyty <14865041+szmyty@users.noreply.github.com>"]
+readme = "README.md"
+homepage = "https://github.com/szmyty/profile"
+repository = "https://github.com/szmyty/profile"
+packages = [{include = "profile_engine"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+# Core dependencies
+jsonschema = "4.23.0"
+pillow = "10.4.0"
+pydantic = "^2.10.4"
+# CLI framework
+click = "^8.1.7"
+# FastAPI and server
+fastapi = "^0.115.6"
+uvicorn = {extras = ["standard"], version = "^0.34.0"}
+# HTTP client for API requests (future: replace subprocess calls with direct HTTP)
+# httpx = "^0.28.1"  # TODO: Uncomment when implementing direct HTTP clients
+
+[tool.poetry.group.dev.dependencies]
+pytest = "8.3.3"
+pre-commit = "4.0.1"
+black = "24.10.0"
+isort = "5.13.2"
+flake8 = "7.1.1"
+mypy = "1.13.0"
+
+[tool.poetry.scripts]
+profile-engine = "profile_engine.cli:cli"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100

@@ -1,0 +1,11 @@
+{
+  "title": "Mock Track Title",
+  "artist": "Mock Artist",
+  "artwork_url": null,
+  "permalink_url": "https://soundcloud.com/mock-artist/mock-track",
+  "genre": "Electronic",
+  "duration_ms": 240000,
+  "playback_count": 1234,
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-12-03T00:00:00Z"
+}

@@ -1,0 +1,33 @@
+{
+  "canonical_textures": [
+    "aged_paper",
+    "grain",
+    "worn_ink",
+    "scuffed_edges",
+    "light_distress"
+  ],
+  "canonical_colors": [
+    "burnt_orange",
+    "warm_yellow",
+    "charcoal",
+    "soft_gold",
+    "warm_parchment",
+    "soft_amber",
+    "deep_brown",
+    "deep_blue"
+  ],
+  "canonical_iconography": [
+    "brain_icon",
+    "yin_yang",
+    "crystal_accents",
+    "crystals",
+    "lighthouses",
+    "rocky_path"
+  ],
+  "canonical_aesthetics": [
+    "retro_print",
+    "weathered_artifact",
+    "analog_texture",
+    "field_manual_tone"
+  ]
+}

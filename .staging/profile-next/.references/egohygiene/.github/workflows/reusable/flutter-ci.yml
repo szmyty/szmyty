@@ -1,0 +1,383 @@
+name: Flutter CI Reusable
+
+on:
+  workflow_call:
+    inputs:
+      collect-coverage:
+        description: Collect and upload coverage artifacts from test execution.
+        required: false
+        type: boolean
+        default: true
+      coverage-threshold:
+        description: Optional minimum line coverage percentage for enforcement.
+        required: false
+        type: string
+        default: ''
+      run-integration-tests:
+        description: >
+          Run the CI integration-test subset (app_smoke_test + navigation_test)
+          on Chrome after static analysis passes.
+        required: false
+        type: boolean
+        default: true
+    outputs:
+      flutter-app-changed:
+        description: Whether Flutter app sources changed for this run.
+        value: ${{ jobs.changes.outputs.flutter-app }}
+
+env:
+  COVERAGE_THRESHOLD: ${{ inputs.coverage-threshold }}
+
+jobs:
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      flutter-app: ${{ steps.set-outputs.outputs.flutter-app }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Detect changed paths
+        id: filter
+        if: github.event_name != 'workflow_dispatch'
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            flutter-app:
+              - 'apps/egohygiene/**'
+
+      - name: Set build outputs
+        id: set-outputs
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "flutter-app=true" >> $GITHUB_OUTPUT
+          else
+            echo "flutter-app=${{ steps.filter.outputs.flutter-app }}" >> $GITHUB_OUTPUT
+          fi
+
+  generate:
+    name: Generate Code
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Generate Code
+        uses: ./.github/actions/flutter-generate
+
+      - name: Upload Generated Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: |
+            apps/egohygiene/**/*.g.dart
+            apps/egohygiene/**/*.freezed.dart
+            apps/egohygiene/**/*.mocks.dart
+          retention-days: 1
+          if-no-files-found: error
+
+  analyze:
+    name: Analyze
+    needs: generate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Restore Generated Code
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: .
+
+      - name: Check Formatting
+        run: dart format --output=none --set-exit-if-changed lib test integration_test
+
+      - name: Analyze
+        run: flutter analyze
+
+  test:
+    name: Test
+    needs: analyze
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Restore Generated Code
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: .
+
+      - name: Setup Rive Native
+        run: dart run rive_native:setup --verbose --clean --platform linux
+
+      - name: Test
+        run: |
+          if [[ "${{ inputs.collect-coverage }}" == "true" ]]; then
+            flutter test --coverage
+          else
+            flutter test
+          fi
+
+      - name: Summarize Coverage
+        id: coverage
+        if: inputs.collect-coverage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os
+
+          coverage_path = Path("coverage/lcov.info")
+          if not coverage_path.exists():
+            raise SystemExit("coverage/lcov.info was not generated")
+
+          total = 0
+          covered = 0
+
+          for line in coverage_path.read_text(encoding="utf-8").splitlines():
+            if not line.startswith("DA:"):
+              continue
+            _, data = line.split(":", 1)
+            _, hits = data.split(",", 1)
+            total += 1
+            if int(hits) > 0:
+              covered += 1
+
+          percentage = (covered / total * 100) if total else 0.0
+          threshold = os.environ.get("COVERAGE_THRESHOLD") or "disabled"
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+            output.write(f"line_coverage={percentage:.2f}\n")
+            output.write(f"covered_lines={covered}\n")
+            output.write(f"total_lines={total}\n")
+
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+            summary.write("## Test Coverage\n\n")
+            summary.write(f"- Lines covered: {covered}/{total}\n")
+            summary.write(f"- Line coverage: {percentage:.2f}%\n")
+            summary.write("- Coverage artifact: `coverage-lcov`\n")
+            if threshold == "disabled":
+              summary.write("- Threshold enforcement: disabled\n\n")
+              summary.write(
+                "> ⚠️ **Coverage threshold is not configured.**"
+                " Set the `COVERAGE_THRESHOLD` Actions variable on this repository"
+                " to enforce a minimum coverage floor.\n"
+              )
+            else:
+              summary.write(f"- Threshold enforcement: {threshold}%\n")
+          PY
+
+      - name: Upload Coverage Artifact
+        if: inputs.collect-coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: apps/egohygiene/coverage/lcov.info
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Enforce Coverage Threshold
+        if: inputs.collect-coverage && env.COVERAGE_THRESHOLD != ''
+        run: |
+          python - <<'PY'
+          import os
+
+          actual = float("${{ steps.coverage.outputs.line_coverage }}")
+          threshold = float(os.environ["COVERAGE_THRESHOLD"])
+
+          if actual < threshold:
+            raise SystemExit(
+              f"Coverage {actual:.2f}% is below required threshold {threshold:.2f}%"
+            )
+
+          print(
+            f"Coverage {actual:.2f}% satisfies required threshold {threshold:.2f}%"
+          )
+          PY
+
+  build-android:
+    name: Build Android
+    needs: [changes, test]
+    if: needs.changes.outputs.flutter-app == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('apps/egohygiene/android/gradle/wrapper/gradle-wrapper.properties', 'apps/egohygiene/android/**/*.gradle.kts') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Restore Generated Code
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: .
+
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Upload Android Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: apps/egohygiene/build/app/outputs/flutter-apk/
+
+  build-web:
+    name: Build Web
+    needs: [changes, test]
+    if: needs.changes.outputs.flutter-app == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Restore Generated Code
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: .
+
+      - name: Build Web
+        run: flutter build web --release
+
+      - name: Upload Web Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: apps/egohygiene/build/web/
+
+  build-linux:
+    name: Build Linux
+    needs: [changes, test]
+    if: needs.changes.outputs.flutter-app == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Install Linux Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            clang \
+            cmake \
+            ninja-build \
+            pkg-config \
+            libgtk-3-dev \
+            liblzma-dev \
+            libsecret-1-dev
+
+      - name: Restore Generated Code
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: .
+
+      - name: Build Linux
+        run: flutter build linux --release
+
+      - name: Upload Linux Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-bundle
+          path: apps/egohygiene/build/linux/x64/release/bundle/
+
+  integration-test:
+    name: Integration Test (Chrome)
+    needs: [changes, analyze]
+    if: needs.changes.outputs.flutter-app == 'true' && inputs.run-integration-tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/egohygiene
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Flutter
+        uses: ./.github/actions/flutter-setup
+
+      - name: Restore Generated Code
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-generated-code
+          path: .
+
+      # Platform: Chrome (headless).
+      #
+      # Rationale: Chrome is pre-installed on ubuntu-latest runners, requires no
+      # emulator setup, supports Flutter's integration_test package directly, and
+      # works headlessly in CI without a virtual display.  The app ships a
+      # sqlite3.wasm and drift_worker.js in web/ so the in-memory Drift database
+      # used by the test helpers functions identically on web.  Rive animations
+      # are bypassed by the zero-duration startupTransitionProvider override in
+      # pumpApp(), keeping startup deterministic and fast.
+      #
+      # CI subset: app_smoke_test + navigation_test.
+      # These two files cover startup lifecycle and all five bottom-nav tabs —
+      # the highest-value flows with the least external dependencies.  Remaining
+      # integration tests may be promoted once their CI reliability is verified.
+      - name: Run Integration Tests
+        run: |
+          flutter test \
+            integration_test/app_smoke_test.dart \
+            integration_test/navigation_test.dart \
+            --device-id chrome \
+            --reporter expanded \
+            2>&1 | tee /tmp/integration-test-output.txt
+          exit "${PIPESTATUS[0]}"
+
+      - name: Upload Test Logs on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-logs
+          path: /tmp/integration-test-output.txt
+          retention-days: 7
+          if-no-files-found: ignore

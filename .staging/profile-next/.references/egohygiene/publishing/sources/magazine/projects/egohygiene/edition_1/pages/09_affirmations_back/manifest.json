@@ -1,0 +1,11 @@
+{
+  "page_id": "09_affirmations_back",
+  "title": "Affirmations Back",
+  "inputs": {
+    "image": false,
+    "fountain": false
+  },
+  "status": "built",
+  "artifacts": [],
+  "last_build": "2026-02-18T21:15:00Z"
+}

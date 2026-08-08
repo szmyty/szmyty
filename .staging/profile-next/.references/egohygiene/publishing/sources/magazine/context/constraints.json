@@ -1,0 +1,30 @@
+{
+  "forbidden_ip_references": [
+    "fallout",
+    "blade runner", 
+    "dune",
+    "mad max",
+    "neuromancer"
+  ],
+  "mandatory_tone_markers": [
+    "non-prescriptive",
+    "grounding",
+    "collectible",
+    "calm",
+    "nervous-system aware"
+  ],
+  "style_invariants": [
+    "retro_print_aesthetic",
+    "aged_paper_texture",
+    "field_manual_tone",
+    "mid_20th_century_pulp_inspiration",
+    "post_collapse_mystic_without_franchise_reference"
+  ],
+  "conceptual_guardrails": [
+    "no_medical_claims",
+    "no_spiritual_superiority",
+    "no_required_actions",
+    "no_productivity_optimization",
+    "balance_over_achievement"
+  ]
+}

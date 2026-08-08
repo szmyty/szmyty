@@ -1,0 +1,224 @@
+---
+version: "3"
+
+vars:
+  APP_DIR: "apps/egohygiene"
+
+# Global environment variables applied to all tasks
+env:
+  # Forces deterministic CLI output colorization if desired
+  FORCE_COLOR: "1" 
+
+tasks:
+
+  setup:
+    desc: One-command local toolchain and dependency setup
+    cmds:
+      - fvm install --setup
+      - task: pub-get
+      - task: setup:rive
+
+  setup:rive:
+    desc: Download and link Rive native testing binaries based on host OS
+    dir: "{{.APP_DIR}}"
+    vars:
+      RIVE_OS: '{{if eq OS "darwin"}}macos{{else}}{{OS}}{{end}}'
+    cmds:
+      - fvm dart run rive_native:setup --verbose --clean --platform {{.RIVE_OS}}
+
+  clean:
+    desc: Remove generated build artifacts and temporary files (preserves FVM SDK cache)
+    cmds:
+      - fvm flutter clean
+      - rm -rf .dart_tool
+      - rm -rf build
+      - rm -rf coverage
+
+  reset:
+    desc: Full destructive reset — removes build artifacts AND the FVM SDK cache (triggers re-download)
+    cmds:
+      - task: clean
+      - rm -rf .fvm/flutter_sdk/bin/cache
+      - rm -rf .fvm/flutter_sdk/bin/cache/artifacts/engine
+      - rm -rf .fvm/flutter_sdk/bin/cache/dart-sdk
+
+  test:list:
+      desc: List all declared test names and test suites without executing them
+      dir: "{{.APP_DIR}}"
+      env:
+        FLUTTER_TEST: "true"
+      cmds:
+        - fvm flutter test --reporter=json | jq -r 'select(.type == "testStart") | .test.name'
+
+  doctor:
+    desc: Verify local developer environment and toolchain
+    cmds:
+      - fvm flutter --version
+      - fvm dart --version
+      - java --version
+
+  pub-get:
+    desc: Install application dependencies
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter pub get
+
+  upgrade:
+    desc: Upgrade dependencies safely across major versions
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter pub upgrade --major-versions
+
+  outdated:
+    desc: Check for outdated application dependencies
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter pub outdated
+
+  generate:
+    desc: Run slalom and build_runner code generation (slang, drift, freezed)
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm dart run slang
+      - fvm dart run build_runner build --delete-conflicting-outputs
+
+  analyze:
+    desc: Run strict project static analysis
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter analyze
+
+  dart:fix:
+    desc: Automatically apply fixes for static analysis lints
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm dart fix --apply
+
+  dart:format:
+    desc: Format all Dart source code using project style rules
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm dart format .
+
+  dart:format:check:
+    desc: Check Dart source code formatting without modifying files (mirrors CI)
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm dart format --output=none --set-exit-if-changed lib test integration_test
+
+  test:
+    desc: Execute unit and widget test suites
+    dir: "{{.APP_DIR}}"
+    env:
+      FLUTTER_TEST: "true"
+    cmds:
+      - fvm flutter test
+
+  test:coverage:
+    desc: Run test suites and generate LCOV code coverage reports
+    dir: "{{.APP_DIR}}"
+    env:
+      FLUTTER_TEST: "true"
+    cmds:
+      - fvm flutter test --coverage
+
+  test:golden:
+    desc: Run golden visual regression tests
+    dir: "{{.APP_DIR}}"
+    env:
+      FLUTTER_TEST: "true"
+    cmds:
+      - fvm flutter test test/golden/
+
+  test:golden:update:
+    desc: Regenerate golden reference images (use after intentional visual changes)
+    dir: "{{.APP_DIR}}"
+    env:
+      FLUTTER_TEST: "true"
+    cmds:
+      - fvm flutter test test/golden/ --update-goldens
+
+  platform:
+    cmds:
+      - echo "OS {{OS}}"                    # linux, darwin, windows, etc.
+      - echo "Architecture {{ARCH}}"        # amd64, arm64, etc.
+      - echo "CPU cores {{numCPU}}"         # Number of CPU cores
+      - echo "Building for {{OS}}/{{ARCH}}"
+
+  run:
+    desc: Spin up the app locally on your default active target device
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter run
+
+  run:web:
+    desc: Spin up the app targeting Google Chrome
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter run --device-id chrome
+
+  build:web:
+    desc: Compile optimized production Web release binaries
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter build web --release
+
+  build:android:
+    desc: Compile production Android release APK package
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter build apk --release
+
+  build:linux:
+    desc: Compile production Linux desktop binaries
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter build linux --release
+
+  build:all:
+    desc: Build all supported platform compilation targets sequentially
+    cmds:
+      - task: build:android
+      - task: build:web
+      - task: build:linux
+
+  ci:local:
+    desc: Execute full local validation suite mimicking the CI/CD environment
+    cmds:
+      - task: pub-get
+      - task: generate
+      - task: dart:format:check
+      - task: analyze
+      - task: test:coverage
+
+  test:integration:ci:
+    desc: >
+      Run the CI integration-test subset (app_smoke_test + navigation_test) on
+      Chrome — the same tests executed by the integration-test CI job.
+      Requires Google Chrome to be installed and available on PATH.
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - >-
+        fvm flutter test
+        integration_test/app_smoke_test.dart
+        integration_test/navigation_test.dart
+        --device-id chrome
+        --reporter expanded
+
+  test:integration:
+    desc: >
+      Run the complete integration-test suite on Chrome.
+      Requires Google Chrome to be installed and available on PATH.
+    dir: "{{.APP_DIR}}"
+    cmds:
+      - fvm flutter test integration_test/ --device-id chrome --reporter expanded
+
+  copilot:hooks:validate:
+    desc: Validate that all Copilot hook JSON configuration files parse successfully
+    cmds:
+      - jq . .github/hooks/ego-hygiene.json > /dev/null
+
+  copilot:hooks:test:
+    desc: Run automated test fixtures for the Copilot hook scripts
+    cmds:
+      - bash scripts/copilot-hooks/tests/test-pre-tool-use.sh

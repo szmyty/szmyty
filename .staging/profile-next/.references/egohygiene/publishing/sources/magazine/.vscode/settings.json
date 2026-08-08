@@ -1,0 +1,136 @@
+{
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/.git": true,
+        "**/reports": true,
+        "**/.lock": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/pnpm-lock.*": true
+    },
+    "cSpell.enabled": true,
+    "cSpell.caseSensitive": false,
+    "cSpell.language": "en",
+    "cSpell.useLocallyInstalledCSpellDictionaries": true,
+    "cSpell.diagnosticLevelFlaggedWords": "Information",
+    "cSpell.hideAddToDictionaryCodeActions": false,
+    "cSpell.maxDuplicateProblems": 20,
+    "cSpell.mergeCSpellSettings": true,
+    "cSpell.useGitignore": true,
+    "cSpell.customDictionaries": {
+      "project-words": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/project-words.dictionary",
+        "addWords": true
+      },
+      "backend-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/backend-terms.dictionary",
+        "addWords": false
+      },
+      "devops-cloud-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/devops-cloud-terms.dictionary",
+        "addWords": false
+      },
+      "frontend-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/frontend-terms.dictionary",
+        "addWords": false
+      },
+      "programming-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/programming-terms.dictionary",
+        "addWords": false
+      },
+      "software-terms": {
+        "path": "${workspaceFolder}/.vscode/dictionaries/software-terms.dictionary",
+        "addWords": false
+      }
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always"
+    },
+    "prettier.useEditorConfig": true,
+    "prettier.configPath": "${workspaceFolder}/config/.prettier.config.mjs",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.formatOnSave": false,
+    },
+    "cSpell.words": ["TASKFILE"],
+    "json.schemas": [
+        {
+            "fileMatch": ["manifest.webmanifest"],
+            "url": "https://json.schemastore.org/web-manifest-combined.json"
+        },
+        {
+            "fileMatch": [".htmlhintrc"],
+            "url": "https://json.schemastore.org/htmlhint.json"
+        },
+        {
+            "fileMatch": [".npmpackagejsonlintrc.json"],
+            "url": "https://json.schemastore.org/npm-package-json-lint.json"
+        },
+        {
+            "fileMatch": [".prettierrc", ".prettierrc.json", ".prettierrc.yaml", ".prettierrc.yml", ".prettierrc.js", ".prettierrc.cjs", ".prettierrc.mjs"],
+            "url": "https://json.schemastore.org/prettierrc.json"
+        },
+        {
+            "fileMatch": [".luacheckrc"],
+            "url": "https://json.schemastore.org/luacheckrc.json"
+        },
+        {
+            "fileMatch": [".markdown-link-check.json"],
+            "url": "https://www.schemastore.org/markdown-link-check.json"
+        },
+        {
+            "fileMatch": [".yamllint.yml", ".yamllint.yaml", ".yamllint.yml"],
+            "url": "https://www.schemastore.org/yamllint.json"
+        }
+    ],
+    "evenBetterToml.schema.associations": {
+        "pyproject.toml": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/pyproject.json"
+    },
+    "[dockerfile]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+    },
+    "[ignore]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": null
+    },
+    "[gitignore]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": null
+    },
+    "[bats]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.formatOnSave": false
+    },
+    "shellcheck.enable": true,
+    "shellcheck.disableVersionCheck": false,
+    "shellcheck.enableQuickFix": true,
+    "shellcheck.useWorkspaceRootAsCwd": false,
+    "shellcheck.run": "onSave",
+}

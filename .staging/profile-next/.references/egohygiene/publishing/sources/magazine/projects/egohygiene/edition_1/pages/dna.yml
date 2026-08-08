@@ -1,0 +1,274 @@
+ego_hygiene_magazine_visual_dna:
+
+  page:
+    aspect_ratio:
+      width: 2063
+      height: 3150
+      orientation: portrait
+    layout_style: "cosmic infographic poster"
+    composition:
+      alignment: "centered vertical axis"
+      symmetry: "balanced left/right"
+      visual_flow:
+        - header_symbol
+        - main_title
+        - subtitle
+        - upper_info_boxes
+        - center_illustration
+        - lower_info_boxes
+        - effect_box
+        - closing_statement
+
+  grid:
+    columns:
+      left_column: 0.28
+      center_column: 0.44
+      right_column: 0.28
+    spacing:
+      margin_outer: "generous"
+      vertical_spacing: "large and breathable"
+      box_spacing: "consistent symmetrical padding"
+
+  typography:
+
+    main_title:
+      description: "Primary headline (ex: MOVEMENT)"
+      font_style: "bold condensed display"
+      weight: 900
+      case: "ALL CAPS"
+      alignment: "center"
+      tracking: "slightly tight"
+      color: "gold_orange_gradient"
+      effects:
+        - glow
+        - bevel
+        - subtle_texture
+        - shadow
+
+    subtitle:
+      description: "Secondary descriptor below title"
+      font_style: "clean sans serif"
+      weight: 500
+      case: "ALL CAPS"
+      alignment: "center"
+      letter_spacing: "wide"
+      color: "light_gold"
+
+    box_title:
+      description: "Titles inside information boxes"
+      font_style: "bold sans serif or display"
+      weight: 700
+      case: "ALL CAPS"
+      alignment: "center"
+      color: "gold"
+      decorative_divider: true
+
+    box_text:
+      description: "Instructional explanatory text"
+      font_style: "clean readable sans serif"
+      case: "sentence_case"
+      alignment: "center"
+      color: "cream"
+      tone: "gentle instructional"
+
+    effect_title:
+      description: "Label for bottom explanation box"
+      font_style: "bold uppercase"
+      alignment: "center"
+      color: "gold"
+
+    closing_line_primary:
+      description: "Strong final mantra"
+      font_style: "bold uppercase"
+      alignment: "center"
+      color: "gold"
+      tracking: "wide"
+
+    closing_line_secondary:
+      description: "Supporting reflective line"
+      font_style: "light sans serif"
+      alignment: "center"
+      color: "cream"
+
+  layout_regions:
+
+    header_symbol:
+      description: "small symbolic element above title"
+      examples:
+        - infinity_symbol
+        - chakra_symbol
+        - cosmic_glyph
+
+    main_title:
+      slot: "primary headline"
+
+    subtitle:
+      slot: "headline descriptor"
+
+    upper_left_box:
+      contains:
+        - box_title
+        - box_text
+
+    upper_right_box:
+      contains:
+        - box_title
+        - box_text
+
+    center_illustration:
+      description: "primary visual anchor"
+      placement: "center column"
+      height_coverage: "approx 40 percent of page"
+      characteristics:
+        - human_silhouette
+        - radiant_energy_glow
+        - motion_echo_figures
+        - light_trails
+        - cosmic_particles
+
+    lower_left_box:
+      contains:
+        - box_title
+        - box_text
+
+    lower_right_box:
+      contains:
+        - box_title
+        - box_text
+
+    effect_box:
+      contains:
+        - effect_title
+        - effect_text
+      alignment: "center"
+      width: "wide centered rectangle"
+
+    closing_statement:
+      contains:
+        - closing_line_primary
+        - closing_line_secondary
+      alignment: "center"
+
+  box_system:
+
+    shape:
+      type: "rounded_rectangle"
+      corner_radius: "medium"
+
+    border:
+      color: "gold"
+      thickness: "medium"
+      style: "illuminated"
+      effects:
+        - glow
+        - bevel
+
+    background:
+      color: "dark_cosmic_brown"
+      texture: "grain_or_nebula"
+
+    internal_structure:
+      order:
+        - box_title
+        - divider_line
+        - box_text
+
+  decorative_elements:
+
+    energy_trails:
+      description: "curving glowing lines surrounding center figure"
+      color: "gold"
+
+    particles:
+      description: "small glowing dust or sparks"
+      colors:
+        - gold
+        - white
+        - orange
+
+    crystals:
+      placement:
+        - bottom_left_corner
+        - bottom_right_corner
+      purpose: "grounding visual weight"
+
+    cosmic_background:
+      style:
+        - nebula_texture
+        - star_particles
+        - warm_glow_center
+
+  color_palette:
+
+    primary:
+      gold: "#f5b84c"
+      amber: "#ff9d2e"
+      burnt_orange: "#cc6a1c"
+
+    secondary:
+      deep_brown: "#2b1c12"
+      cosmic_purple: "#2c1b2f"
+
+    accent:
+      cream: "#f2e6d6"
+      spark_white: "#fff6d5"
+
+  reusable_page_slots:
+
+    header_symbol: ""
+    main_title: ""
+    subtitle: ""
+
+    upper_left_box:
+      title: ""
+      text: ""
+
+    upper_right_box:
+      title: ""
+      text: ""
+
+    center_illustration: ""
+
+    lower_left_box:
+      title: ""
+      text: ""
+
+    lower_right_box:
+      title: ""
+      text: ""
+
+    effect_box:
+      title: ""
+      text: ""
+
+    closing_statement:
+      line_primary: ""
+      line_secondary: ""
+
+  design_principles:
+
+    symmetry: "left and right balanced around center axis"
+    focus: "center figure acts as energetic focal point"
+    hierarchy:
+      - title
+      - instructional_boxes
+      - effect_explanation
+      - closing_mantra
+
+    emotional_tone:
+      - grounding
+      - cosmic
+      - sacred
+      - reflective
+      - empowering
+
+  reusable_page_examples:
+    - movement
+    - rest
+    - presence
+    - affirmations
+    - community
+    - breath
+    - boundaries
+    - creativity
+    

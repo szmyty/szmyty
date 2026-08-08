@@ -1,225 +1,277 @@
-# Auto detect
-## Handle line endings automatically for files detected as text.
-*                    text=auto eol=lf
+###############################################################################
+# .gitattributes
+#
+# Ego Hygiene Engineering Standard
+#
+# Purpose
+# -------
+# Provides consistent Git behavior across operating systems while improving
+# diffs, repository statistics, and contributor experience.
+#
+# Design Goals
+# ------------
+# • Cross-platform consistency
+# • LF as the canonical repository line ending
+# • Preserve CRLF where Windows tooling requires it
+# • Human-friendly diffs
+# • Correct binary detection
+# • Helpful GitHub Linguist classification
+#
+# Documentation
+# -------------
+# https://git-scm.com/docs/gitattributes
+###############################################################################
 
-# Source code.
-*.bash               text eol=lf
-*.bat                text eol=crlf
-*.cmd                text eol=crlf
-*.coffee             text
-*.css                text diff=css
-*.htm                text diff=html
-*.html               text diff=html
-*.inc                text
-*.ini                text
-*.js                 text
-*.json               text
-*.jsx                text
-*.less               text
-*.ls                 text
-*.map                text -diff
-*.od                 text
-*.onlydata           text
-*.php                text
-*.pl                 text
-*.ps1                text eol=crlf
-*.py                 text diff=python
-*.rb                 text diff=ruby
-*.sass               text
-*.scm                text
-*.scss               text diff=css
-*.sh                 text eol=lf
-*.sql                text
-*.styl               text
-*.tag                text
-*.ts                 text
-*.tsx                text
-*.xml                text
-*.xhtml              text diff=html
-*.java               text
+###############################################################################
+# Global Defaults
+###############################################################################
 
-# Docker.
-Dockerfile           text
+# Normalize all text files to LF within the repository.
+* text=auto eol=lf
 
-# Documentation.
-*.ipynb              text
-*.markdown           text diff=markdown
-*.md                 text diff=markdown
-*.mdwn               text diff=markdown
-*.mdown              text diff=markdown
-*.mkd                text diff=markdown
-*.mkdn               text diff=markdown
-*.mdtxt              text
-*.mdtext             text
-*.txt                text
-AUTHORS              text
-CHANGELOG            text
-CHANGES              text
-CONTRIBUTING         text
-COPYING              text
-copyright            text
-*COPYRIGHT*          text
-INSTALL              text
-license              text
-LICENSE              text
-NEWS                 text
-readme               text
-*README*             text
-TODO                 text
+###############################################################################
+# Shell & Scripts
+###############################################################################
 
-# Templates.
-*.dot                text
-*.ejs                text
-*.erb                text
-*.haml               text
-*.handlebars         text
-*.hbs                text
-*.hbt                text
-*.jade               text
-*.latte              text
-*.mustache           text
-*.njk                text
-*.phtml              text
-*.svelte             text
-*.tmpl               text
-*.tpl                text
-*.twig               text
-*.vue                text
+*.sh                text eol=lf
+*.bash              text eol=lf
+*.zsh               text eol=lf
+*.fish              text eol=lf
 
-# Configuration.
-*.cnf                text
-*.conf               text
-*.config             text
-.editorconfig        text
-.env                 text
-.gitattributes       text
-.gitconfig           text
-.htaccess            text
-*.lock               text -diff
-package.json         text eol=lf
-package-lock.json    text -diff
-pnpm-lock.yaml       text eol=lf -diff
-.prettierrc          text
-yarn.lock            text -diff
-*.toml               text
-*.yaml               text
-*.yml                text
-browserslist         text
-.browserslistrc      text
-Makefile             text
-makefile             text
-*.mk                 text
-.shellcheckrc        text eol=lf
-.eslintrc            text
-.eslintrc.js         text
+*.bat               text eol=crlf
+*.cmd               text eol=crlf
 
-Makefile             text eol=lf
-*.mk                 text eol=lf
+# PowerShell
+*.ps1    text eol=lf
+*.psm1   text eol=lf
+*.psd1   text eol=lf
+*.ps1xml text eol=lf
+*.pssc   text eol=lf
+*.psrc   text eol=lf
+*.cdxml  text eol=lf
 
-# Heroku.yaml
-Procfile             text
+###############################################################################
+# Source Code
+###############################################################################
 
-# Graphics
-*.ai                 binary
-*.bmp                binary
-*.eps                binary
-*.gif                binary
-*.gitv               binary
-*.ico                binary
-*.jng                binary
-*.jp2                binary
-*.jpg                binary
-*.jpeg               binary
-*.jpx                binary
-*.jxr                binary
-*.pdf                binary
-*.png                binary
-*.psb                binary
-*.psd                binary
-*.svgz               binary
-*.tif                binary
-*.tiff               binary
-*.wbmp               binary
-*.webp               binary
-# SVG is treated as an asset (binary by default).
-*.svg                text
-# If you want to treat .svg as a binary, use the following line instead.
-#*.svg                binary
+# C / C++
+*.c                 text
+*.cc                text
+*.cpp               text
+*.cxx               text
+*.h                 text
+*.hpp               text
+*.hxx               text
 
-# Audio.
-*.kar                binary
-*.m4a                binary
-*.mid                binary
-*.midi               binary
-*.mp3                binary
-*.ogg                binary
-*.ra                 binary
-*.flac               binary
-*.wav                binary
+# JVM
+*.java              text
+*.kt                text
+*.kts               text
+*.groovy            text
 
-# Video.
-*.3gpp               binary
-*.3gp                binary
-*.as                 binary
-*.asf                binary
-*.asx                binary
-*.avi                binary
-*.fla                binary
-*.flv                binary
-*.m4v                binary
-*.mng                binary
-*.mov                binary
-*.mp4                binary
-*.mpeg               binary
-*.mpg                binary
-*.ogv                binary
-*.swc                binary
-*.swf                binary
-*.webm               binary
+# Rust
+*.rs                text
 
-# Archives.
-*.7z                 binary
-*.gz                 binary
-*.jar                binary
-*.war                binary
-*.rar                binary
-*.tar                binary
-*.zip                binary
+# Go
+*.go                text
 
-# Fonts.
-*.ttf                binary
-*.eot                binary
-*.otf                binary
-*.woff               binary
-*.woff2              binarybinary
+# Swift
+*.swift             text
 
-# Executables.
-*.exe                binary
-*.pyc                binary
+# Zig
+*.zig               text
 
-# RC files (like .babelrc or .eslintrc).
-*.*rc                text
+# Dart / Flutter
+*.dart              text
 
-# Ignore files (like .npmignore or .gitignore).
-*.*ignore            text
-*.gitignore          text
+# Python
+*.py                text diff=python
 
-# SQL.
-*.sql linguist-detectable=true
-*.sql linguist-language=sql
+# Ruby
+*.rb                text diff=ruby
 
-# nvm.
-*.nvmrc              text eol=lf
+# JavaScript / TypeScript
+*.js                text
+*.jsx               text
+*.mjs               text
+*.cjs               text
+*.ts                text
+*.tsx               text
 
-# Dart/Flutter.
-*.dart   text
+# Web
+*.html              text diff=html
+*.htm               text diff=html
+*.css               text diff=css
+*.scss              text diff=css
+*.sass              text
+*.less              text
 
-# Make sure that these Windows files always have CRLF line endings in checkout
-*.sln             text eol=crlf
-*.props           text eol=crlf
-*.vcxproj         text eol=crlf
-*.vcxproj.filters text eol=crlf
-# Including templatized versions.
-*.sln.tmpl        text eol=crlf
-*.props.tmpl      text eol=crlf
-*.vcxproj.tmpl    text eol=crlf
+# Misc
+*.sql               text
+*.xml               text
+*.graphql           text
+*.gql               text
+
+###############################################################################
+# Configuration
+###############################################################################
+
+*.toml              text
+*.yaml              text
+*.yml               text
+*.json              text
+*.jsonc             text
+*.ini               text
+*.cfg               text
+*.conf              text
+*.config            text
+*.properties        text
+*.env               text
+
+.editorconfig       text
+.gitattributes      text
+.gitignore          text
+.mailmap            text
+
+###############################################################################
+# Documentation
+###############################################################################
+
+*.md                text diff=markdown
+*.markdown          text diff=markdown
+*.rst               text
+*.txt               text
+*.adoc              text
+*.asciidoc          text
+
+###############################################################################
+# Infrastructure
+###############################################################################
+
+Dockerfile          text
+docker-compose.yml  text
+
+*.tf                text
+*.tfvars            text
+*.hcl               text
+
+Taskfile.yml        text
+Taskfile.yaml       text
+
+###############################################################################
+# Diagrams
+###############################################################################
+
+*.mmd               text
+*.mermaid           text
+*.puml              text
+*.plantuml          text
+
+*.drawio            binary
+
+###############################################################################
+# Package Managers
+###############################################################################
+
+package.json        text
+
+package-lock.json  text -diff
+pnpm-lock.yaml     text -diff
+yarn.lock          text -diff
+
+Cargo.toml         text
+Cargo.lock         text -diff
+
+pubspec.yaml       text
+pubspec.lock       text -diff
+
+###############################################################################
+# Generated Files
+###############################################################################
+
+*.lock             text -diff
+*.snap             text -diff
+*.map              text -diff
+
+*.min.js           text -diff
+*.min.css          text -diff
+
+###############################################################################
+# Binary Assets
+###############################################################################
+
+# Images
+*.png              binary
+*.jpg              binary
+*.jpeg             binary
+*.gif              binary
+*.bmp              binary
+*.ico              binary
+*.webp             binary
+*.svgz             binary
+
+# SVGs are source assets and diff well.
+*.svg              text
+
+# Fonts
+*.ttf              binary
+*.otf              binary
+*.woff             binary
+*.woff2            binary
+*.eot              binary
+
+# Audio
+*.mp3              binary
+*.wav              binary
+*.ogg              binary
+*.flac             binary
+*.m4a              binary
+
+# Video
+*.mp4              binary
+*.mov              binary
+*.avi              binary
+*.webm             binary
+*.mkv              binary
+
+# Archives
+*.zip              binary
+*.7z               binary
+*.gz               binary
+*.xz               binary
+*.bz2              binary
+*.rar              binary
+*.tar              binary
+
+# Documents
+*.pdf              binary
+
+# Python
+*.pyc              binary
+
+###############################################################################
+# Windows Projects
+###############################################################################
+
+*.sln              text eol=crlf
+*.props            text eol=crlf
+*.vcxproj          text eol=crlf
+*.vcxproj.filters  text eol=crlf
+
+###############################################################################
+# GitHub Linguist
+###############################################################################
+
+*.sql              linguist-language=SQL
+*.graphql          linguist-language=GraphQL
+*.gql              linguist-language=GraphQL
+
+docs/**            linguist-documentation
+*.spec.md          linguist-documentation
+
+###############################################################################
+# Repository Conventions
+###############################################################################
+
+Makefile           text eol=lf
+*.mk               text eol=lf

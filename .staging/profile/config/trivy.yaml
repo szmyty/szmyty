@@ -1,0 +1,50 @@
+# Trivy configuration for universal base scanning
+
+scanners:
+  - vuln
+  - config
+  - secret
+  - license
+
+vuln-type:
+  - os
+  - library
+
+severity:
+  - CRITICAL
+  - HIGH
+  - MEDIUM
+
+ignore-unfixed: true
+
+skip-dirs:
+  - node_modules
+  - dist
+  - .git
+  - .next
+  - coverage
+  - tmp
+
+skip-files:
+  - "*.snap"
+  - "*.map"
+  - "*.min.js"
+  - "*.min.css"
+
+exit-code: 1
+
+timeout: 5m
+
+cache:
+  dir: .cache/.trivycache
+
+format: table
+
+list-all-pkgs: false
+
+offline-scan: false
+
+security-checks:
+  - vuln
+  - secret
+  - config

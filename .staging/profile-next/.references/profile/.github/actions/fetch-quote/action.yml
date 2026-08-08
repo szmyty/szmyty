@@ -1,0 +1,39 @@
+name: 'Fetch Quote of the Day'
+description: 'Fetch an inspirational quote'
+
+outputs:
+  skip:
+    description: 'Whether this step should be skipped (true/false)'
+    value: ${{ steps.fetch.outputs.skip }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: ✨ Fetch Quote of the Day
+      id: fetch
+      shell: bash
+      env:
+        OUTPUT_DIR: quotes
+        LOG_DIR: logs/quotes
+      run: |
+        mkdir -p quotes logs/quotes
+        
+        echo "Fetching quote of the day..."
+        if ! scripts/fetch_quote.sh > quotes/quote.json.tmp 2>> logs/quotes/quote_fetch.log; then
+          echo "⚠️ Warning: Failed to fetch quote"
+          echo "Using cached quote if available"
+          if [ ! -f quotes/quote.json ]; then
+            echo '{"text": "The only way to do great work is to love what you do.", "author": "Steve Jobs", "source": "fallback", "fetched_at": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}' > quotes/quote.json
+          fi
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          if jq empty quotes/quote.json.tmp 2>/dev/null; then
+            mv quotes/quote.json.tmp quotes/quote.json
+            echo "✅ Quote fetched successfully"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Invalid JSON in quote file"
+            rm -f quotes/quote.json.tmp
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+        fi

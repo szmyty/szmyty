@@ -1,0 +1,25 @@
+{
+  "name": "Your::ModuleName",
+  "version": "0.1.0",
+  "description": "A short description of what this module does.",
+  "auth": "github:yourusername",
+  "authors": ["Your Name <you@example.com>"],
+  "license": "Artistic-2.0",
+  "source-url": "https://github.com/yourusername/your-module-name.git",
+
+  "depends": [],
+  "provides": {
+    "Your::ModuleName": "lib/Your/ModuleName.rakumod"
+  },
+
+  "resources": [],
+  "tags": ["raku", "module", "example"],
+  "support": {
+    "email": "you@example.com",
+    "source": "https://github.com/yourusername/your-module-name",
+    "bugtracker": "https://github.com/yourusername/your-module-name/issues"
+  },
+  "build-depends": [],
+  "test-depends": ["Test"],
+  "meta-version": "1"
+}

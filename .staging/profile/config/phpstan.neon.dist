@@ -1,0 +1,56 @@
+# phpstan.neon.dist
+# Baseline PHPStan configuration compatible with MegaLinter and CI/CD pipelines
+# https://phpstan.org/user-guide/configuration
+
+parameters:
+  level: max
+
+  paths:
+    - src
+    - app
+    - lib
+    - tests
+
+  autoload_directories:
+    - vendor
+    - bootstrap
+
+  checkMissingIterableValueType: true
+  checkMissingVarTagType: true
+  checkGenericClassInNonGenericObjectType: true
+  inferPrivatePropertyTypeFromConstructor: true
+
+  # Keep analysis deterministic and CI-friendly
+  reportUnmatchedIgnoredErrors: true
+
+  # Enable bleeding-edge rules for strict typing
+  bleedingEdge: true
+
+  excludes_analyse:
+    - tests/Fixtures/*
+    - vendor/*
+    - storage/*
+    - bootstrap/cache/*
+
+includes:
+  - phpstan-baseline.neon  # optional baseline to suppress known issues
+  - phpstan-strict-rules/rules.neon  # if using phpstan-strict-rules package
+
+# Optional custom services
+services:
+  -
+    class: PHPStan\Rules\Rule
+    tags:
+      - phpstan.rules.rule
+    errorFormatter.sarif:
+        class: Bartlett\Sarif\Converter\Reporter\PhpStanFormatter
+
+
+# Custom error format for CI or Megalinter JSON reporting
+# format: table | json | checkstyle | raw | github
+# GitHub Actions prefers 'github'
+cli:
+  format: github
+
+# Extensions (optional)
+# Add commonly used extensions like phpstan/extension-installer, doctrine rules, etc.

@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "magazine"
+version = "0.1.0"
+description = "Holistic Production Engine for magazine pages and editions"
+authors = ["Alan R Szmyt <play@function.com>"]
+readme = "README.md"
+license = "Proprietary"
+keywords = ["magazine", "publishing", "cli", "ai"]
+include = [
+    { path = "magazine/ai/fountain.modelfile", format = ["sdist", "wheel"] },
+    { path = "magazine/assets/data/sizes.json", format = ["sdist", "wheel"] },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+cbz = "^3.4"
+click = "^8.1"
+pillow-avif-plugin = {version = ">=1.4", optional = true}
+
+[tool.poetry.extras]
+avif = ["pillow-avif-plugin"]
+
+[tool.poetry.group.dev.dependencies]
+pillow = ">=9.0"
+pytest = "^8.0"
+
+[tool.poetry.scripts]
+magazine = "magazine.cli:cli"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,127 @@
+{
+  "page_type": "practice_front",
+  "practice_id": "solitude",
+  "title": "Solitude",
+  "subtitle": "Practices for Self-Contact & Contemplation",
+
+  "edition": {
+    "name": "Ego Hygiene",
+    "number": 1,
+    "theme": "Orientation"
+  },
+
+  "intent": {
+    "role": "inward_orientation",
+    "primary_function": "restore_internal_signal_and_reduce_external_reactivity",
+    "secondary_function": "support_reflection_without_isolation",
+    "tone": [
+      "quiet",
+      "grounded",
+      "reflective",
+      "non_withdrawn"
+    ]
+  },
+
+  "visual_style": {
+    "world": "post_collapse_retro_mystic",
+    "era_inspiration": "mid_20th_century_illustrated_field_manual",
+    "intensity_level": "medium_low",
+    "texture": [
+      "aged_paper",
+      "worn_ink",
+      "grain",
+      "soft_distress"
+    ],
+    "color_palette": {
+      "primary": ["muted_amber", "dusty_gold"],
+      "secondary": ["deep_blue", "mountain_shadow"],
+      "accent": ["soft_starlight", "crystal_fade"]
+    },
+    "iconography": [
+      "seated_silhouette",
+      "mountain_horizon",
+      "subtle_geometry",
+      "crystal_fragments"
+    ]
+  },
+
+  "layout": {
+    "composition": "central_figure_with_open_landscape",
+    "central_element": "seated_silhouette_overlooking_horizon",
+    "foreground_elements": [
+      "earthy_ground_texture",
+      "subtle_crystal_fragments"
+    ],
+    "background_elements": [
+      "twilight_sky",
+      "faint_circular_geometry"
+    ],
+    "panel_style": {
+      "shape": "rounded_rectangle",
+      "has_speech_tail": false,
+      "appearance": "printed_instructional_panel"
+    },
+    "banner_style": {
+      "bottom": {
+        "alignment": "center",
+        "emphasis": "medium"
+      }
+    }
+  },
+
+  "practice_panels": [
+    {
+      "id": "enter",
+      "label": "ENTER",
+      "text": "Allow yourself to step away and lean inward.",
+      "domain": "boundary_setting",
+      "modality": "intentional_withdrawal"
+    },
+    {
+      "id": "listen",
+      "label": "LISTEN",
+      "text": "Turn attention to your own inner signal.",
+      "domain": "interoceptive_awareness",
+      "modality": "self_attunement"
+    },
+    {
+      "id": "rest",
+      "label": "REST",
+      "text": "Be present with what’s unfinished without forcing it to change.",
+      "domain": "emotional",
+      "modality": "allowance"
+    },
+    {
+      "id": "integrate",
+      "label": "INTEGRATE",
+      "text": "Let the quiet support your natural sense-making.",
+      "domain": "cognitive_emotional",
+      "modality": "integration"
+    }
+  ],
+
+  "effect_section": {
+    "label": "EFFECT",
+    "text": "Strengthens internal connection and reduces reactivity when returning to the world.",
+    "scientific_status": "conceptual_placeholder"
+  },
+
+  "footer_banner": {
+    "text": "INWARDNESS RESTORES CLARITY",
+    "tone": "reassuring",
+    "intent": "affirm_value_of_solitude_without_isolation"
+  },
+
+  "constraints": {
+    "no_isolation_glorification": true,
+    "no_avoidance_language": true,
+    "no_spiritual_superiority": true,
+    "no_medical_claims": true
+  },
+
+  "notes": {
+    "solitude_as_counterbalance_to_community": true,
+    "front_page_symbolic_not_explanatory": true,
+    "aligned_with_presence_visual_language": true
+  }
+}

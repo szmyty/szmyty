@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0.0",
+  "page_id": "movement.front",
+  "page_type": "practice_page",
+
+  "title": "Movement",
+  "edition": {
+    "number": 1,
+    "name": "Orientation",
+    "series": "Ego Hygiene Magazine"
+  },
+
+  "asset_files": {
+    "master_image": "movement.front.page.png",
+    "print_variant": "variants/movement.front.print.png",
+    "animation": "movement.front.animation.mp4",
+    "prompt": "movement.front.prompt"
+  },
+
+  "image_metadata": {
+    "format": "PNG",
+    "color_mode": "RGB",
+    "dimensions_px": {
+      "width": 1024,
+      "height": 1536
+    },
+    "aspect_ratio": "2:3",
+    "orientation": "portrait",
+    "intended_print_dpi": 300,
+    "print_safe_dimensions_at_300dpi_inches": {
+      "width": 3.41,
+      "height": 5.12
+    },
+    "file_size_bytes": 0,
+    "color_profile": "sRGB (assumed)",
+    "compression": "lossless_png"
+  },
+
+  "intent": {
+    "role": "applied_regulation_pillar",
+    "primary_function": "restore_physiological_balance",
+    "secondary_function": "shift_state_through_body",
+    "tone": [
+      "grounded",
+      "embodied",
+      "warm",
+      "directive",
+      "retro_field_manual"
+    ]
+  },
+
+  "visual_style": {
+    "world": "retro_mystic_field_manual",
+    "aesthetic_reference": "mid_20th_century_pulp_print_artifact",
+    "texture": [
+      "aged_paper",
+      "edge_burn",
+      "organic_grain",
+      "ink_wear",
+      "print_noise"
+    ],
+    "color_palette": {
+      "primary": ["deep_amber", "burnt_red"],
+      "secondary": ["earth_brown", "shadow_gold"],
+      "accent": ["warm_base_glow"]
+    },
+    "iconography": [
+      "standing_silhouette",
+      "motion_echo_trail",
+      "infinity_divider",
+      "ornamental_border"
+    ],
+    "typography": {
+      "header": {
+        "style": "bold_distressed_retro_display",
+        "case": "uppercase",
+        "hierarchy_rank": 1
+      },
+      "subtitle": {
+        "style": "retro_serif_small_caps",
+        "hierarchy_rank": 2
+      },
+      "panel_headers": {
+        "style": "bold_retro_sans",
+        "hierarchy_rank": 3
+      },
+      "body_text": {
+        "style": "classic_serif",
+        "hierarchy_rank": 4
+      },
+      "effect_band": {
+        "style": "retro_emphasis_serif",
+        "hierarchy_rank": 5
+      },
+      "closing_declaration": {
+        "style": "bold_retro_caps",
+        "hierarchy_rank": 6
+      }
+    }
+  },
+
+  "layout": {
+    "composition": "central_figure_with_quadrant_instruction_panels",
+    "central_element": "standing_silhouette_with_motion_echo",
+    "secondary_elements": [
+      "four_practice_panels",
+      "effect_band"
+    ],
+    "depth_layers": 3,
+    "balance_axis": "vertical_symmetry_weighted_center",
+    "text_hierarchy": [
+      "header",
+      "subtitle",
+      "panel_headers",
+      "panel_body",
+      "effect_band",
+      "closing_declaration"
+    ]
+  },
+
+  "text_elements": {
+    "header": "MOVEMENT",
+    "subtitle": "Practices for Nervous System Regulation",
+    "panels": {
+      "move": "Change posture or position.",
+      "mobilize": "Invite range and circulation.",
+      "stretch": "Ease tension without forcing range.",
+      "release": "Allow excess activation to discharge."
+    },
+    "effect": "Regulates the nervous system, reduces stored tension, and restores embodied alignment.",
+    "closing_declaration": "MOVE YOUR BODY, CALM YOUR MIND, FEEL AT HOME IN YOURSELF"
+  },
+
+  "animation_profile": {
+    "type": "artifact_animation",
+    "allowed_effects": [
+      "ambient_particle_drift",
+      "grain_breathing",
+      "subtle_base_glow_shimmer",
+      "micro_background_sparkle"
+    ],
+    "forbidden_effects": [
+      "camera_motion",
+      "body_animation",
+      "panel_animation",
+      "dramatic_energy_effects",
+      "modern_clean_render"
+    ]
+  },
+
+  "constraints": {
+    "must_remain_print_authentic": true,
+    "avoid_modern_fitness_aesthetic": true,
+    "preserve_pulp_texture": true,
+    "loop_safe_if_animated": true
+  },
+
+  "notes": {
+    "second_primary_pillar_after_presence": true,
+    "focuses_on_physiological_regulation": true,
+    "bridges_body_and_mind": true
+  }
+}

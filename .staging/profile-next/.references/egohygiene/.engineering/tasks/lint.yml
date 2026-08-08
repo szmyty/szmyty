@@ -1,0 +1,76 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  MEGALINTER_IMAGE: ghcr.io/oxsecurity/megalinter:latest
+  COMMIT_HASH:
+    sh: git rev-parse HEAD
+  LINT_CACHE_DIR: "{{.USER_WORKING_DIR}}/.cache/lint"
+  LOGS_DIR: "{{.LINT_CACHE_DIR}}/logs"
+  LYCHEE_DIR: "{{.LINT_CACHE_DIR}}/lychee"
+
+env:
+  PLATFORM: linux/amd64
+  CONTAINER_NAME: megalinter
+  PATH: .
+
+tasks:
+  printvars:
+    desc: "Print all variables"
+    cmds:
+      - echo "MEGALINTER_IMAGE={{.MEGALINTER_IMAGE}}"
+      - echo "COMMIT_HASH={{.COMMIT_HASH}}"
+      - echo "LINT_CACHE_DIR={{.LINT_CACHE_DIR}}"
+      - echo "LOGS_DIR={{.LOGS_DIR}}"
+      - echo "LYCHEE_DIR={{.LYCHEE_DIR}}"
+      - echo "PLATFORM={{.PLATFORM}}"
+      - echo "CONTAINER_NAME={{.CONTAINER_NAME}}"
+      - echo "PATH={{.PATH}}"
+
+  setup:logs:
+    desc: "Ensure logs directory exists"
+    cmds:
+      - mkdir -p {{.LOGS_DIR}}
+
+  setup:lychee:
+    desc: "Ensure Lychee output directory exists"
+    cmds:
+      - mkdir -p {{.LYCHEE_DIR}}
+
+  setup:
+    desc: "Setup linting environment"
+    cmds:
+      - task: setup:logs
+      - task: setup:lychee
+
+  megalinter:
+    desc: "Run MegaLinter with custom args"
+    cmds:
+      - task: setup
+      - docker rm --force --volumes {{.CONTAINER_NAME}} || true
+      - |
+          sh -c 'pnpm exec mega-linter-runner \
+            --container-name={{.CONTAINER_NAME}} \
+            --platform={{.PLATFORM}} \
+            --path={{.PATH}} \
+            --image {{.MEGALINTER_IMAGE}} \
+            {{.MEGALINTER_ARGS}} \
+            2>&1 | sudo tee {{.LOGS_DIR}}/megalinter-$(date +"%Y-%m-%d_%H-%M-%S").log'
+    silent: false
+    interactive: false
+    vars:
+      MEGALINTER_ARGS: '{{default "" .MEGALINTER_ARGS}}'
+
+  all:
+    desc: "Run full MegaLinter scan"
+    cmds:
+      - task: megalinter
+
+  spellcheck:
+    desc: "SPELL"
+    cmds: [{ task: megalinter, vars: { MEGALINTER_ARGS: "--env ENABLE=SPELL" } }]
+
+  python:
+    desc: "PYTHON"
+    cmds: [{ task: megalinter, vars: { MEGALINTER_ARGS: "--env ENABLE=PYTHON" } }]

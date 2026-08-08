@@ -1,0 +1,20 @@
+{
+  "name": "profile",
+  "version": "1.0.0",
+  "description": "GitHub Profile with Dynamic Cards",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/szmyty/profile.git"
+  },
+  "author": "szmyty <14865041+szmyty@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
+    "contributors:check": "all-contributors check"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^6.26.1"
+  }
+}

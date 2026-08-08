@@ -1,0 +1,20 @@
+{
+  "edition": 1,
+  "title": "Orientation",
+  "page_order": [
+    "front_matter/00_cover",
+    "front_matter/01_inside_front_cover",
+    "pages/02_presence",
+    "pages/03_movement",
+    "pages/04_rest",
+    "pages/05_affirmations",
+    "pages/06_gratitude",
+    "pages/07_acceptance",
+    "pages/08_goals",
+    "pages/09_community",
+    "pages/10_solitude",
+    "pages/11_prayer",
+    "back_matter/12_system_balance",
+    "back_matter/13_credits"
+  ]
+}

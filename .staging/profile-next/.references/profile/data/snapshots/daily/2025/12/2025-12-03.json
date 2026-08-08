@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-12-03T01:05:48Z",
+  "date": "2025-12-03",
+  "health": {
+    "sleep_score": 75,
+    "sleep_total": 99,
+    "sleep_deep": 95,
+    "sleep_rem": 40,
+    "sleep_efficiency": 90,
+    "readiness_score": 87,
+    "readiness_hrv": null,
+    "readiness_temp": -0.25,
+    "resting_hr": 86,
+    "activity_score": 44,
+    "activity_steps": 3357,
+    "activity_calories": 179,
+    "activity_met": 1.5
+  },
+  "mood": {
+    "mood_name": "Energetic Compression",
+    "mood_score": 70.5,
+    "mood_icon": "\u26a1"
+  },
+  "weather": {
+    "temperature": -3.8,
+    "condition": "Overcast",
+    "weathercode": 3,
+    "temp_max": 5.9,
+    "temp_min": -4.8,
+    "wind_speed": 5.5
+  },
+  "developer": {}
+}

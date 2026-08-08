@@ -1,0 +1,71 @@
+name: 'Deploy to GitHub Pages'
+description: 'Build React dashboard and deploy to GitHub Pages'
+
+inputs:
+  artifact-path:
+    description: 'Path to the dashboard build directory'
+    required: false
+    default: './dashboard-app/dist'
+
+outputs:
+  page_url:
+    description: 'URL of the deployed GitHub Pages site'
+    value: ${{ steps.deployment.outputs.page_url }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🚀 Copy Data Files to Dashboard
+      shell: bash
+      run: |
+        echo "Copying data files to dashboard public directory..."
+        mkdir -p dashboard-app/public/developer
+        mkdir -p dashboard-app/public/weather
+        mkdir -p dashboard-app/public/location
+        mkdir -p dashboard-app/public/oura
+        mkdir -p dashboard-app/public/soundcloud
+        mkdir -p dashboard-app/public/config
+        mkdir -p dashboard-app/public/achievements
+        mkdir -p dashboard-app/public/ai
+        
+        # Copy existing data files
+        cp -f developer/stats.json dashboard-app/public/developer/ 2>/dev/null || echo "developer/stats.json not found"
+        cp -f weather/weather.json dashboard-app/public/weather/ 2>/dev/null || echo "weather/weather.json not found"
+        cp -f location/location.json dashboard-app/public/location/ 2>/dev/null || echo "location/location.json not found"
+        cp -f oura/metrics.json dashboard-app/public/oura/ 2>/dev/null || echo "oura/metrics.json not found"
+        cp -f oura/mood.json dashboard-app/public/oura/ 2>/dev/null || echo "oura/mood.json not found"
+        cp -f config/theme.json dashboard-app/public/config/ 2>/dev/null || echo "config/theme.json not found"
+        
+        # Create placeholder files for features not yet implemented
+        echo "[]" > dashboard-app/public/achievements/achievements.json
+        echo '{"persona": "Coming soon", "traits": [], "insights": [], "updated_at": "2025-01-01T00:00:00Z"}' > dashboard-app/public/ai/identity.json
+        
+        # Try to copy soundcloud data if it exists
+        if [ -f "soundcloud/latest.json" ]; then
+          cp -f soundcloud/latest.json dashboard-app/public/soundcloud/
+        fi
+        
+        echo "✅ Data files copied to dashboard"
+    
+    - name: 🚀 Build React Dashboard
+      shell: bash
+      run: |
+        echo "Building React dashboard..."
+        cd dashboard-app
+        if npm run build; then
+          echo "✅ React dashboard built successfully"
+        else
+          echo "⚠️ Warning: Failed to build React dashboard"
+        fi
+    
+    - name: 🚀 Setup GitHub Pages
+      uses: actions/configure-pages@v4
+    
+    - name: 🚀 Upload Pages Artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ${{ inputs.artifact-path }}
+    
+    - name: 🚀 Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

@@ -1,0 +1,82 @@
+.soundcloud-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.soundcloud-artwork {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.soundcloud-artwork img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.soundcloud-info {
+  text-align: center;
+}
+
+.track-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+}
+
+.track-meta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.soundcloud-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.soundcloud-stats .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.soundcloud-link {
+  display: block;
+  text-align: center;
+  padding: 12px 24px;
+  background: var(--color-accent);
+  color: var(--background-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.soundcloud-link:hover {
+  opacity: 0.9;
+}

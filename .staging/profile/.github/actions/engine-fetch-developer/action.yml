@@ -1,0 +1,44 @@
+name: 'Fetch Developer Statistics (Engine CLI)'
+description: 'Fetch developer statistics using Profile Engine CLI'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+  username:
+    description: 'GitHub username to fetch statistics for'
+    required: true
+
+outputs:
+  skip:
+    description: 'Whether this step should be skipped (true/false)'
+    value: ${{ steps.fetch.outputs.skip }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🌐 Fetch Developer Statistics (Engine CLI)
+      id: fetch
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        mkdir -p developer/raw logs/developer
+        
+        echo "Fetching developer statistics using Profile Engine CLI..."
+        if ! profile-engine fetch developer --username "${{ inputs.username }}" --output developer/stats.json 2>> logs/developer/developer.log; then
+          echo "⚠️ Warning: Failed to fetch developer statistics"
+          echo "Using cached data if available"
+          if [ ! -f developer/stats.json ]; then
+            echo '{"error": "Failed to fetch data", "username": "${{ inputs.username }}"}' > developer/stats.json
+          fi
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          if jq empty developer/stats.json 2>/dev/null; then
+            echo "✅ Developer statistics fetched successfully"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Invalid JSON in stats file"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+        fi

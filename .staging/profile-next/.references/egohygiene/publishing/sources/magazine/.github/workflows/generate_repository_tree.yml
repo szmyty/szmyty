@@ -1,0 +1,58 @@
+name: Generate Repository Structure Reports
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-tree:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install tree
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes tree
+
+      - name: Create reports directory
+        run: |
+          mkdir --parents reports/tree
+
+      - name: Generate canonical ASCII tree
+        run: |
+          tree -a --prune --gitignore --dirsfirst -L 8 --noreport -I .git -o reports/tree/repo.tree
+
+      - name: Generate JSON report
+        run: |
+          tree -a --prune --gitignore --dirsfirst -L 8 --noreport -I .git -J -o reports/tree/repo.json
+
+      - name: Generate XML report
+        run: |
+          tree -a --prune --gitignore --dirsfirst -L 8 --noreport -I .git -X -o reports/tree/repo.xml
+
+      - name: Generate HTML report
+        run: |
+          tree -a --prune --gitignore --dirsfirst -L 8 --noreport -I .git -H . -T "Repository Structure" -o reports/tree/repo.html
+
+      - name: Commit changes if needed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add reports/tree/
+
+          if git diff --cached --quiet; then
+            echo "No structural changes detected."
+          else
+            git commit --message "chore: update repository structure reports"
+            git push
+          fi

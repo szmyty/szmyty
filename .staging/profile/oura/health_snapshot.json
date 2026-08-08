@@ -1,0 +1,64 @@
+{
+  "personal": {
+    "age": 31,
+    "height_m": 1.8,
+    "height_cm": 180.0,
+    "weight_kg": 81.6,
+    "weight_lbs": 179.9,
+    "bmi": 25.2
+  },
+  "sleep": {
+    "score": 81,
+    "day": "2025-12-05",
+    "deep_sleep": 100,
+    "rem_sleep": 55,
+    "total_sleep": 100,
+    "efficiency": 93,
+    "latency": 70,
+    "restfulness": 83,
+    "timing": 11
+  },
+  "readiness": {
+    "score": 90,
+    "day": "2025-12-05",
+    "recovery_index": 100,
+    "hrv_balance": 67,
+    "resting_heart_rate": 100,
+    "body_temperature": 99,
+    "temperature_deviation": -0.18,
+    "temperature_trend_deviation": -0.05,
+    "activity_balance": 97,
+    "sleep_balance": 100,
+    "previous_day_activity": 87,
+    "previous_night": 86,
+    "sleep_regularity": null
+  },
+  "activity": {
+    "score": 63,
+    "day": "2025-12-06",
+    "steps": 239,
+    "active_calories": 27,
+    "total_calories": 1977,
+    "target_calories": 500,
+    "equivalent_walking_distance": 416,
+    "target_meters": 10000,
+    "inactivity_alerts": 0,
+    "low_activity_time": 1740,
+    "medium_activity_time": 120,
+    "high_activity_time": 0,
+    "average_met_minutes": 1.34375,
+    "meet_daily_targets": 43,
+    "move_every_hour": 100,
+    "recovery_time": 100,
+    "stay_active": 72,
+    "training_frequency": 1,
+    "training_volume": 41
+  },
+  "heart_rate": {
+    "latest_bpm": null,
+    "avg_bpm": null,
+    "resting_bpm": null,
+    "trend_values": []
+  },
+  "updated_at": "2025-12-07T01:18:00Z"
+}

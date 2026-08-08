@@ -1,0 +1,47 @@
+name: 'Fetch Developer Statistics'
+description: 'Fetch developer statistics from GitHub'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+  username:
+    description: 'GitHub username to fetch statistics for'
+    required: true
+
+outputs:
+  skip:
+    description: 'Whether this step should be skipped (true/false)'
+    value: ${{ steps.fetch.outputs.skip }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🌐 Fetch Developer Statistics
+      id: fetch
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        GITHUB_REPOSITORY_OWNER: ${{ inputs.username }}
+      run: |
+        mkdir -p developer/raw logs/developer
+        
+        echo "Fetching developer statistics..."
+        if ! python scripts/fetch-developer-stats.py "$GITHUB_REPOSITORY_OWNER" developer/stats.json.tmp 2>> logs/developer/developer.log; then
+          echo "⚠️ Warning: Failed to fetch developer statistics"
+          echo "Using cached data if available"
+          if [ ! -f developer/stats.json ]; then
+            echo '{"error": "Failed to fetch data", "username": "'${GITHUB_REPOSITORY_OWNER}'"}' > developer/stats.json
+          fi
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          if jq empty developer/stats.json.tmp 2>/dev/null; then
+            mv developer/stats.json.tmp developer/stats.json
+            echo "✅ Developer statistics fetched successfully"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Invalid JSON in stats file"
+            rm -f developer/stats.json.tmp
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+        fi

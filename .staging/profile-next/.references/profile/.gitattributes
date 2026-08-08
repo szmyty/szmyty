@@ -1,0 +1,131 @@
+###############################################################################
+# .gitattributes — Cross-platform consistency and GitHub language support
+# https://git-scm.com/docs/gitattributes
+###############################################################################
+
+# ─────────── General Defaults ───────────
+*               text=auto eol=lf
+
+# ─────────── Source Files ───────────
+*.sh            text eol=lf
+*.bash          text eol=lf
+*.zsh           text eol=lf
+*.fish          text eol=lf
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.ps1           text eol=crlf
+*.py            text diff=python
+*.rb            text diff=ruby
+*.ts            text
+*.tsx           text
+*.js            text
+*.jsx           text
+*.mjs           text
+*.cjs           text
+*.css           text diff=css
+*.scss          text diff=css
+*.html          text diff=html
+*.json          text
+*.xml           text
+*.java          text
+*.rs            text
+*.go            text
+
+# ─────────── Config & Dotfiles ───────────
+*.conf          text
+*.cnf           text
+*.ini           text
+*.toml          text
+*.yml           text
+*.yaml          text
+.editorconfig   text
+.gitattributes  text
+.gitignore      text
+*.env           text
+*.lock          text -diff
+*.rc            text
+*.ignore        text
+.mailmap        text
+
+# ─────────── Package Managers ───────────
+package.json    text eol=lf
+pnpm-lock.yaml  text eol=lf -diff
+yarn.lock       text -diff
+package-lock.json text -diff
+
+# ─────────── Markdown & Docs ───────────
+*.md            text diff=markdown
+*.markdown      text diff=markdown
+*.txt           text
+
+# ─────────── Templates ───────────
+*.vue           text
+*.hbs           text
+*.ejs           text
+*.mustache      text
+*.njk           text
+
+# ─────────── Docker ───────────
+Dockerfile      text
+docker-compose.yml text
+
+# ─────────── Binary Assets ───────────
+*.{png,jpg,jpeg,gif,ico,webp,svgz} binary
+*.{ttf,otf,woff,woff2,eot}         binary
+*.{mp3,mp4,m4a,wav,ogg,flac}       binary
+*.{zip,tar,gz,rar,7z}              binary
+*.{exe,pyc}                        binary
+
+# ─────────── Jupyter Notebooks ───────────
+*.ipynb         text -diff
+
+# ─────────── GitHub Linguist Fixes ───────────
+*.sql linguist-language=SQL
+
+# ─────────── Windows-Specific Files ───────────
+*.sln            text eol=crlf
+*.props          text eol=crlf
+*.vcxproj        text eol=crlf
+*.vcxproj.filters text eol=crlf
+
+# ─────────── Miscellaneous ───────────
+
+# SVGs often treated as source
+*.svg            text
+
+# Skip diffs on minified files
+*.min.js         text -diff
+*.min.css        text -diff
+
+# Jest/RTL snapshot diffs can be noisy
+*.snap           text -diff
+
+# Source maps
+*.map            text -diff
+
+# ─────────── Make & Build ───────────
+Makefile         text eol=lf
+*.mk             text eol=lf
+
+# ─────────── CI/CD Files ───────────
+*.gitlab-ci.yml  text
+.travis.yml      text
+Jenkinsfile      text
+.github/workflows/*  text
+*.ci.yaml            text
+*.nix                text
+
+# Design & Diagram Files
+*.figma         binary
+*.sketch        binary
+*.drawio        binary
+*.gliffy        binary
+*.mermaid       text
+*.plantuml      text
+*.uml           text
+*.dia           text
+*.asciidoc      text
+*.puml          text
+*.penpot        binary
+
+# 🚀 ego hygiene base gitattributes v1

@@ -1,0 +1,21 @@
+<svg width="480" height="230" viewBox="0 0 480 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="a" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#0f0f23" /><stop offset="100%" stop-color="#1a1a2e" /></linearGradient><filter id="b" width="140%" height="140%" x="-20%" y="-20%"><feGaussianBlur result="coloredBlur" stdDeviation="2" /><feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs><rect width="480" height="230" fill="url(#a)" rx="12" /><rect width="480" height="230" fill="none" stroke="#64ffda" stroke-opacity=".3" rx="12" /><text fill="#64ffda" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" transform="translate(20 30)">
+      🌙 Boston, Massachusetts
+    </text><g font-family="'Segoe UI', Arial, sans-serif"><text fill="#fff" filter="url(#b)" font-size="36" font-weight="bold" transform="translate(20 60)">
+      31°F
+    </text><text x="110" fill="#8892b0" font-size="16" transform="translate(20 60)">
+      Mainly clear
+    </text></g><text fill="#8892b0" font-family="'Segoe UI', Arial, sans-serif" font-size="13" transform="translate(20 95)">
+      <tspan fill="#ff6b6b">High: 39°F</tspan>
+      <tspan fill="#4a5568">  •  </tspan>
+      <tspan fill="#4ecdc4">Low: 24°F</tspan>
+    </text><text fill="#8892b0" font-family="'Segoe UI', Arial, sans-serif" font-size="12" transform="translate(20 120)">
+      💨 Wind: 4 mph
+    </text><text fill="#8892b0" font-family="'Segoe UI', Arial, sans-serif" font-size="12" transform="translate(20 145)">
+      🌅 6:59 AM
+      <tspan fill="#4a5568">  •  </tspan>
+      🌇 4:11 PM
+    </text><g transform="translate(20 200)"><rect width="183" height="26" fill="#4ecdc4" fill-opacity=".9" rx="4" /><rect width="183" height="26" fill="none" stroke="#4ecdc4" stroke-width="2" rx="4" /><text x="10" y="17" fill="#fff" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600">
+        ❄️ Freezing temperature alert
+      </text></g><text y="12" fill="#4a5568" font-family="'Segoe UI', Arial, sans-serif" font-size="8" text-anchor="end" transform="translate(470 10)">
+      Updated: just now
+    </text><rect width="4" height="170" x="460" y="15" fill="#64ffda" fill-opacity=".3" rx="2" /></svg>

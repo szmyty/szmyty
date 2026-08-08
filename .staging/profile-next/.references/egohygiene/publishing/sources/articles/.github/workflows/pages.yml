@@ -1,0 +1,128 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'articles/**/published.md'
+      - 'templates/**'
+      - 'site/index.html'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes pandoc
+
+      - name: Prepare site directory
+        run: |
+          rm -rf site/articles
+          mkdir -p site/articles
+
+      - name: Build published articles into HTML
+        run: |
+          set -e
+
+          for dir in articles/*/ ; do
+            SLUG=$(basename "$dir")
+
+            if [ ! -f "$dir/published.md" ]; then
+              echo "Skipping $SLUG (no published.md)"
+              continue
+            fi
+
+            echo "Building article: $SLUG"
+
+            mkdir -p site/articles/$SLUG
+
+            # Extract first H1 as title (safe fallback if missing)
+            TITLE=$(grep -m 1 "^# " "$dir/published.md" | sed 's/^# //' || echo "$SLUG")
+
+            # Convert Markdown to HTML fragment
+            pandoc "$dir/published.md" \
+              --from markdown \
+              --to html \
+              --output site/articles/$SLUG/content.html
+
+            # Inject into template
+            sed "s/{{TITLE}}/$TITLE/g" templates/article-template.html \
+              | sed "/{{CONTENT}}/{
+                  r site/articles/$SLUG/content.html
+                  d
+                }" \
+              > site/articles/$SLUG/article.html
+
+            # Copy assets if present
+            if [ -d "$dir/assets" ]; then
+              cp -r "$dir/assets" site/articles/$SLUG/
+            fi
+          done
+
+      - name: Copy article CSS
+        run: |
+          cp templates/article.css site/article.css
+
+      - name: Regenerate index.html list
+        run: |
+          LIST_FILE="site/generated-list.html"
+          > "$LIST_FILE"
+
+          for dir in site/articles/*/ ; do
+            [ -f "$dir/article.html" ] || continue
+
+            SLUG=$(basename "$dir")
+            TITLE=$(grep -m 1 "<h1>" "$dir/article.html" | sed 's/<[^>]*>//g')
+
+            echo "    <li><a href=\"/articles/$SLUG/article.html\">$TITLE</a></li>" >> "$LIST_FILE"
+          done
+
+          awk '
+          BEGIN {inserted=0}
+          /<!-- AUTO-GENERATED-LIST -->/ {
+            print
+            while ((getline line < "site/generated-list.html") > 0) print line
+            inserted=1
+            next
+          }
+          { print }
+          END {
+            if (!inserted) {
+              print "ERROR: AUTO-GENERATED-LIST marker not found"
+              exit 1
+            }
+          }' site/index.html > site/index.tmp && mv site/index.tmp site/index.html
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

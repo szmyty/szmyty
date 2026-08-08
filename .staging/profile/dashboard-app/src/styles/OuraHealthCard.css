@@ -1,0 +1,50 @@
+.oura-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.oura-scores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.score-item {
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.oura-vitals {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vital-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vital-label {
+  color: var(--text-secondary);
+}
+
+.vital-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}

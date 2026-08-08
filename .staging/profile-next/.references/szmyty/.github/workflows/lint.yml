@@ -1,0 +1,26 @@
+name: Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    name: Formatting & Markdown
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Check formatting with Prettier
+        run: npx --yes prettier --check .
+
+      - name: Lint Markdown with markdownlint
+        run: npx --yes markdownlint-cli .

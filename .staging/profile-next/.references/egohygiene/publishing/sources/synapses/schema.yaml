@@ -1,0 +1,38 @@
+# Schema for a Synapse Visual Blueprint
+# Version: 1.0
+
+title: string  # Title of the synapse (e.g., "Non-Dual Awareness")
+
+core_theme: string  # One-sentence description of the concept’s psychological or spiritual essence
+
+summary: string  # Short poetic/metaphorical explanation of the concept
+
+visual_metaphors:
+  - string  # e.g., "Yin-yang dissolving into an infinity symbol"
+  - string  # e.g., "Dandelion seeds floating outward as breath of awareness"
+
+typography:
+  top_caption: string     # Primary title or phrase
+  middle_caption: string  # Secondary label or diagram center
+  bottom_caption: string  # Optional quote, poetic line, or insight
+
+colors:
+  palette:
+    - string  # e.g., "Earth tones"
+    - string  # e.g., "Deep indigo"
+  background_texture: string  # e.g., "Parchment", "Celestial gradient", etc.
+
+botanicals:
+  - string  # e.g., "Lotus"
+  - string  # e.g., "Fern"
+
+layout_style: string  # General layout guidance (e.g., "Symmetrical", "Center-weighted", "Radial")
+
+inspiration_notes: string  # Freeform notes on how it should feel emotionally / visually
+
+keywords:
+  - string  # e.g., "non-duality"
+  - string  # e.g., "ego dissolution"
+  - string  # e.g., "cosmic integration"
+
+version: float  # Schema version, e.g., 1.0

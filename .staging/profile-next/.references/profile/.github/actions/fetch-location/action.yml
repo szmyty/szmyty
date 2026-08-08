@@ -1,0 +1,78 @@
+name: 'Fetch Location Data'
+description: 'Fetch location data from GitHub profile and geocoding services'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+  username:
+    description: 'GitHub username to fetch location for'
+    required: true
+  mapbox-token:
+    description: 'Mapbox token for geocoding (optional)'
+    required: false
+    default: ''
+
+outputs:
+  skip:
+    description: 'Whether this step should be skipped (true/false)'
+    value: ${{ steps.fetch-location.outputs.skip }}
+  location:
+    description: 'The location value from GitHub profile'
+    value: ${{ steps.get-location.outputs.value }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🌤️ Get GitHub Profile Location
+      id: get-location
+      shell: bash
+      env:
+        GITHUB_REPOSITORY_OWNER: ${{ inputs.username }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        LOCATION=$(curl -sf "https://api.github.com/users/${GITHUB_REPOSITORY_OWNER}" \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+          -H "User-Agent: GitHub-Profile-Build" | jq -r '.location // empty')
+        
+        if [ -z "$LOCATION" ]; then
+          echo "⚠️ Warning: No location found in GitHub profile"
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          echo "value=$LOCATION" >> $GITHUB_OUTPUT
+          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "✅ Found location: $LOCATION"
+        fi
+    
+    - name: 📍 Fetch Location Data
+      id: fetch-location
+      if: steps.get-location.outputs.skip != 'true'
+      shell: bash
+      env:
+        GITHUB_OWNER: ${{ inputs.username }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        OUTPUT_DIR: location
+        MAPBOX_TOKEN: ${{ inputs.mapbox-token }}
+      run: |
+        mkdir -p location logs/location
+        
+        echo "Fetching location data..."
+        if ! scripts/fetch-location.sh > location/location.json.tmp 2>> logs/location/location.log; then
+          echo "⚠️ Warning: Failed to fetch location data"
+          echo "Using cached data if available"
+          if [ ! -f location/location.json ]; then
+            echo '{"error": "Failed to fetch data"}' > location/location.json
+          fi
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          if jq empty location/location.json.tmp 2>/dev/null; then
+            mv location/location.json.tmp location/location.json
+            echo "✅ Location data fetched successfully"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Invalid JSON in location file"
+            rm -f location/location.json.tmp
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+        fi

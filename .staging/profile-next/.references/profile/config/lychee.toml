@@ -1,0 +1,64 @@
+#############################  Display  #############################
+
+verbose = "info"
+no_progress = false
+output = "reports/lychee/lychee.md"
+format = "json"
+
+#############################  Cache  ###############################
+
+cache = false
+max_cache_age = "1d"
+
+#############################  Runtime  #############################
+
+threads = 2
+max_redirects = 10
+max_retries = 2
+max_concurrency = 20
+
+#############################  Requests  ############################
+
+user_agent = "curl/7.83.1"
+timeout = 10
+retry_wait_time = 2
+accept = ["200", "403"]
+insecure = false
+scheme = ["http", "https"]
+require_https = false
+fallback_extensions = ["md", "html"]
+root_dir = "."
+include_fragments = true
+
+#############################  Exclusions  ##########################
+
+inputs = ["."]
+exclude = [
+  "node_modules",
+  "dist",
+  "build",
+  "coverage",
+  "CHANGELOG.md",
+  '^https://example\\.com/home$',
+  '^https?://example\\.com',
+  '^https://(www\\.)?linkedin\\.com',
+  '^https://(.*\\.)?github(usercontent)?\\.(com|io)'
+]
+
+exclude_path = [
+  "\\.txt$",
+  "(^|/)test/",
+  "[aeiouAEIOU]"
+]
+
+include = ["gist\\.github\\.com.*"]
+
+skip_missing = false
+include_verbatim = false
+glob_ignore_case = false
+
+exclude_all_private = true
+exclude_private = false
+exclude_link_local = false
+exclude_loopback = false
+include_mail = true

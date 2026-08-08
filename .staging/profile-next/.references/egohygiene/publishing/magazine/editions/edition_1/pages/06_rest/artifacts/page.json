@@ -1,0 +1,226 @@
+{
+  "TitlePage": [
+    {
+      "type": 2,
+      "name": "Title",
+      "content": " Ego Hygiene"
+    },
+    {
+      "type": 2,
+      "name": "Credit",
+      "content": " Written & Designed by Alan Szmyt"
+    },
+    {
+      "type": 2,
+      "name": "Draft date",
+      "content": " 2026-02-15"
+    },
+    {
+      "type": 2,
+      "name": "Source",
+      "content": " Edition 1 – Orientation\n"
+    }
+  ],
+  "Elements": [
+    {
+      "type": 3,
+      "name": "Scene Heading",
+      "content": "INT. PRINTED MAGAZINE – REST PAGE – TIMELESS"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "The next pillar emerges."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 0,
+      "name": "Character",
+      "content": "REST"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "Below the arching header:"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "Practices for Allowing Rest & Recovery"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "The palette deepens.\nThe glow softens.\nStars scatter lightly across a darkened sky."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "At center,\na figure lies in quiet stillness,\nhands folded,\nbreathing steady."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "Above,\na crescent moon rests inside a drifting thought-cloud."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "Four practice panels surround the scene."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 5,
+      "name": "Character",
+      "content": "PAUSE"
+    },
+    {
+      "type": 6,
+      "name": "Dialogue",
+      "content": "Stop adding input."
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "No fixing.\nNo optimizing."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 5,
+      "name": "Character",
+      "content": "DIM"
+    },
+    {
+      "type": 6,
+      "name": "Dialogue",
+      "content": "Lower light, sound, and stimulation."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 5,
+      "name": "Character",
+      "content": "DREAM"
+    },
+    {
+      "type": 6,
+      "name": "Dialogue",
+      "content": "Allow dreaming and deep imagery."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 5,
+      "name": "Character",
+      "content": "STAY"
+    },
+    {
+      "type": 6,
+      "name": "Dialogue",
+      "content": "Remain at rest when the urge to act appears."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "Near the bottom,\na highlighted band reads:"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "EFFECT:\nAllows the nervous system to downshift,\nrestores baseline regulation,\nand reduces cognitive load."
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "A final declaration anchors the page:"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 0,
+      "name": "Character",
+      "content": "NOTHING IS REQUIRED RIGHT NOW"
+    },
+    {
+      "type": 1,
+      "name": "Empty",
+      "content": ""
+    },
+    {
+      "type": 4,
+      "name": "Action",
+      "content": "The page feels like exhale.\nRelease without collapse.\nStillness without demand."
+    }
+  ]
+}

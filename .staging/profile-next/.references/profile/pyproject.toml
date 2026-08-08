@@ -1,0 +1,41 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "profile"
+version = "1.0.0"
+description = "GitHub Profile with Dynamic Cards"
+authors = ["szmyty <14865041+szmyty@users.noreply.github.com>"]
+readme = "README.md"
+homepage = "https://github.com/szmyty/profile"
+repository = "https://github.com/szmyty/profile"
+packages = [{include = "scripts"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+jsonschema = "4.23.0"
+pillow = "10.4.0"
+pytest = "8.3.3"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "4.0.1"
+black = "24.10.0"
+isort = "5.13.2"
+flake8 = "7.1.1"
+check-jsonschema = "0.30.0"
+mypy = "1.13.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100

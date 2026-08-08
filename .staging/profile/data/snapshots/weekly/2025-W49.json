@@ -1,0 +1,16 @@
+{
+  "period": "weekly",
+  "start_date": "2025-12-03",
+  "end_date": "2025-12-03",
+  "days_count": 1,
+  "health": {
+    "avg_sleep_score": 75,
+    "avg_readiness_score": 87,
+    "avg_activity_score": 44,
+    "total_steps": 3357,
+    "avg_steps": 3357
+  },
+  "developer": {
+    "avg_commits": 0
+  }
+}

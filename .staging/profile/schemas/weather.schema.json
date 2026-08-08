@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/szmyty/profile/schemas/weather.schema.json",
+  "title": "Weather Data",
+  "description": "Schema for weather data used in weather card generation",
+  "type": "object",
+  "required": ["location", "current", "daily"],
+  "properties": {
+    "location": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Location name (city, state/region)"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Full display name of the location"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90,
+          "description": "Latitude"
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180,
+          "description": "Longitude"
+        }
+      },
+      "required": ["lat", "lon"],
+      "additionalProperties": false
+    },
+    "current": {
+      "type": "object",
+      "required": ["temperature", "weathercode"],
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "description": "Current temperature in Celsius"
+        },
+        "wind_speed": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Wind speed in km/h"
+        },
+        "weathercode": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "WMO Weather interpretation code"
+        },
+        "is_day": {
+          "type": "integer",
+          "enum": [0, 1],
+          "description": "1 for day, 0 for night"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Human-readable weather condition"
+        },
+        "emoji": {
+          "type": "string",
+          "description": "Weather emoji representation"
+        }
+      },
+      "additionalProperties": true
+    },
+    "daily": {
+      "type": "object",
+      "required": ["temperature_max", "temperature_min"],
+      "properties": {
+        "temperature_max": {
+          "type": "number",
+          "description": "Maximum temperature for the day in Celsius"
+        },
+        "temperature_min": {
+          "type": "number",
+          "description": "Minimum temperature for the day in Celsius"
+        },
+        "sunrise": {
+          "type": "string",
+          "description": "Sunrise time in ISO 8601 format"
+        },
+        "sunset": {
+          "type": "string",
+          "description": "Sunset time in ISO 8601 format"
+        },
+        "weathercode": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "WMO Weather interpretation code for the day"
+        }
+      },
+      "additionalProperties": true
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone identifier (e.g., America/New_York)"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "Last update timestamp"
+    }
+  },
+  "additionalProperties": true
+}

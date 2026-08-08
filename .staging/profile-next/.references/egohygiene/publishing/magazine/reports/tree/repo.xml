@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree>
+  <directory name=".">
+    <directory name=".github">
+      <directory name="workflows">
+        <file name="generate_repository_tree.yml"></file>
+        <file name="ip-lint.yml"></file>
+      </directory>
+    </directory>
+    <directory name=".vscode">
+      <directory name="dictionaries">
+        <file name="backend-terms.dictionary"></file>
+        <file name="devops-cloud-terms.dictionary"></file>
+        <file name="frontend-terms.dictionary"></file>
+        <file name="programming-terms.dictionary"></file>
+        <file name="project-words.dictionary"></file>
+        <file name="software-terms.dictionary"></file>
+      </directory>
+      <file name="extensions.json"></file>
+      <file name="launch.json"></file>
+      <file name="settings.json"></file>
+      <file name="tasks.json"></file>
+    </directory>
+    <directory name="ai">
+      <directory name="fountain">
+        <file name="script.prompt"></file>
+      </directory>
+    </directory>
+    <directory name="assets">
+      <file name=".gitkeep"></file>
+      <file name="egohygiene.ico"></file>
+      <file name="logo.png"></file>
+    </directory>
+    <directory name="audit">
+      <file name="audit-2026-02-20T17-34-56Z.log"></file>
+      <file name="regression-artifact-parity-2026-02-22T00-05-38Z.log"></file>
+    </directory>
+    <directory name="audits">
+      <file name="audit-magazine-2026-04-04T00-31-44Z.log"></file>
+    </directory>
+    <directory name="context">
+      <file name="constraints.json"></file>
+    </directory>
+    <directory name="docs">
+      <file name="EXAMPLE_WORKFLOW.md"></file>
+      <file name="FOUNTAIN_HTML_FIX.md"></file>
+      <file name="IP_LINT_CHECK.md"></file>
+    </directory>
+    <directory name="editions">
+      <directory name="edition_1">
+        <directory name=".archive">
+          <file name="comic_v0.0.1.cbz"></file>
+        </directory>
+        <directory name="artifacts">
+          <directory name="final_build_stage">
+            <file name="00_cover_front_outside.png"></file>
+            <file name="00_cover_front_outside.tiff"></file>
+            <file name="01_cover_front_inside.png"></file>
+            <file name="01_cover_front_inside.tiff"></file>
+            <file name="02_presence.png"></file>
+            <file name="02_presence.tiff"></file>
+            <file name="04_movement.png"></file>
+            <file name="04_movement.tiff"></file>
+            <file name="06_rest.png"></file>
+            <file name="06_rest.tiff"></file>
+            <file name="08_affirmations.png"></file>
+            <file name="08_affirmations.tiff"></file>
+            <file name="10_gratitude.png"></file>
+            <file name="10_gratitude.tiff"></file>
+            <file name="14_community.png"></file>
+            <file name="14_community.tiff"></file>
+            <file name="18_prayer.png"></file>
+            <file name="18_prayer.tiff"></file>
+          </directory>
+        </directory>
+        <directory name="assets">
+          <file name=".gitkeep"></file>
+        </directory>
+        <directory name="pages">
+          <directory name="00_cover_front_outside">
+            <directory name=".archive">
+              <directory name="artifacts">
+                <file name="page.fadein"></file>
+                <file name="page.fdx"></file>
+                <file name="page.fountain"></file>
+                <file name="page.fountain.html"></file>
+                <file name="page.fountain.json"></file>
+                <file name="page.fountain.osf"></file>
+                <file name="page.fountain.pdf"></file>
+                <file name="page.html"></file>
+                <file name="page.jpg"></file>
+                <file name="page.pdf"></file>
+                <file name="page.pretty.fountain"></file>
+                <file name="page.tiff"></file>
+                <file name="page.webp"></file>
+              </directory>
+              <file name="Magazine_Cover_Animation_Prompt.mp4"></file>
+              <file name="cover.front.animation.mp4"></file>
+              <file name="cover.front.final.fullbleed.pdf"></file>
+              <file name="cover.front.final.html"></file>
+              <file name="cover.front.final.instagram.jpg"></file>
+              <file name="cover.front.final.jpg"></file>
+              <file name="cover.front.final.pdf"></file>
+              <file name="cover.front.final.square.jpg"></file>
+              <file name="cover.front.final.tiff"></file>
+              <file name="cover.front.final.web.jpg"></file>
+              <file name="cover.front.final.webp"></file>
+              <file name="cover.front.fountain.html"></file>
+              <file name="cover.front.fountain.pdf"></file>
+              <file name="cover.front.html"></file>
+              <file name="cover.front.pdf"></file>
+              <file name="cover.front.web.jpg"></file>
+              <file name="meta.json"></file>
+            </directory>
+            <directory name="artifacts">
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.html"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.json"></file>
+              <file name="page.pdf"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <directory name="videos">
+                <file name="00_cover_front_outside_v0.0.1.mp4"></file>
+                <file name="00_cover_front_outside_v0.0.2.mp4"></file>
+                <file name="00_cover_front_outside_v0.0.3.mp4"></file>
+                <file name="00_cover_front_outside_v0.0.4.mp4"></file>
+              </directory>
+              <file name="00_cover_front_outside_v0.0.0.png"></file>
+              <file name="00_cover_front_outside_v0.0.1.png"></file>
+              <file name="00_cover_front_outside_v0.0.2.png"></file>
+              <file name="00_cover_front_outside_v0.1.0.png"></file>
+              <file name="00_cover_front_outside_v0.1.1.png"></file>
+            </directory>
+            <directory name="final">
+              <file name="00_cover_front_outside.png"></file>
+              <file name="00_cover_front_outside_cmyk_print.pdf"></file>
+              <file name="00_cover_front_outside_cmyk_print_bleed.pdf"></file>
+              <file name="00_cover_front_outside_rgb_print.pdf"></file>
+              <file name="00_cover_front_outside_standard.pdf"></file>
+            </directory>
+            <directory name="variants">
+              <file name="cover.front.final_upscayl_2x_digital-art-4x.png"></file>
+              <file name="cover.front.final_upscayl_2x_upscayl-standard-4x.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.fountain"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.mp4"></file>
+            <file name="page.pdf"></file>
+            <file name="page.png"></file>
+            <file name="page.prompt"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="01_cover_front_inside">
+            <directory name=".archive">
+              <directory name="artifacts">
+                <file name="inside_front_coverfadein"></file>
+                <file name="inside_front_coverfdx"></file>
+                <file name="inside_front_coverfountain"></file>
+                <file name="inside_front_coverhtml"></file>
+                <file name="inside_front_coverjson"></file>
+                <file name="inside_front_coverosf"></file>
+                <file name="inside_front_coverpdf"></file>
+                <file name="page.html"></file>
+                <file name="page.jpg"></file>
+                <file name="page.pdf"></file>
+                <file name="page.pretty.fountain"></file>
+                <file name="page.tiff"></file>
+                <file name="page.webp"></file>
+              </directory>
+              <file name="file_000000006bbc71f890ab5ce46c85d592.png"></file>
+              <file name="inside_front_cover.animation.mp4"></file>
+              <file name="inside_front_cover.front.final1.png"></file>
+              <file name="inside_front_cover.page.json"></file>
+              <file name="inside_front_cover.prompt"></file>
+              <file name="meta.json"></file>
+            </directory>
+            <directory name="artifacts">
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <directory name="videos">
+                <file name="inside_front_cover.animation.mp4"></file>
+              </directory>
+              <file name="01_cover_front_inside_v0.0.0.png"></file>
+              <file name="01_cover_front_inside_v0.0.1.png"></file>
+              <file name="01_cover_front_inside_v0.0.2.png"></file>
+              <file name="01_cover_front_inside_v0.0.3.png"></file>
+              <file name="01_cover_front_inside_v0.0.4.png"></file>
+              <file name="01_cover_front_inside_v0.0.5.png"></file>
+              <file name="01_cover_front_inside_v0.0.6.png"></file>
+            </directory>
+            <directory name="variants">
+              <file name="inside_front_cover.front.final_upscayl_2x_digital-art-4x.png"></file>
+              <file name="inside_front_cover.front.final_upscayl_2x_upscayl-standard-4x.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.fountain"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.mp4"></file>
+            <file name="page.pdf"></file>
+            <file name="page.png"></file>
+            <file name="page.prompt"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="02_presence">
+            <directory name=".archive">
+              <directory name="artifacts">
+                <file name="page.html"></file>
+                <file name="page.jpg"></file>
+                <file name="page.pdf"></file>
+                <file name="page.pretty.fountain"></file>
+                <file name="page.tiff"></file>
+                <file name="page.webp"></file>
+                <file name="presencefadein"></file>
+                <file name="presencefdx"></file>
+                <file name="presencefountain"></file>
+                <file name="presencehtml"></file>
+                <file name="presencejson"></file>
+                <file name="presenceosf"></file>
+                <file name="presencepdf"></file>
+              </directory>
+              <file name="file_00000000065071f5b1d9d7195672a13b.png"></file>
+              <file name="file_00000000b6f871f592f62684feb2113f.png"></file>
+              <file name="meta.json"></file>
+              <file name="presence.back.page.json"></file>
+              <file name="presence.back.prompt"></file>
+              <file name="presence.front.page.json"></file>
+              <file name="presence.front.prompt"></file>
+            </directory>
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.html"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.json"></file>
+              <file name="page.pdf"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <directory name="videos">
+                <file name="presence_v0.0.1.mp4"></file>
+                <file name="presence_v0.0.2.mp4"></file>
+              </directory>
+              <file name="02_presence_v0.0.1.png"></file>
+              <file name="02_presence_v0.0.2.png"></file>
+              <file name="02_presence_v0.0.3.png"></file>
+              <file name="02_presence_v0.0.4.png"></file>
+              <file name="02_presence_v0.0.5.png"></file>
+              <file name="02_presence_v0.0.6.png"></file>
+              <file name="02_presence_v0.0.7.png"></file>
+              <file name="02_presence_v0.0.8.png"></file>
+              <file name="02_presence_v0.0.9.png"></file>
+              <file name="02_presence_v0.1.0.png"></file>
+              <file name="02_presence_v0.1.1.png"></file>
+              <file name="02_presence_v0.1.2.png"></file>
+              <file name="02_presence_v0.1.3.png"></file>
+            </directory>
+            <directory name="variants">
+              <file name="presence.front.page_upscayl_2x_digital-art-4x.png"></file>
+              <file name="presence.front.page_upscayl_2x_upscayl-standard-4x.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.fountain"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.mp4"></file>
+            <file name="page.pdf"></file>
+            <file name="page.png"></file>
+            <file name="page.prompt"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="03_presence_back">
+            <directory name="drafts">
+              <file name="03_presence_back_v0.0.1.png"></file>
+              <file name="03_presence_back_v0.0.2.png"></file>
+              <file name="03_presence_back_v0.0.3.png"></file>
+              <file name="03_presence_back_v0.0.4.png"></file>
+              <file name="03_presence_back_v0.0.5.png"></file>
+              <file name="03_presence_back_v0.0.6.png"></file>
+              <file name="03_presence_back_v0.0.7.png"></file>
+              <file name="03_presence_back_v0.0.8.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="04_movement">
+            <directory name=".archive">
+              <directory name="artifacts">
+                <file name="movementfadein"></file>
+                <file name="movementfdx"></file>
+                <file name="movementfountain"></file>
+                <file name="movementhtml"></file>
+                <file name="movementjson"></file>
+                <file name="movementosf"></file>
+                <file name="movementpdf"></file>
+                <file name="page.html"></file>
+                <file name="page.jpg"></file>
+                <file name="page.pdf"></file>
+                <file name="page.pretty.fountain"></file>
+                <file name="page.tiff"></file>
+                <file name="page.webp"></file>
+              </directory>
+              <file name="file_00000000551072309202cb8ed701d15d.png"></file>
+              <file name="file_0000000091b4722f9549085fe9ea2a42.png"></file>
+              <file name="meta.json"></file>
+              <file name="movement.back.page.json"></file>
+              <file name="movement.back.prompt"></file>
+              <file name="movement.front.page.json"></file>
+              <file name="movement.front.prompt"></file>
+            </directory>
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.html"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.json"></file>
+              <file name="page.pdf"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <file name="04_movement_v0.0.1.png"></file>
+              <file name="04_movement_v0.0.2.png"></file>
+              <file name="04_movement_v0.0.3.png"></file>
+              <file name="04_movement_v0.0.4.png"></file>
+              <file name="04_movement_v0.0.5.png"></file>
+              <file name="04_movement_v0.0.6.png"></file>
+              <file name="04_movement_v0.0.7.png"></file>
+              <file name="04_movement_v0.0.8.png"></file>
+              <file name="04_movement_v0.0.9.png"></file>
+            </directory>
+            <directory name="variants">
+              <file name="movement.front.page_upscayl_2x_digital-art-4x.png"></file>
+              <file name="movement.front.page_upscayl_2x_upscayl-standard-4x.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.fountain"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.mp4"></file>
+            <file name="page.pdf"></file>
+            <file name="page.png"></file>
+            <file name="page.prompt"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="05_movement_back">
+            <directory name="drafts">
+              <file name="05_movement_back_v0.0.1.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="06_rest">
+            <directory name=".archive">
+              <directory name="artifacts">
+                <file name="page.html"></file>
+                <file name="page.jpg"></file>
+                <file name="page.pdf"></file>
+                <file name="page.pretty.fountain"></file>
+                <file name="page.tiff"></file>
+                <file name="page.webp"></file>
+                <file name="restfadein"></file>
+                <file name="restfdx"></file>
+                <file name="restfountain"></file>
+                <file name="resthtml"></file>
+                <file name="restjson"></file>
+                <file name="restosf"></file>
+                <file name="restpdf"></file>
+              </directory>
+              <file name="file_000000008c7c722f8d50cf630451aec3.png"></file>
+              <file name="file_00000000c578722fa2a7b3842c98f301.png"></file>
+              <file name="meta.json"></file>
+              <file name="rest.back.page.json"></file>
+              <file name="rest.back.prompt"></file>
+              <file name="rest.front.page.json"></file>
+              <file name="rest.front.prompt"></file>
+            </directory>
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.html"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.json"></file>
+              <file name="page.pdf"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <file name="06_rest_v0.0.1.png"></file>
+              <file name="06_rest_v0.0.2.png"></file>
+              <file name="06_rest_v0.0.3.png"></file>
+              <file name="06_rest_v0.0.4.png"></file>
+              <file name="06_rest_v0.0.5.png"></file>
+            </directory>
+            <directory name="variants">
+              <file name="rest.front.page_upscayl_2x_digital-art-4x.png"></file>
+              <file name="rest.front.page_upscayl_2x_upscayl-standard-4x.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.fountain"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.mp4"></file>
+            <file name="page.pdf"></file>
+            <file name="page.png"></file>
+            <file name="page.prompt"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="07_rest_back">
+            <directory name="drafts">
+              <file name="07_rest_back_v0.0.1.png"></file>
+              <file name="07_rest_back_v0.0.2.png"></file>
+              <file name="07_rest_back_v0.0.3.png"></file>
+              <file name="07_rest_back_v0.0.4.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="08_affirmations">
+            <directory name=".archive">
+              <directory name="artifacts">
+                <file name="page.html"></file>
+              </directory>
+              <file name="affirmations.front.page.json"></file>
+              <file name="affirmations.front.prompt"></file>
+              <file name="file_0000000074e071f89d5e53c0a071df18.png"></file>
+            </directory>
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <file name="affirmations_v0.0.1.png"></file>
+              <file name="affirmations_v0.0.2.png"></file>
+              <file name="affirmations_v0.0.3.png"></file>
+              <file name="affirmations_v0.0.4.png"></file>
+              <file name="affirmations_v0.0.5.png"></file>
+              <file name="affirmations_v0.0.6.png"></file>
+              <file name="affirmations_v0.0.7.png"></file>
+              <file name="affirmations_v0.0.8.png"></file>
+              <file name="affirmations_v0.0.9.png"></file>
+              <file name="affirmations_v0.1.0.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.html"></file>
+            <file name="page.png"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="09_affirmations_back">
+            <directory name="drafts">
+              <file name="09_affirmations_back_v0.0.1.png"></file>
+              <file name="09_affirmations_back_v0.0.2.png"></file>
+              <file name="09_affirmations_back_v0.0.3.png"></file>
+              <file name="09_affirmations_back_v0.0.4.png"></file>
+              <file name="09_affirmations_back_v0.0.5.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="10_gratitude">
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <directory name="videos">
+                <file name="10_gratitude_v0.0.1.mp4"></file>
+              </directory>
+              <file name="10_gratitude_v0.0.1.png"></file>
+              <file name="10_gratitude_v0.0.2.png"></file>
+              <file name="10_gratitude_v0.0.3.png"></file>
+              <file name="10_gratitude_v0.0.4.png"></file>
+              <file name="10_gratitude_v0.0.5.png"></file>
+              <file name="10_gratitude_v0.0.6.png"></file>
+              <file name="10_gratitude_v0.0.7.png"></file>
+              <file name="10_gratitude_v0.0.8.png"></file>
+              <file name="10_gratitude_v0.0.9.png"></file>
+              <file name="10_gratitude_v0.1.0.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.png"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="11_gratitude_back">
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="12_goals">
+            <directory name="drafts">
+              <file name="12_goals_v0.0.1.png"></file>
+              <file name="12_goals_v0.0.2.png"></file>
+              <file name="12_goals_v0.0.3.png"></file>
+              <file name="12_goals_v0.0.4.png"></file>
+              <file name="12_goals_v0.0.5.png"></file>
+              <file name="12_goals_v0.0.6.png"></file>
+              <file name="12_goals_v0.0.7.png"></file>
+              <file name="12_goals_v0.0.8.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.json"></file>
+          </directory>
+          <directory name="13_goals_back">
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="14_community">
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <file name="14_community_v0.0.1.png"></file>
+              <file name="14_community_v0.0.2.png"></file>
+              <file name="14_community_v0.0.3.png"></file>
+              <file name="14_community_v0.1.0.png"></file>
+              <file name="14_community_v0.1.1.png"></file>
+              <file name="14_community_v0.1.2.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.png"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="15_community_back">
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="16_solitude">
+            <directory name=".archive">
+              <file name="solitude.page.json"></file>
+            </directory>
+            <directory name="drafts">
+              <file name="16_solitude_v0.0.1.png"></file>
+              <file name="16_solitude_v0.0.2.png"></file>
+              <file name="16_solitude_v0.0.3.png"></file>
+              <file name="16_solitude_v0.0.4.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.json"></file>
+          </directory>
+          <directory name="17_solitude_back">
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="18_prayer">
+            <directory name="artifacts">
+              <file name="page.epub"></file>
+              <file name="page.fullbleed.pdf"></file>
+              <file name="page.instagram.jpg"></file>
+              <file name="page.jpg"></file>
+              <file name="page.tiff"></file>
+              <file name="page.web.jpg"></file>
+              <file name="page.webp"></file>
+            </directory>
+            <directory name="drafts">
+              <file name="18_prayer_v0.0.1.png"></file>
+              <file name="18_prayer_v0.0.2.png"></file>
+              <file name="18_prayer_v0.0.3.png"></file>
+              <file name="18_prayer_v0.0.4.png"></file>
+              <file name="18_prayer_v0.0.5.png"></file>
+              <file name="18_prayer_v0.0.6.png"></file>
+              <file name="18_prayer_v0.0.7.png"></file>
+              <file name="18_prayer_v0.0.8.png"></file>
+              <file name="18_prayer_v0.0.9.png"></file>
+              <file name="18_prayer_v0.1.0.png"></file>
+              <file name="18_prayer_v0.1.1.png"></file>
+            </directory>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+            <file name="page.html"></file>
+            <file name="page.json"></file>
+            <file name="page.png"></file>
+            <file name="page.tiff"></file>
+          </directory>
+          <directory name="19_prayer_back">
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="20_cover_back_inside">
+            <file name=".gitkeep"></file>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <directory name="21_cover_back_outside">
+            <file name=".gitkeep"></file>
+            <file name="manifest.json"></file>
+            <file name="meta.json"></file>
+          </directory>
+          <file name="dna.yml"></file>
+          <file name="instructions.yml"></file>
+        </directory>
+        <directory name="publishing">
+          <directory name="digital">
+            <file name="comic.cbz"></file>
+            <file name="reader.pdf"></file>
+          </directory>
+          <directory name="print">
+            <file name="press.pdf"></file>
+          </directory>
+          <file name="meta.json"></file>
+        </directory>
+        <directory name="ui">
+          <directory name="drafts">
+            <file name="background_v0.0.1.png"></file>
+            <file name="background_v0.0.2.png"></file>
+            <file name="background_v0.0.3.png"></file>
+            <file name="page_reference_v0.0.1.png"></file>
+          </directory>
+        </directory>
+        <file name="README.md"></file>
+        <file name="manifest.json"></file>
+        <file name="meta.json"></file>
+        <file name="visual_dna.json"></file>
+      </directory>
+    </directory>
+    <directory name="magazine">
+      <directory name="ai">
+        <file name="__init__.py"></file>
+        <file name="base.py"></file>
+        <file name="fountain.modelfile"></file>
+        <file name="fountain.py"></file>
+        <file name="video.py"></file>
+      </directory>
+      <directory name="assets">
+        <directory name="data">
+          <file name="__init__.py"></file>
+          <file name="sizes.json"></file>
+        </directory>
+        <file name="__init__.py"></file>
+        <file name="images.py"></file>
+        <file name="latex.py"></file>
+        <file name="screenplay.py"></file>
+        <file name="sizes.py"></file>
+      </directory>
+      <file name="__init__.py"></file>
+      <file name="bundler.py"></file>
+      <file name="cli.py"></file>
+      <file name="config.py"></file>
+      <file name="edition.py"></file>
+      <file name="exceptions.py"></file>
+      <file name="hashing.py"></file>
+      <file name="metadata.py"></file>
+      <file name="page.py"></file>
+      <file name="pipeline.py"></file>
+      <file name="utils.py"></file>
+    </directory>
+    <directory name="reports">
+      <directory name="tree">
+        <file name="repo.html"></file>
+        <file name="repo.json"></file>
+        <file name="repo.tree"></file>
+        <file name="repo.xml"></file>
+      </directory>
+    </directory>
+    <directory name="scripts">
+      <file name="README.md"></file>
+      <file name="build_page_assets.sh"></file>
+      <file name="fix_fountain_html.sh"></file>
+      <file name="generate_cover_meta.sh"></file>
+      <file name="install_scripttool.sh"></file>
+      <file name="install_wrap.sh"></file>
+      <file name="lint_ip_references.py"></file>
+      <file name="visual_dna.py"></file>
+    </directory>
+    <directory name="tests">
+      <directory name="fixtures">
+        <file name="__init__.py"></file>
+        <file name="generate_adversarial_comic.py"></file>
+        <file name="generate_fake_comic.py"></file>
+      </directory>
+      <file name="__init__.py"></file>
+      <file name="conftest.py"></file>
+      <file name="test_adversarial_comic.py"></file>
+      <file name="test_bundler.py"></file>
+      <file name="test_cli.py"></file>
+      <file name="test_config.py"></file>
+      <file name="test_edition_pipeline.py"></file>
+      <file name="test_fountain_stage.py"></file>
+      <file name="test_hashing.py"></file>
+      <file name="test_idempotency.py"></file>
+      <file name="test_images.py"></file>
+      <file name="test_jxl_generation.py"></file>
+      <file name="test_latex_stage.py"></file>
+      <file name="test_metadata.py"></file>
+      <file name="test_page_pipeline.py"></file>
+      <file name="test_size_stage.py"></file>
+      <file name="test_stage_registry.py"></file>
+      <file name="test_subprocess_timeout.py"></file>
+      <file name="test_synthetic_comic.py"></file>
+      <file name="test_utils.py"></file>
+      <file name="test_video_stage.py"></file>
+    </directory>
+    <file name=".gitattributes"></file>
+    <file name=".gitignore"></file>
+    <file name="README.md"></file>
+    <file name="magazine.code-workspace"></file>
+    <file name="magazine.sh"></file>
+    <file name="poetry.lock"></file>
+    <file name="pyproject.toml"></file>
+  </directory>
+</tree>

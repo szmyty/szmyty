@@ -1,0 +1,45 @@
+name: 'Fetch Oura Health Data'
+description: 'Fetch health metrics from Oura Ring API'
+
+inputs:
+  oura-pat:
+    description: 'Oura Personal Access Token'
+    required: false
+    default: ''
+
+outputs:
+  skip:
+    description: 'Whether this step should be skipped (true/false)'
+    value: ${{ steps.fetch.outputs.skip }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🧬 Fetch Oura Health Data
+      id: fetch
+      shell: bash
+      env:
+        OURA_PAT: ${{ inputs.oura-pat }}
+        OUTPUT_DIR: oura
+      run: |
+        mkdir -p oura logs/oura
+        
+        echo "Fetching Oura health data..."
+        if ! scripts/fetch-oura.sh > oura/metrics.json.tmp 2>> logs/oura/oura.log; then
+          echo "⚠️ Warning: Failed to fetch Oura data"
+          echo "Using cached data if available"
+          if [ ! -f oura/metrics.json ]; then
+            echo '{"error": "Failed to fetch data"}' > oura/metrics.json
+          fi
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          if jq empty oura/metrics.json.tmp 2>/dev/null; then
+            mv oura/metrics.json.tmp oura/metrics.json
+            echo "✅ Oura health data fetched successfully"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Invalid JSON in metrics file"
+            rm -f oura/metrics.json.tmp
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+        fi

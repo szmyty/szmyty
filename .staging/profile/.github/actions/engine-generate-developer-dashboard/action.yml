@@ -1,0 +1,27 @@
+name: 'Generate Developer Dashboard (Engine CLI)'
+description: 'Generate developer dashboard using Profile Engine CLI'
+
+inputs:
+  input-json:
+    description: 'Path to developer stats JSON file'
+    required: false
+    default: 'developer/stats.json'
+  output-svg:
+    description: 'Path to output SVG file'
+    required: false
+    default: 'developer/developer_dashboard.svg'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 💻 Generate Developer Dashboard (Engine CLI)
+      shell: bash
+      run: |
+        echo "Generating developer dashboard using Profile Engine CLI..."
+        if profile-engine generate developer-dashboard --input "${{ inputs.input-json }}" --output "${{ inputs.output-svg }}"; then
+          echo "✅ Developer dashboard generated successfully"
+        else
+          echo "⚠️ Warning: Failed to generate developer dashboard"
+          # Create fallback card
+          echo '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><text x="400" y="200" text-anchor="middle" fill="#666">Developer Dashboard Unavailable</text></svg>' > "${{ inputs.output-svg }}"
+        fi

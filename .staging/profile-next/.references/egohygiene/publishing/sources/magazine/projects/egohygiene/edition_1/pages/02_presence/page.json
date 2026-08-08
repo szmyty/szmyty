@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0.0",
+  "page_id": "presence.front",
+  "page_type": "practice_page",
+
+  "title": "Presence",
+  "edition": {
+    "number": 1,
+    "name": "Orientation",
+    "series": "Ego Hygiene Magazine"
+  },
+
+  "asset_files": {
+    "master_image": "presence.front.page.png",
+    "print_variant": "variants/presence.front.print.png",
+    "animation": "presence.front.animation.mp4",
+    "prompt": "presence.front.prompt"
+  },
+
+  "image_metadata": {
+    "format": "PNG",
+    "color_mode": "RGB",
+    "dimensions_px": {
+      "width": 1024,
+      "height": 1536
+    },
+    "aspect_ratio": "2:3",
+    "orientation": "portrait",
+    "intended_print_dpi": 300,
+    "print_safe_dimensions_at_300dpi_inches": {
+      "width": 3.41,
+      "height": 5.12
+    },
+    "file_size_bytes": 0,
+    "color_profile": "sRGB (assumed)",
+    "compression": "lossless_png"
+  },
+
+  "intent": {
+    "role": "applied_practice_instruction",
+    "primary_function": "introduce_calibration_method",
+    "secondary_function": "ground_the_reader",
+    "tone": [
+      "instructional",
+      "grounded",
+      "steady",
+      "retro",
+      "embodied"
+    ]
+  },
+
+  "visual_style": {
+    "world": "retro_mystic_field_manual",
+    "aesthetic_reference": "mid_20th_century_pulp_print_artifact",
+    "texture": [
+      "aged_paper",
+      "edge_burn",
+      "organic_grain",
+      "print_noise",
+      "ink_wear"
+    ],
+    "color_palette": {
+      "primary": ["deep_amber", "burnt_red"],
+      "secondary": ["muted_teal", "earth_brown"],
+      "accent": ["soft_gold_glow"]
+    },
+    "iconography": [
+      "meditating_silhouette",
+      "concentric_reference_rings",
+      "corner_crystals",
+      "infinity_symbol",
+      "brain_icon"
+    ],
+    "typography": {
+      "header": {
+        "style": "bold_distressed_retro_display",
+        "case": "uppercase",
+        "hierarchy_rank": 1
+      },
+      "subtitle": {
+        "style": "retro_serif_small_caps",
+        "hierarchy_rank": 2
+      },
+      "panel_headers": {
+        "style": "bold_retro_sans",
+        "hierarchy_rank": 3
+      },
+      "body_text": {
+        "style": "classic_serif",
+        "hierarchy_rank": 4
+      },
+      "effect_band": {
+        "style": "retro_emphasis_serif",
+        "hierarchy_rank": 5
+      },
+      "closing_line": {
+        "style": "subtle_serif",
+        "hierarchy_rank": 6
+      }
+    }
+  },
+
+  "layout": {
+    "composition": "central_figure_with_surrounding_instruction_panels",
+    "central_element": "meditating_silhouette",
+    "secondary_elements": [
+      "four_instruction_panels",
+      "effect_band"
+    ],
+    "depth_layers": 3,
+    "balance_axis": "vertical_symmetry_weighted_center",
+    "text_hierarchy": [
+      "header",
+      "subtitle",
+      "panel_headers",
+      "panel_body",
+      "effect_band",
+      "closing_line"
+    ]
+  },
+
+  "text_elements": {
+    "header": "PRESENCE",
+    "subtitle": "Practices for Awareness & Recalibration",
+    "panels": {
+      "acknowledge": "Notice what sensations, thoughts, or moods arise.",
+      "breathe": "Ground attention in the rise and fall of breath.",
+      "space": "Allow gaps between thoughts to gently expand.",
+      "return": "Frustration is normal — return to the breath."
+    },
+    "effect": "Calms the nervous system, reduces reactivity, and fosters self-awareness and equanimity.",
+    "closing_line": "Noticing grounds and soothes the system."
+  },
+
+  "animation_profile": {
+    "type": "artifact_animation",
+    "allowed_effects": [
+      "ambient_particle_drift",
+      "grain_breathing",
+      "subtle_light_shimmer",
+      "micro_ring_luminance_variation",
+      "soft_infinity_pulse"
+    ],
+    "forbidden_effects": [
+      "camera_motion",
+      "text_animation",
+      "figure_animation",
+      "crystal_movement",
+      "dramatic_glow",
+      "modern_clean_render"
+    ]
+  },
+
+  "constraints": {
+    "must_remain_print_authentic": true,
+    "no_modern_infographic_style": true,
+    "preserve_pulp_texture": true,
+    "loop_safe_if_animated": true
+  },
+
+  "notes": {
+    "first_applied_practice_page": true,
+    "bridges_orientation_into_action": true,
+    "calibration_method_introduction": true
+  }
+}

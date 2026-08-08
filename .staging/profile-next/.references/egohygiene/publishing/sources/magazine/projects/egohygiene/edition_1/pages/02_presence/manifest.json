@@ -1,0 +1,11 @@
+{
+  "page_id": "02_presence",
+  "title": "Presence",
+  "inputs": {
+    "image": true,
+    "fountain": true
+  },
+  "status": "built",
+  "artifacts": [],
+  "last_build": "2026-02-18T21:14:56Z"
+}

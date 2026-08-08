@@ -1,0 +1,11 @@
+{
+  "page_id": "10_gratitude",
+  "title": "Gratitude",
+  "inputs": {
+    "image": true,
+    "fountain": false
+  },
+  "status": "built",
+  "artifacts": [],
+  "last_build": "2026-02-18T21:15:02Z"
+}

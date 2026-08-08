@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="113" height="28" role="img"
+     aria-label="KEYCLOAK">
+    <title>KEYCLOAK</title>
+    <g shape-rendering="crispEdges">
+        <rect width="113" height="28" fill="#54487a"/>
+    </g>
+    <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif"
+       text-rendering="geometricPrecision" font-size="100">
+        <image x="9" y="7" width="14" height="14"
+               xlink:href="data:image/svg+xml;base64,PCEtLSBMaWNlbnNlOiBDQzAuIE1hZGUgYnkgU1ZHIFJlcG86IGh0dHBzOi8vd3d3LnN2Z3JlcG8uY29tL3N2Zy8zMzE0NTUva2V5Y2xvYWsgLS0+Cjxzdmcgd2lkdGg9IjEwMjRweCIgaGVpZ2h0PSIxMDI0cHgiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgIDxjaXJjbGUgY3g9IjUxMiIgY3k9IjUxMiIgcj0iNTEyIiBzdHlsZT0iZmlsbDojMDA4YWFhIi8+CiAgIDxwYXRoIGQ9Ik03ODYuMiAzOTUuNWgtODAuNmMtMS41IDAtMy0uOC0zLjctMi4xbC02NC43LTExMi4yYy0uOC0xLjMtMi4yLTIuMS0zLjgtMi4xaC0yNjRjLTEuNSAwLTMgLjgtMy43IDIuMWwtNjcuMyAxMTYuNC02NC44IDExMi4yYy0uNyAxLjMtLjcgMi45IDAgNC4zbDY0LjggMTEyLjIgNjcuMiAxMTYuNWMuNyAxLjMgMi4yIDIuMiAzLjcgMi4xaDI2NC4xYzEuNSAwIDMtLjggMy44LTIuMUw3MDIgNjMwLjZjLjctMS4zIDIuMi0yLjIgMy43LTIuMWg4MC42YzIuNyAwIDQuOC0yLjIgNC44LTQuOFY0MDAuNGMtLjEtMi43LTIuMy00LjktNC45LTQuOXpNNDc3LjUgNjMwLjZsLTIwLjMgMzVjLS4zLjUtLjggMS0xLjMgMS4zLS42LjMtMS4yLjUtMS45LjVoLTQwLjNjLTEuNCAwLTIuNy0uNy0zLjMtMmwtNjAuMS0xMDQuMy01LjktMTAuMy0yMS42LTM2LjljLS4zLS41LS41LTEuMS0uNC0xLjggMC0uNi4yLTEuMy41LTEuOGwyMS43LTM3LjYgNjUuOS0xMTRjLjctMS4yIDItMiAzLjMtMkg0NTRjLjcgMCAxLjQuMiAyLjEuNS41LjMgMSAuNyAxLjMgMS4zbDIwLjMgMzUuMmMuNiAxLjIuNSAyLjctLjIgMy44bC02NS4xIDExMi44Yy0uMy41LS40IDEuMS0uNCAxLjYgMCAuNi4yIDEuMS40IDEuNmw2NS4xIDExMi43Yy45IDEuNS44IDMuMSAwIDQuNHptMjAyLjEtMTE2LjdMNjU4IDU1MC44bC01LjkgMTAuM0w1OTIgNjY1LjRjLS43IDEuMi0xLjkgMi0zLjMgMmgtNDAuM2MtLjcgMC0xLjMtLjItMS45LS41LS41LS4zLTEtLjctMS4zLTEuM2wtMjAuMy0zNWMtLjktMS4zLS45LTIuOS0uMS00LjJsNjUuMS0xMTIuN2MuMy0uNS40LTEuMS40LTEuNiAwLS42LS4yLTEuMS0uNC0xLjZsLTY1LjEtMTEyLjhjLS43LTEuMi0uOC0yLjYtLjItMy44bDIwLjMtMzUuMmMuMy0uNS44LTEgMS4zLTEuMy42LS40IDEuMy0uNSAyLjEtLjVoNDAuNGMxLjQgMCAyLjcuNyAzLjMgMmw2NS45IDExNCAyMS43IDM3LjZjLjMuNi41IDEuMi41IDEuOCAwIC40LS4yIDEtLjUgMS42eiIgc3R5bGU9ImZpbGw6I2ZmZiIvPgo8L3N2Zz4K"/>
+        <text transform="scale(.1)" x="665" y="175" textLength="690" fill="#fff" font-weight="bold">KEYCLOAK</text>
+    </g>
+</svg>

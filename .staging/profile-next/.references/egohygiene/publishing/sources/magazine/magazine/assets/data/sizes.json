@@ -1,0 +1,74 @@
+{
+  "modern": {
+    "width": 1988,
+    "height": 3075,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "modern",
+    "scaling_strategy": "fit"
+  },
+  "silver_age": {
+    "width": 2063,
+    "height": 3150,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "silver_age",
+    "scaling_strategy": "fit"
+  },
+  "golden_age": {
+    "width": 2325,
+    "height": 3150,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "golden_age",
+    "scaling_strategy": "fit"
+  },
+  "manga": {
+    "width": 1500,
+    "height": 2250,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "manga",
+    "scaling_strategy": "fit"
+  },
+  "trade_paperback": {
+    "width": 1800,
+    "height": 2700,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "trade_paperback",
+    "scaling_strategy": "fit"
+  },
+  "a4": {
+    "width": 2481,
+    "height": 3507,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "a4",
+    "scaling_strategy": "fit"
+  },
+  "digital_vertical": {
+    "width": 1080,
+    "height": 1920,
+    "dpi": 72,
+    "bleed": 9,
+    "safe_margin": 18,
+    "output_suffix": "digital_vertical",
+    "scaling_strategy": "fit"
+  },
+  "framing_hd": {
+    "width": 2550,
+    "height": 3300,
+    "dpi": 300,
+    "bleed": 37,
+    "safe_margin": 75,
+    "output_suffix": "framing_hd",
+    "scaling_strategy": "fit"
+  }
+}

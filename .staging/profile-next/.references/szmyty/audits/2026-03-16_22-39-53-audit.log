@@ -1,0 +1,224 @@
+================================================================================
+REPOSITORY AUDIT REPORT
+Repository: szmyty/szmyty
+Generated:  2026-03-16_22-39-53 UTC
+================================================================================
+
+--------------------------------------------------------------------------------
+1. OVERVIEW
+--------------------------------------------------------------------------------
+Purpose: Personal GitHub profile portfolio repository for Alan Szmyt. It serves
+as an automated, self-updating showcase of engineering skills, projects, and
+GitHub activity.
+
+What Exists: A GitHub profile README powered by auto-generated metrics SVGs,
+activity-based updates, and 70+ themed profile summary cards. All content is
+refreshed daily via scheduled GitHub Actions workflows. A professional resume
+PDF is also hosted in the repository.
+
+--------------------------------------------------------------------------------
+2. PROJECT STRUCTURE
+--------------------------------------------------------------------------------
+Key Directories:
+  .github/workflows/     3 GitHub Actions workflow definitions (automation core)
+  assets/emojis/         Custom emoji image assets
+  branding/              Header banners, logo, badge templates
+  docs/                  Empty placeholder (only .gitkeep present)
+  metrics/               Auto-generated GitHub metrics SVG files (4 panels)
+  profile-summary-card-output/  70+ themed profile card SVGs (auto-generated)
+  .vscode/               VS Code workspace settings and extension recommendations
+
+Notable Patterns:
+  - Single-purpose profile repository, not a monorepo.
+  - Automation-first: all meaningful content is machine-generated.
+  - Generated artifacts are committed back to the repository on a daily schedule.
+  - Private reusable action (szmyty/github-profile-summary-cards) is checked out
+    at runtime and removed before pushing to keep the repo clean.
+
+--------------------------------------------------------------------------------
+3. TOOLING & STACK
+--------------------------------------------------------------------------------
+Languages in Repository: YAML (workflows), JSON (config), Markdown, SVG, PDF.
+Showcased Tech Stack (from README): Java, Python, TypeScript, React, Vue.js,
+  Docker, Bash, Linux, Unity, Android, SQLite, PostgreSQL, Dart/Flutter.
+
+Dev Tooling:
+  Formatting:  Prettier (.prettierrc) - single quotes, 2-space indent, 80-col
+  Markdown:    markdownlint (.markdownlint.json) - line-length and HTML relaxed
+  Editor:      .editorconfig - UTF-8, LF line endings, 2-space default indent
+  Git:         .gitattributes (226 lines) - per-language line-ending rules
+               .gitignore (979 lines) - covers 15+ language ecosystems
+  VS Code:     Recommended extensions: Prettier, Remote Containers, Flutter/Dart,
+               Material icons, Regex tester, Base64 utilities
+
+CI/CD Engines: GitHub Actions (3 workflows)
+Metrics Tool:  lowlighter/metrics@latest
+
+--------------------------------------------------------------------------------
+4. DOCUMENTATION REVIEW
+--------------------------------------------------------------------------------
+README.md (284 lines): Well-structured profile showcase. Contains hero banner,
+  metrics dashboard (embedded SVGs), personal bio, DX philosophy, tech stack,
+  featured projects, auto-updated recent activity, and workflow status badges.
+  Quality is high for a profile repository.
+
+docs/ Directory: Exists but is empty (only .gitkeep). No onboarding guides,
+  architecture docs, or contribution guidelines are present.
+
+Missing:
+  - CONTRIBUTING.md
+  - Architecture or design documentation
+  - Onboarding guide for contributors or future maintainers
+  - Inline documentation for workflow files (minimal comments)
+  - CHANGELOG or release notes
+
+--------------------------------------------------------------------------------
+5. CI/CD & AUTOMATION
+--------------------------------------------------------------------------------
+Workflows:
+  metrics.yml              Daily at 00:00 UTC + push to master/main + manual.
+                           Generates 4 metrics SVG panels and a legacy combined
+                           SVG. Uses caching, 3 retries, and [skip ci] commits.
+
+  update-readme.yml        Daily at 00:00 UTC + manual.
+                           Updates recent GitHub activity section in README via
+                           jamesgeorge007/github-activity-readme@master.
+
+  profile-summary-cards.yml  Daily at 00:00 UTC + manual.
+                              Generates 70+ themed profile card SVGs using a
+                              private custom action. Skips gracefully if the
+                              required secret is absent.
+
+Strengths:
+  - Caching used in all 3 workflows (npm, API responses, metrics data).
+  - continue-on-error and retry logic present in metrics workflow.
+  - [skip ci] tags prevent infinite workflow recursion on auto-commits.
+  - All workflows support workflow_dispatch for on-demand runs.
+
+Gaps:
+  - No workflow to validate configuration files (Prettier, markdownlint checks).
+  - No status or health check workflow for the repository itself.
+  - update-readme uses @master (unpinned) external action - supply chain risk.
+  - profile-summary-cards uses @main (unpinned) private action.
+  - metrics.yml uses @latest (unpinned) for lowlighter/metrics - supply chain risk.
+  - No Dependabot or Renovate configuration to keep action versions current.
+  - All three workflows share identical cron schedules (00:00 UTC), potentially
+    causing concurrent runs and GitHub API rate limit contention.
+  - No audit or reporting workflow (this report was created manually).
+
+--------------------------------------------------------------------------------
+6. CODE QUALITY & STANDARDS
+--------------------------------------------------------------------------------
+Formatting:
+  - Prettier configured with consistent, opinionated settings.
+  - .editorconfig enforces charset and indent across editors.
+  - No evidence that Prettier is enforced in CI (no lint workflow).
+
+Linting:
+  - Markdown linting rules defined but not enforced automatically in CI.
+  - No JavaScript/TypeScript linting config (.eslintrc absent) despite the tech
+    stack referencing JS/TS heavily.
+
+Git Hygiene:
+  - .gitattributes is thorough (226 lines); covers most language types.
+  - .gitignore is extensive (~979 lines); likely over-engineered for a profile
+    repo, but not harmful.
+  - Diagnostic log files (metrics-diagnostics.md, readme-update-diagnostics.md)
+    are committed at the root level, creating noise.
+
+Consistency:
+  - Config files are consistent and well-structured.
+  - Workflow files follow similar patterns (checkout, cache, run, commit).
+  - Auto-generated SVG output is large and frequently updated; diffs can be noisy.
+
+--------------------------------------------------------------------------------
+7. DEVELOPER EXPERIENCE (DX)
+--------------------------------------------------------------------------------
+Local Setup: No local setup instructions exist. Reproducing the automation
+  locally requires manual configuration of secrets and tokens.
+
+Reproducibility: Fully reproducible via GitHub Actions, but not locally.
+  No Docker Compose, Makefile, or setup scripts are present.
+
+Devcontainer: Not configured. .devcontainer/ is absent despite VS Code remote
+  container extension being recommended. This is a missed opportunity for a
+  repository that showcases DX as a core value.
+
+Environment Support: No .env.example or documented secret requirements. Users
+  forking the repository must discover required secrets (METRICS_TOKEN,
+  STEAM_TOKEN, PERSONAL_ACCESS_KEY) from workflow YAML files.
+
+--------------------------------------------------------------------------------
+8. STRENGTHS
+--------------------------------------------------------------------------------
+- Fully automated profile: metrics, activity, and cards refresh daily without
+  manual intervention.
+- Robust caching strategy across all workflows reduces API rate limit pressure.
+- Comprehensive .gitattributes and .gitignore cover many languages and IDEs.
+- Prettier and markdownlint configs enforce a consistent baseline style.
+- Visual branding is polished: custom header banners, logo, 70+ themed cards.
+- Retry logic and continue-on-error in workflows improve resilience.
+- Repository clearly demonstrates the owner's commitment to automation and DX.
+- Resume PDF is conveniently co-located for easy sharing.
+
+--------------------------------------------------------------------------------
+9. GAPS / RISKS
+--------------------------------------------------------------------------------
+- Unpinned external GitHub Actions (@latest, @master, @main) expose the
+  repository to supply chain attacks and unexpected breaking changes.
+- No Dependabot configuration to keep actions or other dependencies updated.
+- docs/ directory is empty; declared intent is not fulfilled.
+- No CONTRIBUTING.md; the repository is not contributor-friendly.
+- No devcontainer configuration despite showcasing DX as a pillar.
+- Linting and formatting are not enforced in CI; rule configs exist but are
+  not automatically checked.
+- Diagnostic log files committed at the root add clutter (should be in a
+  dedicated logs/ or audits/ directory, or excluded from version control).
+- All three workflows run at the same cron time, risking API rate contention.
+- No .env.example or documentation of required secrets for forks/contributors.
+- STEAM_TOKEN dependency introduces an optional but undocumented external
+  service coupling in the metrics workflow.
+- Featured projects in README (android-app, python-pipeline, react-dashboards)
+  appear to be placeholder names not linked to real repositories.
+
+--------------------------------------------------------------------------------
+10. RECOMMENDED IMPROVEMENTS
+--------------------------------------------------------------------------------
+1. Pin all GitHub Actions to a specific SHA or tagged version and add Dependabot
+   (or Renovate) to keep them updated safely. This addresses the highest-risk
+   supply chain exposure.
+
+2. Add a lint/format CI workflow that runs Prettier --check and markdownlint on
+   pull requests and pushes. This enforces the existing style configs.
+
+3. Add a .devcontainer/devcontainer.json with a minimal setup so contributors
+   and the repository owner can reproduce the environment locally. This directly
+   supports the stated DX-first philosophy.
+
+4. Create a CONTRIBUTING.md and secrets documentation (e.g., docs/secrets.md or
+   a README section) listing all required and optional secrets with descriptions.
+
+5. Stagger the cron schedules for the three workflows (e.g., 00:00, 00:15,
+   00:30 UTC) to reduce simultaneous API pressure.
+
+6. Move diagnostic log files out of the repository root into the audits/
+   directory or add them to .gitignore to reduce noise in the working tree.
+
+7. Replace placeholder featured project links in README with real, linked
+   repositories or remove them to avoid misleading visitors.
+
+--------------------------------------------------------------------------------
+11. SUMMARY
+--------------------------------------------------------------------------------
+The szmyty/szmyty repository is a well-automated GitHub profile showcase that
+demonstrates strong DevOps instincts through its use of caching, retries, and
+daily scheduled workflows. However, it falls short of its stated DX-first
+philosophy in key areas: no devcontainer, no enforced linting in CI, unpinned
+external actions, and an empty docs/ directory. Addressing the supply chain
+risks (action pinning) and adding a devcontainer and lint workflow would
+significantly elevate the repository's quality and credibility as an
+engineering portfolio.
+
+================================================================================
+END OF REPORT
+================================================================================

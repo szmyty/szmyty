@@ -1,0 +1,41 @@
+/* Storybook theme classes — consumed via @storybook/addon-themes */
+
+.theme-light {
+  --color-bg: #ffffff;
+  --color-text: #0a0a0a;
+  --color-text-muted: #6b6375;
+  --color-border: #e5e4e7;
+  --color-accent: #aa3bff;
+  --color-accent-bg: rgba(170, 59, 255, 0.1);
+  --color-code-bg: #f4f3ec;
+}
+
+.theme-dark {
+  --color-bg: #0a0a0a;
+  --color-text: #ffffff;
+  --color-text-muted: #9ca3af;
+  --color-border: #2e303a;
+  --color-accent: #c084fc;
+  --color-accent-bg: rgba(192, 132, 252, 0.15);
+  --color-code-bg: #1f2028;
+}
+
+.theme-print {
+  --color-bg: #f5e9d8;
+  --color-text: #2b2b2b;
+  --color-text-muted: #333333;
+  --color-border: #4a2c2a;
+  --color-accent: #c4622d;
+  --color-accent-bg: rgba(196, 98, 45, 0.1);
+  --color-code-bg: #f5ecd7;
+}
+
+.theme-cosmic {
+  --color-bg: #05010a;
+  --color-text: #e0d7ff;
+  --color-text-muted: #9f8fc0;
+  --color-border: #2a1f3d;
+  --color-accent: #aa3bff;
+  --color-accent-bg: rgba(170, 59, 255, 0.15);
+  --color-code-bg: #0d0718;
+}

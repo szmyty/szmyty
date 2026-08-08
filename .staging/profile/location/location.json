@@ -1,0 +1,10 @@
+{
+  "location": "Boston, Massachusetts",
+  "display_name": "Boston, Suffolk County, Massachusetts, United States",
+  "coordinates": {
+    "lat": 42.3588336,
+    "lon": -71.0578303
+  },
+  "map_path": "location/location-map.png",
+  "updated_at": "2025-12-07T01:17:54Z"
+}

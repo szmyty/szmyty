@@ -1,0 +1,11 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  lynis:
+    desc: "Run Lynis security audit"
+    cmds:
+      - |
+        mkdir -p reports/lynis
+          lynis audit system --profile lint/config/security/lynis/custom.prf

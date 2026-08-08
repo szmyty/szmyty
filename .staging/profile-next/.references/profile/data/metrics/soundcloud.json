@@ -1,0 +1,20 @@
+{
+  "workflow_name": "soundcloud",
+  "total_runs": 1,
+  "successful_runs": 1,
+  "failed_runs": 0,
+  "consecutive_failures": 0,
+  "last_success": "2025-12-03T04:24:31Z",
+  "last_failure": null,
+  "last_run_time_seconds": 38.5,
+  "avg_run_time_seconds": 38.5,
+  "api_calls": {},
+  "run_history": [
+    {
+      "timestamp": "2025-12-03T04:24:31Z",
+      "success": true,
+      "run_time_seconds": 38.5,
+      "error_message": null
+    }
+  ]
+}

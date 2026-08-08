@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      riverpod_generator:
+        options:
+          # Options here
+      freezed:
+        options:
+          # Options here

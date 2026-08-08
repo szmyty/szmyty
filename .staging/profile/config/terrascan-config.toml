@@ -1,0 +1,30 @@
+[config]
+# Directory to scan (relative to working directory)
+iac_dir = "./"
+
+# IaC type: terraform, helm, k8s, docker, etc.
+iac_type = "terraform"
+
+# IaC version (optional, autodetects in most cases)
+iac_version = "v14"
+
+# Policy type: aws, azure, gcp, k8s, etc.
+policy_type = "aws"
+
+# Policy path (optional — defaults to built-in policies)
+policy_path = ""
+
+# Output format: json, yaml, xml, junit-xml, sarif, human
+output = "human"
+
+# Skip rules by rule ID
+skip_rules = []
+
+# Enable/disable scanning subdirectories
+non_recursive = false
+
+# Verbose logging (set to true for CI debugging)
+verbose = false
+
+# Number of worker threads for parallel file scanning
+scanner_worker_count = 4

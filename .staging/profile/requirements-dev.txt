@@ -1,0 +1,16 @@
+# Development dependencies
+# Install with: pip install -r requirements-dev.txt
+
+# Include base requirements
+-r requirements.txt
+
+# Pre-commit framework
+pre-commit==4.0.1
+
+# Python code formatting and linting
+black==24.10.0
+isort==5.13.2
+flake8==7.1.1
+
+# JSON Schema validation (CLI)
+check-jsonschema==0.30.0

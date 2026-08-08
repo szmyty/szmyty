@@ -1,0 +1,644 @@
+.
+├── .github
+│   └── workflows
+│       ├── generate_repository_tree.yml
+│       └── ip-lint.yml
+├── .vscode
+│   ├── dictionaries
+│   │   ├── backend-terms.dictionary
+│   │   ├── devops-cloud-terms.dictionary
+│   │   ├── frontend-terms.dictionary
+│   │   ├── programming-terms.dictionary
+│   │   ├── project-words.dictionary
+│   │   └── software-terms.dictionary
+│   ├── extensions.json
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+├── ai
+│   └── fountain
+│       └── script.prompt
+├── assets
+│   ├── .gitkeep
+│   ├── egohygiene.ico
+│   └── logo.png
+├── audit
+│   ├── audit-2026-02-20T17-34-56Z.log
+│   └── regression-artifact-parity-2026-02-22T00-05-38Z.log
+├── audits
+│   └── audit-magazine-2026-04-04T00-31-44Z.log
+├── context
+│   └── constraints.json
+├── docs
+│   ├── EXAMPLE_WORKFLOW.md
+│   ├── FOUNTAIN_HTML_FIX.md
+│   └── IP_LINT_CHECK.md
+├── editions
+│   └── edition_1
+│       ├── .archive
+│       │   └── comic_v0.0.1.cbz
+│       ├── artifacts
+│       │   └── final_build_stage
+│       │       ├── 00_cover_front_outside.png
+│       │       ├── 00_cover_front_outside.tiff
+│       │       ├── 01_cover_front_inside.png
+│       │       ├── 01_cover_front_inside.tiff
+│       │       ├── 02_presence.png
+│       │       ├── 02_presence.tiff
+│       │       ├── 04_movement.png
+│       │       ├── 04_movement.tiff
+│       │       ├── 06_rest.png
+│       │       ├── 06_rest.tiff
+│       │       ├── 08_affirmations.png
+│       │       ├── 08_affirmations.tiff
+│       │       ├── 10_gratitude.png
+│       │       ├── 10_gratitude.tiff
+│       │       ├── 14_community.png
+│       │       ├── 14_community.tiff
+│       │       ├── 18_prayer.png
+│       │       └── 18_prayer.tiff
+│       ├── assets
+│       │   └── .gitkeep
+│       ├── pages
+│       │   ├── 00_cover_front_outside
+│       │   │   ├── .archive
+│       │   │   │   ├── artifacts
+│       │   │   │   │   ├── page.fadein
+│       │   │   │   │   ├── page.fdx
+│       │   │   │   │   ├── page.fountain
+│       │   │   │   │   ├── page.fountain.html
+│       │   │   │   │   ├── page.fountain.json
+│       │   │   │   │   ├── page.fountain.osf
+│       │   │   │   │   ├── page.fountain.pdf
+│       │   │   │   │   ├── page.html
+│       │   │   │   │   ├── page.jpg
+│       │   │   │   │   ├── page.pdf
+│       │   │   │   │   ├── page.pretty.fountain
+│       │   │   │   │   ├── page.tiff
+│       │   │   │   │   └── page.webp
+│       │   │   │   ├── Magazine_Cover_Animation_Prompt.mp4
+│       │   │   │   ├── cover.front.animation.mp4
+│       │   │   │   ├── cover.front.final.fullbleed.pdf
+│       │   │   │   ├── cover.front.final.html
+│       │   │   │   ├── cover.front.final.instagram.jpg
+│       │   │   │   ├── cover.front.final.jpg
+│       │   │   │   ├── cover.front.final.pdf
+│       │   │   │   ├── cover.front.final.square.jpg
+│       │   │   │   ├── cover.front.final.tiff
+│       │   │   │   ├── cover.front.final.web.jpg
+│       │   │   │   ├── cover.front.final.webp
+│       │   │   │   ├── cover.front.fountain.html
+│       │   │   │   ├── cover.front.fountain.pdf
+│       │   │   │   ├── cover.front.html
+│       │   │   │   ├── cover.front.pdf
+│       │   │   │   ├── cover.front.web.jpg
+│       │   │   │   └── meta.json
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.html
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.json
+│       │   │   │   ├── page.pdf
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── videos
+│       │   │   │   │   ├── 00_cover_front_outside_v0.0.1.mp4
+│       │   │   │   │   ├── 00_cover_front_outside_v0.0.2.mp4
+│       │   │   │   │   ├── 00_cover_front_outside_v0.0.3.mp4
+│       │   │   │   │   └── 00_cover_front_outside_v0.0.4.mp4
+│       │   │   │   ├── 00_cover_front_outside_v0.0.0.png
+│       │   │   │   ├── 00_cover_front_outside_v0.0.1.png
+│       │   │   │   ├── 00_cover_front_outside_v0.0.2.png
+│       │   │   │   ├── 00_cover_front_outside_v0.1.0.png
+│       │   │   │   └── 00_cover_front_outside_v0.1.1.png
+│       │   │   ├── final
+│       │   │   │   ├── 00_cover_front_outside.png
+│       │   │   │   ├── 00_cover_front_outside_cmyk_print.pdf
+│       │   │   │   ├── 00_cover_front_outside_cmyk_print_bleed.pdf
+│       │   │   │   ├── 00_cover_front_outside_rgb_print.pdf
+│       │   │   │   └── 00_cover_front_outside_standard.pdf
+│       │   │   ├── variants
+│       │   │   │   ├── cover.front.final_upscayl_2x_digital-art-4x.png
+│       │   │   │   └── cover.front.final_upscayl_2x_upscayl-standard-4x.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.fountain
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.mp4
+│       │   │   ├── page.pdf
+│       │   │   ├── page.png
+│       │   │   ├── page.prompt
+│       │   │   └── page.tiff
+│       │   ├── 01_cover_front_inside
+│       │   │   ├── .archive
+│       │   │   │   ├── artifacts
+│       │   │   │   │   ├── inside_front_coverfadein
+│       │   │   │   │   ├── inside_front_coverfdx
+│       │   │   │   │   ├── inside_front_coverfountain
+│       │   │   │   │   ├── inside_front_coverhtml
+│       │   │   │   │   ├── inside_front_coverjson
+│       │   │   │   │   ├── inside_front_coverosf
+│       │   │   │   │   ├── inside_front_coverpdf
+│       │   │   │   │   ├── page.html
+│       │   │   │   │   ├── page.jpg
+│       │   │   │   │   ├── page.pdf
+│       │   │   │   │   ├── page.pretty.fountain
+│       │   │   │   │   ├── page.tiff
+│       │   │   │   │   └── page.webp
+│       │   │   │   ├── file_000000006bbc71f890ab5ce46c85d592.png
+│       │   │   │   ├── inside_front_cover.animation.mp4
+│       │   │   │   ├── inside_front_cover.front.final1.png
+│       │   │   │   ├── inside_front_cover.page.json
+│       │   │   │   ├── inside_front_cover.prompt
+│       │   │   │   └── meta.json
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── videos
+│       │   │   │   │   └── inside_front_cover.animation.mp4
+│       │   │   │   ├── 01_cover_front_inside_v0.0.0.png
+│       │   │   │   ├── 01_cover_front_inside_v0.0.1.png
+│       │   │   │   ├── 01_cover_front_inside_v0.0.2.png
+│       │   │   │   ├── 01_cover_front_inside_v0.0.3.png
+│       │   │   │   ├── 01_cover_front_inside_v0.0.4.png
+│       │   │   │   ├── 01_cover_front_inside_v0.0.5.png
+│       │   │   │   └── 01_cover_front_inside_v0.0.6.png
+│       │   │   ├── variants
+│       │   │   │   ├── inside_front_cover.front.final_upscayl_2x_digital-art-4x.png
+│       │   │   │   └── inside_front_cover.front.final_upscayl_2x_upscayl-standard-4x.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.fountain
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.mp4
+│       │   │   ├── page.pdf
+│       │   │   ├── page.png
+│       │   │   ├── page.prompt
+│       │   │   └── page.tiff
+│       │   ├── 02_presence
+│       │   │   ├── .archive
+│       │   │   │   ├── artifacts
+│       │   │   │   │   ├── page.html
+│       │   │   │   │   ├── page.jpg
+│       │   │   │   │   ├── page.pdf
+│       │   │   │   │   ├── page.pretty.fountain
+│       │   │   │   │   ├── page.tiff
+│       │   │   │   │   ├── page.webp
+│       │   │   │   │   ├── presencefadein
+│       │   │   │   │   ├── presencefdx
+│       │   │   │   │   ├── presencefountain
+│       │   │   │   │   ├── presencehtml
+│       │   │   │   │   ├── presencejson
+│       │   │   │   │   ├── presenceosf
+│       │   │   │   │   └── presencepdf
+│       │   │   │   ├── file_00000000065071f5b1d9d7195672a13b.png
+│       │   │   │   ├── file_00000000b6f871f592f62684feb2113f.png
+│       │   │   │   ├── meta.json
+│       │   │   │   ├── presence.back.page.json
+│       │   │   │   ├── presence.back.prompt
+│       │   │   │   ├── presence.front.page.json
+│       │   │   │   └── presence.front.prompt
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.html
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.json
+│       │   │   │   ├── page.pdf
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── videos
+│       │   │   │   │   ├── presence_v0.0.1.mp4
+│       │   │   │   │   └── presence_v0.0.2.mp4
+│       │   │   │   ├── 02_presence_v0.0.1.png
+│       │   │   │   ├── 02_presence_v0.0.2.png
+│       │   │   │   ├── 02_presence_v0.0.3.png
+│       │   │   │   ├── 02_presence_v0.0.4.png
+│       │   │   │   ├── 02_presence_v0.0.5.png
+│       │   │   │   ├── 02_presence_v0.0.6.png
+│       │   │   │   ├── 02_presence_v0.0.7.png
+│       │   │   │   ├── 02_presence_v0.0.8.png
+│       │   │   │   ├── 02_presence_v0.0.9.png
+│       │   │   │   ├── 02_presence_v0.1.0.png
+│       │   │   │   ├── 02_presence_v0.1.1.png
+│       │   │   │   ├── 02_presence_v0.1.2.png
+│       │   │   │   └── 02_presence_v0.1.3.png
+│       │   │   ├── variants
+│       │   │   │   ├── presence.front.page_upscayl_2x_digital-art-4x.png
+│       │   │   │   └── presence.front.page_upscayl_2x_upscayl-standard-4x.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.fountain
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.mp4
+│       │   │   ├── page.pdf
+│       │   │   ├── page.png
+│       │   │   ├── page.prompt
+│       │   │   └── page.tiff
+│       │   ├── 03_presence_back
+│       │   │   ├── drafts
+│       │   │   │   ├── 03_presence_back_v0.0.1.png
+│       │   │   │   ├── 03_presence_back_v0.0.2.png
+│       │   │   │   ├── 03_presence_back_v0.0.3.png
+│       │   │   │   ├── 03_presence_back_v0.0.4.png
+│       │   │   │   ├── 03_presence_back_v0.0.5.png
+│       │   │   │   ├── 03_presence_back_v0.0.6.png
+│       │   │   │   ├── 03_presence_back_v0.0.7.png
+│       │   │   │   └── 03_presence_back_v0.0.8.png
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 04_movement
+│       │   │   ├── .archive
+│       │   │   │   ├── artifacts
+│       │   │   │   │   ├── movementfadein
+│       │   │   │   │   ├── movementfdx
+│       │   │   │   │   ├── movementfountain
+│       │   │   │   │   ├── movementhtml
+│       │   │   │   │   ├── movementjson
+│       │   │   │   │   ├── movementosf
+│       │   │   │   │   ├── movementpdf
+│       │   │   │   │   ├── page.html
+│       │   │   │   │   ├── page.jpg
+│       │   │   │   │   ├── page.pdf
+│       │   │   │   │   ├── page.pretty.fountain
+│       │   │   │   │   ├── page.tiff
+│       │   │   │   │   └── page.webp
+│       │   │   │   ├── file_00000000551072309202cb8ed701d15d.png
+│       │   │   │   ├── file_0000000091b4722f9549085fe9ea2a42.png
+│       │   │   │   ├── meta.json
+│       │   │   │   ├── movement.back.page.json
+│       │   │   │   ├── movement.back.prompt
+│       │   │   │   ├── movement.front.page.json
+│       │   │   │   └── movement.front.prompt
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.html
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.json
+│       │   │   │   ├── page.pdf
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── 04_movement_v0.0.1.png
+│       │   │   │   ├── 04_movement_v0.0.2.png
+│       │   │   │   ├── 04_movement_v0.0.3.png
+│       │   │   │   ├── 04_movement_v0.0.4.png
+│       │   │   │   ├── 04_movement_v0.0.5.png
+│       │   │   │   ├── 04_movement_v0.0.6.png
+│       │   │   │   ├── 04_movement_v0.0.7.png
+│       │   │   │   ├── 04_movement_v0.0.8.png
+│       │   │   │   └── 04_movement_v0.0.9.png
+│       │   │   ├── variants
+│       │   │   │   ├── movement.front.page_upscayl_2x_digital-art-4x.png
+│       │   │   │   └── movement.front.page_upscayl_2x_upscayl-standard-4x.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.fountain
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.mp4
+│       │   │   ├── page.pdf
+│       │   │   ├── page.png
+│       │   │   ├── page.prompt
+│       │   │   └── page.tiff
+│       │   ├── 05_movement_back
+│       │   │   ├── drafts
+│       │   │   │   └── 05_movement_back_v0.0.1.png
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 06_rest
+│       │   │   ├── .archive
+│       │   │   │   ├── artifacts
+│       │   │   │   │   ├── page.html
+│       │   │   │   │   ├── page.jpg
+│       │   │   │   │   ├── page.pdf
+│       │   │   │   │   ├── page.pretty.fountain
+│       │   │   │   │   ├── page.tiff
+│       │   │   │   │   ├── page.webp
+│       │   │   │   │   ├── restfadein
+│       │   │   │   │   ├── restfdx
+│       │   │   │   │   ├── restfountain
+│       │   │   │   │   ├── resthtml
+│       │   │   │   │   ├── restjson
+│       │   │   │   │   ├── restosf
+│       │   │   │   │   └── restpdf
+│       │   │   │   ├── file_000000008c7c722f8d50cf630451aec3.png
+│       │   │   │   ├── file_00000000c578722fa2a7b3842c98f301.png
+│       │   │   │   ├── meta.json
+│       │   │   │   ├── rest.back.page.json
+│       │   │   │   ├── rest.back.prompt
+│       │   │   │   ├── rest.front.page.json
+│       │   │   │   └── rest.front.prompt
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.html
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.json
+│       │   │   │   ├── page.pdf
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── 06_rest_v0.0.1.png
+│       │   │   │   ├── 06_rest_v0.0.2.png
+│       │   │   │   ├── 06_rest_v0.0.3.png
+│       │   │   │   ├── 06_rest_v0.0.4.png
+│       │   │   │   └── 06_rest_v0.0.5.png
+│       │   │   ├── variants
+│       │   │   │   ├── rest.front.page_upscayl_2x_digital-art-4x.png
+│       │   │   │   └── rest.front.page_upscayl_2x_upscayl-standard-4x.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.fountain
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.mp4
+│       │   │   ├── page.pdf
+│       │   │   ├── page.png
+│       │   │   ├── page.prompt
+│       │   │   └── page.tiff
+│       │   ├── 07_rest_back
+│       │   │   ├── drafts
+│       │   │   │   ├── 07_rest_back_v0.0.1.png
+│       │   │   │   ├── 07_rest_back_v0.0.2.png
+│       │   │   │   ├── 07_rest_back_v0.0.3.png
+│       │   │   │   └── 07_rest_back_v0.0.4.png
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 08_affirmations
+│       │   │   ├── .archive
+│       │   │   │   ├── artifacts
+│       │   │   │   │   └── page.html
+│       │   │   │   ├── affirmations.front.page.json
+│       │   │   │   ├── affirmations.front.prompt
+│       │   │   │   └── file_0000000074e071f89d5e53c0a071df18.png
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── affirmations_v0.0.1.png
+│       │   │   │   ├── affirmations_v0.0.2.png
+│       │   │   │   ├── affirmations_v0.0.3.png
+│       │   │   │   ├── affirmations_v0.0.4.png
+│       │   │   │   ├── affirmations_v0.0.5.png
+│       │   │   │   ├── affirmations_v0.0.6.png
+│       │   │   │   ├── affirmations_v0.0.7.png
+│       │   │   │   ├── affirmations_v0.0.8.png
+│       │   │   │   ├── affirmations_v0.0.9.png
+│       │   │   │   └── affirmations_v0.1.0.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.html
+│       │   │   ├── page.png
+│       │   │   └── page.tiff
+│       │   ├── 09_affirmations_back
+│       │   │   ├── drafts
+│       │   │   │   ├── 09_affirmations_back_v0.0.1.png
+│       │   │   │   ├── 09_affirmations_back_v0.0.2.png
+│       │   │   │   ├── 09_affirmations_back_v0.0.3.png
+│       │   │   │   ├── 09_affirmations_back_v0.0.4.png
+│       │   │   │   └── 09_affirmations_back_v0.0.5.png
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 10_gratitude
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── videos
+│       │   │   │   │   └── 10_gratitude_v0.0.1.mp4
+│       │   │   │   ├── 10_gratitude_v0.0.1.png
+│       │   │   │   ├── 10_gratitude_v0.0.2.png
+│       │   │   │   ├── 10_gratitude_v0.0.3.png
+│       │   │   │   ├── 10_gratitude_v0.0.4.png
+│       │   │   │   ├── 10_gratitude_v0.0.5.png
+│       │   │   │   ├── 10_gratitude_v0.0.6.png
+│       │   │   │   ├── 10_gratitude_v0.0.7.png
+│       │   │   │   ├── 10_gratitude_v0.0.8.png
+│       │   │   │   ├── 10_gratitude_v0.0.9.png
+│       │   │   │   └── 10_gratitude_v0.1.0.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.png
+│       │   │   └── page.tiff
+│       │   ├── 11_gratitude_back
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 12_goals
+│       │   │   ├── drafts
+│       │   │   │   ├── 12_goals_v0.0.1.png
+│       │   │   │   ├── 12_goals_v0.0.2.png
+│       │   │   │   ├── 12_goals_v0.0.3.png
+│       │   │   │   ├── 12_goals_v0.0.4.png
+│       │   │   │   ├── 12_goals_v0.0.5.png
+│       │   │   │   ├── 12_goals_v0.0.6.png
+│       │   │   │   ├── 12_goals_v0.0.7.png
+│       │   │   │   └── 12_goals_v0.0.8.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   └── page.json
+│       │   ├── 13_goals_back
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 14_community
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── 14_community_v0.0.1.png
+│       │   │   │   ├── 14_community_v0.0.2.png
+│       │   │   │   ├── 14_community_v0.0.3.png
+│       │   │   │   ├── 14_community_v0.1.0.png
+│       │   │   │   ├── 14_community_v0.1.1.png
+│       │   │   │   └── 14_community_v0.1.2.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.png
+│       │   │   └── page.tiff
+│       │   ├── 15_community_back
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 16_solitude
+│       │   │   ├── .archive
+│       │   │   │   └── solitude.page.json
+│       │   │   ├── drafts
+│       │   │   │   ├── 16_solitude_v0.0.1.png
+│       │   │   │   ├── 16_solitude_v0.0.2.png
+│       │   │   │   ├── 16_solitude_v0.0.3.png
+│       │   │   │   └── 16_solitude_v0.0.4.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   └── page.json
+│       │   ├── 17_solitude_back
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 18_prayer
+│       │   │   ├── artifacts
+│       │   │   │   ├── page.epub
+│       │   │   │   ├── page.fullbleed.pdf
+│       │   │   │   ├── page.instagram.jpg
+│       │   │   │   ├── page.jpg
+│       │   │   │   ├── page.tiff
+│       │   │   │   ├── page.web.jpg
+│       │   │   │   └── page.webp
+│       │   │   ├── drafts
+│       │   │   │   ├── 18_prayer_v0.0.1.png
+│       │   │   │   ├── 18_prayer_v0.0.2.png
+│       │   │   │   ├── 18_prayer_v0.0.3.png
+│       │   │   │   ├── 18_prayer_v0.0.4.png
+│       │   │   │   ├── 18_prayer_v0.0.5.png
+│       │   │   │   ├── 18_prayer_v0.0.6.png
+│       │   │   │   ├── 18_prayer_v0.0.7.png
+│       │   │   │   ├── 18_prayer_v0.0.8.png
+│       │   │   │   ├── 18_prayer_v0.0.9.png
+│       │   │   │   ├── 18_prayer_v0.1.0.png
+│       │   │   │   └── 18_prayer_v0.1.1.png
+│       │   │   ├── manifest.json
+│       │   │   ├── meta.json
+│       │   │   ├── page.html
+│       │   │   ├── page.json
+│       │   │   ├── page.png
+│       │   │   └── page.tiff
+│       │   ├── 19_prayer_back
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 20_cover_back_inside
+│       │   │   ├── .gitkeep
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── 21_cover_back_outside
+│       │   │   ├── .gitkeep
+│       │   │   ├── manifest.json
+│       │   │   └── meta.json
+│       │   ├── dna.yml
+│       │   └── instructions.yml
+│       ├── publishing
+│       │   ├── digital
+│       │   │   ├── comic.cbz
+│       │   │   └── reader.pdf
+│       │   ├── print
+│       │   │   └── press.pdf
+│       │   └── meta.json
+│       ├── ui
+│       │   └── drafts
+│       │       ├── background_v0.0.1.png
+│       │       ├── background_v0.0.2.png
+│       │       ├── background_v0.0.3.png
+│       │       └── page_reference_v0.0.1.png
+│       ├── README.md
+│       ├── manifest.json
+│       ├── meta.json
+│       └── visual_dna.json
+├── magazine
+│   ├── ai
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── fountain.modelfile
+│   │   ├── fountain.py
+│   │   └── video.py
+│   ├── assets
+│   │   ├── data
+│   │   │   ├── __init__.py
+│   │   │   └── sizes.json
+│   │   ├── __init__.py
+│   │   ├── images.py
+│   │   ├── latex.py
+│   │   ├── screenplay.py
+│   │   └── sizes.py
+│   ├── __init__.py
+│   ├── bundler.py
+│   ├── cli.py
+│   ├── config.py
+│   ├── edition.py
+│   ├── exceptions.py
+│   ├── hashing.py
+│   ├── metadata.py
+│   ├── page.py
+│   ├── pipeline.py
+│   └── utils.py
+├── reports
+│   └── tree
+│       ├── repo.html
+│       ├── repo.json
+│       ├── repo.tree
+│       └── repo.xml
+├── scripts
+│   ├── README.md
+│   ├── build_page_assets.sh
+│   ├── fix_fountain_html.sh
+│   ├── generate_cover_meta.sh
+│   ├── install_scripttool.sh
+│   ├── install_wrap.sh
+│   ├── lint_ip_references.py
+│   └── visual_dna.py
+├── tests
+│   ├── fixtures
+│   │   ├── __init__.py
+│   │   ├── generate_adversarial_comic.py
+│   │   └── generate_fake_comic.py
+│   ├── __init__.py
+│   ├── conftest.py
+│   ├── test_adversarial_comic.py
+│   ├── test_bundler.py
+│   ├── test_cli.py
+│   ├── test_config.py
+│   ├── test_edition_pipeline.py
+│   ├── test_fountain_stage.py
+│   ├── test_hashing.py
+│   ├── test_idempotency.py
+│   ├── test_images.py
+│   ├── test_jxl_generation.py
+│   ├── test_latex_stage.py
+│   ├── test_metadata.py
+│   ├── test_page_pipeline.py
+│   ├── test_size_stage.py
+│   ├── test_stage_registry.py
+│   ├── test_subprocess_timeout.py
+│   ├── test_synthetic_comic.py
+│   ├── test_utils.py
+│   └── test_video_stage.py
+├── .gitattributes
+├── .gitignore
+├── README.md
+├── magazine.code-workspace
+├── magazine.sh
+├── poetry.lock
+└── pyproject.toml

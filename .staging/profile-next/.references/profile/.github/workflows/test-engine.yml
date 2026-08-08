@@ -1,0 +1,104 @@
+name: Test Profile Engine
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'engine/**'
+      - '.github/workflows/test-engine.yml'
+      - '.github/actions/setup-engine/**'
+      - '.github/actions/engine-*/**'
+
+concurrency:
+  group: test-engine-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test-engine-cli:
+    name: Test Engine CLI
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Profile Engine
+        uses: ./.github/actions/setup-engine
+      
+      - name: 🧪 Test CLI commands
+        run: |
+          echo "Testing Profile Engine CLI..."
+          
+          # Test help commands
+          profile-engine --help
+          profile-engine fetch --help
+          profile-engine generate --help
+          
+          # Test build-profile with skip flags (dry run)
+          profile-engine build-profile --skip-fetch --skip-generate
+          
+          echo "✅ All CLI tests passed!"
+  
+  test-engine-fetch:
+    name: Test Engine Fetch Developer Stats
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Profile Engine
+        uses: ./.github/actions/setup-engine
+      
+      - name: 🌐 Fetch developer statistics (Engine)
+        uses: ./.github/actions/engine-fetch-developer
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.repository_owner }}
+        continue-on-error: true
+      
+      - name: 📊 Verify stats file
+        run: |
+          if [ -f developer/stats.json ]; then
+            echo "✅ Stats file created"
+            jq -r '.username' developer/stats.json
+          else
+            echo "⚠️ Stats file not found"
+          fi
+  
+  test-engine-generate:
+    name: Test Engine Generate Dashboard
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Profile Engine
+        uses: ./.github/actions/setup-engine
+      
+      - name: 🌐 Fetch developer statistics (Engine)
+        uses: ./.github/actions/engine-fetch-developer
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.repository_owner }}
+        continue-on-error: true
+      
+      - name: 💻 Generate developer dashboard (Engine)
+        if: hashFiles('developer/stats.json') != ''
+        uses: ./.github/actions/engine-generate-developer-dashboard
+        continue-on-error: true
+      
+      - name: 📊 Verify dashboard file
+        run: |
+          if [ -f developer/developer_dashboard.svg ]; then
+            echo "✅ Dashboard SVG created"
+            head -c 200 developer/developer_dashboard.svg
+          else
+            echo "⚠️ Dashboard SVG not found"
+          fi

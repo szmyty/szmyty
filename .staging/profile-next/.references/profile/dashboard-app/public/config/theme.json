@@ -1,0 +1,367 @@
+{
+  "default_theme": "dark",
+  "themes": {
+    "dark": {
+      "colors": {
+        "background": {
+          "primary": "#1a1a2e",
+          "secondary": "#16213e",
+          "dark": "#0f0f23",
+          "panel": "#1e1e2e",
+          "panel_sleep": "#1a1a3e",
+          "panel_readiness": "#1a2e2e",
+          "panel_activity": "#2e2a1a"
+        },
+        "text": {
+          "primary": "#ffffff",
+          "secondary": "#8892b0",
+          "muted": "#4a5568",
+          "accent": "#64ffda"
+        },
+        "accent": {
+          "teal": "#64ffda",
+          "cyan": "#4ecdc4",
+          "orange": "#ff5500",
+          "sleep": "#4facfe",
+          "readiness": "#38ef7d",
+          "activity": "#f5576c",
+          "heart_rate": "#ff6b6b",
+          "developer": "#a855f7",
+          "commits": "#22c55e",
+          "repos": "#3b82f6",
+          "stars": "#eab308",
+          "prs": "#8b5cf6",
+          "issues": "#f97316"
+        },
+        "scores": {
+          "high": "#4ade80",
+          "medium": "#fbbf24",
+          "low": "#f87171"
+        },
+        "status": {
+          "success": "#4ade80",
+          "warning": "#fbbf24",
+          "error": "#ef4444",
+          "unknown": "#6b7280"
+        },
+        "languages": {
+          "Python": "#3572A5",
+          "JavaScript": "#f1e05a",
+          "TypeScript": "#3178c6",
+          "Java": "#b07219",
+          "Go": "#00ADD8",
+          "Rust": "#dea584",
+          "C++": "#f34b7d",
+          "C": "#555555",
+          "Shell": "#89e051",
+          "Ruby": "#701516",
+          "PHP": "#4F5D95",
+          "HTML": "#e34c26",
+          "CSS": "#563d7c",
+          "Kotlin": "#A97BFF",
+          "Swift": "#F05138",
+          "Other": "#8892b0"
+        },
+        "chart": {
+          "bar_background": "#2d3748"
+        }
+      },
+      "gradients": {
+        "background": {
+          "default": ["#1a1a2e", "#16213e"],
+          "dark": ["#0f0f23", "#1a1a2e"]
+        },
+        "sleep": ["#667eea", "#764ba2"],
+        "readiness": ["#11998e", "#38ef7d"],
+        "activity": ["#f093fb", "#f5576c"],
+        "heart_rate": ["#ff6b6b", "#feca57"],
+        "developer": ["#1e1b4b", "#312e81"],
+        "weather": {
+          "clear_day": ["#1e3a5f", "#2d5a7b"],
+          "cloudy": ["#3d4f5f", "#4a5d6e"],
+          "fog": ["#4a5568", "#5a6578"],
+          "rain": ["#2d3748", "#3d4758"],
+          "snow": ["#4a5568", "#6b7280"],
+          "storm": ["#1a202c", "#2d3748"],
+          "night": ["#0f0f23", "#1a1a2e"]
+        }
+      }
+    },
+    "light": {
+      "colors": {
+        "background": {
+          "primary": "#f8f9fa",
+          "secondary": "#e9ecef",
+          "dark": "#ffffff",
+          "panel": "#ffffff",
+          "panel_sleep": "#f0f4ff",
+          "panel_readiness": "#f0fff4",
+          "panel_activity": "#fff5f0"
+        },
+        "text": {
+          "primary": "#1a202c",
+          "secondary": "#4a5568",
+          "muted": "#a0aec0",
+          "accent": "#0d9488"
+        },
+        "accent": {
+          "teal": "#0d9488",
+          "cyan": "#0891b2",
+          "orange": "#ea580c",
+          "sleep": "#3b82f6",
+          "readiness": "#10b981",
+          "activity": "#f59e0b",
+          "heart_rate": "#ef4444",
+          "developer": "#8b5cf6",
+          "commits": "#16a34a",
+          "repos": "#2563eb",
+          "stars": "#ca8a04",
+          "prs": "#7c3aed",
+          "issues": "#ea580c"
+        },
+        "scores": {
+          "high": "#16a34a",
+          "medium": "#ca8a04",
+          "low": "#dc2626"
+        },
+        "status": {
+          "success": "#16a34a",
+          "warning": "#ca8a04",
+          "error": "#dc2626",
+          "unknown": "#94a3b8"
+        },
+        "languages": {
+          "Python": "#3572A5",
+          "JavaScript": "#f1e05a",
+          "TypeScript": "#3178c6",
+          "Java": "#b07219",
+          "Go": "#00ADD8",
+          "Rust": "#dea584",
+          "C++": "#f34b7d",
+          "C": "#555555",
+          "Shell": "#89e051",
+          "Ruby": "#701516",
+          "PHP": "#4F5D95",
+          "HTML": "#e34c26",
+          "CSS": "#563d7c",
+          "Kotlin": "#A97BFF",
+          "Swift": "#F05138",
+          "Other": "#8892b0"
+        },
+        "chart": {
+          "bar_background": "#e5e7eb"
+        }
+      },
+      "gradients": {
+        "background": {
+          "default": ["#f8f9fa", "#e9ecef"],
+          "dark": ["#ffffff", "#f8f9fa"]
+        },
+        "sleep": ["#60a5fa", "#3b82f6"],
+        "readiness": ["#34d399", "#10b981"],
+        "activity": ["#fbbf24", "#f59e0b"],
+        "heart_rate": ["#f87171", "#ef4444"],
+        "developer": ["#a78bfa", "#8b5cf6"],
+        "weather": {
+          "clear_day": ["#93c5fd", "#60a5fa"],
+          "cloudy": ["#cbd5e1", "#94a3b8"],
+          "fog": ["#e2e8f0", "#cbd5e1"],
+          "rain": ["#94a3b8", "#64748b"],
+          "snow": ["#e0f2fe", "#bae6fd"],
+          "storm": ["#64748b", "#475569"],
+          "night": ["#1e293b", "#334155"]
+        }
+      }
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#1a1a2e",
+      "secondary": "#16213e",
+      "dark": "#0f0f23",
+      "panel": "#1e1e2e",
+      "panel_sleep": "#1a1a3e",
+      "panel_readiness": "#1a2e2e",
+      "panel_activity": "#2e2a1a"
+    },
+    "text": {
+      "primary": "#ffffff",
+      "secondary": "#8892b0",
+      "muted": "#4a5568",
+      "accent": "#64ffda"
+    },
+    "accent": {
+      "teal": "#64ffda",
+      "cyan": "#4ecdc4",
+      "orange": "#ff5500",
+      "sleep": "#4facfe",
+      "readiness": "#38ef7d",
+      "activity": "#f5576c",
+      "heart_rate": "#ff6b6b",
+      "developer": "#a855f7",
+      "commits": "#22c55e",
+      "repos": "#3b82f6",
+      "stars": "#eab308",
+      "prs": "#8b5cf6",
+      "issues": "#f97316"
+    },
+    "scores": {
+      "high": "#4ade80",
+      "medium": "#fbbf24",
+      "low": "#f87171"
+    },
+    "status": {
+      "success": "#4ade80",
+      "warning": "#fbbf24",
+      "error": "#ef4444",
+      "unknown": "#6b7280"
+    },
+    "languages": {
+      "Python": "#3572A5",
+      "JavaScript": "#f1e05a",
+      "TypeScript": "#3178c6",
+      "Java": "#b07219",
+      "Go": "#00ADD8",
+      "Rust": "#dea584",
+      "C++": "#f34b7d",
+      "C": "#555555",
+      "Shell": "#89e051",
+      "Ruby": "#701516",
+      "PHP": "#4F5D95",
+      "HTML": "#e34c26",
+      "CSS": "#563d7c",
+      "Kotlin": "#A97BFF",
+      "Swift": "#F05138",
+      "Other": "#8892b0"
+    },
+    "chart": {
+      "bar_background": "#2d3748"
+    }
+  },
+  "gradients": {
+    "background": {
+      "default": ["#1a1a2e", "#16213e"],
+      "dark": ["#0f0f23", "#1a1a2e"]
+    },
+    "sleep": ["#667eea", "#764ba2"],
+    "readiness": ["#11998e", "#38ef7d"],
+    "activity": ["#f093fb", "#f5576c"],
+    "heart_rate": ["#ff6b6b", "#feca57"],
+    "developer": ["#1e1b4b", "#312e81"],
+    "weather": {
+      "clear_day": ["#1e3a5f", "#2d5a7b"],
+      "cloudy": ["#3d4f5f", "#4a5d6e"],
+      "fog": ["#4a5568", "#5a6578"],
+      "rain": ["#2d3748", "#3d4758"],
+      "snow": ["#4a5568", "#6b7280"],
+      "storm": ["#1a202c", "#2d3748"],
+      "night": ["#0f0f23", "#1a1a2e"]
+    }
+  },
+  "typography": {
+    "font_family": "'Segoe UI', Arial, sans-serif",
+    "font_family_emoji": "Arial, sans-serif",
+    "sizes": {
+      "xs": 8,
+      "sm": 9,
+      "base": 10,
+      "md": 11,
+      "lg": 12,
+      "lg-plus": 13,
+      "xl": 14,
+      "2xl": 16,
+      "3xl": 18,
+      "4xl": 22,
+      "5xl": 24,
+      "6xl": 32,
+      "7xl": 36
+    }
+  },
+  "spacing": {
+    "xs": 4,
+    "sm": 8,
+    "md": 10,
+    "lg": 12,
+    "xl": 15,
+    "2xl": 20,
+    "3xl": 25,
+    "4xl": 30
+  },
+  "cards": {
+    "border_radius": {
+      "sm": 3,
+      "md": 6,
+      "lg": 8,
+      "xl": 12
+    },
+    "widths": {
+      "soundcloud": 480,
+      "weather": 480,
+      "mood": 480,
+      "health_dashboard": 480,
+      "location": 480,
+      "developer_dashboard": 800
+    },
+    "heights": {
+      "soundcloud": 144,
+      "weather": 230,
+      "mood": 250,
+      "health_dashboard": 365,
+      "location": 400,
+      "developer_dashboard": 420
+    },
+    "map": {
+      "margin": 20,
+      "height": 350
+    },
+    "stroke_width": 1,
+    "stroke_opacity": 0.3,
+    "decorative_accent": {
+      "width": 4,
+      "x_offset": 20,
+      "y_offset": 15
+    },
+    "score_bar": {
+      "height": 6,
+      "width": 80,
+      "text_offset": 8
+    },
+    "radial_bar": {
+      "stroke_width": 6,
+      "opacity": 0.8,
+      "ring_spacing": 8
+    },
+    "score_ring": {
+      "stroke_width": 4,
+      "label_offset": 14
+    },
+    "chart": {
+      "bar_height": 16,
+      "bar_gap": 8,
+      "label_width": 100,
+      "sparkline": {
+        "width": 120,
+        "height": 30,
+        "stroke_width": 2
+      }
+    }
+  },
+  "effects": {
+    "glow": {
+      "stdDeviation": 2
+    },
+    "shadow": {
+      "dx": 0,
+      "dy": 2,
+      "stdDeviation": 3,
+      "flood_opacity": 0.3
+    }
+  },
+  "image_optimization": {
+    "enabled": true,
+    "jpeg_quality": 85,
+    "png_colors": 256,
+    "max_width": 600,
+    "max_height": 400
+  }
+}

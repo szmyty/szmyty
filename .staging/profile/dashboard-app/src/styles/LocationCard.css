@@ -1,0 +1,45 @@
+.location-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.location-name {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  padding: 16px 0;
+}
+
+.location-coords {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coord-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coord-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.coord-value {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.location-address {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  color: var(--text-secondary);
+}

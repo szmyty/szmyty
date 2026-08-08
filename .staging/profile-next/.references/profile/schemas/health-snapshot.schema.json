@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/szmyty/profile/schemas/health-snapshot.schema.json",
+  "title": "Health Snapshot",
+  "description": "Schema for normalized health snapshot data derived from Oura metrics",
+  "type": "object",
+  "properties": {
+    "personal": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "User age in years"
+        },
+        "height_m": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Height in meters"
+        },
+        "height_cm": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Height in centimeters"
+        },
+        "weight_kg": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Weight in kilograms"
+        },
+        "weight_lbs": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Weight in pounds"
+        },
+        "bmi": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Body Mass Index"
+        },
+        "sex": {
+          "type": ["string", "null"],
+          "description": "Biological sex"
+        }
+      },
+      "additionalProperties": true
+    },
+    "sleep": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "day": {
+          "type": ["string", "null"],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "deep_sleep": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rem_sleep": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "total_sleep": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "efficiency": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "latency": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "restfulness": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "timing": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": true
+    },
+    "readiness": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "day": {
+          "type": ["string", "null"],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "recovery_index": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "hrv_balance": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "resting_heart_rate": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "body_temperature": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "temperature_deviation": {
+          "type": ["number", "null"]
+        },
+        "temperature_trend_deviation": {
+          "type": ["number", "null"]
+        },
+        "activity_balance": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "sleep_balance": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "previous_day_activity": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "previous_night": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "sleep_regularity": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": true
+    },
+    "activity": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "day": {
+          "type": ["string", "null"],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "steps": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "active_calories": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "total_calories": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "target_calories": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "equivalent_walking_distance": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "target_meters": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "inactivity_alerts": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "low_activity_time": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "medium_activity_time": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "high_activity_time": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "average_met_minutes": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "meet_daily_targets": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "move_every_hour": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "recovery_time": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "stay_active": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "training_frequency": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "training_volume": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": true
+    },
+    "heart_rate": {
+      "type": "object",
+      "properties": {
+        "latest_bpm": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "avg_bpm": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "resting_bpm": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "trend_values": {
+          "type": "array",
+          "items": {
+            "type": ["number", "null"]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "Last update timestamp"
+    }
+  },
+  "additionalProperties": true
+}

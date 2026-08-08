@@ -1,0 +1,17 @@
+base_locale: en
+input_directory: lib/shared/localization
+output_directory: lib/shared/localization
+input_file_pattern: .i18n.json
+output_file_name: strings.g.dart
+fallback_strategy: base_locale
+timestamp: false
+
+# Pluralization: automatically detect plural parameters (e.g. count(count))
+pluralization:
+  auto: cardinal
+
+# Enable locale handling for runtime locale switching
+locale_handling: true
+
+# Generate Flutter-specific integration (TranslationProvider, context.t extension)
+flutter_integration: true

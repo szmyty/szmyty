@@ -1,0 +1,426 @@
+================================================================================
+REFACTOR-FOCUSED REPOSITORY AUDIT
+Repository: szmyty/szmyty
+Generated:  2026-03-17_09-54-33 UTC
+Focus:      Architecture, Clarity, and System Design
+================================================================================
+
+
+--------------------------------------------------------------------------------
+1. CURRENT SYSTEM ASSESSMENT
+--------------------------------------------------------------------------------
+
+What the repository actually is (in practice):
+  A GitHub profile automation engine whose sole consumer is the GitHub profile
+  page at github.com/szmyty. It runs three to four scheduled workflows that
+  fetch data from external APIs, render SVG files, and commit the results back
+  to the repository. The human-readable README is the only "product"; everything
+  else is scaffolding to keep that README looking current.
+
+Where it feels messy or over-engineered:
+
+  a) The repo conflates three distinct concerns in the same flat namespace:
+     source content (README, branding), generated artifacts (metrics SVGs,
+     profile cards), and operational tooling (workflows, config files). There
+     is no clear separation between what a human authors and what a machine
+     produces.
+
+  b) profile-summary-card-output/ contains 64 themed subdirectories (320+
+     SVG files) for a feature that is only ever displayed in the README as a
+     single chosen theme. All 64 themes are committed and versioned even though
+     only one or two are actually referenced. This is the single largest source
+     of repository noise.
+
+  c) github-metrics.svg lives at the repository root while the other four
+     metrics SVGs live under metrics/. This split communicates no intent and
+     creates an implicit two-tier output structure that is never explained.
+
+  d) The audits/ directory now contains two distinct types of files: structured
+     audit reports (.log) and informal diagnostics documents (.md). Mixing
+     these signals that the directory's purpose has not been clearly defined.
+
+  e) The repository markets itself as DX-first but its own setup is opaque:
+     no onboarding path, no local development story, and a devcontainer.json
+     that does nothing beyond specifying an image name.
+
+
+--------------------------------------------------------------------------------
+2. STRUCTURAL ISSUES
+--------------------------------------------------------------------------------
+
+Folder structure problems:
+
+  Root level is cluttered. github-metrics.svg, metrics.plugin.16personalities.svg,
+  and resume.pdf sit at the root alongside README.md and config files. These are
+  logically outputs or assets, not project-root items. A visitor scanning the
+  root cannot quickly distinguish source files from generated artifacts.
+
+  profile-summary-card-output/ is misnamed and misplaced. The directory name is
+  an implementation artifact (the output path baked into the upstream action)
+  not a deliberate design decision. It suggests output, which is correct, but
+  the name is too long and too tool-specific to belong at the root.
+
+  metrics/ and github-metrics.svg are logically the same category (generated
+  metrics) but live in different locations. The legacy SVG at the root should
+  either move into metrics/ or be removed when the four-panel layout fully
+  supersedes it.
+
+  metrics.plugin.16personalities.svg is an orphaned file at the root. It is not
+  referenced in any workflow output step and not linked from the README. Its
+  origin is unclear and it adds unexplained clutter.
+
+  assets/emojis/ contains a single file (zap.png) alongside a .gitkeep. The
+  subdirectory level is unnecessary for one file; the emojis/ layer adds
+  indirection without benefit.
+
+  branding/ and assets/ serve overlapping purposes. branding/ holds SVG/PNG
+  visual assets; assets/ also holds visual assets. The distinction between
+  "branding assets" and "other assets" is not documented anywhere and risks
+  growing into an inconsistent split.
+
+  docs/ contains architecture.md, secrets.md, and workflows.md, but the
+  previous audit reported it as empty (only .gitkeep). Files were added since
+  then, but the .gitkeep remains, which is now unnecessary.
+
+Misplaced files or responsibilities:
+
+  audits/metrics-diagnostics.md, audits/metrics-selfhost-diagnostics.md, and
+  audits/readme-update-diagnostics.md are informal run notes rather than
+  structured reports. They are stored alongside formal audit logs, blurring the
+  purpose of the audits/ directory. These should either live in a logs/ or
+  scratch/ subdirectory, or not be committed at all.
+
+  resume.pdf belongs to personal branding/assets, not the repository root. Its
+  presence at the root makes the directory feel like a miscellaneous dump.
+
+Redundant or unnecessary components:
+
+  64 profile-summary-card themes. The README references one theme. Committing
+  all 64 creates 320+ versioned binary SVGs with no practical benefit. Each
+  daily run diffs hundreds of SVG files, making git history difficult to read.
+
+  github-metrics.svg (legacy). The four-panel metrics/ layout supersedes this
+  file. It is referenced in the README as a "complete" view but duplicates data
+  already visible in the four individual panels. Its retention appears to be
+  inertia rather than intent.
+
+  metrics.plugin.16personalities.svg. No reference to this file exists in any
+  workflow or in the README. It should be removed.
+
+  assets/emojis/.gitkeep. The directory contains a real file; the .gitkeep is
+  no longer needed.
+
+  docs/.gitkeep. Same as above; real content files now exist in docs/.
+
+
+--------------------------------------------------------------------------------
+3. AUTOMATION DESIGN REVIEW
+--------------------------------------------------------------------------------
+
+GitHub Actions architecture:
+
+  Five workflows exist: metrics.yml, profile-summary-cards.yml,
+  update-readme.yml, lint.yml, and health.yml. Their responsibilities are
+  coherent but their designs are inconsistent.
+
+Overlapping responsibilities:
+
+  metrics.yml runs the lowlighter/metrics action five separate times (four
+  focused panels plus one legacy SVG). Each invocation repeats the same
+  configuration block (timezone, retries, optimize, config_* flags). This is
+  DRY-violating YAML: twelve to fifteen identical key-value pairs are
+  duplicated across five steps. Any change to shared settings requires five
+  edits.
+
+  update-readme.yml and profile-summary-cards.yml both commit generated files
+  back to the repository but use slightly different git configuration idioms.
+  metrics.yml uses a third variant. Three workflows, three git commit patterns,
+  no shared composite action or reusable workflow to enforce consistency.
+
+  health.yml and lint.yml serve similar quality-gate purposes but are separate
+  workflows. health.yml checks structural existence of files; lint.yml checks
+  formatting. These could reasonably be consolidated into a single "quality"
+  workflow with multiple jobs, reducing workflow file count and unifying the
+  quality gate concept.
+
+Schedule alignment issues:
+
+  metrics.yml runs at 00:00 UTC.
+  update-readme.yml runs at 00:15 UTC.
+  profile-summary-cards.yml runs at 00:30 UTC.
+  The staggering is correct and avoids the simultaneous-run problem noted in the
+  previous audit. This is a strength.
+
+Opportunities to simplify or consolidate:
+
+  The five repeated lowlighter/metrics invocations in metrics.yml should share
+  a YAML anchor or, preferably, be extracted into a reusable composite action
+  that accepts the filename and plugin flags as inputs. This would halve the
+  size of metrics.yml and make plugin configuration changes a single-point edit.
+
+  The git commit/push pattern (configure, add, diff, commit, push) is repeated
+  across three workflows. A shared composite action (e.g.,
+  .github/actions/commit-and-push) would centralize this logic and ensure all
+  workflows use identical commit authorship and message conventions.
+
+  profile-summary-cards.yml checks for the presence of PERSONAL_ACCESS_KEY at
+  runtime. This runtime guard is necessary, but the workflow still appears in
+  the Actions tab even when it does nothing. Consider using a repository
+  variable to advertise whether the feature is enabled, making the workflow's
+  intent clearer to readers.
+
+  The update-readme.yml workflow uses jamesgeorge007/github-activity-readme
+  pinned to v0.5.0, which is good. However, it does not commit with [skip ci],
+  which means a README update push could trigger the metrics workflow on
+  master/main push. Verify that the metrics workflow's push trigger does not
+  create a re-run loop for README-only pushes.
+
+
+--------------------------------------------------------------------------------
+4. SIGNAL VS NOISE ANALYSIS
+--------------------------------------------------------------------------------
+
+What adds real value (keep):
+
+  README.md — the actual deliverable of this entire system. Well-structured,
+  visually polished, and informative.
+
+  metrics/overview.svg, metrics/github-stats.svg, metrics/top-languages.svg,
+  metrics/contributions.svg — the four-panel layout is the right model. Each
+  file has a clear, focused purpose.
+
+  branding/header.svg, branding/logo.svg — custom visual identity that
+  differentiates the profile from default GitHub profiles.
+
+  docs/secrets.md, docs/architecture.md, docs/workflows.md — documentation
+  that captures intent and reduces onboarding friction. High value, recently
+  added.
+
+  .github/dependabot.yml — signal that dependency management is taken
+  seriously, even if it is not yet fully configured.
+
+  .prettierrc, .markdownlint.json, .editorconfig — consistent style
+  configuration. Valuable tooling.
+
+  lint.yml, health.yml — enforcing quality in CI is the right instinct.
+
+  CONTRIBUTING.md — exists and adds credibility to the repository as an
+  engineered project rather than a casual profile page.
+
+What is low-value or distracting (remove or reduce):
+
+  64 profile-summary-card theme directories. Only one theme is used in
+  the README at any time. Consider limiting output to one or two selected
+  themes, or moving all card output to a branch that does not appear in the
+  default view.
+
+  github-metrics.svg at the repository root. Superseded by the four-panel
+  layout. Its continued presence in the README alongside the panel images
+  creates visual redundancy.
+
+  metrics.plugin.16personalities.svg. Orphaned; no workflow generates it in
+  a documented way; not referenced anywhere. Should be deleted.
+
+  resume.pdf at the root. Belongs under assets/ or branding/ if it must
+  be committed at all. A linked URL to a hosted version (e.g., a GitHub
+  release asset) is cleaner than a versioned binary in the repo root.
+
+  audits/metrics-diagnostics.md, audits/metrics-selfhost-diagnostics.md,
+  audits/readme-update-diagnostics.md. Informal run notes that add noise
+  to the audits/ directory. If retained, move to a subdirectory (audits/logs/)
+  or exclude from version control entirely.
+
+  assets/emojis/.gitkeep. The directory has a real file; remove the placeholder.
+
+  docs/.gitkeep. Same: docs/ has real content now.
+
+  The [legacy] step in metrics.yml that regenerates github-metrics.svg.
+  Eliminating this step removes an entire lowlighter/metrics invocation,
+  reduces API calls, and simplifies the workflow by 20%.
+
+
+--------------------------------------------------------------------------------
+5. DX ALIGNMENT REVIEW
+--------------------------------------------------------------------------------
+
+Intent vs. implementation gap:
+
+  The repository's README and self-description position it as a DX-first
+  engineering portfolio. The gap between that claim and the actual state is
+  significant but closing.
+
+  Positive signals:
+  - lint.yml enforces Prettier and markdownlint in CI.
+  - health.yml validates repository structure on every push.
+  - docs/ now contains architecture, workflow, and secrets documentation.
+  - CONTRIBUTING.md is present.
+  - Caching, retries, and [skip ci] tags show operational maturity.
+
+  Gaps that undermine the DX claim:
+
+  The devcontainer.json is present but minimal: it specifies a base image and
+  nothing else. No extensions, no lifecycle scripts, no port forwarding, no
+  environment variables. A first-time contributor opening this repository in
+  a Dev Container gets a bare Ubuntu shell with no tooling installed. This is
+  not DX; it is a placeholder.
+
+  No Makefile or task runner. The repository has no local entry point. A
+  developer cannot run `make lint` or `task metrics` to reproduce CI locally.
+  For a DX-focused repo, this omission is conspicuous.
+
+  The README's "How This Repository Works" section explains the automation
+  at a high level but does not link to docs/architecture.md or
+  docs/workflows.md. A reader who wants deeper context must discover those
+  documents by browsing the repository tree.
+
+  Featured projects in the README (android-app, python-pipeline,
+  react-dashboards) appear to be placeholder names. They are not hyperlinked
+  to real repositories. This directly damages credibility for a portfolio
+  whose purpose is to impress technical visitors.
+
+  The 16personalities plugin SVG suggests a personal quirk was added to the
+  metrics workflow at some point and then abandoned without cleanup. Small
+  orphaned artifacts like this create an impression of incomplete follow-through.
+
+
+--------------------------------------------------------------------------------
+6. PROPOSED IMPROVED STRUCTURE
+--------------------------------------------------------------------------------
+
+Proposed layout:
+
+  /
+  ├── README.md                        (source: only human-authored content)
+  ├── CONTRIBUTING.md
+  ├── resume.pdf                       (moved from root — consider release asset)
+  ├── .github/
+  │   ├── dependabot.yml
+  │   ├── actions/
+  │   │   ├── commit-and-push/         (shared composite action)
+  │   │   └── metrics-panel/           (shared metrics generation composite)
+  │   └── workflows/
+  │       ├── metrics.yml
+  │       ├── profile-cards.yml        (renamed from profile-summary-cards.yml)
+  │       ├── update-readme.yml
+  │       ├── lint.yml
+  │       └── health.yml
+  ├── assets/
+  │   ├── header.svg                   (merged branding/ into assets/)
+  │   ├── logo.svg
+  │   ├── badges/
+  │   └── emojis/
+  ├── docs/
+  │   ├── architecture.md
+  │   ├── workflows.md
+  │   └── secrets.md
+  ├── generated/
+  │   ├── metrics/                     (moved from metrics/ at root)
+  │   │   ├── overview.svg
+  │   │   ├── github-stats.svg
+  │   │   ├── top-languages.svg
+  │   │   └── contributions.svg
+  │   └── profile-cards/               (renamed, contains only active theme)
+  │       └── default/
+  └── audits/
+      ├── YYYY-MM-DD_HH-MM-SS-audit.log
+      └── YYYY-MM-DD_HH-MM-SS-refactor-audit.log
+
+Why this is better:
+
+  generated/ makes the machine-vs-human boundary explicit and unambiguous.
+  Anything under generated/ is created by workflows and should not be manually
+  edited. Everything outside generated/ is source content.
+
+  Merging branding/ into assets/ eliminates the overlapping-purpose confusion.
+  All static visual assets live in one place.
+
+  Collapsing profile-summary-card-output/ to generated/profile-cards/ with
+  only the active theme removes hundreds of committed binary files and makes
+  the directory name meaningful rather than tool-specific.
+
+  Moving metrics/ under generated/ removes the root-level SVG clutter while
+  keeping files logically grouped.
+
+  .github/actions/ houses shared composite actions that the individual
+  workflows call, making the "commit and push" pattern and the "metrics panel
+  generation" pattern DRY and centrally maintained.
+
+  Renaming profile-summary-cards.yml to profile-cards.yml is a small
+  improvement but signals that names should be chosen by the repository owner,
+  not inherited from the upstream tool.
+
+
+--------------------------------------------------------------------------------
+7. REFACTOR RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+1. Establish a generated/ directory and move all workflow outputs into it.
+   Update README image paths and workflow output paths accordingly. This is
+   the highest-leverage structural change: it immediately clarifies what is
+   source vs. output for every reader and contributor.
+
+2. Remove github-metrics.svg (legacy SVG) and its generating step in
+   metrics.yml. Update the README to remove the "Complete GitHub Metrics"
+   section that references it. The four-panel layout already covers the same
+   information more clearly.
+
+3. Limit profile-cards output to one selected theme. Change the card workflow
+   to generate only the theme referenced in the README. Delete the 63 unused
+   theme directories from the repository. This removes 300+ binary files from
+   version history going forward and dramatically reduces noise in daily diffs.
+
+4. Create a shared composite action for the git commit/push pattern. Extract
+   the git-configure, git-add, git-diff-check, git-commit, git-push sequence
+   into .github/actions/commit-and-push/action.yml. All three generator
+   workflows call this composite. One place to fix commit message format,
+   authorship, and push behavior.
+
+5. Extract a shared composite action for lowlighter/metrics invocations. The
+   five repeated step blocks in metrics.yml share a large set of common inputs.
+   A composite action that accepts filename and plugin-specific flags as
+   parameters reduces metrics.yml to five compact, readable step blocks.
+
+6. Merge branding/ into assets/ and remove the branding/ directory. Update
+   all README image references. The merged directory should use clear
+   subdirectories: assets/branding/, assets/emojis/ if needed.
+
+7. Delete orphaned and unused files: metrics.plugin.16personalities.svg,
+   assets/emojis/.gitkeep, docs/.gitkeep. These are low-effort removals that
+   reduce ambient noise and demonstrate follow-through.
+
+8. Populate the devcontainer.json with practical tooling: Node.js (for
+   Prettier and markdownlint), recommended VS Code extensions (already listed
+   in .vscode/extensions.json), and a postCreateCommand that installs the
+   Prettier and markdownlint CLIs. A working devcontainer makes the DX-first
+   claim credible.
+
+9. Add a Makefile (or Taskfile) with targets: lint, fmt, audit, health. These
+   targets replicate what CI does, enabling local verification before pushing.
+   A single make lint command that mirrors the lint.yml job is the most direct
+   local DX improvement possible.
+
+10. Replace placeholder featured project links in the README with real,
+    hyperlinked repositories or remove the section entirely. A portfolio that
+    references non-existent projects undermines trust with technical visitors.
+    This is the highest-visibility credibility gap in the repository today.
+
+
+--------------------------------------------------------------------------------
+8. SUMMARY
+--------------------------------------------------------------------------------
+
+The szmyty/szmyty repository is a capable and well-automated GitHub profile
+system that has improved meaningfully since its initial audit, but it still
+conflates source content with generated artifacts, carries significant binary
+bloat from 64 unused profile-card themes, and repeats operational patterns
+(git commit, metrics generation) across multiple workflows without shared
+abstractions. The proposed direction is to introduce a generated/ directory
+to enforce a clean source/output boundary, reduce the profile-card output to
+one active theme, extract shared composite actions to eliminate YAML
+duplication, and close the gap between the repository's DX-first branding and
+its actual local developer experience.
+
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/szmyty/profile/schemas/developer-stats.schema.json",
+  "title": "Developer Statistics",
+  "description": "Schema for GitHub developer statistics used in dashboard generation",
+  "type": "object",
+  "required": ["username", "repos", "stars", "followers", "commit_activity", "prs", "issues", "languages", "updated_at"],
+  "properties": {
+    "username": {
+      "type": "string",
+      "minLength": 1,
+      "description": "GitHub username"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the user"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL to user's avatar image"
+    },
+    "repos": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of public repositories"
+    },
+    "private_repos": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of private repositories (if accessible)"
+    },
+    "stars": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total stars received across all repositories"
+    },
+    "followers": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of followers"
+    },
+    "following": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of users being followed"
+    },
+    "commit_activity": {
+      "type": "object",
+      "required": ["last_30_days"],
+      "properties": {
+        "last_30_days": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Daily commit counts for the last 30 days"
+        },
+        "total_30_days": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total commits in the last 30 days"
+        },
+        "activity_grid": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minItems": 24,
+            "maxItems": 24
+          },
+          "minItems": 7,
+          "maxItems": 7,
+          "description": "7x24 grid of commit counts (day of week x hour of day)"
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Day labels for the activity grid"
+        }
+      }
+    },
+    "prs": {
+      "type": "object",
+      "required": ["opened", "merged"],
+      "properties": {
+        "opened": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of PRs opened"
+        },
+        "merged": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of PRs merged"
+        }
+      }
+    },
+    "issues": {
+      "type": "object",
+      "required": ["opened"],
+      "properties": {
+        "opened": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of issues opened"
+        }
+      }
+    },
+    "languages": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "description": "Language distribution as percentages"
+    },
+    "top_repositories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "commits"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Repository name"
+          },
+          "commits": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total commits to this repository"
+          }
+        }
+      },
+      "description": "Top repositories by commit count"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "Last update timestamp in ISO 8601 format"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,6 @@
+# Custom Lynis profile for repository audits
+# Logs and reports saved in the repository under reports/lynis
+logfile=reports/lynis/lynis.log
+report_file=reports/lynis/report.dat
+use-colors=no
+quiet=yes

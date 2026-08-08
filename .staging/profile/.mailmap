@@ -1,0 +1,18 @@
+# .mailmap - Simplified mapping of author and committer names and email addresses
+# https://git-scm.com/docs/gitmailmap
+#
+# This file is used to standardize author/committer names and email addresses in git history.
+# The format is as follows:
+#
+# 1. Map a canonical name/email to an alternative name/email
+#    Example: Correct Name <correct.email@example.com> <incorrect.email@example.com>
+#
+# 2. Map a canonical name/email to a name without an email
+#    Example: Correct Name <correct.email@example.com> Name Without Email
+#
+# 3. Map a canonical name/email to a name and email without an email
+#    Example: Correct Name <correct.email@example.com> Name Without Email <email@without.example.com>
+#
+# Below is a basic configuration for this project.
+
+Alan Szmyt <szmyty@gmail.com>

@@ -1,0 +1,29 @@
+{
+  "action": "opened",
+  "number": 1,
+  "pull_request": {
+    "number": 1,
+    "state": "open",
+    "title": "Test PR",
+    "body": "This is a test pull request for local development",
+    "user": {
+      "login": "szmyty"
+    },
+    "head": {
+      "ref": "feature/test",
+      "sha": "0000000000000000000000000000000000000000"
+    },
+    "base": {
+      "ref": "main",
+      "sha": "0000000000000000000000000000000000000000"
+    }
+  },
+  "repository": {
+    "name": "profile",
+    "full_name": "szmyty/profile",
+    "owner": {
+      "name": "szmyty",
+      "login": "szmyty"
+    }
+  }
+}

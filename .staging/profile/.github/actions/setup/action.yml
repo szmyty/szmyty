@@ -1,0 +1,80 @@
+name: 'Setup Profile Build Environment'
+description: 'Complete setup for profile build including Python, Node.js, dependencies, and tools'
+
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.11'
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '20'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+        cache-dependency-path: |
+          **/requirements*.txt
+          **/pyproject.toml
+          **/poetry.lock
+    
+    - name: 📦 Install system dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq curl bc
+    
+    - name: 🔧 Create Python virtual environment
+      shell: bash
+      run: |
+        python3 -m venv .venv
+        echo "✅ Virtual environment created at .venv"
+    
+    - name: 📦 Install Python dependencies
+      shell: bash
+      run: |
+        source .venv/bin/activate
+        python -m pip install --upgrade pip
+        if [ -f pyproject.toml ]; then
+          pip install poetry
+          poetry install --no-root
+        elif [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        fi
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+        echo "✅ Python dependencies installed in virtual environment"
+    
+    - name: 📦 Install additional Python packages
+      shell: bash
+      run: |
+        source .venv/bin/activate
+        pip install Pillow jsonschema
+    
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'npm'
+        cache-dependency-path: dashboard-app/package-lock.json
+    
+    - name: 📦 Install Node dependencies
+      shell: bash
+      run: |
+        npm install -g svgo
+        cd dashboard-app
+        npm ci
+    
+    - name: 💾 Restore SVG hash cache
+      uses: actions/cache@v4
+      with:
+        path: .cache
+        key: svg-hash-cache-${{ runner.os }}-${{ hashFiles('config/theme.json', 'scripts/generate-*.py', 'scripts/incremental-generate.py') }}
+        restore-keys: |
+          svg-hash-cache-${{ runner.os }}-
+          svg-hash-cache-

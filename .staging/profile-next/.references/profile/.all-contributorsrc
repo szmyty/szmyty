@@ -1,0 +1,78 @@
+{
+  "projectName": "szmyty/profile",
+  "projectOwner": "szmyty",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "szmyty",
+      "name": "Alan Szmyt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14865041?v=4",
+      "profile": "https://github.com/szmyty",
+      "contributions": [
+        "code",
+        "design",
+        "ideas",
+        "maintenance",
+        "infra",
+        "doc"
+      ]
+    },
+    {
+      "login": "github-copilot[bot]",
+      "name": "GitHub Copilot",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "profile": "https://github.com/apps/github-copilot",
+      "contributions": [
+        "code",
+        "ideas",
+        "tool",
+        "automation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true,
+  "contributorsSortAlphabetically": false,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-4a4e69.svg?style=for-the-badge&labelColor=1a1a2e)](#contributors-)",
+  "types": {
+    "code": {
+      "symbol": "💻",
+      "description": "Code"
+    },
+    "design": {
+      "symbol": "🎨",
+      "description": "Design"
+    },
+    "ideas": {
+      "symbol": "🤔",
+      "description": "Ideas & Planning"
+    },
+    "maintenance": {
+      "symbol": "🚧",
+      "description": "Maintenance"
+    },
+    "infra": {
+      "symbol": "🚇",
+      "description": "Infrastructure"
+    },
+    "doc": {
+      "symbol": "📖",
+      "description": "Documentation"
+    },
+    "tool": {
+      "symbol": "🔧",
+      "description": "Tools"
+    },
+    "automation": {
+      "symbol": "🤖",
+      "description": "Automation"
+    }
+  }
+}

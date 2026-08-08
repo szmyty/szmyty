@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/szmyty/profile/schemas/soundcloud-track.schema.json",
+  "title": "SoundCloud Track Metadata",
+  "description": "Schema for SoundCloud track metadata used in card generation",
+  "type": "object",
+  "required": ["title", "artist"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Track title"
+    },
+    "artist": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Artist name"
+    },
+    "artwork_url": {
+      "type": ["string", "null"],
+      "description": "URL to the track artwork image"
+    },
+    "permalink_url": {
+      "type": "string",
+      "description": "Permanent URL to the track on SoundCloud"
+    },
+    "genre": {
+      "type": ["string", "null"],
+      "description": "Music genre"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Track duration in milliseconds"
+    },
+    "playback_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of plays"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "Track creation/upload date in ISO 8601 format"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "Timestamp when this data was last fetched in ISO 8601 format"
+    }
+  },
+  "additionalProperties": true
+}

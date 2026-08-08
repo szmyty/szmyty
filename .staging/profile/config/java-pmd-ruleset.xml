@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Universal Java PMD Rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
+                             https://pmd.github.io/pmd-6.0.0/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="https://pmd.github.io/pmd-6.0.0/ruleset_xml_schema.xsd">
+
+  <description>
+    Universal Java ruleset for static analysis using PMD.
+    This set balances correctness, readability, performance, and maintainability.
+  </description>
+
+  <!-- BASIC -->
+  <rule ref="category/java/bestpractices.xml"/>
+  <rule ref="category/java/codestyle.xml"/>
+  <rule ref="category/java/design.xml"/>
+  <rule ref="category/java/errorprone.xml"/>
+  <rule ref="category/java/performance.xml"/>
+  <rule ref="category/java/security.xml"/>
+  <rule ref="category/java/documentation.xml"/>
+
+  <!-- CUSTOM EXCLUSIONS (optional) -->
+  <exclude-pattern>.*Test\.java</exclude-pattern>
+  <exclude-pattern>.*Generated.*\.java</exclude-pattern>
+
+  <!-- OPTIONAL: enable specific rules and configure thresholds -->
+  <rule ref="category/java/errorprone.xml/UseEqualsToCompareStrings"/>
+  <rule ref="category/java/errorprone.xml/EmptyCatchBlock">
+    <properties>
+      <property name="allowCommentedBlocks" value="true"/>
+    </properties>
+  </rule>
+
+  <rule ref="category/java/design.xml/CyclomaticComplexity">
+    <priority>2</priority>
+    <properties>
+      <property name="reportLevel" value="10"/>
+    </properties>
+  </rule>
+
+  <rule ref="category/java/design.xml/NPathComplexity">
+    <priority>2</priority>
+    <properties>
+      <property name="minimum" value="100"/>
+    </properties>
+  </rule>
+
+  <rule ref="category/java/design.xml/TooManyMethods">
+    <priority>3</priority>
+    <properties>
+      <property name="maxmethods" value="20"/>
+    </properties>
+  </rule>
+
+</ruleset>

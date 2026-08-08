@@ -1,0 +1,7 @@
+{
+  "name": "mini-card",
+  "project": "egohygiene",
+  "edition": "edition_1",
+  "type": "card",
+  "layers": ["background", "border", "content"]
+}

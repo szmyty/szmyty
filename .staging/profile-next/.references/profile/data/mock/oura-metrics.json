@@ -1,0 +1,96 @@
+{
+  "sleep_score": 85,
+  "readiness_score": 78,
+  "activity_score": 82,
+  "hrv": 45.5,
+  "resting_hr": 58,
+  "temp_deviation": 0.2,
+  "personal_info": {
+    "id": "mock-user-id",
+    "age": 30,
+    "weight": 70.0,
+    "height": 1.75,
+    "biological_sex": "male",
+    "email": "mock@example.com"
+  },
+  "sleep": {
+    "id": "mock-sleep-id",
+    "contributors": {
+      "deep_sleep": 88,
+      "efficiency": 92,
+      "latency": 75,
+      "rem_sleep": 85,
+      "restfulness": 80,
+      "timing": 78,
+      "total_sleep": 90
+    },
+    "day": "2024-12-02",
+    "score": 85,
+    "timestamp": "2024-12-02T08:00:00Z"
+  },
+  "readiness": {
+    "id": "mock-readiness-id",
+    "contributors": {
+      "activity_balance": 80,
+      "body_temperature": 85,
+      "hrv_balance": 75,
+      "previous_day_activity": 82,
+      "previous_night": 88,
+      "recovery_index": 78,
+      "resting_heart_rate": 85,
+      "sleep_balance": 80,
+      "sleep_regularity": 75
+    },
+    "day": "2024-12-03",
+    "score": 78,
+    "temperature_deviation": 0.2,
+    "temperature_trend_deviation": 0.1,
+    "timestamp": "2024-12-03T06:00:00Z"
+  },
+  "activity": {
+    "id": "mock-activity-id",
+    "active_calories": 450,
+    "average_met_minutes": 1.8,
+    "class_5_min": "11111222222222222333333333333333333222222222222221111111111111111111111111111111111111111111",
+    "contributors": {
+      "meet_daily_targets": 85,
+      "move_every_hour": 78,
+      "recovery_time": 80,
+      "stay_active": 82,
+      "training_frequency": 75,
+      "training_volume": 80
+    },
+    "day": "2024-12-02",
+    "equivalent_walking_distance": 12500,
+    "high_activity_met_minutes": 180,
+    "high_activity_time": 3600,
+    "inactivity_alerts": 2,
+    "low_activity_met_minutes": 450,
+    "low_activity_time": 14400,
+    "medium_activity_met_minutes": 320,
+    "medium_activity_time": 7200,
+    "met": {
+      "interval": 60,
+      "items": [1.0, 1.2, 1.5, 2.0, 2.5],
+      "timestamp": "2024-12-02T00:00:00Z"
+    },
+    "meters_to_target": 2500,
+    "non_wear_time": 0,
+    "resting_time": 28800,
+    "score": 82,
+    "sedentary_met_minutes": 600,
+    "sedentary_time": 21600,
+    "steps": 10000,
+    "target_calories": 500,
+    "target_meters": 15000,
+    "timestamp": "2024-12-02T23:59:59Z",
+    "total_calories": 2200
+  },
+  "heart_rate": {
+    "latest_bpm": 65,
+    "avg_bpm": 68,
+    "resting_bpm": 58,
+    "trend_values": [58, 59, 57, 58, 60, 58, 59]
+  },
+  "updated_at": "2024-12-03T00:00:00Z"
+}

@@ -1,0 +1,25 @@
+{
+  "hide_commands": [],
+  "debug_mode": false,
+  "settingsPage": "general",
+  "macros": [],
+  "editorMenu": [],
+  "fileMenu": [],
+  "leftRibbon": [
+    {
+      "id": "periodic-notes:open-daily-note",
+      "icon": "calendar-days",
+      "name": "Open today's daily note",
+      "type": "command"
+    },
+    {
+      "id": "homepage:open-homepage",
+      "icon": "home",
+      "name": "Open Home",
+      "type": "command"
+    }
+  ],
+  "rightRibbon": [],
+  "titleBar": [],
+  "statusBar": []
+}

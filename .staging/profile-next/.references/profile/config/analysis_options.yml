@@ -1,0 +1,45 @@
+# analysis_options.yaml
+
+include: package:lints/recommended.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  exclude:
+    - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.gr.dart"
+    - "build/**"
+    - "lib/generated/**"
+    - "**/*.mocks.dart"
+
+linter:
+  rules:
+    # Code quality
+    - avoid_print
+    - cancel_subscriptions
+    - close_sinks
+    - prefer_const_constructors
+    - prefer_final_locals
+    - unnecessary_this
+
+    # Style & formatting
+    - always_put_control_body_on_new_line
+    - always_specify_types
+    - annotate_overrides
+    - curly_braces_in_flow_control_structures
+    - prefer_single_quotes
+    - prefer_expression_function_bodies
+    - avoid_annotating_with_dynamic
+
+    # Naming
+    - camel_case_types
+    - constant_identifier_names
+    - library_prefixes
+    - non_constant_identifier_names
+
+    # Type safety
+    - type_annotate_public_apis
+    - avoid_dynamic_calls
+    - avoid_null_checks_in_equality_operators
