@@ -1,0 +1,117 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🐛 Bug Report"
+description: "Report a defect, regression, unexpected behavior, or system failure."
+title: "[Bug]: "
+labels:
+  - bug
+  - triage
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug.
+
+        Please provide enough information for another contributor to reproduce,
+        investigate, and validate the issue.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug Summary
+      description: Briefly describe the problem.
+      placeholder: |
+        Describe the unexpected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+      placeholder: |
+        Describe the expected result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: |
+        Describe the observed result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Reproduction Steps
+      description: Provide steps to reproduce the issue.
+      placeholder: |
+        1. Run...
+        2. Navigate to...
+        3. Observe...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Relevant operating system, runtime, browser, container, or tooling information.
+      placeholder: |
+        OS:
+        Runtime:
+        Browser:
+        Package Manager:
+        Container:
+        Other:
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Output
+      description: Include any relevant logs, stack traces, or command output.
+      render: shell
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: How severe is the issue?
+      placeholder: |
+        - Cosmetic
+        - Minor
+        - Major
+        - Blocking
+        - Security Related
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Screenshots, related issues, workarounds, or observations.
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validation
+      options:
+        - label: I searched for existing issues before creating this report.
+          required: true
+        - label: I can reproduce this issue consistently.
+        - label: I have included relevant logs or reproduction information where possible.
+
+  - type: checkboxes
+    id: code_of_conduct
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct.
+          required: true

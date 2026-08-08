@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🧹 Technical Debt"
+description: "Track known limitations, shortcuts, maintenance concerns, or future improvements."
+title: "[Tech Debt]: "
+labels:
+  - tech-debt
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - known limitations
+        - temporary workarounds
+        - maintenance concerns
+        - architectural shortcuts
+        - implementation compromises
+        - future cleanup opportunities
+
+        Technical debt is not necessarily a bug. It is work that is known to
+        be suboptimal but accepted temporarily.
+
+  - type: textarea
+    id: current_state
+    attributes:
+      label: Current State
+      description: |
+        Describe the current implementation or situation.
+      placeholder: |
+        Explain what exists today and how it currently works.
+    validations:
+      required: true
+
+  - type: textarea
+    id: debt_description
+    attributes:
+      label: Debt Description
+      description: |
+        Why is this considered technical debt?
+      placeholder: |
+        Describe the limitation, compromise, risk, or maintenance burden.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: |
+        What problems could result if this remains unresolved?
+      placeholder: |
+        - Increased maintenance cost
+        - Reduced reliability
+        - Slower development
+        - Architectural complexity
+
+  - type: textarea
+    id: proposed_resolution
+    attributes:
+      label: Proposed Resolution
+      description: |
+        How should this debt eventually be addressed?
+      placeholder: |
+        Describe the preferred future state.
+
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Blockers or Constraints
+      description: |
+        Why has this not been addressed yet?
+      placeholder: |
+        Document dependencies, priorities, risks, or resource constraints.
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Resolution Criteria
+      description: |
+        How will we know this debt has been successfully resolved?
+      placeholder: |
+        Define acceptance criteria or validation expectations.
+
+  - type: checkboxes
+    id: debt_category
+    attributes:
+      label: Debt Category
+      options:
+        - label: Architecture
+        - label: Automation
+        - label: Documentation
+        - label: Testing
+        - label: Developer Experience
+        - label: Security
+        - label: Performance
+        - label: Dependencies
+
+  - type: checkboxes
+    id: follow_up
+    attributes:
+      label: Follow-Up Actions
+      options:
+        - label: A specification document should be created.
+        - label: An architecture review may be required.
+        - label: This debt affects platform-wide standards.
+        - label: This debt should be tracked as part of a future milestone.

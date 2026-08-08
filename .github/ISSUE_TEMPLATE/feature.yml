@@ -1,0 +1,115 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "✨ Feature Request"
+description: "Propose a new feature, capability, or user-facing improvement."
+title: "[Feature]: "
+labels:
+  - enhancement
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - new features
+        - user-facing improvements
+        - workflow enhancements
+        - platform capabilities
+        - quality-of-life improvements
+
+        For large system design changes, consider creating an Architecture issue first.
+
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: Problem Statement
+      description: |
+        What problem, limitation, or unmet need exists?
+      placeholder: |
+        Describe the current experience and why improvement is needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Who benefits from this feature and why is it valuable?
+      placeholder: |
+        Explain the expected value and desired outcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Describe the feature or improvement being requested.
+      placeholder: |
+        Explain the desired behavior, workflow, or capability.
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_experience
+    attributes:
+      label: User Experience
+      description: |
+        How should users interact with this feature?
+      placeholder: |
+        Describe the expected workflow or user journey.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: |
+        What other solutions, workarounds, or approaches were considered?
+      placeholder: |
+        Include tradeoffs and reasons alternatives were rejected.
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected Impact
+      description: |
+        What improvements should result from this feature?
+      placeholder: |
+        - Better developer experience
+        - Reduced maintenance effort
+        - Improved performance
+        - Increased usability
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation Criteria
+      description: |
+        How will success be measured?
+      placeholder: |
+        Define acceptance criteria, expected outcomes, or validation steps.
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: User-facing feature
+        - label: Developer experience improvement
+        - label: Automation enhancement
+        - label: Documentation improvement
+        - label: API or integration change
+        - label: Platform capability
+
+  - type: checkboxes
+    id: follow_up
+    attributes:
+      label: Follow-Up Actions
+      options:
+        - label: A specification document should be created.
+        - label: An architecture review may be required.
+        - label: A proof of concept should be implemented.
+        - label: Additional research is required.

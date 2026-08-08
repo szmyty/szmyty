@@ -1,0 +1,116 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🧱 Architecture"
+description: "Propose architectural improvements, design decisions, or system-level changes."
+title: "[Arch]: "
+labels:
+  - architecture
+  - discussion
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+        - architectural improvements
+        - system design discussions
+        - technical direction proposals
+        - major refactors
+        - platform and infrastructure decisions
+
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: Problem Statement
+      description: |
+        What problem, limitation, risk, or opportunity has been identified?
+      placeholder: |
+        Describe the current state and why a change may be needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: goals
+    attributes:
+      label: Goals
+      description: |
+        What outcomes should this proposal achieve?
+      placeholder: |
+        - Improve maintainability
+        - Reduce complexity
+        - Improve developer experience
+        - Increase performance
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Describe the recommended architectural approach.
+      placeholder: |
+        Provide a high-level design and rationale.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: |
+        What other options were evaluated?
+      placeholder: |
+        Include tradeoffs and reasons for rejection.
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact Analysis
+      description: |
+        What systems, workflows, repositories, services, or users are affected?
+      placeholder: |
+        List impacted areas and expected consequences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and Tradeoffs
+      description: |
+        What risks, drawbacks, uncertainties, or technical debt might be introduced?
+      placeholder: |
+        Document potential concerns and mitigation strategies.
+
+  - type: textarea
+    id: implementation_strategy
+    attributes:
+      label: Implementation Strategy
+      description: |
+        How should this be introduced?
+      placeholder: |
+        - Incremental rollout
+        - Full migration
+        - Parallel implementation
+        - Proof of concept first
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation Plan
+      description: |
+        How will success be measured?
+      placeholder: |
+        Define testing, verification, benchmarks, or acceptance criteria.
+
+  - type: checkboxes
+    id: follow_up
+    attributes:
+      label: Follow-Up Actions
+      options:
+        - label: A specification document should be created.
+        - label: Additional research is required.
+        - label: A proof of concept should be implemented.
+        - label: This proposal affects existing templates or standards.
+        - label: This proposal affects CI/CD or automation workflows.

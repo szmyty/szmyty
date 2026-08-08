@@ -1,0 +1,81 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🧠 Developer Experience"
+description: "Improve onboarding, tooling, workflows, ergonomics, or overall developer productivity."
+title: "[DX]: "
+labels:
+  - developer-experience
+  - dx
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - onboarding improvements
+        - workflow improvements
+        - tooling ergonomics
+        - automation opportunities
+        - reducing cognitive overhead
+        - improving developer productivity
+
+  - type: textarea
+    id: pain_point
+    attributes:
+      label: Current Pain Point
+      description: |
+        What is frustrating, confusing, slow, or difficult today?
+      placeholder: |
+        Describe the current developer experience issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_improvement
+    attributes:
+      label: Proposed Improvement
+      description: |
+        How could the experience be improved?
+      placeholder: |
+        Describe the desired workflow or outcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Expected Benefits
+      description: |
+        What improvements should result from this change?
+
+  - type: textarea
+    id: affected_workflows
+    attributes:
+      label: Affected Workflows
+      description: |
+        Which workflows, systems, or contributors are affected?
+
+  - type: checkboxes
+    id: dx_area
+    attributes:
+      label: DX Area
+      options:
+        - label: Onboarding
+        - label: Documentation
+        - label: Automation
+        - label: Tooling
+        - label: CI/CD
+        - label: Development Environment
+        - label: AI-Assisted Development
+        - label: Repository Structure
+
+  - type: checkboxes
+    id: follow_up
+    attributes:
+      label: Follow-Up Actions
+      options:
+        - label: A specification document should be created.
+        - label: Existing tooling should be refactored.
+        - label: Existing workflows should be simplified.
+        - label: Documentation should be updated.

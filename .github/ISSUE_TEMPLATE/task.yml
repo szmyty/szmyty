@@ -1,0 +1,96 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🧹 Task"
+description: "Track a discrete unit of work, implementation effort, or maintenance activity."
+title: "[Task]: "
+labels:
+  - task
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - implementation work
+        - maintenance tasks
+        - refactors
+        - follow-up work
+        - specification execution
+        - technical debt reduction
+
+        For new ideas or capabilities, consider creating a Feature Request or
+        Architecture issue instead.
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: |
+        What needs to be accomplished?
+      placeholder: |
+        Describe the desired outcome of this task.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: |
+        Why is this task needed?
+      placeholder: |
+        Reference related issues, specifications, decisions, or discussions.
+
+  - type: textarea
+    id: implementation_plan
+    attributes:
+      label: Implementation Plan
+      description: |
+        Describe the planned approach.
+      placeholder: |
+        - Step 1
+        - Step 2
+        - Step 3
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: |
+        Related links, specifications, documentation, pull requests, or issues.
+      placeholder: |
+        Include supporting resources and context.
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation Criteria
+      description: |
+        How will completion be verified?
+      placeholder: |
+        Define acceptance criteria, tests, reviews, or validation steps.
+
+  - type: checkboxes
+    id: task_type
+    attributes:
+      label: Task Type
+      options:
+        - label: Implementation
+        - label: Refactor
+        - label: Maintenance
+        - label: Documentation
+        - label: Technical Debt
+        - label: Research
+        - label: Automation
+        - label: Testing
+
+  - type: checkboxes
+    id: completion
+    attributes:
+      label: Completion Requirements
+      options:
+        - label: Documentation has been updated where necessary.
+        - label: Validation steps have been completed.
+        - label: Related issues or specifications have been linked.
+        - label: Follow-up work has been identified where applicable.

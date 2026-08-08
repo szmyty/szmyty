@@ -1,0 +1,77 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🔬 Research"
+description: "Investigate technologies, approaches, tooling, or architectural decisions."
+title: "[Research]: "
+labels:
+  - research
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - technology evaluations
+        - architecture investigations
+        - tooling comparisons
+        - proof-of-concept work
+        - exploratory analysis
+
+  - type: textarea
+    id: research_topic
+    attributes:
+      label: Research Topic
+      description: |
+        What needs to be investigated?
+      placeholder: |
+        Describe the question or decision being explored.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Why is this research needed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: |
+        What should be evaluated or investigated?
+
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: Success Criteria
+      description: |
+        What information should be gathered before this issue is complete?
+
+  - type: checkboxes
+    id: research_area
+    attributes:
+      label: Research Area
+      options:
+        - label: Architecture
+        - label: Tooling
+        - label: Infrastructure
+        - label: Automation
+        - label: Security
+        - label: Performance
+        - label: Developer Experience
+        - label: AI and Agents
+
+  - type: checkboxes
+    id: outcomes
+    attributes:
+      label: Expected Outcomes
+      options:
+        - label: Architecture issue should be created.
+        - label: Specification should be created.
+        - label: Proof of concept should be implemented.
+        - label: Documentation should be updated.

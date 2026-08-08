@@ -1,0 +1,48 @@
+---
+# =============================================================================
+# Funding Configuration
+# =============================================================================
+#
+# This file enables the "Sponsor" button across all repositories in the
+# organization (when not overridden locally).
+#
+# Documentation:
+# https://docs.github.com/en/sponsors/receiving-sponsorships-through-github-sponsors/about-funding-files
+#
+# Notes:
+# - Values should match your username or profile on each platform
+# - Commented entries can be enabled later as needed
+# - Keep this file sorted alphabetically for maintainability
+#
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 💰 Active Funding Platforms
+# -----------------------------------------------------------------------------
+
+buy_me_a_coffee: szmyty
+github: szmyty
+ko_fi: szmyty
+open_collective: szmyty
+patreon: szmyty
+thanks_dev: u/gh/szmyty
+
+# -----------------------------------------------------------------------------
+# 🧪 Optional / Future Platforms (currently disabled)
+# -----------------------------------------------------------------------------
+
+# community_bridge: szmyty
+# issuehunt: szmyty
+# liberapay: szmyty
+# polar: szmyty
+# tidelift: szmyty
+
+# -----------------------------------------------------------------------------
+# 📝 Notes
+# -----------------------------------------------------------------------------
+#
+# - GitHub Sponsors (`github`) is the primary funding channel
+# - Other platforms provide diversification and accessibility
+# - Uncomment additional platforms as they are configured
+#
+# =============================================================================

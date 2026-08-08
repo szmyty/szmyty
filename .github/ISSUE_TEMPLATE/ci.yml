@@ -1,0 +1,110 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "🔁 Automation & CI/CD"
+description: "Propose improvements to automation, workflows, testing, builds, deployments, or developer experience."
+title: "[CI/CD]: "
+labels:
+  - ci-cd
+  - automation
+  - devops
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - CI/CD pipeline improvements
+        - GitHub Actions enhancements
+        - automation opportunities
+        - deployment workflows
+        - release processes
+        - testing improvements
+        - developer experience improvements
+
+  - type: textarea
+    id: current_state
+    attributes:
+      label: Current State
+      description: |
+        Describe the existing workflow, automation, or process.
+      placeholder: |
+        Explain how the current system operates today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: Problem Statement
+      description: |
+        What issue, bottleneck, maintenance burden, or limitation exists?
+      placeholder: |
+        Describe what is not working well and why improvement is needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Describe the recommended automation or workflow improvement.
+      placeholder: |
+        Explain the desired future state and implementation approach.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_benefits
+    attributes:
+      label: Expected Benefits
+      description: |
+        What improvements should result from this change?
+      placeholder: |
+        - Faster builds
+        - Improved reliability
+        - Better developer experience
+        - Reduced maintenance effort
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and Tradeoffs
+      description: |
+        Are there any risks, costs, complexity increases, or operational concerns?
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation Plan
+      description: |
+        How should success be measured?
+      placeholder: |
+        Define validation steps, metrics, benchmarks, or acceptance criteria.
+
+  - type: checkboxes
+    id: affected_systems
+    attributes:
+      label: Affected Systems
+      options:
+        - label: GitHub Actions
+        - label: Composite Actions
+        - label: Taskfile
+        - label: Dev Containers
+        - label: Linting and Formatting
+        - label: Release Automation
+        - label: Dependency Management
+        - label: Docker or Containers
+        - label: Documentation Automation
+
+  - type: checkboxes
+    id: follow_up
+    attributes:
+      label: Follow-Up Actions
+      options:
+        - label: A specification document should be created.
+        - label: A proof of concept should be implemented.
+        - label: Existing automation should be refactored.
+        - label: This change affects repository templates.
+        - label: This change affects platform-wide standards.

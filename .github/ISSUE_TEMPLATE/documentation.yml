@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+name: "📚 Documentation"
+description: "Propose documentation improvements, onboarding enhancements, or missing documentation."
+title: "[Docs]: "
+labels:
+  - documentation
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for:
+
+        - missing documentation
+        - onboarding improvements
+        - documentation refactors
+        - examples and tutorials
+        - clarification requests
+
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: Documentation Problem
+      description: |
+        What information is missing, unclear, outdated, or difficult to find?
+      placeholder: |
+        Describe the current documentation issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: audience
+    attributes:
+      label: Target Audience
+      description: |
+        Who would benefit from this improvement?
+      placeholder: |
+        New contributors, maintainers, users, operators, etc.
+
+  - type: textarea
+    id: proposed_improvement
+    attributes:
+      label: Proposed Improvement
+      description: |
+        How should the documentation be improved?
+      placeholder: |
+        Describe the desired documentation changes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: |
+        Related specifications, issues, discussions, or documentation.
+
+  - type: checkboxes
+    id: documentation_type
+    attributes:
+      label: Documentation Type
+      options:
+        - label: README
+        - label: Architecture
+        - label: API
+        - label: Tutorial
+        - label: Onboarding
+        - label: Troubleshooting
+        - label: Specification

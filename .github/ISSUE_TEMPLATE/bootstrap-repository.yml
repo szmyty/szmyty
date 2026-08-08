@@ -1,0 +1,219 @@
+name: "🏗️ Repository Evolution Bootstrap"
+description: Bootstrap an existing repository using the Engineering Methodology.
+title: "🏗️ Bootstrap: "
+labels:
+  - bootstrap
+  - architecture
+  - engineering
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Repository Evolution Bootstrap
+
+        Complete this form (manually or with ChatGPT) to generate the initial
+        engineering roadmap for a repository.
+
+        The objective is **not** to scaffold a project.
+
+        The objective is to understand the repository, identify missing
+        foundations, and generate implementation-ready GitHub issues.
+
+  - type: input
+    id: repository_name
+    attributes:
+      label: Repository Name
+      placeholder: egohygiene
+    validations:
+      required: true
+
+  - type: input
+    id: repository_url
+    attributes:
+      label: Repository URL
+      placeholder: https://github.com/...
+
+  - type: dropdown
+    id: repository_type
+    attributes:
+      label: Repository Type
+      options:
+        - Flutter Application
+        - Python Service
+        - Node Application
+        - Rust Project
+        - Static Website
+        - Documentation
+        - Research
+        - GitHub Profile
+        - CLI
+        - Library
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: repository_maturity
+    attributes:
+      label: Current Maturity
+      options:
+        - Idea
+        - Prototype
+        - MVP
+        - Production
+        - Maintenance
+    validations:
+      required: true
+
+  - type: textarea
+    id: repository_purpose
+    attributes:
+      label: Repository Purpose
+      description: |
+        What is this repository trying to accomplish?
+      placeholder: |
+        {repository_purpose}
+
+  - type: textarea
+    id: repository_vision
+    attributes:
+      label: Long-Term Vision
+      placeholder: |
+        {repository_vision}
+
+  - type: textarea
+    id: repository_summary
+    attributes:
+      label: Repository Discovery Summary
+      description: |
+        Summarize the current state of the repository.
+      placeholder: |
+        {repository_summary}
+
+  - type: textarea
+    id: repository_tree
+    attributes:
+      label: Repository Tree
+      description: |
+        Paste the output of tree -a (or similar).
+      render: text
+      placeholder: |
+        {repository_tree}
+
+  - type: textarea
+    id: documentation_summary
+    attributes:
+      label: Existing Documentation
+      placeholder: |
+        {documentation_summary}
+
+  - type: textarea
+    id: strengths
+    attributes:
+      label: Existing Strengths
+      placeholder: |
+        {existing_strengths}
+
+  - type: textarea
+    id: pain_points
+    attributes:
+      label: Current Pain Points
+      placeholder: |
+        {pain_points}
+
+  - type: textarea
+    id: missing_foundations
+    attributes:
+      label: Missing Foundations
+      placeholder: |
+        {missing_foundations}
+
+  - type: textarea
+    id: goals
+    attributes:
+      label: Current Goals
+      placeholder: |
+        {goals}
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      placeholder: |
+        {constraints}
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-Goals
+      placeholder: |
+        {non_goals}
+
+  - type: textarea
+    id: repository_personality
+    attributes:
+      label: Repository Personality
+      description: |
+        Describe the style or character of the project.
+      placeholder: |
+        {repository_personality}
+
+  - type: textarea
+    id: architecture_recommendations
+    attributes:
+      label: Architecture Recommendations
+      placeholder: |
+        {architecture_recommendations}
+
+  - type: textarea
+    id: files_to_generate
+    attributes:
+      label: Files To Generate
+      render: text
+      placeholder: |
+        README.md
+
+        PURPOSE.md
+        PRINCIPLES.md
+        VISION.md
+        ROADMAP.md
+        ONTOLOGY.md
+        METHODOLOGY.md
+
+        ARCHITECTURE.md
+        SYSTEM.md
+        FOUNDATIONS.md
+        DESIGN.md
+
+        docs/
+        schemas/
+        .github/specs/
+        .github/agents/
+
+  - type: textarea
+    id: github_issue_breakdown
+    attributes:
+      label: GitHub Issue Roadmap
+      placeholder: |
+        {github_issue_breakdown}
+
+  - type: textarea
+    id: copilot_execution_plan
+    attributes:
+      label: Copilot Execution Plan
+      placeholder: |
+        {copilot_execution_plan}
+
+  - type: checkboxes
+    id: success_criteria
+    attributes:
+      label: Bootstrap Success Criteria
+      options:
+        - label: Repository purpose is clearly defined.
+        - label: Engineering foundations are identified.
+        - label: Missing architecture is documented.
+        - label: GitHub issues are prioritized.
+        - label: Repository evolution roadmap exists.
+        - label: Copilot implementation plan exists.
+        - label: Repository can evolve through iterative GitHub issues.
+
