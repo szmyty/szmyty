@@ -1,0 +1,29 @@
+version: 1
+
+profiles:
+  flutter:
+    status: ready
+    description: Shared Flutter application run configuration.
+    target_root: .idea
+    files:
+      - runConfigurations/main_dart.xml
+
+  java:
+    status: ready
+    description: Checkstyle IDEA integration using bundled rule sets.
+    target_root: .idea
+    files:
+      - checkstyle-idea.xml
+
+  python:
+    status: ready
+    description: Ruff integration using the repository pyproject.toml.
+    target_root: .idea
+    files:
+      - ruff.xml
+
+  kotlin:
+    status: deferred
+    description: Add only after a tested Detekt project configuration exists.
+    target_root: .idea
+    files: []

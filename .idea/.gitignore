@@ -1,0 +1,28 @@
+# JetBrains user-local state
+/workspace.xml
+/tasks.xml
+/usage.statistics.xml
+/shelf/
+
+# Local requests and data sources
+/httpRequests/
+/dataSources/
+/dataSources.local.xml
+
+# Generated project and SDK metadata
+/libraries/
+/modules.xml
+*.iml
+
+# Device, deployment, and cache state
+/caches/
+/deploymentTargetDropDown.xml
+/deviceManager.xml
+
+# Plugin-local state
+/jpa-buddy.xml
+/res/
+/sonarlint/
+
+# Operating-system metadata
+.DS_Store

@@ -159,14 +159,8 @@ UpgradeLog*.htm
 UpgradeLog*.XML
 
 # --- JetBrains (IntelliJ, PyCharm, WebStorm, Android Studio, etc.) ---
-.idea/
-!.idea/codeStyles
-!.idea/runConfigurations
 .idea_modules/
 .navigation/
-*.iml
-*.ipr
-*.iws
 atlassian-ide-plugin.xml
 cmake-build-*/
 out/
