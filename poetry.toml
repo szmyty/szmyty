@@ -1,0 +1,107 @@
+# poetry.toml
+#
+# Repository-local Poetry configuration.
+#
+# Philosophy:
+# - Reproducible developer environments.
+# - Fast dependency resolution.
+# - Local .venv for IDE compatibility.
+# - Minimal machine-specific overrides.
+# - Poetry 2.4+ compatible.
+
+# ------------------------------------------------------------------------------
+# Virtual Environments
+# ------------------------------------------------------------------------------
+[virtualenvs]
+
+# Always use virtual environments.
+create = true
+
+# Store virtual environments inside the repository.
+#
+# Benefits:
+# - VS Code detects automatically.
+# - Easy cleanup.
+# - Predictable location.
+# - Better devcontainer support.
+in-project = true
+
+# Nice shell prompt.
+prompt = "{project_name}-py{python_version}"
+
+# Use the currently active Python interpreter.
+#
+# Default is false and is generally what most developers expect.
+use-poetry-python = false
+
+[virtualenvs.options]
+# Do not inherit global site packages.
+#
+# Ensures clean and reproducible environments.
+system-site-packages = false
+
+# ------------------------------------------------------------------------------
+# Installer
+# ------------------------------------------------------------------------------
+[installer]
+
+# Enable parallel installation.
+parallel = true
+
+# Allow wheels when available.
+#
+# Faster installs and fewer build failures.
+no-binary = false
+
+# Do not force wheel-only installs.
+only-binary = false
+
+# Poetry 2.3+ changed the default behavior.
+#
+# Explicitly disable re-resolution and trust the lockfile.
+re-resolve = false
+
+# ------------------------------------------------------------------------------
+# Dependency Resolution
+# ------------------------------------------------------------------------------
+[solver]
+
+# Download wheel metadata using HTTP range requests.
+# Significantly reduces network traffic.
+lazy-wheel = true
+
+# Optional supply-chain hardening.
+#
+# Ignore packages released in the last 3 days.
+min-release-age = 3
+
+#
+# Example:
+#
+# min-release-age-exclude = "my-internal-package"
+
+# ------------------------------------------------------------------------------
+# Networking
+# ------------------------------------------------------------------------------
+[requests]
+# Retry transient network failures.
+#
+# Useful for CI and flaky hotel Wi-Fi.
+max-retries = 3
+
+# ------------------------------------------------------------------------------
+# Git Integration
+# ------------------------------------------------------------------------------
+
+# Use Dulwich by default.
+#
+# Change to true only if you encounter git dependency issues.
+system-git-client = false
+
+# ------------------------------------------------------------------------------
+# Credentials
+# ------------------------------------------------------------------------------
+[keyring]
+
+# Allow secure credential storage.
+enabled = true
