@@ -1,4 +1,0 @@
-feeds:
-  - id: ego-hygiene-medium
-    url: https://articles.egohygiene.io/feed
-    output: publishing/channels/medium

@@ -1,0 +1,22 @@
+# -----------------------------------------------------------------------------
+# Repository act Configuration
+# -----------------------------------------------------------------------------
+#
+# Purpose:
+#   Repository-specific defaults for local GitHub Actions execution.
+# -----------------------------------------------------------------------------
+
+# Use the repository root.
+--directory .
+
+# Cache actions inside the repository.
+--action-cache-path ./.cache/act/actions
+
+# Cache layers inside the repository.
+--cache-server-path ./.cache/act/cache
+
+# Default runner image.
+--platform ubuntu-latest=catthehacker/ubuntu:act-latest
+
+# Disable the local cache server.
+--no-cache-server

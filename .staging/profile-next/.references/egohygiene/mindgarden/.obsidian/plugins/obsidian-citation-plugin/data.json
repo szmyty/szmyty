@@ -1,9 +1,0 @@
-{
-  "citationExportPath": "",
-  "citationExportFormat": "bibtex",
-  "literatureNoteTitleTemplate": "@{{citekey}}",
-  "literatureNoteFolder": "research/references",
-  "literatureNoteContentTemplate": "---\ntitle: \"{{title}}\"\nauthors: {{authorString}}\nyear: {{year}}\ncitekey: {{citekey}}\ntags:\n  - reference\n---\n\n# {{title}}\n\n## Metadata\n\n| Field | Value |\n| ----- | ----- |\n| Authors | {{authorString}} |\n| Year | {{year}} |\n| URL | {{url}} |\n| DOI | {{DOI}} |\n\n## Abstract\n\n{{abstract}}\n\n## Notes\n\n## Key Concepts\n\n## Quotes\n\n## Related\n",
-  "openNoteAfterCreation": true,
-  "openNoteAfterCreationCommand": false
-}

@@ -1,0 +1,47 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  _require:
+    internal: true
+    preconditions:
+      - sh: command -v git >/dev/null 2>&1
+        msg: Git is not installed or is not available on PATH.
+      - sh: git rev-parse --is-inside-work-tree >/dev/null 2>&1
+        msg: The current repository root is not a Git worktree.
+
+  summary:
+    desc: Show concise worktree status and the five most recent commits
+    deps: [_require]
+    cmds:
+      - git status --short --branch
+      - git log --oneline --max-count=5 --graph --decorate
+    silent: true
+
+  branch:
+    desc: Print the current Git branch
+    deps: [_require]
+    cmds:
+      - git rev-parse --abbrev-ref HEAD
+    silent: true
+
+  heatmap:
+    desc: Show the twenty most active commit dates
+    deps: [_require]
+    cmds:
+      - >-
+        git log --date=short --pretty=format:"%ad"
+        | sort
+        | uniq -c
+        | sort -nr
+        | head -n 20
+    silent: true
+
+  contributors:
+    desc: List contributors ordered by commit count
+    deps: [_require]
+    cmds:
+      - git shortlog --summary --numbered --all --no-merges
+    silent: true

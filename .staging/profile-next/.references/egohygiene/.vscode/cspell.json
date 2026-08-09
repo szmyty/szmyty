@@ -1,5 +1,0 @@
-{
-  "import": [
-    "../lint/config/prose/spell/cspell.json"
-  ]
-}

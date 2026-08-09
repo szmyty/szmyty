@@ -1,9 +1,0 @@
-{
-  "formatType": "normal",
-  "formatCurrentColumnOnly": false,
-  "alignColumns": true,
-  "paddingColumns": true,
-  "keepFirstAndLastPipes": true,
-  "defaultEscapeCharacter": "\\",
-  "smartEscapeEnabled": false
-}
