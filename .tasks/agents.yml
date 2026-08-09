@@ -4,45 +4,18 @@
 version: "3"
 
 tasks:
-  doctor:
-    desc: Check the local OpenCode, Ollama, model, and repository setup
-    cmds:
-      - bash ".agents/scripts/doctor.sh"
-
   models:
     desc: List locally installed Ollama models
+    preconditions:
+      - sh: command -v ollama >/dev/null 2>&1
+        msg: "Ollama is not installed or is not on PATH."
     cmds:
       - ollama list
 
   running-models:
     desc: Show models currently loaded by Ollama
+    preconditions:
+      - sh: command -v ollama >/dev/null 2>&1
+        msg: "Ollama is not installed or is not on PATH."
     cmds:
       - ollama ps
-
-  open:
-    desc: Start OpenCode with the project-local configuration
-    preconditions:
-      - sh: command -v opencode >/dev/null 2>&1
-        msg: "OpenCode is not installed or is not on PATH."
-      - sh: ollama list >/dev/null 2>&1
-        msg: "Ollama is not responding. Start Ollama first."
-    cmds:
-      - opencode
-
-  config:
-    desc: Print OpenCode's resolved project configuration
-    cmds:
-      - opencode debug config
-
-  mindcap-doctor:
-    desc: Run Mindcap's ChatGPT capture diagnostics
-    dir: "tools/mindcap"
-    cmds:
-      - task doctor
-
-  mindcap-paths:
-    desc: Show Mindcap artifact and browser-profile locations
-    dir: "tools/mindcap"
-    cmds:
-      - task paths
-

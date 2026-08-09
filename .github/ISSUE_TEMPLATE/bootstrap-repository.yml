@@ -23,7 +23,7 @@ body:
     id: repository_name
     attributes:
       label: Repository Name
-      placeholder: egohygiene
+      placeholder: my-new-repository
     validations:
       required: true
 

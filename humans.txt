@@ -1,156 +1,55 @@
 /* TEAM */
 
 Name: Alan Szmyt
-Role: Founder, Software Engineer, Architect
+Role: Software Engineer, Systems Architect, Creative Technologist
 GitHub: https://github.com/szmyty
 Location: Massachusetts, USA
 
 /* PROJECT */
 
-Name: Ego Hygiene
+Name: szmyty/szmyty
 
 Description:
-A privacy-first, offline-first platform for cultivating self-awareness,
-capturing knowledge, and transforming personal experience into
-understanding through thoughtful software, research, and publishing.
-
-Mission:
-Help people better understand themselves through intentional reflection,
-evidence-informed practices, and open source technology.
-
-Core Principles:
-- Privacy First
-- Offline First
-- Human Centered
-- AI-Assisted, Not AI-Driven
-- Evidence Informed
-- Open by Default
+Alan Szmyt's public GitHub profile repository and reusable README/template
+assets. Maintained as a personal engineering profile and template system.
 
 /* REPOSITORY */
 
 Repository:
-https://github.com/egohygiene/egohygiene
-
-Project Website:
-https://egohygiene.io
-
-Documentation:
-https://github.com/egohygiene/egohygiene/tree/main/docs
+https://github.com/szmyty/szmyty
 
 Issues:
-https://github.com/egohygiene/egohygiene/issues
+https://github.com/szmyty/szmyty/issues
 
 Discussions:
-https://github.com/egohygiene/egohygiene/discussions
-
-/* ECOSYSTEM */
-
-This repository serves as the canonical home for:
-
-- Ego Hygiene Flutter application
-- MindGarden knowledge system
-- Publishing platform
-- Documentation
-- Engineering standards
-- AI specifications
-- GitHub automation
-- Research
-- Reusable developer tooling
+https://github.com/szmyty/szmyty/discussions
 
 /* TECHNOLOGY */
 
 Primary Languages:
 
-- Dart
-- Flutter
-- TypeScript
 - Python
 - Bash
 - YAML
+- Markdown
 
 Core Technologies:
 
-- Flutter
-- Riverpod
-- Drift
-- SQLite
 - GitHub Actions
 - Task
-- FVM
-- Python
 - Poetry
-
-Engineering Practices:
-
-- Specification-Driven Development
-- Architecture First
-- Local First
-- Offline First
-- Conventional Commits
-- Continuous Integration
-- Continuous Documentation
-
-/* PHILOSOPHY */
-
-The project is organized around lifecycle rather than technology.
-
-Personal Experience
-
-↓
-
-Knowledge
-
-↓
-
-Understanding
-
-↓
-
-Action
-
-↓
-
-Publishing
-
-↓
-
-Research
-
-↓
-
-Impact
-
-Software is one interface.
-
-Documentation is another.
-
-Research is another.
-
-All contribute toward the same goal.
-
-See:
-
-- MANIFESTO.md
-- FOUNDATIONS.md
-- ARCHITECTURE.md
-- AI_CONSTITUTION.md
 
 /* THANKS */
 
 Special thanks to the open source community and everyone whose
-ideas, libraries, research, and tools continue to make this project possible.
-
-Every dependency represents countless hours of work by people choosing
-to share their knowledge with others.
-
-Thank you.
+ideas, libraries, research, and tools make this project possible.
 
 See CONTRIBUTORS.md for repository contributors.
 
 /* METADATA */
 
 Repository:
-https://github.com/egohygiene/egohygiene
+https://github.com/szmyty/szmyty
 
 Maintained By:
 Alan Szmyt
@@ -159,7 +58,7 @@ License:
 MIT
 
 Last Updated:
-2026-07-13
+2026-08-09
 
 Humans TXT:
 https://humanstxt.org

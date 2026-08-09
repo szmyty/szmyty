@@ -8,15 +8,6 @@
 # Purpose:
 #   Define repository issue creation behavior and contributor guidance.
 #
-# Design Goals:
-#   - encourage structured issue creation
-#   - reduce untracked work
-#   - route contributors to the appropriate workflow
-#   - support spec-driven development
-#
-# Reference:
-#   https://docs.github.com/issues/tracking-your-work-with-issues
-#
 # -----------------------------------------------------------------------------
 
 # Require contributors to use issue forms.
@@ -24,17 +15,17 @@ blank_issues_enabled: false
 
 contact_links:
   - name: 💬 Questions & Discussions
-    url: https://github.com/egohygiene/sanctuary/discussions
+    url: https://github.com/szmyty/szmyty/discussions
     about: Ask questions, share ideas, and discuss potential improvements.
 
   - name: 🧠 Research & Exploration
-    url: https://github.com/egohygiene/sanctuary/discussions/categories/ideas
+    url: https://github.com/szmyty/szmyty/discussions/categories/ideas
     about: Explore concepts, architectural ideas, and future directions before creating implementation work.
 
   - name: 📚 Documentation Feedback
-    url: https://github.com/egohygiene/sanctuary/discussions/categories/documentation
+    url: https://github.com/szmyty/szmyty/discussions/categories/documentation
     about: Suggest documentation improvements, onboarding enhancements, or clarification requests.
 
   - name: 🔒 Security Reports
-    url: https://github.com/egohygiene/sanctuary/security/advisories/new
+    url: https://github.com/szmyty/szmyty/security/advisories/new
     about: Report security vulnerabilities privately and responsibly.
