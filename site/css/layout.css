@@ -1,0 +1,107 @@
+/* Layout — responsive grid and section layout */
+
+/* Site-wide container */
+.container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+/* Header */
+header[role="banner"] {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+header[role="banner"] nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding: var(--space-md) var(--space-lg);
+}
+
+header[role="banner"] nav > a {
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+header[role="banner"] nav > ul {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+header[role="banner"] nav > ul li a {
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--easing-default);
+}
+
+header[role="banner"] nav > ul li a:hover,
+header[role="banner"] nav > ul li a:focus-visible {
+  color: var(--color-accent);
+}
+
+/* Main */
+main {
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+/* Sections */
+section {
+  padding-block: var(--space-3xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+section:last-child {
+  border-bottom: none;
+}
+
+section h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-xl);
+}
+
+/* Footer */
+footer[role="contentinfo"] {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+}
+
+/* Project card grid */
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* Capability list */
+.capability-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* Responsive — narrow viewports */
+@media (max-width: 600px) {
+  header[role="banner"] nav > ul {
+    display: none;
+  }
+}

@@ -113,7 +113,7 @@ or `promoted:<target-path>` once complete.
 
 | # | Source path | Decision | Target path / issue | Rationale | Privacy status | Completion evidence |
 |---|-------------|----------|---------------------|-----------|----------------|---------------------|
-| 37 | `.staging/dashboard-app/` | `DEFER` | issue to be filed | React/TypeScript dashboard app; overengineered for a profile README; defer until a dedicated dashboard decision is made. | `INTERNAL` | |
+| 37 | `.staging/dashboard-app/` | `ARCHIVE` | szmyty/szmyty#76, ADR 0002 | React/TypeScript Vite dashboard; rejected in favour of plain HTML/CSS `site/` companion (see ADR 0002). Retained as historical evidence only. | `INTERNAL` | issue#76, promoted:site/ |
 
 ---
 

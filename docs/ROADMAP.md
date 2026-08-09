@@ -48,7 +48,7 @@ described in [szmyty/szmyty#72](https://github.com/szmyty/szmyty/issues/72):
 
 - [ ] Automated README regeneration from structured profile data
 - [ ] Reusable issue form and workflow templates published as a template repository
-- [ ] Documentation site (if warranted)
+- [ ] Documentation site (if warranted; see [ADR 0002](adr/0002-site-companion-static-html.md) — static HTML/CSS companion under `site/`)
 
 ## Non-Goals
 

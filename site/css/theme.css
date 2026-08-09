@@ -1,0 +1,70 @@
+/* Theme — light/dark mode via CSS custom properties
+ * Default is light. Dark mode applies via:
+ *   1. OS preference (prefers-color-scheme: dark)
+ *   2. data-theme="dark" on <html> (toggled by js/main.js)
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-border: #30363d;
+    --color-text: #e6edf3;
+    --color-text-muted: #8b949e;
+    --color-accent: #58a6ff;
+    --color-accent-hover: #79c0ff;
+    --color-tag-bg: #1c2d4a;
+    --color-tag-text: #58a6ff;
+    --color-arch-ui: #1c2d3a;
+    --color-arch-api: #1a2d1a;
+    --color-arch-core: #2d2c1a;
+    --color-arch-storage: #2d1a28;
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-border: #30363d;
+  --color-text: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-tag-bg: #1c2d4a;
+  --color-tag-text: #58a6ff;
+  --color-arch-ui: #1c2d3a;
+  --color-arch-api: #1a2d1a;
+  --color-arch-core: #2d2c1a;
+  --color-arch-storage: #2d1a28;
+}
+
+/* High-contrast mode */
+@media (prefers-contrast: more) {
+  :root {
+    --color-bg: #ffffff;
+    --color-surface: #f0f0f0;
+    --color-border: #000000;
+    --color-text: #000000;
+    --color-text-muted: #333333;
+    --color-accent: #0000cc;
+    --color-accent-hover: #000099;
+    --color-tag-bg: #ccccff;
+    --color-tag-text: #000099;
+    --focus-ring: 0 0 0 4px #000000;
+  }
+}
+
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #000000;
+    --color-surface: #111111;
+    --color-border: #ffffff;
+    --color-text: #ffffff;
+    --color-text-muted: #cccccc;
+    --color-accent: #aaddff;
+    --color-accent-hover: #ffffff;
+    --color-tag-bg: #003366;
+    --color-tag-text: #aaddff;
+    --focus-ring: 0 0 0 4px #ffffff;
+  }
+}

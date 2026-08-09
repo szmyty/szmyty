@@ -1,0 +1,65 @@
+/* Design tokens — color, typography, spacing, motion
+ * All CSS custom properties are defined here.
+ * Theme overrides are in theme.css.
+ */
+
+:root {
+  /* Color palette */
+  --color-bg: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-border: #d0d7de;
+  --color-text: #1f2328;
+  --color-text-muted: #656d76;
+  --color-accent: #0969da;
+  --color-accent-hover: #0550ae;
+  --color-tag-bg: #ddf4ff;
+  --color-tag-text: #0550ae;
+  --color-arch-ui: #dbeafe;
+  --color-arch-api: #dcfce7;
+  --color-arch-core: #fef9c3;
+  --color-arch-storage: #fce7f3;
+
+  /* Typography */
+  --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --line-height-base: 1.6;
+  --line-height-heading: 1.25;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Border */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(9, 105, 218, 0.4);
+  --focus-ring-offset: 2px;
+
+  /* Motion */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --easing-default: ease-in-out;
+
+  /* Layout */
+  --max-width-content: 72rem;
+  --max-width-text: 65ch;
+}
