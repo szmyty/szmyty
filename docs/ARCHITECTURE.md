@@ -30,6 +30,7 @@ This repository serves two roles:
 | `.github/` | GitHub configuration: funding, issue templates, PR template |
 | `.tasks/` | Modular Taskfile includes (git, agents, security, tests) |
 | `.staging/` | In-progress work; not promoted to active files |
+| `site/` | Profile companion static site; built from `profile/` inputs; not deployed until issue `#12` |
 
 ## Boundaries
 

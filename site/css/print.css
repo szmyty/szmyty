@@ -1,0 +1,36 @@
+/* Print stylesheet */
+
+@media print {
+  header[role="banner"],
+  #theme-toggle,
+  .skip-link,
+  footer[role="contentinfo"] nav {
+    display: none;
+  }
+
+  body {
+    font-size: 11pt;
+    color: #000000;
+    background: #ffffff;
+  }
+
+  a {
+    color: #000000;
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555555;
+  }
+
+  /* Don't print URL for internal anchors */
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+}
