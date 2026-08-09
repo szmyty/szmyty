@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "event_type": "PushEvent",
+      "repo": "szmyty/szmyty",
+      "repo_url": "https://github.com/szmyty/szmyty",
+      "summary": "Updated profile README",
+      "occurred_at": "2024-01-15"
+    },
+    {
+      "event_type": "CreateEvent",
+      "repo": "szmyty/soliloquy",
+      "repo_url": "https://github.com/szmyty/soliloquy",
+      "summary": "Created branch for local-LLM document query feature",
+      "occurred_at": "2024-01-10"
+    }
+  ],
+  "data_source": "fixture"
+}

@@ -1,0 +1,294 @@
+"""Tests for dynamic profile module scripts and templates."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import pytest
+import yaml
+
+from tools.modules import github_metrics, music_highlight, recent_activity, update_readme
+from tools.profile_builder import cache as cache_utils
+from tools.profile_builder.models import GithubMetrics, MusicHighlight, RecentActivity
+from tools.profile_builder.rendering import render_template
+
+
+def test_github_metrics_fixture_renders_template(tmp_path) -> None:
+    output = tmp_path / 'metrics.json'
+    metrics = github_metrics.build_metrics(
+        output_path=output,
+        fixture_path=github_metrics.DEFAULT_FIXTURE,
+        token=None,
+    )
+    rendered = render_template('github-metrics.md.j2', {'metrics': metrics})
+    written = GithubMetrics.model_validate_json(output.read_text(encoding='utf-8'))
+
+    assert written.data_source == 'fixture'
+    assert '### GitHub Metrics' in rendered
+    assert '**Public repositories:** 12' in rendered
+    assert 'stars' not in output.read_text(encoding='utf-8')
+    assert 'followers' not in output.read_text(encoding='utf-8')
+
+
+def test_recent_activity_filters_and_bounds_live_events(monkeypatch, tmp_path) -> None:
+    def fake_get_json(url: str, token: str | None = None):
+        assert 'events/public' in url
+        return [
+            {'type': 'WatchEvent', 'repo': {'name': 'szmyty/ignore'}, 'created_at': '2024-01-20T00:00:00Z', 'payload': {}},
+            {'type': 'PushEvent', 'repo': {'name': 'szmyty/szmyty'}, 'created_at': '2024-01-19T00:00:00Z', 'payload': {'commits': [{'message': 'Updated README'}]}},
+            {'type': 'PushEvent', 'repo': {'name': 'szmyty/bot'}, 'created_at': '2024-01-18T00:00:00Z', 'actor': {'login': 'octocat[bot]'}, 'payload': {'commits': [{'message': 'Ignore bot'}]}},
+            {'type': 'CreateEvent', 'repo': {'name': 'szmyty/one'}, 'created_at': '2024-01-17T00:00:00Z', 'payload': {'ref_type': 'branch', 'ref': 'main'}},
+            {'type': 'PullRequestEvent', 'repo': {'name': 'szmyty/two'}, 'created_at': '2024-01-16T00:00:00Z', 'payload': {'pull_request': {'title': 'Ship module', 'html_url': 'https://github.com/szmyty/two/pull/1'}}},
+            {'type': 'IssueCommentEvent', 'repo': {'name': 'szmyty/three'}, 'created_at': '2024-01-15T00:00:00Z', 'payload': {'issue': {'title': 'Bugfix', 'html_url': 'https://github.com/szmyty/three/issues/2'}}},
+            {'type': 'ReleaseEvent', 'repo': {'name': 'szmyty/four'}, 'created_at': '2024-01-14T00:00:00Z', 'payload': {'release': {'name': 'v1.0.0', 'html_url': 'https://github.com/szmyty/four/releases/tag/v1.0.0'}}},
+            {'type': 'PushEvent', 'repo': {'name': 'szmyty/five'}, 'created_at': '2024-01-13T00:00:00Z', 'payload': {'commits': [{'message': 'Overflow item'}]}},
+        ], {}
+
+    monkeypatch.setattr(recent_activity, '_github_get_json', fake_get_json)
+    output = tmp_path / 'activity.json'
+
+    activity = recent_activity.build_activity(
+        output_path=output,
+        fixture_path=recent_activity.DEFAULT_FIXTURE,
+        token='x',
+    )
+
+    assert activity.data_source == 'live'
+    assert len(activity.events) == 5
+    assert [event.event_type.value for event in activity.events] == [
+        'PushEvent',
+        'CreateEvent',
+        'PullRequestEvent',
+        'IssueCommentEvent',
+        'ReleaseEvent',
+    ]
+    assert all('[bot]' not in event.summary for event in activity.events)
+
+
+def test_recent_activity_uses_cache_on_rate_limit(monkeypatch, tmp_path) -> None:
+    monkeypatch.setattr(cache_utils, 'CACHE_ROOT', tmp_path / 'cache-root')
+    cache_utils.write_cache(
+        'recent-activity',
+        RecentActivity.model_validate_json(
+            recent_activity.DEFAULT_FIXTURE.read_text(encoding='utf-8')
+        ).model_dump(mode='json'),
+    )
+
+    def fake_get_json(url: str, token: str | None = None):
+        raise recent_activity.RateLimitedError('HTTP 403')
+
+    monkeypatch.setattr(recent_activity, '_github_get_json', fake_get_json)
+    output = tmp_path / 'activity.json'
+
+    activity = recent_activity.build_activity(
+        output_path=output,
+        fixture_path=recent_activity.DEFAULT_FIXTURE,
+        token='x',
+    )
+
+    assert activity.data_source == 'cache'
+    assert json.loads(output.read_text(encoding='utf-8'))['data_source'] == 'cache'
+
+
+def test_github_metrics_uses_cache_on_provider_failure(monkeypatch, tmp_path) -> None:
+    monkeypatch.setattr(cache_utils, 'CACHE_ROOT', tmp_path / 'cache-root')
+    cache_utils.write_cache(
+        'github-metrics',
+        GithubMetrics.model_validate_json(
+            github_metrics.DEFAULT_FIXTURE.read_text(encoding='utf-8')
+        ).model_dump(mode='json'),
+    )
+    monkeypatch.setattr(
+        github_metrics,
+        'fetch_live_metrics',
+        lambda username=github_metrics.USERNAME, token=None: (_ for _ in ()).throw(
+            github_metrics.ProviderFailure('boom')
+        ),
+    )
+
+    output = tmp_path / 'metrics.json'
+    metrics = github_metrics.build_metrics(
+        output_path=output,
+        fixture_path=github_metrics.DEFAULT_FIXTURE,
+        token='x',
+    )
+
+    assert metrics.data_source == 'cache'
+    assert json.loads(output.read_text(encoding='utf-8'))['data_source'] == 'cache'
+
+
+def test_first_run_without_cache_falls_back_to_fixture(monkeypatch, tmp_path) -> None:
+    monkeypatch.setattr(cache_utils, 'CACHE_ROOT', tmp_path / 'cache-root')
+    monkeypatch.setattr(
+        github_metrics,
+        'fetch_live_metrics',
+        lambda username=github_metrics.USERNAME, token=None: (_ for _ in ()).throw(
+            github_metrics.ProviderFailure('offline')
+        ),
+    )
+
+    output = tmp_path / 'metrics.json'
+    metrics = github_metrics.build_metrics(
+        output_path=output,
+        fixture_path=github_metrics.DEFAULT_FIXTURE,
+        token='x',
+    )
+
+    assert metrics.data_source == 'fixture'
+    assert output.exists()
+
+
+def test_music_highlight_uses_cache_on_malformed_input(tmp_path) -> None:
+    input_path = tmp_path / 'music.yml'
+    input_path.write_text('title: [broken\n', encoding='utf-8')
+    output_path = tmp_path / 'artifact.yml'
+    output_path.write_text(
+        yaml.safe_dump(
+            {
+                'title': 'Cached',
+                'public_url': 'https://soundcloud.com/szmyty',
+                'data_source': 'manual',
+            },
+            sort_keys=False,
+        ),
+        encoding='utf-8',
+    )
+
+    music = music_highlight.build_music_highlight(
+        input_path=input_path,
+        output_path=output_path,
+        fixture_path=music_highlight.DEFAULT_FIXTURE,
+    )
+
+    assert music.data_source == 'cache'
+    assert 'Cached' in output_path.read_text(encoding='utf-8')
+
+
+def test_music_highlight_first_run_without_cache_uses_fixture(tmp_path) -> None:
+    input_path = tmp_path / 'missing.yml'
+    output_path = tmp_path / 'artifact.yml'
+
+    music = music_highlight.build_music_highlight(
+        input_path=input_path,
+        output_path=output_path,
+        fixture_path=music_highlight.DEFAULT_FIXTURE,
+    )
+
+    assert music.data_source == 'fixture'
+    assert MusicHighlight.model_validate(
+        yaml.safe_load(output_path.read_text(encoding='utf-8'))
+    ).title == 'Ego Hygiene'
+
+
+def test_invalid_fixture_json_raises_when_no_fallback(monkeypatch, tmp_path) -> None:
+    monkeypatch.setattr(cache_utils, 'CACHE_ROOT', tmp_path / 'cache-root')
+    monkeypatch.setattr(
+        github_metrics,
+        'fetch_live_metrics',
+        lambda username=github_metrics.USERNAME, token=None: (_ for _ in ()).throw(
+            github_metrics.ProviderFailure('offline')
+        ),
+    )
+    bad_fixture = tmp_path / 'broken.json'
+    bad_fixture.write_text('{broken', encoding='utf-8')
+
+    with pytest.raises(github_metrics.ProviderFailure):
+        github_metrics.build_metrics(
+            output_path=tmp_path / 'metrics.json',
+            fixture_path=bad_fixture,
+            token='x',
+        )
+
+
+def test_update_readme_reports_unchanged_on_second_render(tmp_path, monkeypatch) -> None:
+    readme = tmp_path / 'README.md'
+    readme.write_text(
+        'header\n\n'
+        '<!-- START:github-metrics -->\n<!-- END:github-metrics -->\n\n'
+        '<!-- START:recent-activity -->\n<!-- END:recent-activity -->\n\n'
+        '<!-- START:music-highlight -->\n<!-- END:music-highlight -->\n',
+        encoding='utf-8',
+    )
+    templates_dir = tmp_path / 'templates'
+    templates_dir.mkdir()
+    repo_root = Path(__file__).resolve().parents[1]
+    for name in [
+        'github-metrics.md.j2',
+        'recent-activity.md.j2',
+        'music-highlight.md.j2',
+    ]:
+        source = (repo_root / 'profile' / 'templates' / name).read_text(encoding='utf-8')
+        (templates_dir / name).write_text(source, encoding='utf-8')
+
+    artifact_root = tmp_path / 'profile' / 'artifacts'
+    (artifact_root / 'github-metrics').mkdir(parents=True)
+    (artifact_root / 'recent-activity').mkdir(parents=True)
+    (artifact_root / 'music-highlight').mkdir(parents=True)
+    (artifact_root / 'github-metrics' / 'cache.json').write_text(
+        github_metrics.DEFAULT_FIXTURE.read_text(encoding='utf-8'),
+        encoding='utf-8',
+    )
+    (artifact_root / 'recent-activity' / 'cache.json').write_text(
+        recent_activity.DEFAULT_FIXTURE.read_text(encoding='utf-8'),
+        encoding='utf-8',
+    )
+    (artifact_root / 'music-highlight' / 'music.yml').write_text(
+        music_highlight.DEFAULT_FIXTURE.read_text(encoding='utf-8'),
+        encoding='utf-8',
+    )
+
+    config_path = tmp_path / 'modules.yml'
+    config_path.write_text(
+        yaml.safe_dump(
+            {
+                'modules': [
+                    {
+                        'name': 'github-metrics',
+                        'enabled': True,
+                        'region_start_marker': '<!-- START:github-metrics -->',
+                        'region_end_marker': '<!-- END:github-metrics -->',
+                        'template': 'github-metrics.md.j2',
+                        'artifact_path': 'profile/artifacts/github-metrics/cache.json',
+                    },
+                    {
+                        'name': 'recent-activity',
+                        'enabled': True,
+                        'region_start_marker': '<!-- START:recent-activity -->',
+                        'region_end_marker': '<!-- END:recent-activity -->',
+                        'template': 'recent-activity.md.j2',
+                        'artifact_path': 'profile/artifacts/recent-activity/cache.json',
+                    },
+                    {
+                        'name': 'music-highlight',
+                        'enabled': True,
+                        'region_start_marker': '<!-- START:music-highlight -->',
+                        'region_end_marker': '<!-- END:music-highlight -->',
+                        'template': 'music-highlight.md.j2',
+                        'artifact_path': 'profile/artifacts/music-highlight/music.yml',
+                    },
+                ]
+            },
+            sort_keys=False,
+        ),
+        encoding='utf-8',
+    )
+
+    monkeypatch.setattr(update_readme, 'REPO_ROOT', tmp_path)
+    first = update_readme.render_modules(
+        config_path=config_path,
+        readme_path=readme,
+        templates_dir=templates_dir,
+    )
+    second = update_readme.render_modules(
+        config_path=config_path,
+        readme_path=readme,
+        templates_dir=templates_dir,
+    )
+
+    assert all(status == 'updated' for _, status in first)
+    assert all(status == 'unchanged' for _, status in second)
+    rendered = readme.read_text(encoding='utf-8')
+    assert '### GitHub Metrics' in rendered
+    assert '### Recent Public Activity' in rendered
+    assert '### Music' in rendered

@@ -1,0 +1,21 @@
+### GitHub Metrics
+
+| Language | Share |
+|----------|-------|
+{% for lang in metrics.top_languages -%}
+| {{ lang.name }} | {{ "%.0f"|format(lang.percentage) }}% |
+{% endfor %}
+**Public repositories:** {{ metrics.public_repo_count }}
+{% if metrics.maintained_repos %}
+
+**Actively maintained:**
+{% for repo in metrics.maintained_repos %}
+- [{{ repo.name }}]({{ repo.url }}){% if repo.description %} — {{ repo.description }}{% endif %}
+{% endfor %}{% endif %}
+{% if metrics.latest_release %}
+
+**Latest release:** {{ metrics.latest_release }}
+{% endif %}
+{% if metrics.data_source == "cache" %}
+> _Metrics from cached data; live data temporarily unavailable._
+{% endif %}

@@ -1,0 +1,10 @@
+### Recent Public Activity
+{% if activity.events %}
+{% for event in activity.events %}
+- **{{ event.occurred_at }}** · [{{ event.repo }}]({{ event.repo_url }}) — {{ event.summary }}
+{% endfor %}{% else %}
+_No recent public activity available._
+{% endif %}
+{% if activity.data_source == "cache" %}
+> _Activity from cached data; live data temporarily unavailable._
+{% endif %}

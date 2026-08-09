@@ -1,0 +1,16 @@
+{
+  "top_languages": [
+    {"name": "Python", "percentage": 45.2},
+    {"name": "TypeScript", "percentage": 22.1},
+    {"name": "Shell", "percentage": 15.3},
+    {"name": "Dockerfile", "percentage": 10.1},
+    {"name": "YAML", "percentage": 7.3}
+  ],
+  "public_repo_count": 12,
+  "maintained_repos": [
+    {"name": "soliloquy", "url": "https://github.com/szmyty/soliloquy", "description": "Local-LLM document query stack"},
+    {"name": "universal", "url": "https://github.com/szmyty/universal", "description": "Monorepo DX tooling"}
+  ],
+  "latest_release": null,
+  "data_source": "fixture"
+}
