@@ -105,7 +105,10 @@ both modes.
 | Hero banner | `banner-light.svg`, `banner-dark.svg` | 1280 × 400 px | 16 : 5 | 120 KB each |
 | Profile mark / avatar | `mark.svg` | 400 × 400 px | 1 : 1 | 40 KB |
 | Section divider | `divider.svg` | 1280 × 8 px | — | 8 KB |
-| Project card frame | `card-frame.svg` | 480 × 240 px | 2 : 1 | 24 KB |
+
+> **Note:** A project-card frame asset (`card-frame.svg`, 480 × 240 px, ≤ 24 KB) is
+> planned but not yet required. Add it to this table and to the validator when
+> implementing project cards.
 
 All raster fallbacks (if any) must be ≤ 2× the SVG budget and must not exceed
 the dimension limits. No raster image may carry text that is unavailable
