@@ -94,6 +94,10 @@ class TestValidateRecordAccepted:
         for sens in ("public", "internal"):
             record = _valid_record(sensitivity=sens)
             assert validate_record(record, 0) == [], f"Failed for sensitivity: {sens}"
+        # sensitive without a url is also valid
+        record = _valid_record(sensitivity="sensitive")
+        record.pop("url", None)
+        assert validate_record(record, 0) == []
 
     def test_optional_repo_path(self):
         record = _valid_record(evidence_type="repo-path", repo_path="some/path.yml")

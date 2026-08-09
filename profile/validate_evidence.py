@@ -90,7 +90,7 @@ def validate_record(record: Any, index: int) -> list[str]:
     record_id = _safe_id(record)
     prefix = f"Record '{record_id}' (index {index})"
 
-    # Unknown fields
+    # Unknown fields — print sorted field names only (not values) to stderr
     unknown = set(record.keys()) - ALLOWED_FIELDS
     if unknown:
         errors.append(f"{prefix}: unknown field(s): {sorted(unknown)}")
@@ -195,7 +195,11 @@ def validate_file(path: Path) -> int:
 
     # Report
     total = len(records)
-    verified = total - len(unresolved_ids) - len(excluded_ids)
+    verified = sum(
+        1
+        for r in records
+        if isinstance(r, dict) and r.get("status") == "verified"
+    )
 
     print(f"Evidence catalog: {path}")
     print(f"  Total records  : {total}")
