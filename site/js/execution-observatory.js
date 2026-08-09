@@ -34,6 +34,7 @@
   const previewMode = query.get("preview") === "1";
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reduceMotion = previewMode || prefersReducedMotion.matches;
+  let manuallyPaused = reduceMotion;
   let paused = reduceMotion;
   let activeIndex = 0;
 
@@ -60,19 +61,24 @@
 
   if (motionButton) {
     motionButton.addEventListener("click", () => {
-      paused = !paused;
-      updateMotionButtons();
-      setStatus(paused ? "Orbit paused." : "Orbit resumed.");
+    manuallyPaused = !manuallyPaused;
+    paused = manuallyPaused || reduceMotion;
+    updateMotionButtons();
+    setStatus(paused ? "Orbit paused." : "Orbit resumed.");
     });
   }
 
   if (reduceMotionButton) {
-    reduceMotionButton.addEventListener("click", () => {
-      reduceMotion = !reduceMotion;
-      paused = reduceMotion || paused;
-      updateMotionButtons();
-      setStatus(reduceMotion ? "Reduced motion enabled." : "Reduced motion disabled.");
-    });
+  reduceMotionButton.addEventListener("click", () => {
+    reduceMotion = !reduceMotion;
+    if (reduceMotion) {
+      paused = true;
+    } else {
+      paused = manuallyPaused;
+    }
+    updateMotionButtons();
+    setStatus(reduceMotion ? "Reduced motion enabled." : "Reduced motion disabled.");
+  });
   }
 
   container.addEventListener("keydown", (event) => {
@@ -202,7 +208,13 @@
         renderer.setSize(nextWidth, nextHeight);
       };
 
+      let lastTimestamp = null;
       const animate = (timestamp) => {
+        if (lastTimestamp == null) {
+          lastTimestamp = timestamp;
+        }
+        const delta = timestamp - lastTimestamp;
+        lastTimestamp = timestamp;
         if (!container.isConnected) {
           renderer.domElement.removeEventListener("pointermove", onPointer);
           renderer.domElement.removeEventListener("click", onClick);
@@ -217,7 +229,7 @@
           return;
         }
         if (!paused && !reduceMotion) {
-          scene.rotation.z = timestamp * 0.00012;
+          scene.rotation.z += delta * 0.00012;
         }
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
