@@ -24,6 +24,13 @@
       .trace-artifacts { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
       .trace-artifacts li { display: flex; flex-wrap: wrap; gap: 0.5rem; }
       .trace-chip { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; background: rgba(99, 102, 241, 0.18); }
+      .trace-observatory { display: grid; gap: 1rem; }
+      .trace-observatory-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .trace-observatory-controls button { border: 1px solid var(--color-border-default, #30363d); background: transparent; color: inherit; border-radius: 0.5rem; padding: 0.45rem 0.75rem; cursor: pointer; }
+      .trace-observatory-canvas { min-height: 340px; border-radius: 0.875rem; border: 1px solid var(--color-border-muted, #30363d); background: radial-gradient(circle at top, rgba(99, 102, 241, 0.24), rgba(13, 17, 23, 0.98)); padding: 0.75rem; }
+      .trace-observatory-canvas canvas { width: 100%; height: 100%; display: block; border-radius: 0.5rem; }
+      .trace-observatory-fallback { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.35rem; }
+      .trace-observatory-status { margin: 0.5rem 0; }
     </style>
   </head>
   <body>
@@ -38,11 +45,52 @@
         <p><strong>Validation:</strong> <a href="https://github.com/szmyty/szmyty/actions/runs/31335166521">CI validate job passed profile validation, asset validation, Ruff, yamllint, and pytest.</a></p>
       </header>
 
+      <section class="trace-panel trace-observatory" aria-labelledby="observatory-heading">
+        <h2 id="observatory-heading">Interactive AI execution orbit</h2>
+        <p id="observatory-instructions">
+          Explore the delivery loop (intent → specification → issue → implementation →
+          validation → reflection). JavaScript and WebGL are optional: the stage list
+          and timeline below remain fully usable without the interactive canvas.
+        </p>
+        <div class="trace-observatory-controls" role="group" aria-label="Observatory controls">
+          <button type="button" data-observatory-toggle-motion aria-pressed="false">
+            Pause orbit
+          </button>
+          <button type="button" data-observatory-reduce-motion aria-pressed="false">
+            Reduce motion
+          </button>
+        </div>
+        <div
+          id="execution-observatory"
+          class="trace-observatory-canvas"
+          tabindex="0"
+          role="application"
+          aria-label="Interactive execution orbit"
+          aria-describedby="observatory-instructions"
+        >
+          <p class="trace-observatory-status" data-observatory-status>
+            Loading interactive orbit…
+          </p>
+          <ol class="trace-observatory-fallback">
+            <li><a href="#stage-intent">Intent — completed</a></li>
+            <li><a href="#stage-architecture">Architecture — completed</a></li>
+            <li><a href="#stage-specification">Specification — completed</a></li>
+            <li><a href="#stage-issue">Issue — completed</a></li>
+            <li><a href="#stage-implementation">Implementation — completed</a></li>
+            <li><a href="#stage-validation">Validation — completed</a></li>
+            <li><a href="#stage-reflection">Reflection — completed</a></li>
+          </ol>
+        </div>
+        <noscript>
+          <p class="trace-meta">JavaScript is disabled. Use the timeline links below for the full evidence path.</p>
+        </noscript>
+      </section>
+
       <section class="trace-panel" aria-labelledby="timeline-heading">
         <h2 id="timeline-heading">Public execution timeline</h2>
         <ol class="trace-timeline">
 
-          <li class="trace-stage" data-mode="observed">
+          <li id="stage-intent" class="trace-stage" data-mode="observed" data-stage-type="intent">
             <p class="trace-meta">
               <strong>Intent</strong>
               · completed
@@ -54,7 +102,7 @@
 
           </li>
 
-          <li class="trace-stage" data-mode="observed">
+          <li id="stage-architecture" class="trace-stage" data-mode="observed" data-stage-type="architecture">
             <p class="trace-meta">
               <strong>Architecture</strong>
               · completed
@@ -66,7 +114,7 @@
 
           </li>
 
-          <li class="trace-stage" data-mode="observed">
+          <li id="stage-specification" class="trace-stage" data-mode="observed" data-stage-type="specification">
             <p class="trace-meta">
               <strong>Specification</strong>
               · completed
@@ -78,7 +126,7 @@
 
           </li>
 
-          <li class="trace-stage" data-mode="observed">
+          <li id="stage-issue" class="trace-stage" data-mode="observed" data-stage-type="issue">
             <p class="trace-meta">
               <strong>Issue</strong>
               · completed
@@ -90,7 +138,7 @@
 
           </li>
 
-          <li class="trace-stage" data-mode="observed">
+          <li id="stage-implementation" class="trace-stage" data-mode="observed" data-stage-type="implementation">
             <p class="trace-meta">
               <strong>Implementation</strong>
               · completed
@@ -102,7 +150,7 @@
 
           </li>
 
-          <li class="trace-stage" data-mode="observed">
+          <li id="stage-validation" class="trace-stage" data-mode="observed" data-stage-type="validation">
             <p class="trace-meta">
               <strong>Validation</strong>
               · completed
@@ -114,7 +162,7 @@
 
           </li>
 
-          <li class="trace-stage" data-mode="explanatory">
+          <li id="stage-reflection" class="trace-stage" data-mode="explanatory" data-stage-type="reflection">
             <p class="trace-meta">
               <strong>Reflection</strong>
               · completed
@@ -173,5 +221,6 @@
         <p class="trace-meta">Source state: failed-with-fallback · Data source: cache</p>
       </section>
     </main>
+    <script type="module" src="js/execution-observatory.js"></script>
   </body>
 </html>

@@ -21,6 +21,9 @@ site/
     print.css           # Print stylesheet
   js/
     main.js             # Progressive enhancement only; no framework
+    execution-observatory.js # Lazy-loaded Three.js observatory bootstrap
+    vendor/
+      three.module.min.js    # Pinned local Three.js runtime (no CDN)
   assets/
     favicon.svg         # Profile mark / favicon (placeholder)
     og-image.png        # Open Graph image — generate at build time
@@ -41,11 +44,26 @@ duplicated between `README.md` and `site/index.html`.
 
 | Asset | Budget |
 |-------|--------|
-| HTML | ≤ 50 KB uncompressed |
+| HTML (per page) | ≤ 50 KB uncompressed |
 | CSS (total) | ≤ 30 KB uncompressed |
-| JS (total) | ≤ 10 KB uncompressed |
-| Images (total) | ≤ 300 KB |
+| Core JS for first render (`site/js/main.js`) | ≤ 10 KB uncompressed |
+| Lazy observatory JS (`site/js/execution-observatory.js` + vendored Three.js) | ≤ 380 KB uncompressed |
+| Images (total) | ≤ 400 KB |
 | Fonts | System fonts preferred; web fonts ≤ 50 KB per face |
+
+## README preview capture
+
+Capture/update the static README preview for the interactive observatory:
+
+```sh
+python tools/capture_interactive_showcase_preview.py \
+  --output profile/artifacts/interactive-showcase/preview.png
+```
+
+The command targets a fixed viewport (`1280x720`) and stable scene URL
+parameters, writes to a temporary file first, and only replaces the committed
+preview on successful capture. If capture fails, the previous preview remains
+in place as the last-known-good fallback.
 
 ## What is not in this directory
 

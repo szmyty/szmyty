@@ -710,6 +710,8 @@ terraform.rc
 pkg/*
 spec/fixtures/*
 vendor/*
+!site/js/vendor/
+!site/js/vendor/three.module.min.js
 Gemfile.lock
 
 # --- SonarQube ---
