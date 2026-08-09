@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -36,4 +37,49 @@ def write_cache(module_name: str, data: dict[str, Any]) -> None:
     cache_path.write_text(
         json.dumps(data, indent=2, ensure_ascii=False),
         encoding='utf-8',
+    )
+
+
+def write_metadata(
+    module_name: str,
+    state: str,
+    data_source: str,
+    human_summary: str,
+    ttl_seconds: int | None = None,
+    data_at: str | None = None,
+    data_hash: str | None = None,
+    is_stale: bool = False,
+    seconds_until_stale: int | None = None,
+    error: str | None = None,
+    artifact_dir: Path | None = None,
+) -> None:
+    """Write a metadata.json file into the module artifact directory.
+
+    By default the file is placed at ``CACHE_ROOT / module_name /
+    metadata.json``, which resolves to
+    ``profile/artifacts/<module_name>/metadata.json`` relative to the repo
+    root.  Pass *artifact_dir* (an absolute path) to write to a different
+    location — this must match the ``artifact_dir`` field declared in the
+    module registry so that the ``snapshot`` CLI command can read it back.
+    """
+    metadata: dict[str, Any] = {
+        "module_name": module_name,
+        "version": "1.0",
+        "generated_at": datetime.now(UTC).isoformat(),
+        "state": state,
+        "data_source": data_source,
+        "data_at": data_at,
+        "data_hash": data_hash,
+        "ttl_seconds": ttl_seconds,
+        "is_stale": is_stale,
+        "seconds_until_stale": seconds_until_stale,
+        "human_summary": human_summary,
+        "error": error,
+    }
+    target_dir = artifact_dir if artifact_dir is not None else CACHE_ROOT / module_name
+    metadata_path = target_dir / "metadata.json"
+    metadata_path.parent.mkdir(parents=True, exist_ok=True)
+    metadata_path.write_text(
+        json.dumps(metadata, indent=2, ensure_ascii=False),
+        encoding="utf-8",
     )

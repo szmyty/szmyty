@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/szmyty/szmyty/profile/schemas/modules-registry.json",
+  "title": "ModuleRegistry",
+  "description": "Schema for profile/content/modules-registry.yml",
+  "type": "object",
+  "required": ["modules"],
+  "properties": {
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "provider_type",
+          "provider_module",
+          "sensitivity",
+          "freshness_policy",
+          "artifact_dir",
+          "artifact_file",
+          "region_start_marker",
+          "region_end_marker",
+          "template"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Stable kebab-case module name."
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Human-readable description of the module."
+          },
+          "provider_type": {
+            "type": "string",
+            "enum": ["api", "manual", "computed"],
+            "description": "How the module obtains its data."
+          },
+          "provider_module": {
+            "type": "string",
+            "description": "Importable Python path for the module script."
+          },
+          "secret_names": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Names of required secrets (never values)."
+          },
+          "sensitivity": {
+            "type": "string",
+            "enum": ["public", "internal", "sensitive"],
+            "description": "Privacy sensitivity classification."
+          },
+          "freshness_policy": {
+            "type": "object",
+            "required": ["cadence"],
+            "properties": {
+              "cadence": {
+                "type": "string",
+                "enum": ["never", "hourly", "daily", "weekly", "monthly"]
+              },
+              "ttl_seconds": {
+                "type": ["integer", "null"],
+                "minimum": 0
+              },
+              "warn_after_seconds": {
+                "type": ["integer", "null"],
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          },
+          "artifact_dir": {
+            "type": "string",
+            "description": "Directory for all outputs, relative to repo root."
+          },
+          "artifact_file": {
+            "type": "string",
+            "description": "Primary artifact filename within artifact_dir."
+          },
+          "asset_files": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Additional generated files within artifact_dir."
+          },
+          "fixture_file": {
+            "type": ["string", "null"],
+            "description": "Fallback fixture path, relative to repo root."
+          },
+          "readme_path": {
+            "type": "string",
+            "default": "README.md",
+            "description": "Path to the README file managed by this module."
+          },
+          "region_start_marker": {
+            "type": "string",
+            "description": "HTML comment that opens the owned README region."
+          },
+          "region_end_marker": {
+            "type": "string",
+            "description": "HTML comment that closes the owned README region."
+          },
+          "template": {
+            "type": "string",
+            "description": "Jinja2 template filename relative to profile/templates/."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

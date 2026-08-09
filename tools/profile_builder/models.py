@@ -14,6 +14,146 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 # ---------------------------------------------------------------------------
+# Snapshot module platform
+# ---------------------------------------------------------------------------
+
+
+class ResultState(str, Enum):
+    """Possible states returned by a module refresh."""
+
+    FRESH = "fresh"
+    CACHED = "cached"
+    STATIC = "static"
+    DISABLED = "disabled"
+    FAILED_WITH_FALLBACK = "failed-with-fallback"
+
+
+class FreshnessPolicy(BaseModel):
+    """Declares how often a module should refresh and when it is considered stale."""
+
+    cadence: Literal["never", "hourly", "daily", "weekly", "monthly"] = Field(
+        description="How often the module data should be refreshed."
+    )
+    ttl_seconds: int | None = Field(
+        default=None,
+        ge=0,
+        description="Time-to-live in seconds; None means no expiry.",
+    )
+    warn_after_seconds: int | None = Field(
+        default=None,
+        ge=0,
+        description="Seconds after which a staleness warning is emitted; None disables.",
+    )
+
+
+class ModuleRegistryEntry(BaseModel):
+    """Full registry declaration for one profile module."""
+
+    name: str = Field(description="Stable kebab-case module name.")
+    enabled: bool = Field(default=True, description="Whether this module is active.")
+    description: str | None = Field(default=None, description="Human-readable description.")
+
+    # Provider
+    provider_type: Literal["api", "manual", "computed"] = Field(
+        description="How the module obtains its data."
+    )
+    provider_module: str = Field(
+        description="Importable Python path for the module script."
+    )
+    secret_names: list[str] = Field(
+        default_factory=list,
+        description="Names of required secrets (never values).",
+    )
+
+    # Privacy
+    sensitivity: Literal["public", "internal", "sensitive"] = Field(
+        description="Privacy sensitivity classification."
+    )
+
+    # Freshness
+    freshness_policy: FreshnessPolicy = Field(
+        description="Refresh cadence and TTL policy."
+    )
+
+    # Artifact layout
+    artifact_dir: str = Field(
+        description="Directory for all outputs, relative to repo root."
+    )
+    artifact_file: str = Field(
+        description="Primary artifact filename within artifact_dir."
+    )
+    asset_files: list[str] = Field(
+        default_factory=list,
+        description="Additional generated files within artifact_dir.",
+    )
+    fixture_file: str | None = Field(
+        default=None,
+        description="Fallback fixture path, relative to repo root.",
+    )
+
+    # README integration
+    readme_path: str = Field(
+        default="README.md",
+        description="Path to the README file managed by this module.",
+    )
+    region_start_marker: str = Field(
+        description="HTML comment that opens the owned README region."
+    )
+    region_end_marker: str = Field(
+        description="HTML comment that closes the owned README region."
+    )
+    template: str = Field(
+        description="Jinja2 template filename relative to profile/templates/."
+    )
+
+    @field_validator("region_start_marker", "region_end_marker", mode="before")
+    @classmethod
+    def _strip(cls, v: str) -> str:
+        return v.strip()
+
+
+class ModuleRegistry(BaseModel):
+    """Top-level registry loaded from modules-registry.yml."""
+
+    modules: list[ModuleRegistryEntry] = Field(default_factory=list)
+
+    @property
+    def enabled_modules(self) -> list[ModuleRegistryEntry]:
+        """Return only enabled modules in declaration order."""
+        return [m for m in self.modules if m.enabled]
+
+    @model_validator(mode="after")
+    def _validate_unique_names(self) -> "ModuleRegistry":
+        names_seen: set[str] = set()
+        for m in self.modules:
+            if m.name in names_seen:
+                raise ValueError(f"Duplicate module name: {m.name}")
+            names_seen.add(m.name)
+        return self
+
+
+class ModuleResult(BaseModel):
+    """Result produced by one module refresh cycle."""
+
+    module_name: str
+    state: ResultState
+    human_summary: str
+    data_source: Literal["live", "cache", "fixture", "manual", "disabled", "error"]
+    result_at: str = Field(description="ISO-8601 datetime of this result.")
+    data_at: str | None = Field(
+        default=None,
+        description="ISO-8601 datetime of the underlying data.",
+    )
+    data_hash: str | None = Field(
+        default=None,
+        description="SHA-256 hex digest of the primary artifact.",
+    )
+    ttl_seconds: int | None = None
+    is_stale: bool = False
+    seconds_until_stale: int | None = None
+    error: str | None = None
+
+# ---------------------------------------------------------------------------
 # Evidence catalog
 # ---------------------------------------------------------------------------
 

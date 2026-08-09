@@ -1,0 +1,74 @@
+# modules-registry.yml
+# Extended registry for the snapshot-module platform.
+#
+# Each entry declares everything needed to fetch, normalize, cache, and render
+# one profile module — provider type, secret names (never values), sensitivity,
+# freshness policy, artifact layout, and README region ownership.
+#
+# Schema: profile/schemas/modules-registry.json
+
+modules:
+  - name: github-metrics
+    enabled: true
+    description: "Fetches public GitHub profile metrics via the GitHub REST API."
+    provider_type: api
+    provider_module: tools.modules.github_metrics
+    secret_names:
+      - GITHUB_TOKEN
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/github-metrics
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/github-metrics.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:github-metrics -->"
+    region_end_marker: "<!-- END:github-metrics -->"
+    template: github-metrics.md.j2
+
+  - name: recent-activity
+    enabled: true
+    description: "Fetches recent public GitHub activity events."
+    provider_type: api
+    provider_module: tools.modules.recent_activity
+    secret_names:
+      - GITHUB_TOKEN
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/recent-activity
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/recent-activity.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:recent-activity -->"
+    region_end_marker: "<!-- END:recent-activity -->"
+    template: recent-activity.md.j2
+
+  - name: music-highlight
+    enabled: true
+    description: "Renders manually curated music metadata from a hand-authored YAML file."
+    provider_type: manual
+    provider_module: tools.modules.music_highlight
+    secret_names: []
+    sensitivity: public
+    freshness_policy:
+      cadence: never
+      ttl_seconds: null
+      warn_after_seconds: null
+    artifact_dir: profile/artifacts/music-highlight
+    artifact_file: music.yml
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/music-highlight.yml
+    readme_path: README.md
+    region_start_marker: "<!-- START:music-highlight -->"
+    region_end_marker: "<!-- END:music-highlight -->"
+    template: music-highlight.md.j2
