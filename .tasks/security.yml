@@ -1,11 +1,14 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
+
 version: "3"
 
 tasks:
   lynis:
-    desc: "Run Lynis security audit"
+    desc: "Run Lynis security audit (requires Lynis installation)"
+    preconditions:
+      - sh: command -v lynis >/dev/null 2>&1
+        msg: "Lynis is not installed. Install it from https://cisofy.com/lynis/"
     cmds:
-      - |
-        mkdir -p reports/lynis
-          lynis audit system --profile lint/config/security/lynis/custom.prf
+      - mkdir -p reports/lynis
+      - lynis audit system

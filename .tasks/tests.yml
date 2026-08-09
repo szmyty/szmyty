@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  pytest:
+    desc: Run Python tests with pytest
+    preconditions:
+      - sh: command -v pytest >/dev/null 2>&1
+        msg: "pytest is not installed. Run: poetry install --with test"
+    cmds:
+      - pytest
