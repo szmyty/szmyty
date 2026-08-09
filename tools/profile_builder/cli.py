@@ -1,11 +1,13 @@
 """Command-line interface for profile_builder.
 
-Exposes four subcommands:
+Exposes subcommands:
 
     profile-builder validate            Validate public content and normalized data
     profile-builder render MODULE       Render one named module (or --all to render every enabled module)
     profile-builder check               Report whether rendering would change output
     profile-builder status              Explain module status and stale/fallback behavior
+    profile-builder registry            List all modules declared in the registry
+    profile-builder snapshot            Report freshness state of all registry modules
 """
 
 from __future__ import annotations
@@ -17,7 +19,12 @@ from typing import Optional
 import click
 import yaml
 
-from tools.profile_builder.models import EvidenceCatalog, EvidenceEntry, ProfileConfig
+from tools.profile_builder.models import (
+    EvidenceCatalog,
+    EvidenceEntry,
+    ModuleRegistry,
+    ProfileConfig,
+)
 from tools.profile_builder.regions import (
     RegionNotFoundError,
     update_readme_region,
@@ -319,6 +326,108 @@ def status(config_path: Path) -> None:
         artifact = str(mod.artifact_path) if mod.artifact_path else "—"
         state = "yes" if mod.enabled else "no"
         click.echo(f"{mod.name:<20} {state:<8} {mod.template:<30} {artifact}")
+
+
+# ---------------------------------------------------------------------------
+# registry
+# ---------------------------------------------------------------------------
+
+
+@main.command("registry")
+@click.option(
+    "--config",
+    "registry_path",
+    type=click.Path(path_type=Path),
+    default=str(_REPO_ROOT / "profile" / "content" / "modules-registry.yml"),
+    show_default=True,
+    help="Path to the modules-registry YAML.",
+)
+def registry(registry_path: Path) -> None:
+    """List all modules declared in the extended registry.
+
+    Reads modules-registry.yml and prints a summary of every declared module
+    including its provider type, sensitivity, freshness cadence, and enabled
+    state.
+    """
+    if not registry_path.exists():
+        click.echo(f"Registry not found at {registry_path}.", err=True)
+        sys.exit(1)
+
+    raw = yaml.safe_load(registry_path.read_text(encoding="utf-8")) or {}
+    reg = ModuleRegistry.model_validate(raw)
+
+    if not reg.modules:
+        click.echo("No modules declared in registry.")
+        return
+
+    click.echo(
+        f"{'NAME':<22} {'EN':<4} {'TYPE':<10} {'SENSITIVITY':<12} {'CADENCE':<10} {'SECRETS'}"
+    )
+    click.echo("-" * 80)
+    for mod in reg.modules:
+        enabled_flag = "yes" if mod.enabled else "no"
+        secrets = ", ".join(mod.secret_names) if mod.secret_names else "—"
+        click.echo(
+            f"{mod.name:<22} {enabled_flag:<4} {mod.provider_type:<10} "
+            f"{mod.sensitivity:<12} {mod.freshness_policy.cadence:<10} {secrets}"
+        )
+    click.echo(
+        f"\nTotal: {len(reg.modules)} modules — {len(reg.enabled_modules)} enabled"
+    )
+
+
+# ---------------------------------------------------------------------------
+# snapshot
+# ---------------------------------------------------------------------------
+
+
+@main.command("snapshot")
+@click.option(
+    "--config",
+    "registry_path",
+    type=click.Path(path_type=Path),
+    default=str(_REPO_ROOT / "profile" / "content" / "modules-registry.yml"),
+    show_default=True,
+    help="Path to the modules-registry YAML.",
+)
+def snapshot(registry_path: Path) -> None:
+    """Report the freshness state of all modules in the registry.
+
+    Reads the metadata.json file for each module and prints a human-readable
+    snapshot of the current state (fresh, cached, static, disabled, or
+    failed-with-fallback).
+    """
+    import json as _json
+
+    if not registry_path.exists():
+        click.echo(f"Registry not found at {registry_path}.", err=True)
+        sys.exit(1)
+
+    raw = yaml.safe_load(registry_path.read_text(encoding="utf-8")) or {}
+    reg = ModuleRegistry.model_validate(raw)
+
+    if not reg.modules:
+        click.echo("No modules declared in registry.")
+        return
+
+    click.echo("Module Snapshot")
+    click.echo("=" * 60)
+    for mod in reg.modules:
+        if not mod.enabled:
+            click.echo(f"  {mod.name:<22} DISABLED")
+            continue
+        artifact_dir = _REPO_ROOT / mod.artifact_dir
+        metadata_path = artifact_dir / "metadata.json"
+        if metadata_path.exists():
+            try:
+                meta = _json.loads(metadata_path.read_text(encoding="utf-8"))
+                state = meta.get("state", "unknown")
+                summary = meta.get("human_summary", "—")
+                click.echo(f"  {mod.name:<22} {state.upper():<22} {summary}")
+            except (OSError, _json.JSONDecodeError) as exc:
+                click.echo(f"  {mod.name:<22} ERROR                  {exc}")
+        else:
+            click.echo(f"  {mod.name:<22} NO METADATA            (run module script to generate)")
 
 
 # ---------------------------------------------------------------------------
