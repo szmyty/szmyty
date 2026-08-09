@@ -11,6 +11,7 @@ def test_final_readiness_artifacts_exist_and_cross_link() -> None:
     assert report.exists()
     assert handoff.exists()
     assert handoff.name in runbook
+    assert report.name in runbook
 
     report_text = report.read_text(encoding="utf-8")
     handoff_text = handoff.read_text(encoding="utf-8")
