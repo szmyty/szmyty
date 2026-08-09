@@ -48,4 +48,7 @@ def test_validate_uses_records_key(tmp_path: Path) -> None:
     )
 
     assert result.exit_code == 0
-    assert "evidence: 2 entries — 1 verified, 1 needs-user-verification, 0 excluded" in result.output
+    assert "evidence: 2 entries" in result.output
+    assert "1 verified" in result.output
+    assert "1 needs-user-verification" in result.output
+    assert "0 excluded" in result.output

@@ -145,6 +145,28 @@ def test_profile_config_rejects_duplicate_region_ownership() -> None:
         )
 
 
+def test_profile_config_rejects_cross_type_marker_collision() -> None:
+    with pytest.raises(ValidationError):
+        ProfileConfig(
+            modules=[
+                ModuleConfig(
+                    name="module-a",
+                    enabled=True,
+                    region_start_marker="<!-- START:a -->",
+                    region_end_marker="<!-- END:shared -->",
+                    template="a.md.j2",
+                ),
+                ModuleConfig(
+                    name="module-b",
+                    enabled=True,
+                    region_start_marker="<!-- END:shared -->",
+                    region_end_marker="<!-- END:b -->",
+                    template="b.md.j2",
+                ),
+            ]
+        )
+
+
 # ---------------------------------------------------------------------------
 # ModuleConfig
 # ---------------------------------------------------------------------------

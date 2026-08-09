@@ -118,22 +118,17 @@ class ProfileConfig(BaseModel):
     @model_validator(mode="after")
     def _validate_unique_region_ownership(self) -> "ProfileConfig":
         names_seen: set[str] = set()
-        start_seen: set[str] = set()
-        end_seen: set[str] = set()
+        markers_seen: set[str] = set()
         for module in self.modules:
             if module.name in names_seen:
                 raise ValueError(f"Duplicate module name: {module.name}")
             names_seen.add(module.name)
-            if module.region_start_marker in start_seen:
-                raise ValueError(
-                    f"Duplicate region_start_marker: {module.region_start_marker}"
-                )
-            start_seen.add(module.region_start_marker)
-            if module.region_end_marker in end_seen:
-                raise ValueError(
-                    f"Duplicate region_end_marker: {module.region_end_marker}"
-                )
-            end_seen.add(module.region_end_marker)
+            if module.region_start_marker in markers_seen:
+                raise ValueError(f"Region marker already in use: {module.region_start_marker}")
+            markers_seen.add(module.region_start_marker)
+            if module.region_end_marker in markers_seen:
+                raise ValueError(f"Region marker already in use: {module.region_end_marker}")
+            markers_seen.add(module.region_end_marker)
         return self
 
 
