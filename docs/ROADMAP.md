@@ -25,6 +25,25 @@ The immediate goal is a clean, truthful, minimal foundation.
 - [ ] Review `.staging/` content for promotion or removal
 - [ ] Add `CONTRIBUTORS.md`
 
+### Pinned-repository recommendations (for manual review)
+
+The following six repositories are recommended as GitHub profile pins because
+they collectively demonstrate the strongest breadth across the dimensions
+described in [szmyty/szmyty#72](https://github.com/szmyty/szmyty/issues/72):
+
+| Slot | Repository | Rationale |
+|------|------------|-----------|
+| 1 | [`szmyty/soliloquy`](https://github.com/szmyty/soliloquy) | Offline-first LLM tooling; concrete artifact; Docker Compose + Python |
+| 2 | [`szmyty/universal`](https://github.com/szmyty/universal) | DX tooling and CI/CD; composable design; broad applicability |
+| 3 | [`szmyty/OpenAI-Retro-SuperMarioWorld-SNES`](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) | AI/ML experiment; documented and reproducible |
+| 4 | [`egohygiene/egohygiene`](https://github.com/egohygiene/egohygiene) | Platform architecture; cross-platform app; ecosystem centrepiece |
+| 5 | [`egohygiene/egolint`](https://github.com/egohygiene/egolint) | Shipped open-source contribution; merged PR; shared quality tooling |
+| 6 | [`szmyty/szmyty`](https://github.com/szmyty/szmyty) | Evidence-first profile; schema-validated catalog; meta-engineering |
+
+> These pins must be set manually in GitHub profile settings
+> (Profile → Customize your pins). Review accuracy of each repository before
+> pinning.
+
 ### Future
 
 - [ ] Automated README regeneration from structured profile data
