@@ -8,11 +8,11 @@
 # Schema: profile/schemas/modules-registry.json
 
 modules:
-  - name: github-metrics
+  - name: github-dashboard
     enabled: true
-    description: "Fetches public GitHub profile metrics via the GitHub REST API."
+    description: "Builds a first-party visual GitHub engineering dashboard from public GitHub REST and GraphQL data."
     provider_type: api
-    provider_module: tools.modules.github_metrics
+    provider_module: tools.modules.github_dashboard
     secret_names:
       - GITHUB_TOKEN
     sensitivity: public
@@ -20,37 +20,19 @@ modules:
       cadence: daily
       ttl_seconds: 86400
       warn_after_seconds: 172800
-    artifact_dir: profile/artifacts/github-metrics
-    artifact_file: cache.json
+    artifact_dir: profile/artifacts/github-dashboard
+    artifact_file: snapshot.json
     asset_files:
       - metadata.json
-    fixture_file: profile/fixtures/github-metrics.json
+      - card-light.svg
+      - card-dark.svg
+      - card-mobile-light.svg
+      - card-mobile-dark.svg
+    fixture_file: profile/fixtures/github-dashboard.json
     readme_path: README.md
-    region_start_marker: "<!-- START:github-metrics -->"
-    region_end_marker: "<!-- END:github-metrics -->"
-    template: github-metrics.md.j2
-
-  - name: recent-activity
-    enabled: true
-    description: "Fetches recent public GitHub activity events."
-    provider_type: api
-    provider_module: tools.modules.recent_activity
-    secret_names:
-      - GITHUB_TOKEN
-    sensitivity: public
-    freshness_policy:
-      cadence: daily
-      ttl_seconds: 86400
-      warn_after_seconds: 172800
-    artifact_dir: profile/artifacts/recent-activity
-    artifact_file: cache.json
-    asset_files:
-      - metadata.json
-    fixture_file: profile/fixtures/recent-activity.json
-    readme_path: README.md
-    region_start_marker: "<!-- START:recent-activity -->"
-    region_end_marker: "<!-- END:recent-activity -->"
-    template: recent-activity.md.j2
+    region_start_marker: "<!-- START:github-dashboard -->"
+    region_end_marker: "<!-- END:github-dashboard -->"
+    template: github-dashboard.md.j2
 
   - name: ai-agent-showcase
     enabled: true

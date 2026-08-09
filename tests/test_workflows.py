@@ -8,6 +8,8 @@ from typing import Any
 
 import yaml
 
+from tools.profile_builder.models import ModuleRegistry, ProfileConfig
+
 REPO_ROOT = Path(__file__).parents[1]
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
 EXPECTED_WORKFLOWS = {"ci.yml", "pages.yml", "update-profile.yml"}
@@ -107,7 +109,8 @@ def test_update_profile_uses_safe_refresh_events() -> None:
     assert "issues" in events
     assert events["issues"]["types"] == ["closed", "edited", "labeled", "reopened"]
     assert events["push"]["branches"] == ["master"]
-    assert "profile/content/ai-agent-showcase.yml" in events["push"]["paths"]
+    assert "profile/fixtures/github-dashboard.json" in events["push"]["paths"]
+    assert "tools/profile_builder/github_dashboard/**" in events["push"]["paths"]
 
 
 def test_update_profile_summary_uses_poetry_environment() -> None:
@@ -118,6 +121,18 @@ def test_update_profile_summary_uses_poetry_environment() -> None:
         if step.get("name") == "Summarize module refresh"
     )
     assert "poetry run python - <<'PY'" in summarize["run"]
+
+
+def test_update_profile_commit_retries_non_fast_forward_pushes() -> None:
+    workflow = _load_yaml(WORKFLOWS_DIR / "update-profile.yml")
+    commit_step = next(
+        step
+        for step in workflow["jobs"]["commit"]["steps"]
+        if step.get("name") == "Commit semantic changes"
+    )
+    assert "for attempt in 1 2 3" in commit_step["run"]
+    assert "git fetch origin master" in commit_step["run"]
+    assert "git rebase origin/master" in commit_step["run"]
 
 
 def test_pages_scopes_pages_permissions_to_deploy_job() -> None:
@@ -175,19 +190,57 @@ def test_readme_start_and_end_markers_match() -> None:
     )
 
 
-def test_readme_markers_match_modules_yml() -> None:
-    """README markers must correspond exactly to modules declared in modules.yml."""
+def test_readme_markers_match_modules_registry() -> None:
+    """README markers must correspond exactly to registry-declared modules."""
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    registry_data = yaml.safe_load(
+        (REPO_ROOT / "profile" / "content" / "modules-registry.yml").read_text(
+            encoding="utf-8"
+        )
+    )
+    registry = ModuleRegistry.model_validate(registry_data)
+    declared_names = {m.name for m in registry.modules}
+    readme_start_names = set(_START_PATTERN.findall(readme))
+    assert readme_start_names == declared_names, (
+        f"README markers do not match modules-registry.yml — "
+        f"README only: {readme_start_names - declared_names}, "
+        f"modules-registry.yml only: {declared_names - readme_start_names}"
+    )
+
+
+def test_modules_yml_stays_in_sync_with_registry_render_subset() -> None:
+    """The legacy mirror must not drift from the canonical registry."""
     modules_data = yaml.safe_load(
         (REPO_ROOT / "profile" / "content" / "modules.yml").read_text(encoding="utf-8")
     )
-    declared_names = {m["name"] for m in modules_data["modules"]}
-    readme_start_names = set(_START_PATTERN.findall(readme))
-    assert readme_start_names == declared_names, (
-        f"README markers do not match modules.yml — "
-        f"README only: {readme_start_names - declared_names}, "
-        f"modules.yml only: {declared_names - readme_start_names}"
+    registry_data = yaml.safe_load(
+        (REPO_ROOT / "profile" / "content" / "modules-registry.yml").read_text(
+            encoding="utf-8"
+        )
     )
+    modules_cfg = ProfileConfig.model_validate(modules_data)
+    registry = ModuleRegistry.model_validate(registry_data)
+    registry_subset = {
+        mod.name: (
+            mod.enabled,
+            mod.region_start_marker,
+            mod.region_end_marker,
+            mod.template,
+            f"{mod.artifact_dir}/{mod.artifact_file}",
+        )
+        for mod in registry.modules
+    }
+    modules_subset = {
+        mod.name: (
+            mod.enabled,
+            mod.region_start_marker,
+            mod.region_end_marker,
+            mod.template,
+            None if mod.artifact_path is None else str(mod.artifact_path),
+        )
+        for mod in modules_cfg.modules
+    }
+    assert modules_subset == registry_subset
 
 
 # ---------------------------------------------------------------------------

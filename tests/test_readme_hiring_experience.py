@@ -28,10 +28,10 @@ def test_readme_sections_follow_hiring_focused_order() -> None:
     ordered_sections = [
         "## Hiring Snapshot",
         "## Selected Work",
+        "## GitHub Engineering Dashboard",
         "## Flagship Systems",
         "## Experience and Education",
         "## AI Agent Execution Showcase",
-        "## GitHub Engineering Dashboard",
         "## Ego Hygiene Platform",
         "## Research, Writing, and Publications",
         "## Creative Practice",
@@ -47,23 +47,21 @@ def test_readme_sections_follow_hiring_focused_order() -> None:
 def test_active_and_hidden_modules_are_placed_in_their_intended_sections() -> None:
     readme = _readme_text()
 
-    ai_heading = readme.index("## AI Agent Execution Showcase")
     github_heading = readme.index("## GitHub Engineering Dashboard")
+    flagship_heading = readme.index("## Flagship Systems")
+    ai_heading = readme.index("## AI Agent Execution Showcase")
     creative_heading = readme.index("## Creative Practice")
     gaming_heading = readme.index("## Gaming and Working Style")
     matrix_heading = readme.index("## Completion Matrix")
     contact_heading = readme.index("## Contact")
 
     assert (
-        ai_heading < readme.index("<!-- START:ai-agent-showcase -->") < github_heading
-    )
-    assert (
-        github_heading < readme.index("<!-- START:github-metrics -->") < contact_heading
-    )
-    assert (
         github_heading
-        < readme.index("<!-- START:recent-activity -->")
-        < contact_heading
+        < readme.index("<!-- START:github-dashboard -->")
+        < flagship_heading
+    )
+    assert (
+        ai_heading < readme.index("<!-- START:ai-agent-showcase -->") < contact_heading
     )
     assert (
         creative_heading

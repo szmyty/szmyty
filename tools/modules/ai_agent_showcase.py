@@ -105,6 +105,14 @@ def load_cached(path: Path = DEFAULT_OUTPUT) -> AgentShowcaseSnapshot | None:
     )
 
 
+def load_template_context(artifact_path: Path) -> dict[str, Any]:
+    """Load the README template context for a rendered showcase artifact."""
+    snapshot = AgentShowcaseSnapshot.model_validate_json(
+        artifact_path.read_text(encoding="utf-8")
+    )
+    return {"snapshot": snapshot, "trace": snapshot.selected_trace}
+
+
 def _extract_problem_summary(body: str) -> str:
     paragraphs = [p.strip() for p in body.split("\n\n") if p.strip()]
     for paragraph in paragraphs:

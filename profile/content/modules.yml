@@ -1,29 +1,22 @@
 # modules.yml
-# Declares profile modules and their README region ownership.
+# Compatibility mirror for README region ownership.
 #
 # Each module owns exactly one pair of HTML-comment markers in README.md:
 #   <!-- START:<name> -->   … generated content …   <!-- END:<name> -->
 #
 # Hand-authored sections outside those markers are never modified.
-# Set enabled: false to disable a module without removing its markers;
-# the README region will remain empty and the file stays coherent.
+# Canonical module metadata lives in profile/content/modules-registry.yml.
+# Keep overlapping entries synchronized with the registry.
 #
 # Schema: profile/schemas/modules.json
 
 modules:
-  - name: github-metrics
+  - name: github-dashboard
     enabled: true
-    region_start_marker: "<!-- START:github-metrics -->"
-    region_end_marker: "<!-- END:github-metrics -->"
-    template: github-metrics.md.j2
-    artifact_path: profile/artifacts/github-metrics/cache.json
-
-  - name: recent-activity
-    enabled: true
-    region_start_marker: "<!-- START:recent-activity -->"
-    region_end_marker: "<!-- END:recent-activity -->"
-    template: recent-activity.md.j2
-    artifact_path: profile/artifacts/recent-activity/cache.json
+    region_start_marker: "<!-- START:github-dashboard -->"
+    region_end_marker: "<!-- END:github-dashboard -->"
+    template: github-dashboard.md.j2
+    artifact_path: profile/artifacts/github-dashboard/snapshot.json
 
   - name: ai-agent-showcase
     enabled: true
@@ -58,18 +51,21 @@ modules:
     region_start_marker: "<!-- START:education -->"
     region_end_marker: "<!-- END:education -->"
     template: education.md.j2
+    artifact_path: profile/artifacts/education/education.json
 
   - name: resume
     enabled: false
     region_start_marker: "<!-- START:resume -->"
     region_end_marker: "<!-- END:resume -->"
     template: resume.md.j2
+    artifact_path: profile/artifacts/resume/resume.json
 
   - name: working-style
     enabled: false
     region_start_marker: "<!-- START:working-style -->"
     region_end_marker: "<!-- END:working-style -->"
     template: working-style.md.j2
+    artifact_path: profile/artifacts/working-style/working-style.json
 
   - name: soundcloud
     enabled: false
@@ -90,6 +86,7 @@ modules:
     region_start_marker: "<!-- START:stars -->"
     region_end_marker: "<!-- END:stars -->"
     template: stars.md.j2
+    artifact_path: profile/artifacts/stars/stars.json
 
   - name: oura-trends
     enabled: false

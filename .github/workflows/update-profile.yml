@@ -16,9 +16,13 @@ on:
     paths:
       - ".github/workflows/update-profile.yml"
       - "profile/content/ai-agent-showcase.yml"
+      - "profile/fixtures/github-dashboard.json"
       - "profile/fixtures/ai-agent-showcase.json"
+      - "profile/templates/github-dashboard*.j2"
       - "profile/templates/ai-agent-showcase*.j2"
+      - "tools/modules/github_dashboard.py"
       - "tools/modules/ai_agent_showcase.py"
+      - "tools/profile_builder/github_dashboard/**"
       - "tools/profile_builder/models.py"
 
 permissions:
@@ -104,23 +108,14 @@ jobs:
       - name: Install runtime dependencies
         run: poetry install --only main --no-interaction --no-root
 
-      - name: Refresh GitHub metrics
-        id: github_metrics
+      - name: Refresh GitHub dashboard
+        id: github_dashboard
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
-          poetry run python -m tools.modules.github_metrics
-          --output profile/artifacts/github-metrics/cache.json
-
-      - name: Refresh recent activity
-        id: recent_activity
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: >-
-          poetry run python -m tools.modules.recent_activity
-          --output profile/artifacts/recent-activity/cache.json
+          poetry run python -m tools.modules.github_dashboard
+          --output-dir profile/artifacts/github-dashboard
 
       - name: Refresh AI agent showcase
         id: ai_agent_showcase
@@ -148,8 +143,7 @@ jobs:
       - name: Summarize module refresh
         id: summarize
         env:
-          GITHUB_METRICS_OUTCOME: ${{ steps.github_metrics.outcome }}
-          RECENT_ACTIVITY_OUTCOME: ${{ steps.recent_activity.outcome }}
+          GITHUB_DASHBOARD_OUTCOME: ${{ steps.github_dashboard.outcome }}
           AI_AGENT_SHOWCASE_OUTCOME: ${{ steps.ai_agent_showcase.outcome }}
           MUSIC_HIGHLIGHT_OUTCOME: ${{ steps.music_highlight.outcome }}
         run: |
@@ -161,8 +155,7 @@ jobs:
           import yaml
 
           items = [
-              ("github-metrics", Path("profile/artifacts/github-metrics/cache.json"), os.environ["GITHUB_METRICS_OUTCOME"]),
-              ("recent-activity", Path("profile/artifacts/recent-activity/cache.json"), os.environ["RECENT_ACTIVITY_OUTCOME"]),
+              ("github-dashboard", Path("profile/artifacts/github-dashboard/snapshot.json"), os.environ["GITHUB_DASHBOARD_OUTCOME"]),
               ("ai-agent-showcase", Path("profile/artifacts/ai-agent-showcase/cache.json"), os.environ["AI_AGENT_SHOWCASE_OUTCOME"]),
               ("music-highlight", Path("profile/artifacts/music-highlight/music.yml"), os.environ["MUSIC_HIGHLIGHT_OUTCOME"]),
           ]
@@ -172,7 +165,8 @@ jobs:
               source = "missing"
               if path.exists():
                   if path.suffix == ".json":
-                      source = json.loads(path.read_text(encoding="utf-8")).get("data_source", "unknown")
+                      payload = json.loads(path.read_text(encoding="utf-8"))
+                      source = payload.get("data_source") or payload.get("status", {}).get("data_source", "unknown")
                   else:
                       source = (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("data_source", "unknown")
               print(f"- {name}: {outcome}; data source: {source}")
@@ -180,8 +174,7 @@ jobs:
 
           had_failures=false
           for outcome in \
-            "$GITHUB_METRICS_OUTCOME" \
-            "$RECENT_ACTIVITY_OUTCOME" \
+            "$GITHUB_DASHBOARD_OUTCOME" \
             "$AI_AGENT_SHOWCASE_OUTCOME" \
             "$MUSIC_HIGHLIGHT_OUTCOME"; do
             if [ "$outcome" != "success" ]; then
@@ -199,8 +192,12 @@ jobs:
           name: profile-refresh
           path: |
             README.md
-            profile/artifacts/github-metrics/cache.json
-            profile/artifacts/recent-activity/cache.json
+            profile/artifacts/github-dashboard/snapshot.json
+            profile/artifacts/github-dashboard/metadata.json
+            profile/artifacts/github-dashboard/card-light.svg
+            profile/artifacts/github-dashboard/card-dark.svg
+            profile/artifacts/github-dashboard/card-mobile-light.svg
+            profile/artifacts/github-dashboard/card-mobile-dark.svg
             profile/artifacts/ai-agent-showcase/cache.json
             profile/artifacts/ai-agent-showcase/card.svg
             profile/artifacts/music-highlight/music.yml
@@ -219,6 +216,7 @@ jobs:
         with:
           # persist-credentials must remain enabled so this job can git push
           persist-credentials: true
+          fetch-depth: 0
 
       - name: Download refreshed profile files
         # actions/download-artifact v4
@@ -232,8 +230,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add README.md profile/artifacts/github-metrics/cache.json \
-            profile/artifacts/recent-activity/cache.json \
+          git add README.md profile/artifacts/github-dashboard/snapshot.json \
+            profile/artifacts/github-dashboard/metadata.json \
+            profile/artifacts/github-dashboard/card-light.svg \
+            profile/artifacts/github-dashboard/card-dark.svg \
+            profile/artifacts/github-dashboard/card-mobile-light.svg \
+            profile/artifacts/github-dashboard/card-mobile-dark.svg \
             profile/artifacts/ai-agent-showcase/cache.json \
             profile/artifacts/ai-agent-showcase/card.svg \
             profile/artifacts/music-highlight/music.yml
@@ -245,7 +247,17 @@ jobs:
           fi
 
           git commit -m "chore(profile): refresh public modules"
-          git push
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "Push failed after 3 attempts." >&2
+              exit 1
+            fi
+            git fetch origin master
+            git rebase origin/master
+          done
 
   report-partial-failure:
     runs-on: ubuntu-latest

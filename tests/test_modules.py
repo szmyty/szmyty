@@ -9,6 +9,7 @@ import pytest
 import yaml
 
 from tools.modules import (
+    github_dashboard,
     github_metrics,
     music_highlight,
     recent_activity,
@@ -473,8 +474,8 @@ def test_update_readme_reports_unchanged_on_second_render(
     readme = tmp_path / "README.md"
     readme.write_text(
         "header\n\n"
-        "<!-- START:github-metrics -->\n<!-- END:github-metrics -->\n\n"
-        "<!-- START:recent-activity -->\n<!-- END:recent-activity -->\n\n"
+        "<!-- START:github-dashboard -->\n<!-- END:github-dashboard -->\n\n"
+        "<!-- START:ai-agent-showcase -->\n<!-- END:ai-agent-showcase -->\n\n"
         "<!-- START:music-highlight -->\n<!-- END:music-highlight -->\n",
         encoding="utf-8",
     )
@@ -482,8 +483,8 @@ def test_update_readme_reports_unchanged_on_second_render(
     templates_dir.mkdir()
     repo_root = Path(__file__).resolve().parents[1]
     for name in [
-        "github-metrics.md.j2",
-        "recent-activity.md.j2",
+        "github-dashboard.md.j2",
+        "ai-agent-showcase.md.j2",
         "music-highlight.md.j2",
     ]:
         source = (repo_root / "profile" / "templates" / name).read_text(
@@ -492,15 +493,17 @@ def test_update_readme_reports_unchanged_on_second_render(
         (templates_dir / name).write_text(source, encoding="utf-8")
 
     artifact_root = tmp_path / "profile" / "artifacts"
-    (artifact_root / "github-metrics").mkdir(parents=True)
-    (artifact_root / "recent-activity").mkdir(parents=True)
+    (artifact_root / "github-dashboard").mkdir(parents=True)
+    (artifact_root / "ai-agent-showcase").mkdir(parents=True)
     (artifact_root / "music-highlight").mkdir(parents=True)
-    (artifact_root / "github-metrics" / "cache.json").write_text(
-        github_metrics.DEFAULT_FIXTURE.read_text(encoding="utf-8"),
+    (artifact_root / "github-dashboard" / "snapshot.json").write_text(
+        github_dashboard.DEFAULT_FIXTURE.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
-    (artifact_root / "recent-activity" / "cache.json").write_text(
-        recent_activity.DEFAULT_FIXTURE.read_text(encoding="utf-8"),
+    (artifact_root / "ai-agent-showcase" / "cache.json").write_text(
+        (repo_root / "profile" / "fixtures" / "ai-agent-showcase.json").read_text(
+            encoding="utf-8"
+        ),
         encoding="utf-8",
     )
     (artifact_root / "music-highlight" / "music.yml").write_text(
@@ -508,34 +511,49 @@ def test_update_readme_reports_unchanged_on_second_render(
         encoding="utf-8",
     )
 
-    config_path = tmp_path / "modules.yml"
+    config_path = tmp_path / "modules-registry.yml"
     config_path.write_text(
         yaml.safe_dump(
             {
                 "modules": [
                     {
-                        "name": "github-metrics",
+                        "name": "github-dashboard",
                         "enabled": True,
-                        "region_start_marker": "<!-- START:github-metrics -->",
-                        "region_end_marker": "<!-- END:github-metrics -->",
-                        "template": "github-metrics.md.j2",
-                        "artifact_path": "profile/artifacts/github-metrics/cache.json",
+                        "provider_type": "api",
+                        "provider_module": "tools.modules.github_dashboard",
+                        "sensitivity": "public",
+                        "freshness_policy": {"cadence": "daily"},
+                        "artifact_dir": "profile/artifacts/github-dashboard",
+                        "artifact_file": "snapshot.json",
+                        "region_start_marker": "<!-- START:github-dashboard -->",
+                        "region_end_marker": "<!-- END:github-dashboard -->",
+                        "template": "github-dashboard.md.j2",
                     },
                     {
-                        "name": "recent-activity",
+                        "name": "ai-agent-showcase",
                         "enabled": True,
-                        "region_start_marker": "<!-- START:recent-activity -->",
-                        "region_end_marker": "<!-- END:recent-activity -->",
-                        "template": "recent-activity.md.j2",
-                        "artifact_path": "profile/artifacts/recent-activity/cache.json",
+                        "provider_type": "computed",
+                        "provider_module": "tools.modules.ai_agent_showcase",
+                        "sensitivity": "public",
+                        "freshness_policy": {"cadence": "daily"},
+                        "artifact_dir": "profile/artifacts/ai-agent-showcase",
+                        "artifact_file": "cache.json",
+                        "region_start_marker": "<!-- START:ai-agent-showcase -->",
+                        "region_end_marker": "<!-- END:ai-agent-showcase -->",
+                        "template": "ai-agent-showcase.md.j2",
                     },
                     {
                         "name": "music-highlight",
                         "enabled": True,
+                        "provider_type": "manual",
+                        "provider_module": "tools.modules.music_highlight",
+                        "sensitivity": "public",
+                        "freshness_policy": {"cadence": "never"},
+                        "artifact_dir": "profile/artifacts/music-highlight",
+                        "artifact_file": "music.yml",
                         "region_start_marker": "<!-- START:music-highlight -->",
                         "region_end_marker": "<!-- END:music-highlight -->",
                         "template": "music-highlight.md.j2",
-                        "artifact_path": "profile/artifacts/music-highlight/music.yml",
                     },
                 ]
             },
@@ -559,8 +577,8 @@ def test_update_readme_reports_unchanged_on_second_render(
     assert all(status == "updated" for _, status in first)
     assert all(status == "unchanged" for _, status in second)
     rendered = readme.read_text(encoding="utf-8")
-    assert "### GitHub Metrics" in rendered
-    assert "### Recent Public Activity" in rendered
+    assert "profile/artifacts/github-dashboard/card-light.svg" in rendered
+    assert "AI Agent Execution Showcase" in rendered
     assert "### Music" in rendered
 
 

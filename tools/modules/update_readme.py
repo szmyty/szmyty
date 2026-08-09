@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 from pathlib import Path
 from typing import Any
@@ -9,18 +10,12 @@ from typing import Any
 import click
 import yaml
 
-from tools.profile_builder.models import (
-    AgentShowcaseSnapshot,
-    GithubMetrics,
-    MusicHighlight,
-    ProfileConfig,
-    RecentActivity,
-)
+from tools.profile_builder.models import ModuleRegistry
 from tools.profile_builder.regions import update_readme_region
 from tools.profile_builder.rendering import render_template
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CONFIG = REPO_ROOT / "profile" / "content" / "modules.yml"
+DEFAULT_CONFIG = REPO_ROOT / "profile" / "content" / "modules-registry.yml"
 DEFAULT_README = REPO_ROOT / "README.md"
 DEFAULT_TEMPLATES = REPO_ROOT / "profile" / "templates"
 
@@ -33,18 +28,21 @@ def _load_data(path: Path) -> Any:
     raise ValueError(f"Unsupported artifact format: {path.suffix}")
 
 
-def _context_for_module(module_name: str, artifact_path: Path) -> dict[str, Any]:
-    raw = _load_data(artifact_path)
-    if module_name == "github-metrics":
-        return {"metrics": GithubMetrics.model_validate(raw)}
-    if module_name == "recent-activity":
-        return {"activity": RecentActivity.model_validate(raw)}
-    if module_name == "ai-agent-showcase":
-        snapshot = AgentShowcaseSnapshot.model_validate(raw)
-        return {"snapshot": snapshot, "trace": snapshot.selected_trace}
-    if module_name == "music-highlight":
-        return {"music": MusicHighlight.model_validate(raw)}
-    raise ValueError(f"Unsupported module: {module_name}")
+def _context_for_module(provider_module: str, artifact_path: Path) -> dict[str, Any]:
+    module = importlib.import_module(provider_module)
+    loader = getattr(module, "load_template_context", None)
+    if loader is None:
+        raise ValueError(
+            f"Provider module {provider_module!r} does not expose "
+            "load_template_context()."
+        )
+    context = loader(artifact_path)
+    if not isinstance(context, dict):
+        raise ValueError(
+            f"Provider module {provider_module!r} returned a non-mapping "
+            "template context."
+        )
+    return context
 
 
 def render_modules(
@@ -54,13 +52,11 @@ def render_modules(
 ) -> list[tuple[str, str]]:
     """Render all enabled modules and return ``(name, status)`` tuples."""
     raw_cfg = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
-    config = ProfileConfig.model_validate(raw_cfg)
+    config = ModuleRegistry.model_validate(raw_cfg)
     results: list[tuple[str, str]] = []
     for module in config.enabled_modules:
-        if module.artifact_path is None:
-            raise ValueError(f"Module {module.name} is missing artifact_path.")
-        artifact_path = REPO_ROOT / module.artifact_path
-        context = _context_for_module(module.name, artifact_path)
+        artifact_path = REPO_ROOT / module.artifact_dir / module.artifact_file
+        context = _context_for_module(module.provider_module, artifact_path)
         content = render_template(
             module.template,
             context,

@@ -41,6 +41,11 @@ def load_cached_music(path: Path) -> MusicHighlight | None:
     return music.model_copy(update={"data_source": "cache"})
 
 
+def load_template_context(artifact_path: Path) -> dict[str, Any]:
+    """Load the README template context for a rendered music artifact."""
+    return {"music": load_music(artifact_path)}
+
+
 def build_music_highlight(
     input_path: Path = DEFAULT_INPUT,
     output_path: Path = DEFAULT_OUTPUT,
