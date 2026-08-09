@@ -11,6 +11,7 @@ REPO_ROOT="$(git -C "$(dirname "$0")/.." rev-parse --show-toplevel)"
 # Patterns that must NOT appear as production config targets.
 # These are checked only in structured config file types.
 STALE_PATTERNS=(
+    "egohygiene/egohygiene"
     "egohygiene/sanctuary"
     "profile-next"
 )
@@ -42,12 +43,6 @@ for pattern in "${STALE_PATTERNS[@]}"; do
         FOUND=1
     fi
 done
-
-# Check that .allcontributorsrc does not have the wrong owner
-if grep -q '"projectOwner": "egohygiene"' "$REPO_ROOT/.allcontributorsrc" 2>/dev/null; then
-    echo "ERROR: .allcontributorsrc still has projectOwner 'egohygiene'"
-    FOUND=1
-fi
 
 if [[ "$FOUND" -eq 1 ]]; then
     echo ""
