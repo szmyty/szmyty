@@ -130,7 +130,9 @@ class TestValidateRecordExcluded:
         assert validate_record(record, 0) == []
 
     def test_sensitive_with_url_is_error(self):
-        record = _valid_record(sensitivity="sensitive", url="https://private.example.com")
+        record = _valid_record(
+            sensitivity="sensitive", url="https://private.example.com"
+        )
         errors = validate_record(record, 0)
         assert any("sensitive record must not have a 'url'" in e for e in errors)
 
@@ -223,7 +225,9 @@ class TestValidateFile:
         assert validate_file(p) == 0
 
     def test_sensitive_with_url_fails(self, tmp_path):
-        record = _valid_record(sensitivity="sensitive", url="https://private.example.com")
+        record = _valid_record(
+            sensitivity="sensitive", url="https://private.example.com"
+        )
         p = _write_catalog(tmp_path, [record])
         assert validate_file(p) == 1
 

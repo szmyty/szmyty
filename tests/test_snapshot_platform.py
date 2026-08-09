@@ -109,9 +109,13 @@ def test_module_registry_enabled_filter() -> None:
         {
             "modules": [
                 {**_ENTRY_DEFAULTS, "name": "mod-a", "enabled": True},
-                {**_ENTRY_DEFAULTS, "name": "mod-b", "enabled": False,
-                 "region_start_marker": "<!-- START:mod-b -->",
-                 "region_end_marker": "<!-- END:mod-b -->"},
+                {
+                    **_ENTRY_DEFAULTS,
+                    "name": "mod-b",
+                    "enabled": False,
+                    "region_start_marker": "<!-- START:mod-b -->",
+                    "region_end_marker": "<!-- END:mod-b -->",
+                },
             ]
         }
     )
@@ -172,10 +176,7 @@ def test_module_result_failed_with_fallback() -> None:
 # ---------------------------------------------------------------------------
 
 _REGISTRY_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "profile"
-    / "content"
-    / "modules-registry.yml"
+    Path(__file__).resolve().parents[1] / "profile" / "content" / "modules-registry.yml"
 )
 
 

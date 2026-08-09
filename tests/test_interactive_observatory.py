@@ -15,7 +15,7 @@ README = REPO_ROOT / "README.md"
 
 def test_showcase_has_semantic_fallback_before_js() -> None:
     html = SHOWCASE_PAGE.read_text(encoding="utf-8")
-    assert "id=\"execution-observatory\"" in html
+    assert 'id="execution-observatory"' in html
     assert "trace-observatory-fallback" in html
     assert "<noscript>" in html
     assert html.index("trace-observatory-fallback") < html.index(
@@ -28,8 +28,8 @@ def test_showcase_exposes_accessible_controls_and_stage_links() -> None:
     assert "Observatory controls" in html
     assert "data-observatory-toggle-motion" in html
     assert "data-observatory-reduce-motion" in html
-    assert "tabindex=\"0\"" in html
-    assert html.count("id=\"stage-") >= 6
+    assert 'tabindex="0"' in html
+    assert html.count('id="stage-') >= 6
     assert html.count("data-stage-type=") >= 6
 
 

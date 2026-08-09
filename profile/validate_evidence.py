@@ -84,7 +84,9 @@ def validate_record(record: Any, index: int) -> list[str]:
     errors: list[str] = []
 
     if not isinstance(record, dict):
-        errors.append(f"Record {index}: expected a mapping, got {type(record).__name__}")
+        errors.append(
+            f"Record {index}: expected a mapping, got {type(record).__name__}"
+        )
         return errors
 
     record_id = _safe_id(record)
@@ -196,9 +198,7 @@ def validate_file(path: Path) -> int:
     # Report
     total = len(records)
     verified = sum(
-        1
-        for r in records
-        if isinstance(r, dict) and r.get("status") == "verified"
+        1 for r in records if isinstance(r, dict) and r.get("status") == "verified"
     )
 
     print(f"Evidence catalog: {path}")

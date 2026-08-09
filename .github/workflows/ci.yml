@@ -60,7 +60,10 @@ jobs:
         run: poetry run python profile/validate_assets.py assets/profile
 
       - name: Lint Python
-        run: poetry run ruff check tests
+        run: poetry run ruff check .
+
+      - name: Check Python formatting
+        run: poetry run ruff format --check .
 
       - name: Lint workflow YAML
         run: poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml

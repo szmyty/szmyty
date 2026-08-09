@@ -142,7 +142,8 @@ def check_heading_structure(content: str) -> list[str]:
     elif h1_count > 1:
         lines = [str(ln) for lvl, _, ln in headings if lvl == 1]
         errors.append(
-            f"Multiple H1 headings found (lines {', '.join(lines)}) — exactly one is required"
+            f"Multiple H1 headings found (lines {', '.join(lines)})"
+            " — exactly one is required"
         )
 
     prev_level = 0
@@ -184,9 +185,7 @@ def check_generated_regions(content: str) -> list[str]:
                 del open_regions[name]
 
     for name, lineno in sorted(open_regions.items(), key=lambda kv: kv[1]):
-        errors.append(
-            f"Line {lineno}: BEGIN for region '{name}' has no matching END"
-        )
+        errors.append(f"Line {lineno}: BEGIN for region '{name}' has no matching END")
 
     return errors
 
@@ -238,13 +237,9 @@ def check_links_and_images(content: str) -> list[str]:
         url = match.group(2).strip()
         lineno = content[: match.start()].count("\n") + 1
         if not text.strip():
-            errors.append(
-                f"Line {lineno}: link has empty text — '{match.group()}'"
-            )
+            errors.append(f"Line {lineno}: link has empty text — '{match.group()}'")
         if not url:
-            errors.append(
-                f"Line {lineno}: link has empty target — '{match.group()}'"
-            )
+            errors.append(f"Line {lineno}: link has empty target — '{match.group()}'")
 
     return errors
 
@@ -273,7 +268,8 @@ def check_personal_identifiers(content: str) -> list[str]:
             idx = lower.find(identifier.lower())
             lineno = content[:idx].count("\n") + 1
             errors.append(
-                f"Line {lineno}: personal identifier '{identifier}' found in universal template"
+                f"Line {lineno}: personal identifier '{identifier}'"
+                " found in universal template"
             )
     return errors
 
@@ -329,7 +325,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if not paths:
         print(
-            "Usage: validate_template.py <README.md> [<README.md> ...] [--personal-ids-ok]",
+            "Usage: validate_template.py <README.md> [<README.md> ...]"
+            " [--personal-ids-ok]",
             file=sys.stderr,
         )
         return 1

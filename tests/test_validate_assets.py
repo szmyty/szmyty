@@ -116,8 +116,7 @@ class TestCheckSvg:
     def test_missing_title(self, tmp_path):
         p = tmp_path / "test.svg"
         p.write_text(
-            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
-            "<rect/></svg>",
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect/></svg>',
             encoding="utf-8",
         )
         errors = va.check_svg(p)

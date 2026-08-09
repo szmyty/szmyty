@@ -46,10 +46,7 @@ FIXTURE_PATH = (
     Path(__file__).resolve().parents[1] / "profile" / "fixtures" / "oura-trends.json"
 )
 REGISTRY_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "profile"
-    / "content"
-    / "modules-registry.yml"
+    Path(__file__).resolve().parents[1] / "profile" / "content" / "modules-registry.yml"
 )
 
 
@@ -179,9 +176,9 @@ def test_apply_allowlist_strips_unknown_keys() -> None:
         "contributing_days": 80,
         "period_label": "Jul 2026",
         "avg_sleep_hours": 7.0,
-        "daily_array": [1, 2, 3],          # must be stripped
-        "access_token": "oura_secret",     # must be stripped
-        "tags": ["alcohol"],               # must be stripped
+        "daily_array": [1, 2, 3],  # must be stripped
+        "access_token": "oura_secret",  # must be stripped
+        "tags": ["alcohol"],  # must be stripped
         "is_synthetic": True,
         "data_source": "fixture",
         "generated_month": "2026-08",
@@ -448,9 +445,7 @@ def test_aggregate_json_contains_no_token_or_timestamp() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_public_artifact_contains_only_allowlisted_keys(
-    tmp_path, monkeypatch
-) -> None:
+def test_public_artifact_contains_only_allowlisted_keys(tmp_path, monkeypatch) -> None:
     monkeypatch.delenv("OURA_ACCESS_TOKEN", raising=False)
     output = tmp_path / "cache.json"
     build_aggregate(

@@ -248,35 +248,35 @@ def test_profile_config_empty() -> None:
 
 def test_github_metrics_model() -> None:
     metrics = GithubMetrics(
-        top_languages=[LanguageEntry(name='Python', percentage=60.0)],
+        top_languages=[LanguageEntry(name="Python", percentage=60.0)],
         public_repo_count=3,
         maintained_repos=[
-            RepositorySummary(name='szmyty', url='https://github.com/szmyty/szmyty')
+            RepositorySummary(name="szmyty", url="https://github.com/szmyty/szmyty")
         ],
-        latest_release='szmyty@v1.0.0',
-        data_source='live',
+        latest_release="szmyty@v1.0.0",
+        data_source="live",
     )
-    assert metrics.top_languages[0].name == 'Python'
+    assert metrics.top_languages[0].name == "Python"
     assert metrics.public_repo_count == 3
 
 
 def test_recent_activity_model_max_length() -> None:
     event = ActivityEvent(
-        event_type='PushEvent',
-        repo='szmyty/szmyty',
-        repo_url='https://github.com/szmyty/szmyty',
-        summary='Updated profile README',
-        occurred_at='2024-01-15',
+        event_type="PushEvent",
+        repo="szmyty/szmyty",
+        repo_url="https://github.com/szmyty/szmyty",
+        summary="Updated profile README",
+        occurred_at="2024-01-15",
     )
-    activity = RecentActivity(events=[event], data_source='fixture')
-    assert activity.events[0].repo == 'szmyty/szmyty'
+    activity = RecentActivity(events=[event], data_source="fixture")
+    assert activity.events[0].repo == "szmyty/szmyty"
 
 
 def test_music_highlight_model_optional_fields() -> None:
     music = MusicHighlight(
-        title='Ego Hygiene',
-        public_url='https://soundcloud.com/szmyty',
-        data_source='manual',
+        title="Ego Hygiene",
+        public_url="https://soundcloud.com/szmyty",
+        data_source="manual",
     )
     assert music.description is None
     assert music.artwork_path is None
