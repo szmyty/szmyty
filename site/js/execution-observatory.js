@@ -88,9 +88,6 @@
     }
   });
 
-  if (fallbackList) {
-    fallbackList.hidden = false;
-  }
   updateMotionButtons();
 
   const webglProbe = document.createElement("canvas");
