@@ -346,6 +346,118 @@ records:
       Self-reported; reasonable to include as a general statement once
       user confirms current tooling.
 
+  # ─── Education ────────────────────────────────────────────────────────────
+
+  - id: education-umass-lowell-bs-cs
+    claim: "Bachelor of Science in Computer Science, University of Massachusetts Lowell"
+    evidence_type: self-reported
+    url: "https://www.uml.edu/sciences/computer-science/"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Degree and institution are reported by Alan.  User must confirm
+      degree title, program URL, and optional graduation year before
+      rendering the education card.
+
+  - id: education-bu-ms-software-development
+    claim: "Master of Science in Software Development, Boston University"
+    evidence_type: self-reported
+    url: "https://www.bu.edu/met/programs/graduate/computer-science/ms-software-development/"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Degree and institution are reported by Alan.  User must confirm
+      degree title, program URL, and optional graduation year before
+      rendering the education card.
+
+  # ─── Resume ───────────────────────────────────────────────────────────────
+
+  - id: resume-public-document
+    claim: "Sanitized public resume (PDF or stable URL)"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No approved public resume has been supplied.  The public CTA must
+      remain disabled until Alan provides a sanitized artifact that passes
+      the privacy/metadata checklist in docs/RESUME-CHECKLIST.md.
+
+  # ─── ORCID and publications ───────────────────────────────────────────────
+
+  - id: orcid-id
+    claim: "ORCID iD"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Alan must supply and confirm the ORCID iD (format: 0000-0000-0000-0000)
+      before the ORCID module renders any content.  Claim must be backed by
+      a verified public record at https://orcid.org/<id>.
+
+  - id: orcid-public-profile
+    claim: "ORCID public profile and selected works"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Depends on orcid-id being verified.  Selected works are normalized to
+      title, type, year, and DOI/public URL from the public ORCID record only.
+
+  # ─── Medium writing ───────────────────────────────────────────────────────
+
+  - id: medium-username
+    claim: "Medium author profile"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Alan must supply and confirm the Medium username or canonical profile URL
+      before the Medium module renders any articles.
+
+  - id: medium-public-articles
+    claim: "Selected recent Medium articles"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Depends on medium-username being verified.  Article data is normalized
+      from the public RSS feed only (title, URL, date, safe summary text).
+
+  # ─── Working style ────────────────────────────────────────────────────────
+
+  - id: working-style-16personalities
+    claim: "16Personalities working-style self-description"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Alan must supply the personality type label, approved public image path,
+      public link, and first-person working-style summary before this content
+      renders.  This is framed as self-described working style, not a clinical
+      credential or objective prediction.
+
+  # ─── STARS career development ─────────────────────────────────────────────
+
+  - id: stars-career-development
+    claim: "STARS career-development program participation"
+    evidence_type: none
+    status: excluded
+    sensitivity: internal
+    last_reviewed: "2026-08-09"
+    notes: >
+      STARS is a non-public career-development program.  Raw coaching notes
+      must not be published.  A public-selection slot is configured but
+      disabled.  Alan must explicitly mark individual items public before any
+      STARS content can render.
+
   # ─── Creative technology and music ────────────────────────────────────────
 
   - id: creative-music-producer

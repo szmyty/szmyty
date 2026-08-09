@@ -1,0 +1,13 @@
+# orcid-config.yml
+# ORCID module configuration slot.
+#
+# Set enabled: true and supply a confirmed orcid_id before the module
+# renders any content.  The orcid_id must be a valid 16-digit ORCID
+# identifier in the form 0000-0000-0000-0000.
+#
+# Evidence record: orcid-id (profile/content/evidence.yml)
+
+enabled: false
+orcid_id: null
+profile_url: null
+evidence_id: "orcid-id"

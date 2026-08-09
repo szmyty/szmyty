@@ -31,3 +31,41 @@ modules:
     region_end_marker: "<!-- END:music-highlight -->"
     template: music-highlight.md.j2
     artifact_path: profile/artifacts/music-highlight/music.yml
+
+  - name: orcid
+    enabled: false
+    region_start_marker: "<!-- START:orcid -->"
+    region_end_marker: "<!-- END:orcid -->"
+    template: orcid.md.j2
+    artifact_path: profile/artifacts/orcid/cache.json
+
+  - name: medium
+    enabled: false
+    region_start_marker: "<!-- START:medium -->"
+    region_end_marker: "<!-- END:medium -->"
+    template: medium.md.j2
+    artifact_path: profile/artifacts/medium/cache.json
+
+  - name: education
+    enabled: false
+    region_start_marker: "<!-- START:education -->"
+    region_end_marker: "<!-- END:education -->"
+    template: education.md.j2
+
+  - name: resume
+    enabled: false
+    region_start_marker: "<!-- START:resume -->"
+    region_end_marker: "<!-- END:resume -->"
+    template: resume.md.j2
+
+  - name: working-style
+    enabled: false
+    region_start_marker: "<!-- START:working-style -->"
+    region_end_marker: "<!-- END:working-style -->"
+    template: working-style.md.j2
+
+  - name: stars
+    enabled: false
+    region_start_marker: "<!-- START:stars -->"
+    region_end_marker: "<!-- END:stars -->"
+    template: stars.md.j2

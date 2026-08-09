@@ -1,0 +1,11 @@
+# medium-config.yml
+# Medium module configuration slot.
+#
+# Set enabled: true and supply a confirmed username before the module
+# fetches or renders any articles.
+#
+# Evidence record: medium-username (profile/content/evidence.yml)
+
+enabled: false
+username: null
+evidence_id: "medium-username"

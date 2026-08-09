@@ -1,0 +1,10 @@
+{% if data.articles %}
+### Writing
+
+{% if data.profile_url %}[View all articles on Medium]({{ data.profile_url }}){% endif %}
+
+{% for article in data.articles %}
+- **[{{ article.title }}]({{ article.canonical_url }})**{% if article.published_date %} · {{ article.published_date }}{% endif %}
+{% if article.summary %}  {{ article.summary }}{% endif %}
+{% endfor %}
+{% endif %}

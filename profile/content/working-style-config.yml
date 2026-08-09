@@ -1,0 +1,14 @@
+# working-style-config.yml
+# 16Personalities working-style configuration slot.
+#
+# Every field requires explicit Alan approval before the content renders.
+# Set enabled: true only after all fields are supplied and reviewed.
+#
+# Evidence record: working-style-16personalities (profile/content/evidence.yml)
+
+enabled: false
+personality_type: null
+personality_url: null
+image_path: null
+summary: null
+evidence_id: "working-style-16personalities"

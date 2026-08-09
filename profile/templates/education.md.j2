@@ -1,0 +1,9 @@
+{% if config.public_degrees %}
+### Education
+
+{% for degree in config.public_degrees %}
+**{{ degree.degree }} in {{ degree.field_of_study }}**{% if degree.graduation_year %} · {{ degree.graduation_year }}{% endif %}
+{% if degree.institution_url %}[{{ degree.institution }}]({{ degree.institution_url }}){% else %}{{ degree.institution }}{% endif %}
+
+{% endfor %}
+{% endif %}

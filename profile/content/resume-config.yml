@@ -1,0 +1,14 @@
+# resume-config.yml
+# Resume publication configuration slot.
+#
+# Set enabled: true only after a sanitized artifact passes every item
+# on the privacy/metadata checklist at docs/RESUME-CHECKLIST.md.
+# Supply public_url as a stable external URL or a repo-relative path
+# to the approved PDF.
+#
+# Evidence record: resume-public-document (profile/content/evidence.yml)
+
+enabled: false
+public_url: null
+evidence_id: "resume-public-document"
+checklist_path: "docs/RESUME-CHECKLIST.md"

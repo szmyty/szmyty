@@ -344,3 +344,243 @@ class MusicHighlight(BaseModel):
     release_year: int | None = None
     artwork_path: str | None = None
     data_source: Literal["manual", "cache", "fixture"] = "manual"
+
+
+# ---------------------------------------------------------------------------
+# Education
+# ---------------------------------------------------------------------------
+
+
+class EducationDegree(BaseModel):
+    """A single verified education credential."""
+
+    institution: str = Field(description="Full institution name.")
+    degree: str = Field(description="Full degree title.")
+    field_of_study: str = Field(description="Field or program of study.")
+    institution_url: str | None = Field(
+        default=None, description="Link to the official program or institution page."
+    )
+    graduation_year: int | None = Field(
+        default=None, description="Optional graduation year (user-controlled)."
+    )
+    evidence_id: str = Field(
+        description="ID of the evidence record backing this credential."
+    )
+    enabled: bool = Field(
+        default=False,
+        description="Whether this degree is approved for public rendering.",
+    )
+
+
+class EducationConfig(BaseModel):
+    """Collection of education credentials for the profile."""
+
+    degrees: list[EducationDegree] = Field(default_factory=list)
+
+    @property
+    def public_degrees(self) -> list[EducationDegree]:
+        """Return only degrees approved for public rendering."""
+        return [d for d in self.degrees if d.enabled]
+
+
+# ---------------------------------------------------------------------------
+# Resume
+# ---------------------------------------------------------------------------
+
+
+class ResumeConfig(BaseModel):
+    """Configuration for the public resume surface."""
+
+    enabled: bool = Field(
+        default=False,
+        description=(
+            "Whether the public resume CTA is active.  Must remain False "
+            "until a sanitized artifact passes the privacy/metadata checklist."
+        ),
+    )
+    public_url: str | None = Field(
+        default=None,
+        description="Stable external URL or repo-relative path to the public PDF.",
+    )
+    evidence_id: str = Field(
+        default="resume-public-document",
+        description="Evidence catalog ID for the resume publication claim.",
+    )
+    checklist_path: str = Field(
+        default="docs/RESUME-CHECKLIST.md",
+        description="Repo-relative path to the privacy/metadata checklist.",
+    )
+
+
+# ---------------------------------------------------------------------------
+# ORCID / publications
+# ---------------------------------------------------------------------------
+
+
+class OrcidWork(BaseModel):
+    """One normalized public work from an ORCID record."""
+
+    title: str
+    work_type: str | None = None
+    year: int | None = None
+    doi: str | None = None
+    public_url: str | None = None
+    contributor_role: str | None = None
+
+    @field_validator("doi", mode="before")
+    @classmethod
+    def _normalise_doi(cls, v: object) -> str | None:
+        if not v:
+            return None
+        return str(v).strip()
+
+
+class OrcidConfig(BaseModel):
+    """User-supplied ORCID configuration slot."""
+
+    enabled: bool = Field(
+        default=False,
+        description=(
+            "Whether the ORCID module is active.  Must remain False "
+            "until Alan supplies and confirms the ORCID iD."
+        ),
+    )
+    orcid_id: str | None = Field(
+        default=None,
+        description="ORCID iD in 0000-0000-0000-0000 format.",
+        pattern=r"^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$",
+    )
+    profile_url: str | None = Field(
+        default=None,
+        description="Canonical ORCID public profile URL.",
+    )
+    evidence_id: str = Field(default="orcid-id")
+
+
+class OrcidData(BaseModel):
+    """Normalized ORCID module output."""
+
+    orcid_id: str | None = None
+    profile_url: str | None = None
+    works: list[OrcidWork] = Field(default_factory=list, max_length=10)
+    data_source: Literal["live", "cache", "fixture", "disabled"] = "disabled"
+
+
+# ---------------------------------------------------------------------------
+# Medium writing
+# ---------------------------------------------------------------------------
+
+
+class MediumArticle(BaseModel):
+    """One normalized article from a Medium RSS feed."""
+
+    title: str
+    canonical_url: str
+    published_date: str = Field(description="ISO-8601 date string (YYYY-MM-DD).")
+    summary: str | None = Field(
+        default=None,
+        description="Safe plain-text summary with HTML and tracking markup stripped.",
+    )
+
+
+class MediumConfig(BaseModel):
+    """User-supplied Medium configuration slot."""
+
+    enabled: bool = Field(
+        default=False,
+        description=(
+            "Whether the Medium module is active.  Must remain False "
+            "until Alan supplies and confirms the Medium username."
+        ),
+    )
+    username: str | None = Field(
+        default=None,
+        description="Medium username (without @).",
+    )
+    evidence_id: str = Field(default="medium-username")
+
+    @property
+    def feed_url(self) -> str | None:
+        """Return the public RSS feed URL, or None when username is unset."""
+        if not self.username:
+            return None
+        return f"https://medium.com/feed/@{self.username}"
+
+
+class MediumFeed(BaseModel):
+    """Normalized Medium module output."""
+
+    username: str | None = None
+    profile_url: str | None = None
+    articles: list[MediumArticle] = Field(default_factory=list, max_length=5)
+    data_source: Literal["live", "cache", "fixture", "disabled"] = "disabled"
+
+
+# ---------------------------------------------------------------------------
+# Working style
+# ---------------------------------------------------------------------------
+
+
+class WorkingStyleConfig(BaseModel):
+    """User-supplied 16Personalities working-style configuration.
+
+    Every field requires explicit user approval before content can render.
+    """
+
+    enabled: bool = Field(
+        default=False,
+        description=(
+            "Whether working-style content is approved for public rendering.  "
+            "Must remain False until Alan supplies and approves all fields."
+        ),
+    )
+    personality_type: str | None = Field(
+        default=None,
+        description="16Personalities type label (e.g. INFJ-A), supplied by Alan.",
+    )
+    personality_url: str | None = Field(
+        default=None,
+        description="Public 16Personalities profile or type link.",
+    )
+    image_path: str | None = Field(
+        default=None,
+        description="Repo-relative path to the user-owned personality image.",
+    )
+    summary: str | None = Field(
+        default=None,
+        description=(
+            "Alan-approved first-person working-style summary.  "
+            "Must not be generated or inferred."
+        ),
+    )
+    evidence_id: str = Field(default="working-style-16personalities")
+
+
+# ---------------------------------------------------------------------------
+# STARS career development
+# ---------------------------------------------------------------------------
+
+
+class StarsConfig(BaseModel):
+    """STARS career-development configuration slot (non-public by default).
+
+    Raw coaching or career-development notes must never be published.
+    Individual items must be explicitly approved by Alan before any content
+    can render.
+    """
+
+    enabled: bool = Field(
+        default=False,
+        description=(
+            "Whether any STARS content is approved for public rendering.  "
+            "Must remain False until Alan explicitly selects and approves items."
+        ),
+    )
+    public_items: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Alan-approved public-facing STARS items (plain text only).  "
+            "Empty until Alan makes explicit selections."
+        ),
+    )
+    evidence_id: str = Field(default="stars-career-development")

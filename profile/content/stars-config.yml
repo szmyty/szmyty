@@ -1,0 +1,12 @@
+# stars-config.yml
+# STARS career-development configuration slot.
+#
+# Raw coaching or career-development notes must never be published here.
+# STARS remains non-public by default.  Add items to public_items only
+# after Alan explicitly selects and approves each one.
+#
+# Evidence record: stars-career-development (profile/content/evidence.yml)
+
+enabled: false
+public_items: []
+evidence_id: "stars-career-development"

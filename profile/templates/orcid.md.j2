@@ -1,0 +1,11 @@
+{% if data.orcid_id %}
+### Publications
+
+ORCID: [{{ data.orcid_id }}]({{ data.profile_url }})
+{% if data.works %}
+
+{% for work in data.works %}
+- **{{ work.title }}**{% if work.year %} ({{ work.year }}){% endif %}{% if work.doi %} · [DOI: {{ work.doi }}](https://doi.org/{{ work.doi }}){% elif work.public_url %} · [Link]({{ work.public_url }}){% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
