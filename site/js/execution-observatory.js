@@ -178,7 +178,7 @@
         raycaster.setFromCamera(pointer, camera);
         const [hit] = raycaster.intersectObjects(meshes);
         if (hit) {
-          highlight(Number(hit.object.userData.stageIndex || 0));
+          highlight(Number(hit.object.userData.stageIndex ?? 0));
         }
       };
 
@@ -188,15 +188,7 @@
         focusStage(activeIndex);
       });
 
-      const animate = (timestamp) => {
-        if (!paused && !reduceMotion) {
-          scene.rotation.z = timestamp * 0.00012;
-        }
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      };
-
-      const resize = () => {
+      const onResize = () => {
         const nextWidth = Math.max(320, container.clientWidth);
         const nextHeight = Math.max(320, container.clientHeight);
         camera.aspect = nextWidth / nextHeight;
@@ -204,7 +196,20 @@
         renderer.setSize(nextWidth, nextHeight);
       };
 
-      window.addEventListener("resize", resize);
+      const animate = (timestamp) => {
+        if (!container.isConnected) {
+          window.removeEventListener("resize", onResize);
+          renderer.dispose();
+          return;
+        }
+        if (!paused && !reduceMotion) {
+          scene.rotation.z = timestamp * 0.00012;
+        }
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      };
+
+      window.addEventListener("resize", onResize);
       highlight(0);
       setStatus("Orbit ready. Use arrow keys to move between stages.");
       if (fallbackList) {
