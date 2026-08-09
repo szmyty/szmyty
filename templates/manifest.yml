@@ -43,6 +43,8 @@ required_tokens:
   - "{{REPO}}"
   - "{{LICENSE_SPDX}}"
   - "{{LANGUAGE_OR_STACK}}"
+  - "{{PROFILE_USERNAME}}"
+  - "{{PROFILE_TAGLINE}}"
 
 optional_tokens:
   - "{{BADGE_CI_WORKFLOW}}"
@@ -50,8 +52,6 @@ optional_tokens:
   - "{{DOCS_URL}}"
   - "{{PACKAGE_MANAGER_INSTALL}}"
   - "{{CONTRIBUTING_GUIDE_URL}}"
-  - "{{PROFILE_USERNAME}}"
-  - "{{PROFILE_TAGLINE}}"
   - "{{PROFILE_LOCATION}}"
   - "{{PROFILE_HIGHLIGHT_1}}"
   - "{{PROFILE_HIGHLIGHT_2}}"

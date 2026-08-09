@@ -103,6 +103,10 @@ class TestCheckHeadingStructure:
         errors = vt.check_heading_structure("# First\n\n# Second\n")
         assert any("Multiple H1" in e for e in errors)
 
+    def test_level_skip_inside_tilde_fence_ignored(self):
+        content = "# Title\n\n~~~sh\n#### not-a-heading\n~~~\n\n## H2\n"
+        assert vt.check_heading_structure(content) == []
+
     def test_level_skip(self):
         errors = vt.check_heading_structure("# Title\n\n## H2\n\n#### H4\n")
         assert any("skips" in e for e in errors)

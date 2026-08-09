@@ -85,7 +85,7 @@ def _github_anchor(heading_text: str) -> str:
     """
     text = re.sub(r"[`*_~\[\]()]", "", heading_text)  # strip inline markup
     text = text.lower()
-    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"[^\w\s-]", "", text, flags=re.ASCII)
     text = re.sub(r"\s+", "-", text.strip())
     return text
 
@@ -106,9 +106,9 @@ def check_unresolved_tokens(content: str) -> list[str]:
 
 def _strip_code_blocks(content: str) -> str:
     """Return *content* with fenced and indented code blocks replaced by blank lines."""
-    # Replace fenced code blocks (``` ... ```) with equivalent blank lines
+    # Replace fenced code blocks delimited by ``` or ~~~ with equivalent blank lines
     result = re.sub(
-        r"```[^\n]*\n.*?```",
+        r"(?:```|~~~)[^\n]*\n.*?(?:```|~~~)",
         lambda m: "\n" * m.group(0).count("\n"),
         content,
         flags=re.DOTALL,
