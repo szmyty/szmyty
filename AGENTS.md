@@ -7,58 +7,265 @@
 - **Purpose:** Alan Szmyt's public GitHub profile and reusable README/template assets.
 - **License:** MIT
 
+---
+
+## Required Reading Order
+
+Read these documents in order before making changes:
+
+1. `AGENTS.md` (this file) — constraints, ownership, validation
+2. `docs/ARCHITECTURE.md` — boundaries, module lifecycle, workflow topology
+3. `docs/PRIVACY.md` — data allow-list and deny-list (mandatory for any new module or data source)
+4. `docs/CONTENT.md` — claim and evidence rules
+5. `docs/DEVELOPMENT.md` — setup, commands, fixtures
+
+Consult `docs/RUNBOOK.md` for failure response procedures.
+
+---
+
 ## Repository Layout
 
 ```
 szmyty/szmyty
-├── README.md              # Active GitHub profile README
-├── LICENSE                # MIT license
-├── .editorconfig          # Editor formatting defaults
-├── AGENTS.md              # This file — agent and contributor guidance
-├── Taskfile.yml           # Task runner entrypoint (optional, Git-based tasks)
-├── pyproject.toml         # Python project metadata and tooling configuration
-├── humans.txt             # Human-readable project metadata
-├── docs/                  # Documentation
-│   ├── ARCHITECTURE.md    # Current architecture overview
-│   ├── ROADMAP.md         # Near-term roadmap
-│   └── audits/            # Audit reports
-├── .github/               # GitHub configuration
-│   ├── FUNDING.yml        # Sponsor configuration
-│   ├── ISSUE_TEMPLATE/    # Issue forms
+├── README.md                     # Active profile README (partially generated)
+├── LICENSE
+├── AGENTS.md                     # This file
+├── Taskfile.yml                  # Task runner entrypoint (optional)
+├── pyproject.toml                # Python project metadata and tooling
+├── humans.txt                    # Human-readable project metadata
+├── assets/profile/               # Hand-authored SVG/image assets
+├── docs/                         # Documentation
+│   ├── ARCHITECTURE.md           # Boundaries, modules, workflows, env vars
+│   ├── CONTENT.md                # Claim, evidence, and tone rules
+│   ├── DESIGN.md                 # Brand, color, typography
+│   ├── DEVELOPMENT.md            # Setup, commands, fixtures, testing
+│   ├── MIGRATION.md              # Staged-material decisions ledger
+│   ├── PRIVACY.md                # Public-data contract
+│   ├── ROADMAP.md                # Completed work, deferred decisions
+│   ├── RUNBOOK.md                # Operational failure procedures
+│   ├── adr/                      # Architecture decision records
+│   └── audits/                   # Security and privacy audit reports
+├── profile/
+│   ├── artifacts/                # Generated caches (committed; fallback in CI)
+│   ├── content/                  # Hand-authored module inputs
+│   │   ├── evidence.yml          # Claims evidence catalog (owns all public claims)
+│   │   ├── modules.yml           # Module registry and README region ownership
+│   │   └── music-highlight.yml   # Hand-authored music data
+│   ├── fixtures/                 # Sanitized synthetic test data (never real PII)
+│   ├── schemas/                  # JSON schemas for YAML content files
+│   ├── templates/                # Jinja2 templates for README regions
+│   ├── validate_assets.py        # Asset presence and format validator
+│   └── validate_evidence.py      # Evidence catalog validator
+├── site/                         # Companion static site (deployed to Pages)
+├── templates/                    # Reusable repository template assets
+├── tests/                        # pytest test suite
+├── tools/
+│   ├── modules/                  # Module fetch and render scripts
+│   └── profile_builder/          # Profile build CLI and supporting library
+├── .github/
+│   ├── workflows/
+│   │   ├── ci.yml                # Read-only validation (PRs, pushes)
+│   │   ├── update-profile.yml    # Scheduled module refresh and commit
+│   │   └── pages.yml             # Static site validation and Pages deploy
+│   ├── ISSUE_TEMPLATE/
 │   └── PULL_REQUEST_TEMPLATE.md
-├── .tasks/                # Modular Taskfile includes
-│   ├── git.yml            # Git utility tasks
-│   ├── agents.yml         # Agent workflow tasks
-│   ├── security.yml       # Security audit tasks
-│   └── tests.yml          # Test tasks
-└── .staging/              # Staged/in-progress work (not promoted yet)
+├── .tasks/                       # Modular Taskfile includes
+└── .staging/                     # In-progress work; not promoted to active files
 ```
 
-## Constraints for Agents
+---
 
-- Do **not** promote content from `.staging/` without explicit instruction.
-- Do **not** create speculative or aspirational content in active files.
-- Do **not** reference `egohygiene`, `sanctuary`, or `profile-next` in any
-  production configuration or documentation outside explicit migration notes.
-- Do **not** introduce new dependency groups in `pyproject.toml` for
-  libraries that are not currently in active use.
-- All external URLs in configuration files must point to `szmyty/szmyty`
-  or verified external services.
+## Hand-authored vs Generated
 
-## Identity Check
+### Hand-authored (never overwrite without explicit instruction)
 
-When modifying configuration files, verify that:
+| File / directory | Authored by |
+|-----------------|-------------|
+| `README.md` — prose sections outside module markers | `@szmyty` |
+| `assets/profile/*.svg` | `@szmyty` / design tool |
+| `profile/content/evidence.yml` | `@szmyty` and agents following evidence rules |
+| `profile/content/music-highlight.yml` | `@szmyty` |
+| `profile/content/modules.yml` | `@szmyty` |
+| `docs/` (all files) | `@szmyty` and agents |
+| `site/` (all files) | `@szmyty` |
+| `profile/fixtures/` | Agents; must be synthetic, not real personal data |
+| `profile/templates/` | Agents |
+| `tools/` (all files) | Agents |
+| `tests/` (all files) | Agents |
+
+### Generated (owned by automated pipeline; do not hand-edit)
+
+| File | Owner module | Regenerated by |
+|------|-------------|----------------|
+| `README.md` — regions between `<!-- START:<name> -->` markers | Each named module | `tools/modules/update_readme.py` |
+| `profile/artifacts/github-metrics/cache.json` | `github-metrics` | `tools/modules/github_metrics.py` |
+| `profile/artifacts/recent-activity/cache.json` | `recent-activity` | `tools/modules/recent_activity.py` |
+| `profile/artifacts/music-highlight/music.yml` | `music-highlight` | `tools/modules/music_highlight.py` |
+
+Region markers in `README.md` follow the pattern:
+
+```
+<!-- START:<module-name> -->
+…generated content…
+<!-- END:<module-name> -->
+```
+
+Hand-authored content outside these markers is never touched by the pipeline.
+
+---
+
+## File That Owns Public Claims
+
+`profile/content/evidence.yml` is the single source of truth for every public
+claim in `README.md`.  Before writing any factual statement to the profile,
+verify a `status: verified` / `sensitivity: public` record exists for it.
+
+Rules:
+- A claim with no evidence record **must not** appear in rendered output.
+- A claim whose record has `status: needs-user-verification` **must not** appear
+  in rendered output.
+- A claim whose record has `sensitivity: sensitive` or `sensitivity: internal`
+  **must not** appear anywhere in the tracked tree.
+
+See `docs/CONTENT.md` for the complete evidence protocol.
+
+---
+
+## Forbidden Data
+
+Never introduce or regenerate the following — regardless of technical feasibility:
+
+- Health, biometric, sleep, mood, or recovery data (Oura API or equivalent).
+- Precise or frequently-refreshed location, coordinates, or geocoding payloads.
+- Weather snapshots derived from location.
+- Private repository/activity metadata.
+- Tokens, auth headers, raw authenticated API responses, or debug dumps.
+- Personal email addresses not explicitly designated as public by `@szmyty`.
+- Employer or client details not already intentionally public.
+
+These restrictions apply to `README.md`, `profile/artifacts/`, `site/`,
+`tests/`, `docs/`, and all other tracked files.  See `docs/PRIVACY.md`.
+
+---
+
+## Module Ownership and Markers
+
+Each module in `profile/content/modules.yml` owns:
+
+- Exactly one `<!-- START:<name> -->` / `<!-- END:<name> -->` marker pair in
+  `README.md`.
+- Exactly one artifact cache path (`profile/artifacts/<name>/`).
+- Exactly one Jinja2 template (`profile/templates/<name>.md.j2`).
+- Exactly one Python module script (`tools/modules/<name>.py`).
+
+Do not move or rename markers without updating `modules.yml` and the
+corresponding module script simultaneously.
+
+---
+
+## Validation Commands (run before committing)
+
+```sh
+# Install dependencies (first time or after poetry.lock changes)
+poetry install --with lint,test
+
+# Validate profile inputs
+poetry run python -m tools.profile_builder.cli validate
+
+# Validate profile assets
+poetry run python profile/validate_assets.py assets/profile
+
+# Run full test suite
+poetry run python -m pytest
+
+# Lint Python
+poetry run ruff check .
+
+# Lint YAML
+poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml
+
+# Identity constraint check
+bash .tasks/check-identity.sh
+```
+
+All of these must pass before a PR is considered ready for review.
+
+---
+
+## When User Verification Is Mandatory
+
+Stop and open a GitHub issue tagging `@szmyty` before proceeding when:
+
+1. A new public claim has no corresponding evidence record.
+2. An evidence record is marked `needs-user-verification`.
+3. A proposed data source is not on the allow-list in `docs/PRIVACY.md`.
+4. A module would expose any category of data on the deny-list.
+5. A secret needs to be added, rotated, or revoked.
+6. A history rewrite is proposed for any shared branch.
+7. A file from `.staging/` is about to be promoted to a production path.
+
+---
+
+## Changing Branding Without Breaking Fallbacks
+
+SVG assets in `assets/profile/` are referenced by relative paths in
+`README.md`.  When replacing an asset:
+
+1. Keep the filename identical to maintain all existing README references.
+2. Validate contrast ratios meet WCAG 2.1 AA per `docs/DESIGN.md`.
+3. Embed font fallbacks in SVG `<text>` elements — no web-font imports.
+4. Run `poetry run python profile/validate_assets.py assets/profile` after
+   replacement.
+5. Preview the README in GitHub's Markdown renderer before merging.
+
+If a filename must change, update the `README.md` image reference in the same
+commit.
+
+---
+
+## Updating a Dependency Pin
+
+1. Check the advisory database for the target version before updating.
+2. Run `poetry add <package>@<version>` or `poetry update <package>`.
+3. Commit both `pyproject.toml` and `poetry.lock`.
+4. Run the full test suite locally before pushing.
+5. CI will re-install from the new lock file (cache miss is expected).
+
+---
+
+## What Must Never Be Built or Revived from `.staging/`
+
+The following `.staging/` modules are permanently prohibited — do not
+promote, reference, or implement them:
+
+| Staging artifact | Reason prohibited |
+|-----------------|------------------|
+| `fetch-location/` | Location data is on the deny-list |
+| `fetch-weather/` | Location-derived weather is on the deny-list |
+| `fetch-oura/` | Health/biometric data is on the deny-list |
+| `generate-location-card/` | Location data |
+| `generate-weather-card/` | Location-derived weather |
+| `generate-oura-dashboard/` | Health/biometric data |
+| `generate-oura-mood/` | Mood-inference data |
+
+Any other `.staging/` content requires explicit review and approval from
+`@szmyty` before promotion.
+
+---
+
+## Identity Constraints
+
+Before committing changes to configuration files, verify:
 
 1. No file references `egohygiene/egohygiene`, `egohygiene/sanctuary`,
    or `profile-next` as a production target.
 2. No file contains unresolved template tokens such as `{{TOKEN}}`.
-3. All relative asset links in `README.md` point to existing files.
+3. All relative asset links in `README.md` point to files that exist.
+4. No production workflow or configuration references `.staging/`.
 
-## Working with Tasks
+Run `bash .tasks/check-identity.sh` to automate checks 1–3.
 
-Task is optional. Run `task --list` to see available commands.
-All task commands must point to real paths and must either succeed or
-report a precise missing optional dependency message.
+---
 
 ## Python Environment
 
@@ -68,5 +275,7 @@ dependency management. The Python version requirement is `>=3.12,<4.0`.
 Install the development environment:
 
 ```sh
-poetry install --with dev,lint,security
+poetry install --with lint,test
 ```
+
+See `docs/DEVELOPMENT.md` for the full command surface and local workflow.
