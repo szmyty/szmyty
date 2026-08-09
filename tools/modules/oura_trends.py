@@ -103,10 +103,10 @@ _API_ROOT = "https://api.ouraring.com/v2"
 _TIMEOUT = 20
 
 # Aggregation parameters
-SAFETY_BUFFER_DAYS: int = 2     # Exclude this many days before today
-MIN_SAMPLE_DAYS: int = 20       # Suppress a metric when fewer days contributed
-LONG_WINDOW: int = 90           # Primary long-window (days)
-SHORT_WINDOW: int = 30          # Secondary short-window (days)
+SAFETY_BUFFER_DAYS: int = 2  # Exclude this many days before today
+MIN_SAMPLE_DAYS: int = 20  # Suppress a metric when fewer days contributed
+LONG_WINDOW: int = 90  # Primary long-window (days)
+SHORT_WINDOW: int = 30  # Secondary short-window (days)
 
 # HRV band thresholds (relative change from window mean, in ms)
 _HRV_UP_THRESHOLD = 3.0
@@ -154,7 +154,9 @@ def _oura_get(endpoint: str, token: str, params: dict[str, str]) -> object:
             return json.loads(resp.read().decode("utf-8"))
     except error.HTTPError as exc:
         if exc.code in (401, 403):
-            raise ProviderFailure("Oura token is invalid, expired, or lacks scope") from exc
+            raise ProviderFailure(
+                "Oura token is invalid, expired, or lacks scope"
+            ) from exc
         raise ProviderFailure(f"Oura API request failed: HTTP {exc.code}") from exc
     except error.URLError as exc:
         raise ProviderFailure("Oura API unreachable") from exc
@@ -317,7 +319,7 @@ def fetch_live(token: str) -> OuraTrendsAggregate:
     sleep_seconds: list[float] = []
     try:
         sleep_resp = _oura_get("usercollection/daily_sleep", token, params)
-        for item in (sleep_resp.get("data", []) if isinstance(sleep_resp, dict) else []):  # type: ignore[union-attr]
+        for item in sleep_resp.get("data", []) if isinstance(sleep_resp, dict) else []:  # type: ignore[union-attr]
             val = item.get("contributors", {}).get("total_sleep", None)
             if val is not None:
                 # Oura v2 total_sleep is a score (0–100); duration is under
@@ -332,7 +334,7 @@ def fetch_live(token: str) -> OuraTrendsAggregate:
     readiness_scores: list[float] = []
     try:
         ready_resp = _oura_get("usercollection/daily_readiness", token, params)
-        for item in (ready_resp.get("data", []) if isinstance(ready_resp, dict) else []):  # type: ignore[union-attr]
+        for item in ready_resp.get("data", []) if isinstance(ready_resp, dict) else []:  # type: ignore[union-attr]
             score = item.get("score")
             if score is not None:
                 readiness_scores.append(float(score))
@@ -343,7 +345,7 @@ def fetch_live(token: str) -> OuraTrendsAggregate:
     activity_scores: list[float] = []
     try:
         act_resp = _oura_get("usercollection/daily_activity", token, params)
-        for item in (act_resp.get("data", []) if isinstance(act_resp, dict) else []):  # type: ignore[union-attr]
+        for item in act_resp.get("data", []) if isinstance(act_resp, dict) else []:  # type: ignore[union-attr]
             score = item.get("score")
             if score is not None:
                 activity_scores.append(float(score))
@@ -354,7 +356,7 @@ def fetch_live(token: str) -> OuraTrendsAggregate:
     hrv_values: list[float] = []
     try:
         hrv_resp = _oura_get("usercollection/daily_sleep", token, params)
-        for item in (hrv_resp.get("data", []) if isinstance(hrv_resp, dict) else []):  # type: ignore[union-attr]
+        for item in hrv_resp.get("data", []) if isinstance(hrv_resp, dict) else []:  # type: ignore[union-attr]
             hrv = item.get("contributors", {}).get("hrv_balance", None)
             if hrv is not None:
                 hrv_values.append(float(hrv))

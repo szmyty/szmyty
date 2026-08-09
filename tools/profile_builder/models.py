@@ -43,7 +43,8 @@ class FreshnessPolicy(BaseModel):
     warn_after_seconds: int | None = Field(
         default=None,
         ge=0,
-        description="Seconds after which a staleness warning is emitted; None disables.",
+        description="Seconds after which a staleness warning is emitted;"
+        " None disables.",
     )
 
 
@@ -59,7 +60,9 @@ class ModuleRegistryEntry(BaseModel):
             "public output until the owner explicitly approves the allowlist."
         ),
     )
-    description: str | None = Field(default=None, description="Human-readable description.")
+    description: str | None = Field(
+        default=None, description="Human-readable description."
+    )
 
     # Provider
     provider_type: Literal["api", "manual", "computed"] = Field(
@@ -161,6 +164,7 @@ class ModuleResult(BaseModel):
     seconds_until_stale: int | None = None
     error: str | None = None
 
+
 # ---------------------------------------------------------------------------
 # Evidence catalog
 # ---------------------------------------------------------------------------
@@ -170,11 +174,15 @@ class EvidenceEntry(BaseModel):
     """One entry in the evidence catalog (profile/content/evidence.yml)."""
 
     id: str = Field(description="Stable kebab-case identifier.")
-    claim: str = Field(description="Candidate claim text as it might appear in a profile.")
-    evidence_type: Literal["url", "repo-path", "self-reported", "inferred", "none"] = Field(
-        description="Kind of evidence backing the claim."
+    claim: str = Field(
+        description="Candidate claim text as it might appear in a profile."
     )
-    url: str | None = Field(default=None, description="Public URL to the evidence artifact.")
+    evidence_type: Literal["url", "repo-path", "self-reported", "inferred", "none"] = (
+        Field(description="Kind of evidence backing the claim.")
+    )
+    url: str | None = Field(
+        default=None, description="Public URL to the evidence artifact."
+    )
     repo_path: str | None = Field(
         default=None, description="Repository-relative path to the artifact."
     )
@@ -235,10 +243,12 @@ class ModuleConfig(BaseModel):
     name: str = Field(description="Stable machine-readable module name.")
     enabled: bool = Field(default=True, description="Whether this module is active.")
     region_start_marker: str = Field(
-        description="HTML comment that opens the owned README region, e.g. <!-- START:module -->"
+        description="HTML comment that opens the owned README region,"
+        " e.g. <!-- START:module -->"
     )
     region_end_marker: str = Field(
-        description="HTML comment that closes the owned README region, e.g. <!-- END:module -->"
+        description="HTML comment that closes the owned README region,"
+        " e.g. <!-- END:module -->"
     )
     template: str = Field(description="Template name relative to profile/templates/.")
     artifact_path: Path | None = Field(
@@ -277,10 +287,14 @@ class ProfileConfig(BaseModel):
                     f"{module.region_start_marker}"
                 )
             if module.region_start_marker in markers_seen:
-                raise ValueError(f"Region marker already in use: {module.region_start_marker}")
+                raise ValueError(
+                    f"Region marker already in use: {module.region_start_marker}"
+                )
             markers_seen.add(module.region_start_marker)
             if module.region_end_marker in markers_seen:
-                raise ValueError(f"Region marker already in use: {module.region_end_marker}")
+                raise ValueError(
+                    f"Region marker already in use: {module.region_end_marker}"
+                )
             markers_seen.add(module.region_end_marker)
         return self
 
@@ -328,7 +342,8 @@ class GithubMetrics(BaseModel):
         default=None,
         ge=0,
         description=(
-            "Total stargazers across owned, non-fork, non-archived public repositories. "
+            "Total stargazers across owned, non-fork, non-archived public"
+            " repositories. "
             "Omitted from fixture data to avoid fabricating adoption metrics."
         ),
     )
@@ -547,9 +562,7 @@ class AgentShowcaseRepositoryRef(BaseModel):
     merge_commit_sha: str
     merge_commit_url: str
 
-    @field_validator(
-        "issue_url", "pull_request_url", "merge_commit_url", mode="before"
-    )
+    @field_validator("issue_url", "pull_request_url", "merge_commit_url", mode="before")
     @classmethod
     def _validate_url(cls, value: object) -> str:
         return _validate_showcase_public_url(str(value)) or ""
@@ -969,9 +982,7 @@ _SLEEP_BAND_LABELS: frozenset[str] = frozenset(
 _READINESS_BAND_LABELS: frozenset[str] = frozenset(
     {"below-average", "average", "above-average"}
 )
-_ACTIVITY_BAND_LABELS: frozenset[str] = frozenset(
-    {"low", "moderate", "consistent"}
-)
+_ACTIVITY_BAND_LABELS: frozenset[str] = frozenset({"low", "moderate", "consistent"})
 _HRV_DIRECTION_LABELS: frozenset[str] = frozenset(
     {"trending-down", "stable", "trending-up"}
 )
@@ -1038,11 +1049,13 @@ class OuraTrendsAggregate(BaseModel):
     )
     sleep_regularity_band: str | None = Field(
         default=None,
-        description="Coarse regularity band: 'below-average', 'average', or 'above-average'.",
+        description="Coarse regularity band:"
+        " 'below-average', 'average', or 'above-average'.",
     )
     avg_readiness_band: str | None = Field(
         default=None,
-        description="Coarse readiness band: 'below-average', 'average', or 'above-average'.",
+        description="Coarse readiness band:"
+        " 'below-average', 'average', or 'above-average'.",
     )
     activity_consistency_band: str | None = Field(
         default=None,

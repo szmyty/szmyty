@@ -36,7 +36,7 @@ import json
 import os
 from datetime import UTC, datetime
 from pathlib import Path
-from urllib import error, request
+from urllib import error, parse, request
 
 import click
 

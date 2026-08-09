@@ -55,14 +55,10 @@ def test_active_and_hidden_modules_are_placed_in_their_intended_sections() -> No
     contact_heading = readme.index("## Contact")
 
     assert (
-        ai_heading
-        < readme.index("<!-- START:ai-agent-showcase -->")
-        < github_heading
+        ai_heading < readme.index("<!-- START:ai-agent-showcase -->") < github_heading
     )
     assert (
-        github_heading
-        < readme.index("<!-- START:github-metrics -->")
-        < contact_heading
+        github_heading < readme.index("<!-- START:github-metrics -->") < contact_heading
     )
     assert (
         github_heading
@@ -77,15 +73,14 @@ def test_active_and_hidden_modules_are_placed_in_their_intended_sections() -> No
     assert creative_heading < readme.index("<!-- START:soundcloud -->") < gaming_heading
     assert gaming_heading < readme.index("<!-- START:steam -->") < matrix_heading
     assert (
-        gaming_heading
-        < readme.index("<!-- START:working-style -->")
-        < matrix_heading
+        gaming_heading < readme.index("<!-- START:working-style -->") < matrix_heading
     )
     assert matrix_heading < readme.index("<!-- START:stars -->") < contact_heading
 
 
-def test_completion_matrix_records_non_public_modules_without_inline_evidence_ids(
-) -> None:
+def test_completion_matrix_records_non_public_modules_without_inline_evidence_ids() -> (
+    None
+):
     readme = _readme_text()
 
     assert "Evidence ID" not in readme

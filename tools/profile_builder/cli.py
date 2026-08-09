@@ -3,9 +3,10 @@
 Exposes subcommands:
 
     profile-builder validate            Validate public content and normalized data
-    profile-builder render MODULE       Render one named module (or --all to render every enabled module)
+    profile-builder render MODULE       Render one named module
+                                        (or --all to render every enabled module)
     profile-builder check               Report whether rendering would change output
-    profile-builder status              Explain module status and stale/fallback behavior
+    profile-builder status              Explain module status and stale/fallback
     profile-builder registry            List all modules declared in the registry
     profile-builder snapshot            Report freshness state of all registry modules
 """
@@ -131,7 +132,13 @@ def validate(evidence_path: Path, config_path: Path) -> None:
 
 @main.command("render")
 @click.argument("module", required=False, default=None)
-@click.option("--all", "render_all", is_flag=True, default=False, help="Render all enabled modules.")
+@click.option(
+    "--all",
+    "render_all",
+    is_flag=True,
+    default=False,
+    help="Render all enabled modules.",
+)
 @click.option(
     "--config",
     "config_path",
@@ -180,9 +187,11 @@ def render(
     raw_cfg = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     cfg = ProfileConfig.model_validate(raw_cfg)
 
-    targets = cfg.enabled_modules if render_all else [
-        m for m in cfg.enabled_modules if m.name == module
-    ]
+    targets = (
+        cfg.enabled_modules
+        if render_all
+        else [m for m in cfg.enabled_modules if m.name == module]
+    )
 
     if not targets:
         if render_all:
@@ -190,8 +199,7 @@ def render(
             return
         names = [m.name for m in cfg.enabled_modules]
         click.echo(
-            f"ERROR: module {module!r} not found or not enabled. "
-            f"Available: {names}",
+            f"ERROR: module {module!r} not found or not enabled. Available: {names}",
             err=True,
         )
         sys.exit(1)
@@ -267,7 +275,9 @@ def check(config_path: Path, readme_path: Path, templates_dir: Path) -> None:
                 {"module": mod},
                 templates_dir=templates_dir,
             )
-            if would_change(readme_path, mod.region_start_marker, mod.region_end_marker, content):
+            if would_change(
+                readme_path, mod.region_start_marker, mod.region_end_marker, content
+            ):
                 stale.append(mod.name)
                 click.echo(f"stale: {mod.name}")
             else:
@@ -281,7 +291,8 @@ def check(config_path: Path, readme_path: Path, templates_dir: Path) -> None:
 
     if stale:
         click.echo(
-            f"\ncheck: {len(stale)} module(s) would change — run `render --all` to update.",
+            f"\ncheck: {len(stale)} module(s) would change"
+            " — run `render --all` to update.",
             err=True,
         )
         sys.exit(1)
@@ -361,7 +372,8 @@ def registry(registry_path: Path) -> None:
         return
 
     click.echo(
-        f"{'NAME':<22} {'EN':<4} {'TYPE':<10} {'SENSITIVITY':<12} {'CADENCE':<10} {'SECRETS'}"
+        f"{'NAME':<22} {'EN':<4} {'TYPE':<10} {'SENSITIVITY':<12}"
+        f" {'CADENCE':<10} {'SECRETS'}"
     )
     click.echo("-" * 80)
     for mod in reg.modules:
@@ -427,7 +439,10 @@ def snapshot(registry_path: Path) -> None:
             except (OSError, _json.JSONDecodeError) as exc:
                 click.echo(f"  {mod.name:<22} ERROR                  {exc}")
         else:
-            click.echo(f"  {mod.name:<22} NO METADATA            (run module script to generate)")
+            click.echo(
+                f"  {mod.name:<22} NO METADATA"
+                "            (run module script to generate)"
+            )
 
 
 # ---------------------------------------------------------------------------

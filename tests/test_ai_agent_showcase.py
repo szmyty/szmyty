@@ -224,7 +224,6 @@ def test_rendered_outputs_are_static_and_accessible(tmp_path: Path) -> None:
     assert "Inspect public evidence" in page_text
     assert "This stage is explanatory context" in page_text
     assert (
-        '<script type="module" src="js/execution-observatory.js"></script>'
-        in page_text
+        '<script type="module" src="js/execution-observatory.js"></script>' in page_text
     )
     assert "JavaScript is disabled. Use the timeline links below" in page_text

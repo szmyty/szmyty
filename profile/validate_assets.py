@@ -34,7 +34,9 @@ from xml.etree import ElementTree
 # ---------------------------------------------------------------------------
 
 # Extensions permitted for assets
-ALLOWED_EXTENSIONS: frozenset[str] = frozenset({".svg", ".png", ".jpg", ".jpeg", ".webp"})
+ALLOWED_EXTENSIONS: frozenset[str] = frozenset(
+    {".svg", ".png", ".jpg", ".jpeg", ".webp"}
+)
 
 # Required files with their max byte budgets
 REQUIRED_ASSETS: dict[str, int] = {
@@ -133,7 +135,9 @@ def check_svg(path: Path) -> list[str]:
     else:
         first_child = children[0]
         first_local = (
-            first_child.tag.split("}")[-1] if "}" in first_child.tag else first_child.tag
+            first_child.tag.split("}")[-1]
+            if "}" in first_child.tag
+            else first_child.tag
         )
         if first_local != "title":
             errors.append(
@@ -184,9 +188,9 @@ def check_readme_references(asset_dir: Path) -> list[str]:
     # Match Markdown links: [text](path) and bare file references like `file.svg`
     # We look for any token that looks like a filename with a known extension.
     pattern = re.compile(
-        r"[`\[\(]"                         # opening delimiter
+        r"[`\[\(]"  # opening delimiter
         r"([^\s`\[\]\(\)]+\.(?:svg|png|jpg|jpeg|webp|md))"  # filename
-        r"[`\]\)]",                        # closing delimiter
+        r"[`\]\)]",  # closing delimiter
         re.IGNORECASE,
     )
     referenced: set[str] = set()
@@ -199,7 +203,8 @@ def check_readme_references(asset_dir: Path) -> list[str]:
     for ref in sorted(referenced):
         if not (asset_dir / ref).exists():
             errors.append(
-                f"README.md references '{ref}' but the file does not exist in {asset_dir}"
+                f"README.md references '{ref}' but the file does not exist in"
+                f" {asset_dir}"
             )
 
     return errors

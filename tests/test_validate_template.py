@@ -49,12 +49,8 @@ _EXAMPLE_REPO = (
 _EXAMPLE_PROFILE = (
     Path(__file__).parents[1] / "templates" / "profile" / "example" / "README.md"
 )
-_TEMPLATE_REPO = (
-    Path(__file__).parents[1] / "templates" / "repository" / "README.md"
-)
-_TEMPLATE_PROFILE = (
-    Path(__file__).parents[1] / "templates" / "profile" / "README.md"
-)
+_TEMPLATE_REPO = Path(__file__).parents[1] / "templates" / "repository" / "README.md"
+_TEMPLATE_PROFILE = Path(__file__).parents[1] / "templates" / "profile" / "README.md"
 
 
 # ---------------------------------------------------------------------------
@@ -136,10 +132,7 @@ class TestCheckGeneratedRegions:
         assert any("nested or duplicate" in e for e in errors)
 
     def test_multiple_balanced(self):
-        content = (
-            "<!-- BEGIN:a -->\n<!-- END:a -->\n"
-            "<!-- BEGIN:b -->\n<!-- END:b -->\n"
-        )
+        content = "<!-- BEGIN:a -->\n<!-- END:a -->\n<!-- BEGIN:b -->\n<!-- END:b -->\n"
         assert vt.check_generated_regions(content) == []
 
 

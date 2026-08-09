@@ -123,8 +123,7 @@ def _extract_queue_key(body: str) -> str | None:
 
 def _issue_is_blocked(issue: dict[str, Any], config: AgentShowcaseConfig) -> bool:
     label_names = [
-        str(label.get("name", "")).lower()
-        for label in issue.get("labels", [])
+        str(label.get("name", "")).lower() for label in issue.get("labels", [])
     ]
     blocked_labels = tuple(term.lower() for term in config.blocked_label_terms)
     if any(term in label for term in blocked_labels for label in label_names):
@@ -175,9 +174,7 @@ def _summarize_files(files: list[dict[str, Any]]) -> str:
     if not files:
         return "no tracked file changes listed"
     names = [
-        str(item.get("filename", "")).strip()
-        for item in files
-        if item.get("filename")
+        str(item.get("filename", "")).strip() for item in files if item.get("filename")
     ]
     if len(names) <= 3:
         return ", ".join(names)
@@ -399,16 +396,22 @@ def _render_outputs(
     page_output_path: Path,
     templates_dir: Path,
 ) -> None:
-    svg = render_template(
-        "ai-agent-showcase-card.svg.j2",
-        {"snapshot": snapshot, "trace": snapshot.selected_trace},
-        templates_dir=templates_dir,
-    ).rstrip() + "\n"
-    page = render_template(
-        "ai-agent-showcase-page.html.j2",
-        {"snapshot": snapshot, "trace": snapshot.selected_trace},
-        templates_dir=templates_dir,
-    ).rstrip() + "\n"
+    svg = (
+        render_template(
+            "ai-agent-showcase-card.svg.j2",
+            {"snapshot": snapshot, "trace": snapshot.selected_trace},
+            templates_dir=templates_dir,
+        ).rstrip()
+        + "\n"
+    )
+    page = (
+        render_template(
+            "ai-agent-showcase-page.html.j2",
+            {"snapshot": snapshot, "trace": snapshot.selected_trace},
+            templates_dir=templates_dir,
+        ).rstrip()
+        + "\n"
+    )
     _write_text(card_output_path, svg)
     _write_text(page_output_path, page)
 
@@ -534,8 +537,7 @@ def main(
         templates_dir=templates_dir,
     )
     click.echo(
-        f"ai-agent-showcase: wrote {output_path} "
-        f"({snapshot.provenance.data_source})"
+        f"ai-agent-showcase: wrote {output_path} ({snapshot.provenance.data_source})"
     )
 
 

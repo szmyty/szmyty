@@ -118,7 +118,7 @@ def test_orcid_provider_failure_falls_back_to_cache(tmp_path: Path) -> None:
 
     config_path = tmp_path / "orcid-config.yml"
     config_path.write_text(
-        "enabled: true\norcid_id: \"0000-0001-2345-6789\"\n",
+        'enabled: true\norcid_id: "0000-0001-2345-6789"\n',
         encoding="utf-8",
     )
 
@@ -138,7 +138,7 @@ def test_orcid_provider_failure_falls_back_to_cache(tmp_path: Path) -> None:
 def test_orcid_provider_failure_falls_back_to_fixture(tmp_path: Path) -> None:
     config_path = tmp_path / "orcid-config.yml"
     config_path.write_text(
-        "enabled: true\norcid_id: \"0000-0001-2345-6789\"\n",
+        'enabled: true\norcid_id: "0000-0001-2345-6789"\n',
         encoding="utf-8",
     )
     output_path = tmp_path / "orcid.json"
