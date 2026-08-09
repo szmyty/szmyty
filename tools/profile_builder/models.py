@@ -125,7 +125,9 @@ class ProfileConfig(BaseModel):
             names_seen.add(module.name)
             if module.region_start_marker == module.region_end_marker:
                 raise ValueError(
-                    f"Module {module.name} uses the same start and end region marker"
+                    "Module "
+                    f"{module.name} uses the same start and end region marker: "
+                    f"{module.region_start_marker}"
                 )
             if module.region_start_marker in markers_seen:
                 raise ValueError(f"Region marker already in use: {module.region_start_marker}")
