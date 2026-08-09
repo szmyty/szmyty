@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/szmyty/szmyty/profile/schemas/evidence.json",
+  "title": "EvidenceCatalog",
+  "description": "Schema for profile/content/evidence.yml",
+  "type": "object",
+  "required": ["entries"],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "claim", "evidence_type", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Stable kebab-case identifier."
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Candidate claim text as it might appear in a profile."
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": ["url", "repo-path", "self-reported", "inferred", "none"]
+          },
+          "url": {
+            "type": ["string", "null"],
+            "description": "Public URL to the evidence artifact."
+          },
+          "repo_path": {
+            "type": ["string", "null"],
+            "description": "Repository-relative path to the artifact."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["verified", "pending", "disputed", "stale"]
+          },
+          "notes": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

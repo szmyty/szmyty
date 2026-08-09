@@ -179,8 +179,8 @@ or `promoted:<target-path>` once complete.
 
 | # | Source path | Decision | Target path / issue | Rationale | Privacy status | Completion evidence |
 |---|-------------|----------|---------------------|-----------|----------------|---------------------|
-| 75 | `.staging/engine/profile_engine/` | `DEFER` | szmyty/szmyty#65 | Full Python profile engine (CLI, FastAPI, clients, generators, models, services, theme, utils); sophisticated but overscoped for an initial profile migration. Defer until production Python package needs are defined. | `PUBLIC` | |
-| 76 | `.staging/engine/tests/` | `DEFER` | szmyty/szmyty#65 | Engine test suite; defer alongside the engine. | `PUBLIC` | |
+| 75 | `.staging/engine/profile_engine/` | `ARCHIVE` | szmyty/szmyty#74 | Staged Python profile engine replaced by `tools/profile_builder/`. Proven invariants (atomic writes, change detection, SVG sanitization, Pydantic models) were recovered or deliberately deferred per ADR 0001. Retain as historical evidence only. | `PUBLIC` | szmyty/szmyty#74 |
+| 76 | `.staging/engine/tests/` | `ARCHIVE` | szmyty/szmyty#74 | Engine test suite; superseded by `tests/test_profile_builder_*.py`. Retain as historical evidence only. | `PUBLIC` | szmyty/szmyty#74 |
 
 ---
 
@@ -259,8 +259,8 @@ or `promoted:<target-path>` once complete.
 
 | # | Source path | Decision | Target path / issue | Rationale | Privacy status | Completion evidence |
 |---|-------------|----------|---------------------|-----------|----------------|---------------------|
-| 92 | `.staging/scripts/` | `DEFER` | szmyty/szmyty#65 | Shell and Python scripts for the staging engine; review individually and defer until production tooling is established. | `INTERNAL` | |
-| 93 | `.staging/scripts/lib/` | `DEFER` | szmyty/szmyty#65 | Script library modules; defer alongside scripts. | `INTERNAL` | |
+| 92 | `.staging/scripts/` | `ARCHIVE` | szmyty/szmyty#74 | Shell and Python scripts for the staging engine; replaced by `tools/profile_builder/cli.py`. No individual scripts were promoted; retain as historical evidence only. | `INTERNAL` | szmyty/szmyty#74 |
+| 93 | `.staging/scripts/lib/` | `ARCHIVE` | szmyty/szmyty#74 | Script library modules; superseded by `tools/profile_builder/`. Retain as historical evidence only. | `INTERNAL` | szmyty/szmyty#74 |
 
 ---
 
