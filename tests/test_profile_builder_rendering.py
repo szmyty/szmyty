@@ -6,11 +6,10 @@ access to profile/templates/ is required.  No network access is performed.
 
 from __future__ import annotations
 
-import pytest
 import jinja2
+import pytest
 
 from tools.profile_builder.rendering import render_string, render_template
-
 
 # ---------------------------------------------------------------------------
 # render_string

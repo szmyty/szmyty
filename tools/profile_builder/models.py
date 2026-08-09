@@ -13,7 +13,6 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-
 # ---------------------------------------------------------------------------
 # Evidence catalog
 # ---------------------------------------------------------------------------

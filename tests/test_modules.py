@@ -8,7 +8,12 @@ from pathlib import Path
 import pytest
 import yaml
 
-from tools.modules import github_metrics, music_highlight, recent_activity, update_readme
+from tools.modules import (
+    github_metrics,
+    music_highlight,
+    recent_activity,
+    update_readme,
+)
 from tools.profile_builder import cache as cache_utils
 from tools.profile_builder.models import GithubMetrics, MusicHighlight, RecentActivity
 from tools.profile_builder.rendering import render_template

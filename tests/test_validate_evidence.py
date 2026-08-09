@@ -4,19 +4,14 @@ Tests for profile/validate_evidence.py.
 
 from __future__ import annotations
 
-import textwrap
-from pathlib import Path
-
-import pytest
-import yaml
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-
 # Import the module under test by path so we don't need an installed package.
 import importlib.util
-import sys
+from pathlib import Path
+
+import yaml
 
 
 def _load_validator():
