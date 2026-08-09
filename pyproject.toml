@@ -15,10 +15,10 @@ license-files = [
 readme = "README.md"
 requires-python = ">=3.12,<4.0"
 authors = [
-    { name = "Alan Szmyt", email = "szmyty@gmail.com" },
+    { name = "Alan Szmyt", email = "14865041+szmyty@users.noreply.github.com" },
 ]
 maintainers = [
-    { name = "Alan Szmyt", email = "szmyty@gmail.com" },
+    { name = "Alan Szmyt", email = "14865041+szmyty@users.noreply.github.com" },
 ]
 keywords = [
   "python",

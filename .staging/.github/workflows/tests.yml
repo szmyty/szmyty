@@ -10,6 +10,7 @@ on:
       - 'scripts/**/*.sh'
       - 'tests/**/*.py'
       - 'tests/**/*.sh'
+      - 'docs/PRIVACY.md'
       - '.github/workflows/tests.yml'
   pull_request:
     branches:
@@ -19,6 +20,7 @@ on:
       - 'scripts/**/*.sh'
       - 'tests/**/*.py'
       - 'tests/**/*.sh'
+      - 'docs/PRIVACY.md'
       - '.github/workflows/tests.yml'
   workflow_dispatch:
 
@@ -63,3 +65,4 @@ jobs:
           bash tests/test_retry_logic.sh
           bash tests/test_health_checks.sh
           bash tests/test_cache.sh
+          bash tests/test_public_data_boundaries.sh

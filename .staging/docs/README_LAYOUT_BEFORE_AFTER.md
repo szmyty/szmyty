@@ -392,7 +392,7 @@ poetry install
 <br/><br/>
 
 [![GitHub](https://img.shields.io/badge/GitHub-szmyty-181717?style=for-the-badge&logo=github)](https://github.com/szmyty)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:szmyty@gmail.com)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](https://github.com/szmyty)
 
 <br/>
 
@@ -447,7 +447,7 @@ Supporting and contributing to open-source initiatives
 ## 📬 Get In Touch
 
 [![GitHub](https://img.shields.io/badge/GitHub-szmyty-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:szmyty@gmail.com)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](https://github.com/szmyty)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/szmyty)
 
 <br/>

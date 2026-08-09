@@ -7,7 +7,7 @@ name = "profile"
 version = "0.1.0"
 description = "Alan Szmyt's GitHub profile — automation scripts and module support"
 authors = [
-    { name = "Alan Szmyt", email = "szmyty@gmail.com" }
+    { name = "Alan Szmyt", email = "14865041+szmyty@users.noreply.github.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.11"

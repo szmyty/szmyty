@@ -1,6 +1,6 @@
 # Mock Data for Development
 
-This directory contains mock JSON data files for local development and testing without requiring real API keys.
+This directory contains sanitized synthetic JSON fixtures for local development and testing without requiring real API keys.
 
 ## Available Mock Data
 
@@ -77,14 +77,14 @@ python scripts/generate-health-dashboard.py \
 
 ## Customizing Mock Data
 
-Feel free to edit these JSON files to test different scenarios:
+Feel free to edit these fixture files to test different scenarios:
 
 - Different weather conditions
 - Various commit activity patterns
-- Different health scores
+- Different synthetic health scores (never copied personal measurements)
 - Edge cases and error conditions
 
-All mock data files follow the JSON schemas defined in the `schemas/` directory and are validated by pre-commit hooks.
+All fixture data files follow the JSON schemas defined in the `schemas/` directory and are validated by pre-commit hooks.
 
 ## Validation
 
