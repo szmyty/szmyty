@@ -84,47 +84,108 @@ ceremony, and documentation that reveals architecture rather than restating code
 
 ## Featured Systems
 
-### [soliloquy](https://github.com/szmyty/soliloquy)
-
-Privately chat with and summarize PDFs using a fully local LLM. No data leaves
-your machine. Packaged as a single Docker Compose stack.
-
-**Stack:** Python · Docker · Ollama
+> Maturity labels: **Stable** = released and maintained · **Active dev** =
+> usable but evolving · **Experiment** = documented, not production-intended.
+> Each entry links to an inspectable public artifact. Evidence IDs reference
+> [profile/content/evidence.yml](profile/content/evidence.yml).
 
 ---
 
-### [universal](https://github.com/szmyty/universal)
+### [soliloquy](https://github.com/szmyty/soliloquy) · Active dev
 
-All-in-one monorepo DX: formatting, linting, spellcheck, and CI-ready
-automation in a single composable shell toolkit.
+**Problem:** Querying private documents against a cloud LLM exposes confidential
+content to third-party servers and incurs ongoing API costs.
 
-**Stack:** Shell · GitHub Actions
+**Approach:** A single Docker Compose stack — Ollama for local model serving,
+a Python ingestion layer, and a query interface — that processes PDFs entirely
+on-device. No data leaves the host machine.
 
----
+**Alan's role:** Designed the compose architecture, selected Ollama as the
+local runtime, and structured the ingestion pipeline to be document-type-agnostic.
 
-### [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES)
+**Stack:** Python · Docker · Ollama · Vector store
 
-NEAT-Python recurrent neural network that trains an AI agent to complete levels
-in Super Mario World on SNES via gym-retro.
-
-**Stack:** Python · NEAT · OpenAI Gym Retro
-
----
-
-### [egohygiene](https://github.com/egohygiene/egohygiene)
-
-Core application and knowledge system within the Ego Hygiene organisation.
-
-**Stack:** Dart · Flutter · TypeScript · Python · GitHub Actions
+**Evidence:** [`repo-soliloquy`](https://github.com/szmyty/soliloquy) ·
+[`docs/projects/soliloquy.md`](docs/projects/soliloquy.md)
 
 ---
 
-### [szmyty/szmyty](https://github.com/szmyty/szmyty)
+### [universal](https://github.com/szmyty/universal) · Active dev
 
-This profile repository — schema-validated evidence catalog, automated
-validation tooling, and the structured README you are reading.
+**Problem:** Configuration drift across multiple repositories — inconsistent
+formatting, linting, spellcheck, and CI conventions — compounds onboarding cost
+and maintenance burden.
+
+**Approach:** A composable shell toolkit that centralises DX conventions.
+Repositories inherit shared configurations by layering, not forking, keeping
+the source of truth in one place.
+
+**Alan's role:** Identified drift as the root cause, designed the composition
+model, and structured GitHub Actions templates as parameterisable reusable
+workflows.
+
+**Stack:** Shell · GitHub Actions · Formatter and linter configurations
+
+**Evidence:** [`repo-universal`](https://github.com/szmyty/universal) ·
+[`docs/projects/universal.md`](docs/projects/universal.md)
+
+---
+
+### [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) · Experiment
+
+**Problem:** Understanding reinforcement learning requires a concrete,
+observable experiment with a clear reward signal and reproducible setup.
+
+**Approach:** NEAT-Python evolves recurrent neural networks to control a Super
+Mario World agent via OpenAI gym-retro. A fixed configuration file and
+checkpoint system make every training run reproducible.
+
+**Alan's role:** Configured NEAT hyperparameters, wrote the fitness function
+translating game progress to a scalar reward, and documented the training loop
+and results for public inspection.
+
+**Stack:** Python · NEAT-Python · OpenAI gym-retro
+
+**Evidence:** [`repo-openai-retro`](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) ·
+[`docs/projects/openai-retro.md`](docs/projects/openai-retro.md)
+
+---
+
+### [egohygiene](https://github.com/egohygiene/egohygiene) · Active dev
+
+**Problem:** Building a personal knowledge and habit system across multiple
+devices requires a consistent data model and a local-first design that keeps
+all personal data off third-party cloud servers.
+
+**Approach:** A cross-platform Flutter application backed by a Drift/SQLite
+local store, situated at the centre of a multi-repository developer platform
+(the Ego Hygiene organisation) with clearly layered responsibilities.
+
+**Alan's role:** Defined the ecosystem architecture, selected Drift ORM for
+local-first persistence, and established the shared linting baseline via
+`egolint`.
+
+**Stack:** Dart · Flutter · TypeScript · Python · GitHub Actions · SQLite
+
+**Evidence:** [`repo-egohygiene-org`](https://github.com/egohygiene) ·
+[`docs/projects/egohygiene.md`](docs/projects/egohygiene.md)
+
+---
+
+### [szmyty/szmyty](https://github.com/szmyty/szmyty) · Active dev
+
+**Problem:** GitHub profile READMEs routinely contain unverified claims.
+Maintaining a truthful, evidence-backed profile requires a structured catalog
+and automated validation.
+
+**Approach:** This repository — schema-validated YAML evidence catalog,
+automated checks, and the structured README you are reading — treats the
+profile itself as a verifiable system.
 
 **Stack:** Python · YAML · GitHub Actions · Markdown
+
+**Evidence:** [`repo-szmyty-szmyty`](https://github.com/szmyty/szmyty) ·
+[`profile/content/evidence.yml`](profile/content/evidence.yml)
 
 ---
 
@@ -134,14 +195,47 @@ validation tooling, and the structured README you are reading.
 
 ## Ego Hygiene Ecosystem
 
-[Ego Hygiene](https://github.com/egohygiene) is an interconnected developer
-platform — not a collection of unrelated repositories.
+[Ego Hygiene](https://github.com/egohygiene) is a developer platform
+organised as a set of composable, clearly layered repositories — not a
+collection of unrelated projects. Each repository owns a specific
+responsibility and exposes a well-defined interface to the others.
 
-| Repository | Role |
-|------------|------|
-| [egohygiene](https://github.com/egohygiene/egohygiene) | Core application and knowledge system |
-| [mantle](https://github.com/egohygiene/mantle) | Shared infrastructure and conventions |
-| [egolint](https://github.com/egohygiene/egolint) | Opinionated linting rules for the ecosystem |
+### Architecture map
+
+```mermaid
+graph TD
+    A([aether\nStandards · schemas · contracts]) --> B([mantle\nPortable host runtime · shell/CLI])
+    A --> C([egolint\nShared quality policy · analysis])
+    A --> D([relay\nGitHub Actions · delivery orchestration])
+    B --> E([realm\nReproducible environments · local services])
+    E --> F([egohygiene\nCore application · knowledge system])
+    C --> F
+    D --> F
+    F --> G([observatory\nHealth · metrics · feedback])
+    F --> H([pace\nSynchronisation · conformance])
+    F --> I([aniflow · mindcap · optiflow\nFocused products])
+```
+
+### Layer reference
+
+| Layer | Repository | Plain-language responsibility | Interface | Maturity |
+|-------|------------|-------------------------------|-----------|----------|
+| Foundation | [`aether`](https://github.com/egohygiene/aether) | Standards, contracts, policies, schemas, and reusable knowledge shared across the ecosystem | YAML/JSON schemas; documented contracts | Early |
+| Runtime | [`mantle`](https://github.com/egohygiene/mantle) | Portable host runtime — shell and CLI behaviour, dotfile conventions, and environment bootstrapping | Shell scripts; environment hooks | Active dev |
+| Environments | [`realm`](https://github.com/egohygiene/realm) | Reproducible local environments and service orchestration — "the same stack everywhere" | Docker Compose; devcontainer | Active dev |
+| Quality | [`egolint`](https://github.com/egohygiene/egolint) | Shared linting rules and quality policy inherited by all organisation repositories | ESLint / Ruff rule exports | Usable — [PR #1 merged](https://github.com/egohygiene/egolint/pull/1) |
+| Delivery | [`relay`](https://github.com/egohygiene/relay) | Reusable GitHub Actions workflows and release engineering orchestration | GitHub Actions reusable workflows | Early |
+| Conformance | [`pace`](https://github.com/egohygiene/pace) | Synchronisation and conformance checking across repositories | CLI / CI check | Planned |
+| Observability | [`observatory`](https://github.com/egohygiene/observatory) | Health, metrics, and continuous feedback across the platform | Dashboard / API | Planned |
+| Core app | [`egohygiene`](https://github.com/egohygiene/egohygiene) | Core application and knowledge system — the primary user-facing product | Flutter app; local SQLite | Active dev |
+| Products | `aniflow` · `mindcap` · `optiflow` | Focused products built on the platform for animation, cognition, and optimisation workflows | App / CLI | Early / Planned |
+
+> **Reading this table as a first-time visitor:** Start at `aether` (the rules
+> layer), move through `mantle` (how code runs locally), `realm` (how
+> environments are reproduced), and `relay` (how code is delivered), then
+> arrive at `egohygiene` (the product) and its satellite products.
+> `egolint`, `pace`, and `observatory` are cross-cutting — they apply
+> quality, conformance, and observability across the whole platform.
 
 ---
 
@@ -206,6 +300,19 @@ repository at [szmyty/szmyty/issues](https://github.com/szmyty/szmyty/issues).
 Music production, sound design, and generative audio are a continuous thread
 through my work. Creative technology — the intersection of code, sound, and
 interactive media — is not separate from my engineering practice; it informs it.
+
+The `.play()` project is an ongoing effort to build personal creative
+infrastructure: automation pipelines for music composition and production,
+generative tooling for audio and visual media, and workflows that connect
+creative process to the same engineering discipline applied elsewhere.
+
+*Incompris* is a musical project exploring ambient and electronic composition.
+Public releases, media pipeline experiments, and generative tooling will be
+linked here as they become publicly available.
+
+The feedback loop matters: constraints discovered while building creative
+pipelines surface requirements for the engineering platform; solutions from the
+engineering platform reduce friction in the creative workflow.
 
 ---
 
