@@ -64,6 +64,20 @@ modules:
     region_end_marker: "<!-- END:working-style -->"
     template: working-style.md.j2
 
+  - name: soundcloud
+    enabled: false
+    region_start_marker: "<!-- START:soundcloud -->"
+    region_end_marker: "<!-- END:soundcloud -->"
+    template: soundcloud.md.j2
+    artifact_path: profile/artifacts/soundcloud/cache.json
+
+  - name: steam
+    enabled: false
+    region_start_marker: "<!-- START:steam -->"
+    region_end_marker: "<!-- END:steam -->"
+    template: steam.md.j2
+    artifact_path: profile/artifacts/steam/cache.json
+
   - name: stars
     enabled: false
     region_start_marker: "<!-- START:stars -->"

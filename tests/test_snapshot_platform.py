@@ -202,9 +202,12 @@ def test_modules_registry_yml_api_modules_have_token() -> None:
     raw = yaml.safe_load(_REGISTRY_PATH.read_text(encoding="utf-8"))
     reg = ModuleRegistry.model_validate(raw)
     # GitHub API modules require GITHUB_TOKEN; public unauthenticated APIs do not.
-    # Any new `api`-type module that does NOT use the GitHub API must declare
-    # `secret_names: []` and be listed in _UNAUTHENTICATED_API_MODULES below.
+    # Any new `api`-type module that does NOT use the GitHub API must be listed
+    # in one of the exemption sets below.
     _UNAUTHENTICATED_API_MODULES = {"orcid", "medium"}
+    # Third-party API modules authenticate with provider-specific secrets (not
+    # GITHUB_TOKEN).  They must declare at least one secret_name of their own.
+    _THIRD_PARTY_API_MODULES = {"soundcloud", "steam"}
     for mod in reg.modules:
         if mod.provider_type != "api":
             continue
@@ -213,6 +216,17 @@ def test_modules_registry_yml_api_modules_have_token() -> None:
             assert "GITHUB_TOKEN" not in mod.secret_names, (
                 f"Module {mod.name!r} is listed as unauthenticated "
                 f"but declares GITHUB_TOKEN"
+            )
+        elif mod.name in _THIRD_PARTY_API_MODULES:
+            # Third-party provider APIs — must not use GITHUB_TOKEN and must
+            # declare at least one provider-specific secret.
+            assert "GITHUB_TOKEN" not in mod.secret_names, (
+                f"Module {mod.name!r} is a third-party API module "
+                f"but declares GITHUB_TOKEN"
+            )
+            assert len(mod.secret_names) > 0, (
+                f"Module {mod.name!r} is a third-party API module "
+                f"but declares no secret_names"
             )
         else:
             # All other API modules must declare GITHUB_TOKEN.

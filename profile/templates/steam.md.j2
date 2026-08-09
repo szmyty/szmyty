@@ -1,0 +1,15 @@
+{% if snapshot and snapshot.display_name %}
+### 🎮 Steam
+
+{% if snapshot.profile_url %}**[{{ snapshot.display_name }}]({{ snapshot.profile_url }})**{% else %}**{{ snapshot.display_name }}**{% endif %}
+{% if snapshot.steam_level is not none %}
+Steam level: {{ snapshot.steam_level }}
+{% endif %}
+{% if snapshot.recent_games %}
+Recent games:
+{% for game in snapshot.recent_games %}
+- {% if game.store_url %}[{{ game.name }}]({{ game.store_url }}){% else %}{{ game.name }}{% endif %}{% if game.playtime_2weeks is not none %} — {{ (game.playtime_2weeks // 60) }}h this fortnight{% endif %}
+
+{% endfor %}
+{% endif %}
+{% endif %}

@@ -378,5 +378,11 @@ Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidenc
 <!-- START:working-style -->
 <!-- END:working-style -->
 
+<!-- START:soundcloud -->
+<!-- END:soundcloud -->
+
+<!-- START:steam -->
+<!-- END:steam -->
+
 <!-- START:stars -->
 <!-- END:stars -->

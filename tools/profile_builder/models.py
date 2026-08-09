@@ -613,3 +613,104 @@ class StarsConfig(BaseModel):
         ),
     )
     evidence_id: str = Field(default="stars-career-development")
+
+
+# ---------------------------------------------------------------------------
+# SoundCloud snapshot
+# ---------------------------------------------------------------------------
+
+
+class SoundCloudSnapshot(BaseModel):
+    """Sanitized public SoundCloud profile snapshot.
+
+    All fields are optional so the model degrades cleanly when credentials
+    or provider access are unavailable.  Artwork URLs are never embedded
+    directly in rendered output to prevent active-content injection.
+    """
+
+    artist_name: str | None = Field(
+        default=None,
+        description="Public SoundCloud display name.",
+    )
+    profile_url: str | None = Field(
+        default=None,
+        description="Canonical public SoundCloud profile URL.",
+    )
+    latest_track_title: str | None = Field(
+        default=None,
+        description="Title of the most recent public track.",
+    )
+    latest_track_url: str | None = Field(
+        default=None,
+        description="Permalink of the most recent public track.",
+    )
+    track_count: int | None = Field(
+        default=None,
+        ge=0,
+        description="Total number of public tracks in the catalog.",
+    )
+    data_source: Literal["live", "cache", "fixture", "static"] = Field(
+        default="fixture",
+        description="Origin of this snapshot.",
+    )
+    data_at: str | None = Field(
+        default=None,
+        description="ISO-8601 UTC timestamp of the source data.",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Steam snapshot
+# ---------------------------------------------------------------------------
+
+
+class SteamRecentGame(BaseModel):
+    """Selected metadata for a recently played Steam game."""
+
+    name: str = Field(description="Game title.")
+    appid: int = Field(description="Steam application ID.")
+    playtime_2weeks: int | None = Field(
+        default=None,
+        ge=0,
+        description="Minutes played in the last two weeks.",
+    )
+    store_url: str | None = Field(
+        default=None,
+        description="Steam store page URL.",
+    )
+
+
+class SteamSnapshot(BaseModel):
+    """Sanitized public Steam profile snapshot.
+
+    Only data publicly visible through Steam's Web API with the user's current
+    privacy settings is included.  Private game details or unavailable
+    endpoints yield None fields rather than empty successful records.
+    """
+
+    display_name: str | None = Field(
+        default=None,
+        description="Public Steam display name.",
+    )
+    profile_url: str | None = Field(
+        default=None,
+        description="Public Steam community profile URL.",
+    )
+    steam_level: int | None = Field(
+        default=None,
+        ge=0,
+        description="Public Steam level.",
+    )
+    recent_games: list[SteamRecentGame] = Field(
+        default_factory=list,
+        description="Selected recently played games (capped at 5).",
+        max_length=5,
+    )
+    data_source: Literal["live", "cache", "fixture", "static"] = Field(
+        default="fixture",
+        description="Origin of this snapshot.",
+    )
+    data_at: str | None = Field(
+        default=None,
+        description="ISO-8601 UTC timestamp of the source data.",
+    )

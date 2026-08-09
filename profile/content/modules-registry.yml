@@ -175,6 +175,51 @@ modules:
     region_end_marker: "<!-- END:working-style -->"
     template: working-style.md.j2
 
+  - name: soundcloud
+    enabled: false
+    description: "Fetches public SoundCloud profile snapshot via the SoundCloud Web API."
+    provider_type: api
+    provider_module: tools.modules.soundcloud
+    secret_names:
+      - SOUNDCLOUD_CLIENT_ID
+      - SOUNDCLOUD_CLIENT_SECRET
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/soundcloud
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/soundcloud.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:soundcloud -->"
+    region_end_marker: "<!-- END:soundcloud -->"
+    template: soundcloud.md.j2
+
+  - name: steam
+    enabled: false
+    description: "Fetches public Steam profile snapshot via the Steam Web API."
+    provider_type: api
+    provider_module: tools.modules.steam
+    secret_names:
+      - STEAM_WEB_API_KEY
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/steam
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/steam.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:steam -->"
+    region_end_marker: "<!-- END:steam -->"
+    template: steam.md.j2
+
   - name: stars
     enabled: false
     description: "STARS career-development slot — non-public by default."

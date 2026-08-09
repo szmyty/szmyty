@@ -1,0 +1,11 @@
+{% if snapshot and snapshot.artist_name %}
+### 🎵 SoundCloud
+
+{% if snapshot.profile_url %}**[{{ snapshot.artist_name }}]({{ snapshot.profile_url }})**{% else %}**{{ snapshot.artist_name }}**{% endif %}
+{% if snapshot.latest_track_title %}
+Latest: {% if snapshot.latest_track_url %}[{{ snapshot.latest_track_title }}]({{ snapshot.latest_track_url }}){% else %}{{ snapshot.latest_track_title }}{% endif %}
+{% endif %}
+{% if snapshot.track_count is not none %}
+Public tracks: {{ snapshot.track_count }}
+{% endif %}
+{% endif %}
