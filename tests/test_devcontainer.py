@@ -35,7 +35,8 @@ def test_devcontainer_installs_required_tooling_and_extensions() -> None:
 
     post_create = devcontainer["postCreateCommand"]
     assert isinstance(post_create, str)
-    assert "poetry install --with lint,test" in post_create
+    assert "python -m pip install --user poetry==2.1.4" in post_create
+    assert "~/.local/bin/poetry install --with lint,test" in post_create
     assert "npm install --global prettier markdownlint-cli" in post_create
 
 

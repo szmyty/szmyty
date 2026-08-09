@@ -6,5 +6,5 @@
       "version": "lts"
     }
   },
-  "postCreateCommand": "python -m pip install poetry==2.1.4 && poetry install --with lint,test && npm install --global prettier markdownlint-cli"
+  "postCreateCommand": "python -m pip install --user poetry==2.1.4 && ~/.local/bin/poetry install --with lint,test && npm install --global prettier markdownlint-cli"
 }
