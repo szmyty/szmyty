@@ -1,0 +1,93 @@
+owner: szmyty
+repo: szmyty
+page_path: ai-agent-showcase.html
+
+candidates:
+  - issue_number: 107
+    showcase: true
+    implementation_pr_number: 121
+    validation_run_id: 31327725558
+    architecture:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/106
+      evidence_summary: >
+        The finalization epic makes green CI a release prerequisite before
+        later profile modules expand.
+    specification:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/107
+      evidence_summary: >
+        Issue #107 scopes the work to restoring the production validation gate
+        with no unrelated changes.
+    reflection:
+      evidence_mode: explanatory
+      evidence_summary: >
+        A passing CI baseline becomes reusable evidence for every later public
+        profile module and Pages surface.
+
+  - issue_number: 111
+    showcase: true
+    implementation_pr_number: 125
+    validation_run_id: 31334404125
+    architecture:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/106
+      evidence_summary: >
+        The finalization epic calls for explainable first-party GitHub signals
+        with cached fallback instead of opaque third-party cards.
+    specification:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/109
+      evidence_summary: >
+        The snapshot-platform issue defines the normalized module contract,
+        typed artifacts, and last-known-good refresh behavior reused here.
+    reflection:
+      evidence_mode: explanatory
+      evidence_summary: >
+        The merged dashboard work demonstrates how Copilot-delivered changes are
+        anchored to inspectable public metrics and tests.
+
+  - issue_number: 112
+    showcase: true
+    implementation_pr_number: 126
+    validation_run_id: 31335166521
+    architecture:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/106
+      evidence_summary: >
+        The finalization epic positions resilient public-safe provider modules
+        as durable profile building blocks.
+    specification:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/109
+      evidence_summary: >
+        The reusable snapshot-module platform supplies the typed, cached, and
+        fallback-aware contract that the SoundCloud and Steam modules adopt.
+    reflection:
+      evidence_mode: explanatory
+      evidence_summary: >
+        This delivery shows the system loop end-to-end: a public issue becomes a
+        Copilot PR, passes CI, and leaves reusable templates, fixtures, and
+        tests behind for the next module.
+
+  - issue_number: 113
+    showcase: true
+    implementation_pr_number: 127
+    validation_run_id: 31335745568
+    architecture:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/106
+      evidence_summary: >
+        The finalization epic preserves strict privacy gates around any
+        sensitive personal data.
+    specification:
+      evidence_mode: observed
+      public_url: https://github.com/szmyty/szmyty/issues/109
+      evidence_summary: >
+        The snapshot platform supports disabled and privacy-gated states without
+        exposing raw provider data.
+    reflection:
+      evidence_mode: explanatory
+      evidence_summary: >
+        Security- and health-related work is intentionally excluded from the
+        public showcase even when the implementation is complete.

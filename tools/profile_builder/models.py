@@ -10,8 +10,9 @@ from __future__ import annotations
 from enum import Enum
 from pathlib import Path
 from typing import Annotated, Literal
+from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 # ---------------------------------------------------------------------------
 # Snapshot module platform
@@ -380,6 +381,240 @@ class MusicHighlight(BaseModel):
     release_year: int | None = None
     artwork_path: str | None = None
     data_source: Literal["manual", "cache", "fixture"] = "manual"
+
+
+# ---------------------------------------------------------------------------
+# AI agent showcase
+# ---------------------------------------------------------------------------
+
+_SHOWCASE_ALLOWED_HOSTS: frozenset[str] = frozenset({"github.com", "szmyty.github.io"})
+
+
+def _validate_showcase_public_url(value: str | None) -> str | None:
+    """Allow only stable public GitHub or Pages URLs for showcase evidence."""
+    if value is None:
+        return None
+    parsed = urlparse(value)
+    if parsed.scheme != "https" or parsed.hostname not in _SHOWCASE_ALLOWED_HOSTS:
+        raise ValueError(
+            "showcase URLs must use https://github.com/... or "
+            "https://szmyty.github.io/szmyty/..."
+        )
+    if parsed.username or parsed.password:
+        raise ValueError("showcase URLs must not contain credentials")
+    if parsed.hostname == "szmyty.github.io" and not parsed.path.startswith("/szmyty/"):
+        raise ValueError("Pages showcase URLs must stay under /szmyty/")
+    return value
+
+
+class AgentShowcaseStageBlueprint(BaseModel):
+    """Configured stage evidence used to assemble a public execution trace."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    evidence_mode: Literal["observed", "explanatory"] = "observed"
+    public_url: str | None = None
+    evidence_summary: str
+
+    @field_validator("public_url", mode="before")
+    @classmethod
+    def _validate_url(cls, value: object) -> str | None:
+        if not value:
+            return None
+        return _validate_showcase_public_url(str(value))
+
+    @field_validator("evidence_summary", mode="before")
+    @classmethod
+    def _strip_summary(cls, value: object) -> str:
+        summary = str(value).strip()
+        if not summary:
+            raise ValueError("evidence_summary must not be empty")
+        return summary
+
+    @model_validator(mode="after")
+    def _validate_observed_stage(self) -> "AgentShowcaseStageBlueprint":
+        if self.evidence_mode == "observed" and not self.public_url:
+            raise ValueError("observed showcase stages require public_url")
+        return self
+
+
+class AgentShowcaseCandidate(BaseModel):
+    """Configured public issue candidate that may be featured in the showcase."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    issue_number: int = Field(gt=0)
+    showcase: bool = True
+    implementation_pr_number: int = Field(gt=0)
+    validation_run_id: int = Field(gt=0)
+    architecture: AgentShowcaseStageBlueprint
+    specification: AgentShowcaseStageBlueprint
+    reflection: AgentShowcaseStageBlueprint
+
+
+class AgentShowcaseConfig(BaseModel):
+    """Hand-authored candidate list for the execution showcase."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    owner: str = "szmyty"
+    repo: str = "szmyty"
+    page_path: str = "ai-agent-showcase.html"
+    blocked_label_terms: list[str] = Field(
+        default_factory=lambda: ["security", "sensitive", "health", "privacy"]
+    )
+    blocked_text_terms: list[str] = Field(
+        default_factory=lambda: [
+            "oura",
+            "health",
+            "sleep",
+            "readiness",
+            "biometric",
+            "mood",
+        ]
+    )
+    candidates: list[AgentShowcaseCandidate] = Field(default_factory=list)
+
+
+class AgentShowcaseArtifactLink(BaseModel):
+    """Public artifact link rendered on the Pages detail timeline."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    label: str
+    kind: Literal["code", "documentation", "test", "visual", "workflow"]
+    public_url: str
+
+    @field_validator("public_url", mode="before")
+    @classmethod
+    def _validate_url(cls, value: object) -> str:
+        return _validate_showcase_public_url(str(value)) or ""
+
+
+class AgentShowcaseStage(BaseModel):
+    """One normalized stage in the public AI-agent execution trace."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal[
+        "intent",
+        "architecture",
+        "specification",
+        "issue",
+        "implementation",
+        "validation",
+        "reflection",
+    ]
+    status: Literal["completed", "in-progress", "failed", "blocked"] = "completed"
+    evidence_mode: Literal["observed", "explanatory"] = "observed"
+    public_url: str | None = None
+    evidence_summary: str
+
+    @field_validator("public_url", mode="before")
+    @classmethod
+    def _validate_url(cls, value: object) -> str | None:
+        if not value:
+            return None
+        return _validate_showcase_public_url(str(value))
+
+    @field_validator("evidence_summary", mode="before")
+    @classmethod
+    def _strip_summary(cls, value: object) -> str:
+        summary = str(value).strip()
+        if not summary:
+            raise ValueError("evidence_summary must not be empty")
+        return summary
+
+    @model_validator(mode="after")
+    def _validate_stage(self) -> "AgentShowcaseStage":
+        if self.evidence_mode == "observed" and not self.public_url:
+            raise ValueError("observed showcase stages require public_url")
+        return self
+
+
+class AgentShowcaseRepositoryRef(BaseModel):
+    """Repository and ref information for the selected public trace."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    owner: str
+    repo: str
+    issue_number: int = Field(gt=0)
+    issue_url: str
+    pull_request_number: int = Field(gt=0)
+    pull_request_url: str
+    base_ref: str
+    merge_commit_sha: str
+    merge_commit_url: str
+
+    @field_validator(
+        "issue_url", "pull_request_url", "merge_commit_url", mode="before"
+    )
+    @classmethod
+    def _validate_url(cls, value: object) -> str:
+        return _validate_showcase_public_url(str(value)) or ""
+
+
+class AgentShowcaseValidationOutcome(BaseModel):
+    """Public validation evidence for the selected execution trace."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: Literal["passed", "failed", "pending"]
+    public_url: str
+    summary: str
+
+    @field_validator("public_url", mode="before")
+    @classmethod
+    def _validate_url(cls, value: object) -> str:
+        return _validate_showcase_public_url(str(value)) or ""
+
+
+class AgentShowcaseTrace(BaseModel):
+    """Typed normalized execution trace rendered in README and Pages."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    trace_id: str
+    public_title: str
+    problem_summary: str
+    stable_queue_key: str | None = None
+    issue_labels: list[str] = Field(default_factory=list)
+    stages: list[AgentShowcaseStage] = Field(default_factory=list, min_length=7)
+    repository: AgentShowcaseRepositoryRef
+    validation: AgentShowcaseValidationOutcome
+    artifacts: list[AgentShowcaseArtifactLink] = Field(default_factory=list)
+    outcome_summary: str
+    follow_up_state: str | None = None
+    completed_date: str
+    freshness_date: str
+
+
+class AgentShowcaseProvenance(BaseModel):
+    """Data-source state for the selected showcase trace."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    data_source: Literal["live", "cache", "fixture"]
+    source_state: Literal["fresh", "cached", "static", "failed-with-fallback"]
+    selected_from_candidates: int = Field(ge=0)
+    notes: str | None = None
+
+
+class AgentShowcaseSnapshot(BaseModel):
+    """Selected trace plus provenance for the README/Pages showcase."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    selected_trace: AgentShowcaseTrace
+    page_url: str
+    generated_at: str
+    provenance: AgentShowcaseProvenance
+
+    @field_validator("page_url", mode="before")
+    @classmethod
+    def _validate_url(cls, value: object) -> str:
+        return _validate_showcase_public_url(str(value)) or ""
 
 
 # ---------------------------------------------------------------------------

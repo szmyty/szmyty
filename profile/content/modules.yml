@@ -25,6 +25,13 @@ modules:
     template: recent-activity.md.j2
     artifact_path: profile/artifacts/recent-activity/cache.json
 
+  - name: ai-agent-showcase
+    enabled: true
+    region_start_marker: "<!-- START:ai-agent-showcase -->"
+    region_end_marker: "<!-- END:ai-agent-showcase -->"
+    template: ai-agent-showcase.md.j2
+    artifact_path: profile/artifacts/ai-agent-showcase/cache.json
+
   - name: music-highlight
     enabled: true
     region_start_marker: "<!-- START:music-highlight -->"

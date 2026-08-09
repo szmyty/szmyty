@@ -52,6 +52,29 @@ modules:
     region_end_marker: "<!-- END:recent-activity -->"
     template: recent-activity.md.j2
 
+  - name: ai-agent-showcase
+    enabled: true
+    description: "Builds a public evidence-backed AI agent execution showcase from selected issues, PRs, and CI runs."
+    provider_type: computed
+    provider_module: tools.modules.ai_agent_showcase
+    secret_names:
+      - GITHUB_TOKEN
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/ai-agent-showcase
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+      - card.svg
+    fixture_file: profile/fixtures/ai-agent-showcase.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:ai-agent-showcase -->"
+    region_end_marker: "<!-- END:ai-agent-showcase -->"
+    template: ai-agent-showcase.md.j2
+
   - name: music-highlight
     enabled: true
     description: "Renders manually curated music metadata from a hand-authored YAML file."

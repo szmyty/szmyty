@@ -355,12 +355,56 @@ Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidenc
 ---
 
 <!-- START:github-metrics -->
+### GitHub Metrics
+
+| Language | Share |
+|----------|-------|
+| Python | 45% |
+| TypeScript | 22% |
+| Shell | 15% |
+| Dockerfile | 10% |
+| YAML | 7% |
+
+**Public repositories:** 12
+
+
+**Actively maintained:**
+
+- [soliloquy](https://github.com/szmyty/soliloquy) — Local-LLM document query stack
+
+- [universal](https://github.com/szmyty/universal) — Monorepo DX tooling
 <!-- END:github-metrics -->
 
 <!-- START:recent-activity -->
+### Recent Public Activity
+
+
+- **2024-01-15** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Updated profile README
+
+- **2024-01-10** · [szmyty/soliloquy](https://github.com/szmyty/soliloquy) — Created branch for local-LLM document query feature
 <!-- END:recent-activity -->
 
+<!-- START:ai-agent-showcase -->
+### AI Agent Execution Showcase
+
+[![feat(profile): add resilient SoundCloud and Steam snapshot modules execution flow](./profile/artifacts/ai-agent-showcase/card.svg)](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+
+**feat(profile): add resilient SoundCloud and Steam snapshot modules** — Add two independent, resilient snapshot modules for Alan's SoundCloud creative practice and Steam gaming/achievement profile, each with explicit fallback behavior when configuration, credentials, or public provider access is unavailable.
+
+- **Outcome:** Merged to master after public CI passed, leaving reusable provider modules, templates, fixtures, and tests behind.
+- **Validation:** CI validate job passed profile validation, asset validation, Ruff, yamllint, and pytest.
+- **Source:** [Issue #112](https://github.com/szmyty/szmyty/issues/112) · [PR #126](https://github.com/szmyty/szmyty/pull/126) · [Pages detail](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+
+_Queue key: `szmyty-profile-finalize-06` · Completed: 2026-08-09_
+<!-- END:ai-agent-showcase -->
+
 <!-- START:music-highlight -->
+### Music
+
+**[Ego Hygiene](https://soundcloud.com/szmyty)** · 2023
+
+
+Original ambient and experimental electronic music.
 <!-- END:music-highlight -->
 
 <!-- START:education -->

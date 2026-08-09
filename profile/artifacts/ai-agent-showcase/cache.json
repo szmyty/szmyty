@@ -1,0 +1,126 @@
+{
+  "selected_trace": {
+    "trace_id": "issue-112",
+    "public_title": "feat(profile): add resilient SoundCloud and Steam snapshot modules",
+    "problem_summary": "Add two independent, resilient snapshot modules for Alan's SoundCloud creative practice and Steam gaming/achievement profile, each with explicit fallback behavior when configuration, credentials, or public provider access is unavailable.",
+    "stable_queue_key": "szmyty-profile-finalize-06",
+    "issue_labels": [
+      "copilot-ready",
+      "priority:normal",
+      "area:content",
+      "area:automation",
+      "profile-finalization"
+    ],
+    "stages": [
+      {
+        "type": "intent",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/112",
+        "evidence_summary": "Issue #112 defines the public module objective, fallback constraints, safe-provider rules, and acceptance criteria for the SoundCloud and Steam surfaces."
+      },
+      {
+        "type": "architecture",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/106",
+        "evidence_summary": "The finalization epic positions resilient public-safe provider modules as durable profile building blocks with cached fallbacks and bounded automation."
+      },
+      {
+        "type": "specification",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/109",
+        "evidence_summary": "The snapshot-platform issue supplies the typed, cached, and last-known-good module contract that the SoundCloud and Steam modules reuse."
+      },
+      {
+        "type": "issue",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/112",
+        "evidence_summary": "Issue #112 closed with public implementation labels and queue key `szmyty-profile-finalize-06`."
+      },
+      {
+        "type": "implementation",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/pull/126",
+        "evidence_summary": "PR #126 merged 14 file changes spanning provider modules, templates, fixtures, registry wiring, and focused tests for fallback and privacy behavior."
+      },
+      {
+        "type": "validation",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/actions/runs/31335166521",
+        "evidence_summary": "The CI validate job passed the public checks for profile inputs, assets, Python lint, workflow YAML lint, and pytest."
+      },
+      {
+        "type": "reflection",
+        "status": "completed",
+        "evidence_mode": "explanatory",
+        "public_url": null,
+        "evidence_summary": "This merged change demonstrates the broader delivery loop: a public issue became a Copilot-authored PR, passed CI, and left reusable fixtures, templates, and tests behind for later modules."
+      }
+    ],
+    "repository": {
+      "owner": "szmyty",
+      "repo": "szmyty",
+      "issue_number": 112,
+      "issue_url": "https://github.com/szmyty/szmyty/issues/112",
+      "pull_request_number": 126,
+      "pull_request_url": "https://github.com/szmyty/szmyty/pull/126",
+      "base_ref": "master",
+      "merge_commit_sha": "03d917d579042830c2855819634e82d0b9ceaa9a",
+      "merge_commit_url": "https://github.com/szmyty/szmyty/commit/03d917d579042830c2855819634e82d0b9ceaa9a"
+    },
+    "validation": {
+      "status": "passed",
+      "public_url": "https://github.com/szmyty/szmyty/actions/runs/31335166521",
+      "summary": "CI validate job passed profile validation, asset validation, Ruff, yamllint, and pytest."
+    },
+    "artifacts": [
+      {
+        "label": "tools/modules/soundcloud.py",
+        "kind": "code",
+        "public_url": "https://github.com/szmyty/szmyty/blob/03d917d579042830c2855819634e82d0b9ceaa9a/tools/modules/soundcloud.py"
+      },
+      {
+        "label": "tools/modules/steam.py",
+        "kind": "code",
+        "public_url": "https://github.com/szmyty/szmyty/blob/03d917d579042830c2855819634e82d0b9ceaa9a/tools/modules/steam.py"
+      },
+      {
+        "label": "tests/test_modules.py",
+        "kind": "test",
+        "public_url": "https://github.com/szmyty/szmyty/blob/03d917d579042830c2855819634e82d0b9ceaa9a/tests/test_modules.py"
+      },
+      {
+        "label": "tests/test_snapshot_platform.py",
+        "kind": "test",
+        "public_url": "https://github.com/szmyty/szmyty/blob/03d917d579042830c2855819634e82d0b9ceaa9a/tests/test_snapshot_platform.py"
+      },
+      {
+        "label": "profile/templates/soundcloud.md.j2",
+        "kind": "code",
+        "public_url": "https://github.com/szmyty/szmyty/blob/03d917d579042830c2855819634e82d0b9ceaa9a/profile/templates/soundcloud.md.j2"
+      },
+      {
+        "label": "profile/templates/steam.md.j2",
+        "kind": "code",
+        "public_url": "https://github.com/szmyty/szmyty/blob/03d917d579042830c2855819634e82d0b9ceaa9a/profile/templates/steam.md.j2"
+      }
+    ],
+    "outcome_summary": "Merged to master after public CI passed, leaving reusable provider modules, templates, fixtures, and tests behind.",
+    "follow_up_state": "The showcase keeps this last-known-good trace renderable even when live provider refresh is unavailable.",
+    "completed_date": "2026-08-09",
+    "freshness_date": "2026-08-09"
+  },
+  "page_url": "https://szmyty.github.io/szmyty/ai-agent-showcase.html",
+  "generated_at": "2026-08-09T21:10:14.882880+00:00",
+  "provenance": {
+    "data_source": "cache",
+    "source_state": "failed-with-fallback",
+    "selected_from_candidates": 3,
+    "notes": "Seeded from public issue, pull request, workflow, and file evidence."
+  }
+}

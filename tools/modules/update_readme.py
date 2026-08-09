@@ -10,6 +10,7 @@ import click
 import yaml
 
 from tools.profile_builder.models import (
+    AgentShowcaseSnapshot,
     GithubMetrics,
     MusicHighlight,
     ProfileConfig,
@@ -38,6 +39,9 @@ def _context_for_module(module_name: str, artifact_path: Path) -> dict[str, Any]
         return {'metrics': GithubMetrics.model_validate(raw)}
     if module_name == 'recent-activity':
         return {'activity': RecentActivity.model_validate(raw)}
+    if module_name == 'ai-agent-showcase':
+        snapshot = AgentShowcaseSnapshot.model_validate(raw)
+        return {'snapshot': snapshot, 'trace': snapshot.selected_trace}
     if module_name == 'music-highlight':
         return {'music': MusicHighlight.model_validate(raw)}
     raise ValueError(f'Unsupported module: {module_name}')
