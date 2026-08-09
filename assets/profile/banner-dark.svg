@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img">
+  <title>Alan Szmyt — Software Engineer, Systems Architect, Creative Technologist</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="400" fill="url(#bg)"/>
+  <!-- Placeholder: replace with final ChatGPT-generated banner (dark theme) -->
+  <!-- Star points: decorative -->
+  <circle cx="120" cy="60" r="1.5" fill="#e6edf3" opacity="0.6"/>
+  <circle cx="340" cy="140" r="1" fill="#e6edf3" opacity="0.4"/>
+  <circle cx="900" cy="80" r="1.5" fill="#e6edf3" opacity="0.5"/>
+  <circle cx="1100" cy="200" r="1" fill="#e6edf3" opacity="0.4"/>
+  <circle cx="60" cy="300" r="1" fill="#a371f7" opacity="0.5"/>
+  <circle cx="1200" cy="320" r="1.5" fill="#a371f7" opacity="0.4"/>
+  <!-- Subject-safe zone: 240–1040 px wide, 60–340 px tall -->
+  <text x="640" y="190" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="48" font-weight="700" fill="#e6edf3" text-anchor="middle">Alan Szmyt</text>
+  <text x="640" y="250" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="22" font-weight="400" fill="#7d8590" text-anchor="middle">Software Engineer · Systems Architect · Creative Technologist</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img">
+  <title>Alan Szmyt — profile mark</title>
+  <!-- Placeholder: replace with final ChatGPT-generated mark (paths only, no <text>) -->
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="196" fill="none" stroke="#6639BA" stroke-width="4"/>
+  <!-- Geometric monogram: two diagonal strokes forming an abstract "A" shape -->
+  <line x1="140" y1="290" x2="200" y2="120" stroke="#6639BA" stroke-width="18" stroke-linecap="round"/>
+  <line x1="200" y1="120" x2="260" y2="290" stroke="#6639BA" stroke-width="18" stroke-linecap="round"/>
+  <line x1="160" y1="230" x2="240" y2="230" stroke="#6639BA" stroke-width="14" stroke-linecap="round"/>
+</svg>

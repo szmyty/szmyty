@@ -4,6 +4,17 @@
 
 <div align="center">
 
+<!-- Banner: replace banner-light.svg / banner-dark.svg with final ChatGPT-generated artwork.
+     Critical identity text is preserved as Markdown below so it remains readable
+     even when the images do not load. See assets/profile/ASSET-BRIEF.md. -->
+<picture>
+  <source media="(prefers-color-scheme: dark)"  srcset="assets/profile/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/profile/banner-light.svg">
+  <img src="assets/profile/banner-light.svg"
+       alt="Alan Szmyt — Software Engineer, Systems Architect, Creative Technologist"
+       width="100%">
+</picture>
+
 # Alan Szmyt
 
 **Software Engineer · Systems Architect · Creative Technologist**
