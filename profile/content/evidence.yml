@@ -201,6 +201,83 @@ records:
       or contain repositories that are private, inactive, or experimental.
       User must confirm which repositories are ready for public highlight.
 
+  - id: repo-soliloquy
+    claim: "szmyty/soliloquy — offline-first local LLM chat with PDF support, packaged as a Docker Compose stack"
+    evidence_type: url
+    url: "https://github.com/szmyty/soliloquy"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Repository is publicly accessible.  README describes a self-contained
+      Docker Compose stack for querying PDFs via a local LLM with no cloud
+      dependency.  Claim is bounded to the repository description; no adoption
+      or usage metrics are stated.
+
+  - id: repo-universal
+    claim: "szmyty/universal — monorepo developer-experience toolkit: formatting, linting, spellcheck, and CI automation"
+    evidence_type: url
+    url: "https://github.com/szmyty/universal"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Repository is publicly accessible.  Claim is bounded to the repository
+      description and observable contents; no downstream adoption metrics are
+      stated.
+
+  - id: repo-openai-retro
+    claim: "szmyty/OpenAI-Retro-SuperMarioWorld-SNES — NEAT recurrent neural network agent trained on SNES Super Mario World via gym-retro"
+    evidence_type: url
+    url: "https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Repository is publicly accessible.  Training approach, framework choices,
+      and game target are observable in the repository.  No win-rate or benchmark
+      claims are made without a reproducible experiment record.
+
+  - id: repo-egolint
+    claim: "egohygiene/egolint — shared opinionated linting rules for the Ego Hygiene organisation"
+    evidence_type: url
+    url: "https://github.com/egohygiene/egolint"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Repository is publicly accessible under the egohygiene GitHub
+      organisation and backs the claim that shared linting infrastructure
+      exists.  See oss-egolint-pr for the distinct claim that szmyty
+      personally contributed a merged pull request to this repository.
+      Keeping both records separates the "repository exists" claim from
+      the "szmyty contributed to it" claim.
+
+  - id: repo-egohygiene-org
+    claim: "Ego Hygiene GitHub organisation (github.com/egohygiene) — a multi-repository developer platform"
+    evidence_type: url
+    url: "https://github.com/egohygiene"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Organisation is publicly visible on GitHub.  Repositories egohygiene,
+      mantle, and egolint are publicly accessible.  No private or internal
+      repository contents are referenced.
+
+  - id: oss-egolint-pr
+    claim: "Merged pull request in egohygiene/egolint (egohygiene/egolint#1)"
+    evidence_type: url
+    url: "https://github.com/egohygiene/egolint/pull/1"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Pull request is publicly inspectable and shows that szmyty directly
+      contributed to the shared linting infrastructure.  This record is
+      distinct from repo-egolint, which backs the existence of the
+      repository itself; this record backs the contribution/authorship claim.
+
   # ─── Open-source work ─────────────────────────────────────────────────────
 
   - id: oss-third-party-contributions

@@ -47,16 +47,16 @@ ceremony, and documentation that reveals architecture rather than restating code
 
 ## Proof at a Glance
 
-| Claim | Public Artifact |
-|-------|-----------------|
-| Software Engineer | [github.com/szmyty](https://github.com/szmyty) |
-| Open-source systems builder | [szmyty repositories](https://github.com/szmyty?tab=repositories) |
-| Ego Hygiene organisation founder | [github.com/egohygiene](https://github.com/egohygiene) |
-| Local-LLM tooling (soliloquy) | [szmyty/soliloquy](https://github.com/szmyty/soliloquy) |
-| Monorepo DX tooling (universal) | [szmyty/universal](https://github.com/szmyty/universal) |
-| AI game agent (NEAT / gym-retro) | [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
-| Shared linting conventions | [egohygiene/egolint](https://github.com/egohygiene/egolint) |
-| Evidence catalog | [profile/content/evidence.yml](profile/content/evidence.yml) |
+| Claim | Evidence ID | Public Artifact |
+|-------|-------------|-----------------|
+| Software engineer | `identity-role-software-engineer` | [github.com/szmyty](https://github.com/szmyty) |
+| Open-source systems builder | `repo-soliloquy` · `repo-universal` · `repo-openai-retro` | [szmyty repositories](https://github.com/szmyty?tab=repositories) |
+| Ego Hygiene organisation contributor | `repo-egohygiene-org` · `oss-egolint-pr` | [github.com/egohygiene](https://github.com/egohygiene) |
+| Local-LLM tooling (soliloquy) | `repo-soliloquy` | [szmyty/soliloquy](https://github.com/szmyty/soliloquy) |
+| Monorepo DX tooling (universal) | `repo-universal` | [szmyty/universal](https://github.com/szmyty/universal) |
+| AI game agent (NEAT / gym-retro) | `repo-openai-retro` | [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
+| Shared linting contribution | `repo-egolint` · `oss-egolint-pr` | [egohygiene/egolint](https://github.com/egohygiene/egolint) |
+| Evidence catalog | `repo-szmyty-szmyty` | [profile/content/evidence.yml](profile/content/evidence.yml) |
 
 ---
 
@@ -66,12 +66,15 @@ ceremony, and documentation that reveals architecture rather than restating code
 
 ## Selected Impact
 
-| Area | Artifact |
-|------|----------|
-| **Offline-first LLM chat** | Designed and shipped [soliloquy](https://github.com/szmyty/soliloquy) — a self-contained Docker Compose stack that lets users query PDFs via a local LLM with zero cloud dependency |
-| **Monorepo developer experience** | [universal](https://github.com/szmyty/universal) packages formatting, linting, spellcheck, and CI automation into a single composable shell toolkit |
-| **Reinforcement-learning demo** | Trained a NEAT recurrent neural network to autonomously complete SNES levels — [publicly documented](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
-| **Ecosystem linting standard** | Established shared lint rules across the Ego Hygiene organisation via [egolint](https://github.com/egohygiene/egolint) |
+> Each entry below is backed by an inspectable public artifact.
+> Evidence IDs reference [profile/content/evidence.yml](profile/content/evidence.yml).
+
+| Area | Context · Ownership · Outcome | Evidence |
+|------|-------------------------------|----------|
+| **Offline-first LLM chat** | Without a budget for cloud API calls or a willingness to send private documents to third-party servers, designed and built [soliloquy](https://github.com/szmyty/soliloquy) — a single Docker Compose stack that routes PDF queries through a locally running LLM. Outcome: a reproducible, zero-cloud-dependency workflow that any developer can run with one command. | `repo-soliloquy` · [github.com/szmyty/soliloquy](https://github.com/szmyty/soliloquy) |
+| **Monorepo developer experience** | Across multiple projects with inconsistent formatting, linting, and CI conventions, authored [universal](https://github.com/szmyty/universal) — a composable shell toolkit that consolidates formatting, linting, spellcheck, and CI scaffolding. Outcome: a single source of DX conventions that can be layered into any repository without bespoke setup. | `repo-universal` · [github.com/szmyty/universal](https://github.com/szmyty/universal) |
+| **Reinforcement-learning experiment** | To understand emergent agent behaviour from raw game-state input, trained a NEAT recurrent neural network to navigate SNES Super Mario World levels using gym-retro. Outcome: a publicly documented experiment showing the training loop, configuration, and results in a reproducible form. | `repo-openai-retro` · [github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
+| **Shared linting infrastructure** | To reduce lint-rule drift across repositories in the Ego Hygiene organisation, contributed and merged the initial opinionated rule set in [egolint](https://github.com/egohygiene/egolint). Outcome: a shared linting baseline that any organisation repository can inherit, reducing per-repo configuration overhead. | `repo-egolint` · `oss-egolint-pr` · [egohygiene/egolint#1](https://github.com/egohygiene/egolint/pull/1) |
 
 ---
 
@@ -182,8 +185,12 @@ Education details will be added when a verified public artifact exists.
 ## Open Source and Collaboration
 
 - Personal repositories and experiments: [github.com/szmyty](https://github.com/szmyty)
+  — [evidence: `identity-github-username`]
 - Ego Hygiene organisation: [github.com/egohygiene](https://github.com/egohygiene)
-- Merged PR in egolint: [egohygiene/egolint#1](https://github.com/egohygiene/egolint/pull/1)
+  — publicly accessible multi-repository developer platform [evidence: `repo-egohygiene-org`]
+- Merged PR in egolint establishing shared lint conventions:
+  [egohygiene/egolint#1](https://github.com/egohygiene/egolint/pull/1)
+  — inspectable contribution history [evidence: `oss-egolint-pr`]
 
 Contributions, issues, and discussions welcome. See open issues in this
 repository at [szmyty/szmyty/issues](https://github.com/szmyty/szmyty/issues).
