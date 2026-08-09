@@ -786,7 +786,7 @@
     {
       "date": "2025-11-29",
       "contribution_count": 35,
-      "level": 4,
+      "level": 2,
       "weekday": 6,
       "is_future": false
     },
@@ -800,21 +800,21 @@
     {
       "date": "2025-12-01",
       "contribution_count": 58,
-      "level": 4,
+      "level": 3,
       "weekday": 1,
       "is_future": false
     },
     {
       "date": "2025-12-02",
       "contribution_count": 36,
-      "level": 4,
+      "level": 2,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2025-12-03",
       "contribution_count": 20,
-      "level": 3,
+      "level": 1,
       "weekday": 3,
       "is_future": false
     },
@@ -2556,17 +2556,17 @@
     },
     {
       "date": "2026-08-09",
-      "contribution_count": 149,
+      "contribution_count": 151,
       "level": 4,
       "weekday": 0,
       "is_future": false
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 2984,
-    "public_commit_contributions": 1191,
-    "public_pull_request_contributions": 699,
-    "public_issue_contributions": 0,
+    "total_public_contributions": 2986,
+    "public_commit_contributions": 1749,
+    "public_pull_request_contributions": 3,
+    "public_issue_contributions": 699,
     "public_pull_request_review_contributions": 528
   },
   "streaks": {
@@ -2574,60 +2574,60 @@
     "longest_days": 20
   },
   "repository_inventory": {
-    "owned_public_non_archived_repositories": 12,
+    "owned_public_non_archived_repositories": 11,
     "stars_received": 29,
     "public_releases_past_year": 0
   },
   "languages": [
     {
       "name": "Python",
-      "percentage": 43,
-      "bytes": 430000
+      "percentage": 39,
+      "bytes": 542381
     },
     {
       "name": "TypeScript",
-      "percentage": 34,
-      "bytes": 340000
+      "percentage": 28,
+      "bytes": 384785
     },
     {
       "name": "Shell",
-      "percentage": 14,
-      "bytes": 140000
+      "percentage": 11,
+      "bytes": 156066
     },
     {
-      "name": "HTML",
-      "percentage": 2,
-      "bytes": 20000
+      "name": "C#",
+      "percentage": 9,
+      "bytes": 124097
     },
     {
-      "name": "CSS",
-      "percentage": 2,
-      "bytes": 20000
+      "name": "ShaderLab",
+      "percentage": 5,
+      "bytes": 66645
     },
     {
       "name": "Other",
-      "percentage": 5,
-      "bytes": 50000
+      "percentage": 8,
+      "bytes": 107834
     }
   ],
   "status": {
-    "data_source": "cache",
-    "source_state": "failed-with-fallback",
-    "data_timestamp": "2026-08-09T23:34:13.474423+00:00",
-    "generation_timestamp": "2026-08-09T23:34:13.474423+00:00",
+    "data_source": "live",
+    "source_state": "fresh",
+    "data_timestamp": "2026-08-09T23:44:46.773694+00:00",
+    "generation_timestamp": "2026-08-09T23:44:46.773694+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
     "window_start": "2025-08-10",
     "window_end": "2026-08-09",
-    "contribution_calendar_source": "Seeded from the public GitHub contributions calendar HTML for the trailing window.",
-    "contribution_type_source": "Seeded from public GitHub search totals until the scheduled GraphQL refresh overwrites the cached snapshot.",
-    "repository_inventory_source": "Seeded from the existing committed public repository metrics cache.",
-    "language_distribution_source": "Seeded from the existing committed public language metrics cache until the scheduled dashboard refresh recomputes it across all eligible repositories.",
-    "release_count_source": "Seeded from the existing committed public release metrics cache.",
+    "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
+    "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
+    "repository_inventory_source": "GitHub REST /users/{username}/repos type=owner, excluding private, forked, and archived repositories.",
+    "language_distribution_source": "GitHub REST languages_url aggregated across all eligible owned public repositories.",
+    "release_count_source": "GitHub REST /repos/{owner}/{repo}/releases, excluding drafts, published on or after the trailing-window start date.",
     "current_streak_definition": "Contiguous contribution days ending today, or ending yesterday when today has no contribution yet.",
-    "longest_streak_definition": "Longest contiguous contribution streak contained within the displayed trailing 365-day window.",
-    "language_rounding_policy": "Rounded percentages from the committed cache; the scheduled live dashboard refresh recomputes coherent largest-remainder percentages."
+    "longest_streak_definition": "Longest contiguous contribution streak fully contained within the displayed trailing 365-day window.",
+    "language_rounding_policy": "Largest-remainder integer percentages across all eligible repository language bytes so displayed percentages sum to 100."
   }
 }

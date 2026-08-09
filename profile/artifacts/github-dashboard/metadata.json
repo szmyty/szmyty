@@ -1,10 +1,10 @@
 {
   "module_name": "github-dashboard",
-  "result_state": "failed-with-fallback",
-  "data_source": "cache",
-  "data_timestamp": "2026-08-09T23:34:13.474423+00:00",
-  "generation_timestamp": "2026-08-09T23:34:13.474423+00:00",
-  "data_hash": "c0d3bdce37b74f2d60a15a550da78eaa10a7406532d655328bdcf9dac70bb4f7",
+  "result_state": "fresh",
+  "data_source": "live",
+  "data_timestamp": "2026-08-09T23:44:46.773694+00:00",
+  "generation_timestamp": "2026-08-09T23:44:46.773694+00:00",
+  "data_hash": "ff3e0dcda3ad3606d07c9bf5209c1b5cec4eac5dd534c02507cdea26cbc10e14",
   "freshness_policy": {
     "cadence": "daily",
     "ttl_seconds": 86400,
