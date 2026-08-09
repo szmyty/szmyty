@@ -7,6 +7,12 @@ includes:
   git:
     taskfile: .tasks/git.yml
     optional: true
+  security:
+    taskfile: .tasks/security.yml
+    optional: true
+  tests:
+    taskfile: .tasks/tests.yml
+    optional: true
 
 tasks:
   default:
@@ -35,3 +41,34 @@ tasks:
     desc: Reject stale source-repository names and obsolete production URLs
     cmds:
       - bash .tasks/check-identity.sh
+
+  validate-profile:
+    desc: Validate active profile inputs, assets, and README output
+    preconditions:
+      - sh: python -c "import click, yaml, pydantic" >/dev/null 2>&1
+        msg: "Project dependencies are missing. Run: poetry install"
+    cmds:
+      - python -m tools.profile_builder.cli validate
+      - python profile/validate_assets.py assets/profile
+
+  update-profile:
+    desc: Refresh public profile module artifacts and README locally
+    preconditions:
+      - sh: python -c "import click, yaml, pydantic" >/dev/null 2>&1
+        msg: "Project dependencies are missing. Run: poetry install"
+    cmds:
+      - python -m tools.modules.github_metrics --output profile/artifacts/github-metrics/cache.json
+      - python -m tools.modules.recent_activity --output profile/artifacts/recent-activity/cache.json
+      - |
+        python -m tools.modules.music_highlight \
+          --input profile/content/music-highlight.yml \
+          --output profile/artifacts/music-highlight/music.yml
+      - python -m tools.modules.update_readme
+
+  validate-site:
+    desc: Validate Pages workflow and committed site inputs
+    preconditions:
+      - sh: command -v pytest >/dev/null 2>&1
+        msg: "pytest is not installed. Run: poetry install --with test"
+    cmds:
+      - python -m pytest tests/test_workflows.py -k "workflow or site"

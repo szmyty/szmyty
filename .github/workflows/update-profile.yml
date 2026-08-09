@@ -1,0 +1,225 @@
+name: Update Profile
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  POETRY_VIRTUALENVS_IN_PROJECT: true
+
+concurrency:
+  group: update-profile-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        # actions/checkout v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        # actions/setup-python v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: python -m pip install poetry==2.1.4
+
+      - name: Restore Poetry virtualenv
+        # actions/cache v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            .venv
+            ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - name: Install runtime dependencies
+        run: poetry install --only main --no-interaction --no-root
+
+      - name: Validate profile inputs
+        run: poetry run python -m tools.profile_builder.cli validate
+
+  refresh:
+    runs-on: ubuntu-latest
+    needs: validate
+    permissions:
+      contents: read
+    outputs:
+      had_failures: ${{ steps.summarize.outputs.had_failures }}
+
+    steps:
+      - name: Checkout repository
+        # actions/checkout v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        # actions/setup-python v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: python -m pip install poetry==2.1.4
+
+      - name: Restore Poetry virtualenv
+        # actions/cache v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            .venv
+            ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - name: Install runtime dependencies
+        run: poetry install --only main --no-interaction --no-root
+
+      - name: Refresh GitHub metrics
+        id: github_metrics
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          poetry run python -m tools.modules.github_metrics
+          --output profile/artifacts/github-metrics/cache.json
+
+      - name: Refresh recent activity
+        id: recent_activity
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          poetry run python -m tools.modules.recent_activity
+          --output profile/artifacts/recent-activity/cache.json
+
+      - name: Refresh music highlight
+        id: music_highlight
+        continue-on-error: true
+        run: >-
+          poetry run python -m tools.modules.music_highlight
+          --input profile/content/music-highlight.yml
+          --output profile/artifacts/music-highlight/music.yml
+
+      - name: Render README regions
+        run: poetry run python -m tools.modules.update_readme
+
+      - name: Summarize module refresh
+        id: summarize
+        env:
+          GITHUB_METRICS_OUTCOME: ${{ steps.github_metrics.outcome }}
+          RECENT_ACTIVITY_OUTCOME: ${{ steps.recent_activity.outcome }}
+          MUSIC_HIGHLIGHT_OUTCOME: ${{ steps.music_highlight.outcome }}
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          import os
+          from pathlib import Path
+
+          import yaml
+
+          items = [
+              ("github-metrics", Path("profile/artifacts/github-metrics/cache.json"), os.environ["GITHUB_METRICS_OUTCOME"]),
+              ("recent-activity", Path("profile/artifacts/recent-activity/cache.json"), os.environ["RECENT_ACTIVITY_OUTCOME"]),
+              ("music-highlight", Path("profile/artifacts/music-highlight/music.yml"), os.environ["MUSIC_HIGHLIGHT_OUTCOME"]),
+          ]
+
+          print("### Module refresh summary")
+          for name, path, outcome in items:
+              source = "missing"
+              if path.exists():
+                  if path.suffix == ".json":
+                      source = json.loads(path.read_text(encoding="utf-8")).get("data_source", "unknown")
+                  else:
+                      source = (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("data_source", "unknown")
+              print(f"- {name}: {outcome}; data source: {source}")
+          PY
+
+          had_failures=false
+          for outcome in \
+            "$GITHUB_METRICS_OUTCOME" \
+            "$RECENT_ACTIVITY_OUTCOME" \
+            "$MUSIC_HIGHLIGHT_OUTCOME"; do
+            if [ "$outcome" != "success" ]; then
+              had_failures=true
+            fi
+          done
+
+          echo "had_failures=$had_failures" >> "$GITHUB_OUTPUT"
+
+      - name: Upload refreshed profile files
+        if: always()
+        # actions/upload-artifact v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: profile-refresh
+          path: |
+            README.md
+            profile/artifacts/github-metrics/cache.json
+            profile/artifacts/recent-activity/cache.json
+            profile/artifacts/music-highlight/music.yml
+
+  commit:
+    runs-on: ubuntu-latest
+    needs: refresh
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        # actions/checkout v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          # persist-credentials must remain enabled so this job can git push
+          persist-credentials: true
+
+      - name: Download refreshed profile files
+        # actions/download-artifact v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: profile-refresh
+          path: .
+
+      - name: Commit semantic changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add README.md profile/artifacts/github-metrics/cache.json \
+            profile/artifacts/recent-activity/cache.json \
+            profile/artifacts/music-highlight/music.yml
+
+          if git diff --cached --quiet; then
+            echo "No semantic profile changes detected." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git commit -m "chore(profile): refresh public modules"
+          git push
+
+  report-partial-failure:
+    runs-on: ubuntu-latest
+    needs:
+      - refresh
+      - commit
+    if: always() && needs.refresh.outputs.had_failures == 'true'
+    permissions: {}
+
+    steps:
+      - name: Mark run as partially failed
+        run: |
+          echo "One or more module refresh steps failed; unchanged cached output was preserved where available." >> "$GITHUB_STEP_SUMMARY"
+          exit 1

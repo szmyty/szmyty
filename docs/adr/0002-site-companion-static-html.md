@@ -29,7 +29,7 @@ The issue (`szmyty/szmyty#76`) requires a companion site that:
 6. Adds metadata: title, description, canonical URL, Open Graph/Twitter cards,
    favicon, robots policy, and structured data.
 7. Remains optional; the README must still tell the complete professional story.
-8. Is not deployed until issue `#12` provides the secure workflow boundary.
+8. Is deployed only through a dedicated least-privilege GitHub Pages workflow.
 
 ---
 
@@ -148,8 +148,8 @@ site/
   `docs/MIGRATION.md`); the directory remains as historical evidence but is
   not promoted.
 - A new `site/` directory is created with the documented structure.
-- The site is **not deployed** until issue `#12` delivers the secure GitHub
-  Pages workflow boundary.
+- The site is deployed only through `.github/workflows/pages.yml`, which keeps
+  GitHub Pages permissions isolated to the deployment job.
 - Future JavaScript enrichment (e.g., a filter or search widget) may be added
   via vanilla JS in `site/js/main.js` without introducing a framework.
 - If requirements change to require a framework, a new ADR must be filed before

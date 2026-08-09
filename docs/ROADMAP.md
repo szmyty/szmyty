@@ -20,7 +20,7 @@ The immediate goal is a clean, truthful, minimal foundation.
 
 ### Near Term
 
-- [ ] Add CI workflow for identity and broken-reference checks
+- [x] Consolidate CI, profile refresh, and Pages workflows with least-privilege permissions
 - [ ] Verify and simplify `.github/FUNDING.yml` platform list
 - [ ] Review `.staging/` content for promotion or removal
 - [ ] Add `CONTRIBUTORS.md`
