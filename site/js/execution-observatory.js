@@ -89,7 +89,7 @@
   });
 
   if (fallbackList) {
-    fallbackList.hidden = true;
+    fallbackList.hidden = false;
   }
   updateMotionButtons();
 
@@ -126,6 +126,7 @@
 
       const ringRadius = 4;
       const meshes = [];
+      const lineGeometries = [];
       const lineMaterial = new THREE.LineBasicMaterial({
         color: 0x4f46e5,
         transparent: true,
@@ -154,6 +155,7 @@
         const start = meshes[i].position;
         const end = meshes[(i + 1) % meshes.length].position;
         const geometry = new THREE.BufferGeometry().setFromPoints([start, end]);
+        lineGeometries.push(geometry);
         scene.add(new THREE.Line(geometry, lineMaterial));
       }
 
@@ -205,6 +207,12 @@
           renderer.domElement.removeEventListener("pointermove", onPointer);
           renderer.domElement.removeEventListener("click", onClick);
           window.removeEventListener("resize", onResize);
+          sphereGeometry.dispose();
+          lineMaterial.dispose();
+          lineGeometries.forEach((geometry) => geometry.dispose());
+          meshes.forEach((mesh) => {
+            mesh.material.dispose();
+          });
           renderer.dispose();
           return;
         }
