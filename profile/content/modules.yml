@@ -83,3 +83,10 @@ modules:
     region_start_marker: "<!-- START:stars -->"
     region_end_marker: "<!-- END:stars -->"
     template: stars.md.j2
+
+  - name: oura-trends
+    enabled: false
+    region_start_marker: "<!-- START:oura-trends -->"
+    region_end_marker: "<!-- END:oura-trends -->"
+    template: oura-trends.md.j2
+    artifact_path: profile/artifacts/oura-trends/cache.json

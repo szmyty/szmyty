@@ -51,6 +51,13 @@ class ModuleRegistryEntry(BaseModel):
 
     name: str = Field(description="Stable kebab-case module name.")
     enabled: bool = Field(default=True, description="Whether this module is active.")
+    publication: Literal["allowed", "blocked-pending-owner-approval"] = Field(
+        default="allowed",
+        description=(
+            "Publication gate. 'blocked-pending-owner-approval' prevents any "
+            "public output until the owner explicitly approves the allowlist."
+        ),
+    )
     description: str | None = Field(default=None, description="Human-readable description.")
 
     # Provider
@@ -714,3 +721,174 @@ class SteamSnapshot(BaseModel):
         default=None,
         description="ISO-8601 UTC timestamp of the source data.",
     )
+
+
+# ---------------------------------------------------------------------------
+# Oura trends aggregate (gated; publication blocked by default)
+# ---------------------------------------------------------------------------
+
+# Approved band labels — the *only* values that may enter public output.
+_SLEEP_BAND_LABELS: frozenset[str] = frozenset(
+    {"below-average", "average", "above-average"}
+)
+_READINESS_BAND_LABELS: frozenset[str] = frozenset(
+    {"below-average", "average", "above-average"}
+)
+_ACTIVITY_BAND_LABELS: frozenset[str] = frozenset(
+    {"low", "moderate", "consistent"}
+)
+_HRV_DIRECTION_LABELS: frozenset[str] = frozenset(
+    {"trending-down", "stable", "trending-up"}
+)
+
+# Explicit allowlist: only these keys may appear in the public aggregate.
+OURA_PUBLIC_AGGREGATE_ALLOWLIST: frozenset[str] = frozenset(
+    {
+        "window_days",
+        "contributing_days",
+        "period_label",
+        "avg_sleep_hours",
+        "sleep_regularity_band",
+        "avg_readiness_band",
+        "activity_consistency_band",
+        "hrv_direction",
+        "is_synthetic",
+        "data_source",
+        "generated_month",
+    }
+)
+
+
+class OuraTrendsAggregate(BaseModel):
+    """Coarse, privacy-preserving Oura Ring aggregate for public profile display.
+
+    Publication contract
+    --------------------
+    * This model is only written to a tracked artifact when the owning module
+      has ``publication: allowed`` AND ``enabled: true`` in the registry.
+    * Fields are restricted to the explicit allowlist above; unknown fields are
+      rejected at validation time.
+    * All values are coarse: sleep is rounded to the nearest 0.5 h; numeric
+      readiness and HRV are replaced with band labels; timestamps are coarsened
+      to month/year or week-ending date only.
+    * ``is_synthetic`` must be ``True`` for fixture data.  A ``False`` value
+      requires explicit owner approval and real credentials.
+
+    Disclaimer
+    ----------
+    This is experimental personal wellness data shared voluntarily by the
+    profile owner.  It does not constitute medical advice.
+    """
+
+    window_days: Literal[30, 90] = Field(
+        description="Aggregation window: 30 or 90 days."
+    )
+    contributing_days: int = Field(
+        ge=0,
+        description="Number of days with valid data included in this window.",
+    )
+    period_label: str = Field(
+        description=(
+            "Coarse display label for the aggregation period, e.g. 'Jul 2026' "
+            "or 'week ending 2026-07-27'.  Must not expose an exact date."
+        )
+    )
+
+    # Approved aggregate metrics — all optional so they can be suppressed.
+    avg_sleep_hours: float | None = Field(
+        default=None,
+        ge=0.0,
+        le=24.0,
+        description="Average sleep duration rounded to nearest 0.5 h.",
+    )
+    sleep_regularity_band: str | None = Field(
+        default=None,
+        description="Coarse regularity band: 'below-average', 'average', or 'above-average'.",
+    )
+    avg_readiness_band: str | None = Field(
+        default=None,
+        description="Coarse readiness band: 'below-average', 'average', or 'above-average'.",
+    )
+    activity_consistency_band: str | None = Field(
+        default=None,
+        description="Activity consistency band: 'low', 'moderate', or 'consistent'.",
+    )
+    hrv_direction: str | None = Field(
+        default=None,
+        description="HRV trend direction: 'trending-down', 'stable', or 'trending-up'.",
+    )
+
+    # Provenance
+    is_synthetic: bool = Field(
+        default=True,
+        description=(
+            "True for fixture / test data; must remain True until the owner "
+            "approves real-data publication."
+        ),
+    )
+    data_source: Literal["live", "cache", "fixture", "disabled"] = Field(
+        default="fixture",
+        description="Origin of this aggregate.",
+    )
+    generated_month: str = Field(
+        description="Coarse generation label (YYYY-MM) — never an exact timestamp.",
+    )
+
+    @field_validator("sleep_regularity_band", mode="before")
+    @classmethod
+    def _validate_sleep_band(cls, v: object) -> str | None:
+        if v is None:
+            return None
+        if str(v) not in _SLEEP_BAND_LABELS:
+            raise ValueError(
+                f"sleep_regularity_band {v!r} is not in the approved allowlist "
+                f"{sorted(_SLEEP_BAND_LABELS)}"
+            )
+        return str(v)
+
+    @field_validator("avg_readiness_band", mode="before")
+    @classmethod
+    def _validate_readiness_band(cls, v: object) -> str | None:
+        if v is None:
+            return None
+        if str(v) not in _READINESS_BAND_LABELS:
+            raise ValueError(
+                f"avg_readiness_band {v!r} is not in the approved allowlist "
+                f"{sorted(_READINESS_BAND_LABELS)}"
+            )
+        return str(v)
+
+    @field_validator("activity_consistency_band", mode="before")
+    @classmethod
+    def _validate_activity_band(cls, v: object) -> str | None:
+        if v is None:
+            return None
+        if str(v) not in _ACTIVITY_BAND_LABELS:
+            raise ValueError(
+                f"activity_consistency_band {v!r} is not in the approved allowlist "
+                f"{sorted(_ACTIVITY_BAND_LABELS)}"
+            )
+        return str(v)
+
+    @field_validator("hrv_direction", mode="before")
+    @classmethod
+    def _validate_hrv_direction(cls, v: object) -> str | None:
+        if v is None:
+            return None
+        if str(v) not in _HRV_DIRECTION_LABELS:
+            raise ValueError(
+                f"hrv_direction {v!r} is not in the approved allowlist "
+                f"{sorted(_HRV_DIRECTION_LABELS)}"
+            )
+        return str(v)
+
+    @field_validator("avg_sleep_hours", mode="before")
+    @classmethod
+    def _round_sleep_hours(cls, v: object) -> float | None:
+        """Round sleep hours to nearest 0.5 h to prevent precise inference."""
+        if v is None:
+            return None
+        raw = float(v)  # type: ignore[arg-type]
+        return round(raw * 2) / 2
+
+    model_config = {"extra": "forbid"}
