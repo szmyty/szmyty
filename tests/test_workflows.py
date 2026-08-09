@@ -110,6 +110,16 @@ def test_update_profile_uses_safe_refresh_events() -> None:
     assert "profile/content/ai-agent-showcase.yml" in events["push"]["paths"]
 
 
+def test_update_profile_summary_uses_poetry_environment() -> None:
+    workflow = _load_yaml(WORKFLOWS_DIR / "update-profile.yml")
+    summarize = next(
+        step
+        for step in workflow["jobs"]["refresh"]["steps"]
+        if step.get("name") == "Summarize module refresh"
+    )
+    assert "poetry run python - <<'PY'" in summarize["run"]
+
+
 def test_pages_scopes_pages_permissions_to_deploy_job() -> None:
     workflow = _load_yaml(WORKFLOWS_DIR / "pages.yml")
     assert workflow["permissions"] == {"contents": "read"}
