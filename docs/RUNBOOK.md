@@ -243,3 +243,53 @@ marked `status: needs-user-verification` and is blocking a profile update.
    - Commit and push.
 4. If verification is refused or not forthcoming, mark the record `excluded`
    and remove the corresponding claim from `README.md`.
+
+---
+
+## 10. GitHub Surface Owner Checklist
+
+The following settings require direct access to the GitHub UI and cannot be
+verified by repository files or CI.  `@szmyty` must review these manually
+before each release.
+
+> These items are outside the automated validation scope.  Repository files
+> and CI workflows cannot assert their correctness.
+
+### Branch rules and required checks
+
+- [ ] `master` has a branch protection rule or ruleset enabled.
+- [ ] Required status checks include the `validate`, `assets`, `lint-python`,
+      `lint-yaml`, and `tests` jobs from `ci.yml`.
+- [ ] Force-push to `master` is disabled.
+- [ ] Deletion of `master` is disabled.
+
+### Repository About text, homepage, and topics
+
+- [ ] About description is current and accurate.
+- [ ] Homepage URL points to `https://szmyty.github.io` (or is intentionally blank).
+- [ ] Topics reflect the current project focus (e.g., `profile`, `github-profile`).
+- [ ] Social preview image is set and renders correctly in link previews.
+
+### Profile pinned repositories
+
+- [ ] Pinned repositories reflect current flagship projects.
+- [ ] No stale, archived, or placeholder repositories are pinned.
+
+### Pages environment and deployment URL
+
+- [ ] GitHub Pages source is set to the `gh-pages` branch or the Actions
+      deployment workflow (`pages.yml`).
+- [ ] Deployment URL is `https://szmyty.github.io` and returns HTTP 200.
+- [ ] The Pages environment (`github-pages`) shows a successful last deployment.
+
+### Discussions categories and issue-routing links
+
+- [ ] Discussions are enabled on the repository.
+- [ ] The following categories exist: `Announcements`, `General`, `Ideas`,
+      `Polls`, `Q&A`, `Show and tell`.
+- [ ] Contact links in `.github/ISSUE_TEMPLATE/config.yml` each resolve to a
+      real Discussions category or page:
+      - `https://github.com/szmyty/szmyty/discussions` — General Discussions
+      - `https://github.com/szmyty/szmyty/discussions/categories/ideas` — Research & Exploration
+      - `https://github.com/szmyty/szmyty/discussions/categories/q-a` — Documentation Feedback
+      - `https://github.com/szmyty/szmyty/security/advisories/new` — Security Reports

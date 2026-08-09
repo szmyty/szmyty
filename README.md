@@ -344,19 +344,6 @@ engineering platform reduce friction in the creative workflow.
 
 ---
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 13. GENERATED REGIONS (reserved — not required for static profile)          -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
-<!-- GENERATED:ACTIVITY:START -->
-<!-- GENERATED:ACTIVITY:END -->
-
-<!-- GENERATED:METRICS:START -->
-<!-- GENERATED:METRICS:END -->
-
-<!-- GENERATED:MUSIC:START -->
-<!-- GENERATED:MUSIC:END -->
-
 ---
 
 <div align="center">

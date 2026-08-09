@@ -277,3 +277,47 @@ invalidates the cache and triggers a fresh install.
 `.editorconfig` at the repository root sets formatting defaults for all files.
 Most modern editors respect this automatically.  The Python tooling enforces
 additional constraints via `pyproject.toml` (`ruff`, `pytest` configuration).
+
+---
+
+## 10. Quality Tool Boundary
+
+**Authoritative tools** for this repository until further notice:
+
+| Tool | Role | Installed via |
+|------|------|--------------|
+| Poetry | Dependency management | system |
+| Ruff | Python linting and import ordering | `poetry install --with lint` |
+| yamllint | YAML linting | `poetry install --with lint` |
+| pytest | Test runner | `poetry install --with test` |
+| `profile/validate_assets.py` | Asset presence and format validation | repository |
+| `profile/validate_evidence.py` | Evidence catalog validation | repository |
+| `tools/profile_builder/cli.py` | Profile input validation | repository |
+
+These tools constitute the authoritative validation gate and map directly to
+the CI jobs in `.github/workflows/ci.yml`.  No additional linting or quality
+tool is required to pass CI.
+
+### Future migration seam: `egolint`
+
+`egolint` is an independently-developed linting tool that may replace or
+supplement Ruff for this repository's Python quality checks once it is
+released and validated.  Until that release:
+
+- Do **not** import, vendor, mock, or depend on `egolint` in any repository
+  file, test, or workflow.
+- Do **not** add an `egolint` configuration stub to `pyproject.toml` or
+  `.github/workflows/`.
+- When `egolint` reaches a stable public release and is validated against
+  this codebase, migrate by replacing the `poetry run ruff check .` invocation
+  in `ci.yml` and the equivalent local command above, then remove this note.
+
+The migration command will be:
+
+```sh
+# Future — not yet available; do not run
+# poetry run egolint check .
+```
+
+Until that command is available and tested, continue using Ruff as documented
+in § 3 above.
