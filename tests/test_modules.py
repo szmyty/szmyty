@@ -14,8 +14,20 @@ from tools.modules import (
     recent_activity,
     update_readme,
 )
+from tools.modules import (
+    soundcloud as soundcloud_mod,
+)
+from tools.modules import (
+    steam as steam_mod,
+)
 from tools.profile_builder import cache as cache_utils
-from tools.profile_builder.models import GithubMetrics, MusicHighlight, RecentActivity
+from tools.profile_builder.models import (
+    GithubMetrics,
+    MusicHighlight,
+    RecentActivity,
+    SoundCloudSnapshot,
+    SteamSnapshot,
+)
 from tools.profile_builder.rendering import render_template
 
 
@@ -541,3 +553,99 @@ def test_update_readme_reports_unchanged_on_second_render(
     assert '### GitHub Metrics' in rendered
     assert '### Recent Public Activity' in rendered
     assert '### Music' in rendered
+
+
+# ---------------------------------------------------------------------------
+# SoundCloud module
+# ---------------------------------------------------------------------------
+
+
+def test_soundcloud_fixture_loads() -> None:
+    snap = soundcloud_mod.load_fixture()
+    assert isinstance(snap, SoundCloudSnapshot)
+    assert snap.data_source == "fixture"
+    assert snap.artist_name is not None
+    assert snap.profile_url is not None
+
+
+def test_soundcloud_build_without_credentials_uses_fixture(tmp_path) -> None:
+    output = tmp_path / "soundcloud" / "cache.json"
+    snap = soundcloud_mod.build_snapshot(
+        output_path=output,
+        fixture_path=soundcloud_mod.DEFAULT_FIXTURE,
+    )
+    assert snap.data_source in {"fixture", "static"}
+    assert output.exists()
+
+
+def test_soundcloud_fallback_to_cache(tmp_path) -> None:
+    """Cached artifact is preferred over fixture when live provider is absent."""
+    cached_snap = SoundCloudSnapshot(
+        artist_name="Cached Artist",
+        profile_url="https://soundcloud.com/cached",
+        data_source="live",
+    )
+    output = tmp_path / "soundcloud" / "cache.json"
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    output.write_text(
+        json.dumps(cached_snap.model_dump(mode="json"), ensure_ascii=False),
+        encoding="utf-8",
+    )
+    snap = soundcloud_mod.build_snapshot(
+        output_path=output,
+        fixture_path=soundcloud_mod.DEFAULT_FIXTURE,
+    )
+    assert snap.artist_name == "Cached Artist"
+    assert snap.data_source == "cache"
+
+
+# ---------------------------------------------------------------------------
+# Steam module
+# ---------------------------------------------------------------------------
+
+
+def test_steam_fixture_loads() -> None:
+    snap = steam_mod.load_fixture()
+    assert isinstance(snap, SteamSnapshot)
+    assert snap.data_source == "fixture"
+    assert snap.display_name is not None
+    assert len(snap.recent_games) >= 1
+
+
+def test_steam_build_without_credentials_uses_fixture(tmp_path) -> None:
+    output = tmp_path / "steam" / "cache.json"
+    snap = steam_mod.build_snapshot(
+        output_path=output,
+        fixture_path=steam_mod.DEFAULT_FIXTURE,
+    )
+    assert snap.data_source in {"fixture", "static"}
+    assert output.exists()
+
+
+def test_steam_fallback_to_cache(tmp_path) -> None:
+    """Cached artifact is preferred over fixture when live provider is absent."""
+    cached_snap = SteamSnapshot(
+        display_name="Cached Player",
+        profile_url="https://steamcommunity.com/id/cached/",
+        data_source="live",
+    )
+    output = tmp_path / "steam" / "cache.json"
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    output.write_text(
+        json.dumps(cached_snap.model_dump(mode="json"), ensure_ascii=False),
+        encoding="utf-8",
+    )
+    snap = steam_mod.build_snapshot(
+        output_path=output,
+        fixture_path=steam_mod.DEFAULT_FIXTURE,
+    )
+    assert snap.display_name == "Cached Player"
+    assert snap.data_source == "cache"
+
+
+def test_steam_recent_games_capped(tmp_path) -> None:
+    """recent_games list is bounded to at most 5 entries."""
+    snap = steam_mod.load_fixture()
+    assert len(snap.recent_games) <= 5

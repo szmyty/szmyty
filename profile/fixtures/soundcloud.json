@@ -1,0 +1,9 @@
+{
+  "artist_name": "Example Artist",
+  "profile_url": "https://soundcloud.com/example-artist",
+  "latest_track_title": "Example Track",
+  "latest_track_url": "https://soundcloud.com/example-artist/example-track",
+  "track_count": 12,
+  "data_source": "fixture",
+  "data_at": null
+}
