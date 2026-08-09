@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextlib
+import functools
 import shutil
 import subprocess
 import tempfile
@@ -32,9 +33,11 @@ def _find_browser() -> str | None:
 
 
 def _serve_repo(port: int) -> ThreadingHTTPServer:
-    handler = lambda *args, **kwargs: SimpleHTTPRequestHandler(  # noqa: E731
-        *args, directory=str(REPO_ROOT), **kwargs
-    )
+    class QuietHandler(SimpleHTTPRequestHandler):
+        def log_message(self, format: str, *args: object) -> None:  # noqa: A003
+            return None
+
+    handler = functools.partial(QuietHandler, directory=str(REPO_ROOT))
     server = ThreadingHTTPServer(("127.0.0.1", port), handler)
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()

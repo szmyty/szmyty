@@ -89,12 +89,15 @@
   });
 
   if (fallbackList) {
-    fallbackList.hidden = false;
+    fallbackList.hidden = true;
   }
   updateMotionButtons();
 
   const webglProbe = document.createElement("canvas");
   if (!webglProbe.getContext("webgl2") && !webglProbe.getContext("webgl")) {
+    if (fallbackList) {
+      fallbackList.hidden = false;
+    }
     setStatus("WebGL context failed. Showing semantic fallback.");
     return;
   }
@@ -182,11 +185,12 @@
         }
       };
 
-      renderer.domElement.addEventListener("pointermove", onPointer);
-      renderer.domElement.addEventListener("click", (event) => {
+      const onClick = (event) => {
         onPointer(event);
         focusStage(activeIndex);
-      });
+      };
+      renderer.domElement.addEventListener("pointermove", onPointer);
+      renderer.domElement.addEventListener("click", onClick);
 
       const onResize = () => {
         const nextWidth = Math.max(320, container.clientWidth);
@@ -198,6 +202,8 @@
 
       const animate = (timestamp) => {
         if (!container.isConnected) {
+          renderer.domElement.removeEventListener("pointermove", onPointer);
+          renderer.domElement.removeEventListener("click", onClick);
           window.removeEventListener("resize", onResize);
           renderer.dispose();
           return;
@@ -217,6 +223,9 @@
       }
       requestAnimationFrame(animate);
     } catch {
+      if (fallbackList) {
+        fallbackList.hidden = false;
+      }
       setStatus("Interactive orbit is unavailable. Showing semantic fallback.");
     }
   };
