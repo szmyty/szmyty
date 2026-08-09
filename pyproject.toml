@@ -57,21 +57,19 @@ profile-builder = "tools.profile_builder.cli:main"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[dependency-groups]
-lint = [
-    "ruff (>=0.11.0,<0.12.0)",
-    "yamllint (>=1.35.0,<2.0.0)",
-    "codespell (>=2.4.0,<3.0.0)",
-]
-security = [
-    "pip-audit (>=2.9.0,<3.0.0)",
-]
-dev = [
-    "pre-commit (>=4.0.0,<5.0.0)",
-]
-test = [
-    "pytest (>=8.0,<9.0)",
-]
+[tool.poetry.group.lint.dependencies]
+ruff = ">=0.11.0,<0.12.0"
+yamllint = ">=1.35.0,<2.0.0"
+codespell = ">=2.4.0,<3.0.0"
+
+[tool.poetry.group.security.dependencies]
+pip-audit = ">=2.9.0,<3.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = ">=4.0.0,<5.0.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=8.0,<9.0"
 
 [tool.ruff]
 target-version = "py312"

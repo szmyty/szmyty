@@ -69,6 +69,6 @@ tasks:
     desc: Validate Pages workflow and committed site inputs
     preconditions:
       - sh: command -v pytest >/dev/null 2>&1
-        msg: "pytest is not installed. Run: poetry install && poetry run python -m pip install pytest"
+        msg: "pytest is not installed. Run: poetry install --with test"
     cmds:
       - python -m pytest tests/test_workflows.py -k "workflow or site"
