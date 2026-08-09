@@ -32,8 +32,12 @@ def test_github_metrics_fixture_renders_template(tmp_path) -> None:
     assert written.data_source == 'fixture'
     assert '### GitHub Metrics' in rendered
     assert '**Public repositories:** 12' in rendered
-    assert 'stars' not in output.read_text(encoding='utf-8')
+    # Fixture must not include synthetic star counts or follower counts to avoid
+    # fabricating adoption metrics (CONTENT.md: "Do not fabricate: stars, users").
+    assert written.stars_received is None
     assert 'followers' not in output.read_text(encoding='utf-8')
+    # Stars are omitted from the rendered template when the value is None.
+    assert 'Stars received' not in rendered
 
 
 def test_recent_activity_filters_and_bounds_live_events(monkeypatch, tmp_path) -> None:
@@ -262,6 +266,184 @@ def test_invalid_fixture_json_raises_when_no_fallback(monkeypatch, tmp_path) -> 
             fixture_path=bad_fixture,
             token='x',
         )
+
+
+def test_aggregate_stars_sums_non_archived_repos() -> None:
+    repos = [
+        {'stargazers_count': 10, 'archived': False},
+        {'stargazers_count': 5, 'archived': False},
+        {'stargazers_count': 999, 'archived': True},   # archived — excluded
+        {'stargazers_count': None, 'archived': False},  # missing value — treated as 0
+    ]
+    assert github_metrics.aggregate_stars(repos) == 15
+
+
+def test_aggregate_stars_empty_repos_returns_zero() -> None:
+    assert github_metrics.aggregate_stars([]) == 0
+
+
+def test_aggregate_stars_all_archived_returns_zero() -> None:
+    repos = [
+        {'stargazers_count': 50, 'archived': True},
+        {'stargazers_count': 30, 'archived': True},
+    ]
+    assert github_metrics.aggregate_stars(repos) == 0
+
+
+def test_count_recent_releases_counts_within_window(monkeypatch) -> None:
+    from datetime import UTC, datetime, timedelta
+
+    now = datetime.now(UTC)
+    recent = (now - timedelta(days=10)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    old = (now - timedelta(days=400)).strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    repos = [
+        {'full_name': 'szmyty/repo-a'},
+        {'full_name': 'szmyty/repo-b'},
+    ]
+
+    call_count = {'n': 0}
+
+    def fake_get_json(url: str, token: str | None = None):
+        call_count['n'] += 1
+        if 'repo-a' in url:
+            return [
+                {'draft': False, 'published_at': recent},
+                {'draft': False, 'published_at': old},   # older than window
+            ], {}
+        # repo-b has a draft release (excluded) and one recent
+        return [
+            {'draft': True, 'published_at': recent},    # draft — excluded
+            {'draft': False, 'published_at': recent},
+        ], {}
+
+    monkeypatch.setattr(github_metrics, '_github_get_json', fake_get_json)
+
+    count = github_metrics.count_recent_releases(repos, token='x')
+    # repo-a: 1 recent non-draft; repo-b: 1 recent non-draft (draft excluded)
+    assert count == 2
+
+
+def test_count_recent_releases_skips_404_repos(monkeypatch) -> None:
+    repos = [{'full_name': 'szmyty/gone'}]
+
+    def fake_get_json(url: str, token: str | None = None):
+        raise github_metrics.ProviderFailure('HTTP 404')
+
+    monkeypatch.setattr(github_metrics, '_github_get_json', fake_get_json)
+    assert github_metrics.count_recent_releases(repos, token='x') == 0
+
+
+def test_count_recent_releases_empty_repos() -> None:
+    assert github_metrics.count_recent_releases([], token=None) == 0
+
+
+def test_live_metrics_includes_stars_and_releases(monkeypatch) -> None:
+    """fetch_live_metrics populates stars_received and public_releases_count."""
+    from datetime import UTC, datetime, timedelta
+
+    recent = (datetime.now(UTC) - timedelta(days=5)).strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    fake_repos = [
+        {
+            'name': 'my-repo',
+            'full_name': 'szmyty/my-repo',
+            'html_url': 'https://github.com/szmyty/my-repo',
+            'description': 'A repo',
+            'stargazers_count': 7,
+            'archived': False,
+            'fork': False,
+            'private': False,
+            'pushed_at': recent,
+            'languages_url': 'https://api.github.com/repos/szmyty/my-repo/languages',
+        },
+    ]
+
+    monkeypatch.setattr(
+        github_metrics,
+        'fetch_public_repositories',
+        lambda username=github_metrics.USERNAME, token=None: fake_repos,
+    )
+    monkeypatch.setattr(
+        github_metrics,
+        'fetch_public_repo_count',
+        lambda username=github_metrics.USERNAME, token=None: 1,
+    )
+
+    def fake_get_json(url: str, token: str | None = None):
+        if 'languages' in url:
+            return {'Python': 1000}, {}
+        if 'releases' in url:
+            return [{'draft': False, 'published_at': recent}], {}
+        return {}, {}
+
+    monkeypatch.setattr(github_metrics, '_github_get_json', fake_get_json)
+
+    metrics = github_metrics.fetch_live_metrics(token='x')
+    assert metrics.stars_received == 7
+    assert metrics.public_releases_count == 1
+    assert metrics.data_source == 'live'
+
+
+def test_github_metrics_template_shows_stars_when_present() -> None:
+    metrics = GithubMetrics(
+        top_languages=[],
+        public_repo_count=5,
+        stars_received=42,
+        public_releases_count=3,
+        data_source='live',
+    )
+    rendered = render_template('github-metrics.md.j2', {'metrics': metrics})
+    assert '**Stars received:** 42' in rendered
+    assert '**Releases (past year):** 3' in rendered
+
+
+def test_github_metrics_template_omits_stars_when_none() -> None:
+    metrics = GithubMetrics(
+        top_languages=[],
+        public_repo_count=5,
+        stars_received=None,
+        public_releases_count=None,
+        data_source='fixture',
+    )
+    rendered = render_template('github-metrics.md.j2', {'metrics': metrics})
+    assert 'Stars received' not in rendered
+    assert 'Releases (past year)' not in rendered
+
+
+def test_fetch_public_repos_excludes_forks_and_private(monkeypatch) -> None:
+    """fetch_public_repositories filters out forks and private repos."""
+
+    def fake_get_json(url: str, token: str | None = None):
+        return [
+            {'name': 'public-own', 'private': False, 'fork': False},
+            {'name': 'forked', 'private': False, 'fork': True},     # excluded
+            {'name': 'secret', 'private': True, 'fork': False},     # excluded
+        ], {}
+
+    monkeypatch.setattr(github_metrics, '_github_get_json', fake_get_json)
+    repos = github_metrics.fetch_public_repositories(token='x')
+    assert len(repos) == 1
+    assert repos[0]['name'] == 'public-own'
+
+
+def test_select_maintained_repos_excludes_archived(monkeypatch) -> None:
+    from datetime import UTC, datetime, timedelta
+
+    recent = (datetime.now(UTC) - timedelta(days=30)).isoformat()
+    repos = [
+        {
+            'name': 'active', 'html_url': 'https://github.com/szmyty/active',
+            'description': None, 'pushed_at': recent, 'archived': False,
+        },
+        {
+            'name': 'archived-repo', 'html_url': 'https://github.com/szmyty/archived-repo',
+            'description': None, 'pushed_at': recent, 'archived': True,  # excluded
+        },
+    ]
+    maintained = github_metrics.select_maintained_repositories(repos)
+    assert len(maintained) == 1
+    assert maintained[0].name == 'active'
 
 
 def test_update_readme_reports_unchanged_on_second_render(

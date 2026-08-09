@@ -206,12 +206,95 @@ def fetch_latest_release(
     return None if latest is None else latest[1]
 
 
+def aggregate_stars(repositories: list[dict[str, Any]]) -> int:
+    """Sum stargazers_count across owned, non-fork, non-archived public repositories.
+
+    Repositories are already pre-filtered to exclude forks by
+    ``fetch_public_repositories``.  Archived repositories are additionally
+    excluded here because their star counts reflect historical rather than
+    active community interest.
+
+    Methodology: sum of ``stargazers_count`` from the GitHub REST
+    ``/users/{username}/repos`` response, type=owner, excluding archived.
+    """
+    return sum(
+        int(repo.get('stargazers_count') or 0)
+        for repo in repositories
+        if not repo.get('archived', False)
+    )
+
+
+def count_recent_releases(
+    repositories: list[dict[str, Any]],
+    token: str | None = None,
+    window_days: int = MAINTAINED_WINDOW_DAYS,
+) -> int:
+    """Count public releases published within *window_days* across all repositories.
+
+    Methodology: for each owned non-fork public repository, fetch the list of
+    releases (paginated) and count those whose ``published_at`` falls within
+    the rolling window.  Draft releases are excluded because they are not
+    publicly visible.
+
+    The result is a public-snapshot estimate — it reflects the window at the
+    time the data was fetched.
+
+    Ordering assumption: the GitHub Releases API returns releases newest-first
+    (``/repos/{owner}/{repo}/releases`` with default ``per_page``).  This is
+    documented behaviour but not contractually guaranteed.  As an optimisation,
+    pagination stops as soon as the current page contains any release older than
+    the cutoff, because all subsequent pages will contain only older releases
+    given strict newest-first ordering.  All within-window releases on the same
+    page as the first out-of-window release are still counted before stopping.
+    If the API ever returns pages out of order, releases on later pages would be
+    silently missed; the count is therefore labelled a public-snapshot estimate.
+    """
+    cutoff = datetime.now(UTC) - timedelta(days=window_days)
+    total = 0
+    for repo in repositories:
+        full_name = repo.get('full_name')
+        if not full_name:
+            continue
+        params = parse.urlencode({'per_page': 100})
+        next_url: str | None = f'{API_ROOT}/repos/{full_name}/releases?{params}'
+        while next_url:
+            try:
+                payload, headers = _github_get_json(next_url, token)
+            except ProviderFailure as exc:
+                if 'HTTP 404' in str(exc):
+                    break
+                raise
+            if not isinstance(payload, list):
+                break
+            found_older = False
+            for release in payload:
+                if not isinstance(release, dict):
+                    continue
+                if release.get('draft', False):
+                    continue
+                published_at = release.get('published_at')
+                if not published_at:
+                    continue
+                published = datetime.fromisoformat(str(published_at).replace('Z', '+00:00'))
+                if published < cutoff:
+                    # Newest-first ordering: remaining pages are all older.
+                    found_older = True
+                    continue
+                total += 1
+            if found_older:
+                break
+            next_url = _parse_next_link(headers)
+    return total
+
+
 def fetch_live_metrics(username: str = USERNAME, token: str | None = None) -> GithubMetrics:
     """Fetch normalized live GitHub metrics."""
     repositories = fetch_public_repositories(username=username, token=token)
     return GithubMetrics(
         top_languages=aggregate_languages(repositories, token=token),
         public_repo_count=fetch_public_repo_count(username=username, token=token),
+        stars_received=aggregate_stars(repositories),
+        public_releases_count=count_recent_releases(repositories, token=token),
         maintained_repos=select_maintained_repositories(repositories),
         latest_release=fetch_latest_release(repositories, token=token),
         data_source='live',

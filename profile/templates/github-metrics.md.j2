@@ -5,7 +5,9 @@
 {% for lang in metrics.top_languages -%}
 | {{ lang.name }} | {{ "%.0f"|format(lang.percentage) }}% |
 {% endfor %}
-**Public repositories:** {{ metrics.public_repo_count }}
+**Public repositories:** {{ metrics.public_repo_count
+}}{% if metrics.stars_received is not none %} · **Stars received:** {{ metrics.stars_received
+}}{% endif %}{% if metrics.public_releases_count is not none %} · **Releases (past year):** {{ metrics.public_releases_count }}{% endif %}
 {% if metrics.maintained_repos %}
 
 **Actively maintained:**
