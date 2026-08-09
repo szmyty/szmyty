@@ -299,10 +299,39 @@ class RepositorySummary(BaseModel):
 
 
 class GithubMetrics(BaseModel):
-    """Normalized GitHub profile metrics."""
+    """Normalized GitHub profile metrics.
+
+    All fields come exclusively from official GitHub REST API responses for
+    the public user profile and public non-fork repositories.  Fields that
+    are derived or aggregated are documented below.
+
+    ``stars_received`` — sum of ``stargazers_count`` across all owned,
+    non-fork, non-archived public repositories.  None when the value cannot
+    be reliably computed (e.g. fixture mode).
+
+    ``public_releases_count`` — count of public releases published within
+    the last ``MAINTAINED_WINDOW_DAYS`` days across all owned non-fork
+    public repositories.  None when unavailable.
+    """
 
     top_languages: list[LanguageEntry] = Field(default_factory=list, max_length=5)
     public_repo_count: int = Field(ge=0)
+    stars_received: int | None = Field(
+        default=None,
+        ge=0,
+        description=(
+            "Total stargazers across owned, non-fork, non-archived public repositories. "
+            "Omitted from fixture data to avoid fabricating adoption metrics."
+        ),
+    )
+    public_releases_count: int | None = Field(
+        default=None,
+        ge=0,
+        description=(
+            "Number of public releases published within MAINTAINED_WINDOW_DAYS "
+            "across owned non-fork public repositories. Omitted from fixture data."
+        ),
+    )
     maintained_repos: list[RepositorySummary] = Field(default_factory=list)
     latest_release: str | None = None
     data_source: Literal["live", "cache", "fixture"] = "fixture"
