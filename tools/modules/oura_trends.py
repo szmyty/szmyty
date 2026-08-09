@@ -220,8 +220,8 @@ def _period_label(window_days: int, end_date: date) -> str:
     """Produce a coarse period label (never an exact date)."""
     if window_days >= 60:
         return end_date.strftime("%b %Y")
-    # For shorter windows use week-ending rounding
-    week_end = end_date - timedelta(days=end_date.weekday())  # Monday of that week
+    # For shorter windows use week-ending rounding (Sunday)
+    week_end = end_date + timedelta(days=6 - end_date.weekday())
     return f"week ending {week_end.strftime('%Y-%m-%d')}"
 
 
