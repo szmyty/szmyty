@@ -1,0 +1,87 @@
+# extraction manifest
+# Lists which template files are safe to copy into any repository (include)
+# and which files from this repository must never be included (exclude).
+#
+# Tokens that callers must replace before publishing are listed under
+# `required_tokens`.  Optional tokens may be removed together with the
+# surrounding optional block.
+
+schema_version: "1"
+
+# ---------------------------------------------------------------------------
+# Files safe to extract into any repository
+# ---------------------------------------------------------------------------
+include:
+  - templates/repository/README.md
+  - templates/repository/ADAPTATION.md
+  - templates/repository/example/README.md
+  - templates/profile/README.md
+  - templates/profile/ADAPTATION.md
+  - templates/profile/example/README.md
+  - templates/validate_template.py
+
+# ---------------------------------------------------------------------------
+# Files that must NEVER be copied into generic repositories
+# ---------------------------------------------------------------------------
+exclude:
+  # Active profile README — contains personal branding
+  - README.md
+  # Staging tree — research artefacts and personal data
+  - .staging/
+  # Profile content — personal evidence and metrics
+  - profile/
+  # Asset sources — personal design system
+  - assets/
+
+# ---------------------------------------------------------------------------
+# Tokens that adapters must replace
+# ---------------------------------------------------------------------------
+required_tokens:
+  - "{{PROJECT_NAME}}"
+  - "{{PROJECT_DESCRIPTION}}"
+  - "{{OWNER}}"
+  - "{{REPO}}"
+  - "{{LICENSE_SPDX}}"
+  - "{{LANGUAGE_OR_STACK}}"
+  - "{{PROFILE_USERNAME}}"
+  - "{{PROFILE_TAGLINE}}"
+
+optional_tokens:
+  - "{{BADGE_CI_WORKFLOW}}"
+  - "{{BADGE_COVERAGE_TOKEN}}"
+  - "{{DOCS_URL}}"
+  - "{{PACKAGE_MANAGER_INSTALL}}"
+  - "{{CONTRIBUTING_GUIDE_URL}}"
+  - "{{PROFILE_LOCATION}}"
+  - "{{PROFILE_HIGHLIGHT_1}}"
+  - "{{PROFILE_HIGHLIGHT_2}}"
+  - "{{PROFILE_HIGHLIGHT_3}}"
+
+# ---------------------------------------------------------------------------
+# Optional sections that may be removed without breaking heading hierarchy
+# ---------------------------------------------------------------------------
+optional_sections:
+  repository:
+    - benchmarks
+    - changelog-excerpt
+    - acknowledgements
+    - badge-row
+  profile:
+    - metrics-dashboard
+    - pinned-projects
+    - blog-posts
+    - social-links
+
+# ---------------------------------------------------------------------------
+# Generated regions — ownership and regeneration commands
+# ---------------------------------------------------------------------------
+generated_regions:
+  - name: contributors
+    owner: all-contributors-bot
+    regenerate: "npx all-contributors generate"
+  - name: toc
+    owner: doctoc
+    regenerate: "npx doctoc README.md"
+  - name: metrics
+    owner: github-actions
+    regenerate: "Triggered by metrics.yml workflow"
