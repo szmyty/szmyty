@@ -124,35 +124,41 @@ last-known-good cache when live refreshes fail.
 
 | Language | Share |
 |----------|-------|
-| Python | 45% |
-| TypeScript | 22% |
-| Shell | 15% |
-| Dockerfile | 10% |
-| YAML | 7% |
+| Python | 43% |
+| TypeScript | 34% |
+| Shell | 14% |
+| HTML | 2% |
+| CSS | 2% |
 
-**Public repositories:** 12
+**Public repositories:** 12 · **Stars received:** 29 · **Releases (past year):** 0
 
 
 **Actively maintained:**
 
-- [soliloquy](https://github.com/szmyty/soliloquy) — Local-LLM document query stack
+- [szmyty](https://github.com/szmyty/szmyty)
 
-- [universal](https://github.com/szmyty/universal) — Monorepo DX tooling
+- [resume](https://github.com/szmyty/resume) — 📄 Specification-driven LaTeX resume and career publication system.
+
+- [pokescan](https://github.com/szmyty/pokescan) — 🃏 Pokemon card pricing scanner CLI.
+
+- [portfolio](https://github.com/szmyty/portfolio) — Personal portfolio website – systems, AI workflows, and creative technology
+
+- [interviews](https://github.com/szmyty/interviews)
+
+
+
+**Latest release:** Pong@v1.0
 <!-- END:github-metrics -->
 
 <!-- START:recent-activity -->
 ### Recent Public Activity
 
 
-- **2024-01-19** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Updated README
+- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
 
-- **2024-01-17** · [szmyty/one](https://github.com/szmyty/one) — Created branch main
+- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
 
-- **2024-01-16** · [szmyty/two](https://github.com/szmyty/two/pull/1) — Ship module
-
-- **2024-01-15** · [szmyty/three](https://github.com/szmyty/three/issues/2) — Commented on Bugfix
-
-- **2024-01-14** · [szmyty/four](https://github.com/szmyty/four/releases/tag/v1.0.0) — Published v1.0.0
+- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
 <!-- END:recent-activity -->
 
 ---
