@@ -1,0 +1,346 @@
+# evidence.yml
+# Schema-backed evidence catalog for profile claims.
+#
+# Schema
+# ------
+# id:               string  — stable, unique identifier (kebab-case)
+# claim:            string  — candidate claim text as it might appear in a profile
+# evidence_type:    one of: url | repo-path | self-reported | inferred | none
+# url:              string  — public URL to the evidence artifact (optional)
+# repo_path:        string  — repository-relative path to the artifact (optional)
+# status:           one of: verified | needs-user-verification | excluded
+# sensitivity:      one of: public | sensitive | internal
+# last_reviewed:    date    — ISO-8601 date (YYYY-MM-DD)
+# notes:            string  — safe-wording notes or exclusion rationale (optional)
+#
+# Rules
+# -----
+# - Unknown metrics, adoption, impact, dates, ownership, and technology claims
+#   MUST be marked needs-user-verification.
+# - Do NOT mark a claim verified solely because it appeared in an old README.
+# - Do NOT publish records marked needs-user-verification automatically.
+# - Sensitive records MUST be marked excluded and MUST NOT have a public url.
+
+---
+schema_version: "1"
+
+records:
+
+  # ─── Identity and positioning ──────────────────────────────────────────────
+
+  - id: identity-full-name
+    claim: "Alan Szmyt"
+    evidence_type: self-reported
+    url: "https://github.com/szmyty"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Legal name is publicly listed on the GitHub profile and in repository
+      metadata.  Safe to use in bio and contact sections.
+
+  - id: identity-github-username
+    claim: "GitHub username: szmyty"
+    evidence_type: url
+    url: "https://github.com/szmyty"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+
+  - id: identity-role-software-engineer
+    claim: "Software engineer"
+    evidence_type: self-reported
+    url: "https://github.com/szmyty"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Self-reported role on the GitHub profile page.  Safe wording:
+      "Software engineer" without specific employer attribution.
+
+  - id: identity-focus-cloud-native
+    claim: "Focusing on cloud-native systems, developer experience, creative automation, and AI-assisted tooling"
+    evidence_type: self-reported
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Aspirational summary from staged README.  Verify that this accurately
+      reflects current day-to-day work before publishing.
+
+  - id: identity-location
+    claim: "Based in the United States"
+    evidence_type: self-reported
+    status: needs-user-verification
+    sensitivity: sensitive
+    last_reviewed: "2026-08-09"
+    notes: >
+      Location claim; user must confirm country-level granularity is acceptable
+      for public disclosure.  Do not use city or state without explicit consent.
+
+  # ─── Professional experience ───────────────────────────────────────────────
+
+  - id: experience-years-professional
+    claim: "N+ years of professional software engineering experience"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Cannot be inferred from GitHub history.  User must supply the exact
+      figure or approve a general range before this claim is published.
+
+  - id: experience-employer-current
+    claim: "Current employer"
+    evidence_type: none
+    status: excluded
+    sensitivity: sensitive
+    last_reviewed: "2026-08-09"
+    notes: >
+      Employer confidentiality policy (issue 01).  Do not publish current or
+      recent employer names, team names, or project names without explicit
+      user authorisation.
+
+  - id: experience-employer-history
+    claim: "Employment history"
+    evidence_type: none
+    status: excluded
+    sensitivity: sensitive
+    last_reviewed: "2026-08-09"
+    notes: >
+      Same confidentiality policy applies to historical employers.  Excluded
+      until the user provides a list of organisations approved for disclosure.
+
+  - id: experience-devops-cloud
+    claim: "DevOps and cloud infrastructure engineering"
+    evidence_type: repo-path
+    repo_path: ".staging/README.md"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Appears in staged README hero section.  Verify that this reflects real
+      professional work rather than only personal-project experience.
+
+  # ─── Education ─────────────────────────────────────────────────────────────
+
+  - id: education-degree
+    claim: "Academic degree"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No degree information found in any staged artifact.  User must supply
+      institution, field, and graduation year if they wish to include this.
+
+  - id: education-certifications
+    claim: "Professional certifications"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No certification information found in staged artifacts.  User must
+      supply issuer, credential ID, and expiry date for each certification.
+
+  # ─── Accomplishments and outcomes ─────────────────────────────────────────
+
+  - id: accomplishment-open-source-contributions
+    claim: "Active open-source contributor"
+    evidence_type: url
+    url: "https://github.com/szmyty?tab=repositories"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Public repository list exists, but "active contributor" implies
+      frequency and impact.  Verify contribution cadence before publishing.
+
+  - id: accomplishment-github-stars
+    claim: "GitHub repositories with community stars"
+    evidence_type: url
+    url: "https://github.com/szmyty?tab=repositories"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Star counts are dynamic and cannot be hardcoded.  Use a live badge if
+      publishing; user must confirm the claim is worth highlighting.
+
+  - id: accomplishment-production-impact
+    claim: "Systems deployed to production"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No public evidence of production deployments found.  User must supply
+      verifiable references (case studies, blog posts, or employer approval).
+
+  # ─── Flagship repositories and systems ────────────────────────────────────
+
+  - id: repo-szmyty-szmyty
+    claim: "Public GitHub profile repository (szmyty/szmyty)"
+    evidence_type: url
+    url: "https://github.com/szmyty/szmyty"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Repository is publicly accessible and owned by the account.
+
+  - id: repo-flagship-list
+    claim: "Flagship project repositories"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      The staged README listed several projects but the list may be outdated
+      or contain repositories that are private, inactive, or experimental.
+      User must confirm which repositories are ready for public highlight.
+
+  # ─── Open-source work ─────────────────────────────────────────────────────
+
+  - id: oss-third-party-contributions
+    claim: "Contributions to third-party open-source projects"
+    evidence_type: url
+    url: "https://github.com/szmyty?tab=overview"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Public GitHub activity may show contributions but the claim needs
+      user confirmation to avoid overstating impact.
+
+  - id: oss-maintainer-role
+    claim: "Open-source project maintainer"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No evidence of a maintainer role in third-party projects found.
+      User must supply repository and role before publishing.
+
+  # ─── Ego Hygiene architecture ─────────────────────────────────────────────
+
+  - id: ego-hygiene-concept
+    claim: "Creator of the Ego Hygiene framework — a personal engineering philosophy centred on intentional self-awareness and sustainable practice"
+    evidence_type: self-reported
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      The name "Ego Hygiene" appears in staged artifacts but the framework is
+      not yet publicly documented.  User must confirm the claim wording and
+      provide a public reference (blog post, repository, or talk) before
+      publishing.
+
+  - id: ego-hygiene-public-repo
+    claim: "Ego Hygiene repository or documentation"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No public-facing Ego Hygiene repository was found at time of review.
+      Do not reference this until a public artifact exists.
+
+  # ─── AI-assisted engineering workflows ────────────────────────────────────
+
+  - id: ai-assisted-engineering
+    claim: "Builds AI-augmented developer workflows"
+    evidence_type: repo-path
+    repo_path: ".staging/README.md"
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Appears in staged README.  Verify with at least one public example
+      (repository or blog post) before publishing.
+
+  - id: ai-copilot-usage
+    claim: "Uses GitHub Copilot and AI coding tools in daily engineering practice"
+    evidence_type: self-reported
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Self-reported; reasonable to include as a general statement once
+      user confirms current tooling.
+
+  # ─── Creative technology and music ────────────────────────────────────────
+
+  - id: creative-music-producer
+    claim: "Music producer / creative technologist"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Music-related content (SoundCloud integration, audio cards) appeared in
+      staged artifacts but no public music profile URL was found.  User must
+      supply a public SoundCloud, Bandcamp, or equivalent link.
+
+  - id: creative-soundcloud
+    claim: "SoundCloud profile"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No SoundCloud URL found in staged artifacts.  User must supply the
+      public profile URL before publishing.
+
+  # ─── Public contact and availability ──────────────────────────────────────
+
+  - id: contact-github
+    claim: "Reachable via GitHub (https://github.com/szmyty)"
+    evidence_type: url
+    url: "https://github.com/szmyty"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+
+  - id: contact-noreply-email
+    claim: "GitHub noreply email: 14865041+szmyty@users.noreply.github.com"
+    evidence_type: repo-path
+    repo_path: "pyproject.toml"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      GitHub-generated noreply address; safe to publish as a contact channel.
+      Do not publish a personal mailbox address without explicit consent.
+
+  - id: contact-personal-email
+    claim: "Personal email address"
+    evidence_type: none
+    status: excluded
+    sensitivity: sensitive
+    last_reviewed: "2026-08-09"
+    notes: >
+      Personal mailbox references were replaced with the GitHub noreply
+      address during the public-data security audit.  Do not republish.
+
+  - id: contact-linkedin
+    claim: "LinkedIn profile"
+    evidence_type: none
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      No LinkedIn URL found in any staged artifact.  User must supply the
+      URL and confirm they wish to include it.
+
+  - id: contact-availability
+    claim: "Open to collaboration / freelance opportunities"
+    evidence_type: self-reported
+    status: needs-user-verification
+    sensitivity: public
+    last_reviewed: "2026-08-09"
+    notes: >
+      Common profile statement; user must confirm current availability
+      before publishing to avoid stale information.
