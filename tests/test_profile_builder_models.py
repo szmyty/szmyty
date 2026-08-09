@@ -167,6 +167,21 @@ def test_profile_config_rejects_cross_type_marker_collision() -> None:
         )
 
 
+def test_profile_config_rejects_identical_start_end_marker() -> None:
+    with pytest.raises(ValidationError):
+        ProfileConfig(
+            modules=[
+                ModuleConfig(
+                    name="module-a",
+                    enabled=True,
+                    region_start_marker="<!-- SHARED -->",
+                    region_end_marker="<!-- SHARED -->",
+                    template="a.md.j2",
+                )
+            ]
+        )
+
+
 # ---------------------------------------------------------------------------
 # ModuleConfig
 # ---------------------------------------------------------------------------

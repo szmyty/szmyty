@@ -123,6 +123,10 @@ class ProfileConfig(BaseModel):
             if module.name in names_seen:
                 raise ValueError(f"Duplicate module name: {module.name}")
             names_seen.add(module.name)
+            if module.region_start_marker == module.region_end_marker:
+                raise ValueError(
+                    f"Module {module.name} uses the same start and end region marker"
+                )
             if module.region_start_marker in markers_seen:
                 raise ValueError(f"Region marker already in use: {module.region_start_marker}")
             markers_seen.add(module.region_start_marker)
