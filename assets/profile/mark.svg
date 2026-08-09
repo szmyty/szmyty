@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img">
   <title>Alan Szmyt — profile mark</title>
-  <!-- Placeholder: replace with final ChatGPT-generated mark (paths only, no <text>) -->
+  <!-- Production interim: deterministic geometric mark, dual-theme compatible.
+       Source slot reserved for final ChatGPT-generated mark per ASSET-BRIEF.md Brief 3.
+       Replace file only; README structure does not need changes. -->
   <!-- Outer ring -->
   <circle cx="200" cy="200" r="196" fill="none" stroke="#6639BA" stroke-width="4"/>
   <!-- Geometric monogram: two diagonal strokes forming an abstract "A" shape -->
