@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img">
+  <title>Alan Szmyt — Software Engineer, Systems Architect, Creative Technologist</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#f0f4ff"/>
+      <stop offset="100%" stop-color="#dde7f8"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="400" fill="url(#bg)"/>
+  <!-- Placeholder: replace with final ChatGPT-generated banner (light theme) -->
+  <!-- Subject-safe zone: 240–1040 px wide, 60–340 px tall -->
+  <text x="640" y="190" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="48" font-weight="700" fill="#1F2328" text-anchor="middle">Alan Szmyt</text>
+  <text x="640" y="250" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="22" font-weight="400" fill="#59636E" text-anchor="middle">Software Engineer · Systems Architect · Creative Technologist</text>
+</svg>
