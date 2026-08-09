@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="{{ trace.public_title | e }} — public AI-agent execution trace for the szmyty/szmyty profile."
+    />
+    <title>{{ trace.public_title | e }} · AI Agent Showcase</title>
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/print.css" media="print" />
+    <style>
+      .trace-shell { max-width: 72rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+      .trace-intro, .trace-panel { margin-block: 1.5rem; padding: 1.25rem; border: 1px solid var(--color-border-default, #30363d); border-radius: 1rem; background: var(--color-canvas-subtle, #161b22); }
+      .trace-timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+      .trace-stage { padding: 1rem; border-radius: 0.875rem; border: 1px solid var(--color-border-muted, #30363d); background: var(--color-canvas-default, #0d1117); }
+      .trace-stage[data-mode="explanatory"] { border-style: dashed; }
+      .trace-meta { color: var(--color-fg-muted, #8b949e); font-size: 0.95rem; }
+      .trace-artifacts { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
+      .trace-artifacts li { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .trace-chip { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; background: rgba(99, 102, 241, 0.18); }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content" class="trace-shell">
+      <p><a href="https://github.com/szmyty/szmyty">← Back to repository</a></p>
+      <header class="trace-intro">
+        <p class="trace-meta">AI agent execution showcase · {{ trace.completed_date | e }}</p>
+        <h1>{{ trace.public_title | e }}</h1>
+        <p>{{ trace.problem_summary | e }}</p>
+        <p><strong>Outcome:</strong> {{ trace.outcome_summary | e }}</p>
+        <p><strong>Validation:</strong> <a href="{{ trace.validation.public_url }}">{{ trace.validation.summary | e }}</a></p>
+      </header>
+
+      <section class="trace-panel" aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading">Public execution timeline</h2>
+        <ol class="trace-timeline">
+{% for stage in trace.stages %}
+          <li class="trace-stage" data-mode="{{ stage.evidence_mode }}">
+            <p class="trace-meta">
+              <strong>{{ stage.type.replace('-', ' ').title() | e }}</strong>
+              · {{ stage.status | e }}
+              · {{ stage.evidence_mode | e }}
+            </p>
+            <p>{{ stage.evidence_summary | e }}</p>
+{% if stage.public_url %}
+            <p><a href="{{ stage.public_url }}">Inspect public evidence</a></p>
+{% else %}
+            <p class="trace-meta">This stage is explanatory context rather than a direct evidence link.</p>
+{% endif %}
+          </li>
+{% endfor %}
+        </ol>
+      </section>
+
+      <section class="trace-panel" aria-labelledby="artifacts-heading">
+        <h2 id="artifacts-heading">Public artifacts</h2>
+        <ul class="trace-artifacts" role="list">
+{% for artifact in trace.artifacts %}
+          <li>
+            <span class="trace-chip">{{ artifact.kind | e }}</span>
+            <a href="{{ artifact.public_url }}">{{ artifact.label | e }}</a>
+          </li>
+{% endfor %}
+        </ul>
+      </section>
+
+      <section class="trace-panel" aria-labelledby="system-heading">
+        <h2 id="system-heading">How this fits the broader system</h2>
+        <p>This detail page is static HTML, readable without JavaScript, and derived from committed public repository artifacts only.</p>
+        <p>The selected trace stays within the repository’s evidence-first rules: observed stages link to issues, pull requests, workflow runs, or changed files, while explanatory stages are labeled explicitly.</p>
+        <p class="trace-meta">Source state: {{ snapshot.provenance.source_state | e }} · Data source: {{ snapshot.provenance.data_source | e }}</p>
+      </section>
+    </main>
+  </body>
+</html>

@@ -25,12 +25,9 @@ from tools.modules import oura_trends as oura_mod
 from tools.modules.oura_trends import (
     MIN_SAMPLE_DAYS,
     SAFETY_BUFFER_DAYS,
-    PublicationBlocked,
     _apply_allowlist,
     _hrv_direction,
     _period_label,
-    _readiness_band,
-    _round_sleep,
     _window_dates,
     aggregate_window,
     build_aggregate,
@@ -45,8 +42,15 @@ from tools.profile_builder.models import (
 # Helpers
 # ---------------------------------------------------------------------------
 
-FIXTURE_PATH = Path(__file__).resolve().parents[1] / "profile" / "fixtures" / "oura-trends.json"
-REGISTRY_PATH = Path(__file__).resolve().parents[1] / "profile" / "content" / "modules-registry.yml"
+FIXTURE_PATH = (
+    Path(__file__).resolve().parents[1] / "profile" / "fixtures" / "oura-trends.json"
+)
+REGISTRY_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "profile"
+    / "content"
+    / "modules-registry.yml"
+)
 
 
 def _make_agg(**overrides) -> OuraTrendsAggregate:
@@ -471,7 +475,9 @@ def test_registry_oura_trends_disabled_by_default() -> None:
     entries = {m["name"]: m for m in raw["modules"]}
     assert "oura-trends" in entries, "oura-trends must be in modules-registry.yml"
     entry = entries["oura-trends"]
-    assert entry.get("enabled", True) is False, "oura-trends must be disabled by default"
+    assert entry.get("enabled", True) is False, (
+        "oura-trends must be disabled by default"
+    )
     assert entry.get("publication") == "blocked-pending-owner-approval"
 
 

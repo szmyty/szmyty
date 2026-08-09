@@ -10,6 +10,7 @@ import click
 import yaml
 
 from tools.profile_builder.models import (
+    AgentShowcaseSnapshot,
     GithubMetrics,
     MusicHighlight,
     ProfileConfig,
@@ -38,6 +39,9 @@ def _context_for_module(module_name: str, artifact_path: Path) -> dict[str, Any]
         return {'metrics': GithubMetrics.model_validate(raw)}
     if module_name == 'recent-activity':
         return {'activity': RecentActivity.model_validate(raw)}
+    if module_name == 'ai-agent-showcase':
+        snapshot = AgentShowcaseSnapshot.model_validate(raw)
+        return {'snapshot': snapshot, 'trace': snapshot.selected_trace}
     if module_name == 'music-highlight':
         return {'music': MusicHighlight.model_validate(raw)}
     raise ValueError(f'Unsupported module: {module_name}')
@@ -57,7 +61,11 @@ def render_modules(
             raise ValueError(f'Module {module.name} is missing artifact_path.')
         artifact_path = REPO_ROOT / module.artifact_path
         context = _context_for_module(module.name, artifact_path)
-        content = render_template(module.template, context, templates_dir=templates_dir).rstrip()
+        content = render_template(
+            module.template,
+            context,
+            templates_dir=templates_dir,
+        ).rstrip()
         changed = update_readme_region(
             readme_path,
             module.region_start_marker,
@@ -69,12 +77,34 @@ def render_modules(
 
 
 @click.command()
-@click.option('--config', 'config_path', type=click.Path(exists=True, path_type=Path), default=str(DEFAULT_CONFIG), show_default=True)
-@click.option('--readme', 'readme_path', type=click.Path(exists=True, path_type=Path), default=str(DEFAULT_README), show_default=True)
-@click.option('--templates', 'templates_dir', type=click.Path(exists=True, path_type=Path), default=str(DEFAULT_TEMPLATES), show_default=True)
+@click.option(
+    '--config',
+    'config_path',
+    type=click.Path(exists=True, path_type=Path),
+    default=str(DEFAULT_CONFIG),
+    show_default=True,
+)
+@click.option(
+    '--readme',
+    'readme_path',
+    type=click.Path(exists=True, path_type=Path),
+    default=str(DEFAULT_README),
+    show_default=True,
+)
+@click.option(
+    '--templates',
+    'templates_dir',
+    type=click.Path(exists=True, path_type=Path),
+    default=str(DEFAULT_TEMPLATES),
+    show_default=True,
+)
 def main(config_path: Path, readme_path: Path, templates_dir: Path) -> None:
     """Update README module regions from declared artifacts."""
-    for name, status in render_modules(config_path=config_path, readme_path=readme_path, templates_dir=templates_dir):
+    for name, status in render_modules(
+        config_path=config_path,
+        readme_path=readme_path,
+        templates_dir=templates_dir,
+    ):
         click.echo(f'update-readme: {name} {status}')
 
 

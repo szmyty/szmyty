@@ -1,0 +1,102 @@
+{
+  "selected_trace": {
+    "trace_id": "issue-999",
+    "public_title": "Synthetic execution showcase fixture",
+    "problem_summary": "Demonstrates the public issue-to-implementation loop with sanitized evidence only.",
+    "stable_queue_key": "fixture-queue-01",
+    "issue_labels": [
+      "copilot-ready",
+      "profile-finalization"
+    ],
+    "stages": [
+      {
+        "type": "intent",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/999",
+        "evidence_summary": "Synthetic issue intent for offline fixture validation."
+      },
+      {
+        "type": "architecture",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/106",
+        "evidence_summary": "Fixture points at the public finalization architecture contract."
+      },
+      {
+        "type": "specification",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/109",
+        "evidence_summary": "Fixture uses the snapshot-platform contract as the typed spec stage."
+      },
+      {
+        "type": "issue",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/issues/999",
+        "evidence_summary": "Synthetic issue closed with public labels and a stable queue key."
+      },
+      {
+        "type": "implementation",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/pull/999",
+        "evidence_summary": "Synthetic Copilot PR merged with tests, templates, and a README module."
+      },
+      {
+        "type": "validation",
+        "status": "completed",
+        "evidence_mode": "observed",
+        "public_url": "https://github.com/szmyty/szmyty/actions/runs/999",
+        "evidence_summary": "Synthetic CI run completed successfully."
+      },
+      {
+        "type": "reflection",
+        "status": "completed",
+        "evidence_mode": "explanatory",
+        "evidence_summary": "Fixture marks reflection as explanatory instead of inventing a private trace."
+      }
+    ],
+    "repository": {
+      "owner": "szmyty",
+      "repo": "szmyty",
+      "issue_number": 999,
+      "issue_url": "https://github.com/szmyty/szmyty/issues/999",
+      "pull_request_number": 999,
+      "pull_request_url": "https://github.com/szmyty/szmyty/pull/999",
+      "base_ref": "master",
+      "merge_commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "merge_commit_url": "https://github.com/szmyty/szmyty/commit/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "validation": {
+      "status": "passed",
+      "public_url": "https://github.com/szmyty/szmyty/actions/runs/999",
+      "summary": "Synthetic CI run passed the public validation job."
+    },
+    "artifacts": [
+      {
+        "label": "docs/synthetic-audit.md",
+        "kind": "documentation",
+        "public_url": "https://github.com/szmyty/szmyty/blob/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/docs/synthetic-audit.md"
+      },
+      {
+        "label": "tests/test_synthetic_showcase.py",
+        "kind": "test",
+        "public_url": "https://github.com/szmyty/szmyty/blob/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/tests/test_synthetic_showcase.py"
+      }
+    ],
+    "outcome_summary": "Synthetic merged change remained fully inspectable through public repository artifacts.",
+    "follow_up_state": "Fixture preserves the last-known-good rendering contract for offline tests.",
+    "completed_date": "2026-08-09",
+    "freshness_date": "2026-08-09"
+  },
+  "page_url": "https://szmyty.github.io/szmyty/ai-agent-showcase.html",
+  "generated_at": "2026-08-09T00:00:00+00:00",
+  "provenance": {
+    "data_source": "fixture",
+    "source_state": "static",
+    "selected_from_candidates": 1,
+    "notes": "Synthetic offline showcase fixture."
+  }
+}

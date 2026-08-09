@@ -99,6 +99,17 @@ def test_update_profile_scopes_write_permission_and_concurrency() -> None:
     assert workflow["jobs"]["report-partial-failure"]["permissions"] == {}
 
 
+def test_update_profile_uses_safe_refresh_events() -> None:
+    workflow = _load_yaml(WORKFLOWS_DIR / "update-profile.yml")
+    events = _workflow_events(workflow)
+    assert "pull_request_target" not in events
+    assert "workflow_dispatch" in events
+    assert "issues" in events
+    assert events["issues"]["types"] == ["closed", "edited", "labeled", "reopened"]
+    assert events["push"]["branches"] == ["master"]
+    assert "profile/content/ai-agent-showcase.yml" in events["push"]["paths"]
+
+
 def test_pages_scopes_pages_permissions_to_deploy_job() -> None:
     workflow = _load_yaml(WORKFLOWS_DIR / "pages.yml")
     assert workflow["permissions"] == {"contents": "read"}

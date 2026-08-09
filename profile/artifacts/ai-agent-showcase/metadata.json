@@ -1,0 +1,14 @@
+{
+  "module_name": "ai-agent-showcase",
+  "version": "1.0",
+  "generated_at": "2026-08-09T21:15:41.676569+00:00",
+  "state": "failed-with-fallback",
+  "data_source": "cache",
+  "data_at": "2026-08-09",
+  "data_hash": null,
+  "ttl_seconds": null,
+  "is_stale": false,
+  "seconds_until_stale": null,
+  "human_summary": "AI agent showcase (failed-with-fallback)",
+  "error": "missing relationship"
+}

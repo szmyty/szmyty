@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 240" role="img" aria-labelledby="title desc">
+  <title id="title">{{ trace.public_title | e }} execution flow</title>
+  <desc id="desc">Static execution-flow card showing the {{ trace.public_title | e }} trace from intent through reflection, with {{ trace.validation.status | e }} validation and a linked Pages detail view.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="860" height="240" rx="20" fill="url(#bg)" />
+  <text x="28" y="38" fill="#e2e8f0" font-size="13" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">AI agent execution showcase</text>
+  <text x="28" y="64" fill="#ffffff" font-size="24" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">{{ trace.public_title | e }}</text>
+  <text x="28" y="88" fill="#bfdbfe" font-size="12" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Outcome: {{ trace.validation.status | upper | e }} · Completed {{ trace.completed_date | e }}</text>
+{% for stage in trace.stages %}
+{% set row = 0 if loop.index0 < 4 else 1 %}
+{% set col = loop.index0 if loop.index0 < 4 else loop.index0 - 4 %}
+{% set x = 28 + (col * 202) if row == 0 else 129 + (col * 202) %}
+{% set y = 114 if row == 0 else 168 %}
+  <rect x="{{ x }}" y="{{ y }}" width="176" height="36" rx="18" fill="{{ '#1e293b' if stage.evidence_mode == 'observed' else '#312e81' }}" stroke="#93c5fd" stroke-width="1.5" />
+  <text x="{{ x + 14 }}" y="{{ y + 22 }}" fill="#ffffff" font-size="13" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">{{ stage.type.replace('-', ' ').title() | e }}</text>
+{% if loop.index0 < 3 %}
+  <text x="{{ x + 182 }}" y="{{ y + 22 }}" fill="#93c5fd" font-size="16" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">→</text>
+{% elif loop.index0 == 3 %}
+  <text x="408" y="160" fill="#93c5fd" font-size="16" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">↓</text>
+{% elif loop.index0 < 6 %}
+  <text x="{{ x + 182 }}" y="{{ y + 22 }}" fill="#93c5fd" font-size="16" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">→</text>
+{% endif %}
+{% endfor %}
+  <text x="28" y="222" fill="#e2e8f0" font-size="11" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Observed stages link directly to public evidence. Explanatory stages are labeled in the Pages detail.</text>
+</svg>

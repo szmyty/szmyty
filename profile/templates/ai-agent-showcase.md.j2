@@ -1,0 +1,11 @@
+### AI Agent Execution Showcase
+
+[![{{ trace.public_title }} execution flow](./profile/artifacts/ai-agent-showcase/card.svg)]({{ snapshot.page_url }})
+
+**{{ trace.public_title }}** — {{ trace.problem_summary }}
+
+- **Outcome:** {{ trace.outcome_summary }}
+- **Validation:** {{ trace.validation.summary }}
+- **Source:** [Issue #{{ trace.repository.issue_number }}]({{ trace.repository.issue_url }}) · [PR #{{ trace.repository.pull_request_number }}]({{ trace.repository.pull_request_url }}) · [Pages detail]({{ snapshot.page_url }})
+
+{% if trace.stable_queue_key %}_Queue key: `{{ trace.stable_queue_key }}` · Completed: {{ trace.completed_date }}_{% endif %}
