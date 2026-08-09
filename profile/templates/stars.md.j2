@@ -1,0 +1,7 @@
+{% if config.enabled and config.public_items %}
+### STARS
+
+{% for item in config.public_items %}
+- {{ item }}
+{% endfor %}
+{% endif %}

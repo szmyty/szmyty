@@ -72,3 +72,125 @@ modules:
     region_start_marker: "<!-- START:music-highlight -->"
     region_end_marker: "<!-- END:music-highlight -->"
     template: music-highlight.md.j2
+
+  - name: orcid
+    enabled: false
+    description: "Fetches and normalizes public ORCID record and selected works."
+    provider_type: api
+    provider_module: tools.modules.orcid
+    secret_names: []
+    sensitivity: public
+    freshness_policy:
+      cadence: weekly
+      ttl_seconds: 604800
+      warn_after_seconds: 1209600
+    artifact_dir: profile/artifacts/orcid
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/orcid.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:orcid -->"
+    region_end_marker: "<!-- END:orcid -->"
+    template: orcid.md.j2
+
+  - name: medium
+    enabled: false
+    description: "Fetches and normalizes recent public Medium articles from the RSS feed."
+    provider_type: api
+    provider_module: tools.modules.medium
+    secret_names: []
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/medium
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/medium.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:medium -->"
+    region_end_marker: "<!-- END:medium -->"
+    template: medium.md.j2
+
+  - name: education
+    enabled: false
+    description: "Renders verified education credentials as accessible profile cards."
+    provider_type: manual
+    provider_module: tools.modules.education
+    secret_names: []
+    sensitivity: public
+    freshness_policy:
+      cadence: never
+      ttl_seconds: null
+      warn_after_seconds: null
+    artifact_dir: profile/artifacts/education
+    artifact_file: education.json
+    asset_files: []
+    fixture_file: null
+    readme_path: README.md
+    region_start_marker: "<!-- START:education -->"
+    region_end_marker: "<!-- END:education -->"
+    template: education.md.j2
+
+  - name: resume
+    enabled: false
+    description: "Renders the public resume call-to-action when a sanitized artifact is approved."
+    provider_type: manual
+    provider_module: tools.modules.resume
+    secret_names: []
+    sensitivity: public
+    freshness_policy:
+      cadence: never
+      ttl_seconds: null
+      warn_after_seconds: null
+    artifact_dir: profile/artifacts/resume
+    artifact_file: resume.json
+    asset_files: []
+    fixture_file: null
+    readme_path: README.md
+    region_start_marker: "<!-- START:resume -->"
+    region_end_marker: "<!-- END:resume -->"
+    template: resume.md.j2
+
+  - name: working-style
+    enabled: false
+    description: "Renders Alan-approved 16Personalities working-style content."
+    provider_type: manual
+    provider_module: tools.modules.working_style
+    secret_names: []
+    sensitivity: public
+    freshness_policy:
+      cadence: never
+      ttl_seconds: null
+      warn_after_seconds: null
+    artifact_dir: profile/artifacts/working-style
+    artifact_file: working-style.json
+    asset_files: []
+    fixture_file: null
+    readme_path: README.md
+    region_start_marker: "<!-- START:working-style -->"
+    region_end_marker: "<!-- END:working-style -->"
+    template: working-style.md.j2
+
+  - name: stars
+    enabled: false
+    description: "STARS career-development slot — non-public by default."
+    provider_type: manual
+    provider_module: tools.modules.stars
+    secret_names: []
+    sensitivity: internal
+    freshness_policy:
+      cadence: never
+      ttl_seconds: null
+      warn_after_seconds: null
+    artifact_dir: profile/artifacts/stars
+    artifact_file: stars.json
+    asset_files: []
+    fixture_file: null
+    readme_path: README.md
+    region_start_marker: "<!-- START:stars -->"
+    region_end_marker: "<!-- END:stars -->"
+    template: stars.md.j2

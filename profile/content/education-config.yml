@@ -1,0 +1,24 @@
+# education-config.yml
+# Education credentials configuration.
+#
+# Set enabled: true for each degree once Alan confirms the degree title,
+# program URL, and optional graduation year.
+#
+# Evidence records are listed in profile/content/evidence.yml.
+
+degrees:
+  - institution: "University of Massachusetts Lowell"
+    degree: "Bachelor of Science"
+    field_of_study: "Computer Science"
+    institution_url: "https://www.uml.edu/sciences/computer-science/"
+    graduation_year: null
+    evidence_id: "education-umass-lowell-bs-cs"
+    enabled: false
+
+  - institution: "Boston University"
+    degree: "Master of Science"
+    field_of_study: "Software Development"
+    institution_url: "https://www.bu.edu/met/programs/graduate/computer-science/ms-software-development/"
+    graduation_year: null
+    evidence_id: "education-bu-ms-software-development"
+    enabled: false

@@ -183,9 +183,10 @@ def test_modules_registry_yml_loads() -> None:
     assert _REGISTRY_PATH.exists(), f"Missing {_REGISTRY_PATH}"
     raw = yaml.safe_load(_REGISTRY_PATH.read_text(encoding="utf-8"))
     reg = ModuleRegistry.model_validate(raw)
-    assert len(reg.modules) == 3
     names = {m.name for m in reg.modules}
-    assert names == {"github-metrics", "recent-activity", "music-highlight"}
+    # Original modules must be present; new modules are additive.
+    assert {"github-metrics", "recent-activity", "music-highlight"}.issubset(names)
+    assert len(reg.modules) >= 3
 
 
 def test_modules_registry_yml_music_highlight_is_manual() -> None:
@@ -200,8 +201,21 @@ def test_modules_registry_yml_music_highlight_is_manual() -> None:
 def test_modules_registry_yml_api_modules_have_token() -> None:
     raw = yaml.safe_load(_REGISTRY_PATH.read_text(encoding="utf-8"))
     reg = ModuleRegistry.model_validate(raw)
+    # GitHub API modules require GITHUB_TOKEN; public unauthenticated APIs do not.
+    # Any new `api`-type module that does NOT use the GitHub API must declare
+    # `secret_names: []` and be listed in _UNAUTHENTICATED_API_MODULES below.
+    _UNAUTHENTICATED_API_MODULES = {"orcid", "medium"}
     for mod in reg.modules:
-        if mod.provider_type == "api":
+        if mod.provider_type != "api":
+            continue
+        if mod.name in _UNAUTHENTICATED_API_MODULES:
+            # Public APIs — assert no GitHub secret is required.
+            assert "GITHUB_TOKEN" not in mod.secret_names, (
+                f"Module {mod.name!r} is listed as unauthenticated "
+                f"but declares GITHUB_TOKEN"
+            )
+        else:
+            # All other API modules must declare GITHUB_TOKEN.
             assert "GITHUB_TOKEN" in mod.secret_names, (
                 f"Module {mod.name!r} is type 'api' but declares no GITHUB_TOKEN secret"
             )

@@ -1,0 +1,8 @@
+{% if config.enabled and config.personality_type %}
+### Working Style
+
+{% if config.image_path %}<img src="{{ config.image_path }}" alt="{{ config.personality_type }} personality type" width="80" align="left" style="margin-right:12px">{% endif %}
+{% if config.personality_url %}**[{{ config.personality_type }}]({{ config.personality_url }})**{% else %}**{{ config.personality_type }}**{% endif %} · Self-described working style
+
+{% if config.summary %}{{ config.summary }}{% endif %}
+{% endif %}

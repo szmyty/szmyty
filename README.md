@@ -362,3 +362,21 @@ Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidenc
 
 <!-- START:music-highlight -->
 <!-- END:music-highlight -->
+
+<!-- START:education -->
+<!-- END:education -->
+
+<!-- START:resume -->
+<!-- END:resume -->
+
+<!-- START:orcid -->
+<!-- END:orcid -->
+
+<!-- START:medium -->
+<!-- END:medium -->
+
+<!-- START:working-style -->
+<!-- END:working-style -->
+
+<!-- START:stars -->
+<!-- END:stars -->
