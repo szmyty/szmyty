@@ -70,7 +70,6 @@ szmyty/szmyty
 │   ├── ISSUE_TEMPLATE/
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── .tasks/                       # Modular Taskfile includes
-└── .staging/                     # In-progress work; not promoted to active files
 ```
 
 ---
@@ -202,7 +201,7 @@ Stop and open a GitHub issue tagging `@szmyty` before proceeding when:
 4. A module would expose any category of data on the deny-list.
 5. A secret needs to be added, rotated, or revoked.
 6. A history rewrite is proposed for any shared branch.
-7. A file from `.staging/` is about to be promoted to a production path.
+7. A historical experimental file is about to be promoted to a production path.
 
 ---
 
@@ -233,13 +232,13 @@ commit.
 
 ---
 
-## What Must Never Be Built or Revived from `.staging/`
+## What Must Never Be Built or Revived from Historical Experiments
 
-The following `.staging/` modules are permanently prohibited — do not
+The following legacy modules are permanently prohibited — do not
 promote, reference, or implement them:
 
-| Staging artifact | Reason prohibited |
-|-----------------|------------------|
+| Legacy artifact | Reason prohibited |
+|----------------|------------------|
 | `fetch-location/` | Location data is on the deny-list |
 | `fetch-weather/` | Location-derived weather is on the deny-list |
 | `fetch-oura/` | Health/biometric data is on the deny-list |
@@ -248,8 +247,8 @@ promote, reference, or implement them:
 | `generate-oura-dashboard/` | Health/biometric data |
 | `generate-oura-mood/` | Mood-inference data |
 
-Any other `.staging/` content requires explicit review and approval from
-`@szmyty` before promotion.
+Any other historical experimental content requires explicit review and approval
+from `@szmyty` before promotion.
 
 ---
 
@@ -261,7 +260,7 @@ Before committing changes to configuration files, verify:
    or `profile-next` as a production target.
 2. No file contains unresolved template tokens such as `{{TOKEN}}`.
 3. All relative asset links in `README.md` point to files that exist.
-4. No production workflow or configuration references `.staging/`.
+4. No production workflow or configuration references removed experimental paths.
 
 Run `bash .tasks/check-identity.sh` to automate checks 1–3.
 

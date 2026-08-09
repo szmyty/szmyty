@@ -39,15 +39,13 @@ This repository serves two roles:
 | `docs/` | Documentation: architecture, design, content, development, runbook, roadmap, migration, privacy |
 | `.github/` | GitHub configuration: funding, issue templates, PR template, workflows |
 | `.tasks/` | Modular Taskfile includes (git, agents, security, tests) |
-| `.staging/` | In-progress work; not promoted to active files |
 
 ## Boundaries
 
-- `.staging/` is preserved but not promoted until explicitly reviewed.
 - No speculative or aspirational content exists in active files.
 - All production configuration targets `szmyty/szmyty` exclusively.
 - The modules listed under "Prohibited Modules" below must never be implemented
-  or revived from `.staging/`.
+  or revived from historical experimental artifacts.
 
 ## Content and Data Flow
 
@@ -135,7 +133,7 @@ features.
 ## Prohibited Modules
 
 The following modules are permanently prohibited and must not be built or
-revived from `.staging/`:
+revived:
 
 | Module | Reason |
 |--------|--------|

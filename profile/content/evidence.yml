@@ -113,14 +113,13 @@ records:
 
   - id: experience-devops-cloud
     claim: "DevOps and cloud infrastructure engineering"
-    evidence_type: repo-path
-    repo_path: ".staging/README.md"
+    evidence_type: none
     status: needs-user-verification
     sensitivity: public
     last_reviewed: "2026-08-09"
     notes: >
-      Appears in staged README hero section.  Verify that this reflects real
-      professional work rather than only personal-project experience.
+      Previously drafted in experimental profile content. Verify that this
+      reflects real professional work rather than only personal-project experience.
 
   # ─── Education ─────────────────────────────────────────────────────────────
 
@@ -329,14 +328,13 @@ records:
 
   - id: ai-assisted-engineering
     claim: "Builds AI-augmented developer workflows"
-    evidence_type: repo-path
-    repo_path: ".staging/README.md"
+    evidence_type: none
     status: needs-user-verification
     sensitivity: public
     last_reviewed: "2026-08-09"
     notes: >
-      Appears in staged README.  Verify with at least one public example
-      (repository or blog post) before publishing.
+      Previously drafted in experimental profile content. Verify with at least
+      one public example (repository or blog post) before publishing.
 
   - id: ai-copilot-usage
     claim: "Uses GitHub Copilot and AI coding tools in daily engineering practice"

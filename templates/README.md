@@ -2,7 +2,7 @@
 
 Reusable README starter kits for GitHub repositories and profiles.
 Extract only the layer you need — repository or profile — and adapt it
-to your project without reading the historical `.staging` tree.
+to your project without reading archived migration internals.
 
 ## Structure
 
