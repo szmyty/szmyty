@@ -23,7 +23,7 @@ contact_links:
     about: Explore concepts, architectural ideas, and future directions before creating implementation work.
 
   - name: 📚 Documentation Feedback
-    url: https://github.com/szmyty/szmyty/discussions/categories/documentation
+    url: https://github.com/szmyty/szmyty/discussions/categories/q-a
     about: Suggest documentation improvements, onboarding enhancements, or clarification requests.
 
   - name: 🔒 Security Reports

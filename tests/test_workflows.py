@@ -114,3 +114,94 @@ def test_site_directory_contains_committed_pages_inputs() -> None:
     site_dir = REPO_ROOT / "site"
     committed_files = {path.name for path in site_dir.iterdir() if path.is_file()}
     assert committed_files >= SITE_REQUIRED_FILES
+
+
+# ---------------------------------------------------------------------------
+# README region marker convention
+# ---------------------------------------------------------------------------
+
+_START_PATTERN = re.compile(r"<!-- START:(\S+?) -->")
+_END_PATTERN = re.compile(r"<!-- END:(\S+?) -->")
+_LEGACY_PATTERN = re.compile(r"<!-- GENERATED:[A-Z]+:(START|END) -->")
+
+
+def test_readme_uses_only_documented_start_end_markers() -> None:
+    """README must not contain any GENERATED:* legacy markers."""
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    legacy = _LEGACY_PATTERN.findall(readme)
+    assert legacy == [], f"Found legacy GENERATED:* markers: {legacy}"
+
+
+def test_readme_start_end_markers_are_unique() -> None:
+    """Each START and END marker must appear exactly once."""
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    start_names = _START_PATTERN.findall(readme)
+    end_names = _END_PATTERN.findall(readme)
+    assert len(start_names) == len(set(start_names)), (
+        f"Duplicate START markers: {start_names}"
+    )
+    assert len(end_names) == len(set(end_names)), f"Duplicate END markers: {end_names}"
+
+
+def test_readme_start_and_end_markers_match() -> None:
+    """Every START marker must have a corresponding END marker with the same name."""
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    start_names = set(_START_PATTERN.findall(readme))
+    end_names = set(_END_PATTERN.findall(readme))
+    assert start_names == end_names, (
+        f"Mismatched markers — START only: {start_names - end_names}, "
+        f"END only: {end_names - start_names}"
+    )
+
+
+def test_readme_markers_match_modules_yml() -> None:
+    """README markers must correspond exactly to modules declared in modules.yml."""
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    modules_data = yaml.safe_load(
+        (REPO_ROOT / "profile" / "content" / "modules.yml").read_text(encoding="utf-8")
+    )
+    declared_names = {m["name"] for m in modules_data["modules"]}
+    readme_start_names = set(_START_PATTERN.findall(readme))
+    assert readme_start_names == declared_names, (
+        f"README markers do not match modules.yml — "
+        f"README only: {readme_start_names - declared_names}, "
+        f"modules.yml only: {declared_names - readme_start_names}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Issue template contact links
+# ---------------------------------------------------------------------------
+
+# Slug names for existing Discussions categories (all lowercase, as used in URLs).
+# If a category is added or renamed in the GitHub UI, update this set AND the
+# owner checklist in docs/RUNBOOK.md § 10 (GitHub Surface Owner Checklist).
+_KNOWN_VALID_DISCUSSIONS_CATEGORIES = {"ideas", "q-a"}
+_KNOWN_VALID_URLS = {
+    "https://github.com/szmyty/szmyty/discussions",
+    "https://github.com/szmyty/szmyty/security/advisories/new",
+}
+
+
+def test_issue_config_contact_links_are_well_formed() -> None:
+    """All contact_links must have non-empty name, url, and about fields."""
+    config = _load_yaml(REPO_ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml")
+    for link in config.get("contact_links", []):
+        assert link.get("name"), f"Missing name in contact link: {link}"
+        assert link.get("url", "").startswith("https://"), (
+            f"Invalid or missing url in contact link: {link}"
+        )
+        assert link.get("about"), f"Missing about in contact link: {link}"
+
+
+def test_issue_config_discussions_links_use_known_categories() -> None:
+    """Discussion category links must point to known-existing categories."""
+    config = _load_yaml(REPO_ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml")
+    for link in config.get("contact_links", []):
+        url: str = link.get("url", "")
+        if "discussions/categories/" not in url:
+            continue
+        category = url.rsplit("/", 1)[-1]
+        assert category in _KNOWN_VALID_DISCUSSIONS_CATEGORIES, (
+            f"Contact link points to unknown Discussions category '{category}': {url}"
+        )
