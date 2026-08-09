@@ -69,10 +69,12 @@ def test_ci_is_read_only_and_avoids_pull_request_target() -> None:
 def test_checkout_is_read_only_outside_writer_job() -> None:
     for workflow_name in EXPECTED_WORKFLOWS:
         workflow = _load_yaml(WORKFLOWS_DIR / workflow_name)
-        for job_name, job in workflow["jobs"].items():
+        for job in workflow["jobs"].values():
+            permissions = job.get("permissions", workflow.get("permissions", {}))
+            is_writer = permissions.get("contents") == "write"
             for step in job.get("steps", []):
                 uses = step.get("uses", "")
-                if uses.startswith("actions/checkout@") and job_name != "commit":
+                if uses.startswith("actions/checkout@") and not is_writer:
                     assert step.get("with", {}).get("persist-credentials") is False
 
 
