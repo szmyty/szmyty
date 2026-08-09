@@ -91,13 +91,16 @@
   updateMotionButtons();
 
   const webglProbe = document.createElement("canvas");
-  if (!webglProbe.getContext("webgl2") && !webglProbe.getContext("webgl")) {
+  const probeContext =
+    webglProbe.getContext("webgl2") ?? webglProbe.getContext("webgl");
+  if (!probeContext) {
     if (fallbackList) {
       fallbackList.hidden = false;
     }
     setStatus("WebGL context failed. Showing semantic fallback.");
     return;
   }
+  probeContext.getExtension("WEBGL_lose_context")?.loseContext();
 
   const boot = async () => {
     try {
