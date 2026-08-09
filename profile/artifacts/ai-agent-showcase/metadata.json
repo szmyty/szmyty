@@ -1,7 +1,7 @@
 {
   "module_name": "ai-agent-showcase",
   "version": "1.0",
-  "generated_at": "2026-08-09T21:10:14.897206+00:00",
+  "generated_at": "2026-08-09T21:15:41.676569+00:00",
   "state": "failed-with-fallback",
   "data_source": "cache",
   "data_at": "2026-08-09",
@@ -10,5 +10,5 @@
   "is_stale": false,
   "seconds_until_stale": null,
   "human_summary": "AI agent showcase (failed-with-fallback)",
-  "error": "No complete public showcase traces were eligible"
+  "error": "missing relationship"
 }

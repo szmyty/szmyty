@@ -40,9 +40,8 @@ def test_observed_stage_requires_public_github_or_pages_url() -> None:
 def test_select_live_snapshot_prefers_latest_completed_non_sensitive_issue(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    config = ai_agent_showcase.load_config().model_copy(
-        update={"candidates": ai_agent_showcase.load_config().candidates[1:]}
-    )
+    full_config = ai_agent_showcase.load_config()
+    config = full_config.model_copy(update={"candidates": full_config.candidates[1:]})
 
     def fake_get_json(path: str, token: str | None = None) -> object:
         if path.endswith("/issues/111"):
@@ -51,7 +50,11 @@ def test_select_live_snapshot_prefers_latest_completed_non_sensitive_issue(
                 "state": "closed",
                 "title": "Issue 111",
                 "html_url": "https://github.com/szmyty/szmyty/issues/111",
-                "body": "## Objective\n\nIssue 111 summary.\n\nStable queue key: `queue-111`",
+                "body": (
+                    "## Objective\n\n"
+                    "Issue 111 summary.\n\n"
+                    "Stable queue key: `queue-111`"
+                ),
                 "labels": [{"name": "profile-finalization"}],
                 "closed_at": "2026-08-09T20:29:59Z",
             }
@@ -61,7 +64,11 @@ def test_select_live_snapshot_prefers_latest_completed_non_sensitive_issue(
                 "state": "closed",
                 "title": "Issue 112",
                 "html_url": "https://github.com/szmyty/szmyty/issues/112",
-                "body": "## Objective\n\nIssue 112 summary.\n\nStable queue key: `queue-112`",
+                "body": (
+                    "## Objective\n\n"
+                    "Issue 112 summary.\n\n"
+                    "Stable queue key: `queue-112`"
+                ),
                 "labels": [{"name": "profile-finalization"}],
                 "closed_at": "2026-08-09T20:47:50Z",
             }
@@ -71,7 +78,11 @@ def test_select_live_snapshot_prefers_latest_completed_non_sensitive_issue(
                 "state": "closed",
                 "title": "Sensitive issue 113",
                 "html_url": "https://github.com/szmyty/szmyty/issues/113",
-                "body": "## Objective\n\nOura health summary.\n\nStable queue key: `queue-113`",
+                "body": (
+                    "## Objective\n\n"
+                    "Oura health summary.\n\n"
+                    "Stable queue key: `queue-113`"
+                ),
                 "labels": [{"name": "area:security"}],
                 "closed_at": "2026-08-09T21:01:18Z",
             }
@@ -118,7 +129,10 @@ def test_select_live_snapshot_prefers_latest_completed_non_sensitive_issue(
                 "jobs": [
                     {
                         "steps": [
-                            {"name": "Validate profile inputs", "conclusion": "success"},
+                            {
+                                "name": "Validate profile inputs",
+                                "conclusion": "success",
+                            },
                             {"name": "Run tests", "conclusion": "success"},
                         ]
                     }
@@ -129,8 +143,14 @@ def test_select_live_snapshot_prefers_latest_completed_non_sensitive_issue(
                 "jobs": [
                     {
                         "steps": [
-                            {"name": "Validate profile inputs", "conclusion": "success"},
-                            {"name": "Validate profile assets", "conclusion": "success"},
+                            {
+                                "name": "Validate profile inputs",
+                                "conclusion": "success",
+                            },
+                            {
+                                "name": "Validate profile assets",
+                                "conclusion": "success",
+                            },
                             {"name": "Lint Python", "conclusion": "success"},
                             {"name": "Lint workflow YAML", "conclusion": "success"},
                             {"name": "Run tests", "conclusion": "success"},

@@ -35,6 +35,7 @@ DEFAULT_OUTPUT = REPO_ROOT / "profile" / "artifacts" / MODULE_NAME / "cache.json
 DEFAULT_CARD_OUTPUT = REPO_ROOT / "profile" / "artifacts" / MODULE_NAME / "card.svg"
 DEFAULT_PAGE_OUTPUT = REPO_ROOT / "site" / "ai-agent-showcase.html"
 DEFAULT_TEMPLATES = REPO_ROOT / "profile" / "templates"
+_MAX_ARTIFACT_LINKS = 6
 _API_ROOT = "https://api.github.com"
 _TIMEOUT = 20
 _QUEUE_KEY_PATTERN = re.compile(r"Stable queue key:\s*`([^`]+)`", re.IGNORECASE)
@@ -121,7 +122,10 @@ def _extract_queue_key(body: str) -> str | None:
 
 
 def _issue_is_blocked(issue: dict[str, Any], config: AgentShowcaseConfig) -> bool:
-    label_names = [str(label.get("name", "")).lower() for label in issue.get("labels", [])]
+    label_names = [
+        str(label.get("name", "")).lower()
+        for label in issue.get("labels", [])
+    ]
     blocked_labels = tuple(term.lower() for term in config.blocked_label_terms)
     if any(term in label for term in blocked_labels for label in label_names):
         return True
@@ -153,7 +157,7 @@ def _artifact_links(
     commit_sha: str,
 ) -> list[AgentShowcaseArtifactLink]:
     links: list[AgentShowcaseArtifactLink] = []
-    for item in files[:6]:
+    for item in files[:_MAX_ARTIFACT_LINKS]:
         filename = str(item.get("filename", "")).strip()
         if not filename:
             continue
@@ -170,7 +174,11 @@ def _artifact_links(
 def _summarize_files(files: list[dict[str, Any]]) -> str:
     if not files:
         return "no tracked file changes listed"
-    names = [str(item.get("filename", "")).strip() for item in files if item.get("filename")]
+    names = [
+        str(item.get("filename", "")).strip()
+        for item in files
+        if item.get("filename")
+    ]
     if len(names) <= 3:
         return ", ".join(names)
     return f"{', '.join(names[:3])}, and {len(names) - 3} more"
@@ -212,7 +220,9 @@ def _build_trace(
     if issue.get("state") != "closed":
         raise ProviderFailure(f"Issue #{candidate.issue_number} is not completed")
     if _issue_is_blocked(issue, config):
-        raise ProviderFailure(f"Issue #{candidate.issue_number} is not eligible for showcase")
+        raise ProviderFailure(
+            f"Issue #{candidate.issue_number} is not eligible for showcase"
+        )
 
     pr = _github_get_json(
         f"/repos/{config.owner}/{config.repo}/pulls/{candidate.implementation_pr_number}",
@@ -238,7 +248,11 @@ def _build_trace(
     body = str(issue.get("body", "") or "")
     queue_key = _extract_queue_key(body)
     problem_summary = _extract_problem_summary(body)
-    labels = [str(label.get("name", "")) for label in issue.get("labels", []) if label.get("name")]
+    labels = [
+        str(label.get("name", ""))
+        for label in issue.get("labels", [])
+        if label.get("name")
+    ]
     merge_commit_sha = (
         str(pr.get("merge_commit_sha") or "")
         or str(run.get("head_sha") or "")
@@ -495,12 +509,20 @@ def build_showcase(
     default=str(DEFAULT_PAGE_OUTPUT),
     show_default=True,
 )
+@click.option(
+    "--templates",
+    "templates_dir",
+    type=click.Path(exists=True, path_type=Path),
+    default=str(DEFAULT_TEMPLATES),
+    show_default=True,
+)
 def main(
     input_path: Path,
     output_path: Path,
     fixture_path: Path,
     card_output_path: Path,
     page_output_path: Path,
+    templates_dir: Path,
 ) -> None:
     """Write the selected public AI-agent showcase artifact and renderers."""
     snapshot = build_showcase(
@@ -509,6 +531,7 @@ def main(
         fixture_path=fixture_path,
         card_output_path=card_output_path,
         page_output_path=page_output_path,
+        templates_dir=templates_dir,
     )
     click.echo(
         f"ai-agent-showcase: wrote {output_path} "
