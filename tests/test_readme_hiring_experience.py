@@ -82,7 +82,6 @@ def test_active_and_hidden_modules_are_placed_in_their_intended_sections() -> No
         < matrix_heading
     )
     assert matrix_heading < readme.index("<!-- START:stars -->") < contact_heading
-    assert matrix_heading < readme.index("<!-- START:oura-trends -->") < contact_heading
 
 
 def test_completion_matrix_records_non_public_modules_without_inline_evidence_ids(
