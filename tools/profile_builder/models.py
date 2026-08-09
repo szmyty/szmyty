@@ -11,7 +11,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -31,9 +31,13 @@ class EvidenceEntry(BaseModel):
     repo_path: str | None = Field(
         default=None, description="Repository-relative path to the artifact."
     )
-    status: Literal["verified", "pending", "disputed", "stale"] = Field(
+    status: Literal["verified", "needs-user-verification", "excluded"] = Field(
         description="Current verification status."
     )
+    sensitivity: Literal["public", "sensitive", "internal"] = Field(
+        description="Privacy sensitivity of the claim."
+    )
+    last_reviewed: str = Field(description="ISO-8601 review date (YYYY-MM-DD).")
     notes: str | None = Field(default=None, description="Optional free-text notes.")
 
     @field_validator("url", mode="before")
@@ -64,8 +68,13 @@ class EvidenceCatalog(BaseModel):
 
     @property
     def pending(self) -> list[EvidenceEntry]:
-        """Return entries that have not yet been verified."""
-        return [e for e in self.entries if e.status == "pending"]
+        """Return entries that require explicit user verification before publish."""
+        return [e for e in self.entries if e.status == "needs-user-verification"]
+
+    @property
+    def excluded(self) -> list[EvidenceEntry]:
+        """Return entries excluded from publication."""
+        return [e for e in self.entries if e.status == "excluded"]
 
 
 # ---------------------------------------------------------------------------
@@ -105,6 +114,27 @@ class ProfileConfig(BaseModel):
     def enabled_modules(self) -> list[ModuleConfig]:
         """Return only enabled modules in declaration order."""
         return [m for m in self.modules if m.enabled]
+
+    @model_validator(mode="after")
+    def _validate_unique_region_ownership(self) -> "ProfileConfig":
+        names_seen: set[str] = set()
+        start_seen: set[str] = set()
+        end_seen: set[str] = set()
+        for module in self.modules:
+            if module.name in names_seen:
+                raise ValueError(f"Duplicate module name: {module.name}")
+            names_seen.add(module.name)
+            if module.region_start_marker in start_seen:
+                raise ValueError(
+                    f"Duplicate region_start_marker: {module.region_start_marker}"
+                )
+            start_seen.add(module.region_start_marker)
+            if module.region_end_marker in end_seen:
+                raise ValueError(
+                    f"Duplicate region_end_marker: {module.region_end_marker}"
+                )
+            end_seen.add(module.region_end_marker)
+        return self
 
 
 # ---------------------------------------------------------------------------

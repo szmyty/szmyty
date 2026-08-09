@@ -30,6 +30,8 @@ def test_evidence_entry_minimal() -> None:
         claim="Active open-source contributor.",
         evidence_type="url",
         status="verified",
+        sensitivity="public",
+        last_reviewed="2026-08-09",
     )
     assert entry.id == "open-source-contributions"
     assert entry.url is None
@@ -40,8 +42,10 @@ def test_evidence_entry_full() -> None:
         id="python-experience",
         claim="10+ years of Python.",
         evidence_type="self-reported",
-        status="pending",
+        status="needs-user-verification",
         notes="Inferred from commit history.",
+        sensitivity="public",
+        last_reviewed="2026-08-09",
     )
     assert entry.notes is not None
 
@@ -53,6 +57,8 @@ def test_evidence_entry_invalid_type() -> None:
             claim="y",
             evidence_type="unsupported-type",  # type: ignore[arg-type]
             status="verified",
+            sensitivity="public",
+            last_reviewed="2026-08-09",
         )
 
 
@@ -63,6 +69,8 @@ def test_evidence_entry_invalid_status() -> None:
             claim="y",
             evidence_type="none",
             status="unknown-status",  # type: ignore[arg-type]
+            sensitivity="public",
+            last_reviewed="2026-08-09",
         )
 
 
@@ -74,21 +82,67 @@ def test_evidence_entry_invalid_status() -> None:
 def test_evidence_catalog_verified_filter() -> None:
     catalog = EvidenceCatalog(
         entries=[
-            EvidenceEntry(id="a", claim="A", evidence_type="none", status="verified"),
-            EvidenceEntry(id="b", claim="B", evidence_type="none", status="pending"),
-            EvidenceEntry(id="c", claim="C", evidence_type="none", status="disputed"),
+            EvidenceEntry(
+                id="a",
+                claim="A",
+                evidence_type="none",
+                status="verified",
+                sensitivity="public",
+                last_reviewed="2026-08-09",
+            ),
+            EvidenceEntry(
+                id="b",
+                claim="B",
+                evidence_type="none",
+                status="needs-user-verification",
+                sensitivity="public",
+                last_reviewed="2026-08-09",
+            ),
+            EvidenceEntry(
+                id="c",
+                claim="C",
+                evidence_type="none",
+                status="excluded",
+                sensitivity="sensitive",
+                last_reviewed="2026-08-09",
+            ),
         ]
     )
     assert len(catalog.verified) == 1
     assert catalog.verified[0].id == "a"
     assert len(catalog.pending) == 1
     assert catalog.pending[0].id == "b"
+    assert len(catalog.excluded) == 1
+    assert catalog.excluded[0].id == "c"
 
 
 def test_evidence_catalog_empty() -> None:
     catalog = EvidenceCatalog(entries=[])
     assert catalog.verified == []
     assert catalog.pending == []
+    assert catalog.excluded == []
+
+
+def test_profile_config_rejects_duplicate_region_ownership() -> None:
+    with pytest.raises(ValidationError):
+        ProfileConfig(
+            modules=[
+                ModuleConfig(
+                    name="module-a",
+                    enabled=True,
+                    region_start_marker="<!-- START:shared -->",
+                    region_end_marker="<!-- END:a -->",
+                    template="a.md.j2",
+                ),
+                ModuleConfig(
+                    name="module-b",
+                    enabled=True,
+                    region_start_marker="<!-- START:shared -->",
+                    region_end_marker="<!-- END:b -->",
+                    template="b.md.j2",
+                ),
+            ]
+        )
 
 
 # ---------------------------------------------------------------------------

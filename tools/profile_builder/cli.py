@@ -75,13 +75,19 @@ def validate(evidence_path: Path, config_path: Path) -> None:
     # Evidence catalog
     try:
         raw = yaml.safe_load(evidence_path.read_text(encoding="utf-8")) or {}
-        entries_raw = raw.get("entries", raw.get("evidence", []))
+        entries_raw = raw.get("records", raw.get("entries", raw.get("evidence")))
+        if entries_raw is None:
+            raise ValueError("missing evidence records (expected 'records' list)")
+        if not isinstance(entries_raw, list):
+            raise ValueError("evidence records must be a list")
         catalog = EvidenceCatalog(
             entries=[EvidenceEntry.model_validate(e) for e in entries_raw]
         )
         click.echo(
             f"evidence: {len(catalog.entries)} entries — "
-            f"{len(catalog.verified)} verified, {len(catalog.pending)} pending"
+            f"{len(catalog.verified)} verified, "
+            f"{len(catalog.pending)} needs-user-verification, "
+            f"{len(catalog.excluded)} excluded"
         )
     except Exception as exc:  # noqa: BLE001
         errors.append(f"evidence validation failed: {exc}")
