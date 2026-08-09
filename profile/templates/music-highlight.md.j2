@@ -1,0 +1,9 @@
+### Music
+{% if music.artwork_path %}
+<img src="{{ music.artwork_path }}" alt="{{ music.title }} artwork" width="120" align="left" style="margin-right:12px">
+{% endif %}
+**[{{ music.title }}]({{ music.public_url }})**{% if music.release_year %} · {{ music.release_year }}{% endif %}
+{% if music.description %}
+
+{{ music.description }}
+{% endif %}

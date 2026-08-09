@@ -364,3 +364,14 @@ engineering platform reduce friction in the creative workflow.
 <a href="https://github.com/szmyty/szmyty/issues/65">szmyty/szmyty#65</a>.
 Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidence.yml</a>.</sub>
 </div>
+
+---
+
+<!-- START:github-metrics -->
+<!-- END:github-metrics -->
+
+<!-- START:recent-activity -->
+<!-- END:recent-activity -->
+
+<!-- START:music-highlight -->
+<!-- END:music-highlight -->

@@ -7,10 +7,11 @@ needs the same abstraction.
 
 from __future__ import annotations
 
+from enum import Enum
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, Field, HttpUrl, field_validator
+from pydantic import BaseModel, Field, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -104,3 +105,72 @@ class ProfileConfig(BaseModel):
     def enabled_modules(self) -> list[ModuleConfig]:
         """Return only enabled modules in declaration order."""
         return [m for m in self.modules if m.enabled]
+
+
+# ---------------------------------------------------------------------------
+# Dynamic profile modules
+# ---------------------------------------------------------------------------
+
+
+class LanguageEntry(BaseModel):
+    """Aggregated language usage entry for the GitHub metrics module."""
+
+    name: str
+    percentage: Annotated[float, Field(ge=0.0, le=100.0)]
+
+
+class RepositorySummary(BaseModel):
+    """Minimal repository details rendered into the metrics module."""
+
+    name: str
+    url: str
+    description: str | None = None
+    is_maintained: bool = True
+
+
+class GithubMetrics(BaseModel):
+    """Normalized GitHub profile metrics."""
+
+    top_languages: list[LanguageEntry] = Field(default_factory=list, max_length=5)
+    public_repo_count: int = Field(ge=0)
+    maintained_repos: list[RepositorySummary] = Field(default_factory=list)
+    latest_release: str | None = None
+    data_source: Literal["live", "cache", "fixture"] = "fixture"
+
+
+class ActivityEventType(str, Enum):
+    """Supported public GitHub event types."""
+
+    PUSH = "PushEvent"
+    CREATE = "CreateEvent"
+    PULL_REQUEST = "PullRequestEvent"
+    ISSUE_COMMENT = "IssueCommentEvent"
+    RELEASE = "ReleaseEvent"
+
+
+class ActivityEvent(BaseModel):
+    """One normalized recent-activity entry."""
+
+    event_type: ActivityEventType
+    repo: str
+    repo_url: str
+    summary: str
+    occurred_at: str
+
+
+class RecentActivity(BaseModel):
+    """Bounded public GitHub activity feed."""
+
+    events: list[ActivityEvent] = Field(default_factory=list, max_length=5)
+    data_source: Literal["live", "cache", "fixture"] = "fixture"
+
+
+class MusicHighlight(BaseModel):
+    """Manually reviewed public music metadata."""
+
+    title: str
+    public_url: str
+    description: str | None = None
+    release_year: int | None = None
+    artwork_path: str | None = None
+    data_source: Literal["manual", "cache", "fixture"] = "manual"

@@ -5,7 +5,29 @@
 #   <!-- START:<name> -->   … generated content …   <!-- END:<name> -->
 #
 # Hand-authored sections outside those markers are never modified.
+# Set enabled: false to disable a module without removing its markers;
+# the README region will remain empty and the file stays coherent.
 #
 # Schema: profile/schemas/modules.json
 
-modules: []
+modules:
+  - name: github-metrics
+    enabled: true
+    region_start_marker: "<!-- START:github-metrics -->"
+    region_end_marker: "<!-- END:github-metrics -->"
+    template: github-metrics.md.j2
+    artifact_path: profile/artifacts/github-metrics/cache.json
+
+  - name: recent-activity
+    enabled: true
+    region_start_marker: "<!-- START:recent-activity -->"
+    region_end_marker: "<!-- END:recent-activity -->"
+    template: recent-activity.md.j2
+    artifact_path: profile/artifacts/recent-activity/cache.json
+
+  - name: music-highlight
+    enabled: true
+    region_start_marker: "<!-- START:music-highlight -->"
+    region_end_marker: "<!-- END:music-highlight -->"
+    template: music-highlight.md.j2
+    artifact_path: profile/artifacts/music-highlight/music.yml
