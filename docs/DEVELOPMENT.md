@@ -104,15 +104,10 @@ bash .tasks/check-identity.sh
 Run each module fetch step and regenerate README regions:
 
 ```sh
-# Fetch GitHub metrics (requires GITHUB_TOKEN)
+# Fetch the GitHub engineering dashboard (requires GITHUB_TOKEN)
 GITHUB_TOKEN=<your-pat> \
-  poetry run python -m tools.modules.github_metrics \
-    --output profile/artifacts/github-metrics/cache.json
-
-# Fetch recent activity (requires GITHUB_TOKEN)
-GITHUB_TOKEN=<your-pat> \
-  poetry run python -m tools.modules.recent_activity \
-    --output profile/artifacts/recent-activity/cache.json
+  poetry run python -m tools.modules.github_dashboard \
+    --output-dir profile/artifacts/github-dashboard
 
 # Refresh music highlight from hand-authored YAML
 poetry run python -m tools.modules.music_highlight \
@@ -212,8 +207,9 @@ payloads.
 
 | Fixture file | Used by | Purpose |
 |-------------|---------|---------|
-| `profile/fixtures/github-metrics.json` | `tests/test_modules.py`, `test_profile_builder_*` | Synthetic GitHub metrics response |
-| `profile/fixtures/recent-activity.json` | `tests/test_modules.py` | Synthetic activity feed |
+| `profile/fixtures/github-dashboard.json` | `tests/test_github_dashboard.py`, `tests/test_modules.py` | Synthetic GitHub dashboard snapshot |
+| `profile/fixtures/github-metrics.json` | `tests/test_modules.py`, `test_profile_builder_*` | Synthetic legacy GitHub metrics response |
+| `profile/fixtures/recent-activity.json` | `tests/test_modules.py` | Synthetic legacy activity feed |
 | `profile/fixtures/music-highlight.yml` | `tests/test_modules.py` | Synthetic music entry |
 
 When a module artifact cache is absent, the module falls back to the
@@ -224,16 +220,17 @@ APIs.
 
 ## 6. Adding or Modifying a Module
 
-1. Add the module declaration to `profile/content/modules.yml` with
-   `enabled: true` and the correct region markers.
-2. Create the Jinja2 template in `profile/templates/<name>.md.j2`.
-3. Create or update the corresponding Python module under `tools/modules/`.
-4. Add a fixture file in `profile/fixtures/` with sanitized synthetic data.
-5. Add tests in `tests/` covering the fetch, render, and region-update logic.
-6. Run `poetry run python -m tools.profile_builder.cli validate` to confirm
+1. Add the canonical module declaration to `profile/content/modules-registry.yml`
+   with `enabled: true`, provider metadata, and the correct region markers.
+2. Mirror the README-owned subset in `profile/content/modules.yml`.
+3. Create the Jinja2 template in `profile/templates/<name>.md.j2`.
+4. Create or update the corresponding Python module under `tools/modules/`.
+5. Add a fixture file in `profile/fixtures/` with sanitized synthetic data.
+6. Add tests in `tests/` covering the fetch, render, and region-update logic.
+7. Run `poetry run python -m tools.profile_builder.cli validate` to confirm
    the new module passes validation.
-7. Update `docs/ARCHITECTURE.md` module inventory if the module is new.
-8. Verify the `profile/content/evidence.yml` catalog covers any new public
+8. Update `docs/ARCHITECTURE.md` module inventory if the module is new.
+9. Verify the `profile/content/evidence.yml` catalog covers any new public
    claims the module introduces.
 
 Consult `docs/PRIVACY.md` before adding any data source to confirm it is on

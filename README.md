@@ -50,6 +50,30 @@ showcase below, and the public Ego Hygiene work linked later on this page.
 
 ---
 
+## GitHub Engineering Dashboard
+
+This dashboard renders from committed public artifacts, refreshes from GitHub's
+public APIs, and falls back to the last-known-good snapshot when live refreshes
+fail.
+
+<!-- START:github-dashboard -->
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/github-dashboard/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/github-dashboard/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/github-dashboard/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
+  <img
+    src="./profile/artifacts/github-dashboard/card-light.svg"
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, stars, releases, and language distribution for @szmyty."
+    width="100%"
+  >
+</picture>
+
+_Trailing 365-day window · cache / failed-with-fallback · Data 2026-08-09 · Generated 2026-08-09_
+<!-- END:github-dashboard -->
+
+---
+
 ## Flagship Systems
 
 ### [soliloquy](https://github.com/szmyty/soliloquy)
@@ -111,61 +135,6 @@ _Static preview of the interactive cosmic engineering observatory. Open the imag
 
 _Queue key: `szmyty-profile-finalize-06` · Completed: 2026-08-09_
 <!-- END:ai-agent-showcase -->
-
----
-
-## GitHub Engineering Dashboard
-
-These modules render from committed public artifacts and fall back to the
-last-known-good cache when live refreshes fail.
-
-<!-- START:github-metrics -->
-### GitHub Metrics
-
-| Language | Share |
-|----------|-------|
-| Python | 43% |
-| TypeScript | 34% |
-| Shell | 14% |
-| HTML | 2% |
-| CSS | 2% |
-
-**Public repositories:** 12 · **Stars received:** 29 · **Releases (past year):** 0
-
-
-**Actively maintained:**
-
-- [szmyty](https://github.com/szmyty/szmyty)
-
-- [resume](https://github.com/szmyty/resume) — 📄 Specification-driven LaTeX resume and career publication system.
-
-- [pokescan](https://github.com/szmyty/pokescan) — 🃏 Pokemon card pricing scanner CLI.
-
-- [portfolio](https://github.com/szmyty/portfolio) — Personal portfolio website – systems, AI workflows, and creative technology
-
-- [interviews](https://github.com/szmyty/interviews)
-
-
-
-**Latest release:** Pong@v1.0
-<!-- END:github-metrics -->
-
-<!-- START:recent-activity -->
-### Recent Public Activity
-
-
-- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
-
-- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
-
-- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
-
-- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
-
-- **2026-08-09** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Pushed commits
-<!-- END:recent-activity -->
-
----
 
 ## Ego Hygiene Platform
 

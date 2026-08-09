@@ -53,11 +53,12 @@ This repository serves two roles:
 Hand-authored inputs                 Generated outputs
 ─────────────────                    ─────────────────
 profile/content/evidence.yml   ──►  (gates what appears in README)
-profile/content/modules.yml    ──►  defines README region markers
+profile/content/modules-registry.yml ──► canonical module registry
+profile/content/modules.yml    ──►  compatibility mirror for README markers
 profile/content/music-highlight.yml ──► profile/artifacts/music-highlight/music.yml
                                          │
-GitHub API (GITHUB_TOKEN)       ──►  profile/artifacts/github-metrics/cache.json
-GitHub API (GITHUB_TOKEN)       ──►  profile/artifacts/recent-activity/cache.json
+GitHub REST + GraphQL (GITHUB_TOKEN) ──► profile/artifacts/github-dashboard/snapshot.json
+                                         └──► profile/artifacts/github-dashboard/card-*.svg
                                          │
 profile/artifacts/*             ──►  tools/modules/update_readme.py
 profile/templates/*.md.j2       ──►  README.md (generated regions only)
@@ -70,8 +71,10 @@ by the pipeline.
 
 Each active profile module follows this lifecycle:
 
-1. **Declaration** — entry in `profile/content/modules.yml` with
-   `enabled: true`, region markers, template path, and artifact path.
+1. **Declaration** — entry in `profile/content/modules-registry.yml` with
+   `enabled: true`, region markers, template path, provider module, and artifact
+   layout. `profile/content/modules.yml` mirrors the README-owned subset for
+   compatibility validation.
 2. **Fetch** — a Python script under `tools/modules/` retrieves or processes
    data and writes a cache artifact to `profile/artifacts/<name>/`.
 3. **Render** — `tools/modules/update_readme.py` reads the artifact, renders
@@ -117,7 +120,7 @@ features.
 
 | Variable | Required | Secret | Scope | Module / owner | Value / Notes | Disable behavior | Rotation procedure |
 |----------|----------|--------|-------|---------------|---------------|-----------------|-------------------|
-| `GITHUB_TOKEN` | Yes (CI) | No — automatic | GitHub Actions only | `github-metrics`, `recent-activity` | Injected automatically by Actions (`github.token`) | Module falls back to committed artifact cache | No rotation needed; token expires per-run |
+| `GITHUB_TOKEN` | Yes (CI) | No — automatic | GitHub Actions only | `github-dashboard`, `ai-agent-showcase` | Injected automatically by Actions (`github.token`) | Module falls back to committed artifact cache | No rotation needed; token expires per-run |
 | `POETRY_VIRTUALENVS_IN_PROJECT` | No | No | Local and CI | Build tooling | Set to `true` in `poetry.toml`; creates `.venv/` inside the project | Virtualenv is created outside the project directory | Not applicable |
 
 ### Notes

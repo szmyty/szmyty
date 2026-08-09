@@ -186,7 +186,7 @@ def test_modules_registry_yml_loads() -> None:
     reg = ModuleRegistry.model_validate(raw)
     names = {m.name for m in reg.modules}
     # Original modules must be present; new modules are additive.
-    assert {"github-metrics", "recent-activity", "music-highlight"}.issubset(names)
+    assert {"github-dashboard", "ai-agent-showcase", "music-highlight"}.issubset(names)
     assert len(reg.modules) >= 3
 
 
