@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode",
+    "davidanson.vscode-markdownlint",
+    "jasonnutter.vscode-codeowners",
+    "snakemake.snakemake-lang",
+    "sqlfluff.vscode-sqlfluff"
+  ]
+}
