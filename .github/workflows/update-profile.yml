@@ -153,7 +153,7 @@ jobs:
           AI_AGENT_SHOWCASE_OUTCOME: ${{ steps.ai_agent_showcase.outcome }}
           MUSIC_HIGHLIGHT_OUTCOME: ${{ steps.music_highlight.outcome }}
         run: |
-          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          poetry run python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json
           import os
           from pathlib import Path

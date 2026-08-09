@@ -1,359 +1,123 @@
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 1. HERO                                                                     -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
 <div align="center">
 
-<!-- Banner: production interim cosmic SVGs (banner-light.svg / banner-dark.svg).
-     Source slot reserved for final ChatGPT-generated artwork per ASSET-BRIEF.md.
-     To replace: substitute files in assets/profile/ and revalidate; no README
-     structure changes needed. Critical identity text is Markdown below the image. -->
 <picture>
-  <source media="(prefers-color-scheme: dark)"  srcset="assets/profile/banner-dark.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/profile/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/profile/banner-light.svg">
-  <img src="assets/profile/banner-light.svg"
-       alt="Alan Szmyt — Software Engineer, Systems Architect, Creative Technologist"
-       width="100%">
+  <img
+    src="assets/profile/banner-light.svg"
+    alt="Alan Szmyt — Software Engineer"
+    width="100%"
+  >
 </picture>
 
 # Alan Szmyt
 
-**Software Engineer · Systems Architect · Creative Technologist**
+**Software Engineer**
 
-[![GitHub](https://img.shields.io/badge/GitHub-szmyty-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/szmyty)
+[GitHub](https://github.com/szmyty) ·
+[Repositories](https://github.com/szmyty?tab=repositories) ·
+[Evidence Catalog](profile/content/evidence.yml) ·
+[Contact](#contact)
 
 </div>
 
 ---
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 2. THIRTY-SECOND BRIEF                                                      -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+## Hiring Snapshot
 
-## Brief
+My public work is strongest where systems thinking and developer experience
+meet: local-LLM document workflows, reusable developer tooling, evidence-backed
+automation, and inspectable AI experiments.
 
-I build **cloud-native platforms**, **developer experience tooling**, and
-**AI-assisted workflows** with a strong emphasis on privacy, automation, and
-long-term maintainability.
+If you want the fastest tour, start with
+[soliloquy](https://github.com/szmyty/soliloquy),
+[universal](https://github.com/szmyty/universal), the AI agent execution
+showcase below, and the public Ego Hygiene work linked later on this page.
 
-I think in systems. I care about the experience of building as much as the
-experience of using. I value automation that removes friction rather than adding
-ceremony, and documentation that reveals architecture rather than restating code.
+## Selected Work
 
----
-
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 3. PROOF AT A GLANCE                                                        -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
-## Proof at a Glance
-
-| Claim | Evidence ID | Public Artifact |
-|-------|-------------|-----------------|
-| Software engineer | `identity-role-software-engineer` | [github.com/szmyty](https://github.com/szmyty) |
-| Open-source systems builder | `repo-soliloquy` · `repo-universal` · `repo-openai-retro` | [szmyty repositories](https://github.com/szmyty?tab=repositories) |
-| Ego Hygiene organisation contributor | `repo-egohygiene-org` · `oss-egolint-pr` | [github.com/egohygiene](https://github.com/egohygiene) |
-| Local-LLM tooling (soliloquy) | `repo-soliloquy` | [szmyty/soliloquy](https://github.com/szmyty/soliloquy) |
-| Monorepo DX tooling (universal) | `repo-universal` | [szmyty/universal](https://github.com/szmyty/universal) |
-| AI game agent (NEAT / gym-retro) | `repo-openai-retro` | [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
-| Shared linting contribution | `repo-egolint` · `oss-egolint-pr` | [egohygiene/egolint](https://github.com/egohygiene/egolint) |
-| Evidence catalog | `repo-szmyty-szmyty` | [profile/content/evidence.yml](profile/content/evidence.yml) |
+- [**soliloquy**](https://github.com/szmyty/soliloquy) — offline-first local
+  LLM document querying, packaged as a single Docker Compose workflow.
+- [**universal**](https://github.com/szmyty/universal) — reusable formatting,
+  linting, spellcheck, and CI scaffolding for developer experience across
+  repositories.
+- [**OpenAI-Retro-SuperMarioWorld-SNES**](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES)
+  — a public NEAT + gym-retro reinforcement-learning experiment with a
+  reproducible training setup.
+- [**egohygiene/egolint#1**](https://github.com/egohygiene/egolint/pull/1) — an
+  inspectable contribution to shared linting infrastructure in the Ego Hygiene
+  ecosystem.
 
 ---
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 4. SELECTED IMPACT                                                          -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+## Flagship Systems
 
-## Selected Impact
+### [soliloquy](https://github.com/szmyty/soliloquy)
 
-> Each entry below is backed by an inspectable public artifact.
-> Evidence IDs reference [profile/content/evidence.yml](profile/content/evidence.yml).
+Public repository for an offline-first local-LLM PDF workflow packaged as a
+single Docker Compose stack.
 
-| Area | Context · Ownership · Outcome | Evidence |
-|------|-------------------------------|----------|
-| **Offline-first LLM chat** | Without a budget for cloud API calls or a willingness to send private documents to third-party servers, designed and built [soliloquy](https://github.com/szmyty/soliloquy) — a single Docker Compose stack that routes PDF queries through a locally running LLM. Outcome: a reproducible, zero-cloud-dependency workflow that any developer can run with one command. | `repo-soliloquy` · [github.com/szmyty/soliloquy](https://github.com/szmyty/soliloquy) |
-| **Monorepo developer experience** | Across multiple projects with inconsistent formatting, linting, and CI conventions, authored [universal](https://github.com/szmyty/universal) — a composable shell toolkit that consolidates formatting, linting, spellcheck, and CI scaffolding. Outcome: a single source of DX conventions that can be layered into any repository without bespoke setup. | `repo-universal` · [github.com/szmyty/universal](https://github.com/szmyty/universal) |
-| **Reinforcement-learning experiment** | To understand emergent agent behaviour from raw game-state input, trained a NEAT recurrent neural network to navigate SNES Super Mario World levels using gym-retro. Outcome: a publicly documented experiment showing the training loop, configuration, and results in a reproducible form. | `repo-openai-retro` · [github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
-| **Shared linting infrastructure** | To reduce lint-rule drift across repositories in the Ego Hygiene organisation, contributed and merged the initial opinionated rule set in [egolint](https://github.com/egohygiene/egolint). Outcome: a shared linting baseline that any organisation repository can inherit, reducing per-repo configuration overhead. | `repo-egolint` · `oss-egolint-pr` · [egohygiene/egolint#1](https://github.com/egohygiene/egolint/pull/1) |
+### [universal](https://github.com/szmyty/universal)
 
----
+Public repository for a composable developer-experience toolkit that
+centralizes formatting, linting, spellcheck, and CI automation.
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 5. FEATURED SYSTEMS                                                         -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+### [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES)
 
-## Featured Systems
+Public repository for a reproducible NEAT recurrent-neural-network experiment
+trained against SNES Super Mario World through gym-retro.
 
-> Maturity labels: **Stable** = released and maintained · **Active dev** =
-> usable but evolving · **Experiment** = documented, not production-intended.
-> Each entry links to an inspectable public artifact. Evidence IDs reference
-> [profile/content/evidence.yml](profile/content/evidence.yml).
+### [szmyty/szmyty](https://github.com/szmyty/szmyty)
+
+This repository treats the profile itself as a verifiable system: claims are
+gated by an evidence catalog, module output is rendered into owned regions, and
+validation is part of the repository contract.
 
 ---
-
-### [soliloquy](https://github.com/szmyty/soliloquy) · Active dev
-
-**Problem:** Querying private documents against a cloud LLM exposes confidential
-content to third-party servers and incurs ongoing API costs.
-
-**Approach:** A single Docker Compose stack — Ollama for local model serving,
-a Python ingestion layer, and a query interface — that processes PDFs entirely
-on-device. No data leaves the host machine.
-
-**Alan's role:** Designed the compose architecture, selected Ollama as the
-local runtime, and structured the ingestion pipeline to be document-type-agnostic.
-
-**Stack:** Python · Docker · Ollama · Vector store
-
-**Evidence:** [`repo-soliloquy`](https://github.com/szmyty/soliloquy) ·
-[`docs/projects/soliloquy.md`](docs/projects/soliloquy.md)
-
----
-
-### [universal](https://github.com/szmyty/universal) · Active dev
-
-**Problem:** Configuration drift across multiple repositories — inconsistent
-formatting, linting, spellcheck, and CI conventions — compounds onboarding cost
-and maintenance burden.
-
-**Approach:** A composable shell toolkit that centralises DX conventions.
-Repositories inherit shared configurations by layering, not forking, keeping
-the source of truth in one place.
-
-**Alan's role:** Identified drift as the root cause, designed the composition
-model, and structured GitHub Actions templates as parameterisable reusable
-workflows.
-
-**Stack:** Shell · GitHub Actions · Formatter and linter configurations
-
-**Evidence:** [`repo-universal`](https://github.com/szmyty/universal) ·
-[`docs/projects/universal.md`](docs/projects/universal.md)
-
----
-
-### [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) · Experiment
-
-**Problem:** Understanding reinforcement learning requires a concrete,
-observable experiment with a clear reward signal and reproducible setup.
-
-**Approach:** NEAT-Python evolves recurrent neural networks to control a Super
-Mario World agent via OpenAI gym-retro. A fixed configuration file and
-checkpoint system make every training run reproducible.
-
-**Alan's role:** Configured NEAT hyperparameters, wrote the fitness function
-translating game progress to a scalar reward, and documented the training loop
-and results for public inspection.
-
-**Stack:** Python · NEAT-Python · OpenAI gym-retro
-
-**Evidence:** [`repo-openai-retro`](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) ·
-[`docs/projects/openai-retro.md`](docs/projects/openai-retro.md)
-
----
-
-### [egohygiene](https://github.com/egohygiene/egohygiene) · Active dev
-
-**Problem:** Building a personal knowledge and habit system across multiple
-devices requires a consistent data model and a local-first design that keeps
-all personal data off third-party cloud servers.
-
-**Approach:** A cross-platform Flutter application backed by a Drift/SQLite
-local store, situated at the centre of a multi-repository developer platform
-(the Ego Hygiene organisation) with clearly layered responsibilities.
-
-**Alan's role:** Defined the ecosystem architecture, selected Drift ORM for
-local-first persistence, and established the shared linting baseline via
-`egolint`.
-
-**Stack:** Dart · Flutter · TypeScript · Python · GitHub Actions · SQLite
-
-**Evidence:** [`repo-egohygiene-org`](https://github.com/egohygiene) ·
-[`docs/projects/egohygiene.md`](docs/projects/egohygiene.md)
-
----
-
-### [szmyty/szmyty](https://github.com/szmyty/szmyty) · Active dev
-
-**Problem:** GitHub profile READMEs routinely contain unverified claims.
-Maintaining a truthful, evidence-backed profile requires a structured catalog
-and automated validation.
-
-**Approach:** This repository — schema-validated YAML evidence catalog,
-automated checks, and the structured README you are reading — treats the
-profile itself as a verifiable system.
-
-**Stack:** Python · YAML · GitHub Actions · Markdown
-
-**Evidence:** [`repo-szmyty-szmyty`](https://github.com/szmyty/szmyty) ·
-[`profile/content/evidence.yml`](profile/content/evidence.yml)
-
----
-
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 6. EGO HYGIENE ECOSYSTEM                                                    -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
-## Ego Hygiene Ecosystem
-
-[Ego Hygiene](https://github.com/egohygiene) is a developer platform
-organised as a set of composable, clearly layered repositories — not a
-collection of unrelated projects. Each repository owns a specific
-responsibility and exposes a well-defined interface to the others.
-
-### Architecture map
-
-```mermaid
-graph TD
-    A([aether\nStandards · schemas · contracts]) --> B([mantle\nPortable host runtime · shell/CLI])
-    A --> C([egolint\nShared quality policy · analysis])
-    A --> D([relay\nGitHub Actions · delivery orchestration])
-    B --> E([realm\nReproducible environments · local services])
-    E --> F([egohygiene\nCore application · knowledge system])
-    C --> F
-    D --> F
-    F --> G([observatory\nHealth · metrics · feedback])
-    F --> H([pace\nSynchronisation · conformance])
-    F --> I([aniflow · mindcap · optiflow\nFocused products])
-```
-
-### Layer reference
-
-| Layer | Repository | Plain-language responsibility | Interface | Maturity |
-|-------|------------|-------------------------------|-----------|----------|
-| Foundation | [`aether`](https://github.com/egohygiene/aether) | Standards, contracts, policies, schemas, and reusable knowledge shared across the ecosystem | YAML/JSON schemas; documented contracts | Early |
-| Runtime | [`mantle`](https://github.com/egohygiene/mantle) | Portable host runtime — shell and CLI behaviour, dotfile conventions, and environment bootstrapping | Shell scripts; environment hooks | Active dev |
-| Environments | [`realm`](https://github.com/egohygiene/realm) | Reproducible local environments and service orchestration — "the same stack everywhere" | Docker Compose; devcontainer | Active dev |
-| Quality | [`egolint`](https://github.com/egohygiene/egolint) | Shared linting rules and quality policy inherited by all organisation repositories | ESLint / Ruff rule exports | Usable — [PR #1 merged](https://github.com/egohygiene/egolint/pull/1) |
-| Delivery | [`relay`](https://github.com/egohygiene/relay) | Reusable GitHub Actions workflows and release engineering orchestration | GitHub Actions reusable workflows | Early |
-| Conformance | [`pace`](https://github.com/egohygiene/pace) | Synchronisation and conformance checking across repositories | CLI / CI check | Planned |
-| Observability | [`observatory`](https://github.com/egohygiene/observatory) | Health, metrics, and continuous feedback across the platform | Dashboard / API | Planned |
-| Core app | [`egohygiene`](https://github.com/egohygiene/egohygiene) | Core application and knowledge system — the primary user-facing product | Flutter app; local SQLite | Active dev |
-| Products | `aniflow` · `mindcap` · `optiflow` | Focused products built on the platform for animation, cognition, and optimisation workflows | App / CLI | Early / Planned |
-
-> **Reading this table as a first-time visitor:** Start at `aether` (the rules
-> layer), move through `mantle` (how code runs locally), `realm` (how
-> environments are reproduced), and `relay` (how code is delivered), then
-> arrive at `egohygiene` (the product) and its satellite products.
-> `egolint`, `pace`, and `observatory` are cross-cutting — they apply
-> quality, conformance, and observability across the whole platform.
-
----
-
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 7. ENGINEERING CAPABILITIES                                                 -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
-## Engineering Capabilities
-
-| Domain | Skills | Representative artifact |
-|--------|--------|------------------------|
-| **Languages** | Python · TypeScript · Dart · Java · Bash · SQL | [szmyty repos](https://github.com/szmyty?tab=repositories) |
-| **Platforms** | Flutter · Docker · Linux · Android · Node.js | [soliloquy](https://github.com/szmyty/soliloquy) |
-| **Data** | SQLite · PostgreSQL · Drift ORM | [egohygiene](https://github.com/egohygiene/egohygiene) |
-| **CI/CD & automation** | GitHub Actions · Task · Poetry · FVM | [universal](https://github.com/szmyty/universal) |
-| **AI / ML** | Local LLM integration · NEAT · gym-retro | [OpenAI-Retro-SuperMarioWorld-SNES](https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES) |
-| **DX practices** | Specification-driven development · Architecture-first design · Conventional Commits | [szmyty/szmyty](https://github.com/szmyty/szmyty) |
-
----
-
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 8. EXPERIENCE AND EDUCATION                                                 -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
 
 ## Experience and Education
 
-Employment history is held under a confidentiality policy and is not published
-here. The public record of applied skills is the open-source portfolio above.
+Employment history remains private by policy. The public record here is the
+open-source portfolio, generated evidence, and repository history above.
 
-Education details will be added when a verified public artifact exists.
+Education and resume links stay hidden until a verified public education record
+or a sanitized public resume artifact is approved.
 
-> See [profile/content/evidence.yml](profile/content/evidence.yml) for the
-> complete evidence catalog and verification status of each claim.
+<!-- START:education -->
+<!-- END:education -->
 
----
-
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 9. OPEN SOURCE AND COLLABORATION                                            -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
-## Open Source and Collaboration
-
-- Personal repositories and experiments: [github.com/szmyty](https://github.com/szmyty)
-  — [evidence: `identity-github-username`]
-- Ego Hygiene organisation: [github.com/egohygiene](https://github.com/egohygiene)
-  — publicly accessible multi-repository developer platform [evidence: `repo-egohygiene-org`]
-- Merged PR in egolint establishing shared lint conventions:
-  [egohygiene/egolint#1](https://github.com/egohygiene/egolint/pull/1)
-  — inspectable contribution history [evidence: `oss-egolint-pr`]
-
-Contributions, issues, and discussions welcome. See open issues in this
-repository at [szmyty/szmyty/issues](https://github.com/szmyty/szmyty/issues).
+<!-- START:resume -->
+<!-- END:resume -->
 
 ---
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 10. CREATIVE PRACTICE                                                       -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+## AI Agent Execution Showcase
 
-## Creative Practice
+This section highlights a completed, evidence-backed delivery loop from issue
+through implementation, validation, and published output.
 
-Music production, sound design, and generative audio are a continuous thread
-through my work. Creative technology — the intersection of code, sound, and
-interactive media — is not separate from my engineering practice; it informs it.
+<!-- START:ai-agent-showcase -->
+### AI Agent Execution Showcase
 
-The `.play()` project is an ongoing effort to build personal creative
-infrastructure: automation pipelines for music composition and production,
-generative tooling for audio and visual media, and workflows that connect
-creative process to the same engineering discipline applied elsewhere.
+[![Interactive AI execution observatory preview](./profile/artifacts/interactive-showcase/preview.png)](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
 
-*Incompris* is a musical project exploring ambient and electronic composition.
-Public releases, media pipeline experiments, and generative tooling will be
-linked here as they become publicly available.
+_Static preview of the interactive cosmic engineering observatory. Open the image to explore the live Three.js orbit on Pages._
 
-The feedback loop matters: constraints discovered while building creative
-pipelines surface requirements for the engineering platform; solutions from the
-engineering platform reduce friction in the creative workflow.
+**feat(profile): add resilient SoundCloud and Steam snapshot modules** — Add two independent, resilient snapshot modules for Alan's SoundCloud creative practice and Steam gaming/achievement profile, each with explicit fallback behavior when configuration, credentials, or public provider access is unavailable.
+
+- **Outcome:** Merged to master after public CI passed, leaving reusable provider modules, templates, fixtures, and tests behind.
+- **Validation:** CI validate job passed profile validation, asset validation, Ruff, yamllint, and pytest.
+- **Source:** [Issue #112](https://github.com/szmyty/szmyty/issues/112) · [PR #126](https://github.com/szmyty/szmyty/pull/126) · [Pages detail](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+
+_Queue key: `szmyty-profile-finalize-06` · Completed: 2026-08-09_
+<!-- END:ai-agent-showcase -->
 
 ---
 
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 11. CURRENT FOCUS                                                           -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
+## GitHub Engineering Dashboard
 
-## Current Focus
-
-| Stream | Description |
-|--------|-------------|
-| **AI tooling and agents** | Production-grade agent workflows: structured prompting, tool orchestration, and multi-agent coordination |
-| **Developer experience** | Composable monorepo scaffolds, shared linting, and CI automation foundations |
-| **Offline-first systems** | Local LLM integrations and privacy-preserving data patterns |
-| **Knowledge systems** | Structured approaches to personal knowledge management and continuous learning |
-
----
-
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-<!-- 12. CONTACT                                                                 -->
-<!-- ════════════════════════════════════════════════════════════════════════════ -->
-
-## Contact
-
-| Channel | Address |
-|---------|---------|
-| **GitHub** | [@szmyty](https://github.com/szmyty) |
-| **Organisation** | [github.com/egohygiene](https://github.com/egohygiene) |
-
----
-
----
-
-<div align="center">
-<sub>Profile composed per the evidence-first engineering standard defined in
-<a href="https://github.com/szmyty/szmyty/issues/65">szmyty/szmyty#65</a>.
-Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidence.yml</a>.</sub>
-</div>
-
----
+These modules render from committed public artifacts and fall back to the
+last-known-good cache when live refreshes fail.
 
 <!-- START:github-metrics -->
 ### GitHub Metrics
@@ -380,26 +144,49 @@ Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidenc
 ### Recent Public Activity
 
 
-- **2024-01-15** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Updated profile README
+- **2024-01-19** · [szmyty/szmyty](https://github.com/szmyty/szmyty) — Updated README
 
-- **2024-01-10** · [szmyty/soliloquy](https://github.com/szmyty/soliloquy) — Created branch for local-LLM document query feature
+- **2024-01-17** · [szmyty/one](https://github.com/szmyty/one) — Created branch main
+
+- **2024-01-16** · [szmyty/two](https://github.com/szmyty/two/pull/1) — Ship module
+
+- **2024-01-15** · [szmyty/three](https://github.com/szmyty/three/issues/2) — Commented on Bugfix
+
+- **2024-01-14** · [szmyty/four](https://github.com/szmyty/four/releases/tag/v1.0.0) — Published v1.0.0
 <!-- END:recent-activity -->
 
-<!-- START:ai-agent-showcase -->
-### AI Agent Execution Showcase
+---
 
-[![Interactive AI execution observatory preview](./profile/artifacts/interactive-showcase/preview.png)](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+## Ego Hygiene Platform
 
-_Static preview of the interactive cosmic engineering observatory. Open the image to explore the live Three.js orbit on Pages._
+[Ego Hygiene](https://github.com/egohygiene) is a public multi-repository
+platform space rather than a single isolated repository. For hiring purposes,
+it is useful here as architectural evidence: shared linting through
+[egolint](https://github.com/egohygiene/egolint), public application and
+runtime experiments grouped under one organization, and an inspectable merged
+contribution in
+[egohygiene/egolint#1](https://github.com/egohygiene/egolint/pull/1).
 
-**feat(profile): add resilient SoundCloud and Steam snapshot modules** — Add two independent, resilient snapshot modules for Alan's SoundCloud creative practice and Steam gaming/achievement profile, each with explicit fallback behavior when configuration, credentials, or public provider access is unavailable.
+---
 
-- **Outcome:** Merged to master after public CI passed, leaving reusable provider modules, templates, fixtures, and tests behind.
-- **Validation:** CI validate job passed profile validation, asset validation, Ruff, yamllint, and pytest.
-- **Source:** [Issue #112](https://github.com/szmyty/szmyty/issues/112) · [PR #126](https://github.com/szmyty/szmyty/pull/126) · [Pages detail](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+## Research, Writing, and Publications
 
-_Queue key: `szmyty-profile-finalize-06` · Completed: 2026-08-09_
-<!-- END:ai-agent-showcase -->
+Publication and writing modules remain hidden until a verified public ORCID or
+Medium profile is configured.
+
+<!-- START:orcid -->
+<!-- END:orcid -->
+
+<!-- START:medium -->
+<!-- END:medium -->
+
+---
+
+## Creative Practice
+
+Creative work stays lower on the page by design, but it still matters: the
+public release below is where sound, tooling, and identity intersect most
+directly in the current profile.
 
 <!-- START:music-highlight -->
 ### Music
@@ -410,29 +197,70 @@ _Queue key: `szmyty-profile-finalize-06` · Completed: 2026-08-09_
 Original ambient and experimental electronic music.
 <!-- END:music-highlight -->
 
-<!-- START:education -->
-<!-- END:education -->
-
-<!-- START:resume -->
-<!-- END:resume -->
-
-<!-- START:orcid -->
-<!-- END:orcid -->
-
-<!-- START:medium -->
-<!-- END:medium -->
-
-<!-- START:working-style -->
-<!-- END:working-style -->
+SoundCloud will appear here only when a verified public profile is configured.
 
 <!-- START:soundcloud -->
 <!-- END:soundcloud -->
 
+---
+
+## Gaming and Working Style
+
+These modules are intentionally secondary and render only when backed by a
+verified public profile or explicit approval.
+
 <!-- START:steam -->
 <!-- END:steam -->
+
+<!-- START:working-style -->
+<!-- END:working-style -->
+
+---
+
+## Completion Matrix
+
+Every requested area is tracked here even when the public README intentionally
+keeps the module hidden.
+
+| Requested area | Public state | Notes |
+|---|---|---|
+| AI agent execution showcase | Live | Evidence-backed snapshot rendered from committed public artifacts |
+| GitHub engineering dashboard | Live | Public metrics and recent activity render with cache fallback |
+| Education | Hidden | Configured slot exists; claims remain needs-user-verification |
+| Resume | Hidden | No approved public resume artifact is configured |
+| ORCID / publications | Hidden | Waiting for a verified public ORCID iD |
+| Medium / writing | Hidden | Waiting for a verified public Medium profile |
+| SoundCloud | Lower-page fallback only | The curated music highlight is public; the live profile snapshot stays disabled |
+| Steam | Hidden | Waiting for a verified public profile |
+| Working style | Hidden | Requires explicit Alan approval before rendering |
+| STARS | Intentionally hidden | Non-public career-development content stays out of the public README |
+| Oura / personal systems | Omitted | Privacy-gated and not required for release readiness |
 
 <!-- START:stars -->
 <!-- END:stars -->
 
 <!-- START:oura-trends -->
 <!-- END:oura-trends -->
+
+---
+
+## Contact
+
+The safest public contact path is GitHub.
+
+| Channel | Address |
+|---|---|
+| GitHub | [@szmyty](https://github.com/szmyty) |
+| GitHub noreply | [14865041+szmyty@users.noreply.github.com](mailto:14865041+szmyty@users.noreply.github.com) |
+| Organization | [github.com/egohygiene](https://github.com/egohygiene) |
+
+---
+
+<div align="center">
+  <sub>
+    Dynamic sections on this page are rendered from committed module artifacts.
+    If a provider fails, the README keeps the last-known-good public cache
+    rather than inventing replacement content. Evidence policy:
+    <a href="profile/content/evidence.yml">profile/content/evidence.yml</a>.
+  </sub>
+</div>
