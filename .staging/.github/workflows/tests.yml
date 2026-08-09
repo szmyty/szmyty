@@ -10,7 +10,6 @@ on:
       - 'scripts/**/*.sh'
       - 'tests/**/*.py'
       - 'tests/**/*.sh'
-      - 'docs/PRIVACY.md'
       - '.github/workflows/tests.yml'
   pull_request:
     branches:
@@ -20,7 +19,6 @@ on:
       - 'scripts/**/*.sh'
       - 'tests/**/*.py'
       - 'tests/**/*.sh'
-      - 'docs/PRIVACY.md'
       - '.github/workflows/tests.yml'
   workflow_dispatch:
 

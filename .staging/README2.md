@@ -518,7 +518,7 @@ Current interests:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-alanszmyt-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alanszmyt)
 [![Portfolio](https://img.shields.io/badge/Portfolio-szmyty.vercel.app-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://szmyty.vercel.app)
 [![GitHub](https://img.shields.io/badge/GitHub-szmyty-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](https://github.com/szmyty)
+[![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/szmyty/szmyty/issues)
 
 </div>
 

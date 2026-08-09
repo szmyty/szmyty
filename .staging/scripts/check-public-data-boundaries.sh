@@ -2,10 +2,12 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 cd "$REPO_ROOT"
+SECRET_HITS_FILE="$(mktemp)"
+trap 'rm -f "$SECRET_HITS_FILE"' EXIT
 
-DENIED_PATH_REGEX='^(oura/.*\.(json|svg)|location/.*\.(json|png|svg)|weather/.*\.(json|svg)|dashboard-app/public/(oura|location|weather)/.*\.json|data/snapshots/.+\.json|data/metrics/(location|oura|weather)\.json)$'
+DENIED_PATH_REGEX='^(\.staging/(oura/.*\.(json|svg)|location/.*\.(json|png|svg)|weather/.*\.(json|svg)|dashboard-app/public/(oura|location|weather)/.*\.json|data/snapshots/.+\.json|data/metrics/(location|oura|weather)\.json))$'
 
 SECRET_REGEX='(ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{80,}|AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|xox[baprs]-[A-Za-z0-9-]{10,}|-----BEGIN (RSA|EC|OPENSSH|DSA|PGP) PRIVATE KEY-----)'
 
@@ -18,10 +20,9 @@ if [[ -n "$denied_hits" ]]; then
 fi
 
 printf '🔒 Checking tracked files for obvious credential patterns...\n'
-secret_hits="$(git ls-files -z | xargs -0 grep -nE "$SECRET_REGEX" || true)"
-if [[ -n "$secret_hits" ]]; then
+if git ls-files -z | xargs -0 grep -nEI --binary-files=without-match "$SECRET_REGEX" >"$SECRET_HITS_FILE" 2>/dev/null; then
   printf '❌ Potential credential pattern detected (sanitized output):\n'
-  printf '%s\n' "$secret_hits" | cut -d: -f1-2
+  cut -d: -f1-2 "$SECRET_HITS_FILE"
   exit 1
 fi
 
