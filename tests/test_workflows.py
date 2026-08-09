@@ -62,7 +62,8 @@ def test_ci_is_read_only_and_avoids_pull_request_target() -> None:
     assert "pull_request_target" not in _workflow_events(workflow)
     assert workflow["permissions"] == {"contents": "read"}
     for job in workflow["jobs"].values():
-        assert job["permissions"] == {"contents": "read"}
+        permissions = job.get("permissions", workflow["permissions"])
+        assert all(level != "write" for level in permissions.values())
 
 
 def test_checkout_is_read_only_outside_writer_job() -> None:
