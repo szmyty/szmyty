@@ -22,20 +22,29 @@ tasks:
     silent: true
 
   lint:
-    desc: Run available linters (yamllint, ruff)
+    desc: Run formatting and markdown checks
     cmds:
-      - |
-        if command -v yamllint >/dev/null 2>&1; then
-          yamllint .
-        else
-          echo "yamllint not installed — skipping"
-        fi
-      - |
-        if command -v ruff >/dev/null 2>&1; then
-          ruff check .
-        else
-          echo "ruff not installed — skipping"
-        fi
+      - npx prettier --check .
+      - npx markdownlint .
+
+  fmt:
+    desc: Format all files
+    cmds:
+      - npx prettier --write .
+
+  health:
+    desc: Validate repository structure
+    cmds:
+      - 'test -f README.md && echo "PASS: README.md exists" || (echo "FAIL: Missing README.md" && exit 1)'
+      - 'test -d .github/workflows && echo "PASS: .github/workflows exists" || (echo "FAIL: Missing .github/workflows" && exit 1)'
+      - 'test -f .editorconfig && echo "PASS: .editorconfig exists" || (echo "FAIL: Missing .editorconfig" && exit 1)'
+      - 'test -d docs && echo "PASS: docs exists" || (echo "FAIL: Missing docs/" && exit 1)'
+      - 'echo "Repository health check passed"'
+
+  repo:audit:
+    desc: Placeholder for audit tasks
+    cmds:
+      - echo "Audit task placeholder"
 
   check-identity:
     desc: Reject stale source-repository names and obsolete production URLs
