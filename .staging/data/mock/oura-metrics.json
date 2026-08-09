@@ -6,12 +6,12 @@
   "resting_hr": 58,
   "temp_deviation": 0.2,
   "personal_info": {
-    "id": "mock-user-id",
-    "age": 30,
-    "weight": 70.0,
-    "height": 1.75,
-    "biological_sex": "male",
-    "email": "mock@example.com"
+    "id": "synthetic-user",
+    "age": null,
+    "weight": null,
+    "height": null,
+    "biological_sex": null,
+    "email": null
   },
   "sleep": {
     "id": "mock-sleep-id",
