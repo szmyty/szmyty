@@ -40,14 +40,72 @@ def test_recent_activity_filters_and_bounds_live_events(monkeypatch, tmp_path) -
     def fake_get_json(url: str, token: str | None = None):
         assert 'events/public' in url
         return [
-            {'type': 'WatchEvent', 'repo': {'name': 'szmyty/ignore'}, 'created_at': '2024-01-20T00:00:00Z', 'payload': {}},
-            {'type': 'PushEvent', 'repo': {'name': 'szmyty/szmyty'}, 'created_at': '2024-01-19T00:00:00Z', 'payload': {'commits': [{'message': 'Updated README'}]}},
-            {'type': 'PushEvent', 'repo': {'name': 'szmyty/bot'}, 'created_at': '2024-01-18T00:00:00Z', 'actor': {'login': 'octocat[bot]'}, 'payload': {'commits': [{'message': 'Ignore bot'}]}},
-            {'type': 'CreateEvent', 'repo': {'name': 'szmyty/one'}, 'created_at': '2024-01-17T00:00:00Z', 'payload': {'ref_type': 'branch', 'ref': 'main'}},
-            {'type': 'PullRequestEvent', 'repo': {'name': 'szmyty/two'}, 'created_at': '2024-01-16T00:00:00Z', 'payload': {'pull_request': {'title': 'Ship module', 'html_url': 'https://github.com/szmyty/two/pull/1'}}},
-            {'type': 'IssueCommentEvent', 'repo': {'name': 'szmyty/three'}, 'created_at': '2024-01-15T00:00:00Z', 'payload': {'issue': {'title': 'Bugfix', 'html_url': 'https://github.com/szmyty/three/issues/2'}}},
-            {'type': 'ReleaseEvent', 'repo': {'name': 'szmyty/four'}, 'created_at': '2024-01-14T00:00:00Z', 'payload': {'release': {'name': 'v1.0.0', 'html_url': 'https://github.com/szmyty/four/releases/tag/v1.0.0'}}},
-            {'type': 'PushEvent', 'repo': {'name': 'szmyty/five'}, 'created_at': '2024-01-13T00:00:00Z', 'payload': {'commits': [{'message': 'Overflow item'}]}},
+            {
+                'type': 'WatchEvent',
+                'repo': {'name': 'szmyty/ignore'},
+                'created_at': '2024-01-20T00:00:00Z',
+                'payload': {},
+            },
+            {
+                'type': 'PushEvent',
+                'repo': {'name': 'szmyty/szmyty'},
+                'created_at': '2024-01-19T00:00:00Z',
+                'payload': {'commits': [{'message': 'Updated README'}]},
+            },
+            {
+                'type': 'PushEvent',
+                'repo': {'name': 'szmyty/bot'},
+                'created_at': '2024-01-18T00:00:00Z',
+                'actor': {'login': 'octocat[bot]'},
+                'payload': {'commits': [{'message': 'Ignore bot'}]},
+            },
+            {
+                'type': 'CreateEvent',
+                'repo': {'name': 'szmyty/one'},
+                'created_at': '2024-01-17T00:00:00Z',
+                'payload': {'ref_type': 'branch', 'ref': 'main'},
+            },
+            {
+                'type': 'PullRequestEvent',
+                'repo': {'name': 'szmyty/two'},
+                'created_at': '2024-01-16T00:00:00Z',
+                'payload': {
+                    'pull_request': {
+                        'title': 'Ship module',
+                        'html_url': 'https://github.com/szmyty/two/pull/1',
+                    },
+                },
+            },
+            {
+                'type': 'IssueCommentEvent',
+                'repo': {'name': 'szmyty/three'},
+                'created_at': '2024-01-15T00:00:00Z',
+                'payload': {
+                    'issue': {
+                        'title': 'Bugfix',
+                        'html_url': 'https://github.com/szmyty/three/issues/2',
+                    },
+                },
+            },
+            {
+                'type': 'ReleaseEvent',
+                'repo': {'name': 'szmyty/four'},
+                'created_at': '2024-01-14T00:00:00Z',
+                'payload': {
+                    'release': {
+                        'name': 'v1.0.0',
+                        'html_url': (
+                            'https://github.com/szmyty/four/releases/tag/v1.0.0'
+                        ),
+                    },
+                },
+            },
+            {
+                'type': 'PushEvent',
+                'repo': {'name': 'szmyty/five'},
+                'created_at': '2024-01-13T00:00:00Z',
+                'payload': {'commits': [{'message': 'Overflow item'}]},
+            },
         ], {}
 
     monkeypatch.setattr(recent_activity, '_github_get_json', fake_get_json)
@@ -206,7 +264,9 @@ def test_invalid_fixture_json_raises_when_no_fallback(monkeypatch, tmp_path) -> 
         )
 
 
-def test_update_readme_reports_unchanged_on_second_render(tmp_path, monkeypatch) -> None:
+def test_update_readme_reports_unchanged_on_second_render(
+    tmp_path, monkeypatch
+) -> None:
     readme = tmp_path / 'README.md'
     readme.write_text(
         'header\n\n'
@@ -223,7 +283,9 @@ def test_update_readme_reports_unchanged_on_second_render(tmp_path, monkeypatch)
         'recent-activity.md.j2',
         'music-highlight.md.j2',
     ]:
-        source = (repo_root / 'profile' / 'templates' / name).read_text(encoding='utf-8')
+        source = (
+            repo_root / 'profile' / 'templates' / name
+        ).read_text(encoding='utf-8')
         (templates_dir / name).write_text(source, encoding='utf-8')
 
     artifact_root = tmp_path / 'profile' / 'artifacts'

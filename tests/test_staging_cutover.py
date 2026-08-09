@@ -36,7 +36,8 @@ def test_active_files_do_not_reference_staging_paths() -> None:
 
 def test_migration_ledger_has_no_unresolved_rows() -> None:
     rows: list[list[str]] = []
-    for line in (REPO_ROOT / "docs/MIGRATION.md").read_text(encoding="utf-8").splitlines():
+    content = (REPO_ROOT / "docs/MIGRATION.md").read_text(encoding="utf-8")
+    for line in content.splitlines():
         if not line.startswith("|"):
             continue
         columns = [value.strip() for value in line.strip("|").split("|")]
