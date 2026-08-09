@@ -83,10 +83,60 @@ or `promoted:<target-path>` once complete.
 | # | Source path | Decision | Target path / issue | Rationale | Privacy status | Completion evidence |
 |---|-------------|----------|---------------------|-----------|----------------|---------------------|
 | 27 | `.staging/.github/GOVERNANCE.md` | `ADOPT` | `.github/GOVERNANCE.md` | Generic governance document; safe to adopt. | `PUBLIC` | |
-| 28 | `.staging/.github/dependabot.yml` | `ADOPT` | `.github/dependabot.yml` | Dependabot configuration; evaluate intervals and adopt. | `PUBLIC` | |
-| 29 | `.staging/.github/workflows/` | `REWRITE` | `.github/workflows/` | Workflow files are tightly coupled to staging repository layout and hardcoded secrets; rewrite for production with portable context variables. | `INTERNAL` | |
-| 30 | `.staging/.github/actions/` | `DEFER` | szmyty/szmyty#65 | Custom composite actions; evaluate individual actions and defer until workflows are rebuilt. | `INTERNAL` | |
+| 28 | `.staging/.github/dependabot.yml` | `ADOPT` | `.github/dependabot.yml` | Dependabot configuration; evaluate intervals and adopt. | `PUBLIC` | promoted:.github/dependabot.yml |
+| 29 | `.staging/.github/workflows/` | `REWRITE` | `.github/workflows/` | Workflow files are tightly coupled to staging repository layout and hardcoded secrets; rewrite for production with portable context variables. | `INTERNAL` | promoted:.github/workflows/{ci.yml,update-profile.yml,pages.yml} |
+| 30 | `.staging/.github/actions/` | `DEFER` | szmyty/szmyty#65 | Custom composite actions; evaluate individual actions and defer until workflows are rebuilt. | `INTERNAL` | issue#77 |
 | 31 | `.staging/.github/instructions/` | `ARCHIVE` | `docs/audits/` | Copilot instruction files specific to the staging development process; not needed in production. | `INTERNAL` | |
+
+---
+
+### Detailed workflow inventory for issue `#77`
+
+| Source path | Decision | Production mapping | Notes |
+|-------------|----------|--------------------|-------|
+| `.staging/.github/workflows/build-profile.yml` | `REWRITE` | `ci.yml`, `update-profile.yml`, `pages.yml` | Split validation, scheduled refresh, and Pages deployment into separate least-privilege workflows. |
+| `.staging/.github/workflows/tests.yml` | `MERGE` | `ci.yml` | Fold Python test coverage into the read-only validation workflow. |
+| `.staging/.github/workflows/lint.yml` | `MERGE` | `ci.yml` | Fold YAML/Python linting into the read-only validation workflow. |
+| `.staging/.github/workflows/update-readme.yml` | `MERGE` | `update-profile.yml` | Replace README mutation with the current Python module pipeline. |
+| `.staging/.github/workflows/activity.yml` | `MERGE` | `update-profile.yml` | Retain public-activity refresh through `tools.modules.recent_activity`. |
+| `.staging/.github/workflows/github-stats.yml` | `MERGE` | `update-profile.yml` | Retain public GitHub metrics refresh through `tools.modules.github_metrics`. |
+| `.staging/.github/workflows/metrics.yml` | `DISCARD` | — | No active production asset consumes the staged lowlighter metrics workflow. |
+| `.staging/.github/workflows/profile-summary-cards.yml` | `DISCARD` | — | No active production asset consumes the staged summary-card workflow. |
+| `.staging/.github/workflows/monitoring.yml` | `DISCARD` | — | Routine incident and issue automation is intentionally omitted from the production set. |
+| `.staging/.github/workflows/health.yml` | `DISCARD` | — | Health monitoring for staged services is out of scope for the public profile repository. |
+| `.staging/.github/workflows/release.yml` | `DISCARD` | — | Release automation is unrelated to profile validation, refresh, or Pages deployment. |
+| `.staging/.github/workflows/greetings.yml` | `DISCARD` | — | Contributor greeting automation is unrelated to the target workflow set. |
+| `.staging/.github/workflows/test-engine.yml` | `DISCARD` | — | Staged engine test harness was superseded by production `pytest` coverage. |
+| `.staging/.github/workflows/test-individual-actions.yml` | `DISCARD` | — | Local composite-action tests are unnecessary after consolidating on first-party workflows. |
+| `.staging/.github/workflows/act-demo.yml` | `DISCARD` | — | Best-effort `act` guidance is documented, but no separate demo workflow is retained. |
+| `.staging/.github/workflows/all-contributors.yml` | `DISCARD` | — | Contributor management is unrelated to the target workflow set. |
+
+### Detailed composite-action inventory for issue `#77`
+
+| Source path | Decision | Production mapping | Notes |
+|-------------|----------|--------------------|-------|
+| `.staging/.github/actions/setup/action.yml` | `DISCARD` | — | Replaced by pinned `actions/setup-python` plus Poetry installs. |
+| `.staging/.github/actions/setup-engine/action.yml` | `DISCARD` | — | Staged engine setup is superseded by the production Python toolchain. |
+| `.staging/.github/actions/setup-environment/action.yml` | `DISCARD` | — | Replaced by pinned `actions/setup-python` plus Poetry installs. |
+| `.staging/.github/actions/pip-install/action.yml` | `DISCARD` | — | Replaced by Poetry with lockfile-based caching. |
+| `.staging/.github/actions/update-readme/action.yml` | `REWRITE` | `update-profile.yml` | Replaced by `python -m tools.modules.update_readme`. |
+| `.staging/.github/actions/deploy-pages/action.yml` | `REWRITE` | `pages.yml` | Replaced by official Pages actions in a dedicated deployment workflow. |
+| `.staging/.github/actions/fetch-developer/action.yml` | `DISCARD` | — | Developer dashboard data is not part of the active public profile pipeline. |
+| `.staging/.github/actions/engine-fetch-developer/action.yml` | `DISCARD` | — | Staged engine fetch path is superseded by production tooling. |
+| `.staging/.github/actions/generate-developer-dashboard/action.yml` | `DISCARD` | — | Developer dashboard SVG generation is not retained in production. |
+| `.staging/.github/actions/engine-generate-developer-dashboard/action.yml` | `DISCARD` | — | Staged engine dashboard generation is superseded by production tooling. |
+| `.staging/.github/actions/fetch-location/action.yml` | `DISCARD` | — | Location automation remains excluded for privacy reasons. |
+| `.staging/.github/actions/generate-location-card/action.yml` | `DISCARD` | — | Location card generation remains excluded for privacy reasons. |
+| `.staging/.github/actions/fetch-weather/action.yml` | `DISCARD` | — | Weather automation remains excluded from the production profile scope. |
+| `.staging/.github/actions/generate-weather-card/action.yml` | `DISCARD` | — | Weather card generation remains excluded from the production profile scope. |
+| `.staging/.github/actions/fetch-oura/action.yml` | `DISCARD` | — | Oura and health automation remains excluded for privacy reasons. |
+| `.staging/.github/actions/generate-oura-dashboard/action.yml` | `DISCARD` | — | Oura and health automation remains excluded for privacy reasons. |
+| `.staging/.github/actions/generate-oura-mood/action.yml` | `DISCARD` | — | Oura and health automation remains excluded for privacy reasons. |
+| `.staging/.github/actions/fetch-soundcloud/action.yml` | `DISCARD` | — | Replaced by the hand-authored `music-highlight` input file. |
+| `.staging/.github/actions/generate-soundcloud-card/action.yml` | `DISCARD` | — | SoundCloud card generation is replaced by the current README module template. |
+| `.staging/.github/actions/fetch-quote/action.yml` | `DISCARD` | — | Quote automation is not part of the active public profile pipeline. |
+| `.staging/.github/actions/generate-quote-card/action.yml` | `DISCARD` | — | Quote card generation is not part of the active public profile pipeline. |
+| `.staging/.github/actions/optimize-svgs/action.yml` | `DISCARD` | — | No active generated SVG workflow requires a retained optimizer action. |
 
 ---
 

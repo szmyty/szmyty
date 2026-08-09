@@ -45,6 +45,20 @@ This repository serves two roles:
 - **GitHub Actions** — CI/CD (`.github/workflows/`)
 - **yamllint, ruff** — linting
 
+## Automation
+
+The production workflow set is intentionally limited to three files:
+
+| Workflow | Responsibility | Local parity |
+|----------|----------------|--------------|
+| `ci.yml` | Read-only validation for pull requests, pushes, and manual diagnosis | `task validate-profile && task validate-site && task pytest` |
+| `update-profile.yml` | Scheduled/manual refresh of public module artifacts and README regions | `task update-profile` |
+| `pages.yml` | Validate the committed static site and deploy `site/` to GitHub Pages | `task validate-site` |
+
+`act` use is best-effort only for syntax and basic runner parity. GitHub Pages
+OIDC, deployment environments, and hosted Pages infrastructure are not fully
+reproducible under `act`.
+
 ## Current Status
 
 The repository is in a clean-foundation phase following the reconciliation

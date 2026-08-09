@@ -1,8 +1,7 @@
 # site/
 
-> **Status:** Foundation — not deployed. Deployment is blocked until
-> [szmyty/szmyty#12](https://github.com/szmyty/szmyty/issues/12) provides
-> the secure GitHub Pages workflow boundary.
+> **Status:** Foundation — deployable through the least-privilege
+> `.github/workflows/pages.yml` workflow.
 
 Optional GitHub Pages companion to the profile README.
 See [docs/adr/0002-site-companion-static-html.md](../docs/adr/0002-site-companion-static-html.md)
@@ -58,4 +57,7 @@ duplicated between `README.md` and `site/index.html`.
 
 ## Deployment
 
-Not active. Blocked by [szmyty/szmyty#12](https://github.com/szmyty/szmyty/issues/12).
+GitHub Pages deployment is optional and is scoped to the dedicated
+`pages.yml` workflow. Local validation parity is available via
+`task validate-site`. `act` may be used for best-effort syntax checks, but it
+does not faithfully reproduce Pages environments or OIDC-based deployment.
