@@ -1,0 +1,13 @@
+{
+  "name": "szmyty",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "postCreateCommand": {
+    "install-python-tooling": "python -m venv \"$HOME/.local/share/poetry\" && \"$HOME/.local/share/poetry/bin/pip\" install 'poetry>=2.1,<2.2' && \"$HOME/.local/share/poetry/bin/poetry\" install --with lint,test",
+    "install-node-tooling": "npm install --global prettier markdownlint-cli"
+  }
+}
