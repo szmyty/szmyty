@@ -1,4 +1,4 @@
-"""Taskfile task definitions for local workflow parity."""
+"""Tests for Taskfile local workflow parity task definitions."""
 
 from __future__ import annotations
 
