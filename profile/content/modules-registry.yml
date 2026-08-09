@@ -239,3 +239,29 @@ modules:
     region_start_marker: "<!-- START:stars -->"
     region_end_marker: "<!-- END:stars -->"
     template: stars.md.j2
+
+  - name: oura-trends
+    enabled: false
+    publication: blocked-pending-owner-approval
+    description: >
+      Explicitly gated, privacy-preserving Oura Ring trend aggregates.
+      Publication is blocked until the owner approves the metric allowlist.
+      Raw data, daily records, and authentication values are never committed.
+    provider_type: api
+    provider_module: tools.modules.oura_trends
+    secret_names:
+      - OURA_ACCESS_TOKEN
+    sensitivity: sensitive
+    freshness_policy:
+      cadence: monthly
+      ttl_seconds: 2592000
+      warn_after_seconds: 5184000
+    artifact_dir: profile/artifacts/oura-trends
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+    fixture_file: profile/fixtures/oura-trends.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:oura-trends -->"
+    region_end_marker: "<!-- END:oura-trends -->"
+    template: oura-trends.md.j2

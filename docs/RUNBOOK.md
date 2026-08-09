@@ -293,3 +293,66 @@ before each release.
       - `https://github.com/szmyty/szmyty/discussions/categories/ideas` — Research & Exploration
       - `https://github.com/szmyty/szmyty/discussions/categories/q-a` — Documentation Feedback
       - `https://github.com/szmyty/szmyty/security/advisories/new` — Security Reports
+
+---
+
+## oura-trends module
+
+### Default state
+
+The module is `enabled: false` and `publication: blocked-pending-owner-approval`
+in `profile/content/modules-registry.yml`.  No real-data artifact is written
+until the owner completes the approval checklist below.
+
+### Owner approval checklist (required before enabling)
+
+- [ ] Review the threat model in `tools/modules/oura_trends.py` (sleep/wake
+      schedule, travel, illness, availability inference risks).
+- [ ] Confirm the metric allowlist in `OURA_PUBLIC_AGGREGATE_ALLOWLIST` (models.py)
+      covers only coarse approved metrics.
+- [ ] Create a Personal Access Token at
+      <https://cloud.ouraring.com/personal-access-tokens> with only the
+      minimum scopes needed: `daily_sleep`, `daily_readiness`, `daily_activity`.
+- [ ] Add `OURA_ACCESS_TOKEN` as a repository secret under GitHub → Settings →
+      Secrets and variables → Actions.
+- [ ] Set `enabled: true` **and** `publication: allowed` in
+      `profile/content/modules-registry.yml`.
+- [ ] Run `poetry run python -m pytest tests/test_oura_trends.py -v` locally
+      to confirm the full pipeline passes.
+- [ ] Merge the registry change in a dedicated PR reviewed by `@szmyty`.
+
+### Token rotation
+
+1. Create a new token at <https://cloud.ouraring.com/personal-access-tokens>.
+2. Update the `OURA_ACCESS_TOKEN` repository secret.
+3. Verify the next scheduled pipeline run succeeds.
+4. Revoke the old token.
+
+### Revocation
+
+1. Revoke the token at <https://cloud.ouraring.com/personal-access-tokens>.
+2. Remove or invalidate the `OURA_ACCESS_TOKEN` repository secret immediately.
+3. The module automatically falls back to the cached artifact or fixture —
+   other profile modules are unaffected.
+
+### Disable procedure
+
+1. Set `enabled: false` in `profile/content/modules-registry.yml`.
+2. Commit and merge.  The module stops fetching and the README region is
+   cleared on the next pipeline run.
+
+### Delete public artifact procedure
+
+1. Delete `profile/artifacts/oura-trends/` from the tracked tree:
+   ```sh
+   git rm -r profile/artifacts/oura-trends/
+   ```
+2. Clear the README region between
+   `<!-- START:oura-trends -->` and `<!-- END:oura-trends -->`.
+3. Set `enabled: false` and `publication: blocked-pending-owner-approval` in
+   the registry.
+4. Commit and merge.
+
+**Note:** History containing previously committed aggregate artifacts should be
+reviewed separately.  Do not rewrite shared branch history automatically;
+follow the incident response procedure in `docs/PRIVACY.md`.

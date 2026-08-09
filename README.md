@@ -386,3 +386,6 @@ Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidenc
 
 <!-- START:stars -->
 <!-- END:stars -->
+
+<!-- START:oura-trends -->
+<!-- END:oura-trends -->

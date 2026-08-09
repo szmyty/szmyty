@@ -32,6 +32,12 @@
             "type": "boolean",
             "default": true
           },
+          "publication": {
+            "type": "string",
+            "enum": ["allowed", "blocked-pending-owner-approval"],
+            "default": "allowed",
+            "description": "Publication gate controlling whether public output may be written."
+          },
           "description": {
             "type": ["string", "null"],
             "description": "Human-readable description of the module."

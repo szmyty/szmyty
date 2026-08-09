@@ -207,7 +207,7 @@ def test_modules_registry_yml_api_modules_have_token() -> None:
     _UNAUTHENTICATED_API_MODULES = {"orcid", "medium"}
     # Third-party API modules authenticate with provider-specific secrets (not
     # GITHUB_TOKEN).  They must declare at least one secret_name of their own.
-    _THIRD_PARTY_API_MODULES = {"soundcloud", "steam"}
+    _THIRD_PARTY_API_MODULES = {"soundcloud", "steam", "oura-trends"}
     for mod in reg.modules:
         if mod.provider_type != "api":
             continue

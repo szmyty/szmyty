@@ -1,0 +1,14 @@
+{
+  "module_name": "oura-trends",
+  "version": "1.0",
+  "generated_at": "2026-08-09T20:56:33.221343+00:00",
+  "state": "static",
+  "data_source": "fixture",
+  "data_at": null,
+  "data_hash": null,
+  "ttl_seconds": null,
+  "is_stale": false,
+  "seconds_until_stale": null,
+  "human_summary": "oura-trends: 90-day aggregate (static)",
+  "error": "OURA_ACCESS_TOKEN not set"
+}
