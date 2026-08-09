@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/szmyty/szmyty/profile/schemas/modules.json",
+  "title": "ProfileConfig",
+  "description": "Schema for profile/content/modules.yml",
+  "type": "object",
+  "required": ["modules"],
+  "properties": {
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "region_start_marker", "region_end_marker", "template"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Stable machine-readable module name."
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "region_start_marker": {
+            "type": "string",
+            "description": "HTML comment that opens the owned README region."
+          },
+          "region_end_marker": {
+            "type": "string",
+            "description": "HTML comment that closes the owned README region."
+          },
+          "template": {
+            "type": "string",
+            "description": "Template filename relative to profile/templates/."
+          },
+          "artifact_path": {
+            "type": ["string", "null"],
+            "description": "Optional path to a tracked artifact produced by this module."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

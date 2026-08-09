@@ -1,0 +1,11 @@
+# modules.yml
+# Declares profile modules and their README region ownership.
+#
+# Each module owns exactly one pair of HTML-comment markers in README.md:
+#   <!-- START:<name> -->   … generated content …   <!-- END:<name> -->
+#
+# Hand-authored sections outside those markers are never modified.
+#
+# Schema: profile/schemas/modules.json
+
+modules: []
