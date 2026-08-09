@@ -22,7 +22,7 @@ The immediate goal is a clean, truthful, minimal foundation.
 
 - [x] Consolidate CI, profile refresh, and Pages workflows with least-privilege permissions
 - [ ] Verify and simplify `.github/FUNDING.yml` platform list
-- [ ] Review `.staging/` content for promotion or removal
+- [x] Complete experimental-staging cutover and remove the legacy staging tree
 - [ ] Add `CONTRIBUTORS.md`
 
 ### Pinned-repository recommendations (for manual review)
@@ -50,8 +50,16 @@ described in [szmyty/szmyty#72](https://github.com/szmyty/szmyty/issues/72):
 - [ ] Reusable issue form and workflow templates published as a template repository
 - [ ] Documentation site (if warranted; see [ADR 0002](adr/0002-site-companion-static-html.md) — static HTML/CSS companion under `site/`)
 
+### Deferred post-cutover decisions
+
+Bounded follow-up scope for ledger rows marked `DEFER`:
+
+- [ ] Reassess deferred dashboard/package metadata under szmyty/szmyty#65.
+- [ ] Reassess deferred workflow/action references under szmyty/szmyty#65.
+- [ ] Reassess deferred docs/models/schemas/soundcloud/tests under szmyty/szmyty#65.
+
 ## Non-Goals
 
 - This is a personal profile repository. It will not grow into a general-purpose
   platform or accumulate speculative tooling.
-- No content is promoted from `.staging/` without explicit review.
+- No prohibited data categories are reintroduced through future experiments.

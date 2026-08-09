@@ -33,7 +33,7 @@ This repository publishes a public profile. Only intentionally public data is al
 
 - Raw denied inputs must not be committed.
 - Generated outputs derived from denied inputs must not be committed.
-- Test fixtures may exist only as sanitized synthetic data under `.staging/data/mock/` and must not include copied personal measurements or coordinates.
+- Test fixtures may exist only as sanitized synthetic data under `profile/fixtures/` and must not include copied personal measurements or coordinates.
 - Historical incidents are documented in `docs/audits/` using sanitized summaries only.
 
 ## Redaction and incident response

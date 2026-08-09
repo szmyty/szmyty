@@ -733,26 +733,3 @@ Referenced Packages
 salesforce.schema
 TestCache.xml
 TestsResultsCache.xml
-
-# ==============================================================================
-# 11. PROFILE PRIVACY QUARANTINE (PUBLIC TREE DENY-LIST)
-# ==============================================================================
-
-# Local secret files in staged profile workspace
-.staging/.secrets
-
-# Denied staged telemetry/raw generated copies (health, location, weather)
-.staging/oura/*.json
-.staging/oura/*.svg
-.staging/location/*.json
-.staging/location/*.png
-.staging/location/*.svg
-.staging/weather/*.json
-.staging/weather/*.svg
-.staging/dashboard-app/public/oura/*.json
-.staging/dashboard-app/public/location/*.json
-.staging/dashboard-app/public/weather/*.json
-.staging/data/snapshots/**/*.json
-.staging/data/metrics/location.json
-.staging/data/metrics/oura.json
-.staging/data/metrics/weather.json

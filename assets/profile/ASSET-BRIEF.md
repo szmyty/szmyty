@@ -4,9 +4,8 @@
 **Status:** Active — awaiting Alan's ChatGPT session
 **Last updated:** 2026-08-09
 
-> **Note:** The staged branding materials in `.staging/branding/` are preserved
-> as reference only. Do not promote them directly. The briefs below define the
-> final target.
+> **Note:** Legacy branding concepts are historical references only. Do not
+> promote old drafts directly. The briefs below define the final target.
 
 ---
 
@@ -176,16 +175,8 @@ both edges.
 
 ---
 
-## Staged Branding Reference Notes
+## Legacy Branding Reference Notes
 
-The following assets exist in `.staging/branding/` from a prior design
-iteration. They are preserved as reference only and must not be promoted
-without Alan's explicit approval:
-
-- `.staging/branding/header.svg` — an earlier header concept.
-- `.staging/branding/logo.svg` — an earlier logo concept.
-- `.staging/branding/header.png` — raster version of the earlier header.
-
-These files do not satisfy the asset contract defined in this document
-(dimensions, format, validation, provenance) and should be regenerated from
-scratch using the briefs above.
+Earlier branding drafts do not satisfy the asset contract defined in this
+document (dimensions, format, validation, provenance) and should be
+regenerated from scratch using the briefs above.

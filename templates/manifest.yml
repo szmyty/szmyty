@@ -26,8 +26,6 @@ include:
 exclude:
   # Active profile README — contains personal branding
   - README.md
-  # Staging tree — research artefacts and personal data
-  - .staging/
   # Profile content — personal evidence and metrics
   - profile/
   # Asset sources — personal design system

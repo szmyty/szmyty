@@ -20,7 +20,7 @@ STALE_PATTERNS=(
 # in allcontributorsrc or as a config URL.
 CONFIG_EXTENSIONS=("*.yml" "*.yaml" "*.json" "*.toml")
 
-EXCLUDE_DIRS=(".staging" "docs/audits" ".git")
+EXCLUDE_DIRS=("docs/audits" ".git")
 
 EXCLUDE_ARGS=()
 for dir in "${EXCLUDE_DIRS[@]}"; do
