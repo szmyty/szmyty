@@ -4,9 +4,10 @@
 
 <div align="center">
 
-<!-- Banner: replace banner-light.svg / banner-dark.svg with final ChatGPT-generated artwork.
-     Critical identity text is preserved as Markdown below so it remains readable
-     even when the images do not load. See assets/profile/ASSET-BRIEF.md. -->
+<!-- Banner: production interim cosmic SVGs (banner-light.svg / banner-dark.svg).
+     Source slot reserved for final ChatGPT-generated artwork per ASSET-BRIEF.md.
+     To replace: substitute files in assets/profile/ and revalidate; no README
+     structure changes needed. Critical identity text is Markdown below the image. -->
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="assets/profile/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/profile/banner-light.svg">

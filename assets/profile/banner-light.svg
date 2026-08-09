@@ -1,16 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img">
   <title>Alan Szmyt — Software Engineer, Systems Architect, Creative Technologist</title>
+  <!-- Production interim: polished deterministic cosmic banner (light theme).
+       Source slot reserved for final ChatGPT-generated artwork per ASSET-BRIEF.md Brief 1.
+       Replace file only; README structure and alt-text do not need changes. -->
   <defs>
-    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+    <radialGradient id="bg-l" cx="48%" cy="45%" r="65%">
       <stop offset="0%" stop-color="#f0f4ff"/>
       <stop offset="100%" stop-color="#dde7f8"/>
     </radialGradient>
+    <radialGradient id="glow-l" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#aac8ff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#aac8ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dome-l" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6639BA" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#6639BA" stop-opacity="0.06"/>
+    </linearGradient>
   </defs>
-  <rect width="1280" height="400" fill="url(#bg)"/>
-  <!-- Placeholder: replace with final ChatGPT-generated banner (light theme) -->
-  <!-- Subject-safe zone: 240–1040 px wide, 60–340 px tall -->
-  <text x="640" y="190" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-        font-size="48" font-weight="700" fill="#1F2328" text-anchor="middle">Alan Szmyt</text>
-  <text x="640" y="250" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-        font-size="22" font-weight="400" fill="#59636E" text-anchor="middle">Software Engineer · Systems Architect · Creative Technologist</text>
+  <!-- Background -->
+  <rect width="1280" height="400" fill="url(#bg-l)"/>
+  <!-- Soft nebula glow at center -->
+  <ellipse cx="620" cy="200" rx="480" ry="180" fill="url(#glow-l)"/>
+  <!-- Scattered star points — pale blue-white on light surface -->
+  <circle cx="95"  cy="38"  r="1.2" fill="#6639BA" opacity="0.28"/>
+  <circle cx="210" cy="72"  r="0.9" fill="#6639BA" opacity="0.22"/>
+  <circle cx="380" cy="28"  r="1.4" fill="#9A6700" opacity="0.30"/>
+  <circle cx="520" cy="55"  r="0.8" fill="#6639BA" opacity="0.20"/>
+  <circle cx="660" cy="22"  r="1.1" fill="#6639BA" opacity="0.25"/>
+  <circle cx="800" cy="48"  r="1.3" fill="#9A6700" opacity="0.22"/>
+  <circle cx="950" cy="35"  r="0.9" fill="#6639BA" opacity="0.18"/>
+  <circle cx="1080" cy="62" r="1.5" fill="#6639BA" opacity="0.28"/>
+  <circle cx="1190" cy="30" r="1.0" fill="#9A6700" opacity="0.20"/>
+  <circle cx="140"  cy="130" r="0.8" fill="#6639BA" opacity="0.16"/>
+  <circle cx="300"  cy="110" r="1.1" fill="#6639BA" opacity="0.20"/>
+  <circle cx="1140" cy="120" r="1.0" fill="#6639BA" opacity="0.18"/>
+  <circle cx="1220" cy="150" r="0.7" fill="#9A6700" opacity="0.16"/>
+  <!-- Constellation: 6-point arrangement (upper-center-left) -->
+  <line x1="340" y1="60"  x2="410" y2="95"  stroke="#6639BA" stroke-width="0.8" opacity="0.30"/>
+  <line x1="410" y1="95"  x2="500" y2="75"  stroke="#6639BA" stroke-width="0.8" opacity="0.30"/>
+  <line x1="500" y1="75"  x2="560" y2="105" stroke="#6639BA" stroke-width="0.8" opacity="0.30"/>
+  <line x1="560" y1="105" x2="620" y2="80"  stroke="#6639BA" stroke-width="0.8" opacity="0.30"/>
+  <line x1="620" y1="80"  x2="690" y2="50"  stroke="#6639BA" stroke-width="0.8" opacity="0.30"/>
+  <circle cx="340" cy="60"  r="2.0" fill="#6639BA" opacity="0.40"/>
+  <circle cx="410" cy="95"  r="2.2" fill="#9A6700" opacity="0.45"/>
+  <circle cx="500" cy="75"  r="1.8" fill="#6639BA" opacity="0.38"/>
+  <circle cx="560" cy="105" r="2.5" fill="#9A6700" opacity="0.50"/>
+  <circle cx="620" cy="80"  r="2.0" fill="#6639BA" opacity="0.40"/>
+  <circle cx="690" cy="50"  r="1.8" fill="#6639BA" opacity="0.35"/>
+  <!-- Observatory silhouette — lower-right architectural anchor -->
+  <!-- Dome base -->
+  <rect x="990" y="310" width="200" height="70" fill="url(#dome-l)" rx="2"/>
+  <!-- Dome arc -->
+  <path d="M 990 310 A 100 80 0 0 1 1190 310" fill="url(#dome-l)"/>
+  <!-- Dome slit -->
+  <line x1="1090" y1="235" x2="1090" y2="310" stroke="#6639BA" stroke-width="1.5" opacity="0.12"/>
+  <!-- Telescope tube suggestion -->
+  <line x1="1090" y1="262" x2="1130" y2="238" stroke="#6639BA" stroke-width="2" opacity="0.14" stroke-linecap="round"/>
+  <!-- Accent focal glyph — violet diamond at center-left -->
+  <polygon points="440,195 455,210 440,225 425,210"
+           fill="none" stroke="#6639BA" stroke-width="1.8" opacity="0.55"/>
+  <!-- Horizon baseline -->
+  <line x1="0" y1="340" x2="1280" y2="340" stroke="#6639BA" stroke-width="0.5" opacity="0.10"/>
 </svg>
