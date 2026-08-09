@@ -275,7 +275,11 @@ dependency management. The Python version requirement is `>=3.12,<4.0`.
 Install the development environment:
 
 ```sh
+# Lint and test dependencies (matches CI)
 poetry install --with lint,test
+
+# All development dependencies including pre-commit hooks and pip-audit
+poetry install --with lint,test,dev,security
 ```
 
 See `docs/DEVELOPMENT.md` for the full command surface and local workflow.

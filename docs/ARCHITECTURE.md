@@ -117,10 +117,10 @@ This table is the canonical reference for all environment variables used by
 workflows and local tooling.  Do not add secrets for deferred or prohibited
 features.
 
-| Variable | Required | Secret | Scope | Module / owner | Safe default | Disable behavior | Rotation procedure |
-|----------|----------|--------|-------|---------------|-------------|-----------------|-------------------|
+| Variable | Required | Secret | Scope | Module / owner | Value / Notes | Disable behavior | Rotation procedure |
+|----------|----------|--------|-------|---------------|---------------|-----------------|-------------------|
 | `GITHUB_TOKEN` | Yes (CI) | No — automatic | GitHub Actions only | `github-metrics`, `recent-activity` | Injected automatically by Actions (`github.token`) | Module falls back to committed artifact cache | No rotation needed; token expires per-run |
-| `POETRY_VIRTUALENVS_IN_PROJECT` | No | No | Local and CI | Build tooling | `true` | Virtualenv is created outside the project directory | Not applicable |
+| `POETRY_VIRTUALENVS_IN_PROJECT` | No | No | Local and CI | Build tooling | Set to `true` in `poetry.toml`; creates `.venv/` inside the project | Virtualenv is created outside the project directory | Not applicable |
 
 ### Notes
 
