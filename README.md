@@ -387,7 +387,9 @@ Evidence catalog: <a href="profile/content/evidence.yml">profile/content/evidenc
 <!-- START:ai-agent-showcase -->
 ### AI Agent Execution Showcase
 
-[![feat(profile): add resilient SoundCloud and Steam snapshot modules execution flow](./profile/artifacts/ai-agent-showcase/card.svg)](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+[![Interactive AI execution observatory preview](./profile/artifacts/interactive-showcase/preview.png)](https://szmyty.github.io/szmyty/ai-agent-showcase.html)
+
+_Static preview of the interactive cosmic engineering observatory. Open the image to explore the live Three.js orbit on Pages._
 
 **feat(profile): add resilient SoundCloud and Steam snapshot modules** — Add two independent, resilient snapshot modules for Alan's SoundCloud creative practice and Steam gaming/achievement profile, each with explicit fallback behavior when configuration, credentials, or public provider access is unavailable.
 

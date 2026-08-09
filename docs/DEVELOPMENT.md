@@ -140,6 +140,10 @@ poetry run python -m tools.modules.update_readme --module music-highlight
 ```sh
 # Validate Pages workflow and static site inputs
 poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
+
+# Capture the deterministic README preview for the interactive observatory
+python tools/capture_interactive_showcase_preview.py \
+  --output profile/artifacts/interactive-showcase/preview.png
 ```
 
 ### Clean generated caches
