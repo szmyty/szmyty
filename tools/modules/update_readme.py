@@ -9,7 +9,12 @@ from typing import Any
 import click
 import yaml
 
-from tools.profile_builder.models import GithubMetrics, MusicHighlight, ProfileConfig, RecentActivity
+from tools.profile_builder.models import (
+    GithubMetrics,
+    MusicHighlight,
+    ProfileConfig,
+    RecentActivity,
+)
 from tools.profile_builder.regions import update_readme_region
 from tools.profile_builder.rendering import render_template
 

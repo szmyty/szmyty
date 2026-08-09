@@ -18,7 +18,11 @@ import click
 import yaml
 
 from tools.profile_builder.models import EvidenceCatalog, EvidenceEntry, ProfileConfig
-from tools.profile_builder.regions import RegionNotFoundError, update_readme_region, would_change
+from tools.profile_builder.regions import (
+    RegionNotFoundError,
+    update_readme_region,
+    would_change,
+)
 from tools.profile_builder.rendering import render_template
 
 # ---------------------------------------------------------------------------

@@ -9,9 +9,17 @@ from typing import Any
 
 import click
 
-from tools.modules.github_metrics import ProviderFailure, RateLimitedError, _github_get_json
+from tools.modules.github_metrics import (
+    ProviderFailure,
+    RateLimitedError,
+    _github_get_json,
+)
 from tools.profile_builder import cache as cache_utils
-from tools.profile_builder.models import ActivityEvent, ActivityEventType, RecentActivity
+from tools.profile_builder.models import (
+    ActivityEvent,
+    ActivityEventType,
+    RecentActivity,
+)
 
 MODULE_NAME = 'recent-activity'
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -122,7 +130,7 @@ def fetch_live_activity(username: str = USERNAME, token: str | None = None) -> R
     payload, _ = _github_get_json(f'{API_ROOT}/users/{username}/events/public?per_page=20', token)
     if not isinstance(payload, list):
         raise ProviderFailure('Unexpected recent-activity payload from GitHub API.')
-    events = [item for item in payload if isinstance(item, dict) and not item.get('public') is False]
+    events = [item for item in payload if isinstance(item, dict) and item.get('public') is not False]
     return normalize_events(events)
 
 

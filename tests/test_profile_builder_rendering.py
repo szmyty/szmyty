@@ -6,11 +6,10 @@ access to profile/templates/ is required.  No network access is performed.
 
 from __future__ import annotations
 
-import pytest
 import jinja2
+import pytest
 
 from tools.profile_builder.rendering import render_string, render_template
-
 
 # ---------------------------------------------------------------------------
 # render_string
@@ -78,6 +77,7 @@ def test_render_template_equivalent_input_byte_equivalent(tmp_path) -> None:
     tmpl_dir.mkdir()
     (tmpl_dir / "t.md.j2").write_text("{{ x }} {{ y }}")
 
-    r1 = render_template("t.md.j2", {"x": "hello", "y": "world"}, templates_dir=tmpl_dir)
-    r2 = render_template("t.md.j2", {"x": "hello", "y": "world"}, templates_dir=tmpl_dir)
+    args = {"x": "hello", "y": "world"}
+    r1 = render_template("t.md.j2", args, templates_dir=tmpl_dir)
+    r2 = render_template("t.md.j2", args, templates_dir=tmpl_dir)
     assert r1 == r2
