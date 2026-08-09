@@ -252,6 +252,12 @@ The following settings require direct access to the GitHub UI and cannot be
 verified by repository files or CI.  `@szmyty` must review these manually
 before each release.
 
+> Use the consolidated release handoff at
+> [`docs/FINAL-OWNER-HANDOFF-CHECKLIST.md`](FINAL-OWNER-HANDOFF-CHECKLIST.md)
+> together with
+> [`docs/audits/FINAL-PROFILE-READINESS-REPORT.md`](audits/FINAL-PROFILE-READINESS-REPORT.md)
+> when performing the final owner sign-off.
+
 > These items are outside the automated validation scope.  Repository files
 > and CI workflows cannot assert their correctness.
 
