@@ -6,19 +6,5 @@
       "version": "lts"
     }
   },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "redhat.vscode-yaml",
-        "esbenp.prettier-vscode",
-        "davidanson.vscode-markdownlint",
-        "jasonnutter.vscode-codeowners",
-        "snakemake.snakemake-lang",
-        "sqlfluff.vscode-sqlfluff"
-      ]
-    }
-  },
   "postCreateCommand": "python -m pip install poetry==2.1.4 && poetry install --with lint,test && npm install --global prettier markdownlint-cli"
 }

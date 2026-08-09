@@ -33,12 +33,6 @@ def test_devcontainer_installs_required_tooling_and_extensions() -> None:
     assert isinstance(features, dict)
     assert features["ghcr.io/devcontainers/features/node:1"] == {"version": "lts"}
 
-    customizations = devcontainer["customizations"]
-    assert isinstance(customizations, dict)
-    vscode = customizations["vscode"]
-    assert isinstance(vscode, dict)
-    assert vscode["extensions"] == recommendations
-
     post_create = devcontainer["postCreateCommand"]
     assert isinstance(post_create, str)
     assert "poetry install --with lint,test" in post_create
