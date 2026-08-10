@@ -1,18 +1,25 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "title": "GitHub Engineering",
   "username": "szmyty",
-  "trailing_window_days": 365,
-  "window_start": "2025-08-10",
-  "window_end": "2026-08-09",
-  "contribution_days": [
+  "repository_owners": [
     {
-      "date": "2025-08-10",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 0,
-      "is_future": false
+      "login": "szmyty",
+      "type": "user"
     },
+    {
+      "login": "incomprisllc",
+      "type": "organization"
+    },
+    {
+      "login": "egohygiene",
+      "type": "organization"
+    }
+  ],
+  "trailing_window_days": 365,
+  "window_start": "2025-08-11",
+  "window_end": "2026-08-10",
+  "contribution_days": [
     {
       "date": "2025-08-11",
       "contribution_count": 0,
@@ -2556,78 +2563,241 @@
     },
     {
       "date": "2026-08-09",
-      "contribution_count": 151,
+      "contribution_count": 153,
       "level": 4,
       "weekday": 0,
       "is_future": false
+    },
+    {
+      "date": "2026-08-10",
+      "contribution_count": 5,
+      "level": 1,
+      "weekday": 1,
+      "is_future": false
+    }
+  ],
+  "monthly_contributions": [
+    {
+      "year": 2025,
+      "month": 8,
+      "count": 2
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "count": 0
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "count": 0
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "count": 109
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "count": 116
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "count": 1
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "count": 1
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "count": 549
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "count": 802
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "count": 390
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "count": 322
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "count": 369
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "count": 332
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 2986,
-    "public_commit_contributions": 1749,
+    "total_public_contributions": 2993,
+    "public_commit_contributions": 1755,
     "public_pull_request_contributions": 3,
-    "public_issue_contributions": 699,
+    "public_issue_contributions": 700,
     "public_pull_request_review_contributions": 528
   },
   "streaks": {
-    "current_days": 2,
+    "current_days": 3,
     "longest_days": 20
   },
+  "most_active_month": "2026-04",
+  "average_contributions_per_active_day": 25.8,
+  "active_contribution_days": 116,
+  "repositories_contributed_to": 0,
   "repository_inventory": {
-    "owned_public_non_archived_repositories": 11,
+    "owned_public_non_archived_repositories": 38,
+    "total_public_repositories": 38,
+    "archived_repositories": 0,
+    "repositories_per_owner": {
+      "szmyty": 11,
+      "incomprisllc": 3,
+      "egohygiene": 24
+    },
     "stars_received": 29,
-    "public_releases_past_year": 0
+    "forks_received": 7,
+    "public_releases_past_year": 3,
+    "detected_languages": 5
   },
   "languages": [
     {
-      "name": "Python",
-      "percentage": 39,
-      "bytes": 542381
+      "name": "JavaScript",
+      "percentage": 51,
+      "bytes": 10591352
     },
     {
-      "name": "TypeScript",
-      "percentage": 28,
-      "bytes": 384785
+      "name": "Python",
+      "percentage": 15,
+      "bytes": 3025500
     },
     {
       "name": "Shell",
-      "percentage": 11,
-      "bytes": 156066
+      "percentage": 12,
+      "bytes": 2477594
     },
     {
-      "name": "C#",
-      "percentage": 9,
-      "bytes": 124097
+      "name": "TeX",
+      "percentage": 7,
+      "bytes": 1548011
     },
     {
-      "name": "ShaderLab",
-      "percentage": 5,
-      "bytes": 66645
+      "name": "Rust",
+      "percentage": 7,
+      "bytes": 1442521
     },
     {
       "name": "Other",
       "percentage": 8,
-      "bytes": 107834
+      "bytes": 1551393
     }
   ],
+  "radar_dimensions": [
+    {
+      "key": "build",
+      "label": "Build",
+      "score": 98,
+      "source_fields": [
+        "public_commit_contributions"
+      ],
+      "formula": "log10(commits + 1) / log10(threshold + 1) * 100, bounded 0–100; threshold=2000",
+      "unavailable": false
+    },
+    {
+      "key": "collaborate",
+      "label": "Collaborate",
+      "score": 100,
+      "source_fields": [
+        "public_pull_request_contributions",
+        "public_pull_request_review_contributions"
+      ],
+      "formula": "log10(PRs + reviews + 1) / log10(threshold + 1) * 100, bounded 0–100; threshold=500",
+      "unavailable": false
+    },
+    {
+      "key": "ship",
+      "label": "Ship",
+      "score": 42,
+      "source_fields": [
+        "public_releases_past_year",
+        "public_pull_request_contributions"
+      ],
+      "formula": "log10(releases + PRs + 1) / log10(threshold + 1) * 100, bounded 0–100; threshold=100",
+      "unavailable": false
+    },
+    {
+      "key": "maintain",
+      "label": "Maintain",
+      "score": 93,
+      "source_fields": [
+        "owned_public_non_archived_repositories"
+      ],
+      "formula": "log10(active_repos + 1) / log10(threshold + 1) * 100, bounded 0–100; threshold=50",
+      "unavailable": false
+    },
+    {
+      "key": "explore",
+      "label": "Explore",
+      "score": 0,
+      "source_fields": [
+        "total_starred"
+      ],
+      "formula": "log10(starred + 1) / log10(threshold + 1) * 100, bounded 0–100; threshold=5000",
+      "unavailable": true
+    },
+    {
+      "key": "breadth",
+      "label": "Breadth",
+      "score": 93,
+      "source_fields": [
+        "detected_languages",
+        "orgs_count"
+      ],
+      "formula": "log10(languages*2 + orgs*3 + 1) / log10(threshold + 1) * 100, bounded 0–100; threshold=20",
+      "unavailable": false
+    }
+  ],
+  "featured_repositories": [],
+  "knowledge_categories": [],
+  "starred_repository_totals": {
+    "total_starred": 0,
+    "crawl_complete": false,
+    "crawl_pages": 0
+  },
+  "verified_achievements": [],
+  "nonfatal_diagnostics": [],
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-09T23:44:46.773694+00:00",
-    "generation_timestamp": "2026-08-09T23:44:46.773694+00:00",
+    "data_timestamp": "2026-08-10T04:13:09.805918+00:00",
+    "generation_timestamp": "2026-08-10T04:13:09.805918+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-10",
-    "window_end": "2026-08-09",
+    "window_start": "2025-08-11",
+    "window_end": "2026-08-10",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
-    "repository_inventory_source": "GitHub REST /users/{username}/repos type=owner, excluding private, forked, and archived repositories.",
-    "language_distribution_source": "GitHub REST languages_url aggregated across all eligible owned public repositories.",
+    "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",
+    "language_distribution_source": "GitHub REST languages_url aggregated across active public repositories from all configured owners.",
     "release_count_source": "GitHub REST /repos/{owner}/{repo}/releases, excluding drafts, published on or after the trailing-window start date.",
     "current_streak_definition": "Contiguous contribution days ending today, or ending yesterday when today has no contribution yet.",
     "longest_streak_definition": "Longest contiguous contribution streak fully contained within the displayed trailing 365-day window.",
-    "language_rounding_policy": "Largest-remainder integer percentages across all eligible repository language bytes so displayed percentages sum to 100."
+    "language_rounding_policy": "Largest-remainder integer percentages across all eligible repository language bytes so displayed percentages sum to 100.",
+    "multi_owner_scope": "Public repositories owned by: szmyty, incomprisllc, egohygiene.",
+    "personal_activity_scope": "Contributions attributed to @szmyty across all public GitHub repositories."
   }
 }
