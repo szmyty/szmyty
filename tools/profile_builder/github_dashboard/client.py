@@ -109,6 +109,44 @@ class GitHubDashboardClient:
             if not repo.get("private", False) and not repo.get("fork", False)
         ]
 
+    def fetch_org_public_repositories(self, org: str) -> list[dict[str, Any]]:
+        """Fetch public repositories owned by an organization."""
+        params = parse.urlencode({"per_page": 100, "type": "public", "sort": "updated"})
+        url = f"{_API_ROOT}/orgs/{org}/repos?{params}"
+        try:
+            return [
+                repo
+                for repo in self.paginate_rest_list(url)
+                if not repo.get("private", False) and not repo.get("fork", False)
+            ]
+        except ProviderFailure as exc:
+            if "HTTP 404" in str(exc):
+                return []
+            raise
+
+    def fetch_repositories_for_owner(
+        self,
+        login: str,
+        owner_type: str,
+    ) -> list[dict[str, Any]]:
+        """Dispatch to the correct endpoint based on owner type."""
+        if owner_type == "organization":
+            return self.fetch_org_public_repositories(login)
+        return self.fetch_public_repositories(login)
+
+    def fetch_repository(self, full_name: str) -> dict[str, Any] | None:
+        """Fetch a single public repository by owner/name."""
+        url = f"{_API_ROOT}/repos/{full_name}"
+        try:
+            payload, _ = self._request_json(url)
+            if not isinstance(payload, dict):
+                return None
+            return payload
+        except ProviderFailure as exc:
+            if "HTTP 404" in str(exc):
+                return None
+            raise
+
     def fetch_languages(self, languages_url: str) -> dict[str, int]:
         payload, _ = self._request_json(languages_url)
         if not isinstance(payload, dict):

@@ -1,7 +1,21 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "title": "GitHub Engineering",
   "username": "szmyty",
+  "repository_owners": [
+    {
+      "login": "szmyty",
+      "type": "user"
+    },
+    {
+      "login": "incomprisllc",
+      "type": "organization"
+    },
+    {
+      "login": "egohygiene",
+      "type": "organization"
+    }
+  ],
   "trailing_window_days": 365,
   "window_start": "2025-08-10",
   "window_end": "2026-08-09",
@@ -2562,6 +2576,68 @@
       "is_future": false
     }
   ],
+  "monthly_contributions": [
+    {
+      "year": 2025,
+      "month": 8,
+      "count": 42
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "count": 67
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "count": 88
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "count": 74
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "count": 55
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "count": 91
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "count": 103
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "count": 87
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "count": 76
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "count": 112
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "count": 95
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "count": 130
+    }
+  ],
   "contribution_breakdown": {
     "total_public_contributions": 920,
     "public_commit_contributions": 1184,
@@ -2573,10 +2649,23 @@
     "current_days": 7,
     "longest_days": 29
   },
+  "most_active_month": "2026-07",
+  "average_contributions_per_active_day": 4.2,
+  "active_contribution_days": 219,
+  "repositories_contributed_to": 18,
   "repository_inventory": {
-    "owned_public_non_archived_repositories": 12,
-    "stars_received": 29,
-    "public_releases_past_year": 0
+    "owned_public_non_archived_repositories": 28,
+    "total_public_repositories": 34,
+    "archived_repositories": 6,
+    "repositories_per_owner": {
+      "szmyty": 12,
+      "incomprisllc": 9,
+      "egohygiene": 13
+    },
+    "stars_received": 87,
+    "forks_received": 14,
+    "public_releases_past_year": 5,
+    "detected_languages": 12
   },
   "languages": [
     {
@@ -2610,6 +2699,169 @@
       "bytes": 20000
     }
   ],
+  "radar_dimensions": [
+    {
+      "key": "build",
+      "label": "Build",
+      "score": 72,
+      "source_fields": [
+        "public_commit_contributions"
+      ],
+      "formula": "log10(commits + 1) / log10(threshold + 1) * 100, bounded 0-100",
+      "unavailable": false
+    },
+    {
+      "key": "collaborate",
+      "label": "Collaborate",
+      "score": 68,
+      "source_fields": [
+        "public_pull_request_contributions",
+        "public_pull_request_review_contributions"
+      ],
+      "formula": "log10(PRs + reviews + 1) / log10(threshold + 1) * 100, bounded 0-100",
+      "unavailable": false
+    },
+    {
+      "key": "ship",
+      "label": "Ship",
+      "score": 55,
+      "source_fields": [
+        "public_releases_past_year",
+        "public_pull_request_contributions"
+      ],
+      "formula": "log10(releases + PRs + 1) / log10(threshold + 1) * 100, bounded 0-100",
+      "unavailable": false
+    },
+    {
+      "key": "maintain",
+      "label": "Maintain",
+      "score": 60,
+      "source_fields": [
+        "owned_public_non_archived_repositories",
+        "active_contribution_days"
+      ],
+      "formula": "log10(active_repos + 1) / log10(threshold + 1) * 100, bounded 0-100",
+      "unavailable": false
+    },
+    {
+      "key": "explore",
+      "label": "Explore",
+      "score": 80,
+      "source_fields": [
+        "total_starred"
+      ],
+      "formula": "log10(starred + 1) / log10(threshold + 1) * 100, bounded 0-100",
+      "unavailable": false
+    },
+    {
+      "key": "breadth",
+      "label": "Breadth",
+      "score": 65,
+      "source_fields": [
+        "detected_languages",
+        "repositories_contributed_to"
+      ],
+      "formula": "(languages / language_threshold + orgs / org_threshold) / 2 * 100, bounded 0-100",
+      "unavailable": false
+    }
+  ],
+  "featured_repositories": [
+    {
+      "owner": "szmyty",
+      "name": "szmyty",
+      "full_name": "szmyty/szmyty",
+      "description": "Alan Szmyt's public GitHub profile and reusable README/template assets.",
+      "primary_language": "Python",
+      "stars": 3,
+      "forks": 1,
+      "html_url": "https://github.com/szmyty/szmyty",
+      "latest_release_tag": "",
+      "latest_release_date": "",
+      "missing": false
+    },
+    {
+      "owner": "egohygiene",
+      "name": "mantle",
+      "full_name": "egohygiene/mantle",
+      "description": "Core infrastructure library.",
+      "primary_language": "Python",
+      "stars": 0,
+      "forks": 0,
+      "html_url": "https://github.com/egohygiene/mantle",
+      "latest_release_tag": "",
+      "latest_release_date": "",
+      "missing": false
+    }
+  ],
+  "knowledge_categories": [
+    {
+      "key": "ai_ml",
+      "label": "AI, ML & Agents",
+      "count": 412,
+      "percentage": 18
+    },
+    {
+      "key": "dev_tooling",
+      "label": "Developer Tooling",
+      "count": 389,
+      "percentage": 17
+    },
+    {
+      "key": "devops",
+      "label": "DevOps & Infrastructure",
+      "count": 346,
+      "percentage": 15
+    },
+    {
+      "key": "web_app",
+      "label": "Web & App Dev",
+      "count": 321,
+      "percentage": 14
+    },
+    {
+      "key": "data",
+      "label": "Data & Databases",
+      "count": 276,
+      "percentage": 12
+    },
+    {
+      "key": "security",
+      "label": "Security & Privacy",
+      "count": 184,
+      "percentage": 8
+    },
+    {
+      "key": "creative",
+      "label": "Creative Technology",
+      "count": 138,
+      "percentage": 6
+    },
+    {
+      "key": "research",
+      "label": "Research & Learning",
+      "count": 115,
+      "percentage": 5
+    },
+    {
+      "key": "os_homelab",
+      "label": "OS & Homelab",
+      "count": 92,
+      "percentage": 4
+    },
+    {
+      "key": "other",
+      "label": "Other",
+      "count": 27,
+      "percentage": 1
+    }
+  ],
+  "starred_repository_totals": {
+    "total_starred": 2300,
+    "crawl_complete": false,
+    "crawl_pages": 0
+  },
+  "verified_achievements": [],
+  "nonfatal_diagnostics": [],
   "status": {
     "data_source": "fixture",
     "source_state": "static",
@@ -2628,6 +2880,8 @@
     "release_count_source": "Synthetic fixture for offline rendering and tests.",
     "current_streak_definition": "Contiguous contribution days ending today, or yesterday when today has no contribution.",
     "longest_streak_definition": "Longest contiguous contribution streak within the displayed trailing 365-day window.",
-    "language_rounding_policy": "Largest-remainder integer percentages summing to 100."
+    "language_rounding_policy": "Largest-remainder integer percentages summing to 100.",
+    "multi_owner_scope": "Public repositories owned by szmyty, incomprisllc, and egohygiene.",
+    "personal_activity_scope": "Contributions attributed to @szmyty across all public GitHub repositories."
   }
 }

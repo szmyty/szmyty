@@ -1,0 +1,38 @@
+# github-dashboard.yml
+# Typed configuration for the GitHub AFQC multi-owner telemetry system.
+# All owner identities and collection policies are declared here.
+# Do not scatter owner names through collectors, renderers, or templates.
+
+github:
+  subject: "szmyty"
+
+  repository_owners:
+    - login: "szmyty"
+      type: "user"
+    - login: "incomprisllc"
+      type: "organization"
+    - login: "egohygiene"
+      type: "organization"
+
+  repository_policy:
+    visibility: "public"
+    include_forks: false
+    include_templates: true
+    include_archived_in_inventory: true
+    include_archived_in_active_metrics: false
+    include_archived_in_languages: false
+
+  contribution_period:
+    mode: "trailing_days"
+    days: 365
+
+  starred_repository_policy:
+    visibility: "public"
+    page_size: 100
+    cache_pages: true
+
+  featured_repositories:
+    - "egohygiene/mantle"
+    - "egohygiene/relay"
+    - "egohygiene/aniflow"
+    - "szmyty/szmyty"
