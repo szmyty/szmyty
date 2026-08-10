@@ -17,6 +17,14 @@ _TIMEOUT = 20
 class ProviderFailure(RuntimeError):
     """Raised when public GitHub data cannot be collected."""
 
+    def __init__(self, message: str, *, status_code: int | None = None) -> None:
+        super().__init__(message)
+        self.status_code = status_code
+
+
+class ResourceNotFoundError(ProviderFailure):
+    """Raised when a GitHub resource returns HTTP 404."""
+
 
 class RateLimitedError(ProviderFailure):
     """Raised when GitHub rate limits the request."""
@@ -61,10 +69,17 @@ class GitHubDashboardClient:
                 and (retry_after is not None or rate_limit_remaining == "0")
             ):
                 raise RateLimitedError(
-                    f"GitHub API rate limited: HTTP {exc.code}"
+                    f"GitHub API rate limited: HTTP {exc.code}",
+                    status_code=exc.code,
+                ) from exc
+            if exc.code == 404:
+                raise ResourceNotFoundError(
+                    "GitHub resource not found: HTTP 404",
+                    status_code=404,
                 ) from exc
             raise ProviderFailure(
-                f"GitHub API request failed: HTTP {exc.code}"
+                f"GitHub API request failed: HTTP {exc.code}",
+                status_code=exc.code,
             ) from exc
         except error.URLError as exc:
             raise ProviderFailure(f"GitHub API unavailable: {exc.reason}") from exc
@@ -120,7 +135,7 @@ class GitHubDashboardClient:
                 if not repo.get("private", False) and not repo.get("fork", False)
             ]
         except ProviderFailure as exc:
-            if "HTTP 404" in str(exc):
+            if isinstance(exc, ResourceNotFoundError):
                 return []
             raise
 
@@ -143,7 +158,7 @@ class GitHubDashboardClient:
                 return None
             return payload
         except ProviderFailure as exc:
-            if "HTTP 404" in str(exc):
+            if isinstance(exc, ResourceNotFoundError):
                 return None
             raise
 
@@ -165,7 +180,7 @@ class GitHubDashboardClient:
         try:
             return self.paginate_rest_list(url)
         except ProviderFailure as exc:
-            if "HTTP 404" in str(exc):
+            if isinstance(exc, ResourceNotFoundError):
                 return []
             raise
 

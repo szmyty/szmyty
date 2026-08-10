@@ -193,12 +193,8 @@ class DashboardMethodology(BaseModel):
     current_streak_definition: str
     longest_streak_definition: str
     language_rounding_policy: str
-    multi_owner_scope: str = (
-        "Public repositories owned by szmyty, incomprisllc, and egohygiene."
-    )
-    personal_activity_scope: str = (
-        "Contributions attributed to @szmyty across all public GitHub repositories."
-    )
+    multi_owner_scope: str = ""
+    personal_activity_scope: str = ""
 
 
 class GitHubDashboardSnapshot(BaseModel):

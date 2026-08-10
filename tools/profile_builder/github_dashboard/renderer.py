@@ -7,6 +7,7 @@ measured content — no hard-coded global y-offsets.
 
 from __future__ import annotations
 
+import calendar
 import math
 from dataclasses import dataclass
 from datetime import date
@@ -298,7 +299,7 @@ def _pulse_chart(
         cy = by
         points.append((cx, cy))
         # Month label
-        abbr = f"{month.month:02d}"
+        abbr = calendar.month_abbr[month.month]
         parts.append(
             f'<text x="{cx:.1f}" y="{box.y + box.height - 6:.1f}" '
             f'fill="{tok.text_muted}" font-size="9" '
