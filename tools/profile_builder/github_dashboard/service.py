@@ -99,6 +99,7 @@ def _fetch_languages(
         for repo in repositories
         if repo.get("languages_url")
     ]
+
     def load(url: str) -> tuple[str, dict[str, int]]:
         try:
             return url, github.fetch_languages(url)
@@ -115,10 +116,9 @@ def _fetch_releases(
     repositories: list[dict[str, object]],
 ) -> dict[str, list[dict[str, Any]]]:
     names = [
-        str(repo.get("full_name"))
-        for repo in repositories
-        if repo.get("full_name")
+        str(repo.get("full_name")) for repo in repositories if repo.get("full_name")
     ]
+
     def load(full_name: str) -> tuple[str, list[dict[str, Any]]]:
         try:
             return full_name, github.fetch_releases(full_name)
