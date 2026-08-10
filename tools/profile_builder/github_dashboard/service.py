@@ -15,12 +15,21 @@ from tools.profile_builder.github_dashboard.client import (
     RateLimitedError,
 )
 from tools.profile_builder.github_dashboard.metrics import (
+    aggregate_forks,
     aggregate_language_shares,
     aggregate_stars,
+    all_public_non_fork_repositories,
+    calculate_active_days,
+    calculate_average_contributions_per_active_day,
+    calculate_monthly_contributions,
+    calculate_most_active_month,
+    calculate_radar_dimensions,
     calculate_streaks,
     count_public_releases_past_year,
+    deduplicate_repositories,
     eligible_public_repositories,
     normalize_contribution_days,
+    repositories_per_owner,
     trailing_window_endpoints,
     utc_today,
 )
@@ -30,6 +39,8 @@ from tools.profile_builder.github_dashboard.models import (
     DashboardStatus,
     GitHubDashboardSnapshot,
     RepositoryInventory,
+    RepositoryOwnerConfig,
+    StarredRepositoryTotals,
     StreakMetrics,
 )
 from tools.profile_builder.github_dashboard.renderer import render_dashboard_svg
@@ -40,13 +51,18 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "profile" / "artifacts" / MODULE_NAME
 DEFAULT_FIXTURE = REPO_ROOT / "profile" / "fixtures" / "github-dashboard.json"
 DEFAULT_USERNAME = "szmyty"
+DEFAULT_REPOSITORY_OWNERS: list[RepositoryOwnerConfig] = [
+    RepositoryOwnerConfig(login="szmyty", type="user"),
+    RepositoryOwnerConfig(login="incomprisllc", type="organization"),
+    RepositoryOwnerConfig(login="egohygiene", type="organization"),
+]
 _FRESHNESS_POLICY = {
     "cadence": "daily",
     "ttl_seconds": 86400,
     "warn_after_seconds": 172800,
 }
-_RENDERER_VERSION = "1.0"
-_SCHEMA_VERSION = "1.0"
+_RENDERER_VERSION = "2.0"
+_SCHEMA_VERSION = "2.0"
 
 
 def _write_json(path: Path, data: dict[str, Any]) -> str:
@@ -99,6 +115,7 @@ def _fetch_languages(
         for repo in repositories
         if repo.get("languages_url")
     ]
+
     def load(url: str) -> tuple[str, dict[str, int]]:
         try:
             return url, github.fetch_languages(url)
@@ -115,10 +132,9 @@ def _fetch_releases(
     repositories: list[dict[str, object]],
 ) -> dict[str, list[dict[str, Any]]]:
     names = [
-        str(repo.get("full_name"))
-        for repo in repositories
-        if repo.get("full_name")
+        str(repo.get("full_name")) for repo in repositories if repo.get("full_name")
     ]
+
     def load(full_name: str) -> tuple[str, list[dict[str, Any]]]:
         try:
             return full_name, github.fetch_releases(full_name)
@@ -181,11 +197,15 @@ def collect_live_snapshot(
     token: str,
     now: datetime,
     client: GitHubDashboardClient | None = None,
+    repository_owners: list[RepositoryOwnerConfig] | None = None,
 ) -> GitHubDashboardSnapshot:
-    """Collect and normalize a live dashboard snapshot."""
+    """Collect and normalize a live multi-owner dashboard snapshot."""
     today = utc_today(now)
     window_start, window_end = trailing_window_endpoints(today=today, days=365)
     github = client or GitHubDashboardClient(token)
+    owners = repository_owners or DEFAULT_REPOSITORY_OWNERS
+
+    # Personal activity — attributed to subject across GitHub
     collection = github.fetch_contributions(
         username,
         window_start=window_start,
@@ -200,49 +220,100 @@ def collect_live_snapshot(
         window_start=window_start,
         window_end=window_end,
     )
-    repositories = eligible_public_repositories(
-        github.fetch_public_repositories(username)
-    )
-    languages_by_repo = _fetch_languages(github, repositories)
-    releases_by_repo = _fetch_releases(github, repositories)
+
+    # Engineering ecosystem — aggregate all configured owners
+    nonfatal_diagnostics: list[str] = []
+    all_repos_raw: list[dict[str, object]] = []
+    for owner_cfg in owners:
+        try:
+            owner_repos = github.fetch_repositories_for_owner(
+                owner_cfg.login, owner_cfg.type
+            )
+            all_repos_raw.extend(owner_repos)
+        except ProviderFailure as exc:
+            nonfatal_diagnostics.append(f"Owner {owner_cfg.login!r} unavailable: {exc}")
+
+    all_repos_dedup = deduplicate_repositories(all_repos_raw)
+    active_repos = eligible_public_repositories(all_repos_dedup)
+    all_non_fork = all_public_non_fork_repositories(all_repos_dedup)
+    archived_count = len(all_non_fork) - len(active_repos)
+
+    languages_by_repo = _fetch_languages(github, active_repos)
+    releases_by_repo = _fetch_releases(github, active_repos)
     current_streak, longest_streak = calculate_streaks(contribution_days, today=today)
+    monthly = calculate_monthly_contributions(
+        contribution_days, window_start=window_start, window_end=window_end
+    )
+    active_days = calculate_active_days(contribution_days)
+    avg_per_day = calculate_average_contributions_per_active_day(
+        contribution_days, active_days
+    )
+    most_active = calculate_most_active_month(monthly)
+
+    commits = int(collection.get("totalCommitContributions") or 0)
+    pull_requests = int(collection.get("totalPullRequestContributions") or 0)
+    reviews = int(collection.get("totalPullRequestReviewContributions") or 0)
+    releases_count = count_public_releases_past_year(
+        active_repos, releases_by_repo, window_start=window_start
+    )
+    languages = aggregate_language_shares(active_repos, languages_by_repo)
+    detected_languages = len({lang.name for lang in languages if lang.name != "Other"})
+    orgs_count = sum(1 for o in owners if o.type == "organization")
+
+    radar = calculate_radar_dimensions(
+        commits=commits,
+        pull_requests=pull_requests,
+        reviews=reviews,
+        releases=releases_count,
+        active_repositories=len(active_repos),
+        total_starred=0,
+        detected_languages=detected_languages,
+        orgs_count=orgs_count,
+    )
+    per_owner = repositories_per_owner(active_repos)
     data_timestamp = now.astimezone(UTC).isoformat()
     return GitHubDashboardSnapshot(
         schema_version=_SCHEMA_VERSION,
         username=username,
+        repository_owners=owners,
         trailing_window_days=365,
         window_start=window_start.isoformat(),
         window_end=window_end.isoformat(),
         contribution_days=contribution_days,
+        monthly_contributions=monthly,
         contribution_breakdown=ContributionBreakdown(
             total_public_contributions=int(calendar.get("totalContributions") or 0),
-            public_commit_contributions=int(
-                collection.get("totalCommitContributions") or 0
-            ),
-            public_pull_request_contributions=int(
-                collection.get("totalPullRequestContributions") or 0
-            ),
+            public_commit_contributions=commits,
+            public_pull_request_contributions=pull_requests,
             public_issue_contributions=int(
                 collection.get("totalIssueContributions") or 0
             ),
-            public_pull_request_review_contributions=int(
-                collection.get("totalPullRequestReviewContributions") or 0
-            ),
+            public_pull_request_review_contributions=reviews,
         ),
         streaks=StreakMetrics(
             current_days=current_streak,
             longest_days=longest_streak,
         ),
+        most_active_month=most_active,
+        average_contributions_per_active_day=avg_per_day,
+        active_contribution_days=active_days,
+        repositories_contributed_to=0,
         repository_inventory=RepositoryInventory(
-            owned_public_non_archived_repositories=len(repositories),
-            stars_received=aggregate_stars(repositories),
-            public_releases_past_year=count_public_releases_past_year(
-                repositories,
-                releases_by_repo,
-                window_start=window_start,
-            ),
+            owned_public_non_archived_repositories=len(active_repos),
+            total_public_repositories=len(all_non_fork),
+            archived_repositories=max(0, archived_count),
+            repositories_per_owner=per_owner,
+            stars_received=aggregate_stars(active_repos),
+            forks_received=aggregate_forks(active_repos),
+            public_releases_past_year=releases_count,
+            detected_languages=detected_languages,
         ),
-        languages=aggregate_language_shares(repositories, languages_by_repo),
+        languages=languages,
+        radar_dimensions=radar,
+        starred_repository_totals=StarredRepositoryTotals(
+            total_starred=0, crawl_complete=False, crawl_pages=0
+        ),
+        nonfatal_diagnostics=nonfatal_diagnostics,
         status=DashboardStatus(
             data_source="live",
             source_state="fresh",
@@ -264,12 +335,13 @@ def collect_live_snapshot(
                 "totalPullRequestReviewContributions for the same window."
             ),
             repository_inventory_source=(
-                "GitHub REST /users/{username}/repos type=owner, excluding "
-                "private, forked, and archived repositories."
+                "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all "
+                "configured owners, excluding private and forked repositories; "
+                "deduplicated by canonical full_name."
             ),
             language_distribution_source=(
-                "GitHub REST languages_url aggregated across all eligible "
-                "owned public repositories."
+                "GitHub REST languages_url aggregated across active public "
+                "repositories from all configured owners."
             ),
             release_count_source=(
                 "GitHub REST /repos/{owner}/{repo}/releases, excluding drafts, "
@@ -286,6 +358,15 @@ def collect_live_snapshot(
             language_rounding_policy=(
                 "Largest-remainder integer percentages across all eligible "
                 "repository language bytes so displayed percentages sum to 100."
+            ),
+            multi_owner_scope=(
+                "Public repositories owned by: "
+                + ", ".join(o.login for o in owners)
+                + "."
+            ),
+            personal_activity_scope=(
+                f"Contributions attributed to @{username} across all public "
+                "GitHub repositories."
             ),
         ),
     )

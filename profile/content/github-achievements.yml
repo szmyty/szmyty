@@ -1,0 +1,9 @@
+# github-achievements.yml
+# Verified GitHub achievement catalog for @szmyty.
+#
+# Only achievements with verified: true render publicly.
+# Do not invent achievements, tiers, descriptions, dates, or badge imagery.
+# If no achievements are verified, the public card is omitted and this module
+# is recorded as requiring owner verification.
+
+achievements: []

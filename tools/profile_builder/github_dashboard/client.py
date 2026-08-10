@@ -17,6 +17,14 @@ _TIMEOUT = 20
 class ProviderFailure(RuntimeError):
     """Raised when public GitHub data cannot be collected."""
 
+    def __init__(self, message: str, *, status_code: int | None = None) -> None:
+        super().__init__(message)
+        self.status_code = status_code
+
+
+class ResourceNotFoundError(ProviderFailure):
+    """Raised when a GitHub resource returns HTTP 404."""
+
 
 class RateLimitedError(ProviderFailure):
     """Raised when GitHub rate limits the request."""
@@ -61,10 +69,17 @@ class GitHubDashboardClient:
                 and (retry_after is not None or rate_limit_remaining == "0")
             ):
                 raise RateLimitedError(
-                    f"GitHub API rate limited: HTTP {exc.code}"
+                    f"GitHub API rate limited: HTTP {exc.code}",
+                    status_code=exc.code,
+                ) from exc
+            if exc.code == 404:
+                raise ResourceNotFoundError(
+                    "GitHub resource not found: HTTP 404",
+                    status_code=404,
                 ) from exc
             raise ProviderFailure(
-                f"GitHub API request failed: HTTP {exc.code}"
+                f"GitHub API request failed: HTTP {exc.code}",
+                status_code=exc.code,
             ) from exc
         except error.URLError as exc:
             raise ProviderFailure(f"GitHub API unavailable: {exc.reason}") from exc
@@ -109,6 +124,44 @@ class GitHubDashboardClient:
             if not repo.get("private", False) and not repo.get("fork", False)
         ]
 
+    def fetch_org_public_repositories(self, org: str) -> list[dict[str, Any]]:
+        """Fetch public repositories owned by an organization."""
+        params = parse.urlencode({"per_page": 100, "type": "public", "sort": "updated"})
+        url = f"{_API_ROOT}/orgs/{org}/repos?{params}"
+        try:
+            return [
+                repo
+                for repo in self.paginate_rest_list(url)
+                if not repo.get("private", False) and not repo.get("fork", False)
+            ]
+        except ProviderFailure as exc:
+            if isinstance(exc, ResourceNotFoundError):
+                return []
+            raise
+
+    def fetch_repositories_for_owner(
+        self,
+        login: str,
+        owner_type: str,
+    ) -> list[dict[str, Any]]:
+        """Dispatch to the correct endpoint based on owner type."""
+        if owner_type == "organization":
+            return self.fetch_org_public_repositories(login)
+        return self.fetch_public_repositories(login)
+
+    def fetch_repository(self, full_name: str) -> dict[str, Any] | None:
+        """Fetch a single public repository by owner/name."""
+        url = f"{_API_ROOT}/repos/{full_name}"
+        try:
+            payload, _ = self._request_json(url)
+            if not isinstance(payload, dict):
+                return None
+            return payload
+        except ProviderFailure as exc:
+            if isinstance(exc, ResourceNotFoundError):
+                return None
+            raise
+
     def fetch_languages(self, languages_url: str) -> dict[str, int]:
         payload, _ = self._request_json(languages_url)
         if not isinstance(payload, dict):
@@ -127,7 +180,7 @@ class GitHubDashboardClient:
         try:
             return self.paginate_rest_list(url)
         except ProviderFailure as exc:
-            if "HTTP 404" in str(exc):
+            if isinstance(exc, ResourceNotFoundError):
                 return []
             raise
 
