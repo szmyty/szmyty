@@ -17,16 +17,9 @@
     }
   ],
   "trailing_window_days": 365,
-  "window_start": "2025-08-13",
-  "window_end": "2026-08-12",
+  "window_start": "2025-08-14",
+  "window_end": "2026-08-13",
   "contribution_days": [
-    {
-      "date": "2025-08-13",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 3,
-      "is_future": false
-    },
     {
       "date": "2025-08-14",
       "contribution_count": 0,
@@ -2574,6 +2567,13 @@
       "level": 0,
       "weekday": 3,
       "is_future": false
+    },
+    {
+      "date": "2026-08-13",
+      "contribution_count": 0,
+      "level": 0,
+      "weekday": 4,
+      "is_future": false
     }
   ],
   "monthly_contributions": [
@@ -2651,7 +2651,7 @@
     "public_pull_request_review_contributions": 531
   },
   "streaks": {
-    "current_days": 4,
+    "current_days": 0,
     "longest_days": 20
   },
   "most_active_month": "2026-04",
@@ -2781,14 +2781,14 @@
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-12T06:30:02.621248+00:00",
-    "generation_timestamp": "2026-08-12T06:30:02.621248+00:00",
+    "data_timestamp": "2026-08-13T06:31:35.529388+00:00",
+    "generation_timestamp": "2026-08-13T06:31:35.529388+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-13",
-    "window_end": "2026-08-12",
+    "window_start": "2025-08-14",
+    "window_end": "2026-08-13",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
     "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",
