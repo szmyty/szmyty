@@ -17,16 +17,9 @@
     }
   ],
   "trailing_window_days": 365,
-  "window_start": "2025-08-16",
-  "window_end": "2026-08-15",
+  "window_start": "2025-08-17",
+  "window_end": "2026-08-16",
   "contribution_days": [
-    {
-      "date": "2025-08-16",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 6,
-      "is_future": false
-    },
     {
       "date": "2025-08-17",
       "contribution_count": 0,
@@ -1723,7 +1716,7 @@
     },
     {
       "date": "2026-04-16",
-      "contribution_count": 2,
+      "contribution_count": 1,
       "level": 1,
       "weekday": 4,
       "is_future": false
@@ -1737,8 +1730,8 @@
     },
     {
       "date": "2026-04-18",
-      "contribution_count": 2,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 6,
       "is_future": false
     },
@@ -1849,8 +1842,8 @@
     },
     {
       "date": "2026-05-04",
-      "contribution_count": 4,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 1,
       "is_future": false
     },
@@ -1891,8 +1884,8 @@
     },
     {
       "date": "2026-05-10",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 0,
       "is_future": false
     },
@@ -1905,8 +1898,8 @@
     },
     {
       "date": "2026-05-12",
-      "contribution_count": 2,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 2,
       "is_future": false
     },
@@ -1919,8 +1912,8 @@
     },
     {
       "date": "2026-05-14",
-      "contribution_count": 4,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 4,
       "is_future": false
     },
@@ -1975,14 +1968,14 @@
     },
     {
       "date": "2026-05-22",
-      "contribution_count": 2,
+      "contribution_count": 1,
       "level": 1,
       "weekday": 5,
       "is_future": false
     },
     {
       "date": "2026-05-23",
-      "contribution_count": 29,
+      "contribution_count": 26,
       "level": 2,
       "weekday": 6,
       "is_future": false
@@ -2045,7 +2038,7 @@
     },
     {
       "date": "2026-06-01",
-      "contribution_count": 14,
+      "contribution_count": 13,
       "level": 1,
       "weekday": 1,
       "is_future": false
@@ -2073,7 +2066,7 @@
     },
     {
       "date": "2026-06-05",
-      "contribution_count": 5,
+      "contribution_count": 4,
       "level": 1,
       "weekday": 5,
       "is_future": false
@@ -2115,7 +2108,7 @@
     },
     {
       "date": "2026-06-11",
-      "contribution_count": 7,
+      "contribution_count": 1,
       "level": 1,
       "weekday": 4,
       "is_future": false
@@ -2129,14 +2122,14 @@
     },
     {
       "date": "2026-06-13",
-      "contribution_count": 15,
+      "contribution_count": 9,
       "level": 1,
       "weekday": 6,
       "is_future": false
     },
     {
       "date": "2026-06-14",
-      "contribution_count": 6,
+      "contribution_count": 1,
       "level": 1,
       "weekday": 0,
       "is_future": false
@@ -2150,64 +2143,64 @@
     },
     {
       "date": "2026-06-16",
-      "contribution_count": 11,
+      "contribution_count": 2,
       "level": 1,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2026-06-17",
-      "contribution_count": 2,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 3,
       "is_future": false
     },
     {
       "date": "2026-06-18",
-      "contribution_count": 5,
+      "contribution_count": 2,
       "level": 1,
       "weekday": 4,
       "is_future": false
     },
     {
       "date": "2026-06-19",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 5,
       "is_future": false
     },
     {
       "date": "2026-06-20",
-      "contribution_count": 25,
-      "level": 2,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 6,
       "is_future": false
     },
     {
       "date": "2026-06-21",
-      "contribution_count": 17,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2026-06-22",
-      "contribution_count": 17,
+      "contribution_count": 2,
       "level": 1,
       "weekday": 1,
       "is_future": false
     },
     {
       "date": "2026-06-23",
-      "contribution_count": 2,
+      "contribution_count": 1,
       "level": 1,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2026-06-24",
-      "contribution_count": 5,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 3,
       "is_future": false
     },
@@ -2220,7 +2213,7 @@
     },
     {
       "date": "2026-06-26",
-      "contribution_count": 35,
+      "contribution_count": 23,
       "level": 2,
       "weekday": 5,
       "is_future": false
@@ -2241,29 +2234,29 @@
     },
     {
       "date": "2026-06-29",
-      "contribution_count": 3,
+      "contribution_count": 2,
       "level": 1,
       "weekday": 1,
       "is_future": false
     },
     {
       "date": "2026-06-30",
-      "contribution_count": 3,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2026-07-01",
-      "contribution_count": 25,
-      "level": 2,
+      "contribution_count": 16,
+      "level": 1,
       "weekday": 3,
       "is_future": false
     },
     {
       "date": "2026-07-02",
-      "contribution_count": 32,
-      "level": 2,
+      "contribution_count": 2,
+      "level": 1,
       "weekday": 4,
       "is_future": false
     },
@@ -2276,22 +2269,22 @@
     },
     {
       "date": "2026-07-04",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 6,
       "is_future": false
     },
     {
       "date": "2026-07-05",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2026-07-06",
-      "contribution_count": 5,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 1,
       "is_future": false
     },
@@ -2304,8 +2297,8 @@
     },
     {
       "date": "2026-07-08",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 3,
       "is_future": false
     },
@@ -2318,35 +2311,35 @@
     },
     {
       "date": "2026-07-10",
-      "contribution_count": 5,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 5,
       "is_future": false
     },
     {
       "date": "2026-07-11",
-      "contribution_count": 49,
-      "level": 3,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 6,
       "is_future": false
     },
     {
       "date": "2026-07-12",
-      "contribution_count": 4,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2026-07-13",
-      "contribution_count": 2,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 1,
       "is_future": false
     },
     {
       "date": "2026-07-14",
-      "contribution_count": 14,
+      "contribution_count": 13,
       "level": 1,
       "weekday": 2,
       "is_future": false
@@ -2367,7 +2360,7 @@
     },
     {
       "date": "2026-07-17",
-      "contribution_count": 18,
+      "contribution_count": 16,
       "level": 1,
       "weekday": 5,
       "is_future": false
@@ -2381,21 +2374,21 @@
     },
     {
       "date": "2026-07-19",
-      "contribution_count": 35,
+      "contribution_count": 33,
       "level": 2,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2026-07-20",
-      "contribution_count": 11,
+      "contribution_count": 10,
       "level": 1,
       "weekday": 1,
       "is_future": false
     },
     {
       "date": "2026-07-21",
-      "contribution_count": 18,
+      "contribution_count": 13,
       "level": 1,
       "weekday": 2,
       "is_future": false
@@ -2430,8 +2423,8 @@
     },
     {
       "date": "2026-07-26",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 0,
+      "level": 0,
       "weekday": 0,
       "is_future": false
     },
@@ -2451,7 +2444,7 @@
     },
     {
       "date": "2026-07-29",
-      "contribution_count": 24,
+      "contribution_count": 23,
       "level": 2,
       "weekday": 3,
       "is_future": false
@@ -2507,7 +2500,7 @@
     },
     {
       "date": "2026-08-06",
-      "contribution_count": 37,
+      "contribution_count": 36,
       "level": 2,
       "weekday": 4,
       "is_future": false
@@ -2570,9 +2563,16 @@
     },
     {
       "date": "2026-08-15",
-      "contribution_count": 4,
-      "level": 1,
+      "contribution_count": 67,
+      "level": 4,
       "weekday": 6,
+      "is_future": false
+    },
+    {
+      "date": "2026-08-16",
+      "contribution_count": 3,
+      "level": 1,
+      "weekday": 0,
       "is_future": false
     }
   ],
@@ -2620,52 +2620,52 @@
     {
       "year": 2026,
       "month": 4,
-      "count": 802
+      "count": 799
     },
     {
       "year": 2026,
       "month": 5,
-      "count": 390
+      "count": 375
     },
     {
       "year": 2026,
       "month": 6,
-      "count": 322
+      "count": 209
     },
     {
       "year": 2026,
       "month": 7,
-      "count": 369
+      "count": 249
     },
     {
       "year": 2026,
       "month": 8,
-      "count": 519
+      "count": 584
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 3180,
-    "public_commit_contributions": 1896,
-    "public_pull_request_contributions": 41,
-    "public_issue_contributions": 703,
-    "public_pull_request_review_contributions": 533
+    "total_public_contributions": 2994,
+    "public_commit_contributions": 1739,
+    "public_pull_request_contributions": 54,
+    "public_issue_contributions": 684,
+    "public_pull_request_review_contributions": 510
   },
   "streaks": {
-    "current_days": 3,
-    "longest_days": 20
+    "current_days": 4,
+    "longest_days": 16
   },
   "most_active_month": "2026-04",
-  "average_contributions_per_active_day": 26.5,
-  "active_contribution_days": 120,
+  "average_contributions_per_active_day": 29.64,
+  "active_contribution_days": 101,
   "repositories_contributed_to": 0,
   "repository_inventory": {
-    "owned_public_non_archived_repositories": 39,
-    "total_public_repositories": 39,
+    "owned_public_non_archived_repositories": 38,
+    "total_public_repositories": 38,
     "archived_repositories": 0,
     "repositories_per_owner": {
       "szmyty": 11,
       "incomprisllc": 3,
-      "egohygiene": 25
+      "egohygiene": 24
     },
     "stars_received": 30,
     "forks_received": 7,
@@ -2674,41 +2674,41 @@
   },
   "languages": [
     {
-      "name": "JavaScript",
-      "percentage": 48,
-      "bytes": 10629011
+      "name": "TeX",
+      "percentage": 22,
+      "bytes": 5837348
     },
     {
-      "name": "Python",
-      "percentage": 15,
-      "bytes": 3426001
+      "name": "JavaScript",
+      "percentage": 18,
+      "bytes": 4711374
+    },
+    {
+      "name": "HTML",
+      "percentage": 17,
+      "bytes": 4432441
     },
     {
       "name": "Shell",
+      "percentage": 16,
+      "bytes": 4240264
+    },
+    {
+      "name": "Python",
       "percentage": 14,
-      "bytes": 3108294
-    },
-    {
-      "name": "TeX",
-      "percentage": 7,
-      "bytes": 1557291
-    },
-    {
-      "name": "Rust",
-      "percentage": 7,
-      "bytes": 1493473
+      "bytes": 3813805
     },
     {
       "name": "Other",
-      "percentage": 9,
-      "bytes": 1936394
+      "percentage": 13,
+      "bytes": 3383463
     }
   ],
   "radar_dimensions": [
     {
       "key": "build",
       "label": "Build",
-      "score": 99,
+      "score": 98,
       "source_fields": [
         "public_commit_contributions"
       ],
@@ -2729,7 +2729,7 @@
     {
       "key": "ship",
       "label": "Ship",
-      "score": 82,
+      "score": 88,
       "source_fields": [
         "public_releases_past_year",
         "public_pull_request_contributions"
@@ -2740,7 +2740,7 @@
     {
       "key": "maintain",
       "label": "Maintain",
-      "score": 94,
+      "score": 93,
       "source_fields": [
         "owned_public_non_archived_repositories"
       ],
@@ -2781,14 +2781,14 @@
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-15T06:07:16.673343+00:00",
-    "generation_timestamp": "2026-08-15T06:07:16.673343+00:00",
+    "data_timestamp": "2026-08-16T06:08:03.571167+00:00",
+    "generation_timestamp": "2026-08-16T06:08:03.571167+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-16",
-    "window_end": "2026-08-15",
+    "window_start": "2025-08-17",
+    "window_end": "2026-08-16",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
     "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",

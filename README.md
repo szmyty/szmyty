@@ -69,7 +69,7 @@ fail.
   >
 </picture>
 
-_Trailing 365-day window · live / fresh · Data 2026-08-15 · Generated 2026-08-15_
+_Trailing 365-day window · live / fresh · Data 2026-08-16 · Generated 2026-08-16_
 <!-- END:github-dashboard -->
 
 ---
