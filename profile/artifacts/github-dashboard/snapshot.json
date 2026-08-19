@@ -17,16 +17,9 @@
     }
   ],
   "trailing_window_days": 365,
-  "window_start": "2025-08-19",
-  "window_end": "2026-08-18",
+  "window_start": "2025-08-20",
+  "window_end": "2026-08-19",
   "contribution_days": [
-    {
-      "date": "2025-08-19",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 2,
-      "is_future": false
-    },
     {
       "date": "2025-08-20",
       "contribution_count": 0,
@@ -744,14 +737,14 @@
     {
       "date": "2025-11-30",
       "contribution_count": 74,
-      "level": 4,
+      "level": 3,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2025-12-01",
       "contribution_count": 58,
-      "level": 3,
+      "level": 2,
       "weekday": 1,
       "is_future": false
     },
@@ -1486,7 +1479,7 @@
     {
       "date": "2026-03-16",
       "contribution_count": 31,
-      "level": 2,
+      "level": 1,
       "weekday": 1,
       "is_future": false
     },
@@ -1528,14 +1521,14 @@
     {
       "date": "2026-03-22",
       "contribution_count": 67,
-      "level": 4,
+      "level": 3,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2026-03-23",
       "contribution_count": 52,
-      "level": 3,
+      "level": 2,
       "weekday": 1,
       "is_future": false
     },
@@ -1549,7 +1542,7 @@
     {
       "date": "2026-03-25",
       "contribution_count": 30,
-      "level": 2,
+      "level": 1,
       "weekday": 3,
       "is_future": false
     },
@@ -1570,42 +1563,42 @@
     {
       "date": "2026-03-28",
       "contribution_count": 31,
-      "level": 2,
+      "level": 1,
       "weekday": 6,
       "is_future": false
     },
     {
       "date": "2026-03-29",
       "contribution_count": 73,
-      "level": 4,
+      "level": 3,
       "weekday": 0,
       "is_future": false
     },
     {
       "date": "2026-03-30",
       "contribution_count": 82,
-      "level": 4,
+      "level": 3,
       "weekday": 1,
       "is_future": false
     },
     {
       "date": "2026-03-31",
       "contribution_count": 85,
-      "level": 4,
+      "level": 3,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2026-04-01",
       "contribution_count": 86,
-      "level": 4,
+      "level": 3,
       "weekday": 3,
       "is_future": false
     },
     {
       "date": "2026-04-02",
       "contribution_count": 25,
-      "level": 2,
+      "level": 1,
       "weekday": 4,
       "is_future": false
     },
@@ -1654,14 +1647,14 @@
     {
       "date": "2026-04-09",
       "contribution_count": 30,
-      "level": 2,
+      "level": 1,
       "weekday": 4,
       "is_future": false
     },
     {
       "date": "2026-04-10",
       "contribution_count": 85,
-      "level": 4,
+      "level": 3,
       "weekday": 5,
       "is_future": false
     },
@@ -1682,7 +1675,7 @@
     {
       "date": "2026-04-13",
       "contribution_count": 88,
-      "level": 4,
+      "level": 3,
       "weekday": 1,
       "is_future": false
     },
@@ -1731,7 +1724,7 @@
     {
       "date": "2026-04-20",
       "contribution_count": 27,
-      "level": 2,
+      "level": 1,
       "weekday": 1,
       "is_future": false
     },
@@ -1962,7 +1955,7 @@
     {
       "date": "2026-05-23",
       "contribution_count": 26,
-      "level": 2,
+      "level": 1,
       "weekday": 6,
       "is_future": false
     },
@@ -1983,14 +1976,14 @@
     {
       "date": "2026-05-26",
       "contribution_count": 82,
-      "level": 4,
+      "level": 3,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2026-05-27",
       "contribution_count": 61,
-      "level": 3,
+      "level": 2,
       "weekday": 3,
       "is_future": false
     },
@@ -2018,7 +2011,7 @@
     {
       "date": "2026-05-31",
       "contribution_count": 28,
-      "level": 2,
+      "level": 1,
       "weekday": 0,
       "is_future": false
     },
@@ -2200,14 +2193,14 @@
     {
       "date": "2026-06-26",
       "contribution_count": 23,
-      "level": 2,
+      "level": 1,
       "weekday": 5,
       "is_future": false
     },
     {
       "date": "2026-06-27",
       "contribution_count": 48,
-      "level": 3,
+      "level": 2,
       "weekday": 6,
       "is_future": false
     },
@@ -2340,7 +2333,7 @@
     {
       "date": "2026-07-16",
       "contribution_count": 31,
-      "level": 2,
+      "level": 1,
       "weekday": 4,
       "is_future": false
     },
@@ -2431,14 +2424,14 @@
     {
       "date": "2026-07-29",
       "contribution_count": 23,
-      "level": 2,
+      "level": 1,
       "weekday": 3,
       "is_future": false
     },
     {
       "date": "2026-07-30",
       "contribution_count": 24,
-      "level": 2,
+      "level": 1,
       "weekday": 4,
       "is_future": false
     },
@@ -2501,7 +2494,7 @@
     {
       "date": "2026-08-08",
       "contribution_count": 80,
-      "level": 4,
+      "level": 3,
       "weekday": 6,
       "is_future": false
     },
@@ -2522,7 +2515,7 @@
     {
       "date": "2026-08-11",
       "contribution_count": 46,
-      "level": 3,
+      "level": 2,
       "weekday": 2,
       "is_future": false
     },
@@ -2536,28 +2529,28 @@
     {
       "date": "2026-08-13",
       "contribution_count": 58,
-      "level": 3,
+      "level": 2,
       "weekday": 4,
       "is_future": false
     },
     {
       "date": "2026-08-14",
       "contribution_count": 67,
-      "level": 4,
+      "level": 3,
       "weekday": 5,
       "is_future": false
     },
     {
       "date": "2026-08-15",
       "contribution_count": 67,
-      "level": 4,
+      "level": 3,
       "weekday": 6,
       "is_future": false
     },
     {
       "date": "2026-08-16",
       "contribution_count": 68,
-      "level": 4,
+      "level": 3,
       "weekday": 0,
       "is_future": false
     },
@@ -2570,9 +2563,16 @@
     },
     {
       "date": "2026-08-18",
-      "contribution_count": 1,
-      "level": 1,
+      "contribution_count": 126,
+      "level": 4,
       "weekday": 2,
+      "is_future": false
+    },
+    {
+      "date": "2026-08-19",
+      "contribution_count": 0,
+      "level": 0,
+      "weekday": 3,
       "is_future": false
     }
   ],
@@ -2640,14 +2640,14 @@
     {
       "year": 2026,
       "month": 8,
-      "count": 666
+      "count": 791
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 3074,
-    "public_commit_contributions": 1799,
-    "public_pull_request_contributions": 73,
-    "public_issue_contributions": 686,
+    "total_public_contributions": 3199,
+    "public_commit_contributions": 1833,
+    "public_pull_request_contributions": 90,
+    "public_issue_contributions": 760,
     "public_pull_request_review_contributions": 510
   },
   "streaks": {
@@ -2655,7 +2655,7 @@
     "longest_days": 16
   },
   "most_active_month": "2026-04",
-  "average_contributions_per_active_day": 30.14,
+  "average_contributions_per_active_day": 31.36,
   "active_contribution_days": 102,
   "repositories_contributed_to": 0,
   "repository_inventory": {
@@ -2680,28 +2680,28 @@
     },
     {
       "name": "JavaScript",
-      "percentage": 18,
-      "bytes": 4748431
+      "percentage": 17,
+      "bytes": 4766060
     },
     {
       "name": "HTML",
       "percentage": 17,
-      "bytes": 4576036
+      "bytes": 4591460
     },
     {
       "name": "Shell",
       "percentage": 16,
-      "bytes": 4423056
+      "bytes": 4469249
     },
     {
       "name": "Python",
       "percentage": 14,
-      "bytes": 3834787
+      "bytes": 3935686
     },
     {
       "name": "Other",
-      "percentage": 13,
-      "bytes": 3544478
+      "percentage": 14,
+      "bytes": 3756906
     }
   ],
   "radar_dimensions": [
@@ -2729,7 +2729,7 @@
     {
       "key": "ship",
       "label": "Ship",
-      "score": 94,
+      "score": 98,
       "source_fields": [
         "public_releases_past_year",
         "public_pull_request_contributions"
@@ -2781,14 +2781,14 @@
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-18T06:09:36.470305+00:00",
-    "generation_timestamp": "2026-08-18T06:09:36.470305+00:00",
+    "data_timestamp": "2026-08-19T06:09:27.715767+00:00",
+    "generation_timestamp": "2026-08-19T06:09:27.715767+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-19",
-    "window_end": "2026-08-18",
+    "window_start": "2025-08-20",
+    "window_end": "2026-08-19",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
     "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",
