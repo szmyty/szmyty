@@ -17,16 +17,9 @@
     }
   ],
   "trailing_window_days": 365,
-  "window_start": "2025-08-20",
-  "window_end": "2026-08-19",
+  "window_start": "2025-08-21",
+  "window_end": "2026-08-20",
   "contribution_days": [
-    {
-      "date": "2025-08-20",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 3,
-      "is_future": false
-    },
     {
       "date": "2025-08-21",
       "contribution_count": 0,
@@ -2535,7 +2528,7 @@
     },
     {
       "date": "2026-08-14",
-      "contribution_count": 67,
+      "contribution_count": 68,
       "level": 3,
       "weekday": 5,
       "is_future": false
@@ -2563,16 +2556,23 @@
     },
     {
       "date": "2026-08-18",
-      "contribution_count": 126,
+      "contribution_count": 127,
       "level": 4,
       "weekday": 2,
       "is_future": false
     },
     {
       "date": "2026-08-19",
-      "contribution_count": 0,
-      "level": 0,
+      "contribution_count": 123,
+      "level": 4,
       "weekday": 3,
+      "is_future": false
+    },
+    {
+      "date": "2026-08-20",
+      "contribution_count": 19,
+      "level": 1,
+      "weekday": 4,
       "is_future": false
     }
   ],
@@ -2640,68 +2640,68 @@
     {
       "year": 2026,
       "month": 8,
-      "count": 791
+      "count": 935
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 3199,
-    "public_commit_contributions": 1833,
-    "public_pull_request_contributions": 90,
-    "public_issue_contributions": 760,
+    "total_public_contributions": 3343,
+    "public_commit_contributions": 1909,
+    "public_pull_request_contributions": 130,
+    "public_issue_contributions": 788,
     "public_pull_request_review_contributions": 510
   },
   "streaks": {
-    "current_days": 6,
+    "current_days": 8,
     "longest_days": 16
   },
-  "most_active_month": "2026-04",
-  "average_contributions_per_active_day": 31.36,
-  "active_contribution_days": 102,
+  "most_active_month": "2026-08",
+  "average_contributions_per_active_day": 32.14,
+  "active_contribution_days": 104,
   "repositories_contributed_to": 0,
   "repository_inventory": {
-    "owned_public_non_archived_repositories": 37,
-    "total_public_repositories": 37,
+    "owned_public_non_archived_repositories": 38,
+    "total_public_repositories": 38,
     "archived_repositories": 0,
     "repositories_per_owner": {
       "szmyty": 10,
       "incomprisllc": 3,
-      "egohygiene": 24
+      "egohygiene": 25
     },
     "stars_received": 30,
     "forks_received": 7,
-    "public_releases_past_year": 3,
+    "public_releases_past_year": 4,
     "detected_languages": 5
   },
   "languages": [
     {
       "name": "TeX",
-      "percentage": 22,
-      "bytes": 5869720
+      "percentage": 21,
+      "bytes": 5878486
     },
     {
       "name": "JavaScript",
       "percentage": 17,
-      "bytes": 4766060
+      "bytes": 4785933
     },
     {
       "name": "HTML",
-      "percentage": 17,
-      "bytes": 4591460
+      "percentage": 16,
+      "bytes": 4575262
     },
     {
       "name": "Shell",
       "percentage": 16,
-      "bytes": 4469249
+      "bytes": 4508689
     },
     {
       "name": "Python",
-      "percentage": 14,
-      "bytes": 3935686
+      "percentage": 15,
+      "bytes": 4233168
     },
     {
       "name": "Other",
-      "percentage": 14,
-      "bytes": 3756906
+      "percentage": 15,
+      "bytes": 4175464
     }
   ],
   "radar_dimensions": [
@@ -2729,7 +2729,7 @@
     {
       "key": "ship",
       "label": "Ship",
-      "score": 98,
+      "score": 100,
       "source_fields": [
         "public_releases_past_year",
         "public_pull_request_contributions"
@@ -2781,14 +2781,14 @@
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-19T06:09:27.715767+00:00",
-    "generation_timestamp": "2026-08-19T06:09:27.715767+00:00",
+    "data_timestamp": "2026-08-20T06:09:51.001300+00:00",
+    "generation_timestamp": "2026-08-20T06:09:51.001300+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-20",
-    "window_end": "2026-08-19",
+    "window_start": "2025-08-21",
+    "window_end": "2026-08-20",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
     "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",
