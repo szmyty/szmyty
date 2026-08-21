@@ -84,6 +84,21 @@ _First-party public GitHub data · trailing 365 days · refreshed 2026-08-21. St
 
 ---
 
+## Live telemetry
+
+These cards are generated first-party from public or explicitly approved API data. Synthetic fixtures are used for tests only and are never presented as live profile data.
+
+<!-- START:weather -->
+<!-- END:weather -->
+
+<!-- START:steam -->
+<!-- END:steam -->
+
+<!-- START:oura-trends -->
+<!-- END:oura-trends -->
+
+---
+
 ## How I work
 
 I use **AI-assisted implementation inside bounded, reviewable workflows**. I own the architecture, constraints, review, validation, and release decisions.
@@ -111,9 +126,5 @@ For professional inquiries, use the [contact route on my portfolio](https://szmy
 <!-- END:working-style -->
 <!-- START:soundcloud -->
 <!-- END:soundcloud -->
-<!-- START:steam -->
-<!-- END:steam -->
 <!-- START:stars -->
 <!-- END:stars -->
-<!-- START:oura-trends -->
-<!-- END:oura-trends -->
