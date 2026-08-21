@@ -134,9 +134,9 @@ def test_svg_contains_avatar_last_online_and_steam_native_metrics(tmp_path) -> N
 
 
 def test_template_links_badge_and_card_to_profile_url() -> None:
-    template = (
-        steam.REPO_ROOT / "profile" / "templates" / "steam.md.j2"
-    ).read_text(encoding="utf-8")
+    template = (steam.REPO_ROOT / "profile" / "templates" / "steam.md.j2").read_text(
+        encoding="utf-8"
+    )
 
     assert "Steam-szmyty" in template
     assert template.count('href="{{ snapshot.profile_url }}"') >= 2
