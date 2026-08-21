@@ -47,11 +47,13 @@ jobs:
             > "${RUNNER_TEMP}/profile-polish.tar.gz"
 
           python - <<'PY'
+          import os
           from pathlib import Path
           import zlib
 
-          source = Path("${RUNNER_TEMP}/profile-polish.tar.gz")
-          target = Path("${RUNNER_TEMP}/profile-polish.tar")
+          runner_temp = Path(os.environ["RUNNER_TEMP"])
+          source = runner_temp / "profile-polish.tar.gz"
+          target = runner_temp / "profile-polish.tar"
           compressed = source.read_bytes()
           decompressor = zlib.decompressobj(16 + zlib.MAX_WBITS)
           recovered = bytearray()
@@ -71,7 +73,7 @@ jobs:
           tar --extract \
             --file "${RUNNER_TEMP}/profile-polish.tar" \
             --directory . \
-            --ignore-zeros || true
+            --ignore-zeros
 
           if ! python -m py_compile tests/test_snapshot_platform.py; then
             cp "${RUNNER_TEMP}/test_snapshot_platform.py" \

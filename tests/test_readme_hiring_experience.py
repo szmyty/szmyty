@@ -93,5 +93,5 @@ def test_public_dashboard_is_rendered_and_unverified_regions_stay_empty() -> Non
         assert start_marker in readme
         assert end_marker in readme
         start_index = readme.index(start_marker) + len(start_marker)
-        end_index = readme.index(end_marker)
+        end_index = readme.index(end_marker, start_index)
         assert readme[start_index:end_index].strip() == ""
