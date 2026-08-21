@@ -12,86 +12,74 @@ def test_first_viewport_carries_identity_proof_and_action_paths() -> None:
     head = "\n".join(_readme_text().splitlines()[:60])
 
     assert "# Alan Szmyt" in head
-    assert "**Software Engineer**" in head
-    assert "[GitHub](https://github.com/szmyty)" in head
+    assert (
+        "Software engineer building reliable developer platforms, local-first "
+        "systems, and AI-assisted workflows."
+    ) in head
+    assert "[Portfolio](https://szmyty.vercel.app)" in head
+    assert "[Ego Hygiene](https://github.com/egohygiene)" in head
     assert "[Repositories](https://github.com/szmyty?tab=repositories)" in head
-    assert "[Evidence Catalog](profile/content/evidence.yml)" in head
-    assert "## Hiring Snapshot" in head
-    assert "## Selected Work" in head
-    assert "soliloquy" in head
-    assert "universal" in head
+    assert "## Selected work" in head
+
+    for project in ["Reflector", "Renderflow", "Relay", "Optiflow"]:
+        assert project in head
 
 
-def test_readme_sections_follow_hiring_focused_order() -> None:
+def test_readme_excludes_broken_and_internal_profile_state() -> None:
     readme = _readme_text()
 
-    ordered_sections = [
-        "## Hiring Snapshot",
-        "## Selected Work",
-        "## GitHub Engineering Dashboard",
-        "## Flagship Systems",
-        "## Experience and Education",
-        "## AI Agent Execution Showcase",
-        "## Ego Hygiene Platform",
-        "## Research, Writing, and Publications",
-        "## Creative Practice",
-        "## Gaming and Working Style",
-        "## Completion Matrix",
-        "## Contact",
+    for forbidden in [
+        "soliloquy",
+        "szmyty/universal",
+        "GitHub Engineering Dashboard",
+        "AI Agent Execution Showcase",
+        "Completion Matrix",
+        "Queue key:",
+        "failed-with-fallback",
+        "needs-user-verification",
+        "GitHub noreply",
+    ]:
+        assert forbidden not in readme
+
+
+def test_readme_uses_only_approved_public_destinations() -> None:
+    readme = _readme_text()
+
+    approved = [
+        "https://szmyty.vercel.app",
+        "https://github.com/egohygiene",
+        "https://github.com/szmyty?tab=repositories",
+        "https://github.com/egohygiene/reflector",
+        "https://github.com/egohygiene/renderflow",
+        "https://github.com/egohygiene/relay",
+        "https://github.com/egohygiene/optiflow",
+    ]
+    for destination in approved:
+        assert destination in readme
+
+    assert "mailto:" not in readme
+    assert "@users.noreply.github.com" not in readme
+
+
+def test_generated_regions_are_reserved_and_empty() -> None:
+    readme = _readme_text()
+    modules = [
+        "github-dashboard",
+        "ai-agent-showcase",
+        "music-highlight",
+        "orcid",
+        "medium",
+        "education",
+        "resume",
+        "working-style",
+        "soundcloud",
+        "steam",
+        "stars",
+        "oura-trends",
     ]
 
-    indices = [readme.index(section) for section in ordered_sections]
-    assert indices == sorted(indices)
-
-
-def test_active_and_hidden_modules_are_placed_in_their_intended_sections() -> None:
-    readme = _readme_text()
-
-    github_heading = readme.index("## GitHub Engineering Dashboard")
-    flagship_heading = readme.index("## Flagship Systems")
-    ai_heading = readme.index("## AI Agent Execution Showcase")
-    creative_heading = readme.index("## Creative Practice")
-    gaming_heading = readme.index("## Gaming and Working Style")
-    matrix_heading = readme.index("## Completion Matrix")
-    contact_heading = readme.index("## Contact")
-
-    assert (
-        github_heading
-        < readme.index("<!-- START:github-dashboard -->")
-        < flagship_heading
-    )
-    assert (
-        ai_heading < readme.index("<!-- START:ai-agent-showcase -->") < contact_heading
-    )
-    assert (
-        creative_heading
-        < readme.index("<!-- START:music-highlight -->")
-        < gaming_heading
-    )
-    assert creative_heading < readme.index("<!-- START:soundcloud -->") < gaming_heading
-    assert gaming_heading < readme.index("<!-- START:steam -->") < matrix_heading
-    assert (
-        gaming_heading < readme.index("<!-- START:working-style -->") < matrix_heading
-    )
-    assert matrix_heading < readme.index("<!-- START:stars -->") < contact_heading
-
-
-def test_completion_matrix_records_non_public_modules_without_inline_evidence_ids() -> (
-    None
-):
-    readme = _readme_text()
-
-    assert "Evidence ID" not in readme
-
-    for label in [
-        "Education",
-        "Resume",
-        "ORCID / publications",
-        "Medium / writing",
-        "SoundCloud",
-        "Steam",
-        "Working style",
-        "STARS",
-        "Oura / personal systems",
-    ]:
-        assert label in readme
+    for module in modules:
+        assert (
+            f"<!-- START:{module} -->\n<!-- END:{module} -->"
+            in readme
+        )
