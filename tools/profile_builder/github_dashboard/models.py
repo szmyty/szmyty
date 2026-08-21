@@ -188,6 +188,7 @@ class DashboardMethodology(BaseModel):
     contribution_calendar_source: str
     contribution_type_source: str
     repository_inventory_source: str
+    starred_repository_total_source: str = ""
     language_distribution_source: str
     release_count_source: str
     current_streak_definition: str

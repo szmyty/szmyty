@@ -227,7 +227,7 @@ def test_music_highlight_uses_cache_on_malformed_input(tmp_path) -> None:
         yaml.safe_dump(
             {
                 "title": "Cached",
-                "public_url": "https://soundcloud.com/szmyty",
+                "public_url": "https://soundcloud.com/playfunction",
                 "data_source": "manual",
             },
             sort_keys=False,

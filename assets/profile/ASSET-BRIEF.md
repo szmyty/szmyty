@@ -1,8 +1,8 @@
 # Asset Generation Briefs — Alan Szmyt Profile
 
-**Document type:** Copy-ready generation briefs for ChatGPT image generation
-**Status:** Active — awaiting Alan's ChatGPT session
-**Last updated:** 2026-08-09
+**Document type:** Implementation record and regeneration brief
+**Status:** Profile Done v1 banners implemented
+**Last updated:** 2026-08-21
 
 > **Note:** Legacy branding concepts are historical references only. Do not
 > promote old drafts directly. The briefs below define the final target.
@@ -18,10 +18,10 @@
 
 ### Composition
 
-Horizontal panoramic banner. The scene evokes a cosmic observatory or deep-sky
-study: subtle star field fading from center-left to edges, with a low-horizon
-architectural silhouette (observatory dome or minimal geometric form) in the
-lower-right quadrant.
+Horizontal panoramic systems map. Three signal rails enter from each side and
+converge through a continuous central orbit. Evidence nodes, constellation
+fragments, a quiet grid, and restrained cosmic glows connect engineering,
+research, local-first tools, and creative technology without embedded text.
 
 ### Subject-Safe Zone
 
@@ -36,8 +36,8 @@ zone.
 
 - Background sky: `#f0f4ff` fading to `#dde7f8`
 - Star points: white or pale `#aac8ff` on soft background
-- Accent: amber `#9A6700` or violet `#6639BA` focal glyph
-- Architecture / silhouette: `#6639BA` at low opacity
+- Signal accents: pink, violet, and cyan
+- Grid and evidence nodes: slate/violet at low opacity
 
 ### Contrast
 
@@ -58,12 +58,12 @@ below the `<picture>` block in `README.md`.
 - No dark overlay that obscures more than 10 % of the canvas.
 - No JavaScript, external URL references, or `<script>` elements in SVG.
 - No text elements inside the banner SVG.
-- Do not label this output "FINAL" until Alan confirms it.
+- Motion must be optional and wrapped in
+  `@media (prefers-reduced-motion: no-preference)`.
 
 ### Required Outputs
 
-1. `banner-light.svg` — light-theme variant (no dark mode media query needed;
-   the dark variant is a separate file).
+1. `banner-light.svg` — implemented light-theme variant.
 2. A brief description of the scene for the alt-text record.
 
 ---
@@ -77,12 +77,9 @@ below the `<picture>` block in `README.md`.
 
 ### Composition
 
-Same horizontal panoramic layout as the light theme, adapted for a dark canvas.
-Deep-space atmosphere: radial gradient from `#161b22` at center to `#0d1117`
-at edges. Dense star field across the upper half of the canvas. A constellation
-line connecting 5–8 star points in the upper-center-left region. The
-observatory silhouette (or geometric anchor form) sits in the lower-right,
-outlined in muted violet.
+The same systems-map geometry as the light theme, adapted to a deep neutral
+canvas. Violet/cyan glows, a sparse star field, evidence nodes, and animated
+signal traces preserve the exact visual concept across theme changes.
 
 ### Subject-Safe Zone
 
@@ -111,7 +108,7 @@ Same as Brief 1.
 
 ### Required Outputs
 
-1. `banner-dark.svg` — dark-theme variant.
+1. `banner-dark.svg` — implemented dark-theme variant.
 2. A brief description of the scene for the alt-text record.
 
 ---

@@ -9,7 +9,7 @@
 
 modules:
   - name: github-dashboard
-    enabled: false
+    enabled: true
     description: "Builds a first-party visual GitHub engineering dashboard from public GitHub REST and GraphQL data."
     provider_type: api
     provider_module: tools.modules.github_dashboard

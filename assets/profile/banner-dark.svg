@@ -1,74 +1,121 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img">
-  <title>Alan Szmyt — Software Engineer, Systems Architect, Creative Technologist</title>
-  <!-- Production interim: polished deterministic cosmic banner (dark theme).
-       Source slot reserved for final ChatGPT-generated artwork per ASSET-BRIEF.md Brief 2.
-       Replace file only; README structure and alt-text do not need changes. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img" aria-labelledby="title desc">
+  <title id="title">Alan Szmyt — connected systems in continuous motion</title>
+  <desc id="desc">A dark animated systems map converges through a luminous continuous orbit, representing developer platforms, research software, local-first tools, and creative technology.</desc>
   <defs>
-    <radialGradient id="bg-d" cx="48%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#161b22"/>
-      <stop offset="100%" stop-color="#0d1117"/>
-    </radialGradient>
-    <radialGradient id="glow-d" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#388bfd" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#388bfd" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="dome-d" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#a371f7" stop-opacity="0.40"/>
-      <stop offset="100%" stop-color="#a371f7" stop-opacity="0.12"/>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a12"/>
+      <stop offset="0.52" stop-color="#111827"/>
+      <stop offset="1" stop-color="#090d18"/>
     </linearGradient>
+    <radialGradient id="violet-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cyan-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#67e8f9" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#67e8f9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="orbit" x1="400" y1="95" x2="880" y2="305" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f472b6"/>
+      <stop offset="0.45" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#67e8f9"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="120" y1="0" x2="1160" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#c084fc" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <style>
+      .signal { stroke-dasharray: 24 360; }
+      @keyframes signal-flow { to { stroke-dashoffset: -384; } }
+      @keyframes node-pulse { 0%, 100% { opacity: .48; transform: scale(.84); } 50% { opacity: 1; transform: scale(1.18); } }
+      @keyframes twinkle { 0%, 100% { opacity: .18; } 50% { opacity: .9; } }
+      @keyframes orbit-breathe { 0%, 100% { opacity: .72; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: no-preference) {
+        .signal { animation: signal-flow 9s linear infinite; }
+        .signal.reverse { animation-direction: reverse; animation-duration: 12s; }
+        .node { transform-box: fill-box; transform-origin: center; animation: node-pulse 5s ease-in-out infinite; }
+        .node.delay-a { animation-delay: -1.6s; }
+        .node.delay-b { animation-delay: -3.2s; }
+        .star { animation: twinkle 7s ease-in-out infinite; }
+        .star.delay-a { animation-delay: -2.3s; }
+        .star.delay-b { animation-delay: -4.6s; }
+        .orbit-core { animation: orbit-breathe 8s ease-in-out infinite; }
+      }
+    </style>
   </defs>
-  <!-- Background -->
-  <rect width="1280" height="400" fill="url(#bg-d)"/>
-  <!-- Soft nebula glow at center -->
-  <ellipse cx="620" cy="200" rx="480" ry="180" fill="url(#glow-d)"/>
-  <!-- Dense star field — upper half -->
-  <circle cx="45"  cy="22"  r="1.0" fill="#e6edf3" opacity="0.70"/>
-  <circle cx="95"  cy="58"  r="1.3" fill="#e6edf3" opacity="0.55"/>
-  <circle cx="150" cy="34"  r="0.8" fill="#e6edf3" opacity="0.45"/>
-  <circle cx="210" cy="72"  r="1.1" fill="#e6edf3" opacity="0.60"/>
-  <circle cx="275" cy="18"  r="0.7" fill="#e6edf3" opacity="0.40"/>
-  <circle cx="320" cy="88"  r="1.4" fill="#e6edf3" opacity="0.50"/>
-  <circle cx="390" cy="28"  r="0.9" fill="#e6edf3" opacity="0.65"/>
-  <circle cx="440" cy="62"  r="1.2" fill="#a371f7" opacity="0.55"/>
-  <circle cx="510" cy="44"  r="0.8" fill="#e6edf3" opacity="0.48"/>
-  <circle cx="560" cy="18"  r="1.0" fill="#e6edf3" opacity="0.60"/>
-  <circle cx="620" cy="55"  r="1.5" fill="#e3b341" opacity="0.50"/>
-  <circle cx="680" cy="32"  r="0.9" fill="#e6edf3" opacity="0.45"/>
-  <circle cx="740" cy="68"  r="1.1" fill="#e6edf3" opacity="0.55"/>
-  <circle cx="810" cy="25"  r="0.7" fill="#e6edf3" opacity="0.42"/>
-  <circle cx="870" cy="48"  r="1.3" fill="#a371f7" opacity="0.45"/>
-  <circle cx="940" cy="20"  r="0.9" fill="#e6edf3" opacity="0.58"/>
-  <circle cx="1010" cy="62" r="1.0" fill="#e6edf3" opacity="0.50"/>
-  <circle cx="1060" cy="30" r="1.4" fill="#e6edf3" opacity="0.62"/>
-  <circle cx="1120" cy="55" r="0.8" fill="#e6edf3" opacity="0.45"/>
-  <circle cx="1180" cy="22" r="1.2" fill="#e3b341" opacity="0.48"/>
-  <circle cx="1230" cy="70" r="1.0" fill="#e6edf3" opacity="0.55"/>
-  <circle cx="1260" cy="38" r="0.7" fill="#e6edf3" opacity="0.40"/>
-  <!-- Additional mid-field stars -->
-  <circle cx="130" cy="140" r="0.8" fill="#e6edf3" opacity="0.30"/>
-  <circle cx="280" cy="160" r="0.7" fill="#e6edf3" opacity="0.28"/>
-  <circle cx="780" cy="130" r="0.9" fill="#e6edf3" opacity="0.32"/>
-  <circle cx="1140" cy="140" r="0.8" fill="#e6edf3" opacity="0.28"/>
-  <!-- Constellation: 6-point arrangement (upper-center-left) -->
-  <line x1="340" y1="60"  x2="410" y2="95"  stroke="#388bfd" stroke-width="0.9" opacity="0.40"/>
-  <line x1="410" y1="95"  x2="500" y2="75"  stroke="#388bfd" stroke-width="0.9" opacity="0.40"/>
-  <line x1="500" y1="75"  x2="560" y2="105" stroke="#388bfd" stroke-width="0.9" opacity="0.40"/>
-  <line x1="560" y1="105" x2="620" y2="80"  stroke="#388bfd" stroke-width="0.9" opacity="0.40"/>
-  <line x1="620" y1="80"  x2="690" y2="50"  stroke="#388bfd" stroke-width="0.9" opacity="0.40"/>
-  <circle cx="340" cy="60"  r="2.2" fill="#e6edf3" opacity="0.75"/>
-  <circle cx="410" cy="95"  r="2.5" fill="#e3b341" opacity="0.80"/>
-  <circle cx="500" cy="75"  r="2.0" fill="#e6edf3" opacity="0.70"/>
-  <circle cx="560" cy="105" r="2.8" fill="#e3b341" opacity="0.80"/>
-  <circle cx="620" cy="80"  r="2.2" fill="#e6edf3" opacity="0.75"/>
-  <circle cx="690" cy="50"  r="2.0" fill="#a371f7" opacity="0.70"/>
-  <!-- Observatory silhouette — lower-right architectural anchor, muted violet -->
-  <rect x="990" y="310" width="200" height="70" fill="url(#dome-d)" rx="2"/>
-  <path d="M 990 310 A 100 80 0 0 1 1190 310" fill="url(#dome-d)"/>
-  <line x1="1090" y1="235" x2="1090" y2="310" stroke="#a371f7" stroke-width="1.5" opacity="0.22"/>
-  <line x1="1090" y1="262" x2="1130" y2="238" stroke="#a371f7" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
-  <!-- Accent focal glyph — amber diamond at center-left -->
-  <polygon points="440,195 455,210 440,225 425,210"
-           fill="none" stroke="#e3b341" stroke-width="1.8" opacity="0.65"/>
-  <!-- Horizon baseline -->
-  <line x1="0" y1="340" x2="1280" y2="340" stroke="#a371f7" stroke-width="0.5" opacity="0.15"/>
+
+  <rect width="1280" height="400" rx="28" fill="url(#background)"/>
+  <ellipse cx="615" cy="195" rx="390" ry="220" fill="url(#violet-glow)"/>
+  <ellipse cx="915" cy="205" rx="320" ry="190" fill="url(#cyan-glow)"/>
+
+  <g fill="none" stroke="#94a3b8" stroke-width="1" opacity="0.07">
+    <path d="M0 80H1280M0 160H1280M0 240H1280M0 320H1280"/>
+    <path d="M160 0V400M320 0V400M480 0V400M640 0V400M800 0V400M960 0V400M1120 0V400"/>
+  </g>
+
+  <g fill="#e2e8f0">
+    <circle class="star" cx="84" cy="54" r="1.7"/>
+    <circle class="star delay-a" cx="214" cy="92" r="1.2"/>
+    <circle class="star delay-b" cx="352" cy="44" r="1.5"/>
+    <circle class="star delay-a" cx="512" cy="74" r="1.1"/>
+    <circle class="star" cx="690" cy="38" r="1.5"/>
+    <circle class="star delay-b" cx="834" cy="82" r="1.2"/>
+    <circle class="star" cx="1018" cy="48" r="1.6"/>
+    <circle class="star delay-a" cx="1192" cy="88" r="1.2"/>
+    <circle class="star delay-b" cx="146" cy="346" r="1.4"/>
+    <circle class="star" cx="1104" cy="338" r="1.5"/>
+  </g>
+
+  <g fill="none" stroke="url(#rail)" stroke-width="1.5">
+    <path d="M96 118C214 118 282 148 408 190"/>
+    <path d="M70 202H402"/>
+    <path d="M116 286C232 286 292 250 408 210"/>
+    <path d="M872 190C994 152 1052 124 1186 124"/>
+    <path d="M878 202H1214"/>
+    <path d="M872 214C1000 256 1068 286 1192 286"/>
+  </g>
+  <g fill="none" stroke="url(#orbit)" stroke-width="2.4" stroke-linecap="round" opacity="0.8">
+    <path class="signal" d="M96 118C214 118 282 148 408 190"/>
+    <path class="signal reverse" d="M70 202H402"/>
+    <path class="signal" d="M116 286C232 286 292 250 408 210"/>
+    <path class="signal reverse" d="M872 190C994 152 1052 124 1186 124"/>
+    <path class="signal" d="M878 202H1214"/>
+    <path class="signal reverse" d="M872 214C1000 256 1068 286 1192 286"/>
+  </g>
+
+  <path d="M640 200C560 80 400 80 400 200S560 320 640 200S880 80 880 200S720 320 640 200" fill="none" stroke="#a78bfa" stroke-width="28" opacity="0.13" filter="url(#soft-glow)"/>
+  <path class="orbit-core" d="M640 200C560 80 400 80 400 200S560 320 640 200S880 80 880 200S720 320 640 200" fill="none" stroke="url(#orbit)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path class="signal" d="M640 200C560 80 400 80 400 200S560 320 640 200S880 80 880 200S720 320 640 200" pathLength="384" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+
+  <g fill="#0b1020" stroke-width="2">
+    <circle class="node" cx="96" cy="118" r="8" stroke="#60a5fa"/>
+    <circle class="node delay-a" cx="70" cy="202" r="7" stroke="#c084fc"/>
+    <circle class="node delay-b" cx="116" cy="286" r="8" stroke="#f472b6"/>
+    <circle class="node delay-a" cx="1186" cy="124" r="8" stroke="#67e8f9"/>
+    <circle class="node delay-b" cx="1214" cy="202" r="7" stroke="#a78bfa"/>
+    <circle class="node" cx="1192" cy="286" r="8" stroke="#22d3ee"/>
+    <circle class="node delay-b" cx="640" cy="200" r="9" stroke="#f8fafc"/>
+  </g>
+
+  <g fill="none" stroke="#c4b5fd" stroke-width="1" opacity="0.24">
+    <path d="M180 118L234 82L286 114L340 78"/>
+    <path d="M944 292L996 326L1052 294L1110 324"/>
+  </g>
+  <g fill="#c4b5fd" opacity="0.65">
+    <circle cx="180" cy="118" r="2"/><circle cx="234" cy="82" r="2"/><circle cx="286" cy="114" r="2"/><circle cx="340" cy="78" r="2"/>
+    <circle cx="944" cy="292" r="2"/><circle cx="996" cy="326" r="2"/><circle cx="1052" cy="294" r="2"/><circle cx="1110" cy="324" r="2"/>
+  </g>
+
+  <path d="M56 352H1224" stroke="url(#rail)" stroke-width="1" opacity="0.45"/>
+  <g fill="#a78bfa" opacity="0.7">
+    <rect x="56" y="347" width="3" height="10" rx="1.5"/>
+    <rect x="322" y="347" width="3" height="10" rx="1.5"/>
+    <rect x="638" y="345" width="4" height="14" rx="2"/>
+    <rect x="954" y="347" width="3" height="10" rx="1.5"/>
+    <rect x="1221" y="347" width="3" height="10" rx="1.5"/>
+  </g>
 </svg>

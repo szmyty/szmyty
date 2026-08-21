@@ -238,6 +238,11 @@ def collect_live_snapshot(
     all_non_fork = all_public_non_fork_repositories(all_repos_dedup)
     archived_count = len(all_non_fork) - len(active_repos)
 
+    # This is a primary profile signal, so a failed refresh must not silently
+    # replace the last-known-good count with zero. Let build_dashboard route the
+    # whole refresh through its cache/fixture fallback instead.
+    total_starred = github.fetch_starred_repository_total(username)
+
     languages_by_repo = _fetch_languages(github, active_repos)
     releases_by_repo = _fetch_releases(github, active_repos)
     current_streak, longest_streak = calculate_streaks(contribution_days, today=today)
@@ -266,7 +271,7 @@ def collect_live_snapshot(
         reviews=reviews,
         releases=releases_count,
         active_repositories=len(active_repos),
-        total_starred=0,
+        total_starred=total_starred,
         detected_languages=detected_languages,
         orgs_count=orgs_count,
     )
@@ -311,7 +316,9 @@ def collect_live_snapshot(
         languages=languages,
         radar_dimensions=radar,
         starred_repository_totals=StarredRepositoryTotals(
-            total_starred=0, crawl_complete=False, crawl_pages=0
+            total_starred=total_starred,
+            crawl_complete=False,
+            crawl_pages=0,
         ),
         nonfatal_diagnostics=nonfatal_diagnostics,
         status=DashboardStatus(
@@ -338,6 +345,10 @@ def collect_live_snapshot(
                 "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all "
                 "configured owners, excluding private and forked repositories; "
                 "deduplicated by canonical full_name."
+            ),
+            starred_repository_total_source=(
+                f"GitHub REST /users/{username}/starred?per_page=1; exact public "
+                "total derived from the pagination Link header."
             ),
             language_distribution_source=(
                 "GitHub REST languages_url aggregated across active public "

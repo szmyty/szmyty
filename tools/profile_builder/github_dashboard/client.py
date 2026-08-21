@@ -184,6 +184,37 @@ class GitHubDashboardClient:
                 return []
             raise
 
+    @staticmethod
+    def _parse_last_page(headers: Message) -> int | None:
+        """Return the final page number from a GitHub pagination header."""
+        link_header = headers.get("Link")
+        if not link_header:
+            return None
+        for part in link_header.split(","):
+            chunks = [item.strip() for item in part.split(";")]
+            if len(chunks) < 2 or chunks[1] != 'rel="last"':
+                continue
+            target = chunks[0]
+            if not (target.startswith("<") and target.endswith(">")):
+                continue
+            query = parse.parse_qs(parse.urlparse(target[1:-1]).query)
+            page = query.get("page", [None])[0]
+            if isinstance(page, str) and page.isdigit():
+                return int(page)
+        return None
+
+    def fetch_starred_repository_total(self, username: str) -> int:
+        """Fetch an exact public starred-repository count in one REST request."""
+        params = parse.urlencode({"per_page": 1})
+        url = f"{_API_ROOT}/users/{username}/starred?{params}"
+        payload, headers = self._request_json(url)
+        if not isinstance(payload, list):
+            raise ProviderFailure("Unexpected starred-repositories payload.")
+        last_page = self._parse_last_page(headers)
+        if last_page is not None:
+            return last_page
+        return len(payload)
+
     def fetch_contributions(
         self,
         username: str,

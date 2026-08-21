@@ -168,6 +168,33 @@ records:
       Star counts are dynamic and cannot be hardcoded.  Use a live badge if
       publishing; user must confirm the claim is worth highlighting.
 
+  - id: accomplishment-starred-research-index
+    claim: "Public GitHub research index with more than 6,000 starred repositories"
+    evidence_type: url
+    url: "https://github.com/szmyty?tab=stars"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      GitHub's public starred-repository endpoint reported 6,526 repositories
+      during the Profile Done v1 review. The dashboard renders the live total
+      and frames it as long-running open-source exploration, not authorship,
+      endorsement, or a proficiency score.
+
+  - id: github-dashboard-public-telemetry
+    claim: "First-party GitHub engineering dashboard reporting public trailing-365-day activity, repository ecosystem, release, language, received-star, and starred-repository metrics"
+    evidence_type: repo-path
+    repo_path: "profile/artifacts/github-dashboard/snapshot.json"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      The committed snapshot records the exact REST and GraphQL methodology for
+      contributions, contribution types, streaks, public non-fork repository
+      inventory across szmyty, incomprisllc, and egohygiene, received stars,
+      public releases, detected languages, and the public starred total. These
+      are activity and exploration signals, not proficiency or impact claims.
+
   - id: accomplishment-production-impact
     claim: "Systems deployed to production"
     evidence_type: none
@@ -344,6 +371,17 @@ records:
       Owner-approved positioning for the first application lane. Public proof
       paths are Reflector, Renderflow, Relay, and Optiflow.
 
+  - id: profile-v1-public-lanes
+    claim: "Platform engineering, developer experience, research software, and creative technology"
+    evidence_type: self-reported
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Owner-confirmed public profile lanes in the Profile Done v1 planning
+      session. Public proof paths include Relay, Reflector, Renderflow,
+      Optiflow, the writing profile, and the .play() music profile.
+
   - id: profile-ai-disclosure
     claim: "Uses AI-assisted implementation inside bounded, reviewable workflows while owning architecture, constraints, review, validation, and release decisions"
     evidence_type: url
@@ -389,6 +427,18 @@ records:
     notes: >
       No evidence of a maintainer role in third-party projects found.
       User must supply repository and role before publishing.
+
+  - id: oss-open-source-initiative-membership
+    claim: "Open Source Initiative individual member"
+    evidence_type: self-reported
+    url: "https://opensource.org/get-involved"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Membership was explicitly confirmed by Alan for the public profile.
+      The badge links to OSI's official membership information because no
+      unique public member-directory entry is available.
 
   # ─── Ego Hygiene architecture ─────────────────────────────────────────────
 
@@ -478,41 +528,44 @@ records:
   # ─── ORCID and publications ───────────────────────────────────────────────
 
   - id: orcid-id
-    claim: "ORCID iD"
-    evidence_type: none
-    status: needs-user-verification
+    claim: "ORCID iD 0009-0008-5291-9795"
+    evidence_type: url
+    url: "https://orcid.org/0009-0008-5291-9795"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Alan must supply and confirm the ORCID iD (format: 0000-0000-0000-0000)
-      before the ORCID module renders any content.  Claim must be backed by
-      a verified public record at https://orcid.org/<id>.
+      The identifier is published by Alan's portfolio and resolves to the
+      public ORCID record. Safe for the verified identity-link row.
 
   - id: orcid-public-profile
     claim: "ORCID public profile and selected works"
-    evidence_type: none
-    status: needs-user-verification
+    evidence_type: url
+    url: "https://orcid.org/0009-0008-5291-9795"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Depends on orcid-id being verified.  Selected works are normalized to
-      title, type, year, and DOI/public URL from the public ORCID record only.
+      Profile identity is verified. Selected works may be normalized from the
+      public ORCID record when the dynamic module is separately launched.
 
   # ─── Medium writing ───────────────────────────────────────────────────────
 
   - id: medium-username
-    claim: "Medium author profile"
-    evidence_type: none
-    status: needs-user-verification
+    claim: "Medium author profile @szmyty"
+    evidence_type: url
+    url: "https://medium.com/@szmyty"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Alan must supply and confirm the Medium username or canonical profile URL
-      before the Medium module renders any articles.
+      The canonical username is configured in Alan's public portfolio and is
+      safe for a direct writing-profile link.
 
   - id: medium-public-articles
     claim: "Selected recent Medium articles"
-    evidence_type: none
+    evidence_type: url
+    url: "https://medium.com/@szmyty"
     status: needs-user-verification
     sensitivity: public
     last_reviewed: "2026-08-09"
@@ -557,19 +610,30 @@ records:
     sensitivity: public
     last_reviewed: "2026-08-09"
     notes: >
-      Music-related content (SoundCloud integration, audio cards) appeared in
-      staged artifacts but no public music profile URL was found.  User must
-      supply a public SoundCloud, Bandcamp, or equivalent link.
+      A public SoundCloud profile is now verified separately, but Alan must
+      still approve this specific professional title before it is rendered.
 
   - id: creative-soundcloud
     claim: "SoundCloud profile"
-    evidence_type: none
-    status: needs-user-verification
+    evidence_type: url
+    url: "https://soundcloud.com/playfunction"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      No SoundCloud URL found in staged artifacts.  User must supply the
-      public profile URL before publishing.
+      The public SoundCloud RSS feed for user 325554244 identifies the active
+      account as .play() / playfunction. Safe for the creative-work link row.
+
+  - id: creative-pinterest-ego-hygiene
+    claim: "Ego Hygiene visual research and infographic board on Pinterest"
+    evidence_type: url
+    url: "https://www.pinterest.com/playfunctionmusic/ego-hygiene/"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Public board linked from Alan's portfolio. Framed as visual notes and
+      infographics rather than a professional credential.
 
   # ─── Public contact and availability ──────────────────────────────────────
 
@@ -604,13 +668,15 @@ records:
 
   - id: contact-linkedin
     claim: "LinkedIn profile"
-    evidence_type: none
+    evidence_type: url
+    url: "https://www.linkedin.com/in/alanszmyt"
     status: needs-user-verification
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      No LinkedIn URL found in any staged artifact.  User must supply the
-      URL and confirm they wish to include it.
+      Canonical public profile URL is configured in Alan's portfolio, but the
+      GitHub badge remains hidden until Alan explicitly approves publication
+      here. Professional contact continues to route through the portfolio.
 
   - id: contact-availability
     claim: "Open to collaboration / freelance opportunities"

@@ -5,9 +5,9 @@
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
   <img
     src="./profile/artifacts/github-dashboard/card-light.svg"
-    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, stars, releases, and language distribution for @{{ dashboard.username }}."
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, {{ dashboard.starred_repository_totals.total_starred ~ ' publicly starred repositories, ' if dashboard.starred_repository_totals else '' }}releases, and language distribution for @{{ dashboard.username }}."
     width="100%"
   >
 </picture>
 
-_Trailing {{ dashboard.trailing_window_days }}-day window · {{ dashboard.status.data_source }} / {{ dashboard.status.source_state }} · Data {{ dashboard.status.data_timestamp[:10] }} · Generated {{ dashboard.status.generation_timestamp[:10] }}_
+_First-party public GitHub data · trailing {{ dashboard.trailing_window_days }} days · refreshed {{ dashboard.status.data_timestamp[:10] }}. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._

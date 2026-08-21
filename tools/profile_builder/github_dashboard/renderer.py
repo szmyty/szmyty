@@ -63,7 +63,7 @@ _DARK_TOKENS = AfqcTokens(
     border_subtle="#2a2f4e",
     text_primary="#e8eaf6",
     text_secondary="#b0b8d8",
-    text_muted="#6b7280",
+    text_muted="#9ca3af",
     quantum_pink="#e879a8",
     cosmic_violet="#7c3aed",
     signal_cyan="#22d3ee",
@@ -242,6 +242,7 @@ def _heatmap_month_labels(
 ) -> str:
     labels: list[str] = []
     seen: set[tuple[int, int]] = set()
+    last_label_x: float | None = None
     start = date.fromisoformat(snapshot.window_start)
     for day in snapshot.contribution_days:
         value = date.fromisoformat(day.date)
@@ -253,6 +254,9 @@ def _heatmap_month_labels(
         seen.add(marker)
         col = (value - start).days // 7
         lx = origin_x + col * (cell_size + gap)
+        if last_label_x is not None and lx - last_label_x < cell_size * 3:
+            continue
+        last_label_x = lx
         labels.append(
             f'<text x="{lx:.0f}" y="{origin_y - 6:.0f}" '
             f'fill="{tok.text_muted}" font-size="9" '
@@ -480,15 +484,6 @@ def _radar_chart(
             f'text-anchor="{anchor}" font-family="{_FONT_STACK}">'
             f"{escape(dim.label)}</text>"
         )
-    parts.append(
-        _label(
-            "GitHub activity dimensions — not a proficiency score",
-            box.x + _PANEL_PADDING,
-            box.bottom - 4,
-            tok,
-            size=9,
-        )
-    )
     return "\n".join(parts)
 
 
@@ -515,12 +510,13 @@ def render_dashboard_svg(
     cell = _heatmap_cell_size(mobile)
     gap = 2
     hmap_h = _heatmap_height(cell, gap) + 24  # +24 for month labels above
-    hmap_panel_h = hmap_h + 2 * pad
-    activity_panel_h = 130
-    language_panel_h = 170
+    hmap_panel_h = hmap_h + 2 * pad + 34
+    activity_panel_h = 145
+    language_panel_h = 185
     pulse_panel_h = 120
-    radar_panel_h = 200
-    footer_h = 24
+    explore_panel_h = 125
+    radar_panel_h = 215
+    footer_h = 52
 
     # Left / right column widths
     if mobile:
@@ -547,6 +543,7 @@ def render_dashboard_svg(
         activity_box = _add(activity_panel_h)
         lang_box = _add(language_panel_h)
         pulse_box = _add(pulse_panel_h)
+        explore_box = _add(explore_panel_h)
         radar_box = _add(radar_panel_h)
         canvas_h = y_cursor + footer_h
     else:
@@ -560,6 +557,8 @@ def render_dashboard_svg(
         left_y += hmap_panel_h + _SECTION_GAP
         pulse_box = LayoutBox(left_x, left_y, left_w, pulse_panel_h)
         left_y += pulse_panel_h + _SECTION_GAP
+        explore_box = LayoutBox(left_x, left_y, left_w, explore_panel_h)
+        left_y += explore_panel_h + _SECTION_GAP
 
         activity_box = LayoutBox(right_x, right_y, right_w, activity_panel_h)
         right_y += activity_panel_h + _SECTION_GAP
@@ -573,6 +572,11 @@ def render_dashboard_svg(
     breakdown = snapshot.contribution_breakdown
     streaks = snapshot.streaks
     inventory = snapshot.repository_inventory
+    starred_total = (
+        snapshot.starred_repository_totals.total_starred
+        if snapshot.starred_repository_totals is not None
+        else 0
+    )
     title_text = f"{snapshot.title} — @{snapshot.username}"
     n_owners = len(snapshot.repository_owners)
     active_repos = inventory.owned_public_non_archived_repositories
@@ -583,6 +587,7 @@ def render_dashboard_svg(
         f"Current streak: {streaks.current_days} days. "
         f"{active_repos} active public repositories across {n_owners} owners. "
         f"{inventory.stars_received} stars received. "
+        f"{starred_total} public repositories starred as a research index. "
         f"{inventory.detected_languages} languages detected."
     )
 
@@ -664,7 +669,7 @@ def render_dashboard_svg(
 
     # ---------- Contribution Heatmap panel ----------
     hmap_inner_x = hmap_box.x + pad
-    hmap_inner_y = hmap_box.y + pad + 18  # 18 for month labels
+    hmap_inner_y = hmap_box.y + pad + 50
     parts.append(_card_bg(hmap_box, tok))
     parts.append(
         _label(
@@ -739,6 +744,42 @@ def render_dashboard_svg(
     )
     parts.append(_pulse_chart(snapshot.monthly_contributions, chart_box, tok))
 
+    # ---------- Open-source Exploration panel ----------
+    parts.append(_card_bg(explore_box, tok))
+    ex = explore_box.x + pad
+    ey = explore_box.y + pad
+    parts.append(
+        _label(
+            "Open-source Exploration Index",
+            ex,
+            ey + 12,
+            tok,
+            size=12,
+            color=tok.text_primary,
+            weight="600",
+        )
+    )
+    parts.append(
+        _label(
+            "A long-running map of tools, papers, patterns, and public systems",
+            ex,
+            ey + 25,
+            tok,
+            size=9,
+        )
+    )
+    parts.append(
+        _metric_tile(
+            f"{starred_total:,}" if starred_total else "Unavailable",
+            "public repositories starred · exploration, not authorship",
+            ex,
+            ey + 62,
+            tok,
+            value_color=tok.iridescent_lavender,
+            value_size=28,
+        )
+    )
+
     # ---------- Engineering Activity panel ----------
     parts.append(_card_bg(activity_box, tok))
     ax = activity_box.x + pad
@@ -763,7 +804,7 @@ def render_dashboard_svg(
             size=9,
         )
     )
-    tile_y = ay + 40
+    tile_y = ay + 48
     col_step = (activity_box.width - 2 * pad) / 3
     metrics_row1 = [
         (f"{breakdown.public_commit_contributions:,}", "Commits", tok.quantum_pink),
@@ -832,27 +873,41 @@ def render_dashboard_svg(
             weight="600",
         )
     )
+    parts.append(
+        _label(
+            "GitHub activity dimensions — not a proficiency score",
+            radar_box.x + pad,
+            radar_box.y + pad + 24,
+            tok,
+            size=9,
+        )
+    )
     radar_inner = LayoutBox(
         radar_box.x,
-        radar_box.y + pad + 20,
+        radar_box.y + pad + 36,
         radar_box.width,
-        radar_box.height - pad - 20,
+        radar_box.height - pad - 36,
     )
     parts.append(_radar_chart(snapshot, radar_inner, tok))
 
     # Metric constellation footer strip
     owners_str = " · ".join(o.login for o in snapshot.repository_owners)
-    footer_items = [
-        (f"{inventory.owned_public_non_archived_repositories}", "Active repos"),
-        (f"{inventory.total_public_repositories}", "Total repos"),
-        (f"{inventory.stars_received:,}", "Stars received"),
-        (f"{inventory.public_releases_past_year}", "Releases / yr"),
-        (
-            f"{inventory.detected_languages}",
-            "Languages",
-        ),
-    ]
-    footer_y = canvas_h - footer_h + 4
+    if mobile:
+        footer_items = [
+            (f"{inventory.owned_public_non_archived_repositories}", "Active repos"),
+            (f"{starred_total:,}", "Starred repos"),
+            (f"{inventory.detected_languages}", "Languages"),
+        ]
+    else:
+        footer_items = [
+            (f"{inventory.owned_public_non_archived_repositories}", "Active repos"),
+            (f"{inventory.total_public_repositories}", "Total repos"),
+            (f"{starred_total:,}", "Starred repos"),
+            (f"{inventory.stars_received:,}", "Stars received"),
+            (f"{inventory.public_releases_past_year}", "Releases / yr"),
+            (f"{inventory.detected_languages}", "Languages"),
+        ]
+    footer_y = canvas_h - footer_h + 10
     parts.append(
         _label(
             f"Ecosystem: {owners_str}",
@@ -862,19 +917,21 @@ def render_dashboard_svg(
             size=9,
         )
     )
-    fi_x = margin + 180
-    fi_step = (width - fi_x - margin) / max(1, len(footer_items))
+    fi_x = margin
+    fi_step = (width - 2 * margin) / max(1, len(footer_items))
     for idx, (val, lbl) in enumerate(footer_items):
-        fx = fi_x + idx * fi_step
+        fx = fi_x + (idx + 0.5) * fi_step
         parts.append(
-            f'<text x="{fx:.0f}" y="{footer_y:.0f}" '
+            f'<text x="{fx:.0f}" y="{footer_y + 20:.0f}" '
             f'fill="{tok.text_primary}" font-size="10" font-weight="600" '
-            f'font-family="{_FONT_STACK}">{escape(val)}</text>'
+            f'text-anchor="middle" font-family="{_FONT_STACK}">'
+            f"{escape(val)}</text>"
         )
         parts.append(
-            f'<text x="{fx:.0f}" y="{footer_y + 10:.0f}" '
+            f'<text x="{fx:.0f}" y="{footer_y + 31:.0f}" '
             f'fill="{tok.text_muted}" font-size="8" '
-            f'font-family="{_FONT_STACK}">{escape(lbl)}</text>'
+            f'text-anchor="middle" font-family="{_FONT_STACK}">'
+            f"{escape(lbl)}</text>"
         )
 
     parts.append("</svg>")
