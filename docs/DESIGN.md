@@ -1,15 +1,15 @@
 # Design System — Alan Szmyt Profile
 
 **Status:** Active — production source of truth
-**Last updated:** 2026-08-09
+**Last updated:** 2026-08-21
 
 ---
 
 ## 1. Visual Thesis and Narrative
 
 The profile communicates **craft, depth, and precision**. The aesthetic is
-cosmic: dark-mode-first, deep-space blues and violets with deliberate warm
-amber and teal accents, conveying both technical rigour and creative breadth.
+cosmic: dark-mode-first, deep-space blues and violets with deliberate pink,
+cyan, amber, and teal accents, conveying both technical rigour and creative breadth.
 Every visual element must reinforce the written narrative rather than
 substitute for it. When images are unavailable, the profile must remain fully
 legible and credible through text alone.
@@ -32,6 +32,10 @@ All color decisions must meet WCAG 2.1 AA contrast (≥ 4.5 : 1 for body text,
 | Accent violet | `#6639BA` | `#a371f7` | Hero highlight |
 | Accent amber | `#9A6700` | `#e3b341` | Warnings, emphasis |
 | Accent teal | `#1A7F64` | `#3fb950` | Success, secondary CTA |
+| Signal pink | `#DB2777` | `#F472B6` | Banner input and motion signal |
+| Signal violet | `#7C3AED` | `#A78BFA` | Continuous systems orbit |
+| Signal cyan | `#0891B2` | `#67E8F9` | Banner output signal |
+| Banner surface | `#F8FAFC` | `#070A12` | Coordinated hero background |
 
 **Validation rule:** Every foreground/background combination used in SVG assets
 must be listed here and must pass the AA contrast ratio at its declared size.

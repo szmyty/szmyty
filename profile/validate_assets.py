@@ -10,9 +10,10 @@ Rules (from docs/DESIGN.md §12)
 3. SVGs parse without XML error.
 4. SVGs have a ``viewBox`` attribute on the root ``<svg>`` element.
 5. SVGs have a ``<title>`` as first child of the root ``<svg>`` element.
-6. SVGs contain no ``<script>`` tags or ``javascript:`` URL references.
-7. Light/dark banner pair is complete (both files present).
-8. ``assets/profile/README.md`` references only files that exist in the
+6. SVGs contain no active HTML, scripts, or external URL references.
+7. CSS animation declarations opt in through ``prefers-reduced-motion``.
+8. Light/dark banner pair is complete (both files present).
+9. ``assets/profile/README.md`` references only files that exist in the
    same directory.
 
 Usage
@@ -96,8 +97,9 @@ def check_svg(path: Path) -> list[str]:
     - Root element is ``<svg>`` (with or without namespace).
     - Root has a ``viewBox`` attribute.
     - First child element is ``<title>``.
-    - No ``<script>`` elements anywhere.
-    - No ``javascript:`` URLs anywhere in attribute values.
+    - No ``<script>`` or ``<foreignObject>`` elements anywhere.
+    - No active or external URLs in link/source attributes.
+    - CSS animations opt in through ``prefers-reduced-motion: no-preference``.
     """
     errors: list[str] = []
     name = path.name
@@ -111,6 +113,14 @@ def check_svg(path: Path) -> list[str]:
     # Check for javascript: URLs in raw text (catches href="javascript:...")
     if "javascript:" in content.lower():
         errors.append(f"{name}: contains 'javascript:' URL reference (prohibited)")
+    if (
+        "animation:" in content
+        and "prefers-reduced-motion: no-preference" not in content
+    ):
+        errors.append(
+            f"{name}: CSS animation is not guarded by "
+            "prefers-reduced-motion: no-preference"
+        )
 
     try:
         root = ElementTree.fromstring(content)  # noqa: S314 — local files only
@@ -146,12 +156,24 @@ def check_svg(path: Path) -> list[str]:
         elif not (first_child.text or "").strip():
             errors.append(f"{name}: <title> element is empty")
 
-    # No <script> elements anywhere
+    # No active HTML, scripts, or external link/source references
     for elem in root.iter():
         local = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
         if local == "script":
             errors.append(f"{name}: contains a <script> element (prohibited)")
-            break
+        if local == "foreignObject":
+            errors.append(f"{name}: contains a <foreignObject> element (prohibited)")
+        for attribute, value in elem.attrib.items():
+            attribute_local = (
+                attribute.split("}")[-1] if "}" in attribute else attribute
+            )
+            if attribute_local not in {"href", "src"}:
+                continue
+            if value.strip().lower().startswith(("http://", "https://", "//")):
+                errors.append(
+                    f"{name}: contains an external {attribute_local} reference "
+                    "(prohibited)"
+                )
 
     return errors
 

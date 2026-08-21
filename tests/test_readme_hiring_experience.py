@@ -9,17 +9,17 @@ def _readme_text() -> str:
 
 
 def test_first_viewport_carries_identity_proof_and_action_paths() -> None:
-    head = "\n".join(_readme_text().splitlines()[:60])
+    head = "\n".join(_readme_text().splitlines()[:80])
 
-    assert "# Alan Szmyt" in head
+    assert "<h1>Alan Szmyt</h1>" in head
     assert (
         "Software engineer building reliable developer platforms, local-first "
         "systems, and AI-assisted workflows."
     ) in head
-    assert "[Portfolio](https://szmyty.vercel.app)" in head
-    assert "[Ego Hygiene](https://github.com/egohygiene)" in head
-    assert "[Repositories](https://github.com/szmyty?tab=repositories)" in head
-    assert "## Selected work" in head
+    assert 'href="https://szmyty.vercel.app"' in head
+    assert 'href="https://github.com/egohygiene"' in head
+    assert 'href="https://github.com/szmyty?tab=repositories"' in head
+    assert "## Selected systems" in head
 
     for project in ["Reflector", "Renderflow", "Relay", "Optiflow"]:
         assert project in head
@@ -31,7 +31,6 @@ def test_readme_excludes_broken_and_internal_profile_state() -> None:
     for forbidden in [
         "soliloquy",
         "szmyty/universal",
-        "GitHub Engineering Dashboard",
         "AI Agent Execution Showcase",
         "Completion Matrix",
         "Queue key:",
@@ -53,18 +52,29 @@ def test_readme_uses_only_approved_public_destinations() -> None:
         "https://github.com/egohygiene/renderflow",
         "https://github.com/egohygiene/relay",
         "https://github.com/egohygiene/optiflow",
+        "https://orcid.org/0009-0008-5291-9795",
+        "https://medium.com/@szmyty",
+        "https://soundcloud.com/playfunction",
+        "https://www.pinterest.com/playfunctionmusic/ego-hygiene/",
+        "https://opensource.org/get-involved",
     ]
     for destination in approved:
         assert destination in readme
 
     assert "mailto:" not in readme
     assert "@users.noreply.github.com" not in readme
+    assert "linkedin.com" not in readme
 
 
-def test_generated_regions_are_reserved_and_empty() -> None:
+def test_public_dashboard_is_rendered_and_unverified_regions_stay_empty() -> None:
     readme = _readme_text()
+    dashboard_start = readme.index("<!-- START:github-dashboard -->")
+    dashboard_end = readme.index("<!-- END:github-dashboard -->")
+    dashboard = readme[dashboard_start:dashboard_end]
+    assert "profile/artifacts/github-dashboard/card-light.svg" in dashboard
+    assert "First-party public GitHub data" in dashboard
+
     modules = [
-        "github-dashboard",
         "ai-agent-showcase",
         "music-highlight",
         "orcid",

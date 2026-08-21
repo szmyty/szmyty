@@ -3,8 +3,8 @@
   "result_state": "fresh",
   "data_source": "live",
   "data_timestamp": "2026-08-21T13:40:57.870332+00:00",
-  "generation_timestamp": "2026-08-21T13:40:57.870332+00:00",
-  "data_hash": "00782dfb12511132ee426e946433feacb0a061101a4179e12e3fbc7818183198",
+  "generation_timestamp": "2026-08-21T14:35:58+00:00",
+  "data_hash": "2132544ec513cfe412b921a9ed4d2b0d29c29b5ec33a10f144e9a5dbf02f6a99",
   "freshness_policy": {
     "cadence": "daily",
     "ttl_seconds": 86400,

@@ -152,6 +152,49 @@ class TestCheckSvg:
         errors = va.check_svg(p)
         assert any("javascript:" in e.lower() for e in errors)
 
+    def test_foreign_object_rejected(self, tmp_path):
+        p = tmp_path / "test.svg"
+        p.write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
+            "<title>T</title><foreignObject/></svg>",
+            encoding="utf-8",
+        )
+        errors = va.check_svg(p)
+        assert any("foreignobject" in e.lower() for e in errors)
+
+    def test_external_href_rejected(self, tmp_path):
+        p = tmp_path / "test.svg"
+        p.write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
+            '<title>T</title><image href="https://example.com/image.png"/></svg>',
+            encoding="utf-8",
+        )
+        errors = va.check_svg(p)
+        assert any("external href" in e.lower() for e in errors)
+
+    def test_unguarded_css_animation_rejected(self, tmp_path):
+        p = tmp_path / "test.svg"
+        p.write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
+            "<title>T</title><style>.x { animation: pulse 2s infinite; }</style>"
+            '<rect class="x"/></svg>',
+            encoding="utf-8",
+        )
+        errors = va.check_svg(p)
+        assert any("prefers-reduced-motion" in e for e in errors)
+
+    def test_guarded_css_animation_accepted(self, tmp_path):
+        p = tmp_path / "test.svg"
+        p.write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">'
+            "<title>T</title><style>"
+            "@media (prefers-reduced-motion: no-preference) {"
+            ".x { animation: pulse 2s infinite; }}"
+            '</style><rect class="x"/></svg>',
+            encoding="utf-8",
+        )
+        assert va.check_svg(p) == []
+
     def test_invalid_xml(self, tmp_path):
         p = tmp_path / "test.svg"
         p.write_text("<svg><unclosed>", encoding="utf-8")

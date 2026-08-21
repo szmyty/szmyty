@@ -275,7 +275,7 @@ def test_recent_activity_model_max_length() -> None:
 def test_music_highlight_model_optional_fields() -> None:
     music = MusicHighlight(
         title="Ego Hygiene",
-        public_url="https://soundcloud.com/szmyty",
+        public_url="https://soundcloud.com/playfunction",
         data_source="manual",
     )
     assert music.description is None

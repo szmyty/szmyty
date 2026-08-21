@@ -107,8 +107,8 @@ ever added to `evidence.yml`, the following rules apply:
 Location, personal email, LinkedIn, and other contact details may only appear
 in `README.md` when the corresponding evidence record is `verified` and the
 user has explicitly confirmed that the specific granularity is acceptable for
-public disclosure.  See evidence records `identity-location` and
-`contact-linkedin` for examples of currently excluded information.
+public disclosure. See `identity-location` and `contact-linkedin` for claims
+that remain gated and excluded from the public README.
 
 ---
 

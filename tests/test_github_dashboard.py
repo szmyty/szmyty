@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
+from email.message import Message
 from io import BytesIO
 from pathlib import Path
 from urllib import error
@@ -120,12 +121,68 @@ def test_client_only_treats_rate_limited_403_as_rate_limit(monkeypatch) -> None:
         raise AssertionError("Expected RateLimitedError when rate limit is exhausted")
 
 
+def test_client_fetch_starred_total_uses_pagination_last_page(monkeypatch) -> None:
+    client = GitHubDashboardClient("token")
+    headers = Message()
+    headers["Link"] = (
+        "<https://api.github.com/user/14865041/starred?per_page=1&page=2>; "
+        'rel="next", '
+        "<https://api.github.com/user/14865041/starred?per_page=1&page=6526>; "
+        'rel="last"'
+    )
+
+    def _fake_request(url: str):
+        assert url.endswith("/users/szmyty/starred?per_page=1")
+        return [{"full_name": "example/repository"}], headers
+
+    monkeypatch.setattr(client, "_request_json", _fake_request)
+
+    assert client.fetch_starred_repository_total("szmyty") == 6526
+
+
+def test_live_snapshot_uses_authoritative_starred_total() -> None:
+    class _FakeClient:
+        def fetch_contributions(self, username, *, window_start, window_end):
+            return {
+                "totalCommitContributions": 12,
+                "totalIssueContributions": 3,
+                "totalPullRequestContributions": 4,
+                "totalPullRequestReviewContributions": 5,
+                "contributionCalendar": {"totalContributions": 24, "weeks": []},
+            }
+
+        def fetch_repositories_for_owner(self, login, owner_type):
+            return []
+
+        def fetch_starred_repository_total(self, username):
+            return 6526
+
+    snapshot = dashboard_service.collect_live_snapshot(
+        username="szmyty",
+        token="unused",
+        now=datetime(2026, 8, 21, 14, 35, tzinfo=UTC),
+        client=_FakeClient(),  # type: ignore[arg-type]
+        repository_owners=[models.RepositoryOwnerConfig(login="szmyty", type="user")],
+    )
+
+    assert snapshot.starred_repository_totals is not None
+    assert snapshot.starred_repository_totals.total_starred == 6526
+    explore = next(dim for dim in snapshot.radar_dimensions if dim.key == "explore")
+    assert explore.score == 100
+    assert not explore.unavailable
+    assert "starred?per_page=1" in (
+        snapshot.methodology.starred_repository_total_source
+    )
+
+
 def test_render_dashboard_svg_includes_accessible_metadata() -> None:
     snapshot = _fixture_snapshot()
     svg = render_dashboard_svg(snapshot, theme="dark", mobile=False)
     assert '<title id="title">' in svg
     assert '<desc id="desc">' in svg
     assert "GitHub Engineering" in svg
+    assert "Open-source Exploration Index" in svg
+    assert "2,300" in svg
     assert "<foreignObject" not in svg
 
 
@@ -174,6 +231,54 @@ def test_build_dashboard_uses_cache_on_provider_failure(tmp_path, monkeypatch) -
     assert snapshot.status.source_state == "failed-with-fallback"
     assert (output_dir / "metadata.json").exists()
     assert (output_dir / "card-dark.svg").exists()
+
+
+def test_starred_total_failure_preserves_last_known_good_snapshot(tmp_path) -> None:
+    output_dir = tmp_path / "github-dashboard"
+    output_dir.mkdir(parents=True)
+    cached = _fixture_snapshot()
+    cached_total = cached.starred_repository_totals
+    assert cached_total is not None
+    (output_dir / "snapshot.json").write_text(
+        json.dumps(cached.model_dump(mode="json"), indent=2),
+        encoding="utf-8",
+    )
+
+    class _StarredFailureClient:
+        def fetch_contributions(self, username, *, window_start, window_end):
+            return {
+                "totalCommitContributions": 12,
+                "totalIssueContributions": 3,
+                "totalPullRequestContributions": 4,
+                "totalPullRequestReviewContributions": 5,
+                "contributionCalendar": {"totalContributions": 24, "weeks": []},
+            }
+
+        def fetch_repositories_for_owner(self, login, owner_type):
+            return []
+
+        def fetch_starred_repository_total(self, username):
+            raise ProviderFailure("temporary starred endpoint failure")
+
+    snapshot = build_dashboard(
+        output_dir=output_dir,
+        fixture_path=Path(__file__).resolve().parents[1]
+        / "profile"
+        / "fixtures"
+        / "github-dashboard.json",
+        token="token",
+        now=datetime(2026, 8, 21, 18, 0, tzinfo=UTC),
+        client=_StarredFailureClient(),  # type: ignore[arg-type]
+    )
+
+    assert snapshot.status.data_source == "cache"
+    assert snapshot.status.source_state == "failed-with-fallback"
+    assert snapshot.starred_repository_totals is not None
+    assert (
+        snapshot.starred_repository_totals.total_starred == cached_total.total_starred
+    )
+    rendered = (output_dir / "card-light.svg").read_text(encoding="utf-8")
+    assert f">{cached_total.total_starred:,}<" in rendered
 
 
 # ---------------------------------------------------------------------------
