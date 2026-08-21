@@ -59,7 +59,7 @@ def test_preview_bridge_artifact_and_capture_command_exist() -> None:
     assert "keeping last-known-good preview" in script
 
 
-def test_readme_preview_links_to_live_pages_experience() -> None:
+def test_readme_does_not_promote_prelaunch_observatory() -> None:
     readme = README.read_text(encoding="utf-8")
-    assert "./profile/artifacts/interactive-showcase/preview.png" in readme
-    assert "https://szmyty.github.io/szmyty/ai-agent-showcase.html" in readme
+    assert "./profile/artifacts/interactive-showcase/preview.png" not in readme
+    assert "https://szmyty.github.io/szmyty/ai-agent-showcase.html" not in readme

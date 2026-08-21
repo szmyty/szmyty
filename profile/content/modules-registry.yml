@@ -9,7 +9,7 @@
 
 modules:
   - name: github-dashboard
-    enabled: true
+    enabled: false
     description: "Builds a first-party visual GitHub engineering dashboard from public GitHub REST and GraphQL data."
     provider_type: api
     provider_module: tools.modules.github_dashboard
@@ -35,7 +35,7 @@ modules:
     template: github-dashboard.md.j2
 
   - name: ai-agent-showcase
-    enabled: true
+    enabled: false
     description: "Builds a public evidence-backed AI agent execution showcase from selected issues, PRs, and CI runs."
     provider_type: computed
     provider_module: tools.modules.ai_agent_showcase
@@ -58,7 +58,7 @@ modules:
     template: ai-agent-showcase.md.j2
 
   - name: music-highlight
-    enabled: true
+    enabled: false
     description: "Renders manually curated music metadata from a hand-authored YAML file."
     provider_type: manual
     provider_module: tools.modules.music_highlight
