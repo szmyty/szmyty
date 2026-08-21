@@ -17,16 +17,10 @@ from tools.profile_builder.models import (
 )
 
 FIXTURE_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "profile"
-    / "fixtures"
-    / "oura-trends.json"
+    Path(__file__).resolve().parents[1] / "profile" / "fixtures" / "oura-trends.json"
 )
 REGISTRY_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "profile"
-    / "content"
-    / "modules-registry.yml"
+    Path(__file__).resolve().parents[1] / "profile" / "content" / "modules-registry.yml"
 )
 
 
@@ -114,8 +108,7 @@ def test_weekly_scores_are_rounded_and_unlabeled() -> None:
 
 def test_fetch_live_uses_daily_scope_summary_endpoints(monkeypatch) -> None:
     days = [
-        (date(2026, 5, 1) + timedelta(days=index)).isoformat()
-        for index in range(30)
+        (date(2026, 5, 1) + timedelta(days=index)).isoformat() for index in range(30)
     ]
 
     def fake_get(endpoint: str, token: str, params: dict[str, str]):
