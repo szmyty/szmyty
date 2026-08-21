@@ -34,6 +34,32 @@ modules:
     region_end_marker: "<!-- END:github-dashboard -->"
     template: github-dashboard.md.j2
 
+  - name: weather
+    enabled: true
+    description: "Renders current weather for the public city/region string on the GitHub profile using Open-Meteo."
+    provider_type: api
+    provider_module: tools.modules.weather
+    secret_names:
+      - GITHUB_TOKEN
+    sensitivity: public
+    freshness_policy:
+      cadence: hourly
+      ttl_seconds: 14400
+      warn_after_seconds: 28800
+    artifact_dir: profile/artifacts/weather
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+      - card-light.svg
+      - card-dark.svg
+      - card-mobile-light.svg
+      - card-mobile-dark.svg
+    fixture_file: profile/fixtures/weather.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:weather -->"
+    region_end_marker: "<!-- END:weather -->"
+    template: weather.md.j2
+
   - name: ai-agent-showcase
     enabled: false
     description: "Builds a public evidence-backed AI agent execution showcase from selected issues, PRs, and CI runs."
@@ -204,8 +230,8 @@ modules:
     template: soundcloud.md.j2
 
   - name: steam
-    enabled: false
-    description: "Fetches public Steam profile snapshot via the Steam Web API."
+    enabled: true
+    description: "Renders a public Steam snapshot with level, XP, badges, owned games, and bounded recent playtime."
     provider_type: api
     provider_module: tools.modules.steam
     secret_names:
@@ -219,6 +245,11 @@ modules:
     artifact_file: cache.json
     asset_files:
       - metadata.json
+      - stats.json
+      - card-light.svg
+      - card-dark.svg
+      - card-mobile-light.svg
+      - card-mobile-dark.svg
     fixture_file: profile/fixtures/steam.json
     readme_path: README.md
     region_start_marker: "<!-- START:steam -->"
@@ -246,25 +277,29 @@ modules:
     template: stars.md.j2
 
   - name: oura-trends
-    enabled: false
-    publication: blocked-pending-owner-approval
+    enabled: true
+    publication: allowed
     description: >
-      Explicitly gated, privacy-preserving Oura Ring trend aggregates.
-      Publication is blocked until the owner approves the metric allowlist.
-      Raw data, daily records, and authentication values are never committed.
+      Publishes owner-approved, privacy-bounded Oura daily-summary trends as
+      coarse weekly SVG charts. Raw daily records, exact schedules, location,
+      workouts, tags, and authentication values are never committed.
     provider_type: api
     provider_module: tools.modules.oura_trends
     secret_names:
       - OURA_ACCESS_TOKEN
     sensitivity: sensitive
     freshness_policy:
-      cadence: monthly
-      ttl_seconds: 2592000
-      warn_after_seconds: 5184000
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
     artifact_dir: profile/artifacts/oura-trends
     artifact_file: cache.json
     asset_files:
       - metadata.json
+      - card-light.svg
+      - card-dark.svg
+      - card-mobile-light.svg
+      - card-mobile-dark.svg
     fixture_file: profile/fixtures/oura-trends.json
     readme_path: README.md
     region_start_marker: "<!-- START:oura-trends -->"
