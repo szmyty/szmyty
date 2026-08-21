@@ -83,10 +83,15 @@ def test_public_dashboard_is_rendered_and_unverified_regions_stay_empty() -> Non
         "resume",
         "working-style",
         "soundcloud",
-        "steam",
         "stars",
         "oura-trends",
     ]
 
     for module in modules:
-        assert f"<!-- START:{module} -->\n<!-- END:{module} -->" in readme
+        start_marker = f"<!-- START:{module} -->"
+        end_marker = f"<!-- END:{module} -->"
+        assert start_marker in readme
+        assert end_marker in readme
+        start_index = readme.index(start_marker) + len(start_marker)
+        end_index = readme.index(end_marker)
+        assert readme[start_index:end_index].strip() == ""

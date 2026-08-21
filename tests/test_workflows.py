@@ -12,7 +12,12 @@ from tools.profile_builder.models import ModuleRegistry, ProfileConfig
 
 REPO_ROOT = Path(__file__).parents[1]
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
-EXPECTED_WORKFLOWS = {"ci.yml", "pages.yml", "update-profile.yml"}
+EXPECTED_WORKFLOWS = {
+    "apply-profile-polish.yml",
+    "ci.yml",
+    "pages.yml",
+    "update-profile.yml",
+}
 SITE_REQUIRED_FILES = {
     "index.html",
     "manifest.webmanifest",
