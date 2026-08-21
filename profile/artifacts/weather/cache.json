@@ -1,17 +1,17 @@
 {
   "location": "Boston, Massachusetts",
   "condition": "Overcast",
-  "temperature_f": 71.6,
-  "apparent_temperature_f": 72.5,
-  "relative_humidity_pct": 68,
+  "temperature_f": 70.3,
+  "apparent_temperature_f": 72.0,
+  "relative_humidity_pct": 73,
   "precipitation_in": 0.0,
-  "wind_mph": 6.5,
+  "wind_mph": 5.1,
   "high_f": 74.3,
   "low_f": 64.3,
   "precipitation_probability_pct": 46,
   "weather_code": 3,
   "data_source": "live",
-  "data_at": "2026-08-21T20:39:29.649510+00:00",
+  "data_at": "2026-08-21T21:27:39.924810+00:00",
   "attribution": "Weather data by Open-Meteo.com",
   "is_synthetic": false
 }
