@@ -79,7 +79,4 @@ def test_generated_regions_are_reserved_and_empty() -> None:
     ]
 
     for module in modules:
-        assert (
-            f"<!-- START:{module} -->\n<!-- END:{module} -->"
-            in readme
-        )
+        assert f"<!-- START:{module} -->\n<!-- END:{module} -->" in readme
