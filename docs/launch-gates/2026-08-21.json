@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "gate_id": "m6-05-2026-08-21",
+  "review_date": "2026-08-21",
+  "tracking_issue": "https://github.com/szmyty/szmyty/issues/146",
+  "report": "docs/audits/2026-08-21-CROSS-SURFACE-LAUNCH-REVIEW.md",
+  "overall_status": "blocked",
+  "launch_decision": "not_ready_for_applications",
+  "alan_signoff": false,
+  "surfaces": {
+    "profile": {
+      "status": "partial_pass",
+      "repository": "https://github.com/szmyty/szmyty",
+      "change_pull_request": {
+        "number": 145,
+        "url": "https://github.com/szmyty/szmyty/pull/145",
+        "state": "merged",
+        "merged_at": "2026-08-21T15:09:37Z"
+      },
+      "live_observations": [
+        {
+          "id": "github-readme-signed-out-desktop-light",
+          "date": "2026-08-21",
+          "viewer": "signed_out",
+          "viewport": "desktop",
+          "theme": "light",
+          "status": "pass",
+          "scope_limit": "This observation does not cover mobile, dark theme, or reduced motion."
+        }
+      ]
+    },
+    "portfolio": {
+      "status": "blocked",
+      "repository": "https://github.com/szmyty/portfolio",
+      "preview_access": {
+        "deployment_status": "ready",
+        "signed_out_access": "blocked_by_vercel_sso",
+        "visual_qa": "pending"
+      },
+      "required_manual_matrix": [
+        "360x740",
+        "390x844",
+        "412x915",
+        "phone-landscape",
+        "desktop-light",
+        "desktop-dark",
+        "mobile-light",
+        "mobile-dark",
+        "reduced-motion",
+        "no-webgl",
+        "javascript-failure",
+        "slow-network"
+      ],
+      "integration_sequence": [
+        {
+          "phase": 1,
+          "pull_requests": [291, 293]
+        },
+        {
+          "phase": 2,
+          "pull_requests": [292]
+        },
+        {
+          "phase": 3,
+          "pull_requests": [290]
+        },
+        {
+          "phase": 4,
+          "pull_requests": [294]
+        }
+      ],
+      "pull_requests": [
+        {
+          "number": 290,
+          "url": "https://github.com/szmyty/portfolio/pull/290",
+          "title": "feat(portfolio): publish selected engineering case studies",
+          "roadmap_issues": [288],
+          "state": "draft",
+          "checks": "pass",
+          "workflow_runs": [32505768330, 32505768325],
+          "preview_url": "https://portfolio-git-feat-selected-case-studies-szmyty.vercel.app",
+          "preview_deployment": "ready",
+          "signed_out_review": "blocked_by_vercel_sso"
+        },
+        {
+          "number": 291,
+          "url": "https://github.com/szmyty/portfolio/pull/291",
+          "title": "fix(portfolio): establish the mobile navigation and safe-area contract",
+          "roadmap_issues": [284],
+          "state": "draft",
+          "checks": "pass",
+          "workflow_runs": [32506006901, 32506006801],
+          "preview_url": "https://portfolio-git-fix-mobile-navigation-safe-area-szmyty.vercel.app",
+          "preview_deployment": "ready",
+          "signed_out_review": "blocked_by_vercel_sso"
+        },
+        {
+          "number": 292,
+          "url": "https://github.com/szmyty/portfolio/pull/292",
+          "title": "perf(portfolio): bound Canvas and media lifecycle",
+          "roadmap_issues": [287],
+          "state": "draft",
+          "checks": "pass",
+          "workflow_runs": [32507275148, 32507275257, 32507275175],
+          "preview_url": "https://portfolio-git-perf-canvas-media-lifecycle-szmyty.vercel.app",
+          "preview_deployment": "ready",
+          "signed_out_review": "blocked_by_vercel_sso"
+        },
+        {
+          "number": 293,
+          "url": "https://github.com/szmyty/portfolio/pull/293",
+          "title": "fix(portfolio): stabilize the infinity and floppy compositions",
+          "roadmap_issues": [285, 286],
+          "state": "draft",
+          "checks": "pass",
+          "workflow_runs": [32507486274, 32507486220],
+          "preview_url": "https://portfolio-git-fix-three-composition-szmyty.vercel.app",
+          "preview_deployment": "ready",
+          "signed_out_review": "blocked_by_vercel_sso"
+        }
+      ],
+      "integration_contract": [
+        {
+          "producer_pr": 293,
+          "consumer_pr": 292,
+          "status": "pending",
+          "requirement": "Preserve measured floppy bounds and camera-fit behavior in SharedSectionVisualCanvas."
+        },
+        {
+          "producer_pr": 291,
+          "consumer_pr": 290,
+          "status": "review_after_integration",
+          "requirement": "Review selected-work navigation and case-study layout in the integrated mobile shell."
+        },
+        {
+          "producer_pr": 290,
+          "consumer_pr": 294,
+          "status": "pending",
+          "requirement": "Preserve selected-work content and heading ownership when rebasing the trust suite."
+        },
+        {
+          "producer_pr": 291,
+          "consumer_pr": 294,
+          "status": "pending",
+          "requirement": "Preserve mobile disclosure and safe-area behavior when rebasing the trust suite."
+        },
+        {
+          "producer_pr": 293,
+          "consumer_pr": 294,
+          "status": "pending",
+          "requirement": "Preserve the homepage and 3D composition contracts when rebasing the trust suite."
+        },
+        {
+          "producer_pr": 292,
+          "consumer_pr": 294,
+          "status": "pending",
+          "requirement": "Preserve Canvas/media lifecycle and static fallbacks when rebasing the trust suite."
+        }
+      ]
+    },
+    "trust_suite": {
+      "status": "draft_checks_pass",
+      "pull_request": {
+        "number": 294,
+        "url": "https://github.com/szmyty/portfolio/pull/294",
+        "title": "test(portfolio): establish the application-ready trust suite",
+        "state": "draft",
+        "head_sha": "836a5a4317013f2139b289dd42db23175d846615",
+        "local_deterministic_validation": "pass",
+        "github_checks": [
+          {
+            "name": "CI",
+            "run_id": 32511398330,
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Optimize Images",
+            "run_id": 32511398215,
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Application Readiness static contracts",
+            "run_id": 32511398253,
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "vercel_deployment": "ready",
+        "signed_out_preview_access": "blocked_by_vercel_sso",
+        "release_gate": {
+          "status": "not_run",
+          "workflow_run_id": 32511398253,
+          "deployed_release_job": "skipped",
+          "scope": "deployed_browser_and_live_destination_checks",
+          "when": "after_integrated_release_candidate"
+        },
+        "integration_prerequisites": [290, 291, 292, 293]
+      }
+    },
+    "resume": {
+      "status": "draft_checks_pass",
+      "pull_request": {
+        "number": 22,
+        "url": "https://github.com/szmyty/resume/pull/22",
+        "title": "feat: publish application-ready resume system",
+        "state": "draft",
+        "head_sha": "b514d11cb87f1de1b6a963a37701553db6cf1d44",
+        "closes_issues": [18, 19, 20, 21],
+        "local_validation": "pass",
+        "local_validation_summary": "9 artifacts and 18 rendered pages passed visual, ATS, link, and privacy review.",
+        "github_ci": {
+          "run_id": 32511953627,
+          "status": "completed",
+          "conclusion": "success"
+        }
+      }
+    },
+    "guild": {
+      "status": "blocked",
+      "repository": "https://github.com/167guild/167guild.io",
+      "tracking_issue": "https://github.com/167guild/167guild.io/issues/69",
+      "live_url": "https://167guild.io/",
+      "signed_out_state": "public_wikijs_welcome_page",
+      "required_state": "restricted_or_intentionally_unpublished_and_verified_signed_out"
+    },
+    "scout": {
+      "status": "blocked",
+      "repository": "https://github.com/szmyty/scout",
+      "tracking_issue": "https://github.com/szmyty/scout/issues/3",
+      "current_risk": "public_employer_level_application_strategy",
+      "required_state": "aggregate_only_public_career_strategy_verified"
+    }
+  },
+  "owner_only_controls": [
+    {
+      "id": "github-account-bio",
+      "status": "pending",
+      "owner": "Alan",
+      "current_observed": "🧠 Systems architect building AI-native workflows, agent tooling, and knowledge systems.",
+      "required_value": "Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows."
+    },
+    {
+      "id": "github-pinned-repositories",
+      "status": "pending",
+      "owner": "Alan",
+      "required_repositories": [
+        "egohygiene/reflector",
+        "egohygiene/renderflow",
+        "egohygiene/relay",
+        "egohygiene/aether",
+        "egohygiene/optiflow",
+        "egohygiene/mantle"
+      ]
+    },
+    {
+      "id": "github-account-location",
+      "status": "pending",
+      "owner": "Alan",
+      "current_observed": "Boston, Massachusetts",
+      "required_value": "Greater Boston, MA"
+    },
+    {
+      "id": "github-branch-protection",
+      "status": "pending",
+      "owner": "Alan",
+      "requirements": [
+        "pull_requests_required",
+        "required_checks_enabled",
+        "default_branch_deletion_disabled",
+        "default_branch_force_push_disabled"
+      ],
+      "history_cutover_exception": "https://github.com/szmyty/szmyty/issues/147"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "portfolio-draft-integration-and-visual-qa",
+      "status": "open",
+      "separate_operation": false
+    },
+    {
+      "id": "trust-suite-pr",
+      "status": "open",
+      "separate_operation": false
+    },
+    {
+      "id": "resume-pr",
+      "status": "open",
+      "separate_operation": false
+    },
+    {
+      "id": "167guild-safety-state",
+      "status": "open",
+      "separate_operation": true,
+      "tracking_issue": "https://github.com/167guild/167guild.io/issues/69"
+    },
+    {
+      "id": "profile-history-remediation",
+      "status": "open",
+      "separate_operation": true,
+      "tracking_issue": "https://github.com/szmyty/szmyty/issues/147"
+    },
+    {
+      "id": "scout-application-strategy-privacy",
+      "status": "open",
+      "separate_operation": true,
+      "tracking_issue": "https://github.com/szmyty/scout/issues/3"
+    },
+    {
+      "id": "owner-only-github-controls",
+      "status": "pending",
+      "separate_operation": false
+    },
+    {
+      "id": "alan-launch-signoff",
+      "status": "pending",
+      "separate_operation": false
+    }
+  ]
+}
