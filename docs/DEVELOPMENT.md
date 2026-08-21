@@ -3,8 +3,8 @@
 **Repository:** `szmyty/szmyty`
 **Status:** Active
 
-This document covers everything needed to work on this repository from a fresh
-checkout, including setup, the command surface, local testing, and fixture usage.
+This guide covers setup, local validation, snapshot-module development, and the
+live telemetry credential boundary.
 
 ---
 
@@ -16,18 +16,13 @@ checkout, including setup, the command surface, local testing, and fixture usage
 | Poetry | 2.1.x | Dependency management | Yes |
 | Git | 2.x | Version control | Yes |
 | Task | 3.x | Optional task runner | No |
-| yamllint | 1.x | YAML linting | No (installed via Poetry) |
-| ruff | 0.11.x | Python linting | No (installed via Poetry) |
-| act | latest | Local Actions runner | No — best-effort only |
+| act | current | Best-effort local Actions syntax/runner parity | No |
 
-Python and Poetry are the only hard requirements.  All other tools are installed
-as Poetry dev-dependencies or are truly optional.
+Ruff, yamllint, and pytest are installed through Poetry groups.
 
 ---
 
-## 2. Setup
-
-### Clone and bootstrap
+## 2. Bootstrap
 
 ```sh
 git clone https://github.com/szmyty/szmyty.git
@@ -36,289 +31,270 @@ python -m pip install poetry==2.1.4
 poetry install --with lint,test
 ```
 
-This creates a `.venv/` inside the project directory (`poetry.toml` sets
-`virtualenvs.in-project = true`).
+`poetry.toml` keeps the virtual environment in `.venv/`.
 
-### Activate the environment (optional)
+Optional shell activation:
 
 ```sh
-# Activate for the current shell session
 source .venv/bin/activate
-
-# Or prefix commands with `poetry run`
-poetry run python -m pytest
 ```
+
+All documented commands work without activation when prefixed with
+`poetry run`.
 
 ---
 
-## 3. Command Surface
+## 3. Validation Surface
 
-All commands are available through `poetry run` regardless of whether Task is
-installed.
-
-### Validate
+Run the complete gate before a PR is ready:
 
 ```sh
-# Validate profile inputs (schemas, evidence catalog, asset presence)
 poetry run python -m tools.profile_builder.cli validate
-
-# Validate profile SVG and image assets
 poetry run python profile/validate_assets.py assets/profile
-
-# Run both validations (local parity with CI)
-poetry run python -m tools.profile_builder.cli validate && \
-  poetry run python profile/validate_assets.py assets/profile
-```
-
-### Test
-
-```sh
-# Run full test suite
 poetry run python -m pytest
-
-# Run a specific test file
-poetry run python -m pytest tests/test_modules.py
-
-# Run tests with verbose output
-poetry run python -m pytest -v
-
-# Run only workflow/site tests (parity with pages.yml CI job)
-poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
-```
-
-### Lint
-
-```sh
-# Lint Python source
 poetry run ruff check .
-
-# Lint YAML files (workflows, config)
 poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml
-
-# Identity check — rejects stale source-repository names
 bash .tasks/check-identity.sh
 ```
 
-### Update profile (local refresh)
-
-Run each module fetch step and regenerate README regions:
+Useful targeted tests:
 
 ```sh
-# Fetch the GitHub engineering dashboard (requires GITHUB_TOKEN)
-GITHUB_TOKEN=<your-pat> \
-  poetry run python -m tools.modules.github_dashboard \
-    --output-dir profile/artifacts/github-dashboard
+poetry run python -m pytest tests/test_weather.py
+poetry run python -m pytest tests/test_steam_cards.py
+poetry run python -m pytest tests/test_oura_trends.py
+poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
+```
 
-# Refresh music highlight from hand-authored YAML
+Live providers are never required by tests. Provider calls must be mocked or
+replaced by synthetic fixtures.
+
+---
+
+## 4. Local Profile Refresh
+
+### GitHub dashboard
+
+```sh
+GITHUB_TOKEN="${GITHUB_TOKEN}" \
+  poetry run python -m tools.modules.github_dashboard \
+  --output-dir profile/artifacts/github-dashboard
+```
+
+### Weather
+
+Weather uses the public GitHub profile `location` string and Open-Meteo. It
+requires no weather-provider API key.
+
+```sh
+GITHUB_TOKEN="${GITHUB_TOKEN}" \
+  poetry run python -m tools.modules.weather \
+  --output profile/artifacts/weather/cache.json
+```
+
+The GitHub token is optional for the public user lookup when running locally,
+but Actions supplies `github.token` automatically.
+
+### Steam
+
+```sh
+STEAM_WEB_API_KEY="${STEAM_WEB_API_KEY}" \
+STEAM_ID64="${STEAM_ID64}" \
+  poetry run python -m tools.modules.steam \
+  --output profile/artifacts/steam/cache.json
+```
+
+Required live configuration:
+
+- `STEAM_WEB_API_KEY`: secret credential from the Steam Web API provider.
+- `STEAM_ID64`: public SteamID64 identifier; store as a repository Actions
+  variable rather than a secret.
+
+### Oura
+
+Oura Cloud API V2 uses OAuth2. Personal Access Tokens are no longer supported.
+The access token must be authorized only for the `daily` scope used by the
+profile transformation.
+
+```sh
+OURA_ACCESS_TOKEN="${OURA_ACCESS_TOKEN}" \
+  poetry run python -m tools.modules.oura_trends \
+  --allow-publication \
+  --output profile/artifacts/oura-trends/cache.json
+```
+
+Do not save access or refresh tokens in `.env` files committed to this
+repository. For local work, inject credentials through the shell or a local
+secret manager outside the tracked tree.
+
+### Manual music input
+
+```sh
 poetry run python -m tools.modules.music_highlight \
   --input profile/content/music-highlight.yml \
   --output profile/artifacts/music-highlight/music.yml
+```
 
-# Render all README regions from refreshed artifacts
+### Render README regions
+
+After refreshing one or more module artifacts:
+
+```sh
 poetry run python -m tools.modules.update_readme
 ```
 
-When `GITHUB_TOKEN` is absent the GitHub-backed modules fall back to the
-committed fixture caches.  See [§ 5 Fixtures](#5-fixtures) below.
-
-### Render one module
-
-Re-render a single README region without running all modules:
-
-```sh
-# Re-render only the music-highlight region
-poetry run python -m tools.modules.update_readme --module music-highlight
-```
-
-### Validate site
-
-```sh
-# Validate Pages workflow and static site inputs
-poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
-
-# Capture the deterministic README preview for the interactive observatory
-python tools/capture_interactive_showcase_preview.py \
-  --output profile/artifacts/interactive-showcase/preview.png
-```
-
-### Clean generated caches
-
-Remove transient generated files without deleting committed fixtures or tracked
-artifacts:
-
-```sh
-# Remove virtualenv (force-reinstall on next poetry install)
-rm -rf .venv
-
-# Remove pytest cache
-rm -rf .pytest_cache
-
-# Remove ruff cache
-rm -rf .ruff_cache
-
-# Remove Python bytecode
-find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
-```
-
-> **Do not delete** committed artifact caches
-> (`profile/artifacts/*/cache.json`, `profile/artifacts/music-highlight/music.yml`).
-> Those files are tracked and serve as fallbacks in CI.
-
-### Task shortcuts (optional)
-
-If Task is installed (`brew install go-task` or equivalent):
-
-```sh
-task --list                # Show all available commands
-task lint                  # yamllint + ruff
-task tests:pytest          # Run full test suite
-task validate-profile      # Profile input validation
-task validate-site         # Site and workflow tests
-task update-profile        # Local module refresh
-task check-identity        # Identity constraint check
-```
+Only enabled modules are rendered. Their templates own only the content between
+the corresponding README region markers.
 
 ---
 
-## 4. Local Workflow Parity with CI
+## 5. Fixtures and Generated Artifacts
 
-| CI job | Local equivalent |
-|--------|----------------|
-| `ci.yml` → validate | `poetry run python -m tools.profile_builder.cli validate` |
-| `ci.yml` → assets | `poetry run python profile/validate_assets.py assets/profile` |
-| `ci.yml` → lint Python | `poetry run ruff check tests` |
-| `ci.yml` → lint YAML | `poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml` |
-| `ci.yml` → tests | `poetry run python -m pytest` |
-| `update-profile.yml` | `task update-profile` (requires `GITHUB_TOKEN`) |
-| `pages.yml` → validate | `poetry run python -m pytest tests/test_workflows.py -k "workflow or site"` |
+Fixtures live under `profile/fixtures/` and must contain sanitized synthetic
+data only.
 
-`act` provides best-effort local runner parity for workflow syntax.  GitHub
-Pages OIDC, deployment environments, and hosted Pages infrastructure are not
-fully reproducible under `act`.
+| Fixture | Module |
+|---------|--------|
+| `github-dashboard.json` | `github-dashboard` |
+| `weather.json` | `weather` |
+| `steam.json` | `steam` |
+| `oura-trends.json` | `oura-trends` |
+| `music-highlight.yml` | `music-highlight` |
 
----
+### Synthetic-output rule
 
-## 5. Fixtures
+A fixture may be rendered during tests to exercise the complete SVG path, but
+it must be unmistakably synthetic in the artifact contract and the README
+template must refuse to present it as live personal data.
 
-Fixtures provide deterministic inputs for tests and for offline module
-rendering.  They live in `profile/fixtures/` and must contain sanitized
-synthetic data only — no real personal measurements, coordinates, or auth
-payloads.
+### Last-known-good rule
 
-| Fixture file | Used by | Purpose |
-|-------------|---------|---------|
-| `profile/fixtures/github-dashboard.json` | `tests/test_github_dashboard.py`, `tests/test_modules.py` | Synthetic GitHub dashboard snapshot |
-| `profile/fixtures/github-metrics.json` | `tests/test_modules.py`, `test_profile_builder_*` | Synthetic legacy GitHub metrics response |
-| `profile/fixtures/recent-activity.json` | `tests/test_modules.py` | Synthetic legacy activity feed |
-| `profile/fixtures/music-highlight.yml` | `tests/test_modules.py` | Synthetic music entry |
+Real provider snapshots in `profile/artifacts/` are committed intentionally so
+the public README remains stable during transient provider outages. Never
+replace a real cached snapshot with a synthetic fixture while presenting the
+result as live/cached real data.
 
-When a module artifact cache is absent, the module falls back to the
-corresponding committed fixture.  Tests always use fixtures and never call live
-APIs.
+Do not hand-edit generated telemetry values to make them look current.
 
 ---
 
 ## 6. Adding or Modifying a Module
 
-1. Add the canonical module declaration to `profile/content/modules-registry.yml`
-   with `enabled: true`, provider metadata, and the correct region markers.
-2. Mirror the README-owned subset in `profile/content/modules.yml`.
-3. Create the Jinja2 template in `profile/templates/<name>.md.j2`.
-4. Create or update the corresponding Python module under `tools/modules/`.
-5. Add a fixture file in `profile/fixtures/` with sanitized synthetic data.
-6. Add tests in `tests/` covering the fetch, render, and region-update logic.
-7. Run `poetry run python -m tools.profile_builder.cli validate` to confirm
-   the new module passes validation.
-8. Update `docs/ARCHITECTURE.md` module inventory if the module is new.
-9. Verify the `profile/content/evidence.yml` catalog covers any new public
-   claims the module introduces.
+Follow this order:
 
-Consult `docs/PRIVACY.md` before adding any data source to confirm it is on
-the allow-list.
+1. Define or update the public-data contract in `docs/PRIVACY.md`.
+2. If the source is sensitive/location-derived or the output is a new personal
+   disclosure, obtain explicit owner approval in a GitHub issue before
+   implementation.
+3. Add/update the canonical entry in
+   `profile/content/modules-registry.yml`.
+4. Mirror README marker ownership in `profile/content/modules.yml`.
+5. Implement the provider adapter in `tools/modules/`.
+6. Normalize before persistence; never write raw provider responses as an
+   intermediate tracked file.
+7. Add a synthetic fixture.
+8. Add the Jinja2 README template.
+9. For visual modules, generate desktop/mobile light/dark SVGs.
+10. Add deterministic tests for provider parsing, privacy boundaries,
+    fallback behavior, synthetic hiding, and rendering.
+11. Integrate refresh behavior into the existing `update-profile.yml` workflow
+    instead of creating workflow sprawl.
+12. Update architecture, content, privacy, and runbook documentation.
+13. Run the full validation gate.
 
----
-
-## 7. Adding or Rotating a Secret
-
-1. Confirm the secret is necessary — see the environment variable table in
-   `docs/ARCHITECTURE.md`.
-2. Add the secret to the repository's Settings → Secrets and variables →
-   Actions.
-3. Reference it in the workflow with `${{ secrets.SECRET_NAME }}`.
-4. Update the environment variable table in `docs/ARCHITECTURE.md`.
-5. Document the rotation procedure in `docs/RUNBOOK.md`.
-6. Never commit secret values to any file.
+Issue #149 is the owner-approval record for the current weather/Steam/Oura
+transformations.
 
 ---
 
-## 8. Dependency Updates
+## 7. Secrets and Variables
+
+Repository configuration lives under GitHub Settings → Secrets and variables →
+Actions.
+
+| Name | Kind | Purpose |
+|------|------|---------|
+| `STEAM_WEB_API_KEY` | Secret | Steam Web API authentication |
+| `STEAM_ID64` | Variable | Public Steam account identifier |
+| `OURA_ACCESS_TOKEN` | Secret | Oura OAuth2 access token with `daily` scope |
+| `GITHUB_TOKEN` | Automatic Actions token | Public GitHub/provider workflow access |
+
+### Adding or rotating a secret
+
+1. Confirm the credential is declared in `docs/ARCHITECTURE.md` and the module
+   registry.
+2. Add/replace it in Actions secrets; never commit its value.
+3. Trigger `Update Profile` manually.
+4. Confirm the module metadata reports a live/fresh result.
+5. Revoke the previous provider credential when rotation is required.
+
+For Oura, do not attempt to automate secret mutation using a stored single-use
+refresh token unless a future architecture explicitly provides a safe external
+secret-rotation service. The current design prefers explicit re-authorization
+and last-known-good fallback.
+
+---
+
+## 8. Workflow Parity
+
+| CI / workflow | Local equivalent |
+|---------------|------------------|
+| `ci.yml` validation | `poetry run python -m tools.profile_builder.cli validate` |
+| Asset validation | `poetry run python profile/validate_assets.py assets/profile` |
+| Python lint | `poetry run ruff check .` |
+| YAML lint | `poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml` |
+| Tests | `poetry run python -m pytest` |
+| README render | `poetry run python -m tools.modules.update_readme` |
+| Pages checks | `poetry run python -m pytest tests/test_workflows.py -k "workflow or site"` |
+
+`act` is best-effort only. Hosted GitHub token behavior, secrets, scheduled-event
+payloads, Pages OIDC, and deployment environments are not fully reproducible
+locally.
+
+---
+
+## 9. Generated Cache Cleanup
+
+Safe transient cleanup:
 
 ```sh
-# Update a single dependency
+rm -rf .venv
+rm -rf .pytest_cache
+rm -rf .ruff_cache
+find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+```
+
+Do **not** delete committed `profile/artifacts/` merely as routine cleanup; they
+are part of the graceful-degradation architecture.
+
+---
+
+## 10. Dependency Updates
+
+```sh
 poetry add <package>@<version>
-
-# Update all dependencies within constraints
 poetry update
-
-# Lock without installing
 poetry lock
-
-# Check for outdated packages
 poetry show --outdated
 ```
 
-After updating `poetry.lock`, commit both `pyproject.toml` and `poetry.lock`.
-CI caches the virtualenv keyed on `poetry.lock`; a changed lock file
-invalidates the cache and triggers a fresh install.
+Commit both `pyproject.toml` and `poetry.lock` when dependency resolution
+changes.
 
 ---
 
-## 9. Editor Configuration
+## 11. Quality Tool Boundary
 
-`.editorconfig` at the repository root sets formatting defaults for all files.
-Most modern editors respect this automatically.  The Python tooling enforces
-additional constraints via `pyproject.toml` (`ruff`, `pytest` configuration).
+The authoritative validation stack is:
 
----
+- Poetry
+- Ruff
+- yamllint
+- pytest
+- `profile/validate_assets.py`
+- `profile/validate_evidence.py`
+- `tools/profile_builder/cli.py`
 
-## 10. Quality Tool Boundary
-
-**Authoritative tools** for this repository until further notice:
-
-| Tool | Role | Installed via |
-|------|------|--------------|
-| Poetry | Dependency management | system |
-| Ruff | Python linting and import ordering | `poetry install --with lint` |
-| yamllint | YAML linting | `poetry install --with lint` |
-| pytest | Test runner | `poetry install --with test` |
-| `profile/validate_assets.py` | Asset presence and format validation | repository |
-| `profile/validate_evidence.py` | Evidence catalog validation | repository |
-| `tools/profile_builder/cli.py` | Profile input validation | repository |
-
-These tools constitute the authoritative validation gate and map directly to
-the CI jobs in `.github/workflows/ci.yml`.  No additional linting or quality
-tool is required to pass CI.
-
-### Future migration seam: `egolint`
-
-`egolint` is an independently-developed linting tool that may replace or
-supplement Ruff for this repository's Python quality checks once it is
-released and validated.  Until that release:
-
-- Do **not** import, vendor, mock, or depend on `egolint` in any repository
-  file, test, or workflow.
-- Do **not** add an `egolint` configuration stub to `pyproject.toml` or
-  `.github/workflows/`.
-- When `egolint` reaches a stable public release and is validated against
-  this codebase, migrate by replacing the `poetry run ruff check .` invocation
-  in `ci.yml` and the equivalent local command above, then remove this note.
-
-The migration command will be:
-
-```sh
-# Future — not yet available; do not run
-# poetry run egolint check .
-```
-
-Until that command is available and tested, continue using Ruff as documented
-in § 3 above.
+`egolint` may replace or supplement part of this stack after a stable public
+release and explicit repository migration. Do not add speculative `egolint`
+configuration before that migration is designed and validated.
