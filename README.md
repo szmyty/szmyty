@@ -99,7 +99,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Overcast, 70 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Overcast, 71 degrees Fahrenheit."
     width="100%"
   >
 </picture>
@@ -111,14 +111,16 @@ These cards are generated first-party from public or explicitly approved API dat
 
 ### Gaming
 
-<a href="https://steamcommunity.com/profiles/76561198068207368/"><picture>
+<a href="https://steamcommunity.com/profiles/76561198068207368/" title="Open my Steam profile"><img src="https://img.shields.io/badge/Steam-szmyty-171A21?style=flat-square&logo=steam&logoColor=white" alt="Steam | szmyty"></a>
+
+<a href="https://steamcommunity.com/profiles/76561198068207368/" title="Open my Steam profile"><picture>
   <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/steam/card-mobile-dark.svg">
   <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/steam/card-mobile-light.svg">
   <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/steam/card-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/steam/card-light.svg">
   <img
     src="./profile/artifacts/steam/card-light.svg"
-    alt="Steam profile snapshot for xqc simp gamer pogchamp with Steam level, player XP, badge count, owned games, recent playtime, and recent games."
+    alt="Steam profile snapshot for xqc simp gamer pogchamp with avatar, last-online timestamp, Steam level, player XP, badge count, owned games, recent playtime, and recent games."
     width="100%"
   >
 </picture></a>
