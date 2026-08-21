@@ -1,5 +1,11 @@
 # Final Owner Handoff Checklist
 
+> **Current launch gate (2026-08-21):** The profile is **not ready** for final
+> application launch. Use the
+> [`Cross-Surface Application Launch Review`](audits/2026-08-21-CROSS-SURFACE-LAUNCH-REVIEW.md)
+> and its machine-readable gate for the current decision. The report linked
+> below is retained as a historical 2026-08-09 snapshot.
+
 This checklist is the owner-facing companion to
 [`docs/audits/FINAL-PROFILE-READINESS-REPORT.md`](audits/FINAL-PROFILE-READINESS-REPORT.md).
 Use it after reviewing the audit report and before declaring the profile fully

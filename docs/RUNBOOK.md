@@ -6,6 +6,14 @@
 This runbook covers response procedures for every known failure scenario in the
 profile build and publish pipeline.
 
+## Current application launch gate
+
+The current cross-surface decision is tracked in
+[`docs/audits/2026-08-21-CROSS-SURFACE-LAUNCH-REVIEW.md`](audits/2026-08-21-CROSS-SURFACE-LAUNCH-REVIEW.md)
+and enforced by
+[`docs/launch-gates/2026-08-21.json`](launch-gates/2026-08-21.json).
+Do not infer launch readiness from a successful deployment or an older audit.
+
 ---
 
 ## 1. Scheduled Update Failure
