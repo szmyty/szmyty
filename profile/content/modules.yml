@@ -12,21 +12,21 @@
 
 modules:
   - name: github-dashboard
-    enabled: true
+    enabled: false
     region_start_marker: "<!-- START:github-dashboard -->"
     region_end_marker: "<!-- END:github-dashboard -->"
     template: github-dashboard.md.j2
     artifact_path: profile/artifacts/github-dashboard/snapshot.json
 
   - name: ai-agent-showcase
-    enabled: true
+    enabled: false
     region_start_marker: "<!-- START:ai-agent-showcase -->"
     region_end_marker: "<!-- END:ai-agent-showcase -->"
     template: ai-agent-showcase.md.j2
     artifact_path: profile/artifacts/ai-agent-showcase/cache.json
 
   - name: music-highlight
-    enabled: true
+    enabled: false
     region_start_marker: "<!-- START:music-highlight -->"
     region_end_marker: "<!-- END:music-highlight -->"
     template: music-highlight.md.j2
