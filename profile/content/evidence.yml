@@ -59,14 +59,15 @@ records:
       "Software engineer" without specific employer attribution.
 
   - id: identity-focus-cloud-native
-    claim: "Focusing on cloud-native systems, developer experience, creative automation, and AI-assisted tooling"
-    evidence_type: self-reported
-    status: needs-user-verification
+    claim: "Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows"
+    evidence_type: url
+    url: "https://github.com/szmyty/szmyty/issues/141"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Aspirational summary from staged README.  Verify that this accurately
-      reflects current day-to-day work before publishing.
+      Owner-approved Platform/DevEx-first positioning for the application-ready
+      profile. Public proof is limited to the verified showcase repositories.
 
   - id: identity-location
     claim: "Based in the United States"
@@ -190,40 +191,39 @@ records:
       Repository is publicly accessible and owned by the account.
 
   - id: repo-flagship-list
-    claim: "Flagship project repositories"
-    evidence_type: none
-    status: needs-user-verification
+    claim: "Profile showcase repositories: Reflector, Renderflow, Relay, and Optiflow"
+    evidence_type: url
+    url: "https://github.com/szmyty/szmyty/issues/141"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      The staged README listed several projects but the list may be outdated
-      or contain repositories that are private, inactive, or experimental.
-      User must confirm which repositories are ready for public highlight.
+      Owner-approved showcase four. Each destination was independently checked
+      as public before publication.
 
   - id: repo-soliloquy
     claim: "szmyty/soliloquy — offline-first local LLM chat with PDF support, packaged as a Docker Compose stack"
     evidence_type: url
     url: "https://github.com/szmyty/soliloquy"
-    status: verified
+    status: needs-user-verification
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Repository is publicly accessible.  README describes a self-contained
-      Docker Compose stack for querying PDFs via a local LLM with no cloud
-      dependency.  Claim is bounded to the repository description; no adoption
-      or usage metrics are stated.
+      Removed from the recruiter-facing profile after the public destination
+      failed verification. Re-verify visibility, content, and lifecycle before
+      any future promotion.
 
   - id: repo-universal
     claim: "szmyty/universal — monorepo developer-experience toolkit: formatting, linting, spellcheck, and CI automation"
     evidence_type: url
     url: "https://github.com/szmyty/universal"
-    status: verified
+    status: needs-user-verification
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Repository is publicly accessible.  Claim is bounded to the repository
-      description and observable contents; no downstream adoption metrics are
-      stated.
+      Removed from the recruiter-facing profile after the public destination
+      failed verification. Re-verify visibility, content, and lifecycle before
+      any future promotion.
 
   - id: repo-openai-retro
     claim: "szmyty/OpenAI-Retro-SuperMarioWorld-SNES — NEAT recurrent neural network agent trained on SNES Super Mario World via gym-retro"
@@ -276,6 +276,96 @@ records:
       contributed to the shared linting infrastructure.  This record is
       distinct from repo-egolint, which backs the existence of the
       repository itself; this record backs the contribution/authorship claim.
+
+  - id: repo-reflector
+    claim: "egohygiene/reflector - research software for governed, auditable AI-assisted engineering, with a manuscript workflow and DOI-backed archive"
+    evidence_type: url
+    url: "https://github.com/egohygiene/reflector"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Wording is bounded to the public repository README, manuscript tree,
+      workflows, and DOI link. The current repository and archived DOI artifact
+      must remain separately identified.
+
+  - id: repo-renderflow
+    claim: "egohygiene/renderflow - a Rust, specification-driven document rendering engine built around graph-planned transformations"
+    evidence_type: url
+    url: "https://github.com/egohygiene/renderflow"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      The public README documents Rust, a transformation DAG, specifications,
+      supported outputs, tests, and release workflows.
+
+  - id: repo-relay
+    claim: "egohygiene/relay - versioned GitHub Actions, reusable workflows, and CI contracts for the Ego Hygiene ecosystem"
+    evidence_type: url
+    url: "https://github.com/egohygiene/relay"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      The public action catalog and README document reusable, versioned
+      automation contracts and consumer boundaries.
+
+  - id: repo-optiflow
+    claim: "egohygiene/optiflow - a local-first, read-only Rust CLI for media inventory and evidence-backed duplicate planning"
+    evidence_type: url
+    url: "https://github.com/egohygiene/optiflow"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      The public README explicitly defines the v0.1.0 command surface as
+      local-first and non-mutating.
+
+  - id: contact-portfolio
+    claim: "Professional contact route on Alan Szmyt's public portfolio"
+    evidence_type: url
+    url: "https://szmyty.vercel.app"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      The GitHub profile links to the portfolio route without embedding a
+      personal mailbox in this repository.
+
+  - id: profile-v1-positioning
+    claim: "Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows"
+    evidence_type: url
+    url: "https://github.com/szmyty/szmyty/issues/141"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Owner-approved positioning for the first application lane. Public proof
+      paths are Reflector, Renderflow, Relay, and Optiflow.
+
+  - id: profile-ai-disclosure
+    claim: "Uses AI-assisted implementation inside bounded, reviewable workflows while owning architecture, constraints, review, validation, and release decisions"
+    evidence_type: url
+    url: "https://github.com/szmyty/szmyty/issues/141"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Owner-approved disclosure. Do not imply that generated volume alone
+      demonstrates quality, judgment, adoption, or impact.
+
+  - id: ego-hygiene-public-lab
+    claim: "Ego Hygiene is Alan Szmyt's public engineering and research lab"
+    evidence_type: url
+    url: "https://github.com/egohygiene"
+    status: verified
+    sensitivity: public
+    last_reviewed: "2026-08-21"
+    notes: >
+      Relationship and wording approved in the owner decision record at
+      szmyty/szmyty#141.
+
 
   # ─── Open-source work ─────────────────────────────────────────────────────
 
@@ -492,15 +582,15 @@ records:
     last_reviewed: "2026-08-09"
 
   - id: contact-noreply-email
-    claim: "GitHub noreply email: 14865041+szmyty@users.noreply.github.com"
+    claim: "GitHub noreply email"
     evidence_type: repo-path
     repo_path: "pyproject.toml"
-    status: verified
+    status: excluded
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      GitHub-generated noreply address; safe to publish as a contact channel.
-      Do not publish a personal mailbox address without explicit consent.
+      A GitHub noreply address is not an inbound professional contact route and
+      must not be presented as one.
 
   - id: contact-personal-email
     claim: "Personal email address"
