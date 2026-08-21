@@ -1,0 +1,15 @@
+{
+  "display_name": "Example Player",
+  "profile_url": "https://steamcommunity.com/id/example-player/",
+  "steam_level": 10,
+  "recent_games": [
+    {
+      "name": "Example Game",
+      "appid": 999999,
+      "playtime_2weeks": 120,
+      "store_url": "https://store.steampowered.com/app/999999/"
+    }
+  ],
+  "data_source": "fixture",
+  "data_at": null
+}
