@@ -1,15 +1,15 @@
 {
-  "display_name": "Example Player",
-  "profile_url": "https://steamcommunity.com/id/example-player/",
-  "steam_level": 10,
+  "display_name": "xqc simp gamer pogchamp",
+  "profile_url": "https://steamcommunity.com/profiles/76561198068207368/",
+  "steam_level": 11,
   "recent_games": [
     {
-      "name": "Example Game",
-      "appid": 999999,
-      "playtime_2weeks": 120,
-      "store_url": "https://store.steampowered.com/app/999999/"
+      "name": "Agent 64: Spies Never Die",
+      "appid": 1574480,
+      "playtime_2weeks": 431,
+      "store_url": "https://store.steampowered.com/app/1574480/"
     }
   ],
-  "data_source": "fixture",
-  "data_at": null
+  "data_source": "live",
+  "data_at": "2026-08-21T20:39:40.968834+00:00"
 }

@@ -1,7 +1,7 @@
 {
-  "owned_games": null,
-  "badge_count": null,
-  "player_xp": null,
-  "data_source": "fixture",
-  "is_synthetic": true
+  "owned_games": 243,
+  "badge_count": 6,
+  "player_xp": 1349,
+  "data_source": "live",
+  "is_synthetic": false
 }

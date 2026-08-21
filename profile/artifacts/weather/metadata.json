@@ -1,14 +1,14 @@
 {
-  "module_name": "steam",
+  "module_name": "weather",
   "version": "1.0",
-  "generated_at": "2026-08-21T20:39:41.391668+00:00",
+  "generated_at": "2026-08-21T20:39:29.650416+00:00",
   "state": "fresh",
   "data_source": "live",
-  "data_at": "2026-08-21T20:39:40.968834+00:00",
+  "data_at": "2026-08-21T20:39:29.649510+00:00",
   "data_hash": null,
   "ttl_seconds": null,
   "is_stale": false,
   "seconds_until_stale": null,
-  "human_summary": "Steam snapshot (fresh)",
+  "human_summary": "Weather snapshot (fresh)",
   "error": null
 }

@@ -74,7 +74,7 @@ These systems meet inside [**Ego Hygiene**](https://github.com/egohygiene), my p
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
   <img
     src="./profile/artifacts/github-dashboard/card-light.svg"
-    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6526 publicly starred repositories, releases, and language distribution for @szmyty."
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6528 publicly starred repositories, releases, and language distribution for @szmyty."
     width="100%"
   >
 </picture>
@@ -89,12 +89,45 @@ _First-party public GitHub data · trailing 365 days · refreshed 2026-08-21. St
 These cards are generated first-party from public or explicitly approved API data. Synthetic fixtures are used for tests only and are never presented as live profile data.
 
 <!-- START:weather -->
+
+### Weather where I am
+
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/weather/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/weather/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/weather/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
+  <img
+    src="./profile/artifacts/weather/card-light.svg"
+    alt="Current weather for Boston, Massachusetts: Overcast, 72 degrees Fahrenheit."
+    width="100%"
+  >
+</picture>
+
+<sub>Location follows my public GitHub profile · weather data by [Open-Meteo](https://open-meteo.com/) · no coordinates are stored.</sub>
 <!-- END:weather -->
 
 <!-- START:steam -->
+
+### Gaming
+
+<a href="https://steamcommunity.com/profiles/76561198068207368/"><picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/steam/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/steam/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/steam/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/steam/card-light.svg">
+  <img
+    src="./profile/artifacts/steam/card-light.svg"
+    alt="Steam profile snapshot for xqc simp gamer pogchamp with Steam level, player XP, badge count, owned games, recent playtime, and recent games."
+    width="100%"
+  >
+</picture></a>
+
+<sub>Public Steam Web API data · availability follows my Steam privacy settings.</sub>
 <!-- END:steam -->
 
 <!-- START:oura-trends -->
+
 <!-- END:oura-trends -->
 
 ---
