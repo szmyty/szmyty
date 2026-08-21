@@ -32,8 +32,8 @@
 </p>
 
 <p>
-  <a href="https://www.bu.edu/met/degrees-certificates/ms-software-development/"><img alt="Boston University — MS Software Development" src="https://img.shields.io/badge/Boston_University-MS_Software_Development-CC0000?style=flat-square"></a>
-  <a href="https://www.uml.edu/Sciences/computer-science/Programs/Ugrad/computer-science-major.aspx"><img alt="UMass Lowell — BS Computer Science" src="https://img.shields.io/badge/UMass_Lowell-BS_Computer_Science-0067B1?style=flat-square"></a>
+  <a href="https://www.bu.edu/met/degrees-certificates/ms-software-development/"><img alt="Boston University — MS Software Development" src="https://img.shields.io/badge/Boston_University-MS_Software_Development-CC0000?style=flat-square&amp;logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHRleHQgeD0iMTIiIHk9IjE2LjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIj5CVTwvdGV4dD48L3N2Zz4="></a>
+  <a href="https://www.uml.edu/Sciences/computer-science/Programs/Ugrad/computer-science-major.aspx"><img alt="UMass Lowell — BS Computer Science" src="https://img.shields.io/badge/UMass_Lowell-BS_Computer_Science-0067B1?style=flat-square&amp;logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHRleHQgeD0iMTIiIHk9IjE1LjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI3LjIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmYiPlVNTDwvdGV4dD48L3N2Zz4="></a>
 </p>
 
 </div>
