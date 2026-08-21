@@ -405,12 +405,15 @@ def _render_svg(
         avatar_center_y = avatar_y + avatar_radius
         avatar_markup = (
             '<defs><clipPath id="steamAvatarClip">'
-            f'<circle cx="{avatar_center_x}" cy="{avatar_center_y}" r="{avatar_radius}"/>'
+            f'<circle cx="{avatar_center_x}" cy="{avatar_center_y}" '
+            f'r="{avatar_radius}"/>'
             "</clipPath></defs>"
             f'<image href="{html.escape(avatar_data_uri, quote=True)}" '
-            f'x="{avatar_x}" y="{avatar_y}" width="{avatar_size}" height="{avatar_size}" '
+            f'x="{avatar_x}" y="{avatar_y}" width="{avatar_size}" '
+            f'height="{avatar_size}" '
             'preserveAspectRatio="xMidYMid slice" clip-path="url(#steamAvatarClip)"/>'
-            f'<circle cx="{avatar_center_x}" cy="{avatar_center_y}" r="{avatar_radius}" '
+            f'<circle cx="{avatar_center_x}" cy="{avatar_center_y}" '
+            f'r="{avatar_radius}" '
             f'fill="none" stroke="{palette["border"]}" stroke-width="2"/>'
         )
 
