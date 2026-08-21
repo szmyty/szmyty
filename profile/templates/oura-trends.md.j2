@@ -1,19 +1,17 @@
-{% if aggregate and aggregate.data_source != "disabled" %}
-### Wellness Trends *(experimental)*
+{% if is_public and aggregate %}
+### Wellness trends
 
-> **Disclaimer:** This is coarse, voluntarily shared aggregate wellness data.
-> It does not constitute medical advice and may not reflect current state.
-> Exact daily records, schedules, and routines are never published.
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/oura-trends/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/oura-trends/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/oura-trends/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/oura-trends/card-light.svg">
+  <img
+    src="./profile/artifacts/oura-trends/card-light.svg"
+    alt="Oura aggregate wellness trends over a {{ aggregate.window_days }}-day window, shown as coarse weekly sleep, readiness, and activity score charts."
+    width="100%"
+  >
+</picture>
 
-| Metric | {{ aggregate.window_days }}-Day Window |
-|--------|---------------------------------------|
-{% if aggregate.avg_sleep_hours is not none %}| Average sleep | ~{{ aggregate.avg_sleep_hours }} h |
-{% endif %}{% if aggregate.sleep_regularity_band %}| Sleep regularity | {{ aggregate.sleep_regularity_band }} |
-{% endif %}{% if aggregate.avg_readiness_band %}| Readiness | {{ aggregate.avg_readiness_band }} |
-{% endif %}{% if aggregate.activity_consistency_band %}| Activity consistency | {{ aggregate.activity_consistency_band }} |
-{% endif %}{% if aggregate.hrv_direction %}| HRV trend | {{ aggregate.hrv_direction }} |
-{% endif %}
-
-<sub>*Period: {{ aggregate.period_label }} · {{ aggregate.contributing_days }} contributing days*{% if aggregate.is_synthetic %} · **synthetic test data**{% endif %}</sub>
-
+<sub>Voluntarily shared aggregate wellness data · weekly values are rounded to 5-point buckets · recent days, daily records, schedules, and raw measurements are not published. This is not medical advice.</sub>
 {% endif %}

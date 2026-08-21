@@ -3,362 +3,339 @@
 **Repository:** `szmyty/szmyty`
 **Status:** Active
 
-This runbook covers response procedures for every known failure scenario in the
-profile build and publish pipeline.
+This runbook covers failure response for the profile build, live telemetry, and
+publish pipeline.
 
 ---
 
 ## 1. Scheduled Update Failure
 
-**Symptom:** The `update-profile.yml` workflow run ends in failure or
-partial-failure.
+**Symptom:** `update-profile.yml` ends in failure or partial failure.
 
-**Response:**
+1. Open the failed Actions run and read the module refresh summary.
+2. Identify the module outcome (`success`, `failure`, or `skipped`) and its
+   artifact `data_source`.
+3. Treat one provider failure as isolated: other modules should still refresh
+   and the failed module should retain last-known-good output when available.
+4. Re-run a transient provider/network failure manually.
+5. For a structural failure, run the module-specific command below and fix the
+   provider adapter, schema, template, or workflow contract.
+6. If scheduled workflows were disabled after repository inactivity, re-enable
+   the workflow in the Actions UI.
 
-1. Open the failed run in Actions and check the `summarize` step output.
-   Each module reports its outcome (`success`, `failure`, `skipped`) and its
-   `data_source` value from the artifact cache.
-2. If a single module failed but the others succeeded, the README is still
-   updated with the passing modules.  The `report-partial-failure` job marks
-   the overall run as failed to make the problem visible.
-3. Identify which module failed (`github-metrics`, `recent-activity`, or
-   `music-highlight`).
-4. Check whether the failure is a transient API error or a structural problem.
-5. For transient errors: re-run the workflow from the Actions UI.
-6. For structural errors: see the module-specific sections below.
-7. If the update has not run in more than 48 hours, open an issue and tag
-   `@szmyty` for manual review.
+### Expected schedule
 
----
+- Weather: `17 0,3,9,12,15,18,21 * * *`.
+- Full profile refresh: `0 6 * * *`.
 
-## 2. Module Provider Failure
-
-### 2a. GitHub API failure (github-metrics, recent-activity)
-
-**Symptom:** Module step exits non-zero; log shows a non-2xx response or
-connection error from the GitHub API.
-
-**Response:**
-
-1. Check [githubstatus.com](https://www.githubstatus.com) for an active
-   incident.
-2. If GitHub is degraded, wait and re-run the workflow after the incident
-   resolves.
-3. If the failure persists after GitHub recovers, inspect the module script
-   for changes to the API endpoint or response schema.
-4. The cached artifact from the previous successful run is preserved in the
-   repository.  The README will retain the last-known-good content until the
-   provider recovers.
-
-### 2b. Music highlight module failure
-
-**Symptom:** The `music-highlight` step fails.
-
-**Response:**
-
-1. Inspect `profile/content/music-highlight.yml` for malformed YAML or a
-   missing required field.
-2. Validate the file locally:
-   ```sh
-   poetry run python -m tools.modules.music_highlight \
-     --input profile/content/music-highlight.yml \
-     --output /tmp/music.yml
-   ```
-3. If the file is valid and the failure is script-related, check the module
-   script at `tools/modules/music_highlight.py` for a broken import or logic
-   error.
+The daily full run also refreshes weather. Non-06:00 scheduled runs skip the
+heavier GitHub/Steam/Oura modules.
 
 ---
 
-## 3. Stale Output
+## 2. Local Validation
 
-**Symptom:** The rendered README shows data that is significantly older than
-expected (e.g., no activity updates for several days).
+Run before merging provider or rendering changes:
 
-**Response:**
+```sh
+poetry install --with lint,test
+poetry run python -m tools.profile_builder.cli validate
+poetry run python profile/validate_assets.py assets/profile
+poetry run python -m pytest
+poetry run ruff check .
+poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml
+bash .tasks/check-identity.sh
+```
 
-1. Confirm the scheduled workflow is not disabled.  Open Actions → Update
-   Profile → check that the workflow is enabled.
-2. Verify the workflow schedule is active (GitHub disables scheduled workflows
-   on repositories with no activity for 60 days).
-3. Re-enable or trigger the workflow manually from the Actions UI.
-4. If artifacts are stale due to repeated module failures, manually update the
-   fixture fallback:
-   ```sh
-   GITHUB_TOKEN=<your-pat> \
-     poetry run python -m tools.modules.github_metrics \
-       --output profile/artifacts/github-metrics/cache.json
-   git add profile/artifacts/github-metrics/cache.json
-   git commit -m "chore(profile): manually refresh stale github-metrics cache"
-   git push
-   ```
+Provider tests are deterministic and must not call live APIs.
 
 ---
 
-## 4. Broken Link
+## 3. Weather Module
 
-**Symptom:** A link in `README.md`, `site/index.html`, or a documentation file
-returns a 404 or connection error.
+### Live command
 
-**Response:**
+```sh
+GITHUB_TOKEN="${GITHUB_TOKEN}" \
+  poetry run python -m tools.modules.weather \
+  --output profile/artifacts/weather/cache.json
+```
 
-1. Identify the broken URL and where it is referenced.
-2. For profile README links: check `profile/content/evidence.yml` for the
-   corresponding record.  If the URL is no longer valid, mark the record
-   `status: needs-user-verification` and open an issue.
-3. For site links: update `site/index.html` or the relevant CSS/JS reference.
-4. For documentation links: update the markdown file directly.
-5. Commit the fix and verify in CI.
+`GITHUB_TOKEN` is optional locally for the public GitHub user endpoint but is
+provided automatically in Actions.
 
----
+### Expected behavior
 
-## 5. Asset Replacement
+1. Read the public `@szmyty` GitHub `location` field.
+2. Geocode that string transiently with Open-Meteo.
+3. Fetch weather using the in-memory coordinates.
+4. Persist the public location label and normalized weather only.
+5. Generate desktop/mobile light/dark SVGs.
 
-**Symptom:** An SVG or image asset in `assets/profile/` is missing, corrupted,
-or must be replaced.
+### Failure response
 
-**Response:**
+- **GitHub location missing:** update the public GitHub profile location if a
+  weather card is still desired. The module must not silently substitute a
+  hard-coded city.
+- **Open-Meteo unavailable:** retain the last-known-good real cache. A synthetic
+  fixture may exercise CI but remains hidden from the public README.
+- **Wrong city resolution:** inspect the public GitHub location string and the
+  geocoding selection logic. Never fix this by committing coordinates.
+- **Coordinate/timezone/elevation appears in a tracked artifact:** treat as a
+  privacy-boundary failure, remove the value, and follow the incident procedure.
 
-1. Prepare the replacement asset offline and validate it meets the design
-   constraints in `docs/DESIGN.md` (contrast ratios, font fallbacks, dimensions).
-2. Replace the file at the same path:
-   ```sh
-   cp /path/to/new-banner-dark.svg assets/profile/banner-dark.svg
-   ```
-3. Run the asset validator:
-   ```sh
-   poetry run python profile/validate_assets.py assets/profile
-   ```
-4. Review the README to confirm the replaced asset renders as expected in the
-   GitHub Markdown preview.
-5. Commit the replacement:
-   ```sh
-   git add assets/profile/banner-dark.svg
-   git commit -m "chore(assets): replace banner-dark.svg"
-   git push
-   ```
+### Disable
+
+Set `weather.enabled: false` in both module registries and remove or relocate the
+README marker surface in the same PR. Do not leave two location sources behind.
 
 ---
 
-## 6. GitHub Pages Rollback
+## 4. Steam Module
 
-**Symptom:** The deployed Pages site (`szmyty.github.io`) is broken or showing
-wrong content after a `pages.yml` deployment.
+### Required repository configuration
 
-**Response:**
+- Actions secret: `STEAM_WEB_API_KEY`
+- Actions variable: `STEAM_ID64`
 
-1. Identify the last known-good commit for `site/`:
+`STEAM_ID64` is a public profile identifier and is intentionally a variable,
+not a secret.
+
+### Live command
+
+```sh
+STEAM_WEB_API_KEY="${STEAM_WEB_API_KEY}" \
+STEAM_ID64="${STEAM_ID64}" \
+  poetry run python -m tools.modules.steam \
+  --output profile/artifacts/steam/cache.json
+```
+
+### Expected public metrics
+
+- Steam level
+- player XP
+- badge count
+- owned-game count
+- up to five recent games
+- bounded recent playtime
+
+Steam does not expose an Xbox-style Gamerscore; do not invent a composite score
+unless a future specification explicitly defines and labels it as a custom
+metric.
+
+### Failure response
+
+- **No live card after enabling:** verify both repository configuration values
+  exist and that the Steam profile/game-details privacy settings expose the
+  requested public data.
+- **401:** rotate `STEAM_WEB_API_KEY` at the Steam provider and replace the
+  Actions secret.
+- **403/private response:** respect Steam privacy settings; do not add a scraper
+  to bypass them.
+- **Partial endpoint failure:** the card may omit unavailable level/library or
+  badge metrics while preserving the rest of the public snapshot.
+
+### Revoke/rotate
+
+1. Revoke or replace the key at the Steam provider.
+2. Update `STEAM_WEB_API_KEY` in GitHub Actions secrets.
+3. Trigger `Update Profile` manually.
+4. Confirm the new artifact has `data_source: live`.
+
+---
+
+## 5. Oura Trends Module
+
+### Authentication model
+
+Oura Cloud API V2 requires OAuth2. Personal Access Tokens are no longer an
+available authentication path. The module expects:
+
+- Actions secret: `OURA_ACCESS_TOKEN`
+- OAuth scope: `daily`
+
+The workflow intentionally does not store an OAuth refresh token and does not
+grant itself repository-secret mutation privileges to rotate one. When the
+access token expires, the public card remains on last-known-good real output
+until the owner re-authorizes and updates the secret.
+
+### Live command
+
+```sh
+OURA_ACCESS_TOKEN="${OURA_ACCESS_TOKEN}" \
+  poetry run python -m tools.modules.oura_trends \
+  --allow-publication \
+  --output profile/artifacts/oura-trends/cache.json
+```
+
+### Public transformation
+
+Only the owner-approved #149 transformation may be published:
+
+- `daily_sleep`, `daily_readiness`, and `daily_activity` summary score streams;
+- recent-day safety buffer;
+- in-memory daily rows only;
+- up to eight unlabeled weekly averages;
+- weekly values rounded to 5-point buckets;
+- aggregate JSON limited by `OURA_PUBLIC_AGGREGATE_ALLOWLIST`;
+- no raw/daily records, precise schedules, workouts, tags, heart-rate series,
+  precise HRV, travel/location inference, or authentication data.
+
+### Expired/revoked access token
+
+1. Confirm the failure is 401/403 in the sanitized workflow message. Do not log
+   the provider response body or token.
+2. Complete the Oura OAuth authorization flow again with only the `daily` scope.
+3. Replace the `OURA_ACCESS_TOKEN` Actions secret.
+4. Trigger `Update Profile` manually.
+5. Confirm the artifact changes from `cache` to `live`.
+
+### Provider/API failure
+
+- A transient provider failure must retain the last-known-good real aggregate
+  and SVGs.
+- If no real cache exists, synthetic fixture output stays hidden from README.
+- If all three daily summary endpoints fail, treat the fetch as failed rather
+  than publishing an empty “healthy” chart.
+
+### Disable/delete public Oura output
+
+1. Set `oura-trends.enabled: false` in both registries.
+2. Set `publication: blocked-pending-owner-approval` in the canonical registry
+   if approval is being withdrawn.
+3. Clear the README region or allow the renderer to clear it once disabled.
+4. Remove tracked `profile/artifacts/oura-trends/` if the owner wants the
+   current public artifact removed from the tree.
+5. Review reachable history separately; do not rewrite shared history without
+   explicit coordination.
+
+---
+
+## 6. GitHub Dashboard and Manual Modules
+
+### GitHub dashboard failure
+
+```sh
+GITHUB_TOKEN="${GITHUB_TOKEN}" \
+  poetry run python -m tools.modules.github_dashboard \
+  --output-dir profile/artifacts/github-dashboard
+```
+
+On rate-limit or transient API failure, preserve the committed cache rather
+than fabricating metrics.
+
+### Music highlight failure
+
+```sh
+poetry run python -m tools.modules.music_highlight \
+  --input profile/content/music-highlight.yml \
+  --output profile/artifacts/music-highlight/music.yml
+```
+
+Inspect the manual YAML input for malformed or missing required fields.
+
+---
+
+## 7. Stale Output
+
+1. Confirm `Update Profile` remains enabled in Actions.
+2. Inspect `profile/artifacts/<module>/metadata.json` for `state`,
+   `data_source`, and generation time.
+3. Confirm the provider credential/variable exists where required.
+4. Trigger the workflow manually after resolving configuration/provider issues.
+5. Do not hand-edit generated live artifacts to “freshen” timestamps or values.
+
+Expected freshness policy is declared in
+`profile/content/modules-registry.yml`.
+
+---
+
+## 8. Broken Generated Card
+
+**Symptom:** README shows a broken SVG, wrong theme variant, or bad mobile
+layout.
+
+1. Confirm all four visual assets exist in the module artifact directory:
+   - `card-light.svg`
+   - `card-dark.svg`
+   - `card-mobile-light.svg`
+   - `card-mobile-dark.svg`
+2. Render the module locally from fixtures/mocked data.
+3. Validate SVG markup and confirm `<title>`/`<desc>` accessibility text exists.
+4. Inspect the module Jinja2 template's `<picture>` media queries.
+5. Do not replace first-party generated SVGs with third-party badge/card services
+   solely to hide a renderer bug.
+
+---
+
+## 9. Suspected Sensitive-Data or Secret Exposure
+
+1. **Revoke credentials immediately** if any credential may be exposed.
+2. **Disable the affected module** if it can continue generating the bad field.
+3. Remove the disallowed value/file from the tracked tree.
+4. Delete affected Actions logs if they contain a credential or raw sensitive
+   payload.
+5. Scan the current tree and recent history for the same class/pattern.
+6. Add/repair tests that enforce the transformation boundary.
+7. Document a sanitized incident summary under `docs/audits/` without copying
+   the sensitive value.
+8. Plan any history rewrite separately with `@szmyty`; never rewrite shared
+   history automatically.
+
+For Oura, daily records or exact timestamps entering artifacts are a privacy
+incident even when no credential leaked. For weather, persisted coordinates are
+a privacy incident under the current #149 contract.
+
+---
+
+## 10. GitHub Pages Rollback
+
+1. Identify the last known-good site commit:
+
    ```sh
    git log --oneline -- site/
    ```
-2. Check out the known-good state of the site files:
+
+2. Restore the known-good site files:
+
    ```sh
    git checkout <good-commit-sha> -- site/
    ```
-3. Run the local site validator:
+
+3. Validate:
+
    ```sh
    poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
    ```
-4. Commit and push the reverted site:
-   ```sh
-   git add site/
-   git commit -m "revert(site): roll back to <good-commit-sha>"
-   git push
-   ```
-5. The `pages.yml` workflow will re-deploy automatically on push to `master`.
-6. Verify the deployment completed successfully in Actions and confirm the live
-   site is restored.
+
+4. Commit the rollback with a conventional commit and let `pages.yml` redeploy.
 
 ---
 
-## 7. Suspected Secret Exposure
+## 11. Evidence Verification Request
 
-**Symptom:** A secret value (token, credential) may have been committed,
-logged, or leaked.
+For stable profile prose, do not change a `needs-user-verification` record to
+`verified` without explicit owner confirmation or a public supporting artifact.
 
-**Immediate response (within minutes):**
-
-1. **Revoke immediately:** Go to the provider (GitHub, etc.) and invalidate
-   the affected token before doing anything else.
-2. **Remove from tracked tree:**
-   ```sh
-   git rm --cached <file-with-secret>
-   git commit -m "security: remove accidentally committed secret"
-   git push
-   ```
-3. **Remove from Actions logs:** If the secret appeared in a workflow log,
-   open Settings → Actions → Logs and delete the affected run logs.
-4. **Notify:** Tag `@szmyty` on the incident and, if the secret was used to
-   access third-party services, follow those services' breach-notification
-   procedures.
-5. **Assess exposure:** Scan the current tracked tree and recent history for
-   other occurrences of the same token pattern.
-6. **Re-issue a new secret** only after confirming the old one is fully
-   revoked and removed.
-7. **Document** the incident in `docs/audits/` using a sanitized summary
-   (type, path range, date — never the value).
-8. **Schedule history rewrite** separately, coordinated with `@szmyty`, as
-   rewriting shared history affects all forks and clones.
-
-> Do not rewrite shared branch history automatically.  Rewriting history
-> after a secret exposure requires explicit coordination with the repository
-> owner.
+Dynamic telemetry values follow the provider-transformation contract in
+`docs/CONTENT.md` and `docs/PRIVACY.md`; issue #149 records the current owner
+approval for weather/Steam/Oura. That approval does not automatically verify
+separate stable personal claims.
 
 ---
 
-## 8. CI Validation Failure
+## 12. GitHub Surface Owner Checklist
 
-**Symptom:** The `ci.yml` workflow fails on a pull request or push.
+Repository files and CI cannot verify every GitHub UI setting. Before a major
+profile release, review:
 
-**Response:**
+- branch/ruleset protection for `master`;
+- required CI checks;
+- About text/homepage/topics/social preview;
+- pinned repositories;
+- Pages environment/deployment URL;
+- Discussions categories and issue-routing links;
+- Actions secrets/variables required by enabled modules.
 
-1. Open the failed job in Actions.
-2. Run the failing step locally to reproduce:
-   - Profile validation: `poetry run python -m tools.profile_builder.cli validate`
-   - Asset validation: `poetry run python profile/validate_assets.py assets/profile`
-   - Python lint: `poetry run ruff check tests`
-   - YAML lint: `poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml`
-   - Tests: `poetry run python -m pytest`
-3. Fix the underlying issue, commit, and push to trigger a new CI run.
-4. If the failure is a flaky test, investigate root cause — do not simply
-   re-run without understanding why it failed.
-
----
-
-## 9. Evidence Verification Request
-
-**Symptom:** A claim in `README.md` or `profile/content/evidence.yml` is
-marked `status: needs-user-verification` and is blocking a profile update.
-
-**Response:**
-
-1. Open or locate the corresponding GitHub issue requesting verification from
-   `@szmyty`.
-2. Do not change the record to `verified` without an explicit response or a
-   publicly inspectable artifact.
-3. If `@szmyty` provides confirmation:
-   - Update the record's `status` to `verified`.
-   - Add or update the `url` or `repo_path` field with the artifact reference.
-   - Update `last_reviewed` to today's date.
-   - Commit and push.
-4. If verification is refused or not forthcoming, mark the record `excluded`
-   and remove the corresponding claim from `README.md`.
-
----
-
-## 10. GitHub Surface Owner Checklist
-
-The following settings require direct access to the GitHub UI and cannot be
-verified by repository files or CI.  `@szmyty` must review these manually
-before each release.
-
-> Use the consolidated release handoff at
-> [`docs/FINAL-OWNER-HANDOFF-CHECKLIST.md`](FINAL-OWNER-HANDOFF-CHECKLIST.md)
-> together with
-> [`docs/audits/FINAL-PROFILE-READINESS-REPORT.md`](audits/FINAL-PROFILE-READINESS-REPORT.md)
-> when performing the final owner sign-off.
-
-> These items are outside the automated validation scope.  Repository files
-> and CI workflows cannot assert their correctness.
-
-### Branch rules and required checks
-
-- [ ] `master` has a branch protection rule or ruleset enabled.
-- [ ] Required status checks include the `validate`, `assets`, `lint-python`,
-      `lint-yaml`, and `tests` jobs from `ci.yml`.
-- [ ] Force-push to `master` is disabled.
-- [ ] Deletion of `master` is disabled.
-
-### Repository About text, homepage, and topics
-
-- [ ] About description is current and accurate.
-- [ ] Homepage URL points to `https://szmyty.github.io` (or is intentionally blank).
-- [ ] Topics reflect the current project focus (e.g., `profile`, `github-profile`).
-- [ ] Social preview image is set and renders correctly in link previews.
-
-### Profile pinned repositories
-
-- [ ] Pinned repositories reflect current flagship projects.
-- [ ] No stale, archived, or placeholder repositories are pinned.
-
-### Pages environment and deployment URL
-
-- [ ] GitHub Pages source is set to the `gh-pages` branch or the Actions
-      deployment workflow (`pages.yml`).
-- [ ] Deployment URL is `https://szmyty.github.io` and returns HTTP 200.
-- [ ] The Pages environment (`github-pages`) shows a successful last deployment.
-
-### Discussions categories and issue-routing links
-
-- [ ] Discussions are enabled on the repository.
-- [ ] The following categories exist: `Announcements`, `General`, `Ideas`,
-      `Polls`, `Q&A`, `Show and tell`.
-- [ ] Contact links in `.github/ISSUE_TEMPLATE/config.yml` each resolve to a
-      real Discussions category or page:
-      - `https://github.com/szmyty/szmyty/discussions` — General Discussions
-      - `https://github.com/szmyty/szmyty/discussions/categories/ideas` — Research & Exploration
-      - `https://github.com/szmyty/szmyty/discussions/categories/q-a` — Documentation Feedback
-      - `https://github.com/szmyty/szmyty/security/advisories/new` — Security Reports
-
----
-
-## oura-trends module
-
-### Default state
-
-The module is `enabled: false` and `publication: blocked-pending-owner-approval`
-in `profile/content/modules-registry.yml`.  No real-data artifact is written
-until the owner completes the approval checklist below.
-
-### Owner approval checklist (required before enabling)
-
-- [ ] Review the threat model in `tools/modules/oura_trends.py` (sleep/wake
-      schedule, travel, illness, availability inference risks).
-- [ ] Confirm the metric allowlist in `OURA_PUBLIC_AGGREGATE_ALLOWLIST` (models.py)
-      covers only coarse approved metrics.
-- [ ] Create a Personal Access Token at
-      <https://cloud.ouraring.com/personal-access-tokens> with only the
-      minimum scopes needed: `daily_sleep`, `daily_readiness`, `daily_activity`.
-- [ ] Add `OURA_ACCESS_TOKEN` as a repository secret under GitHub → Settings →
-      Secrets and variables → Actions.
-- [ ] Set `enabled: true` **and** `publication: allowed` in
-      `profile/content/modules-registry.yml`.
-- [ ] Run `poetry run python -m pytest tests/test_oura_trends.py -v` locally
-      to confirm the full pipeline passes.
-- [ ] Merge the registry change in a dedicated PR reviewed by `@szmyty`.
-
-### Token rotation
-
-1. Create a new token at <https://cloud.ouraring.com/personal-access-tokens>.
-2. Update the `OURA_ACCESS_TOKEN` repository secret.
-3. Verify the next scheduled pipeline run succeeds.
-4. Revoke the old token.
-
-### Revocation
-
-1. Revoke the token at <https://cloud.ouraring.com/personal-access-tokens>.
-2. Remove or invalidate the `OURA_ACCESS_TOKEN` repository secret immediately.
-3. The module automatically falls back to the cached artifact or fixture —
-   other profile modules are unaffected.
-
-### Disable procedure
-
-1. Set `enabled: false` in `profile/content/modules-registry.yml`.
-2. Commit and merge.  The module stops fetching and the README region is
-   cleared on the next pipeline run.
-
-### Delete public artifact procedure
-
-1. Delete `profile/artifacts/oura-trends/` from the tracked tree:
-   ```sh
-   git rm -r profile/artifacts/oura-trends/
-   ```
-2. Clear the README region between
-   `<!-- START:oura-trends -->` and `<!-- END:oura-trends -->`.
-3. Set `enabled: false` and `publication: blocked-pending-owner-approval` in
-   the registry.
-4. Commit and merge.
-
-**Note:** History containing previously committed aggregate artifacts should be
-reviewed separately.  Do not rewrite shared branch history automatically;
-follow the incident response procedure in `docs/PRIVACY.md`.
+Use `docs/FINAL-OWNER-HANDOFF-CHECKLIST.md` together with
+`docs/audits/FINAL-PROFILE-READINESS-REPORT.md` for the broader release gate.

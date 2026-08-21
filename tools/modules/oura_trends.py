@@ -1,90 +1,23 @@
-"""Fetch and publish coarse, privacy-preserving Oura Ring trend aggregates.
+"""Publish privacy-bounded Oura trends as responsive SVG charts.
 
-Default state
--------------
-This module is ``enabled: false`` and
-``publication: blocked-pending-owner-approval`` in
-``profile/content/modules-registry.yml``.  **No real data or public artifact
-is written until the owner explicitly approves the metric allowlist.**
+Oura Cloud API V2 requires OAuth2. Personal access tokens were removed in
+December 2025. This module expects a current OAuth access token in the
+``OURA_ACCESS_TOKEN`` Actions secret and requests only the ``daily`` scope.
 
-Setup (owner approval required before enabling)
-------------------------------------------------
-1. Create a Personal Access Token at https://cloud.ouraring.com/personal-access-tokens.
-   Request only the scopes needed for approved metrics:
-   ``daily_sleep``, ``daily_readiness``, ``daily_activity``, ``heartrate``.
-2. Add ``OURA_ACCESS_TOKEN`` as a repository secret under GitHub → Settings →
-   Secrets and variables → Actions.
-3. Review the publication checklist in ``docs/RUNBOOK.md#oura-trends``.
-4. After completing the checklist, set ``enabled: true`` **and**
-   ``publication: allowed`` in ``profile/content/modules-registry.yml``.
-
-Rate limits
------------
-The Oura Ring API v2 uses token-bucket rate limiting (~5 000 requests/day per
-token for most endpoints).  This module makes at most four requests per run
-(one per approved endpoint over the 90-day window).
-
-Privacy and threat model
-------------------------
-Inferring the following from even coarse wellness aggregates poses real risks:
-
-* **exact sleep/wake schedule** — exposes home presence and daily routine;
-* **current location or travel** — sleep-window shifts imply timezone changes;
-* **work/commute routine** — regularity and HRV dips correlate with schedules;
-* **illness, stress, medication, or mental-health state** — HRV and readiness
-  dips are strong illness/stress signals;
-* **workouts and activity timestamps** — activity spikes expose exercise
-  windows;
-* **present-day availability** — readiness bands could imply current fatigue.
-
-Mitigations implemented here:
-* Only 30-day and 90-day aggregates are computed — no daily records.
-* The current day and a configurable ``SAFETY_BUFFER_DAYS`` are excluded.
-* Exact numeric scores are replaced with coarse band labels.
-* Sleep duration is rounded to the nearest 0.5 h.
-* Period labels use month/year or week-ending date only.
-* Metrics are suppressed when ``contributing_days < MIN_SAMPLE_DAYS``.
-* Authentication and API errors are masked; only state labels are logged.
-* Raw API responses are never written to tracked files, artifacts, or logs.
-
-Authentication boundary
------------------------
-Only ``OURA_ACCESS_TOKEN`` (Personal Access Token) is used.  Automatic OAuth
-refresh-token rotation is **not implemented** in this module; defer that until
-a safe single-use rotation mechanism is available (see issue #113).
-If the token expires, the module falls back to the most recent cached
-aggregate or the synthetic fixture — it does not fail unrelated modules.
-
-Data lifecycle
---------------
-1. Raw API responses are fetched into an in-memory buffer.
-2. Normalisation and aggregation happen in memory; no temp files are written.
-3. The publication allowlist (``OURA_PUBLIC_AGGREGATE_ALLOWLIST``) is applied
-   before any output is produced.
-4. Only the small public aggregate record is written to the tracked artifact
-   ``profile/artifacts/oura-trends/cache.json``.
-5. Raw responses, daily arrays, exact timestamps, and auth material are never
-   committed, logged, or uploaded as Actions artifacts.
-
-Revocation
-----------
-1. Revoke the token at https://cloud.ouraring.com/personal-access-tokens.
-2. Remove or rotate the ``OURA_ACCESS_TOKEN`` repository secret immediately.
-3. To remove public output: delete ``profile/artifacts/oura-trends/`` and
-   clear the ``<!-- START:oura-trends --> … <!-- END:oura-trends -->`` region
-   in ``README.md``, then set ``enabled: false`` and
-   ``publication: blocked-pending-owner-approval`` in the registry.
-
-See ``docs/RUNBOOK.md#oura-trends`` for the complete disable/delete procedure.
+Raw daily records exist in memory only long enough to compute coarse
+aggregates. Public artifacts contain no daily arrays, exact sleep/wake times,
+workouts, tags, locations, timestamps, or authentication material.
 """
 
 from __future__ import annotations
 
+import html
 import json
 import os
+from collections import defaultdict
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
-from urllib import error, request
+from urllib import error, parse, request
 
 import click
 
@@ -101,47 +34,35 @@ DEFAULT_OUTPUT = REPO_ROOT / "profile" / "artifacts" / MODULE_NAME / "cache.json
 
 _API_ROOT = "https://api.ouraring.com/v2"
 _TIMEOUT = 20
+SAFETY_BUFFER_DAYS = 2
+MIN_SAMPLE_DAYS = 20
+LONG_WINDOW = 90
+SHORT_WINDOW = 30
+_MAX_PAGES = 10
 
-# Aggregation parameters
-SAFETY_BUFFER_DAYS: int = 2  # Exclude this many days before today
-MIN_SAMPLE_DAYS: int = 20  # Suppress a metric when fewer days contributed
-LONG_WINDOW: int = 90  # Primary long-window (days)
-SHORT_WINDOW: int = 30  # Secondary short-window (days)
-
-# HRV band thresholds (relative change from window mean, in ms)
 _HRV_UP_THRESHOLD = 3.0
 _HRV_DOWN_THRESHOLD = -3.0
-
-# Readiness / sleep score band thresholds (Oura v2 scores are 0–100)
 _READINESS_ABOVE_AVG = 70
 _READINESS_BELOW_AVG = 50
-
-# Sleep duration band thresholds (in hours)
 _SLEEP_ABOVE_AVG_H = 7.5
 _SLEEP_BELOW_AVG_H = 6.5
 
 
 class ProviderFailure(RuntimeError):
-    """Raised when live data cannot be collected; never exposes auth details."""
+    """Raised when Oura cannot produce a safe public aggregate."""
 
 
 class PublicationBlocked(RuntimeError):
-    """Raised when the module is disabled or publication is not yet approved."""
+    """Raised when publication has not been explicitly approved."""
 
 
 def _env(name: str) -> str | None:
     return os.environ.get(name) or None
 
 
-def _oura_get(endpoint: str, token: str, params: dict[str, str]) -> object:
-    """Make one authenticated request to the Oura API.
-
-    Errors are raised as ``ProviderFailure``; the original HTTP response body
-    and the token value are never included in the message.
-    """
-    from urllib.parse import urlencode
-
-    url = f"{_API_ROOT}/{endpoint}?{urlencode(params)}"
+def _oura_get(endpoint: str, token: str, params: dict[str, str]) -> dict:
+    """Make one authenticated Oura request without exposing auth material."""
+    url = f"{_API_ROOT}/{endpoint}?{parse.urlencode(params)}"
     req = request.Request(
         url,
         headers={
@@ -150,20 +71,26 @@ def _oura_get(endpoint: str, token: str, params: dict[str, str]) -> object:
         },
     )
     try:
-        with request.urlopen(req, timeout=_TIMEOUT) as resp:  # noqa: S310
-            return json.loads(resp.read().decode("utf-8"))
+        with request.urlopen(req, timeout=_TIMEOUT) as response:  # noqa: S310
+            payload = json.loads(response.read().decode("utf-8"))
     except error.HTTPError as exc:
         if exc.code in (401, 403):
             raise ProviderFailure(
-                "Oura token is invalid, expired, or lacks scope"
+                "Oura access token is expired, revoked, or lacks daily scope"
             ) from exc
+        if exc.code == 429:
+            raise ProviderFailure("Oura API rate limit exceeded") from exc
         raise ProviderFailure(f"Oura API request failed: HTTP {exc.code}") from exc
     except error.URLError as exc:
         raise ProviderFailure("Oura API unreachable") from exc
 
+    if not isinstance(payload, dict):
+        raise ProviderFailure("Oura API returned a non-object response")
+    return payload
+
 
 def _window_dates(window_days: int) -> tuple[date, date]:
-    """Return (start_date, end_date_exclusive) excluding safety buffer days."""
+    """Return a date window that excludes the current and recent days."""
     today = datetime.now(UTC).date()
     end = today - timedelta(days=SAFETY_BUFFER_DAYS)
     start = end - timedelta(days=window_days - 1)
@@ -171,7 +98,7 @@ def _window_dates(window_days: int) -> tuple[date, date]:
 
 
 def _round_sleep(hours: float) -> float:
-    """Round sleep duration to nearest 0.5 h."""
+    """Round sleep duration to the public half-hour boundary."""
     return round(hours * 2) / 2
 
 
@@ -200,16 +127,12 @@ def _activity_band(score: float) -> str:
 
 
 def _hrv_direction(values: list[float]) -> str:
-    """Classify HRV trend over the window.
-
-    Splits the window in half and compares mean of the later half to the
-    earlier half.  Returns a coarse direction label.
-    """
+    """Return only a coarse direction label for legacy aggregate compatibility."""
     if len(values) < 4:
         return "stable"
-    mid = len(values) // 2
-    early_mean = sum(values[:mid]) / mid
-    late_mean = sum(values[mid:]) / (len(values) - mid)
+    middle = len(values) // 2
+    early_mean = sum(values[:middle]) / middle
+    late_mean = sum(values[middle:]) / (len(values) - middle)
     delta = late_mean - early_mean
     if delta >= _HRV_UP_THRESHOLD:
         return "trending-up"
@@ -219,22 +142,20 @@ def _hrv_direction(values: list[float]) -> str:
 
 
 def _period_label(window_days: int, end_date: date) -> str:
-    """Produce a coarse period label (never an exact date)."""
+    """Produce a coarse period label."""
     if window_days >= 60:
         return end_date.strftime("%b %Y")
-    # For shorter windows use week-ending rounding (Sunday)
     week_end = end_date + timedelta(days=6 - end_date.weekday())
     return f"week ending {week_end.strftime('%Y-%m-%d')}"
 
 
 def _apply_allowlist(data: dict) -> dict:
-    """Strip any key not in the explicit public allowlist.
-
-    This is the *only* gate between normalised data and public output.
-    Unknown provider fields are silently dropped — a deny-list alone is
-    insufficient.
-    """
-    return {k: v for k, v in data.items() if k in OURA_PUBLIC_AGGREGATE_ALLOWLIST}
+    """Strip every field that is not explicitly approved for public storage."""
+    return {
+        key: value
+        for key, value in data.items()
+        if key in OURA_PUBLIC_AGGREGATE_ALLOWLIST
+    }
 
 
 def aggregate_window(
@@ -245,151 +166,372 @@ def aggregate_window(
     window_days: int,
     end_date: date,
 ) -> OuraTrendsAggregate:
-    """Compute a coarse aggregate for one time window.
-
-    Parameters
-    ----------
-    daily_sleep_seconds:
-        Sleep duration per contributing day, in seconds.
-    readiness_scores:
-        Readiness scores (0–100) per contributing day.
-    activity_scores:
-        Activity scores (0–100) per contributing day.
-    hrv_rmssd_values:
-        HRV RMSSD values (ms) per contributing day.
-    window_days:
-        Aggregation window in days (30 or 90).
-    end_date:
-        Last date of the window (already safety-buffered).
-    """
+    """Compute the legacy coarse aggregate used by the public artifact model."""
     contributing_days = len(daily_sleep_seconds)
-
     avg_sleep: float | None = None
     sleep_band: str | None = None
     avg_readiness: str | None = None
-    activity_band_val: str | None = None
-    hrv_dir: str | None = None
+    activity_band_value: str | None = None
+    hrv_direction: str | None = None
 
     if contributing_days >= MIN_SAMPLE_DAYS:
         if daily_sleep_seconds:
-            mean_h = sum(daily_sleep_seconds) / len(daily_sleep_seconds) / 3600.0
-            avg_sleep = _round_sleep(mean_h)
-            sleep_band = _sleep_band(mean_h)
+            mean_hours = sum(daily_sleep_seconds) / len(daily_sleep_seconds) / 3600.0
+            avg_sleep = _round_sleep(mean_hours)
+            sleep_band = _sleep_band(mean_hours)
 
         if readiness_scores:
-            mean_r = sum(readiness_scores) / len(readiness_scores)
-            avg_readiness = _readiness_band(mean_r)
-
+            avg_readiness = _readiness_band(
+                sum(readiness_scores) / len(readiness_scores)
+            )
         if activity_scores:
-            mean_a = sum(activity_scores) / len(activity_scores)
-            activity_band_val = _activity_band(mean_a)
-
+            activity_band_value = _activity_band(
+                sum(activity_scores) / len(activity_scores)
+            )
         if hrv_rmssd_values:
-            hrv_dir = _hrv_direction(hrv_rmssd_values)
-
-    label = _period_label(window_days, end_date)
+            hrv_direction = _hrv_direction(hrv_rmssd_values)
 
     return OuraTrendsAggregate(
         window_days=window_days,  # type: ignore[arg-type]
         contributing_days=contributing_days,
-        period_label=label,
+        period_label=_period_label(window_days, end_date),
         avg_sleep_hours=avg_sleep,
         sleep_regularity_band=sleep_band,
         avg_readiness_band=avg_readiness,
-        activity_consistency_band=activity_band_val,
-        hrv_direction=hrv_dir,
+        activity_consistency_band=activity_band_value,
+        hrv_direction=hrv_direction,
         is_synthetic=False,
         data_source="live",
         generated_month=datetime.now(UTC).strftime("%Y-%m"),
     )
 
 
-def fetch_live(token: str) -> OuraTrendsAggregate:
-    """Fetch Oura data for LONG_WINDOW days and return a coarse aggregate.
+def _parse_daily_scores(payload: dict) -> list[tuple[date, float]]:
+    """Extract only day + score into an ephemeral in-memory series."""
+    series: list[tuple[date, float]] = []
+    data = payload.get("data")
+    if not isinstance(data, list):
+        return series
+    for item in data:
+        if not isinstance(item, dict):
+            continue
+        raw_day = item.get("day")
+        raw_score = item.get("score")
+        if not isinstance(raw_day, str) or not isinstance(raw_score, (int, float)):
+            continue
+        try:
+            parsed_day = date.fromisoformat(raw_day)
+        except ValueError:
+            continue
+        series.append((parsed_day, float(raw_score)))
+    return series
 
-    Raw responses are processed in memory.  No temp files are written.
-    """
-    start, end = _window_dates(LONG_WINDOW)
+
+def _fetch_daily_scores(
+    endpoint: str,
+    token: str,
+    start_date: date,
+    end_date: date,
+) -> list[tuple[date, float]]:
+    """Fetch a bounded daily score series, following Oura pagination in memory."""
     params = {
-        "start_date": start.isoformat(),
-        "end_date": end.isoformat(),
+        "start_date": start_date.isoformat(),
+        "end_date": end_date.isoformat(),
+        "fields": "day,score",
     }
+    all_scores: list[tuple[date, float]] = []
 
-    # --- Sleep ---
-    sleep_seconds: list[float] = []
-    try:
-        sleep_resp = _oura_get("usercollection/daily_sleep", token, params)
-        for item in sleep_resp.get("data", []) if isinstance(sleep_resp, dict) else []:  # type: ignore[union-attr]
-            val = item.get("contributors", {}).get("total_sleep", None)
-            if val is not None:
-                # Oura v2 total_sleep is a score (0–100); duration is under
-                # sleep/time_in_bed.  Use sleep.duration (seconds) if present.
-                dur = item.get("sleep", {}).get("duration", None)
-                if dur is not None:
-                    sleep_seconds.append(float(dur))
-    except ProviderFailure:
-        pass  # Non-fatal; metric will be suppressed
+    for _ in range(_MAX_PAGES):
+        payload = _oura_get(endpoint, token, params)
+        all_scores.extend(_parse_daily_scores(payload))
+        next_token = payload.get("next_token")
+        if not isinstance(next_token, str) or not next_token:
+            break
+        params["next_token"] = next_token
+    return all_scores
 
-    # --- Readiness ---
-    readiness_scores: list[float] = []
-    try:
-        ready_resp = _oura_get("usercollection/daily_readiness", token, params)
-        for item in ready_resp.get("data", []) if isinstance(ready_resp, dict) else []:  # type: ignore[union-attr]
-            score = item.get("score")
-            if score is not None:
-                readiness_scores.append(float(score))
-    except ProviderFailure:
-        pass
 
-    # --- Activity ---
-    activity_scores: list[float] = []
-    try:
-        act_resp = _oura_get("usercollection/daily_activity", token, params)
-        for item in act_resp.get("data", []) if isinstance(act_resp, dict) else []:  # type: ignore[union-attr]
-            score = item.get("score")
-            if score is not None:
-                activity_scores.append(float(score))
-    except ProviderFailure:
-        pass
+def _round_score(score: float) -> int:
+    """Round public chart values to five-point buckets."""
+    return int(round(score / 5.0) * 5)
 
-    # --- HRV (heartrate collection used for RMSSD) ---
-    hrv_values: list[float] = []
-    try:
-        hrv_resp = _oura_get("usercollection/daily_sleep", token, params)
-        for item in hrv_resp.get("data", []) if isinstance(hrv_resp, dict) else []:  # type: ignore[union-attr]
-            hrv = item.get("contributors", {}).get("hrv_balance", None)
-            if hrv is not None:
-                hrv_values.append(float(hrv))
-    except ProviderFailure:
-        pass
 
-    # Use sleep sample count as the contributing-days count (most restrictive)
-    return aggregate_window(
-        daily_sleep_seconds=sleep_seconds,
-        readiness_scores=readiness_scores,
-        activity_scores=activity_scores,
-        hrv_rmssd_values=hrv_values,
-        window_days=LONG_WINDOW,
-        end_date=end,
+def _weekly_scores(
+    series: list[tuple[date, float]],
+    *,
+    max_weeks: int = 8,
+) -> list[int]:
+    """Aggregate daily scores into coarse unlabeled weekly means."""
+    buckets: dict[tuple[int, int], list[float]] = defaultdict(list)
+    for day, score in series:
+        iso_year, iso_week, _ = day.isocalendar()
+        buckets[(iso_year, iso_week)].append(score)
+
+    values = [
+        _round_score(sum(scores) / len(scores))
+        for _, scores in sorted(buckets.items())[-max_weeks:]
+        if scores
+    ]
+    return values
+
+
+def fetch_live_with_trends(
+    token: str,
+) -> tuple[OuraTrendsAggregate, dict[str, list[int]]]:
+    """Fetch daily summary scores and immediately reduce them to public trends."""
+    start_date, end_date = _window_dates(LONG_WINDOW)
+    endpoint_map = {
+        "sleep": "usercollection/daily_sleep",
+        "readiness": "usercollection/daily_readiness",
+        "activity": "usercollection/daily_activity",
+    }
+    series: dict[str, list[tuple[date, float]]] = {}
+    failures = 0
+
+    for name, endpoint in endpoint_map.items():
+        try:
+            series[name] = _fetch_daily_scores(
+                endpoint,
+                token,
+                start_date,
+                end_date,
+            )
+        except ProviderFailure:
+            series[name] = []
+            failures += 1
+
+    if failures == len(endpoint_map):
+        raise ProviderFailure("Oura daily summary endpoints are unavailable")
+
+    non_empty_counts = [len(values) for values in series.values() if values]
+    contributing_days = min(non_empty_counts) if non_empty_counts else 0
+
+    readiness_scores = [score for _, score in series["readiness"]]
+    activity_scores = [score for _, score in series["activity"]]
+    readiness_band = None
+    activity_band = None
+    if contributing_days >= MIN_SAMPLE_DAYS:
+        if readiness_scores:
+            readiness_band = _readiness_band(
+                sum(readiness_scores) / len(readiness_scores)
+            )
+        if activity_scores:
+            activity_band = _activity_band(sum(activity_scores) / len(activity_scores))
+
+    aggregate = OuraTrendsAggregate(
+        window_days=LONG_WINDOW,  # type: ignore[arg-type]
+        contributing_days=contributing_days,
+        period_label=_period_label(LONG_WINDOW, end_date),
+        avg_sleep_hours=None,
+        sleep_regularity_band=None,
+        avg_readiness_band=readiness_band,
+        activity_consistency_band=activity_band,
+        hrv_direction=None,
+        is_synthetic=False,
+        data_source="live",
+        generated_month=datetime.now(UTC).strftime("%Y-%m"),
     )
+    trends = {name: _weekly_scores(values) for name, values in series.items()}
+    return aggregate, trends
+
+
+def fetch_live(token: str) -> OuraTrendsAggregate:
+    """Compatibility wrapper returning only the public aggregate."""
+    aggregate, _ = fetch_live_with_trends(token)
+    return aggregate
 
 
 def _write_json(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    path.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
 
 def load_fixture(path: Path = DEFAULT_FIXTURE) -> OuraTrendsAggregate:
-    """Load the sanitised synthetic fixture."""
+    """Load the sanitized synthetic aggregate fixture."""
     return OuraTrendsAggregate.model_validate_json(path.read_text(encoding="utf-8"))
 
 
 def load_cached(path: Path = DEFAULT_OUTPUT) -> OuraTrendsAggregate | None:
-    """Load the previous aggregate artifact as a fallback cache."""
+    """Load only a previously published real aggregate."""
     if not path.exists():
         return None
-    agg = OuraTrendsAggregate.model_validate_json(path.read_text(encoding="utf-8"))
-    return agg.model_copy(update={"data_source": "cache"})
+    aggregate = OuraTrendsAggregate.model_validate_json(
+        path.read_text(encoding="utf-8")
+    )
+    if aggregate.is_synthetic:
+        return None
+    return aggregate.model_copy(update={"data_source": "cache"})
+
+
+def _palette(dark: bool) -> dict[str, str]:
+    if dark:
+        return {
+            "background": "#0D1117",
+            "border": "#30363D",
+            "text": "#F0F6FC",
+            "muted": "#8B949E",
+            "grid": "#30363D",
+        }
+    return {
+        "background": "#FFFFFF",
+        "border": "#D0D7DE",
+        "text": "#1F2328",
+        "muted": "#59636E",
+        "grid": "#D8DEE4",
+    }
+
+
+def _polyline(
+    values: list[int],
+    *,
+    x: int,
+    y: int,
+    width: int,
+    height: int,
+) -> str:
+    if not values:
+        return ""
+    if len(values) == 1:
+        values = [values[0], values[0]]
+    step = width / (len(values) - 1)
+    points = []
+    for index, value in enumerate(values):
+        bounded = min(100, max(0, value))
+        point_x = x + index * step
+        point_y = y + height - (bounded / 100.0) * height
+        points.append(f"{point_x:.1f},{point_y:.1f}")
+    return " ".join(points)
+
+
+def _render_svg(
+    aggregate: OuraTrendsAggregate,
+    trends: dict[str, list[int]],
+    *,
+    dark: bool,
+    mobile: bool,
+) -> str:
+    palette = _palette(dark)
+    width = 360 if mobile else 760
+    height = 500 if mobile else 360
+    font = "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif"
+    colors = {
+        "sleep": "#8B5CF6",
+        "readiness": "#EC4899",
+        "activity": "#10B981",
+    }
+    labels = {
+        "sleep": "SLEEP SCORE",
+        "readiness": "READINESS SCORE",
+        "activity": "ACTIVITY SCORE",
+    }
+
+    if mobile:
+        chart_x = 30
+        chart_width = 300
+        row_y = {"sleep": 145, "readiness": 255, "activity": 365}
+        chart_height = 58
+    else:
+        chart_x = 190
+        chart_width = 530
+        row_y = {"sleep": 105, "readiness": 190, "activity": 275}
+        chart_height = 52
+
+    chart_markup = ""
+    for name in ("sleep", "readiness", "activity"):
+        values = trends.get(name, [])
+        row = row_y[name]
+        polyline = _polyline(
+            values,
+            x=chart_x,
+            y=row,
+            width=chart_width,
+            height=chart_height,
+        )
+        latest = f"{values[-1]}" if values else "—"
+        if mobile:
+            label_y = row - 18
+            chart_markup += (
+                f'<text x="30" y="{label_y}" fill="{palette["muted"]}" '
+                f'font-size="11" font-weight="650">{labels[name]}</text>'
+                f'<text x="330" y="{label_y}" text-anchor="end" '
+                f'fill="{colors[name]}" font-size="15" '
+                f'font-weight="720">{latest}</text>'
+            )
+        else:
+            chart_markup += (
+                f'<text x="30" y="{row + 22}" fill="{palette["muted"]}" '
+                f'font-size="11" font-weight="650">{labels[name]}</text>'
+                f'<text x="155" y="{row + 22}" text-anchor="end" '
+                f'fill="{colors[name]}" font-size="17" '
+                f'font-weight="720">{latest}</text>'
+            )
+
+        chart_markup += (
+            f'<line x1="{chart_x}" y1="{row + chart_height}" '
+            f'x2="{chart_x + chart_width}" y2="{row + chart_height}" '
+            f'stroke="{palette["grid"]}" stroke-width="1"/>'
+        )
+        if polyline:
+            chart_markup += (
+                f'<polyline points="{polyline}" fill="none" '
+                f'stroke="{colors[name]}" stroke-width="3" '
+                'stroke-linecap="round" stroke-linejoin="round"/>'
+            )
+
+    title = html.escape(str(aggregate.period_label))
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img">'
+        "<title>Oura aggregate wellness trends</title>"
+        "<desc>Coarse weekly sleep, readiness, and activity score trends. "
+        "No daily records or exact schedules are published.</desc>"
+        f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="18" '
+        f'fill="{palette["background"]}" stroke="{palette["border"]}"/>'
+        f'<g font-family="{font}">'
+        f'<text x="28" y="42" fill="{palette["text"]}" font-size="13" '
+        'font-weight="700">OURA · AGGREGATE TRENDS</text>'
+        f'<text x="28" y="70" fill="{palette["muted"]}" font-size="12">'
+        f"{title} · {aggregate.contributing_days} contributing days</text>"
+        f"{chart_markup}"
+        f'<text x="28" y="{height - 22}" fill="{palette["muted"]}" font-size="11">'
+        "Weekly averages rounded to 5-point buckets · recent days excluded"
+        "</text></g></svg>"
+    )
+
+
+def render_cards(
+    aggregate: OuraTrendsAggregate,
+    trends: dict[str, list[int]],
+    artifact_dir: Path,
+) -> None:
+    """Render responsive SVG trend charts without storing raw daily inputs."""
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+    variants = {
+        "card-light.svg": (False, False),
+        "card-dark.svg": (True, False),
+        "card-mobile-light.svg": (False, True),
+        "card-mobile-dark.svg": (True, True),
+    }
+    for filename, (dark, mobile) in variants.items():
+        (artifact_dir / filename).write_text(
+            _render_svg(aggregate, trends, dark=dark, mobile=mobile),
+            encoding="utf-8",
+        )
+
+
+def _cards_exist(artifact_dir: Path) -> bool:
+    return all(
+        (artifact_dir / filename).exists()
+        for filename in (
+            "card-light.svg",
+            "card-dark.svg",
+            "card-mobile-light.svg",
+            "card-mobile-dark.svg",
+        )
+    )
 
 
 def build_aggregate(
@@ -398,18 +540,10 @@ def build_aggregate(
     *,
     publication_allowed: bool = False,
 ) -> OuraTrendsAggregate:
-    """Build the Oura aggregate with graceful degradation.
-
-    When ``publication_allowed`` is False (the default), the module writes
-    nothing to the tracked artifact and returns a ``disabled`` state.
-
-    Fetch order (only when publication_allowed is True):
-    1. Live provider (requires ``OURA_ACCESS_TOKEN``).
-    2. Cached artifact from the previous run.
-    3. Synthetic fixture.
-    """
+    """Build a live aggregate with real-cache and synthetic-fixture fallbacks."""
+    artifact_dir = output_path.parent
     if not publication_allowed:
-        agg = OuraTrendsAggregate(
+        aggregate = OuraTrendsAggregate(
             window_days=LONG_WINDOW,  # type: ignore[arg-type]
             contributing_days=0,
             period_label="—",
@@ -421,44 +555,65 @@ def build_aggregate(
             module_name=MODULE_NAME,
             state="disabled",
             data_source="disabled",
-            human_summary="oura-trends: publication blocked pending owner approval",
+            human_summary="oura-trends: publication blocked",
+            artifact_dir=artifact_dir,
         )
-        return agg
+        return aggregate
 
     token = _env("OURA_ACCESS_TOKEN")
-    agg: OuraTrendsAggregate | None = None
+    aggregate: OuraTrendsAggregate | None = None
+    trends: dict[str, list[int]] = {}
     state = "failed-with-fallback"
-    error_msg: str | None = None
+    error_message: str | None = None
 
     if token:
         try:
-            agg = fetch_live(token)
+            aggregate, trends = fetch_live_with_trends(token)
             state = "fresh"
         except ProviderFailure:
-            error_msg = "Oura provider failed (credentials or API error)"
+            error_message = "Oura provider failed (OAuth token or API error)"
     else:
-        error_msg = "OURA_ACCESS_TOKEN not set"
+        error_message = "OURA_ACCESS_TOKEN not set"
 
-    if agg is None:
-        agg = load_cached(output_path)
-        if agg is not None:
+    if aggregate is None:
+        aggregate = load_cached(output_path)
+        if aggregate is not None:
             state = "cached"
 
-    if agg is None:
-        agg = load_fixture(fixture_path)
+    if aggregate is None:
+        aggregate = load_fixture(fixture_path)
         state = "static"
 
-    # Apply the explicit allowlist before writing any tracked file.
-    public_data = _apply_allowlist(agg.model_dump(mode="json"))
+    public_data = _apply_allowlist(aggregate.model_dump(mode="json"))
     _write_json(output_path, public_data)
+
+    if state == "fresh":
+        render_cards(aggregate, trends, artifact_dir)
+    elif not _cards_exist(artifact_dir):
+        render_cards(aggregate, {}, artifact_dir)
+
     cache_utils.write_metadata(
         module_name=MODULE_NAME,
         state=state,
-        data_source=agg.data_source,
+        data_source=aggregate.data_source,
         human_summary=f"oura-trends: {LONG_WINDOW}-day aggregate ({state})",
-        error=error_msg,
+        error=error_message,
+        artifact_dir=artifact_dir,
     )
-    return agg
+    return aggregate
+
+
+def load_template_context(artifact_path: Path) -> dict:
+    """Expose only sufficiently aggregated, non-synthetic output to README."""
+    aggregate = OuraTrendsAggregate.model_validate_json(
+        artifact_path.read_text(encoding="utf-8")
+    )
+    is_public = (
+        not aggregate.is_synthetic
+        and aggregate.data_source in {"live", "cache"}
+        and aggregate.contributing_days >= MIN_SAMPLE_DAYS
+    )
+    return {"aggregate": aggregate, "is_public": is_public}
 
 
 @click.command()
@@ -481,16 +636,18 @@ def build_aggregate(
     "publication_allowed",
     is_flag=True,
     default=False,
-    help="Allow public artifact output (requires owner approval).",
+    help="Allow publication of the owner-approved aggregate metric allowlist.",
 )
 def main(output_path: Path, fixture_path: Path, publication_allowed: bool) -> None:
-    """Write a coarse Oura trends aggregate to *output_path*."""
-    agg = build_aggregate(
+    """Write the Oura aggregate and responsive SVG charts."""
+    aggregate = build_aggregate(
         output_path=output_path,
         fixture_path=fixture_path,
         publication_allowed=publication_allowed,
     )
-    click.echo(f"oura-trends: {agg.data_source} ({agg.window_days}-day window)")
+    click.echo(
+        f"oura-trends: {aggregate.data_source} ({aggregate.window_days}-day window)"
+    )
 
 
 if __name__ == "__main__":

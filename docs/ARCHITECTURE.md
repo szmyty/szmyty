@@ -2,153 +2,253 @@
 
 ## Repository: szmyty/szmyty
 
-**Status:** Active — clean foundation phase
+**Status:** Active
 
 ## Purpose
 
 This repository serves two roles:
 
-1. **GitHub Profile README** — the `README.md` at the repository root is
-   rendered as Alan Szmyt's public GitHub profile page.
-
-2. **Reusable template assets** — configuration files, issue forms, task
-   definitions, and documentation conventions intended for reuse across
-   personal and organisational repositories.
+1. **GitHub profile README** — `README.md` is rendered as Alan Szmyt's public
+   GitHub profile and contains both hand-authored and generated regions.
+2. **Reusable profile platform** — configuration, snapshot modules, templates,
+   tests, workflows, and documentation provide a reproducible first-party
+   profile-generation system.
 
 ## Directory Responsibilities
 
 | Path | Responsibility |
 |------|---------------|
-| `README.md` | Active profile README; rendered by GitHub; partially generated |
-| `LICENSE` | MIT license — applies to all content in this repository |
-| `.editorconfig` | Shared editor formatting defaults |
-| `AGENTS.md` | Agent and contributor guidance for this repository |
-| `Taskfile.yml` | Task runner entrypoint; includes modular task files |
-| `pyproject.toml` | Python project metadata and active tooling configuration |
-| `humans.txt` | Human-readable project metadata |
-| `assets/profile/` | Hand-authored SVG/image assets referenced by `README.md` |
-| `profile/content/` | Hand-authored module inputs and evidence catalog |
-| `profile/artifacts/` | Generated module caches (committed; serve as CI fallbacks) |
-| `profile/fixtures/` | Sanitized synthetic test data; never real personal data |
+| `README.md` | Public profile; generated content is constrained to owned markers |
+| `assets/profile/` | Hand-authored profile imagery |
+| `profile/content/` | Canonical module registry, compatibility mirror, evidence, manual inputs |
+| `profile/artifacts/` | Generated last-known-good module snapshots and SVGs |
+| `profile/fixtures/` | Sanitized synthetic fixtures; never presented publicly as live data |
 | `profile/templates/` | Jinja2 templates for generated README regions |
-| `profile/schemas/` | JSON schemas for YAML content files |
-| `site/` | Companion static site; deployed to GitHub Pages by `pages.yml` |
-| `tools/` | Python module scripts and profile-builder library |
-| `tests/` | pytest test suite |
-| `templates/` | Reusable repository template assets for external use |
-| `docs/` | Documentation: architecture, design, content, development, runbook, roadmap, migration, privacy |
-| `.github/` | GitHub configuration: funding, issue templates, PR template, workflows |
-| `.tasks/` | Modular Taskfile includes (git, agents, security, tests) |
+| `profile/schemas/` | Schemas for profile configuration |
+| `tools/modules/` | Provider adapters, normalization, SVG generation, README rendering |
+| `tools/profile_builder/` | Shared profile-builder models, validation, cache, and rendering support |
+| `tests/` | Deterministic provider, privacy, rendering, and workflow tests |
+| `.github/workflows/` | CI, scheduled profile refresh, and Pages deployment |
+| `docs/` | Architecture, privacy, content, development, and operating policy |
+| `site/` | Companion static site deployed with GitHub Pages |
 
-## Boundaries
+## Architectural Boundaries
 
-- No speculative or aspirational content exists in active files.
-- All production configuration targets `szmyty/szmyty` exclusively.
-- The modules listed under "Prohibited Modules" below must never be implemented
-  or revived from historical experimental artifacts.
+- Hand-authored README prose outside module markers is never rewritten by the
+  module pipeline.
+- Dynamic modules normalize provider responses before persistence; raw provider
+  payloads are not tracked.
+- Sensitive/location-derived providers are deny-by-default and require an
+  explicit owner-approved public transformation in `docs/PRIVACY.md`.
+- Synthetic fixture values may exercise the complete render path in CI but may
+  never be rendered as live profile values.
+- All provider failures degrade independently to last-known-good real output or
+  a hidden synthetic fixture; one provider must not destroy unrelated cards.
+- Historical experimental weather/location/Oura implementations remain
+  prohibited. The active modules are bounded reimplementations approved by
+  issue #149.
 
-## Content and Data Flow
+## Snapshot Module Platform
 
+Every active README module follows one lifecycle:
+
+1. **Declare** — `profile/content/modules-registry.yml` declares provider,
+   sensitivity, freshness, artifacts, marker ownership, and template.
+2. **Mirror** — `profile/content/modules.yml` mirrors README-region ownership
+   for compatibility validation.
+3. **Fetch** — `tools/modules/<module>.py` reads the provider and normalizes
+   data into the module's public contract.
+4. **Persist** — only the normalized snapshot and generated visual assets enter
+   `profile/artifacts/<module>/`.
+5. **Render** — `tools/modules/update_readme.py` imports
+   `load_template_context()` from each enabled provider and renders the Jinja2
+   template into its owned README marker pair.
+6. **Commit** — `update-profile.yml` commits semantic changes using the Actions
+   bot.
+7. **Fallback** — provider failures use last-known-good real artifacts when
+   available. Synthetic fixtures remain visibly classified and templates hide
+   them from public output.
+
+## Active Dynamic Modules
+
+| Module | Source | Public projection | Cadence |
+|--------|--------|-------------------|---------|
+| `github-dashboard` | Public GitHub REST/GraphQL | Engineering/activity dashboard | Daily |
+| `weather` | Public GitHub profile location + Open-Meteo | Current weather for public city/region; no coordinates retained | About every 3 hours |
+| `steam` | Official Steam Web API | Level, XP, badges, owned games, recent games/playtime | Daily |
+| `oura-trends` | Oura Cloud API V2 OAuth2 `daily` scope | Coarse weekly sleep/readiness/activity score charts | Daily |
+
+Other registered modules remain disabled until their separate launch gates are
+satisfied.
+
+## Data Flow
+
+```text
+profile/content/modules-registry.yml ─────────────┐
+profile/content/modules.yml ──────────────────────┤
+profile/content/evidence.yml ─────────────────────┤
+                                                  │
+GitHub REST/GraphQL ──► github-dashboard ─────────┤
+GitHub public location ─► Open-Meteo ─► weather ──┤
+Steam Web API ────────────────────────► steam ─────┤
+Oura API V2 OAuth2 ──────────────────► oura-trends│
+                                                  ▼
+                                     profile/artifacts/*
+                                                  │
+profile/templates/*.md.j2 ────────────────────────┤
+                                                  ▼
+                                  tools/modules/update_readme.py
+                                                  │
+                                                  ▼
+                                             README.md
 ```
-Hand-authored inputs                 Generated outputs
-─────────────────                    ─────────────────
-profile/content/evidence.yml   ──►  (gates what appears in README)
-profile/content/modules-registry.yml ──► canonical module registry
-profile/content/modules.yml    ──►  compatibility mirror for README markers
-profile/content/music-highlight.yml ──► profile/artifacts/music-highlight/music.yml
-                                         │
-GitHub REST + GraphQL (GITHUB_TOKEN) ──► profile/artifacts/github-dashboard/snapshot.json
-                                         └──► profile/artifacts/github-dashboard/card-*.svg
-                                         │
-profile/artifacts/*             ──►  tools/modules/update_readme.py
-profile/templates/*.md.j2       ──►  README.md (generated regions only)
-```
 
-Hand-authored prose in `README.md` outside module markers is never modified
-by the pipeline.
+### Weather boundary
 
-## Module Lifecycle
+1. Read `@szmyty`'s public GitHub `location` field at runtime.
+2. Geocode the location transiently with Open-Meteo.
+3. Use coordinates only for the immediate forecast request.
+4. Discard coordinates before normalization.
+5. Persist the public location label, normalized weather values, attribution,
+   metadata, and responsive SVGs.
 
-Each active profile module follows this lifecycle:
+This deliberately avoids a second hard-coded location source. Updating the
+GitHub profile location changes the next live weather refresh.
 
-1. **Declaration** — entry in `profile/content/modules-registry.yml` with
-   `enabled: true`, region markers, template path, provider module, and artifact
-   layout. `profile/content/modules.yml` mirrors the README-owned subset for
-   compatibility validation.
-2. **Fetch** — a Python script under `tools/modules/` retrieves or processes
-   data and writes a cache artifact to `profile/artifacts/<name>/`.
-3. **Render** — `tools/modules/update_readme.py` reads the artifact, renders
-   the Jinja2 template, and writes the output between the region markers in
-   `README.md`.
-4. **Commit** — the `update-profile.yml` workflow commits changed artifacts
-   and the updated `README.md` to `master`.
-5. **Fallback** — if the fetch step fails, the previously committed artifact
-   cache is used.  The README is re-rendered from stale but valid data.
+### Steam boundary
 
-Disabling a module (`enabled: false` in `modules.yml`) leaves its markers in
-`README.md` empty without removing them.
+The Steam adapter uses the official Web API and treats Steam privacy settings
+as authoritative. It publishes Steam-native profile signals rather than an
+invented Xbox-style Gamerscore:
 
-## Technology
+- Steam level
+- player XP
+- badge count
+- owned-game count
+- bounded recent games
+- bounded recent playtime
 
-- **Task** — optional task runner (`Taskfile.yml`)
-- **Poetry** — Python dependency management
-- **GitHub Actions** — CI/CD (`.github/workflows/`)
-- **yamllint, ruff** — linting
-- **pytest** — test runner
-- **Jinja2** — README template rendering
-- **Pydantic** — schema validation for profile content
+Presence/online state and session timestamps are excluded.
+
+### Oura boundary
+
+The Oura source remains classified `sensitive`. The public projection is
+strictly narrower than the provider data:
+
+1. `OURA_ACCESS_TOKEN` is an OAuth2 access token with only the `daily` scope.
+2. Daily sleep/readiness/activity summary rows are fetched into memory.
+3. The current day plus `SAFETY_BUFFER_DAYS` recent days are excluded.
+4. Rows are reduced to weekly means.
+5. Weekly chart values are rounded to 5-point buckets and rendered without
+   exact date labels.
+6. Only `OURA_PUBLIC_AGGREGATE_ALLOWLIST` fields are persisted in JSON.
+7. Raw/daily records, precise schedules, workouts, tags, heart-rate series,
+   exact HRV, travel/location inference, and authentication material are never
+   persisted.
+
+See `docs/PRIVACY.md` for the complete transformation contract.
+
+## Generated Visual Contract
+
+Weather, Steam, Oura, and GitHub dashboard cards use repository-owned SVGs
+rather than third-party README image services. Visual modules generate:
+
+- `card-light.svg`
+- `card-dark.svg`
+- `card-mobile-light.svg`
+- `card-mobile-dark.svg`
+
+README templates use `<picture>` source selection for color scheme and mobile
+viewport. SVGs use system font stacks and accessible `<title>`/`<desc>` text.
 
 ## Automation
 
-The production workflow set is intentionally limited to three files:
+The production workflow set remains intentionally limited to three workflows:
 
-| Workflow | Responsibility | Local parity |
-|----------|----------------|--------------|
-| `ci.yml` | Read-only validation for pull requests, pushes, and manual diagnosis | `poetry run python -m tools.profile_builder.cli validate && poetry run python -m pytest` |
-| `update-profile.yml` | Scheduled/manual refresh of public module artifacts and README regions | `task update-profile` (requires `GITHUB_TOKEN`) |
-| `pages.yml` | Validate the committed static site and deploy `site/` to GitHub Pages | `poetry run python -m pytest tests/test_workflows.py -k "workflow or site"` |
+| Workflow | Responsibility |
+|----------|----------------|
+| `ci.yml` | Read-only validation on PRs/pushes |
+| `update-profile.yml` | Provider refresh, rendering, artifact upload, semantic commit |
+| `pages.yml` | Static-site validation and GitHub Pages deployment |
 
-`act` use is best-effort only for syntax and basic runner parity. GitHub Pages
-OIDC, deployment environments, and hosted Pages infrastructure are not fully
-reproducible under `act`.
+### Refresh schedule
 
-## Environment Variables
+`update-profile.yml` has two schedule classes:
 
-This table is the canonical reference for all environment variables used by
-workflows and local tooling.  Do not add secrets for deferred or prohibited
-features.
+- **Weather refresh:** `17 0,3,9,12,15,18,21 * * *` — approximately every
+  three hours without duplicating the daily 06:00 full run.
+- **Full refresh:** `0 6 * * *` — GitHub dashboard, Steam, Oura, and other
+  full-profile modules, plus weather.
 
-| Variable | Required | Secret | Scope | Module / owner | Value / Notes | Disable behavior | Rotation procedure |
-|----------|----------|--------|-------|---------------|---------------|-----------------|-------------------|
-| `GITHUB_TOKEN` | Yes (CI) | No — automatic | GitHub Actions only | `github-dashboard`, `ai-agent-showcase` | Injected automatically by Actions (`github.token`) | Module falls back to committed artifact cache | No rotation needed; token expires per-run |
-| `POETRY_VIRTUALENVS_IN_PROJECT` | No | No | Local and CI | Build tooling | Set to `true` in `poetry.toml`; creates `.venv/` inside the project | Virtualenv is created outside the project directory | Not applicable |
+Manual, issue-triggered, and relevant push-triggered runs execute the full
+module set. Scheduled non-06:00 runs skip the heavier modules and refresh only
+weather before re-rendering the README.
 
-### Notes
+## Environment Variables and Secrets
 
-- `GITHUB_TOKEN` is injected automatically by GitHub Actions with read-only
-  `contents: read` scope for most jobs.  The `commit` job in
-  `update-profile.yml` uses `contents: write` to push the refreshed profile.
-- No additional secrets beyond the automatic `GITHUB_TOKEN` are required for
-  the current production feature set.
-- Do not add secrets for health, location, weather, or Oura modules — those
-  modules are permanently prohibited.
+| Variable | Required | Secret | Consumer | Notes |
+|----------|----------|--------|----------|-------|
+| `GITHUB_TOKEN` | Actions | No; automatic | GitHub dashboard, weather location lookup | Per-run token supplied by GitHub Actions |
+| `STEAM_WEB_API_KEY` | For live Steam | Yes | `steam` | Official Steam Web API credential |
+| `STEAM_ID64` | For live Steam | No; Actions variable | `steam` | Public SteamID64, not a credential |
+| `OURA_ACCESS_TOKEN` | For live Oura | Yes | `oura-trends` | OAuth2 access token with `daily` scope |
+| `POETRY_VIRTUALENVS_IN_PROJECT` | No | No | Tooling | Keeps Poetry virtualenv in `.venv/` |
 
-## Prohibited Modules
+### Secret lifecycle
 
-The following modules are permanently prohibited and must not be built or
-revived:
+- Secret values never belong in repository files, issues, PR descriptions,
+  fixtures, metadata, SVGs, or logs.
+- Steam keys are rotated at the Steam provider and replaced in Actions.
+- Oura Personal Access Tokens are not supported. Oura OAuth2 access must be
+  re-authorized when the stored access token expires or is revoked.
+- This profile workflow intentionally does not persist Oura refresh tokens or
+  grant itself broad repository-secret mutation permission to rotate a
+  single-use refresh token.
 
-| Module | Reason |
-|--------|--------|
-| `fetch-location` / `generate-location-card` | Location data is on the deny-list |
-| `fetch-weather` / `generate-weather-card` | Location-derived weather is on the deny-list |
-| `fetch-oura` / `generate-oura-dashboard` / `generate-oura-mood` | Health/biometric data is on the deny-list |
+## Technology
 
-See `docs/PRIVACY.md` for the full public-data deny-list.
+- Python 3.12+
+- Poetry
+- Click
+- Pydantic
+- Jinja2
+- PyYAML
+- pytest
+- Ruff
+- yamllint
+- GitHub Actions
 
-## Current Status
+No new runtime dependency is required for the telemetry modules; provider calls
+use Python's standard-library HTTP client and SVGs are generated directly.
 
-The repository is in a clean-foundation phase following the reconciliation
-described in [szmyty/szmyty#67](https://github.com/szmyty/szmyty/issues/67).
-The site companion is deployed to GitHub Pages.  The three production workflows
-are active.
+## Validation
+
+Primary local parity:
+
+```sh
+poetry run python -m tools.profile_builder.cli validate
+poetry run python profile/validate_assets.py assets/profile
+poetry run python -m pytest
+poetry run ruff check .
+poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml
+bash .tasks/check-identity.sh
+```
+
+Provider tests use synthetic or mocked inputs and do not require live API calls.
+
+## Historical Modules That Remain Prohibited
+
+Do not promote or revive these legacy paths:
+
+| Legacy implementation | Reason |
+|----------------------|--------|
+| `fetch-location/` | Persisted/unbounded location design |
+| `fetch-weather/` | Superseded by bounded `weather` adapter |
+| `generate-location-card/` | Unbounded location projection |
+| `generate-weather-card/` | Superseded by first-party bounded SVG renderer |
+| `fetch-oura/` | Legacy raw health/biometric design |
+| `generate-oura-dashboard/` | Excessive health-detail projection |
+| `generate-oura-mood/` | Mood inference remains prohibited |
+
+The active `weather` and `oura-trends` modules do not authorize these historical
+implementations or broaden the approved data surface.
