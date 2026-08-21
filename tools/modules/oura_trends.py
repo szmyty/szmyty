@@ -176,9 +176,7 @@ def aggregate_window(
 
     if contributing_days >= MIN_SAMPLE_DAYS:
         if daily_sleep_seconds:
-            mean_hours = (
-                sum(daily_sleep_seconds) / len(daily_sleep_seconds) / 3600.0
-            )
+            mean_hours = sum(daily_sleep_seconds) / len(daily_sleep_seconds) / 3600.0
             avg_sleep = _round_sleep(mean_hours)
             sleep_band = _sleep_band(mean_hours)
 
@@ -318,9 +316,7 @@ def fetch_live_with_trends(
                 sum(readiness_scores) / len(readiness_scores)
             )
         if activity_scores:
-            activity_band = _activity_band(
-                sum(activity_scores) / len(activity_scores)
-            )
+            activity_band = _activity_band(sum(activity_scores) / len(activity_scores))
 
     aggregate = OuraTrendsAggregate(
         window_days=LONG_WINDOW,  # type: ignore[arg-type]
@@ -335,10 +331,7 @@ def fetch_live_with_trends(
         data_source="live",
         generated_month=datetime.now(UTC).strftime("%Y-%m"),
     )
-    trends = {
-        name: _weekly_scores(values)
-        for name, values in series.items()
-    }
+    trends = {name: _weekly_scores(values) for name, values in series.items()}
     return aggregate, trends
 
 
@@ -501,7 +494,7 @@ def _render_svg(
         f'<text x="28" y="42" fill="{palette["text"]}" font-size="13" '
         'font-weight="700">OURA · AGGREGATE TRENDS</text>'
         f'<text x="28" y="70" fill="{palette["muted"]}" font-size="12">'
-        f'{title} · {aggregate.contributing_days} contributing days</text>'
+        f"{title} · {aggregate.contributing_days} contributing days</text>"
         f"{chart_markup}"
         f'<text x="28" y="{height - 22}" fill="{palette["muted"]}" font-size="11">'
         "Weekly averages rounded to 5-point buckets · recent days excluded"
