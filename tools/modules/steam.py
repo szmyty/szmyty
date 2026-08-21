@@ -336,7 +336,7 @@ def _render_svg(
         game_text = " · ".join(game.name for game in recent_games) or "No recent games"
         game_markup = (
             f'<text x="30" y="225" fill="{palette["text"]}" font-size="13">'
-            f'{html.escape(game_text[:95])}</text>'
+            f"{html.escape(game_text[:95])}</text>"
         )
 
     footer_y = height - 22
