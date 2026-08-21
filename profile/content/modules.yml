@@ -18,6 +18,13 @@ modules:
     template: github-dashboard.md.j2
     artifact_path: profile/artifacts/github-dashboard/snapshot.json
 
+  - name: weather
+    enabled: true
+    region_start_marker: "<!-- START:weather -->"
+    region_end_marker: "<!-- END:weather -->"
+    template: weather.md.j2
+    artifact_path: profile/artifacts/weather/cache.json
+
   - name: ai-agent-showcase
     enabled: false
     region_start_marker: "<!-- START:ai-agent-showcase -->"
@@ -75,7 +82,7 @@ modules:
     artifact_path: profile/artifacts/soundcloud/cache.json
 
   - name: steam
-    enabled: false
+    enabled: true
     region_start_marker: "<!-- START:steam -->"
     region_end_marker: "<!-- END:steam -->"
     template: steam.md.j2
@@ -89,7 +96,7 @@ modules:
     artifact_path: profile/artifacts/stars/stars.json
 
   - name: oura-trends
-    enabled: false
+    enabled: true
     region_start_marker: "<!-- START:oura-trends -->"
     region_end_marker: "<!-- END:oura-trends -->"
     template: oura-trends.md.j2
