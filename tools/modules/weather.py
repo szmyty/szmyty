@@ -97,9 +97,10 @@ def fetch_public_github_location(token: str | None = None) -> str:
 
 
 def _geocode(location: str) -> tuple[float, float]:
+    search_name = location.split(",", 1)[0].strip() or location
     query = parse.urlencode(
         {
-            "name": location,
+            "name": search_name,
             "count": "5",
             "language": "en",
             "format": "json",
@@ -161,8 +162,7 @@ def fetch_live(location: str) -> dict:
                 "precipitation,weather_code,wind_speed_10m"
             ),
             "daily": (
-                "temperature_2m_max,temperature_2m_min,"
-                "precipitation_probability_max"
+                "temperature_2m_max,temperature_2m_min,precipitation_probability_max"
             ),
             "temperature_unit": "fahrenheit",
             "wind_speed_unit": "mph",
@@ -294,7 +294,7 @@ def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
         )
         detail = (
             f'<text x="28" y="150" fill="{palette["muted"]}" font-size="13">'
-            f'High {high} · Low {low}</text>'
+            f"High {high} · Low {low}</text>"
         )
     else:
         metrics = [
@@ -312,7 +312,7 @@ def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
         )
         detail = (
             f'<text x="32" y="180" fill="{palette["muted"]}" font-size="13">'
-            f'Today: high {high} · low {low}</text>'
+            f"Today: high {high} · low {low}</text>"
         )
 
     return (
