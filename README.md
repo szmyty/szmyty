@@ -31,6 +31,11 @@
   <a href="https://opensource.org/get-involved"><img alt="Open Source Initiative member" src="https://img.shields.io/badge/OSI-Member-3DA639?style=flat-square&amp;logo=opensourceinitiative&amp;logoColor=white"></a>
 </p>
 
+<p>
+  <a href="https://www.bu.edu/met/degrees-certificates/ms-software-development/"><img alt="Boston University — MS Software Development" src="https://img.shields.io/badge/Boston_University-MS_Software_Development-CC0000?style=flat-square"></a>
+  <a href="https://www.uml.edu/Sciences/computer-science/Programs/Ugrad/computer-science-major.aspx"><img alt="UMass Lowell — BS Computer Science" src="https://img.shields.io/badge/UMass_Lowell-BS_Computer_Science-0067B1?style=flat-square"></a>
+</p>
+
 </div>
 
 ---
@@ -154,14 +159,6 @@ For professional inquiries, use the [contact route on my portfolio](https://szmy
 <!-- START:medium -->
 <!-- END:medium -->
 <!-- START:education -->
-
-## Education
-
-<p>
-  <a href="https://www.bu.edu/met/degrees-certificates/ms-software-development/"><img alt="Boston University — MS Software Development" src="https://img.shields.io/badge/Boston_University-MS_Software_Development-CC0000?style=flat-square"></a>
-  <a href="https://www.uml.edu/Sciences/computer-science/Programs/Ugrad/computer-science-major.aspx"><img alt="UMass Lowell — BS Computer Science" src="https://img.shields.io/badge/UMass_Lowell-BS_Computer_Science-0067B1?style=flat-square"></a>
-</p>
-
 <!-- END:education -->
 <!-- START:resume -->
 <!-- END:resume -->
