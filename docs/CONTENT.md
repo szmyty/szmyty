@@ -3,185 +3,203 @@
 **Repository:** `szmyty/szmyty`
 **Status:** Active
 
-This document defines the rules for authoring, updating, and reviewing content
-in the public profile README and its supporting evidence catalog.  Following
-these rules ensures that every public claim is accurate, bounded, and
-maintainable.
+This document defines the rules for authoring and generating the public profile
+README. The goal is to keep stable claims evidence-backed while allowing
+narrowly governed dynamic modules to publish changing provider values without
+pretending those values are permanent claims.
 
 ---
 
-## 1. Claim and Evidence Rules
+## 1. Stable Claims and Evidence
 
-### Evidence catalog
+`profile/content/evidence.yml` is the source of truth for stable factual claims
+in the hand-authored profile narrative.
 
-All factual claims in `README.md` must have a corresponding record in
-`profile/content/evidence.yml` with `status: verified`.
+A stable claim may appear when:
 
-**A claim may only appear in rendered README content when all of the following
-are true:**
+1. a matching evidence record exists;
+2. its `status` is `verified`;
+3. its `sensitivity` is `public`; and
+4. the README wording does not exceed the scope of the recorded claim.
 
-1. A record exists in `evidence.yml` with a matching `id`.
-2. The record has `status: verified`.
-3. The record has `sensitivity: public`.
-4. The claim text in the README does not exceed the scope of the `claim` field
-   in the record.
-
-**A claim must be absent from rendered content when:**
-
-- The record has `status: needs-user-verification`.
-- The record has `status: excluded`.
-- The record has `sensitivity: sensitive` or `sensitivity: internal`.
-- No corresponding record exists in `evidence.yml`.
+A stable claim must remain absent when its record is
+`needs-user-verification`, `excluded`, `sensitive`, or `internal`, unless a
+separate explicitly owner-approved public transformation governs the output.
 
 ### Evidence types
 
-| Type | Meaning | Example |
-|------|---------|---------|
-| `url` | The claim is directly inspectable at a public URL | GitHub repository, merged PR |
-| `repo-path` | The claim is supported by a file in this repository (`repo_path` YAML field) | `pyproject.toml` |
-| `self-reported` | The claim comes from the subject and cannot be independently verified via a public artifact | GitHub profile bio |
-| `inferred` | The claim is a reasonable conclusion from observable public signals, but is not explicitly stated anywhere | Language inferred from repository contents |
-| `none` | No supporting artifact has been located yet | Requires user verification |
+| Type | Meaning |
+|------|---------|
+| `url` | Publicly inspectable supporting artifact |
+| `repo-path` | Supporting artifact in this repository |
+| `self-reported` | Owner-confirmed claim without independent public proof |
+| `inferred` | Bounded conclusion from public observable signals |
+| `none` | No supporting artifact is currently available |
 
 ### Needs-user-verification protocol
 
-When a record is marked `needs-user-verification`:
+When a record is `needs-user-verification`:
 
-1. Open or reference an issue requesting the specific artifact or confirmation
-   from Alan Szmyt (`@szmyty`).
-2. Do not resolve the record to `verified` without an explicit response or a
-   publicly inspectable artifact.
-3. Do not include the claim in any rendered README section while it remains
-   unverified.
+1. open or reference an issue requesting the specific confirmation;
+2. do not mark the stable claim `verified` without explicit owner confirmation
+   or a public artifact; and
+3. do not render that stable claim while it remains unverified.
 
 ---
 
-## 2. Tense and Tone
+## 2. Dynamic Provider Modules
 
-- Write in **present tense** for current capabilities and ongoing work.
-- Write in **past tense** for completed projects and historical events.
-- Lead with **outcomes**, not process.  Say what changed or was made possible,
-  not only what technology was used.
-- State **ownership clearly but proportionally**.  Distinguish sole authorship
-  ("designed and built") from collaborative contribution ("contributed and
-  merged").  Do not overstate solo authorship for team work.
-- Avoid generic evaluative phrases: "results-driven," "passionate about,"
-  "expert in," "highly skilled," "world-class."  If the surrounding evidence
-  makes such claims unnecessary, omit them.
-- Do not convert technology names into accomplishment claims.  "Uses Docker"
-  is not an outcome; "packaged the system as a single Docker Compose stack
-  that any developer can run with one command" describes a concrete capability.
-- Do not fabricate or estimate: repository adoption, stars, users, releases,
-  scale, or time savings must not appear without a verifiable source.
+Dynamic module values are not stable claims. Weather temperature, Steam game
+counts, and Oura trend buckets change over time and therefore are governed by a
+**source + transformation + owner-approval contract** instead of one evidence
+record per value.
 
----
+A dynamic module may render changing values only when all of the following are
+true:
 
-## 3. Handling Confidential and Restricted Work
+1. the module is declared in `profile/content/modules-registry.yml`;
+2. its provider and public transformation are documented in
+   `docs/PRIVACY.md` and `docs/ARCHITECTURE.md`;
+3. the data owner has explicitly approved that public projection;
+4. tests demonstrate that disallowed source fields cannot enter tracked output;
+5. synthetic fixtures are distinguishable from real values and are hidden from
+   the public README; and
+6. the README accurately attributes or characterizes the data source.
 
-### General policy
+Issue [#149](https://github.com/szmyty/szmyty/issues/149) is the owner-approval
+record for the current `weather`, `steam`, and `oura-trends` projections.
 
-Employment history is held under a confidentiality policy and is not published
-in this repository.  See evidence record `experience-employer-current` for the
-rationale.
+### Dynamic disclosure does not broaden stable identity claims
 
-### MIT Lincoln Laboratory (and similar organisations)
+The weather module may display the public GitHub profile location string because
+that exact runtime source and granularity were approved in #149. That does not
+silently verify the older `identity-location` evidence record for use in other
+profile prose. A sentence such as "I live in Boston" remains a separate stable
+claim and requires its own verified evidence/approval.
 
-If professional experience at a research laboratory or restricted programme is
-ever added to `evidence.yml`, the following rules apply:
-
-- **Do not** publish: system names, programme names, customer or mission
-  identities, dataset descriptions, internal performance metrics, security
-  clearance level or scope, team or division names, internal tools or
-  codebases, or any detail that could narrow the set of programmes the person
-  worked on.
-- **Do publish** (with user confirmation): employment dates at country-level
-  chronological granularity, publicly announced research areas, and job titles
-  that are themselves publicly disclosed by the employer.
-- Mark any record touching restricted work `sensitivity: internal` and
-  `status: excluded` unless specific public disclosure is confirmed in writing
-  by the user and supported by a publicly available citation.
-- When in doubt, err toward exclusion and request user guidance in the PR.
-
-### Sensitive personal data
-
-Location, personal email, LinkedIn, and other contact details may only appear
-in `README.md` when the corresponding evidence record is `verified` and the
-user has explicitly confirmed that the specific granularity is acceptable for
-public disclosure. See `identity-location` and `contact-linkedin` for claims
-that remain gated and excluded from the public README.
+Likewise, approving coarse Oura charts does not authorize health claims,
+diagnoses, current-condition statements, or interpretation of the underlying
+wellness data.
 
 ---
 
-## 4. How to Update Current Focus and Availability
+## 3. Tense and Tone
 
-The **Current Focus** table and any availability or target-role language must
-be updated **manually** by the repository owner (`@szmyty`) or by an agent
-acting on explicit user instruction.
+- Use present tense for current capabilities and ongoing work.
+- Use past tense for completed projects and historical events.
+- Lead with outcomes rather than technology inventories.
+- State ownership proportionally and distinguish individual work from
+  collaborative contribution.
+- Avoid generic evaluative claims such as "expert", "world-class", or
+  "results-driven" when evidence does not make them necessary.
+- Do not fabricate or estimate adoption, impact, repository stars, users,
+  releases, scale, time savings, or proficiency.
+- Dynamic telemetry must describe what the provider reports rather than imply a
+  broader personal-quality score.
 
-To update:
+### Steam-specific wording
 
-1. Identify the evidence record ID for each changed claim (or create a new
-   record in `evidence.yml` for new claims).
-2. Set the record `status` to `verified` and `last_reviewed` to today's date.
-3. Update the corresponding section in `README.md`.
-4. Open a pull request referencing the evidence record IDs changed.
+Steam does not define an Xbox-style Gamerscore. The profile therefore displays
+Steam-native signals—level, XP, badges, owned games, and recent playtime—without
+combining them into an invented score.
 
-Do not update the Current Focus or availability language based on inferred
-signals, old README content, or staged content in `.staging/`.
+### Oura-specific wording
 
----
-
-## 5. How Accomplishments Graduate from Candidate to Verified
-
-An accomplishment begins its life as a `needs-user-verification` record in
-`evidence.yml`.  It graduates to `verified` through the following steps:
-
-| Step | Action | Who |
-|------|--------|-----|
-| 1 | A candidate claim is drafted and a record is added to `evidence.yml` with `status: needs-user-verification` | Agent or contributor |
-| 2 | An issue or PR comment requests confirmation of the specific artifact or metric | Agent |
-| 3 | The user (`@szmyty`) supplies the artifact URL, confirms the wording, or provides a clear correction | `@szmyty` |
-| 4 | The record is updated to `status: verified` with the confirmed `url` or `repo_path` and today's `last_reviewed` date | Agent acting on user response |
-| 5 | The claim is added to the appropriate README section | Agent |
-| 6 | A PR is opened referencing the evidence record ID and the user response | Agent |
-
-Claims must **not** graduate automatically.  A human confirmation step is
-always required for facts that cannot be independently observed at a public URL.
+Oura output is voluntarily shared aggregate wellness telemetry. Do not describe
+it as a diagnosis, medical assessment, current health state, or productivity
+score. The README must retain a plain-language aggregation/privacy disclaimer.
 
 ---
 
-## 6. Content Freshness, Owners, and Review Cadence
+## 4. Confidential and Restricted Work
 
-### Owners
+Employment history remains governed by the repository's confidentiality policy.
+Do not publish non-public employer, team, customer, mission, program, dataset,
+security, or internal-tool details.
+
+If professional experience is later approved for publication:
+
+- use only explicitly approved public facts;
+- do not narrow restricted programs through indirect technical details; and
+- mark uncertain records `internal` or `needs-user-verification` until the
+  owner resolves them.
+
+---
+
+## 5. Sensitive Personal Data
+
+Sensitive sources are deny-by-default. `docs/PRIVACY.md` is authoritative for
+approved public transformations.
+
+Current owner-approved transformations are limited to:
+
+- public GitHub city/region label → weather card, without coordinates;
+- public Steam API fields → gaming card, without presence/session telemetry;
+- Oura daily summary scores → coarse weekly aggregate charts, without raw daily
+  rows, exact schedules, location/travel inference, or authentication data.
+
+Do not infer or add additional personal information from those sources.
+
+---
+
+## 6. Current Focus and Availability
+
+The **Current Focus** table and any availability or target-role language are
+manual owner-controlled content. Do not infer them from GitHub activity,
+telemetry, old README content, or staged files.
+
+To change them:
+
+1. create or update the matching evidence record;
+2. obtain explicit owner confirmation when needed;
+3. update `last_reviewed`;
+4. change the hand-authored README section; and
+5. reference the approval/evidence in the PR.
+
+---
+
+## 7. Accomplishment Graduation
+
+A candidate accomplishment normally begins as `needs-user-verification` and
+graduates to `verified` only after explicit owner confirmation or a public
+artifact supports the exact wording.
+
+| Step | Action |
+|------|--------|
+| 1 | Create candidate evidence record |
+| 2 | Request specific verification |
+| 3 | Owner supplies confirmation/artifact/correction |
+| 4 | Update to `verified` with current review date |
+| 5 | Add bounded README wording |
+| 6 | Review in PR |
+
+Claims do not graduate automatically from old README content or inferred
+activity.
+
+---
+
+## 8. Freshness and Ownership
 
 | Content area | Owner |
 |-------------|-------|
-| Evidence catalog (`evidence.yml`) | `@szmyty` |
-| README narrative sections | `@szmyty` |
-| This document | `@szmyty` |
+| Evidence catalog | `@szmyty` |
+| Hand-authored README narrative | `@szmyty` |
+| Dynamic module public-transformation approval | `@szmyty` |
+| Provider adapters/templates/tests | Repository maintainers under documented contract |
 
-### Review cadence
+Review stable evidence at least every six months and re-review records older
+than twelve months before promoting them into new public prose.
 
-| Trigger | Action |
-|---------|--------|
-| Any new role, project, or accomplishment | Add a `needs-user-verification` record; follow the graduation workflow |
-| Every six months | Review all `last_reviewed` dates; re-verify any record older than 12 months |
-| Repository activity drops or focus shifts | Update the **Current Focus** table and any availability language |
-| A linked repository becomes private or is deleted | Remove or update the corresponding README entry; change the evidence record to `status: needs-user-verification` |
-
-### Stale evidence
-
-A record is considered stale when `last_reviewed` is more than 12 months before
-today.  Stale records must be re-reviewed before their claims are added to or
-retained in the rendered README.
+Dynamic provider freshness is declared per module in
+`profile/content/modules-registry.yml`; stale provider output must follow the
+module's last-known-good fallback semantics rather than inventing new values.
 
 ---
 
-## 7. Relationship to the Profile Reconstruction Epic
+## 9. Relationship to Profile Reconstruction
 
-This document was created as part of the profile reconstruction effort tracked
-in [szmyty/szmyty#65](https://github.com/szmyty/szmyty/issues/65) and
-specifically addresses the content governance requirement from
-[szmyty/szmyty#71](https://github.com/szmyty/szmyty/issues/71).
-
-The queue key for this work stream is `szmyty-profile-rebuild-06`.
+These rules originated in the profile reconstruction work tracked by
+[szmyty/szmyty#65](https://github.com/szmyty/szmyty/issues/65) and the content
+governance work in #71. Issue #149 extends that governance model with explicit,
+tested dynamic telemetry transformations rather than weakening the original
+privacy/evidence constraints.
