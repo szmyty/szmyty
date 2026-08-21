@@ -1,0 +1,13 @@
+{
+  "window_days": 90,
+  "contributing_days": 82,
+  "period_label": "Jul 2026",
+  "avg_sleep_hours": 7.0,
+  "sleep_regularity_band": "average",
+  "avg_readiness_band": "average",
+  "activity_consistency_band": "moderate",
+  "hrv_direction": "stable",
+  "is_synthetic": true,
+  "data_source": "fixture",
+  "generated_month": "2026-08"
+}
