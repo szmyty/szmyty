@@ -46,7 +46,8 @@ This repository serves two roles:
   a hidden synthetic fixture; one provider must not destroy unrelated cards.
 - Historical experimental weather/location/Oura implementations remain
   prohibited. The active modules are bounded reimplementations approved by
-  issue #149.
+  issue #149, with the Steam identity and historical-last-online extension
+  narrowly approved by issue #151.
 
 ## Snapshot Module Platform
 
@@ -75,7 +76,7 @@ Every active README module follows one lifecycle:
 |--------|--------|-------------------|---------|
 | `github-dashboard` | Public GitHub REST/GraphQL | Engineering/activity dashboard | Daily |
 | `weather` | Public GitHub profile location + Open-Meteo | Current weather for public city/region; no coordinates retained | About every 3 hours |
-| `steam` | Official Steam Web API | Level, XP, badges, owned games, recent games/playtime | Daily |
+| `steam` | Official Steam Web API | Profile link/avatar, historical last-online UTC timestamp, level, XP, badges, owned games, recent games/playtime | Daily |
 | `oura-trends` | Oura Cloud API V2 OAuth2 `daily` scope | Coarse weekly sleep/readiness/activity score charts | Daily |
 
 Other registered modules remain disabled until their separate launch gates are
@@ -121,6 +122,11 @@ The Steam adapter uses the official Web API and treats Steam privacy settings
 as authoritative. It publishes Steam-native profile signals rather than an
 invented Xbox-style Gamerscore:
 
+- public `profileurl`, used by the Steam identity badge and entire linked card
+- public `avatarfull`, fetched only from HTTPS `steamstatic.com` hosts and
+  embedded as a bounded data URI for deterministic SVG rendering
+- historical `lastlogoff`, normalized from the provider epoch to an explicit
+  UTC `last_online_at` value before persistence or rendering
 - Steam level
 - player XP
 - badge count
@@ -128,7 +134,9 @@ invented Xbox-style Gamerscore:
 - bounded recent games
 - bounded recent playtime
 
-Presence/online state and session timestamps are excluded.
+Current `personastate`, current game/server state, session history, and
+availability inference remain excluded. The historical `lastlogoff` field is
+the only presence-adjacent value approved by issue #151.
 
 ### Oura boundary
 
@@ -160,6 +168,9 @@ rather than third-party README image services. Visual modules generate:
 
 README templates use `<picture>` source selection for color scheme and mobile
 viewport. SVGs use system font stacks and accessible `<title>`/`<desc>` text.
+The Steam renderer embeds its allow-listed public avatar bytes directly in the
+SVG so the image does not depend on a nested external request when GitHub
+renders the card.
 
 ## Automation
 

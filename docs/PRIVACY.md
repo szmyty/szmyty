@@ -11,7 +11,10 @@ used only when its public projection is narrowly allow-listed, documented,
 tested, and explicitly approved by the data owner.
 
 Issue [#149](https://github.com/szmyty/szmyty/issues/149) records the current
-owner approval for the `weather`, `steam`, and `oura-trends` modules.
+owner approval for the `weather`, `steam`, and `oura-trends` modules. Issue
+[#151](https://github.com/szmyty/szmyty/issues/151) records the narrow additional
+Steam approval for public profile identity imagery and the historical
+`lastlogoff` field.
 
 ## Public-data allow-list
 
@@ -24,9 +27,11 @@ owner approval for the `weather`, `steam`, and `oura-trends` modules.
   (`https://szmyty.vercel.app`).
 - `weather`: the public GitHub profile city/region label and weather derived
   from that label. Geocoded coordinates are transient implementation details.
-- `steam`: public profile identity, Steam level, player XP, badge count,
-  owned-game count, bounded recent games, and bounded recent playtime when the
-  owner's Steam privacy settings expose them.
+- `steam`: public profile identity, `profileurl`, `avatarfull`, Steam level,
+  player XP, badge count, owned-game count, bounded recent games, bounded recent
+  playtime, and the historical `lastlogoff` timestamp when the owner's Steam
+  privacy settings expose them. `lastlogoff` is published only after
+  normalization to an explicit UTC timestamp.
 - `oura-trends`: the explicitly approved aggregate model plus coarse weekly
   sleep/readiness/activity score charts. Weekly values are rounded to 5-point
   buckets, recent days are excluded, and no daily records are retained.
@@ -42,8 +47,10 @@ active:
   measurement timestamps, workouts, tags, heart-rate time series, precise HRV
   values, mood/mood inference, illness inference, travel/location inference,
   or present-day readiness/availability inference.
-- Steam online/presence state, session timestamps, or fields unavailable under
-  the owner's current Steam privacy settings.
+- Steam current online/presence state, current game/server/session fields,
+  session history, availability inference, or fields unavailable under the
+  owner's current Steam privacy settings. The owner-approved historical
+  `lastlogoff` value in #151 is the sole presence-adjacent exception.
 - Private repository/activity metadata.
 - Tokens, cookies, refresh tokens, auth headers, raw authenticated responses,
   debug dumps, or provider credentials of any kind.
@@ -55,11 +62,12 @@ active:
 - **Data owner:** repository owner (`@szmyty`).
 - **General approved sources:** authored markdown, public GitHub APIs, and
   explicitly public media metadata.
-- **Telemetry sources approved by #149:**
+- **Telemetry sources approved by #149 and #151:**
   - GitHub public user API for the profile location string.
   - Open-Meteo geocoding and forecast APIs; coordinates may exist in memory
     only and must not enter tracked artifacts or logs.
-  - Official Steam Web API, bounded by Steam privacy settings.
+  - Official Steam Web API, bounded by Steam privacy settings and the explicit
+    public field allow-list above.
   - Oura Cloud API V2 using OAuth2 and the `daily` scope; only the public
     transformation described above may be persisted.
 
@@ -73,8 +81,10 @@ provider. The transformation contract is authoritative.
   workflow artifacts.
 - Weather artifacts may retain the public city/region label and normalized
   weather values, but never coordinates/timezone/elevation.
-- Steam artifacts may retain only the public metrics enumerated in the
-  allow-list.
+- Steam artifacts may retain only the public metrics and identity metadata
+  enumerated in the allow-list. The raw `lastlogoff` epoch must be discarded
+  after normalization. Public Steam avatar bytes may be embedded as a bounded
+  image data URI solely for deterministic SVG rendering.
 - Oura artifacts may retain only fields in
   `OURA_PUBLIC_AGGREGATE_ALLOWLIST` and generated SVGs containing coarse weekly
   score buckets. Daily arrays must never be written.
@@ -126,9 +136,16 @@ The Steam module must:
 1. Store `STEAM_WEB_API_KEY` only as a GitHub Actions secret.
 2. Store the public `STEAM_ID64` as a repository Actions variable.
 3. Treat Steam privacy settings as authoritative.
-4. Publish only the allow-listed profile/game metrics.
-5. Never infer or expose presence/availability from Steam state.
-6. Retain last-known-good real data if the provider becomes unavailable.
+4. Publish only the allow-listed profile/game metrics and identity metadata.
+5. Use `profileurl` as the destination for the profile badge and linked card.
+6. Use only Steam's public `avatarfull` URL for the card avatar. For reliable
+   SVG rendering, the image may be fetched only over HTTPS from an allow-listed
+   `steamstatic.com` host, size/type checked, and embedded as a data URI.
+7. Normalize the public `lastlogoff` epoch to an explicit UTC `last_online_at`
+   value before persistence or rendering; never publish the raw epoch integer.
+8. Never publish current `personastate`, current game/server fields, session
+   history, or infer current availability from the historical timestamp.
+9. Retain last-known-good real data if the provider becomes unavailable.
 
 ## Redaction and incident response
 

@@ -13,6 +13,7 @@ and bounded recent playtime. Steam privacy settings remain authoritative.
 
 from __future__ import annotations
 
+import base64
 import html
 import json
 import os
@@ -31,6 +32,8 @@ DEFAULT_FIXTURE = REPO_ROOT / "profile" / "fixtures" / "steam.json"
 DEFAULT_OUTPUT = REPO_ROOT / "profile" / "artifacts" / MODULE_NAME / "cache.json"
 _API_ROOT = "https://api.steampowered.com"
 _MAX_RECENT_GAMES = 5
+_MAX_AVATAR_BYTES = 512 * 1024
+_STEAMSTATIC_HOST_SUFFIX = ".steamstatic.com"
 _TIMEOUT = 15
 
 
@@ -70,6 +73,48 @@ def _steam_get(endpoint: str, params: dict[str, str], api_key: str) -> object:
         raise ProviderFailure(f"Steam API request failed: HTTP {exc.code}") from exc
     except error.URLError as exc:
         raise ProviderFailure(f"Steam API unreachable: {exc.reason}") from exc
+
+
+def _normalize_lastlogoff(value: object) -> str | None:
+    """Normalize Steam's public ``lastlogoff`` epoch to an explicit UTC timestamp."""
+    if not isinstance(value, int) or value <= 0:
+        return None
+    try:
+        timestamp = datetime.fromtimestamp(value, tz=UTC).replace(microsecond=0)
+    except (OverflowError, OSError, ValueError):
+        return None
+    return timestamp.isoformat().replace("+00:00", "Z")
+
+
+def _fetch_avatar_data_uri(url: str | None) -> str | None:
+    """Download a public Steam avatar and embed it for reliable SVG rendering."""
+    if not url:
+        return None
+
+    parsed_url = parse.urlparse(url)
+    hostname = (parsed_url.hostname or "").lower()
+    if parsed_url.scheme != "https" or not (
+        hostname == "steamstatic.com" or hostname.endswith(_STEAMSTATIC_HOST_SUFFIX)
+    ):
+        return None
+
+    req = request.Request(
+        url,
+        headers={"User-Agent": "szmyty-profile-builder/1.0"},
+    )
+    try:
+        with request.urlopen(req, timeout=_TIMEOUT) as resp:  # noqa: S310
+            media_type = resp.headers.get_content_type()
+            if media_type not in {"image/jpeg", "image/png", "image/webp"}:
+                return None
+            data = resp.read(_MAX_AVATAR_BYTES + 1)
+    except (error.HTTPError, error.URLError):
+        return None
+
+    if len(data) > _MAX_AVATAR_BYTES:
+        return None
+    encoded = base64.b64encode(data).decode("ascii")
+    return f"data:{media_type};base64,{encoded}"
 
 
 def fetch_live(api_key: str, steam_id: str) -> SteamSnapshot:
@@ -147,10 +192,34 @@ def fetch_live(api_key: str, steam_id: str) -> SteamSnapshot:
 
 
 def fetch_extended_stats(api_key: str, steam_id: str) -> dict:
-    """Fetch public Steam-native score-like metrics for the SVG card."""
+    """Fetch public Steam-native metrics and owner-approved profile metadata."""
     owned_games: int | None = None
     badge_count: int | None = None
     player_xp: int | None = None
+    avatar_url: str | None = None
+    avatar_data_uri: str | None = None
+    last_online_at: str | None = None
+
+    try:
+        summary_resp = _steam_get(
+            "ISteamUser/GetPlayerSummaries/v0002",
+            {"steamids": steam_id},
+            api_key,
+        )
+        players = (
+            summary_resp.get("response", {}).get("players", [])
+            if isinstance(summary_resp, dict)
+            else []
+        )
+        if players:
+            player = players[0]
+            raw_avatar_url = player.get("avatarfull")
+            if isinstance(raw_avatar_url, str):
+                avatar_url = raw_avatar_url
+                avatar_data_uri = _fetch_avatar_data_uri(raw_avatar_url)
+            last_online_at = _normalize_lastlogoff(player.get("lastlogoff"))
+    except ProviderFailure:
+        pass
 
     try:
         owned_resp = _steam_get(
@@ -194,6 +263,9 @@ def fetch_extended_stats(api_key: str, steam_id: str) -> dict:
         "owned_games": owned_games,
         "badge_count": badge_count,
         "player_xp": player_xp,
+        "avatar_url": avatar_url,
+        "avatar_data_uri": avatar_data_uri,
+        "last_online_at": last_online_at,
         "data_source": "live",
         "is_synthetic": False,
     }
@@ -245,6 +317,9 @@ def _empty_stats() -> dict:
         "owned_games": None,
         "badge_count": None,
         "player_xp": None,
+        "avatar_url": None,
+        "avatar_data_uri": None,
+        "last_online_at": None,
         "data_source": "fixture",
         "is_synthetic": True,
     }
@@ -285,6 +360,20 @@ def _recent_hours(snapshot: SteamSnapshot) -> int | None:
     return round(sum(values) / 60)
 
 
+def _format_last_online(value: object) -> str:
+    """Format a normalized UTC timestamp for the public card."""
+    if not isinstance(value, str):
+        return "Unavailable"
+    try:
+        timestamp = datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(UTC)
+    except ValueError:
+        return "Unavailable"
+    return (
+        f"{timestamp.strftime('%b')} {timestamp.day}, {timestamp.year} · "
+        f"{timestamp.strftime('%H:%M')} UTC"
+    )
+
+
 def _render_svg(
     snapshot: SteamSnapshot,
     stats: dict,
@@ -294,7 +383,7 @@ def _render_svg(
 ) -> str:
     palette = _palette(dark)
     width = 360 if mobile else 760
-    height = 420 if mobile else 285
+    height = 520 if mobile else 325
     font = "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif"
     display_name = html.escape(snapshot.display_name or "Steam player")
     level = _number(snapshot.steam_level)
@@ -303,6 +392,30 @@ def _render_svg(
     xp = _number(stats.get("player_xp"))
     recent_hours = _recent_hours(snapshot)
     recent = f"{recent_hours} h" if recent_hours is not None else "—"
+    last_online = html.escape(_format_last_online(stats.get("last_online_at")))
+
+    avatar_data_uri = stats.get("avatar_data_uri")
+    avatar_markup = ""
+    if isinstance(avatar_data_uri, str) and avatar_data_uri.startswith("data:image/"):
+        avatar_size = 78 if mobile else 92
+        avatar_x = 28
+        avatar_y = 54 if mobile else 48
+        avatar_radius = avatar_size // 2
+        avatar_center_x = avatar_x + avatar_radius
+        avatar_center_y = avatar_y + avatar_radius
+        avatar_markup = (
+            '<defs><clipPath id="steamAvatarClip">'
+            f'<circle cx="{avatar_center_x}" cy="{avatar_center_y}" '
+            f'r="{avatar_radius}"/>'
+            "</clipPath></defs>"
+            f'<image href="{html.escape(avatar_data_uri, quote=True)}" '
+            f'x="{avatar_x}" y="{avatar_y}" width="{avatar_size}" '
+            f'height="{avatar_size}" '
+            'preserveAspectRatio="xMidYMid slice" clip-path="url(#steamAvatarClip)"/>'
+            f'<circle cx="{avatar_center_x}" cy="{avatar_center_y}" '
+            f'r="{avatar_radius}" '
+            f'fill="none" stroke="{palette["border"]}" stroke-width="2"/>'
+        )
 
     metrics = [
         ("LEVEL", level),
@@ -312,9 +425,9 @@ def _render_svg(
         ("RECENT PLAYTIME", recent),
     ]
     if mobile:
-        positions = [(28, 125), (190, 125), (28, 190), (190, 190), (28, 255)]
+        positions = [(28, 170), (190, 170), (28, 235), (190, 235), (28, 300)]
     else:
-        positions = [(30, 125), (165, 125), (300, 125), (455, 125), (590, 125)]
+        positions = [(30, 170), (165, 170), (300, 170), (455, 170), (590, 170)]
 
     metric_markup = "".join(
         f'<text x="{x}" y="{y}" fill="{palette["muted"]}" font-size="11" '
@@ -326,38 +439,56 @@ def _render_svg(
 
     recent_games = snapshot.recent_games[:3]
     if mobile:
-        start_y = 320
+        start_y = 392
         game_markup = "".join(
             f'<text x="28" y="{start_y + index * 28}" fill="{palette["text"]}" '
             f'font-size="13">{html.escape(game.name[:38])}</text>'
             for index, game in enumerate(recent_games)
         )
+        header_x = 126 if avatar_markup else 28
+        title_y = 44
+        name_y = 76
+        last_label_y = 105
+        last_value_y = 125
+        recent_label_y = 365
     else:
         game_text = " · ".join(game.name for game in recent_games) or "No recent games"
         game_markup = (
-            f'<text x="30" y="225" fill="{palette["text"]}" font-size="13">'
+            f'<text x="30" y="270" fill="{palette["text"]}" font-size="13">'
             f"{html.escape(game_text[:95])}</text>"
         )
+        header_x = 140 if avatar_markup else 28
+        title_y = 42
+        name_y = 78
+        last_label_y = 106
+        last_value_y = 126
+        recent_label_y = 242
 
     footer_y = height - 22
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img">'
         f"<title>Steam profile snapshot for {display_name}</title>"
-        "<desc>Public Steam level, XP, badges, owned games, and recent playtime.</desc>"
+        "<desc>Public Steam avatar, last-online timestamp, level, XP, badges, "
+        "owned games, and recent playtime.</desc>"
         f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="18" '
         f'fill="{palette["background"]}" stroke="{palette["border"]}"/>'
+        f"{avatar_markup}"
         f'<g font-family="{font}">'
-        f'<text x="28" y="42" fill="{palette["accent"]}" font-size="13" '
+        f'<text x="{header_x}" y="{title_y}" fill="{palette["accent"]}" font-size="13" '
         'font-weight="700">STEAM SNAPSHOT</text>'
-        f'<text x="28" y="78" fill="{palette["text"]}" font-size="24" '
-        f'font-weight="750">{display_name}</text>'
+        f'<text x="{header_x}" y="{name_y}" fill="{palette["text"]}" '
+        f'font-size="{18 if mobile else 24}" font-weight="750">{display_name}</text>'
+        f'<text x="{header_x}" y="{last_label_y}" fill="{palette["muted"]}" '
+        'font-size="10" font-weight="650">LAST ONLINE</text>'
+        f'<text x="{header_x}" y="{last_value_y}" fill="{palette["text"]}" '
+        f'font-size="12">{last_online}</text>'
         f"{metric_markup}"
-        f'<text x="28" y="{300 if mobile else 197}" fill="{palette["muted"]}" '
+        f'<text x="28" y="{recent_label_y}" fill="{palette["muted"]}" '
         'font-size="11" font-weight="650">RECENT GAMES</text>'
         f"{game_markup}"
         f'<text x="28" y="{footer_y}" fill="{palette["muted"]}" font-size="11">'
-        "Public Steam Web API data · private fields remain hidden by Steam"
+        "Public Steam Web API data · click card to view profile"
         "</text></g></svg>"
     )
 

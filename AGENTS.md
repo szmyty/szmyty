@@ -132,7 +132,8 @@ Rules:
 - Dynamic provider values do not require one evidence record per changing
   value when the module's source, disclosure boundary, and owner approval are
   recorded. Issue #149 is the approval record for `weather`, `steam`, and
-  `oura-trends`.
+  `oura-trends`; issue #151 narrowly extends the Steam projection with public
+  profile imagery and the historical `lastlogoff` field.
 
 See `docs/CONTENT.md` for the complete evidence protocol.
 
@@ -144,15 +145,18 @@ Health, location-derived, and other sensitive data are **deny-by-default**.
 They may only be published through a narrowly scoped transformation that has
 explicit owner approval, tests, and documentation.
 
-Issue #149 records the owner's approval for these exact public projections:
+Issues #149 and #151 record the owner's approval for these exact public
+projections:
 
 - `weather`: the public GitHub profile city/region string plus weather derived
   from it. Geocoded coordinates, timezone, elevation, and raw geocoding
   payloads are transient only and must never be committed or logged.
 - `steam`: metrics already visible through the owner's Steam privacy settings,
-  limited to profile identity, level, XP, badges, owned-game count, recent
-  games, and bounded recent playtime. Online presence/session timestamps are
-  not published.
+  limited to profile identity, `profileurl`, `avatarfull`, level, XP, badges,
+  owned-game count, recent games, bounded recent playtime, and the historical
+  `lastlogoff` value normalized to an explicit UTC last-online timestamp.
+  Current online/presence state, current game/server fields, and session history
+  are not published.
 - `oura-trends`: coarse weekly sleep/readiness/activity score trends and the
   existing aggregate allow-list only. Weekly chart scores are rounded to
   5-point buckets; recent days are excluded. Raw/daily records, exact
