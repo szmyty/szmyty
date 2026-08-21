@@ -2,6 +2,7 @@ name: Update Profile
 
 on:
   schedule:
+    - cron: "17 0,3,9,12,15,18,21 * * *"
     - cron: "0 6 * * *"
   workflow_dispatch:
   issues:
@@ -16,12 +17,22 @@ on:
     paths:
       - ".github/workflows/update-profile.yml"
       - "profile/content/ai-agent-showcase.yml"
+      - "profile/content/modules-registry.yml"
       - "profile/fixtures/github-dashboard.json"
       - "profile/fixtures/ai-agent-showcase.json"
+      - "profile/fixtures/weather.json"
+      - "profile/fixtures/steam.json"
+      - "profile/fixtures/oura-trends.json"
       - "profile/templates/github-dashboard*.j2"
       - "profile/templates/ai-agent-showcase*.j2"
+      - "profile/templates/weather.md.j2"
+      - "profile/templates/steam.md.j2"
+      - "profile/templates/oura-trends.md.j2"
       - "tools/modules/github_dashboard.py"
       - "tools/modules/ai_agent_showcase.py"
+      - "tools/modules/weather.py"
+      - "tools/modules/steam.py"
+      - "tools/modules/oura_trends.py"
       - "tools/profile_builder/github_dashboard/**"
       - "tools/profile_builder/models.py"
 
@@ -108,8 +119,18 @@ jobs:
       - name: Install runtime dependencies
         run: poetry install --only main --no-interaction --no-root
 
+      - name: Refresh weather
+        id: weather
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          poetry run python -m tools.modules.weather
+          --output profile/artifacts/weather/cache.json
+
       - name: Refresh GitHub dashboard
         id: github_dashboard
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -119,6 +140,7 @@ jobs:
 
       - name: Refresh AI agent showcase
         id: ai_agent_showcase
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -131,11 +153,34 @@ jobs:
 
       - name: Refresh music highlight
         id: music_highlight
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
         continue-on-error: true
         run: >-
           poetry run python -m tools.modules.music_highlight
           --input profile/content/music-highlight.yml
           --output profile/artifacts/music-highlight/music.yml
+
+      - name: Refresh Steam snapshot
+        id: steam
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
+        continue-on-error: true
+        env:
+          STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
+          STEAM_ID64: ${{ vars.STEAM_ID64 }}
+        run: >-
+          poetry run python -m tools.modules.steam
+          --output profile/artifacts/steam/cache.json
+
+      - name: Refresh Oura aggregate trends
+        id: oura_trends
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
+        continue-on-error: true
+        env:
+          OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
+        run: >-
+          poetry run python -m tools.modules.oura_trends
+          --allow-publication
+          --output profile/artifacts/oura-trends/cache.json
 
       - name: Render README regions
         run: poetry run python -m tools.modules.update_readme
@@ -143,9 +188,12 @@ jobs:
       - name: Summarize module refresh
         id: summarize
         env:
+          WEATHER_OUTCOME: ${{ steps.weather.outcome }}
           GITHUB_DASHBOARD_OUTCOME: ${{ steps.github_dashboard.outcome }}
           AI_AGENT_SHOWCASE_OUTCOME: ${{ steps.ai_agent_showcase.outcome }}
           MUSIC_HIGHLIGHT_OUTCOME: ${{ steps.music_highlight.outcome }}
+          STEAM_OUTCOME: ${{ steps.steam.outcome }}
+          OURA_TRENDS_OUTCOME: ${{ steps.oura_trends.outcome }}
         run: |
           poetry run python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json
@@ -155,9 +203,12 @@ jobs:
           import yaml
 
           items = [
+              ("weather", Path("profile/artifacts/weather/cache.json"), os.environ["WEATHER_OUTCOME"]),
               ("github-dashboard", Path("profile/artifacts/github-dashboard/snapshot.json"), os.environ["GITHUB_DASHBOARD_OUTCOME"]),
               ("ai-agent-showcase", Path("profile/artifacts/ai-agent-showcase/cache.json"), os.environ["AI_AGENT_SHOWCASE_OUTCOME"]),
               ("music-highlight", Path("profile/artifacts/music-highlight/music.yml"), os.environ["MUSIC_HIGHLIGHT_OUTCOME"]),
+              ("steam", Path("profile/artifacts/steam/cache.json"), os.environ["STEAM_OUTCOME"]),
+              ("oura-trends", Path("profile/artifacts/oura-trends/cache.json"), os.environ["OURA_TRENDS_OUTCOME"]),
           ]
 
           print("### Module refresh summary")
@@ -174,15 +225,18 @@ jobs:
 
           had_failures=false
           for outcome in \
+            "$WEATHER_OUTCOME" \
             "$GITHUB_DASHBOARD_OUTCOME" \
             "$AI_AGENT_SHOWCASE_OUTCOME" \
-            "$MUSIC_HIGHLIGHT_OUTCOME"; do
-            if [ "$outcome" != "success" ]; then
+            "$MUSIC_HIGHLIGHT_OUTCOME" \
+            "$STEAM_OUTCOME" \
+            "$OURA_TRENDS_OUTCOME"; do
+            if [ "$outcome" = "failure" ]; then
               had_failures=true
             fi
           done
 
-          echo "had_failures=$had_failures" >> "$GITHUB_OUTPUT"
+          printf 'had_failures=%s\n' "$had_failures" >> "$GITHUB_OUTPUT"
 
       - name: Upload refreshed profile files
         if: always()
@@ -192,15 +246,12 @@ jobs:
           name: profile-refresh
           path: |
             README.md
-            profile/artifacts/github-dashboard/snapshot.json
-            profile/artifacts/github-dashboard/metadata.json
-            profile/artifacts/github-dashboard/card-light.svg
-            profile/artifacts/github-dashboard/card-dark.svg
-            profile/artifacts/github-dashboard/card-mobile-light.svg
-            profile/artifacts/github-dashboard/card-mobile-dark.svg
-            profile/artifacts/ai-agent-showcase/cache.json
-            profile/artifacts/ai-agent-showcase/card.svg
-            profile/artifacts/music-highlight/music.yml
+            profile/artifacts/github-dashboard/
+            profile/artifacts/weather/
+            profile/artifacts/ai-agent-showcase/
+            profile/artifacts/music-highlight/
+            profile/artifacts/steam/
+            profile/artifacts/oura-trends/
             site/ai-agent-showcase.html
 
   commit:
@@ -230,19 +281,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add README.md profile/artifacts/github-dashboard/snapshot.json \
-            profile/artifacts/github-dashboard/metadata.json \
-            profile/artifacts/github-dashboard/card-light.svg \
-            profile/artifacts/github-dashboard/card-dark.svg \
-            profile/artifacts/github-dashboard/card-mobile-light.svg \
-            profile/artifacts/github-dashboard/card-mobile-dark.svg \
-            profile/artifacts/ai-agent-showcase/cache.json \
-            profile/artifacts/ai-agent-showcase/card.svg \
-            profile/artifacts/music-highlight/music.yml
-          git add site/ai-agent-showcase.html
+          git add README.md \
+            profile/artifacts/github-dashboard \
+            profile/artifacts/weather \
+            profile/artifacts/ai-agent-showcase \
+            profile/artifacts/music-highlight \
+            profile/artifacts/steam \
+            profile/artifacts/oura-trends \
+            site/ai-agent-showcase.html
 
           if git diff --cached --quiet; then
-            echo "No semantic profile changes detected." >> "$GITHUB_STEP_SUMMARY"
+            printf '%s\n' "No semantic profile changes detected." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
 
@@ -252,7 +301,7 @@ jobs:
               exit 0
             fi
             if [ "$attempt" -eq 3 ]; then
-              echo "Push failed after 3 attempts." >&2
+              printf '%s\n' "Push failed after 3 attempts." >&2
               exit 1
             fi
             git fetch origin master
@@ -270,5 +319,7 @@ jobs:
     steps:
       - name: Mark run as partially failed
         run: |
-          echo "One or more module refresh steps failed; unchanged cached output was preserved where available." >> "$GITHUB_STEP_SUMMARY"
+          printf '%s\n' \
+            "One or more module refresh steps failed; cached output was preserved." \
+            >> "$GITHUB_STEP_SUMMARY"
           exit 1
