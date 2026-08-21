@@ -11,7 +11,7 @@ This repository publishes a public profile. Only intentionally public data is al
 - Public education/professional chronology explicitly approved for publication.
 - Public project docs, releases, and demos.
 - Public music metadata/links explicitly published by the data owner.
-- Public contact channel: GitHub profile/issues only (`https://github.com/szmyty`).
+- Professional contact route: the approved public portfolio (`https://szmyty.vercel.app`); GitHub issues remain appropriate for repository-specific questions.
 
 ## Public-data deny-list
 
@@ -47,8 +47,12 @@ This repository publishes a public profile. Only intentionally public data is al
 
 ## Public contact policy
 
-- Use GitHub as the public contact channel.
-- Do not publish personal mailbox addresses in profile artifacts unless explicitly approved as public.
+- Route professional inquiries through the approved public portfolio.
+- Use GitHub issues only for repository-specific questions.
+- Do not embed a personal mailbox address in profile artifacts unless the
+  exact address is explicitly approved as public.
+- A destination may expose an owner-approved contact method without copying
+  that value into this repository.
 
 ## Employment and restricted-detail policy
 
