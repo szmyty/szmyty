@@ -10,7 +10,7 @@
   "low_f": 65.2,
   "precipitation_probability_pct": 46,
   "weather_code": 3,
-  "data_source": "live",
+  "data_source": "cache",
   "data_at": "2026-08-22T00:30:28.380379+00:00",
   "attribution": "Weather data by Open-Meteo.com",
   "is_synthetic": false
