@@ -81,7 +81,7 @@ These systems meet inside [**Ego Hygiene**](https://github.com/egohygiene), my p
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
   <img
     src="./profile/artifacts/github-dashboard/card-light.svg"
-    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6535 publicly starred repositories, releases, and language distribution for @szmyty."
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6536 publicly starred repositories, releases, and language distribution for @szmyty."
     width="100%"
   >
 </picture>
@@ -106,7 +106,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Overcast, 73 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Overcast, 70 degrees Fahrenheit."
     width="100%"
   >
 </picture>
@@ -137,6 +137,21 @@ These cards are generated first-party from public or explicitly approved API dat
 
 <!-- START:monkeytype -->
 
+### Typing
+
+<a href="https://monkeytype.com/profile/szmyty" title="Open my Monkeytype profile"><picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/monkeytype/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/monkeytype/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/monkeytype/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/monkeytype/card-light.svg">
+  <img
+    src="./profile/artifacts/monkeytype/card-light.svg"
+    alt="Monkeytype typing statistics for szmyty with completed tests, typing time, and selected time-mode personal bests."
+    width="100%"
+  >
+</picture></a>
+
+<sub>Official Monkeytype API · aggregate typing activity and selected time-mode personal bests · [view profile](https://monkeytype.com/profile/szmyty)</sub>
 <!-- END:monkeytype -->
 
 <!-- START:oura-trends -->

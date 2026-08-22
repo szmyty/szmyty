@@ -1,35 +1,35 @@
 {
   "profile_url": "https://monkeytype.com/profile/szmyty",
-  "completed_tests": 240,
-  "started_tests": 260,
-  "time_typing_seconds": 45210,
+  "completed_tests": 1,
+  "started_tests": 1,
+  "time_typing_seconds": 60,
   "personal_bests": [
     {
       "duration_seconds": 15,
-      "wpm": 111.1,
-      "accuracy_pct": 98.4,
-      "consistency_pct": 83.2
+      "wpm": null,
+      "accuracy_pct": null,
+      "consistency_pct": null
     },
     {
       "duration_seconds": 30,
-      "wpm": 103.2,
-      "accuracy_pct": 97.8,
-      "consistency_pct": 81.1
+      "wpm": null,
+      "accuracy_pct": null,
+      "consistency_pct": null
     },
     {
       "duration_seconds": 60,
-      "wpm": 96.5,
-      "accuracy_pct": 97.3,
-      "consistency_pct": 79.6
+      "wpm": 94.0,
+      "accuracy_pct": 100.0,
+      "consistency_pct": 82.4
     },
     {
       "duration_seconds": 120,
-      "wpm": 91.4,
-      "accuracy_pct": 97.0,
-      "consistency_pct": 78.0
+      "wpm": null,
+      "accuracy_pct": null,
+      "consistency_pct": null
     }
   ],
-  "data_source": "fixture",
-  "data_at": null,
-  "is_synthetic": true
+  "data_source": "live",
+  "data_at": "2026-08-22T19:01:42.549005+00:00",
+  "is_synthetic": false
 }
