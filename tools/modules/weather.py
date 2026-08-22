@@ -162,7 +162,8 @@ def fetch_live(location: str) -> dict:
                 "precipitation,weather_code,wind_speed_10m"
             ),
             "daily": (
-                "temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+                "temperature_2m_max,temperature_2m_min,"
+                "precipitation_probability_max"
             ),
             "temperature_unit": "fahrenheit",
             "wind_speed_unit": "mph",
@@ -243,6 +244,37 @@ def _format_number(value: object, suffix: str = "", digits: int = 0) -> str:
     return f"{value:.{digits}f}{suffix}"
 
 
+def _weather_icon_name(code: object) -> str:
+    """Map an Open-Meteo WMO weather code to one icon family."""
+    if not isinstance(code, (int, float)):
+        return "unknown"
+
+    weather_code = int(code)
+    if weather_code == 0:
+        return "clear"
+    if weather_code == 1:
+        return "mostly-clear"
+    if weather_code == 2:
+        return "partly-cloudy"
+    if weather_code == 3:
+        return "overcast"
+    if weather_code in {45, 48}:
+        return "fog"
+    if weather_code in {51, 53, 55, 56, 57}:
+        return "drizzle"
+    if weather_code in {61, 63, 65, 66, 67}:
+        return "rain"
+    if weather_code in {71, 73, 75, 77, 85, 86}:
+        return "snow"
+    if weather_code in {80, 81, 82}:
+        return "showers"
+    if weather_code == 95:
+        return "thunderstorm"
+    if weather_code in {96, 99}:
+        return "hail"
+    return "unknown"
+
+
 def _palette(dark: bool) -> dict[str, str]:
     if dark:
         return {
@@ -252,6 +284,11 @@ def _palette(dark: bool) -> dict[str, str]:
             "text": "#F0F6FC",
             "muted": "#8B949E",
             "accent": "#58A6FF",
+            "sun": "#E3B341",
+            "cloud": "#8B949E",
+            "precipitation": "#79C0FF",
+            "snow": "#B6E3FF",
+            "lightning": "#F2CC60",
         }
     return {
         "background": "#FFFFFF",
@@ -260,13 +297,117 @@ def _palette(dark: bool) -> dict[str, str]:
         "text": "#1F2328",
         "muted": "#59636E",
         "accent": "#0969DA",
+        "sun": "#BF8700",
+        "cloud": "#57606A",
+        "precipitation": "#0969DA",
+        "snow": "#54AEFF",
+        "lightning": "#9A6700",
     }
+
+
+def _sun_icon(palette: dict[str, str]) -> str:
+    color = palette["sun"]
+    rays = (
+        '<line x1="32" y1="5" x2="32" y2="13"/>'
+        '<line x1="32" y1="51" x2="32" y2="59"/>'
+        '<line x1="5" y1="32" x2="13" y2="32"/>'
+        '<line x1="51" y1="32" x2="59" y2="32"/>'
+        '<line x1="13" y1="13" x2="18.5" y2="18.5"/>'
+        '<line x1="45.5" y1="45.5" x2="51" y2="51"/>'
+        '<line x1="13" y1="51" x2="18.5" y2="45.5"/>'
+        '<line x1="45.5" y1="18.5" x2="51" y2="13"/>'
+    )
+    return (
+        f'<g fill="none" stroke="{color}" stroke-width="3" '
+        f'stroke-linecap="round">{rays}'
+        '<circle cx="32" cy="32" r="12"/></g>'
+    )
+
+
+def _cloud_icon(palette: dict[str, str]) -> str:
+    return (
+        '<path d="M16 45h31c7 0 12-5 12-11s-5-11-12-11h-1C43 14 36 9 '
+        '27 9c-10 0-18 8-19 18-5 2-8 6-8 10 0 5 4 8 9 8h7z" '
+        f'fill="{palette["cloud"]}" opacity="0.94"/>'
+    )
+
+
+def _weather_icon_svg(
+    code: object,
+    *,
+    x: float,
+    y: float,
+    size: float,
+    palette: dict[str, str],
+) -> str:
+    """Render one repository-owned icon for a WMO weather-code family."""
+    icon = _weather_icon_name(code)
+    cloud = _cloud_icon(palette)
+    rain = palette["precipitation"]
+    snow = palette["snow"]
+    lightning = palette["lightning"]
+
+    if icon == "clear":
+        body = _sun_icon(palette)
+    elif icon in {"mostly-clear", "partly-cloudy"}:
+        body = (
+            '<g transform="translate(-10 -10) scale(.72)">'
+            f'{_sun_icon(palette)}</g>{cloud}'
+        )
+    elif icon in {"overcast", "unknown"}:
+        body = cloud
+    elif icon == "fog":
+        body = (
+            f'{cloud}'
+            f'<g stroke="{palette["muted"]}" stroke-width="3" '
+            'stroke-linecap="round">'
+            '<line x1="11" y1="51" x2="53" y2="51"/>'
+            '<line x1="18" y1="59" x2="46" y2="59"/></g>'
+        )
+    elif icon in {"drizzle", "rain", "showers"}:
+        stroke_width = "2" if icon == "drizzle" else "3"
+        y2 = "58" if icon == "drizzle" else "61"
+        body = (
+            f'{cloud}<g stroke="{rain}" stroke-width="{stroke_width}" '
+            'stroke-linecap="round">'
+            f'<line x1="22" y1="49" x2="18" y2="{y2}"/>'
+            f'<line x1="36" y1="49" x2="32" y2="{y2}"/>'
+            f'<line x1="50" y1="49" x2="46" y2="{y2}"/></g>'
+        )
+    elif icon == "snow":
+        body = (
+            f'{cloud}<g stroke="{snow}" stroke-width="2" '
+            'stroke-linecap="round">'
+            '<path d="M21 50v11M16 55.5h10M17.5 52l7 7M24.5 52l-7 7"/>'
+            '<path d="M45 50v11M40 55.5h10M41.5 52l7 7M48.5 52l-7 7"/>'
+            '</g>'
+        )
+    elif icon in {"thunderstorm", "hail"}:
+        hail = ""
+        if icon == "hail":
+            hail = (
+                f'<circle cx="20" cy="57" r="3" fill="{snow}"/>'
+                f'<circle cx="50" cy="57" r="3" fill="{snow}"/>'
+            )
+        body = (
+            f'{cloud}<path d="M37 45 27 57h9l-4 7 16-16h-9l4-3z" '
+            f'fill="{lightning}"/>{hail}'
+        )
+    else:
+        body = cloud
+
+    scale = size / 64
+    return (
+        f'<g data-weather-icon="{icon}" aria-hidden="true" '
+        f'transform="translate({x:.1f} {y:.1f}) scale({scale:.4f})">'
+        f'{body}</g>'
+    )
 
 
 def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
     palette = _palette(dark)
     width = 360 if mobile else 760
-    height = 330 if mobile else 230
+    height = 236 if mobile else 184
     location = html.escape(str(snapshot.get("location") or "GitHub profile location"))
     condition = html.escape(str(snapshot.get("condition") or "Weather"))
     temperature = _format_number(snapshot.get("temperature_f"), "°F")
@@ -279,62 +420,88 @@ def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
     font = "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif"
 
     if mobile:
+        icon = _weather_icon_svg(
+            snapshot.get("weather_code"),
+            x=282,
+            y=30,
+            size=46,
+            palette=palette,
+        )
         metrics = [
-            ("FEELS", feels, 28, 195),
-            ("HUMIDITY", humidity, 190, 195),
-            ("WIND", wind, 28, 255),
-            ("PRECIP", precip, 190, 255),
+            ("FEELS", feels, 28, 143),
+            ("HUMIDITY", humidity, 190, 143),
+            ("WIND", wind, 28, 178),
+            ("PRECIP", precip, 190, 178),
         ]
         metric_markup = "".join(
             f'<text x="{x}" y="{y}" fill="{palette["muted"]}" '
-            f'font-size="11" font-weight="600">{label}</text>'
-            f'<text x="{x}" y="{y + 23}" fill="{palette["text"]}" '
-            f'font-size="17" font-weight="650">{html.escape(value)}</text>'
+            f'font-size="9" font-weight="700">{label}</text>'
+            f'<text x="{x}" y="{y + 16}" fill="{palette["text"]}" '
+            f'font-size="14" font-weight="650">{html.escape(value)}</text>'
             for label, value, x, y in metrics
         )
-        detail = (
-            f'<text x="28" y="150" fill="{palette["muted"]}" font-size="13">'
-            f"High {high} · Low {low}</text>"
+        summary_markup = (
+            f'<text x="28" y="94" fill="{palette["text"]}" font-size="36" '
+            f'font-weight="750">{temperature}</text>'
+            f'<text x="112" y="80" fill="{palette["text"]}" font-size="15" '
+            f'font-weight="650">{condition}</text>'
+            f'<text x="112" y="99" fill="{palette["muted"]}" font-size="11">'
+            f'High {high} · Low {low}</text>'
+        )
+        panel_markup = (
+            f'<rect x="18" y="119" width="324" height="76" rx="12" '
+            f'fill="{palette["panel"]}" stroke="{palette["border"]}"/>'
         )
     else:
+        icon = _weather_icon_svg(
+            snapshot.get("weather_code"),
+            x=685,
+            y=23,
+            size=52,
+            palette=palette,
+        )
         metrics = [
-            ("FEELS LIKE", feels, 320),
-            ("HUMIDITY", humidity, 435),
-            ("WIND", wind, 550),
-            ("PRECIP", precip, 650),
+            ("FEELS", feels, 302),
+            ("HUMIDITY", humidity, 417),
+            ("WIND", wind, 532),
+            ("PRECIP", precip, 640),
         ]
         metric_markup = "".join(
-            f'<text x="{x}" y="111" fill="{palette["muted"]}" '
-            f'font-size="11" font-weight="600">{label}</text>'
-            f'<text x="{x}" y="140" fill="{palette["text"]}" '
-            f'font-size="18" font-weight="650">{html.escape(value)}</text>'
+            f'<text x="{x}" y="121" fill="{palette["muted"]}" '
+            f'font-size="9" font-weight="700">{label}</text>'
+            f'<text x="{x}" y="139" fill="{palette["text"]}" '
+            f'font-size="14" font-weight="650">{html.escape(value)}</text>'
             for label, value, x in metrics
         )
-        detail = (
-            f'<text x="32" y="180" fill="{palette["muted"]}" font-size="13">'
-            f"Today: high {high} · low {low}</text>"
+        summary_markup = (
+            f'<text x="28" y="94" fill="{palette["text"]}" font-size="36" '
+            f'font-weight="750">{temperature}</text>'
+            f'<text x="120" y="80" fill="{palette["text"]}" font-size="15" '
+            f'font-weight="650">{condition}</text>'
+            f'<text x="120" y="99" fill="{palette["muted"]}" font-size="11">'
+            f'High {high} · Low {low}</text>'
+        )
+        panel_markup = (
+            f'<rect x="286" y="104" width="446" height="48" rx="12" '
+            f'fill="{palette["panel"]}" stroke="{palette["border"]}"/>'
         )
 
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}" role="img">'
-        f"<title>Weather for {location}</title>"
-        f"<desc>{condition}, {temperature}. {snapshot.get('attribution', '')}</desc>"
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" '
+        f'height="{height}" viewBox="0 0 {width} {height}" role="img">'
+        f'<title>Weather for {location}</title>'
+        f'<desc>{condition}, {temperature}. {snapshot.get("attribution", "")}</desc>'
         f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="18" '
         f'fill="{palette["background"]}" stroke="{palette["border"]}"/>'
         f'<g font-family="{font}">'
-        f'<text x="28" y="42" fill="{palette["accent"]}" font-size="13" '
-        f'font-weight="700">LOCAL WEATHER</text>'
-        f'<text x="28" y="70" fill="{palette["muted"]}" font-size="14">'
-        f"{location}</text>"
-        f'<text x="28" y="122" fill="{palette["text"]}" font-size="42" '
-        f'font-weight="750">{temperature}</text>'
-        f'<text x="145" y="111" fill="{palette["text"]}" font-size="18" '
-        f'font-weight="650">{condition}</text>'
-        f"{detail}{metric_markup}"
-        f'<text x="28" y="{height - 22}" fill="{palette["muted"]}" font-size="11">'
-        "Weather data: Open-Meteo · location sourced from public GitHub profile"
-        "</text></g></svg>"
+        f'<text x="28" y="30" fill="{palette["accent"]}" font-size="10" '
+        f'font-weight="800" letter-spacing="0.7">LOCAL WEATHER</text>'
+        f'<text x="28" y="49" fill="{palette["muted"]}" font-size="11">'
+        f'{location}</text>'
+        f'{summary_markup}{panel_markup}{metric_markup}{icon}'
+        f'<text x="28" y="{height - 15}" fill="{palette["muted"]}" '
+        f'font-size="9">Open-Meteo · location from public GitHub profile</text>'
+        '</g></svg>'
     )
 
 
