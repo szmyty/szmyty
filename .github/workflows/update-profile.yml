@@ -22,16 +22,19 @@ on:
       - "profile/fixtures/ai-agent-showcase.json"
       - "profile/fixtures/weather.json"
       - "profile/fixtures/steam.json"
+      - "profile/fixtures/monkeytype.json"
       - "profile/fixtures/oura-trends.json"
       - "profile/templates/github-dashboard*.j2"
       - "profile/templates/ai-agent-showcase*.j2"
       - "profile/templates/weather.md.j2"
       - "profile/templates/steam.md.j2"
+      - "profile/templates/monkeytype.md.j2"
       - "profile/templates/oura-trends.md.j2"
       - "tools/modules/github_dashboard.py"
       - "tools/modules/ai_agent_showcase.py"
       - "tools/modules/weather.py"
       - "tools/modules/steam.py"
+      - "tools/modules/monkeytype.py"
       - "tools/modules/oura_trends.py"
       - "tools/profile_builder/github_dashboard/**"
       - "tools/profile_builder/models.py"
@@ -171,6 +174,16 @@ jobs:
           poetry run python -m tools.modules.steam
           --output profile/artifacts/steam/cache.json
 
+      - name: Refresh Monkeytype snapshot
+        id: monkeytype
+        if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
+        continue-on-error: true
+        env:
+          MONKEYTYPE_APE_KEY: ${{ secrets.MONKEYTYPE_APE_KEY }}
+        run: >-
+          poetry run python -m tools.modules.monkeytype
+          --output profile/artifacts/monkeytype/cache.json
+
       - name: Refresh Oura aggregate trends
         id: oura_trends
         if: github.event_name != 'schedule' || github.event.schedule == '0 6 * * *'
@@ -193,6 +206,7 @@ jobs:
           AI_AGENT_SHOWCASE_OUTCOME: ${{ steps.ai_agent_showcase.outcome }}
           MUSIC_HIGHLIGHT_OUTCOME: ${{ steps.music_highlight.outcome }}
           STEAM_OUTCOME: ${{ steps.steam.outcome }}
+          MONKEYTYPE_OUTCOME: ${{ steps.monkeytype.outcome }}
           OURA_TRENDS_OUTCOME: ${{ steps.oura_trends.outcome }}
         run: |
           poetry run python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
@@ -208,6 +222,7 @@ jobs:
               ("ai-agent-showcase", Path("profile/artifacts/ai-agent-showcase/cache.json"), os.environ["AI_AGENT_SHOWCASE_OUTCOME"]),
               ("music-highlight", Path("profile/artifacts/music-highlight/music.yml"), os.environ["MUSIC_HIGHLIGHT_OUTCOME"]),
               ("steam", Path("profile/artifacts/steam/cache.json"), os.environ["STEAM_OUTCOME"]),
+              ("monkeytype", Path("profile/artifacts/monkeytype/cache.json"), os.environ["MONKEYTYPE_OUTCOME"]),
               ("oura-trends", Path("profile/artifacts/oura-trends/cache.json"), os.environ["OURA_TRENDS_OUTCOME"]),
           ]
 
@@ -230,6 +245,7 @@ jobs:
             "$AI_AGENT_SHOWCASE_OUTCOME" \
             "$MUSIC_HIGHLIGHT_OUTCOME" \
             "$STEAM_OUTCOME" \
+            "$MONKEYTYPE_OUTCOME" \
             "$OURA_TRENDS_OUTCOME"; do
             if [ "$outcome" = "failure" ]; then
               had_failures=true
@@ -251,6 +267,7 @@ jobs:
             profile/artifacts/ai-agent-showcase/
             profile/artifacts/music-highlight/
             profile/artifacts/steam/
+            profile/artifacts/monkeytype/
             profile/artifacts/oura-trends/
             site/ai-agent-showcase.html
 
@@ -287,6 +304,7 @@ jobs:
             profile/artifacts/ai-agent-showcase \
             profile/artifacts/music-highlight \
             profile/artifacts/steam \
+            profile/artifacts/monkeytype \
             profile/artifacts/oura-trends \
             site/ai-agent-showcase.html
 
