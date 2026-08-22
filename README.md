@@ -29,7 +29,10 @@
   <a href="https://medium.com/@szmyty"><img alt="Writing on Medium" src="https://img.shields.io/badge/Medium-Writing-000000?style=flat-square&amp;logo=medium&amp;logoColor=white"></a>
   <a href="https://soundcloud.com/playfunction"><img alt="Music on SoundCloud" src="https://img.shields.io/badge/SoundCloud-Music-FF5500?style=flat-square&amp;logo=soundcloud&amp;logoColor=white"></a>
   <a href="https://www.pinterest.com/playfunctionmusic/ego-hygiene/"><img alt="Visual notes on Pinterest" src="https://img.shields.io/badge/Pinterest-Visual_notes-BD081C?style=flat-square&amp;logo=pinterest&amp;logoColor=white"></a>
-  <a href="https://opensource.org/get-involved"><img alt="Open Source Initiative member" src="https://img.shields.io/badge/OSI-Member-3DA639?style=flat-square&amp;logo=opensourceinitiative&amp;logoColor=white"></a>
+  <a href="https://x.com/play__function"><img alt="X — play__function" src="https://img.shields.io/badge/X-play%5F%5Ffunction-000000?style=flat-square&amp;logo=x&amp;logoColor=white"></a>
+  <a href="https://www.threads.com/@playfunctionmusic"><img alt="Threads — playfunctionmusic" src="https://img.shields.io/badge/Threads-playfunctionmusic-000000?style=flat-square&amp;logo=threads&amp;logoColor=white"></a>
+  <a href="https://www.instagram.com/playfunctionmusic/"><img alt="Instagram — playfunctionmusic" src="https://img.shields.io/badge/Instagram-playfunctionmusic-E4405F?style=flat-square&amp;logo=instagram&amp;logoColor=white"></a>
+  <a href="https://members.opensource.org/user/alan-szmyt/"><img alt="Open Source Initiative member" src="https://img.shields.io/badge/OSI-Member-3DA639?style=flat-square&amp;logo=opensourceinitiative&amp;logoColor=white"></a>
   <a href="https://www.16personalities.com/profiles/366f5f0cddbe1"><img alt="16Personalities — Architect INTJ-T" src="https://img.shields.io/badge/16Personalities-Architect_(INTJ--T)-88619A?style=flat-square"></a>
   <a href="https://monkeytype.com/profile/szmyty"><img alt="Monkeytype — szmyty" src="https://img.shields.io/badge/Monkeytype-szmyty-E2B714?style=flat-square&amp;logo=monkeytype&amp;logoColor=111111"></a>
   <a href="https://steamcommunity.com/profiles/76561198068207368/"><img alt="Steam — szmyty" src="https://img.shields.io/badge/Steam-szmyty-171A21?style=flat-square&amp;logo=steam&amp;logoColor=white"></a>
@@ -83,7 +86,7 @@ These systems meet inside [**Ego Hygiene**](https://github.com/egohygiene), my p
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
   <img
     src="./profile/artifacts/github-dashboard/card-light.svg"
-    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6536 publicly starred repositories, releases, and language distribution for @szmyty."
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6537 publicly starred repositories, releases, and language distribution for @szmyty."
     width="100%"
   >
 </picture>
@@ -108,7 +111,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Overcast, 71 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Overcast, 68 degrees Fahrenheit."
     width="100%"
   >
 </picture>
