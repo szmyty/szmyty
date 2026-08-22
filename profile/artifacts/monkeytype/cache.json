@@ -1,0 +1,35 @@
+{
+  "profile_url": "https://monkeytype.com/profile/szmyty",
+  "completed_tests": 240,
+  "started_tests": 260,
+  "time_typing_seconds": 45210,
+  "personal_bests": [
+    {
+      "duration_seconds": 15,
+      "wpm": 111.1,
+      "accuracy_pct": 98.4,
+      "consistency_pct": 83.2
+    },
+    {
+      "duration_seconds": 30,
+      "wpm": 103.2,
+      "accuracy_pct": 97.8,
+      "consistency_pct": 81.1
+    },
+    {
+      "duration_seconds": 60,
+      "wpm": 96.5,
+      "accuracy_pct": 97.3,
+      "consistency_pct": 79.6
+    },
+    {
+      "duration_seconds": 120,
+      "wpm": 91.4,
+      "accuracy_pct": 97.0,
+      "consistency_pct": 78.0
+    }
+  ],
+  "data_source": "fixture",
+  "data_at": null,
+  "is_synthetic": true
+}

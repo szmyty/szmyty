@@ -452,27 +452,28 @@ def test_working_style_disabled_by_default() -> None:
 
 
 def test_working_style_not_renderable_without_approval() -> None:
-    # The template must produce empty output when enabled is False
-    config = WorkingStyleConfig(
-        enabled=False,
-        personality_type="INFJ-A",
-        personality_url="https://www.16personalities.com/infj-personality",
-        summary="I prefer deep focus and deliberate collaboration.",
+    rendered = render_template(
+        "working-style.md.j2",
+        {"is_public": False, "snapshot": {}},
     )
-    rendered = render_template("working-style.md.j2", {"config": config})
     assert rendered.strip() == ""
 
 
 def test_working_style_renders_when_approved() -> None:
-    config = WorkingStyleConfig(
-        enabled=True,
-        personality_type="INFJ-A",
-        personality_url="https://www.16personalities.com/infj-personality",
-        summary="I prefer deep focus and deliberate collaboration.",
+    profile_url = "https://www.16personalities.com/infj-personality"
+    rendered = render_template(
+        "working-style.md.j2",
+        {
+            "is_public": True,
+            "snapshot": {
+                "profile_url": profile_url,
+                "personality_type": "INFJ-A",
+            },
+        },
     )
-    rendered = render_template("working-style.md.j2", {"config": config})
-    assert "INFJ-A" in rendered
-    assert "deep focus" in rendered
+    assert "Personality & working style" in rendered
+    assert "profile/artifacts/working-style/card-light.svg" in rendered
+    assert profile_url in rendered
 
 
 # ---------------------------------------------------------------------------

@@ -81,7 +81,6 @@ def test_public_dashboard_is_rendered_and_unverified_regions_stay_empty() -> Non
         "medium",
         "education",
         "resume",
-        "working-style",
         "soundcloud",
         "stars",
         "oura-trends",
