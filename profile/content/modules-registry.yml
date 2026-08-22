@@ -187,7 +187,7 @@ modules:
     template: resume.md.j2
 
   - name: working-style
-    enabled: false
+    enabled: true
     description: "Renders Alan-approved 16Personalities working-style content."
     provider_type: manual
     provider_module: tools.modules.working_style
@@ -199,7 +199,11 @@ modules:
       warn_after_seconds: null
     artifact_dir: profile/artifacts/working-style
     artifact_file: working-style.json
-    asset_files: []
+    asset_files:
+      - card-light.svg
+      - card-dark.svg
+      - card-mobile-light.svg
+      - card-mobile-dark.svg
     fixture_file: null
     readme_path: README.md
     region_start_marker: "<!-- START:working-style -->"
