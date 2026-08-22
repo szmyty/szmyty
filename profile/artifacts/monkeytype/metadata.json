@@ -1,0 +1,14 @@
+{
+  "module_name": "monkeytype",
+  "version": "1.0",
+  "generated_at": "2026-08-22T00:00:00+00:00",
+  "state": "static",
+  "data_source": "fixture",
+  "data_at": null,
+  "data_hash": null,
+  "ttl_seconds": null,
+  "is_stale": false,
+  "seconds_until_stale": null,
+  "human_summary": "Monkeytype snapshot (static)",
+  "error": null
+}
