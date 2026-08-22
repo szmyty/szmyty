@@ -30,6 +30,7 @@
   <a href="https://www.pinterest.com/playfunctionmusic/ego-hygiene/"><img alt="Visual notes on Pinterest" src="https://img.shields.io/badge/Pinterest-Visual_notes-BD081C?style=flat-square&amp;logo=pinterest&amp;logoColor=white"></a>
   <a href="https://opensource.org/get-involved"><img alt="Open Source Initiative member" src="https://img.shields.io/badge/OSI-Member-3DA639?style=flat-square&amp;logo=opensourceinitiative&amp;logoColor=white"></a>
   <a href="https://www.16personalities.com/profiles/366f5f0cddbe1"><img alt="16Personalities — Architect INTJ-T" src="https://img.shields.io/badge/16Personalities-Architect_(INTJ--T)-88619A?style=flat-square"></a>
+  <a href="https://monkeytype.com/profile/szmyty"><img alt="Monkeytype — szmyty" src="https://img.shields.io/badge/Monkeytype-szmyty-E2B714?style=flat-square&amp;logo=monkeytype&amp;logoColor=111111"></a>
 </p>
 
 <p>
@@ -133,6 +134,10 @@ These cards are generated first-party from public or explicitly approved API dat
 
 <sub>Public Steam Web API data · availability follows my Steam privacy settings.</sub>
 <!-- END:steam -->
+
+<!-- START:monkeytype -->
+
+<!-- END:monkeytype -->
 
 <!-- START:oura-trends -->
 
