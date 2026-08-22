@@ -162,8 +162,7 @@ def fetch_live(location: str) -> dict:
                 "precipitation,weather_code,wind_speed_10m"
             ),
             "daily": (
-                "temperature_2m_max,temperature_2m_min,"
-                "precipitation_probability_max"
+                "temperature_2m_max,temperature_2m_min,precipitation_probability_max"
             ),
             "temperature_unit": "fahrenheit",
             "wind_speed_unit": "mph",
@@ -352,13 +351,13 @@ def _weather_icon_svg(
     elif icon in {"mostly-clear", "partly-cloudy"}:
         body = (
             '<g transform="translate(-10 -10) scale(.72)">'
-            f'{_sun_icon(palette)}</g>{cloud}'
+            f"{_sun_icon(palette)}</g>{cloud}"
         )
     elif icon in {"overcast", "unknown"}:
         body = cloud
     elif icon == "fog":
         body = (
-            f'{cloud}'
+            f"{cloud}"
             f'<g stroke="{palette["muted"]}" stroke-width="3" '
             'stroke-linecap="round">'
             '<line x1="11" y1="51" x2="53" y2="51"/>'
@@ -380,7 +379,7 @@ def _weather_icon_svg(
             'stroke-linecap="round">'
             '<path d="M21 50v11M16 55.5h10M17.5 52l7 7M24.5 52l-7 7"/>'
             '<path d="M45 50v11M40 55.5h10M41.5 52l7 7M48.5 52l-7 7"/>'
-            '</g>'
+            "</g>"
         )
     elif icon in {"thunderstorm", "hail"}:
         hail = ""
@@ -400,7 +399,7 @@ def _weather_icon_svg(
     return (
         f'<g data-weather-icon="{icon}" aria-hidden="true" '
         f'transform="translate({x:.1f} {y:.1f}) scale({scale:.4f})">'
-        f'{body}</g>'
+        f"{body}</g>"
     )
 
 
@@ -446,7 +445,7 @@ def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
             f'<text x="112" y="80" fill="{palette["text"]}" font-size="15" '
             f'font-weight="650">{condition}</text>'
             f'<text x="112" y="99" fill="{palette["muted"]}" font-size="11">'
-            f'High {high} · Low {low}</text>'
+            f"High {high} · Low {low}</text>"
         )
         panel_markup = (
             f'<rect x="18" y="119" width="324" height="76" rx="12" '
@@ -479,7 +478,7 @@ def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
             f'<text x="120" y="80" fill="{palette["text"]}" font-size="15" '
             f'font-weight="650">{condition}</text>'
             f'<text x="120" y="99" fill="{palette["muted"]}" font-size="11">'
-            f'High {high} · Low {low}</text>'
+            f"High {high} · Low {low}</text>"
         )
         panel_markup = (
             f'<rect x="286" y="104" width="446" height="48" rx="12" '
@@ -489,19 +488,19 @@ def _render_svg(snapshot: dict, *, dark: bool, mobile: bool) -> str:
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" '
         f'height="{height}" viewBox="0 0 {width} {height}" role="img">'
-        f'<title>Weather for {location}</title>'
-        f'<desc>{condition}, {temperature}. {snapshot.get("attribution", "")}</desc>'
+        f"<title>Weather for {location}</title>"
+        f"<desc>{condition}, {temperature}. {snapshot.get('attribution', '')}</desc>"
         f'<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="18" '
         f'fill="{palette["background"]}" stroke="{palette["border"]}"/>'
         f'<g font-family="{font}">'
         f'<text x="28" y="30" fill="{palette["accent"]}" font-size="10" '
         f'font-weight="800" letter-spacing="0.7">LOCAL WEATHER</text>'
         f'<text x="28" y="49" fill="{palette["muted"]}" font-size="11">'
-        f'{location}</text>'
-        f'{summary_markup}{panel_markup}{metric_markup}{icon}'
+        f"{location}</text>"
+        f"{summary_markup}{panel_markup}{metric_markup}{icon}"
         f'<text x="28" y="{height - 15}" fill="{palette["muted"]}" '
         f'font-size="9">Open-Meteo · location from public GitHub profile</text>'
-        '</g></svg>'
+        "</g></svg>"
     )
 
 
