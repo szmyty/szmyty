@@ -240,9 +240,7 @@ def _render_svg(
     raw_bests = snapshot.get("personal_bests")
     bests = raw_bests if isinstance(raw_bests, list) else []
     by_duration = {
-        item.get("duration_seconds"): item
-        for item in bests
-        if isinstance(item, dict)
+        item.get("duration_seconds"): item for item in bests if isinstance(item, dict)
     }
 
     if mobile:
@@ -384,9 +382,7 @@ def build_snapshot(
         data_source=str(snapshot.get("data_source") or "fixture"),
         human_summary=f"Monkeytype snapshot ({state})",
         data_at=(
-            str(snapshot["data_at"])
-            if snapshot.get("data_at") is not None
-            else None
+            str(snapshot["data_at"]) if snapshot.get("data_at") is not None else None
         ),
         error=error_message,
         artifact_dir=output_path.parent,
@@ -397,10 +393,9 @@ def build_snapshot(
 def load_template_context(artifact_path: Path) -> dict[str, Any]:
     """Hide synthetic Monkeytype data from the public README."""
     snapshot = _load_json(artifact_path) or {}
-    is_public = (
-        snapshot.get("is_synthetic") is not True
-        and snapshot.get("data_source") in {"live", "cache"}
-    )
+    is_public = snapshot.get("is_synthetic") is not True and snapshot.get(
+        "data_source"
+    ) in {"live", "cache"}
     return {"snapshot": snapshot, "is_public": is_public}
 
 
@@ -426,8 +421,7 @@ def main(output_path: Path, fixture_path: Path) -> None:
         fixture_path=fixture_path,
     )
     click.echo(
-        f"monkeytype: wrote {output_path} "
-        f"({snapshot.get('data_source', 'unknown')})"
+        f"monkeytype: wrote {output_path} ({snapshot.get('data_source', 'unknown')})"
     )
 
 
