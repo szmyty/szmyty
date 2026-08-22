@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 1171" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
   <title id="title">GitHub Engineering — @szmyty</title>
-  <desc id="desc">Trailing 365-day GitHub engineering telemetry for @szmyty. 3710 public contributions. Current streak: 10 days. 40 active public repositories across 3 owners. 31 stars received. 6536 public repositories starred as a research index. 5 languages detected.</desc>
+  <desc id="desc">Trailing 365-day GitHub engineering telemetry for @szmyty. 3749 public contributions. Current streak: 10 days. 40 active public repositories across 3 owners. 31 stars received. 6536 public repositories starred as a research index. 5 languages detected.</desc>
   <defs>
     <linearGradient id="afqc-bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f0f1f8" />
@@ -29,7 +29,7 @@
 <text x="16" y="82" fill="#6b7280" font-size="10" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">2025-08-23 → 2026-08-22  ·  szmyty, incomprisllc, egohygiene  ·  live</text>
 <rect x="16" y="88" width="388" height="145" rx="18" fill="#f8f9ff" opacity="0.92" stroke="#d1d5db" stroke-width="1" />
 <text x="36" y="120" fill="#111827" font-size="12" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="600" text-anchor="start">Contribution Rhythm</text>
-<text x="36" y="134" fill="#6b7280" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">3,710 contributions  ·  106 active days  ·  Activity attributed to @szmyty</text>
+<text x="36" y="134" fill="#6b7280" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">3,749 contributions  ·  106 active days  ·  Activity attributed to @szmyty</text>
 <text x="36" y="152" fill="#6b7280" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Aug</text>
 <text x="78" y="152" fill="#6b7280" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Oct</text>
 <text x="106" y="152" fill="#6b7280" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Nov</text>
@@ -418,37 +418,37 @@
 <text x="102.9" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Oct</text>
 <rect x="118.3" y="690.0" width="22.8" height="1.0" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="129.7" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Nov</text>
-<rect x="145.1" y="689.9" width="22.8" height="1.1" rx="3" fill="#6d28d9" opacity="0.35" />
+<rect x="145.1" y="690.0" width="22.8" height="1.0" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="156.5" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Dec</text>
 <rect x="171.8" y="691.0" width="22.8" height="0.0" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="183.2" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Jan</text>
 <rect x="198.6" y="691.0" width="22.8" height="0.0" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="210.0" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Feb</text>
-<rect x="225.4" y="685.9" width="22.8" height="5.1" rx="3" fill="#6d28d9" opacity="0.35" />
+<rect x="225.4" y="686.1" width="22.8" height="4.9" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="236.8" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Mar</text>
-<rect x="252.2" y="683.6" width="22.8" height="7.4" rx="3" fill="#6d28d9" opacity="0.35" />
+<rect x="252.2" y="683.9" width="22.8" height="7.1" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="263.5" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Apr</text>
-<rect x="278.9" y="687.6" width="22.8" height="3.4" rx="3" fill="#6d28d9" opacity="0.35" />
+<rect x="278.9" y="687.7" width="22.8" height="3.3" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="290.3" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">May</text>
 <rect x="305.7" y="689.1" width="22.8" height="1.9" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="317.1" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Jun</text>
-<rect x="332.5" y="688.7" width="22.8" height="2.3" rx="3" fill="#6d28d9" opacity="0.35" />
+<rect x="332.5" y="688.8" width="22.8" height="2.2" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="343.8" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Jul</text>
 <rect x="359.2" y="679.0" width="22.8" height="12.0" rx="3" fill="#6d28d9" opacity="0.35" />
 <text x="370.6" y="725.0" fill="#6b7280" font-size="9" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Aug</text>
-<polyline points="49.4,691.0 76.2,691.0 102.9,691.0 129.7,690.0 156.5,689.9 183.2,691.0 210.0,691.0 236.8,685.9 263.5,683.6 290.3,687.6 317.1,689.1 343.8,688.7 370.6,679.0" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<polyline points="49.4,691.0 76.2,691.0 102.9,691.0 129.7,690.0 156.5,690.0 183.2,691.0 210.0,691.0 236.8,686.1 263.5,683.9 290.3,687.7 317.1,689.1 343.8,688.8 370.6,679.0" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 <circle cx="49.4" cy="691.0" r="3" fill="#be185d" />
 <circle cx="76.2" cy="691.0" r="3" fill="#be185d" />
 <circle cx="102.9" cy="691.0" r="3" fill="#be185d" />
 <circle cx="129.7" cy="690.0" r="3" fill="#be185d" />
-<circle cx="156.5" cy="689.9" r="3" fill="#be185d" />
+<circle cx="156.5" cy="690.0" r="3" fill="#be185d" />
 <circle cx="183.2" cy="691.0" r="3" fill="#be185d" />
 <circle cx="210.0" cy="691.0" r="3" fill="#be185d" />
-<circle cx="236.8" cy="685.9" r="3" fill="#be185d" />
-<circle cx="263.5" cy="683.6" r="3" fill="#be185d" />
-<circle cx="290.3" cy="687.6" r="3" fill="#be185d" />
+<circle cx="236.8" cy="686.1" r="3" fill="#be185d" />
+<circle cx="263.5" cy="683.9" r="3" fill="#be185d" />
+<circle cx="290.3" cy="687.7" r="3" fill="#be185d" />
 <circle cx="317.1" cy="689.1" r="3" fill="#be185d" />
-<circle cx="343.8" cy="688.7" r="3" fill="#be185d" />
+<circle cx="343.8" cy="688.8" r="3" fill="#be185d" />
 <circle cx="370.6" cy="679.0" r="3" fill="#be185d" />
 <rect x="16" y="747" width="388" height="125" rx="18" fill="#f8f9ff" opacity="0.92" stroke="#d1d5db" stroke-width="1" />
 <text x="36" y="779" fill="#111827" font-size="12" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="600" text-anchor="start">Open-source Exploration Index</text>
@@ -458,11 +458,11 @@
 <rect x="16" y="249" width="388" height="145" rx="18" fill="#f8f9ff" opacity="0.92" stroke="#d1d5db" stroke-width="1" />
 <text x="36" y="281" fill="#111827" font-size="12" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="600" text-anchor="start">Engineering Activity</text>
 <text x="36" y="293" fill="#6b7280" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">Activity attributed to @szmyty across public GitHub</text>
-<text x="36" y="317" fill="#be185d" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">2,190</text>
+<text x="36" y="317" fill="#be185d" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">2,208</text>
 <text x="36" y="333" fill="#6b7280" font-size="10" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">Commits</text>
-<text x="152" y="317" fill="#111827" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">189</text>
+<text x="152" y="317" fill="#111827" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">191</text>
 <text x="152" y="333" fill="#6b7280" font-size="10" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">Pull requests</text>
-<text x="268" y="317" fill="#111827" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">814</text>
+<text x="268" y="317" fill="#111827" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">833</text>
 <text x="268" y="333" fill="#6b7280" font-size="10" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">Issues</text>
 <text x="36" y="367" fill="#111827" font-size="22" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">510</text>
 <text x="36" y="383" fill="#6b7280" font-size="10" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="normal" text-anchor="start">PR reviews</text>
