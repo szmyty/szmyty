@@ -88,6 +88,13 @@ modules:
     template: steam.md.j2
     artifact_path: profile/artifacts/steam/cache.json
 
+  - name: monkeytype
+    enabled: true
+    region_start_marker: "<!-- START:monkeytype -->"
+    region_end_marker: "<!-- END:monkeytype -->"
+    template: monkeytype.md.j2
+    artifact_path: profile/artifacts/monkeytype/cache.json
+
   - name: stars
     enabled: false
     region_start_marker: "<!-- START:stars -->"

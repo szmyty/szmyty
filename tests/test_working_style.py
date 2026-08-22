@@ -64,7 +64,9 @@ def test_readme_links_badge_and_section_to_public_profile() -> None:
 
 def test_working_style_registry_is_enabled_with_responsive_assets() -> None:
     registry = yaml.safe_load(REGISTRY.read_text(encoding="utf-8"))
-    module = next(item for item in registry["modules"] if item["name"] == "working-style")
+    module = next(
+        item for item in registry["modules"] if item["name"] == "working-style"
+    )
 
     assert module["enabled"] is True
     assert module["provider_type"] == "manual"
