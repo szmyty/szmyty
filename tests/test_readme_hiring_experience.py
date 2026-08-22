@@ -20,6 +20,9 @@ def test_first_viewport_carries_identity_proof_and_action_paths() -> None:
     assert 'href="https://szmyty.github.io/resume/"' in head
     assert 'href="https://github.com/egohygiene"' in head
     assert 'href="https://github.com/szmyty?tab=repositories"' in head
+    assert 'href="https://x.com/play__function"' in head
+    assert 'href="https://www.threads.com/@playfunctionmusic"' in head
+    assert 'href="https://www.instagram.com/playfunctionmusic/"' in head
     assert "Steam-szmyty" in head
     assert "## Selected systems" in head
 
@@ -59,7 +62,10 @@ def test_readme_uses_only_approved_public_destinations() -> None:
         "https://medium.com/@szmyty",
         "https://soundcloud.com/playfunction",
         "https://www.pinterest.com/playfunctionmusic/ego-hygiene/",
-        "https://opensource.org/get-involved",
+        "https://x.com/play__function",
+        "https://www.threads.com/@playfunctionmusic",
+        "https://www.instagram.com/playfunctionmusic/",
+        "https://members.opensource.org/user/alan-szmyt/",
     ]
     for destination in approved:
         assert destination in readme
