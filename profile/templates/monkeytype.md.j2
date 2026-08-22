@@ -1,0 +1,17 @@
+{% if is_public and snapshot %}
+### Typing
+
+<a href="{{ snapshot.profile_url }}" title="Open my Monkeytype profile"><picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/monkeytype/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/monkeytype/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/monkeytype/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/monkeytype/card-light.svg">
+  <img
+    src="./profile/artifacts/monkeytype/card-light.svg"
+    alt="Monkeytype typing statistics for szmyty with completed tests, typing time, and selected time-mode personal bests."
+    width="100%"
+  >
+</picture></a>
+
+<sub>Official Monkeytype API · aggregate typing activity and selected time-mode personal bests · [view profile]({{ snapshot.profile_url }})</sub>
+{% endif %}
