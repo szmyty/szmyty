@@ -576,16 +576,17 @@ records:
   # ─── Working style ────────────────────────────────────────────────────────
 
   - id: working-style-16personalities
-    claim: "16Personalities working-style self-description"
-    evidence_type: none
-    status: needs-user-verification
+    claim: "16Personalities assessment snapshot: Architect (INTJ-T)"
+    evidence_type: url
+    url: "https://www.16personalities.com/profiles/366f5f0cddbe1"
+    status: verified
     sensitivity: public
-    last_reviewed: "2026-08-09"
+    last_reviewed: "2026-08-21"
     notes: >
-      Alan must supply the personality type label, approved public image path,
-      public link, and first-person working-style summary before this content
-      renders.  This is framed as self-described working style, not a clinical
-      credential or objective prediction.
+      Owner-approved in issue #158. Public surface is limited to the type label
+      and five percentage balances from the saved assessment result. Frame as
+      self-described personality-assessment context, not a clinical credential,
+      objective prediction, ability score, or hiring/professional-fit measure.
 
   # ─── STARS career development ─────────────────────────────────────────────
 

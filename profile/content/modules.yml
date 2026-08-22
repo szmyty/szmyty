@@ -68,7 +68,7 @@ modules:
     artifact_path: profile/artifacts/resume/resume.json
 
   - name: working-style
-    enabled: false
+    enabled: true
     region_start_marker: "<!-- START:working-style -->"
     region_end_marker: "<!-- END:working-style -->"
     template: working-style.md.j2

@@ -2,13 +2,16 @@
 # 16Personalities working-style configuration slot.
 #
 # Every field requires explicit Alan approval before the content renders.
-# Set enabled: true only after all fields are supplied and reviewed.
+# Issue #158 records the current owner approval for this public snapshot.
 #
 # Evidence record: working-style-16personalities (profile/content/evidence.yml)
 
-enabled: false
-personality_type: null
-personality_url: null
+enabled: true
+personality_type: "Architect (INTJ-T)"
+personality_url: "https://www.16personalities.com/profiles/366f5f0cddbe1"
 image_path: null
-summary: null
+summary: >
+  A compact snapshot of my 16Personalities assessment. I treat these results as
+  a self-description and conversation aid, not as an objective measure of
+  ability, behavior, or professional fit.
 evidence_id: "working-style-16personalities"

@@ -29,6 +29,7 @@
   <a href="https://soundcloud.com/playfunction"><img alt="Music on SoundCloud" src="https://img.shields.io/badge/SoundCloud-Music-FF5500?style=flat-square&amp;logo=soundcloud&amp;logoColor=white"></a>
   <a href="https://www.pinterest.com/playfunctionmusic/ego-hygiene/"><img alt="Visual notes on Pinterest" src="https://img.shields.io/badge/Pinterest-Visual_notes-BD081C?style=flat-square&amp;logo=pinterest&amp;logoColor=white"></a>
   <a href="https://opensource.org/get-involved"><img alt="Open Source Initiative member" src="https://img.shields.io/badge/OSI-Member-3DA639?style=flat-square&amp;logo=opensourceinitiative&amp;logoColor=white"></a>
+  <a href="https://www.16personalities.com/profiles/366f5f0cddbe1"><img alt="16Personalities — Architect INTJ-T" src="https://img.shields.io/badge/16Personalities-Architect_(INTJ--T)-88619A?style=flat-square"></a>
 </p>
 
 <p>
@@ -139,6 +140,26 @@ These cards are generated first-party from public or explicitly approved API dat
 
 ---
 
+<!-- START:working-style -->
+## Personality & working style
+
+<a href="https://www.16personalities.com/profiles/366f5f0cddbe1" title="Open my 16Personalities profile"><picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/working-style/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/working-style/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/working-style/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/working-style/card-light.svg">
+  <img
+    src="./profile/artifacts/working-style/card-light.svg"
+    alt="16Personalities assessment snapshot: Architect INTJ-T. Introverted 76%, Intuitive 88%, Thinking 51%, Judging 54%, Turbulent 57%."
+    width="100%"
+  >
+</picture></a>
+
+<sub>Self-described personality-assessment context · not a clinical, ability, or professional-fit measure · [view profile](https://www.16personalities.com/profiles/366f5f0cddbe1)</sub>
+<!-- END:working-style -->
+
+---
+
 ## How I work
 
 I use **AI-assisted implementation inside bounded, reviewable workflows**. I own the architecture, constraints, review, validation, and release decisions.
@@ -162,8 +183,6 @@ For professional inquiries, use the [contact route on my portfolio](https://szmy
 <!-- END:education -->
 <!-- START:resume -->
 <!-- END:resume -->
-<!-- START:working-style -->
-<!-- END:working-style -->
 <!-- START:soundcloud -->
 <!-- END:soundcloud -->
 <!-- START:stars -->

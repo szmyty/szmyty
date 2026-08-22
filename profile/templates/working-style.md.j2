@@ -1,8 +1,17 @@
-{% if config.enabled and config.personality_type %}
-### Working Style
+{% if is_public and snapshot %}
+## Personality & working style
 
-{% if config.image_path %}<img src="{{ config.image_path }}" alt="{{ config.personality_type }} personality type" width="80" align="left" style="margin-right:12px">{% endif %}
-{% if config.personality_url %}**[{{ config.personality_type }}]({{ config.personality_url }})**{% else %}**{{ config.personality_type }}**{% endif %} · Self-described working style
+<a href="{{ snapshot.profile_url }}" title="Open my 16Personalities profile"><picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/working-style/card-mobile-dark.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/working-style/card-mobile-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./profile/artifacts/working-style/card-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/working-style/card-light.svg">
+  <img
+    src="./profile/artifacts/working-style/card-light.svg"
+    alt="16Personalities assessment snapshot: Architect INTJ-T. Introverted 76%, Intuitive 88%, Thinking 51%, Judging 54%, Turbulent 57%."
+    width="100%"
+  >
+</picture></a>
 
-{% if config.summary %}{{ config.summary }}{% endif %}
+<sub>Self-described personality-assessment context · not a clinical, ability, or professional-fit measure · [view profile]({{ snapshot.profile_url }})</sub>
 {% endif %}

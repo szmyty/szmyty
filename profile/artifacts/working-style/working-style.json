@@ -1,0 +1,46 @@
+{
+  "personality_name": "Architect",
+  "personality_type": "INTJ-T",
+  "profile_url": "https://www.16personalities.com/profiles/366f5f0cddbe1",
+  "assessment_date": "2025-01-26",
+  "source": "16Personalities",
+  "traits": [
+    {
+      "dimension": "Energy",
+      "left_label": "Introverted",
+      "left_percent": 76,
+      "right_label": "Extraverted",
+      "right_percent": 24
+    },
+    {
+      "dimension": "Mind",
+      "left_label": "Intuitive",
+      "left_percent": 88,
+      "right_label": "Observant",
+      "right_percent": 12
+    },
+    {
+      "dimension": "Nature",
+      "left_label": "Thinking",
+      "left_percent": 51,
+      "right_label": "Feeling",
+      "right_percent": 49
+    },
+    {
+      "dimension": "Tactics",
+      "left_label": "Judging",
+      "left_percent": 54,
+      "right_label": "Prospecting",
+      "right_percent": 46
+    },
+    {
+      "dimension": "Identity",
+      "left_label": "Turbulent",
+      "left_percent": 57,
+      "right_label": "Assertive",
+      "right_percent": 43
+    }
+  ],
+  "data_source": "manual",
+  "is_public": true
+}
