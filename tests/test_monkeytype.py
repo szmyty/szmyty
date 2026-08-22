@@ -119,13 +119,9 @@ def test_render_cards_are_accessible_and_privacy_bounded(tmp_path) -> None:
 
 def test_registry_readme_and_workflow_contract() -> None:
     registry = yaml.safe_load(
-        (REPO_ROOT / "profile/content/modules-registry.yml").read_text(
-            encoding="utf-8"
-        )
+        (REPO_ROOT / "profile/content/modules-registry.yml").read_text(encoding="utf-8")
     )
-    module = next(
-        item for item in registry["modules"] if item["name"] == "monkeytype"
-    )
+    module = next(item for item in registry["modules"] if item["name"] == "monkeytype")
     assert module["enabled"] is True
     assert module["provider_type"] == "api"
     assert module["secret_names"] == ["MONKEYTYPE_APE_KEY"]
