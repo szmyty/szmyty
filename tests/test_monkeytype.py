@@ -25,7 +25,12 @@ def test_fixture_is_synthetic_and_hidden() -> None:
 def test_fetch_live_normalizes_only_bounded_fields(monkeypatch) -> None:
     calls: list[tuple[str, dict[str, str] | None]] = []
 
-    def fake_get(path: str, ape_key: str, *, params=None):
+    def fake_get(
+        path: str,
+        ape_key: str,
+        *,
+        params: dict[str, str] | None = None,
+    ) -> dict:
         assert ape_key == "secret-value"
         calls.append((path, params))
         if path == "/users/stats":
@@ -38,6 +43,7 @@ def test_fetch_live_normalizes_only_bounded_fields(monkeypatch) -> None:
                     "uid": "must-not-leak",
                 }
             }
+        assert params is not None
         duration = int(params["mode2"])
         return {
             "data": [
@@ -71,7 +77,11 @@ def test_fetch_live_normalizes_only_bounded_fields(monkeypatch) -> None:
     assert len(calls) == 5
 
 
-def test_build_snapshot_prefers_real_cache_when_key_is_missing(tmp_path) -> None:
+def test_build_snapshot_prefers_real_cache_when_key_is_missing(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    monkeypatch.delenv("MONKEYTYPE_APE_KEY", raising=False)
     output = tmp_path / "monkeytype" / "cache.json"
     output.parent.mkdir(parents=True)
     cached = monkeytype.load_fixture().copy()
@@ -113,7 +123,9 @@ def test_registry_readme_and_workflow_contract() -> None:
             encoding="utf-8"
         )
     )
-    module = next(item for item in registry["modules"] if item["name"] == "monkeytype")
+    module = next(
+        item for item in registry["modules"] if item["name"] == "monkeytype"
+    )
     assert module["enabled"] is True
     assert module["provider_type"] == "api"
     assert module["secret_names"] == ["MONKEYTYPE_APE_KEY"]
