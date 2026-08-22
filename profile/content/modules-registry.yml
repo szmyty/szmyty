@@ -260,6 +260,32 @@ modules:
     region_end_marker: "<!-- END:steam -->"
     template: steam.md.j2
 
+  - name: monkeytype
+    enabled: true
+    description: "Renders aggregate Monkeytype typing activity and selected time-mode personal bests."
+    provider_type: api
+    provider_module: tools.modules.monkeytype
+    secret_names:
+      - MONKEYTYPE_APE_KEY
+    sensitivity: public
+    freshness_policy:
+      cadence: daily
+      ttl_seconds: 86400
+      warn_after_seconds: 172800
+    artifact_dir: profile/artifacts/monkeytype
+    artifact_file: cache.json
+    asset_files:
+      - metadata.json
+      - card-light.svg
+      - card-dark.svg
+      - card-mobile-light.svg
+      - card-mobile-dark.svg
+    fixture_file: profile/fixtures/monkeytype.json
+    readme_path: README.md
+    region_start_marker: "<!-- START:monkeytype -->"
+    region_end_marker: "<!-- END:monkeytype -->"
+    template: monkeytype.md.j2
+
   - name: stars
     enabled: false
     description: "STARS career-development slot — non-public by default."
