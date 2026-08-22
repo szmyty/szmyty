@@ -17,8 +17,10 @@ def test_first_viewport_carries_identity_proof_and_action_paths() -> None:
         "systems, and AI-assisted workflows."
     ) in head
     assert 'href="https://szmyty.vercel.app"' in head
+    assert 'href="https://szmyty.github.io/resume/"' in head
     assert 'href="https://github.com/egohygiene"' in head
     assert 'href="https://github.com/szmyty?tab=repositories"' in head
+    assert "Steam-szmyty" in head
     assert "## Selected systems" in head
 
     for project in ["Reflector", "Renderflow", "Relay", "Optiflow"]:
@@ -46,6 +48,7 @@ def test_readme_uses_only_approved_public_destinations() -> None:
 
     approved = [
         "https://szmyty.vercel.app",
+        "https://szmyty.github.io/resume/",
         "https://github.com/egohygiene",
         "https://github.com/szmyty?tab=repositories",
         "https://github.com/egohygiene/reflector",

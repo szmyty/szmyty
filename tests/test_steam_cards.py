@@ -133,10 +133,10 @@ def test_svg_contains_avatar_last_online_and_steam_native_metrics(tmp_path) -> N
     assert "lastlogoff" not in svg.casefold()
 
 
-def test_template_links_badge_and_card_to_profile_url() -> None:
+def test_template_links_card_to_profile_without_duplicate_badge() -> None:
     template = (steam.REPO_ROOT / "profile" / "templates" / "steam.md.j2").read_text(
         encoding="utf-8"
     )
 
-    assert "Steam-szmyty" in template
-    assert template.count('href="{{ snapshot.profile_url }}"') >= 2
+    assert "Steam-szmyty" not in template
+    assert template.count('href="{{ snapshot.profile_url }}"') == 1
