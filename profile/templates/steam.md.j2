@@ -1,8 +1,6 @@
 {% if is_public and snapshot and snapshot.display_name %}
 ### Gaming
 
-{% if snapshot.profile_url %}<a href="{{ snapshot.profile_url }}" title="Open my Steam profile"><img src="https://img.shields.io/badge/Steam-szmyty-171A21?style=flat-square&logo=steam&logoColor=white" alt="Steam | szmyty"></a>{% endif %}
-
 {% if snapshot.profile_url %}<a href="{{ snapshot.profile_url }}" title="Open my Steam profile">{% endif %}<picture>
   <source media="(prefers-color-scheme: dark) and (max-width: 767px)" srcset="./profile/artifacts/steam/card-mobile-dark.svg">
   <source media="(prefers-color-scheme: light) and (max-width: 767px)" srcset="./profile/artifacts/steam/card-mobile-light.svg">
