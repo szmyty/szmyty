@@ -111,7 +111,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Overcast, 70 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Overcast, 68 degrees Fahrenheit."
     width="100%"
   >
 </picture>
