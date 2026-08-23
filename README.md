@@ -91,7 +91,7 @@ These systems meet inside [**Ego Hygiene**](https://github.com/egohygiene), my p
   >
 </picture>
 
-_First-party public GitHub data · trailing 365 days · refreshed 2026-08-22. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
+_First-party public GitHub data · trailing 365 days · refreshed 2026-08-23. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
 <!-- END:github-dashboard -->
 
 ---
