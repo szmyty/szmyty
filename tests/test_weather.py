@@ -126,12 +126,62 @@ def test_synthetic_weather_is_hidden_from_readme(tmp_path) -> None:
     assert context["is_public"] is False
 
 
+def test_wmo_codes_map_to_distinct_weather_icon_families() -> None:
+    expected = {
+        0: "clear",
+        1: "mostly-clear",
+        2: "partly-cloudy",
+        3: "overcast",
+        45: "fog",
+        51: "drizzle",
+        61: "rain",
+        71: "snow",
+        80: "showers",
+        95: "thunderstorm",
+        96: "hail",
+    }
+
+    for code, icon_name in expected.items():
+        assert weather._weather_icon_name(code) == icon_name
+
+    assert weather._weather_icon_name(None) == "unknown"
+    assert weather._weather_icon_name(999) == "unknown"
+
+
+def test_rendered_svg_is_compact_and_uses_condition_icon(tmp_path) -> None:
+    snapshot = weather.load_fixture().copy()
+    snapshot["weather_code"] = 2
+    weather.render_cards(snapshot, tmp_path)
+
+    desktop = (tmp_path / "card-light.svg").read_text(encoding="utf-8")
+    mobile = (tmp_path / "card-mobile-light.svg").read_text(encoding="utf-8")
+
+    assert 'width="760" height="184"' in desktop
+    assert 'width="360" height="236"' in mobile
+    assert 'data-weather-icon="partly-cloudy"' in desktop
+    assert 'data-weather-icon="partly-cloudy"' in mobile
+    assert 'font-size="42"' not in desktop
+    assert 'font-size="18" font-weight="650">Partly cloudy' not in desktop
+
+
+def test_clear_and_overcast_icons_render_different_visuals() -> None:
+    palette = weather._palette(False)
+    clear = weather._weather_icon_svg(0, x=0, y=0, size=64, palette=palette)
+    overcast = weather._weather_icon_svg(3, x=0, y=0, size=64, palette=palette)
+
+    assert 'data-weather-icon="clear"' in clear
+    assert 'data-weather-icon="overcast"' in overcast
+    assert "<circle" in clear
+    assert "<path" in overcast
+    assert clear != overcast
+
+
 def test_rendered_svg_has_accessible_context_without_coordinates(tmp_path) -> None:
     snapshot = weather.load_fixture()
     weather.render_cards(snapshot, tmp_path)
     svg = (tmp_path / "card-light.svg").read_text(encoding="utf-8")
 
     assert "<title>" in svg
-    assert "Weather data: Open-Meteo" in svg
+    assert "Open-Meteo" in svg
     assert "latitude" not in svg
     assert "longitude" not in svg
