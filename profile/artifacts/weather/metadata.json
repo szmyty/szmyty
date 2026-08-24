@@ -1,14 +1,14 @@
 {
   "module_name": "weather",
   "version": "1.0",
-  "generated_at": "2026-08-24T00:30:54.637491+00:00",
-  "state": "fresh",
-  "data_source": "live",
+  "generated_at": "2026-08-24T03:37:32.545687+00:00",
+  "state": "cached",
+  "data_source": "cache",
   "data_at": "2026-08-24T00:30:54.636448+00:00",
   "data_hash": null,
   "ttl_seconds": null,
   "is_stale": false,
   "seconds_until_stale": null,
-  "human_summary": "Weather snapshot (fresh)",
-  "error": null
+  "human_summary": "Weather snapshot (cached)",
+  "error": "provider request failed: network unavailable"
 }
