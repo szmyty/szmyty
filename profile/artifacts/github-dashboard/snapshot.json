@@ -17,16 +17,9 @@
     }
   ],
   "trailing_window_days": 365,
-  "window_start": "2025-08-24",
-  "window_end": "2026-08-23",
+  "window_start": "2025-08-25",
+  "window_end": "2026-08-24",
   "contribution_days": [
-    {
-      "date": "2025-08-24",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 0,
-      "is_future": false
-    },
     {
       "date": "2025-08-25",
       "contribution_count": 0,
@@ -1500,7 +1493,7 @@
     {
       "date": "2026-03-23",
       "contribution_count": 52,
-      "level": 2,
+      "level": 1,
       "weekday": 1,
       "is_future": false
     },
@@ -2570,9 +2563,16 @@
     },
     {
       "date": "2026-08-23",
-      "contribution_count": 37,
-      "level": 1,
+      "contribution_count": 211,
+      "level": 4,
       "weekday": 0,
+      "is_future": false
+    },
+    {
+      "date": "2026-08-24",
+      "contribution_count": 0,
+      "level": 0,
+      "weekday": 1,
       "is_future": false
     }
   ],
@@ -2640,14 +2640,14 @@
     {
       "year": 2026,
       "month": 8,
-      "count": 1436
+      "count": 1610
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 3844,
-    "public_commit_contributions": 2258,
-    "public_pull_request_contributions": 199,
-    "public_issue_contributions": 870,
+    "total_public_contributions": 4018,
+    "public_commit_contributions": 2423,
+    "public_pull_request_contributions": 206,
+    "public_issue_contributions": 872,
     "public_pull_request_review_contributions": 510
   },
   "streaks": {
@@ -2655,17 +2655,17 @@
     "longest_days": 16
   },
   "most_active_month": "2026-08",
-  "average_contributions_per_active_day": 35.93,
+  "average_contributions_per_active_day": 37.55,
   "active_contribution_days": 107,
   "repositories_contributed_to": 0,
   "repository_inventory": {
-    "owned_public_non_archived_repositories": 40,
-    "total_public_repositories": 40,
+    "owned_public_non_archived_repositories": 41,
+    "total_public_repositories": 41,
     "archived_repositories": 0,
     "repositories_per_owner": {
       "szmyty": 11,
       "incomprisllc": 3,
-      "egohygiene": 26
+      "egohygiene": 27
     },
     "stars_received": 31,
     "forks_received": 7,
@@ -2681,17 +2681,17 @@
     {
       "name": "JavaScript",
       "percentage": 17,
-      "bytes": 4954809
+      "bytes": 4963515
     },
     {
       "name": "Python",
       "percentage": 16,
-      "bytes": 4747329
+      "bytes": 4839609
     },
     {
       "name": "HTML",
       "percentage": 16,
-      "bytes": 4614028
+      "bytes": 4601548
     },
     {
       "name": "Shell",
@@ -2701,7 +2701,7 @@
     {
       "name": "Other",
       "percentage": 16,
-      "bytes": 4744292
+      "bytes": 4767777
     }
   ],
   "radar_dimensions": [
@@ -2740,7 +2740,7 @@
     {
       "key": "maintain",
       "label": "Maintain",
-      "score": 94,
+      "score": 95,
       "source_fields": [
         "owned_public_non_archived_repositories"
       ],
@@ -2772,7 +2772,7 @@
   "featured_repositories": [],
   "knowledge_categories": [],
   "starred_repository_totals": {
-    "total_starred": 6537,
+    "total_starred": 6543,
     "crawl_complete": false,
     "crawl_pages": 0
   },
@@ -2781,14 +2781,14 @@
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-23T17:33:41.648186+00:00",
-    "generation_timestamp": "2026-08-23T17:33:41.648186+00:00",
+    "data_timestamp": "2026-08-24T06:13:41.308221+00:00",
+    "generation_timestamp": "2026-08-24T06:13:41.308221+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-24",
-    "window_end": "2026-08-23",
+    "window_start": "2025-08-25",
+    "window_end": "2026-08-24",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
     "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",
