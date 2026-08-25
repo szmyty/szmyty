@@ -17,16 +17,9 @@
     }
   ],
   "trailing_window_days": 365,
-  "window_start": "2025-08-25",
-  "window_end": "2026-08-24",
+  "window_start": "2025-08-26",
+  "window_end": "2026-08-25",
   "contribution_days": [
-    {
-      "date": "2025-08-25",
-      "contribution_count": 0,
-      "level": 0,
-      "weekday": 1,
-      "is_future": false
-    },
     {
       "date": "2025-08-26",
       "contribution_count": 0,
@@ -2570,9 +2563,16 @@
     },
     {
       "date": "2026-08-24",
+      "contribution_count": 70,
+      "level": 2,
+      "weekday": 1,
+      "is_future": false
+    },
+    {
+      "date": "2026-08-25",
       "contribution_count": 0,
       "level": 0,
-      "weekday": 1,
+      "weekday": 2,
       "is_future": false
     }
   ],
@@ -2640,23 +2640,23 @@
     {
       "year": 2026,
       "month": 8,
-      "count": 1610
+      "count": 1680
     }
   ],
   "contribution_breakdown": {
-    "total_public_contributions": 4018,
-    "public_commit_contributions": 2423,
-    "public_pull_request_contributions": 206,
-    "public_issue_contributions": 872,
+    "total_public_contributions": 4088,
+    "public_commit_contributions": 2459,
+    "public_pull_request_contributions": 237,
+    "public_issue_contributions": 875,
     "public_pull_request_review_contributions": 510
   },
   "streaks": {
-    "current_days": 11,
+    "current_days": 12,
     "longest_days": 16
   },
   "most_active_month": "2026-08",
-  "average_contributions_per_active_day": 37.55,
-  "active_contribution_days": 107,
+  "average_contributions_per_active_day": 37.85,
+  "active_contribution_days": 108,
   "repositories_contributed_to": 0,
   "repository_inventory": {
     "owned_public_non_archived_repositories": 41,
@@ -2680,8 +2680,8 @@
     },
     {
       "name": "JavaScript",
-      "percentage": 17,
-      "bytes": 4963515
+      "percentage": 18,
+      "bytes": 5317569
     },
     {
       "name": "Python",
@@ -2690,8 +2690,8 @@
     },
     {
       "name": "HTML",
-      "percentage": 16,
-      "bytes": 4601548
+      "percentage": 15,
+      "bytes": 4602553
     },
     {
       "name": "Shell",
@@ -2701,7 +2701,7 @@
     {
       "name": "Other",
       "percentage": 16,
-      "bytes": 4767777
+      "bytes": 4885159
     }
   ],
   "radar_dimensions": [
@@ -2772,7 +2772,7 @@
   "featured_repositories": [],
   "knowledge_categories": [],
   "starred_repository_totals": {
-    "total_starred": 6543,
+    "total_starred": 6544,
     "crawl_complete": false,
     "crawl_pages": 0
   },
@@ -2781,14 +2781,14 @@
   "status": {
     "data_source": "live",
     "source_state": "fresh",
-    "data_timestamp": "2026-08-24T06:13:41.308221+00:00",
-    "generation_timestamp": "2026-08-24T06:13:41.308221+00:00",
+    "data_timestamp": "2026-08-25T06:10:29.461021+00:00",
+    "generation_timestamp": "2026-08-25T06:10:29.461021+00:00",
     "is_stale": false
   },
   "methodology": {
     "trailing_window_days": 365,
-    "window_start": "2025-08-25",
-    "window_end": "2026-08-24",
+    "window_start": "2025-08-26",
+    "window_end": "2026-08-25",
     "contribution_calendar_source": "GitHub GraphQL contributionsCollection.contributionCalendar for @szmyty, trailing 365-day window.",
     "contribution_type_source": "GitHub GraphQL totalCommitContributions, totalPullRequestContributions, totalIssueContributions, and totalPullRequestReviewContributions for the same window.",
     "repository_inventory_source": "GitHub REST /users/{owner}/repos and /orgs/{org}/repos for all configured owners, excluding private and forked repositories; deduplicated by canonical full_name.",
