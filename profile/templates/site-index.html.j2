@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ profile.positioning.claim }}" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="{{ site.canonical_url }}" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ profile.positioning.claim }}" />
+    <meta property="og:url" content="{{ site.canonical_url }}" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    <meta name="twitter:description" content="{{ profile.positioning.claim }}" />
+
+    <script type="application/ld+json">
+{{ structured_data | tojson(indent=2) }}
+    </script>
+
+    <title>{{ page_title }}</title>
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/print.css" media="print" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header role="banner">
+      <nav aria-label="Site navigation">
+        <a href="#hero" aria-label="Home">{{ profile.name.claim }}</a>
+        <ul>
+          <li><a href="#systems">Systems</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#lab">Public lab</a></li>
+          <li><a href="#creative">Creative</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button
+          id="theme-toggle"
+          aria-label="Toggle colour theme"
+          aria-pressed="false"
+          type="button"
+        >
+          <span aria-hidden="true">◐</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Software engineering · Public work</p>
+        <h1 id="hero-heading">{{ profile.name.claim }}</h1>
+        <p class="hero-subtitle">{{ profile.positioning.claim }}.</p>
+        <p class="hero-summary">{{ profile.lanes.claim }}.</p>
+        <div class="cta-group">
+          <a class="cta-primary" href="{{ profile.contact.url }}" rel="noopener">
+            Contact and portfolio
+          </a>
+          <a class="cta-secondary" href="{{ profile.github.url }}" rel="noopener">
+            GitHub profile
+          </a>
+        </div>
+        <p class="evidence-note">
+          This companion is generated from reviewed, public evidence in the
+          profile repository.
+        </p>
+      </section>
+
+      <section id="systems" aria-labelledby="systems-heading">
+        <p class="eyebrow">Current proof set</p>
+        <h2 id="systems-heading">Selected systems</h2>
+        <p class="section-intro">
+          Public repositories selected for a focused view of platform,
+          local-first, and AI-assisted engineering work.
+        </p>
+        <ul class="project-cards" role="list">
+{% for system in systems %}
+          <li class="project-card" data-evidence-id="{{ system.evidence_id }}">
+            <h3><a href="{{ system.url }}" rel="noopener">{{ system.name }}</a></h3>
+            <p>{{ system.description }}.</p>
+            <a class="project-link" href="{{ system.url }}" rel="noopener">
+              View public repository <span aria-hidden="true">→</span>
+            </a>
+          </li>
+{% endfor %}
+        </ul>
+      </section>
+
+      <section id="approach" aria-labelledby="approach-heading">
+        <p class="eyebrow">Responsible AI-assisted work</p>
+        <h2 id="approach-heading">How I work</h2>
+        <p class="feature-statement">{{ profile.ai_disclosure.claim }}.</p>
+      </section>
+
+      <section id="lab" aria-labelledby="lab-heading">
+        <p class="eyebrow">Open engineering</p>
+        <h2 id="lab-heading">Ego Hygiene</h2>
+        <div class="lab-panel">
+          <p>{{ profile.public_lab.claim }}.</p>
+          <p>{{ profile.lanes.claim }}.</p>
+          <a href="{{ profile.public_lab.url }}" rel="noopener">
+            Explore the public lab <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="creative" aria-labelledby="creative-heading">
+        <p class="eyebrow">Creative practice</p>
+        <h2 id="creative-heading">Music</h2>
+        <p>
+          <a href="{{ profile.creative.url }}" rel="noopener">
+            Listen on the verified SoundCloud profile
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading">
+        <p class="eyebrow">Get in touch</p>
+        <h2 id="contact-heading">Contact</h2>
+        <p>
+          For professional inquiries, use the
+          <a href="{{ profile.contact.url }}" rel="noopener">contact route on my portfolio</a>.
+          For project-specific questions, open an issue in the relevant public
+          repository.
+        </p>
+        <p class="source-links">
+          <a href="{{ site.source_url }}" rel="noopener">View this site's source</a>
+          <span aria-hidden="true">·</span>
+          <a href="{{ license_url }}" rel="noopener">MIT License</a>
+        </p>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <p>{{ profile.name.claim }} · Evidence-backed profile companion.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -6,6 +6,12 @@ on:
       - master
     paths:
       - "site/**"
+      - "profile/content/evidence.yml"
+      - "profile/content/site.yml"
+      - "profile/schemas/site.json"
+      - "profile/templates/site-index.html.j2"
+      - "tools/modules/site_companion.py"
+      - "tests/test_site_companion.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -54,7 +60,9 @@ jobs:
         run: poetry install --with test --no-interaction --no-root
 
       - name: Validate Pages inputs
-        run: poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
+        run: |
+          poetry run python -m tools.modules.site_companion --check
+          poetry run python -m pytest tests/test_site_companion.py tests/test_workflows.py
 
   deploy:
     runs-on: ubuntu-latest

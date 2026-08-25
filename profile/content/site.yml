@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../schemas/site.json
+
+schema_version: "1"
+
+site:
+  canonical_url: "https://szmyty.github.io/szmyty/"
+  source_url: "https://github.com/szmyty/szmyty"
+  default_branch: "master"
+
+evidence:
+  name: "identity-full-name"
+  role: "identity-role-software-engineer"
+  positioning: "profile-v1-positioning"
+  lanes: "profile-v1-public-lanes"
+  ai_disclosure: "profile-ai-disclosure"
+  public_lab: "ego-hygiene-public-lab"
+  github: "identity-github-username"
+  contact: "contact-portfolio"
+  creative: "creative-soundcloud"
+
+selected_systems:
+  - name: "Reflector"
+    evidence_id: "repo-reflector"
+  - name: "Renderflow"
+    evidence_id: "repo-renderflow"
+  - name: "Relay"
+    evidence_id: "repo-relay"
+  - name: "Optiflow"
+    evidence_id: "repo-optiflow"
