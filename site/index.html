@@ -3,46 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Alan Szmyt — Staff-level software architect, systems thinker, and creative technologist building reliable, privacy-respecting systems." />
+    <meta name="description" content="Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://szmyty.github.io/szmyty/" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Alan Szmyt — Software Architect" />
-    <meta property="og:description" content="Staff-level software architect, systems thinker, and creative technologist." />
+    <meta property="og:title" content="Alan Szmyt — Software Engineer" />
+    <meta property="og:description" content="Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows" />
     <meta property="og:url" content="https://szmyty.github.io/szmyty/" />
-    <meta property="og:image" content="https://szmyty.github.io/szmyty/assets/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Alan Szmyt — Software Architect" />
-    <meta name="twitter:description" content="Staff-level software architect, systems thinker, and creative technologist." />
-    <meta name="twitter:image" content="https://szmyty.github.io/szmyty/assets/og-image.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Alan Szmyt — Software Engineer" />
+    <meta name="twitter:description" content="Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows" />
 
-    <!-- Structured data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Alan Szmyt",
-      "url": "https://szmyty.github.io/szmyty/",
-      "sameAs": [
-        "https://github.com/szmyty"
-      ],
-      "jobTitle": "Software Architect",
-      "description": "Staff-level software architect, systems thinker, and creative technologist building reliable, privacy-respecting systems."
-    }
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "description": "Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows",
+  "jobTitle": "Software engineer",
+  "name": "Alan Szmyt",
+  "sameAs": [
+    "https://github.com/szmyty",
+    "https://github.com/egohygiene",
+    "https://soundcloud.com/playfunction"
+  ],
+  "url": "https://szmyty.github.io/szmyty/"
+}
     </script>
 
-    <title>Alan Szmyt — Software Architect</title>
+    <title>Alan Szmyt — Software Engineer</title>
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="manifest" href="manifest.webmanifest" />
-
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
@@ -57,10 +51,9 @@
       <nav aria-label="Site navigation">
         <a href="#hero" aria-label="Home">Alan Szmyt</a>
         <ul>
-          <li><a href="#impact">Impact</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#architecture">Architecture</a></li>
-          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#systems">Systems</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#lab">Public lab</a></li>
           <li><a href="#creative">Creative</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -76,218 +69,117 @@
     </header>
 
     <main id="main-content">
-
-      <!-- 1. Hero and positioning -->
       <section id="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Software engineering · Public work</p>
         <h1 id="hero-heading">Alan Szmyt</h1>
-        <p class="hero-subtitle">Staff-level software architect, systems thinker, and creative technologist.</p>
-        <p class="hero-summary">
-          I build reliable, privacy-respecting systems—from distributed platform
-          infrastructure to offline-first applications—and translate complex
-          engineering decisions into clear, auditable artefacts.
+        <p class="hero-subtitle">Software engineer building reliable developer platforms, local-first systems, and AI-assisted workflows.</p>
+        <p class="hero-summary">Platform engineering, developer experience, research software, and creative technology.</p>
+        <div class="cta-group">
+          <a class="cta-primary" href="https://szmyty.vercel.app" rel="noopener">
+            Contact and portfolio
+          </a>
+          <a class="cta-secondary" href="https://github.com/szmyty" rel="noopener">
+            GitHub profile
+          </a>
+        </div>
+        <p class="evidence-note">
+          This companion is generated from reviewed, public evidence in the
+          profile repository.
         </p>
-        <a class="cta-primary" href="https://github.com/szmyty" rel="noopener">
-          View on GitHub
-        </a>
       </section>
 
-      <!-- 2. Selected impact -->
-      <section id="impact" aria-labelledby="impact-heading">
-        <h2 id="impact-heading">Selected Impact</h2>
-        <ul class="impact-list" role="list">
-          <li>
-            <strong>Offline-first LLM tooling</strong> —
-            <a href="https://github.com/szmyty/soliloquy" rel="noopener">soliloquy</a>:
-            Docker Compose + Python pipeline for local language-model workflows.
-          </li>
-          <li>
-            <strong>Cross-platform DX tooling</strong> —
-            <a href="https://github.com/szmyty/universal" rel="noopener">universal</a>:
-            composable CI/CD configuration adopted across personal and organisational projects.
-          </li>
-          <li>
-            <strong>Open-source linting contribution</strong> —
-            egolint: shipped and merged shared quality tooling for a cross-platform platform ecosystem.
-          </li>
-          <li>
-            <strong>Platform architecture</strong> —
-            cross-platform application and ecosystem centrepiece demonstrating multi-tier architecture design.
-          </li>
-        </ul>
-      </section>
-
-      <!-- 3. Flagship system case studies -->
-      <section id="projects" aria-labelledby="projects-heading">
-        <h2 id="projects-heading">Flagship Projects</h2>
+      <section id="systems" aria-labelledby="systems-heading">
+        <p class="eyebrow">Current proof set</p>
+        <h2 id="systems-heading">Selected systems</h2>
+        <p class="section-intro">
+          Public repositories selected for a focused view of platform,
+          local-first, and AI-assisted engineering work.
+        </p>
         <ul class="project-cards" role="list">
-          <li class="project-card">
-            <h3>
-              <a href="https://github.com/szmyty/soliloquy" rel="noopener">soliloquy</a>
-            </h3>
-            <p>Offline-first LLM tooling. Docker Compose + Python. Reproducible and documented.</p>
-            <p class="project-tags">
-              <span class="tag">Python</span>
-              <span class="tag">Docker</span>
-              <span class="tag">LLM</span>
-            </p>
-          </li>
-          <li class="project-card">
-            <h3>
-              <a href="https://github.com/szmyty/universal" rel="noopener">universal</a>
-            </h3>
-            <p>DX tooling and CI/CD. Composable design with broad applicability across repositories.</p>
-            <p class="project-tags">
-              <span class="tag">CI/CD</span>
-              <span class="tag">DX</span>
-              <span class="tag">GitHub Actions</span>
-            </p>
-          </li>
-          <li class="project-card">
-            <h3>
-              <a href="https://github.com/szmyty/OpenAI-Retro-SuperMarioWorld-SNES" rel="noopener">OpenAI Retro — Super Mario World</a>
-            </h3>
-            <p>AI/ML reinforcement learning experiment. Documented and reproducible.</p>
-            <p class="project-tags">
-              <span class="tag">Python</span>
-              <span class="tag">Reinforcement Learning</span>
-              <span class="tag">OpenAI Gym</span>
-            </p>
-          </li>
-          <li class="project-card">
-            <h3>szmyty/szmyty</h3>
-            <p>Evidence-first profile; schema-validated catalog; meta-engineering and architecture storytelling.</p>
-            <p class="project-tags">
-              <span class="tag">Architecture</span>
-              <span class="tag">Python</span>
-              <span class="tag">Schema</span>
-            </p>
-          </li>
-        </ul>
-      </section>
 
-      <!-- 4. Ego Hygiene architecture -->
-      <section id="architecture" aria-labelledby="arch-heading">
-        <h2 id="arch-heading">Ego Hygiene Architecture</h2>
-        <p>
-          The Ego Hygiene platform is a privacy-first, offline-capable personal
-          data ecosystem. The diagram below shows the principal layers. Each layer
-          is also described in the list that follows.
-        </p>
-
-        <!--
-          SVG architecture diagram placeholder.
-          Replace with a build-time-generated accessible SVG from profile/content/.
-          Requirements: ARIA roles, keyboard focus on interactive nodes,
-          text alternatives for every node.
-        -->
-        <figure>
-          <svg
-            id="arch-diagram"
-            role="img"
-            aria-labelledby="arch-diagram-title arch-diagram-desc"
-            viewBox="0 0 600 300"
-            width="600"
-            height="300"
-            focusable="false"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title id="arch-diagram-title">Ego Hygiene architecture overview</title>
-            <desc id="arch-diagram-desc">
-              Four horizontal layers: UI (top), API gateway, Core services, and
-              Local storage (bottom). Arrows indicate data flow between layers.
-              All data stays on-device unless the user explicitly exports it.
-            </desc>
-            <!-- Placeholder rectangles — replace with final SVG at build time -->
-            <rect x="10" y="10" width="580" height="60" rx="6" class="arch-layer arch-layer--ui" />
-            <text x="300" y="46" text-anchor="middle" class="arch-label">UI Layer (React Native / Tauri)</text>
-            <rect x="10" y="90" width="580" height="60" rx="6" class="arch-layer arch-layer--api" />
-            <text x="300" y="126" text-anchor="middle" class="arch-label">API Gateway (local REST / IPC)</text>
-            <rect x="10" y="170" width="580" height="60" rx="6" class="arch-layer arch-layer--core" />
-            <text x="300" y="206" text-anchor="middle" class="arch-label">Core Services (Rust / Python)</text>
-            <rect x="10" y="250" width="580" height="40" rx="6" class="arch-layer arch-layer--storage" />
-            <text x="300" y="276" text-anchor="middle" class="arch-label">Local Storage (SQLite / file system)</text>
-          </svg>
-          <figcaption>
-            Ego Hygiene architecture — four-layer on-device stack. All data
-            remains local unless explicitly exported by the user.
-          </figcaption>
-        </figure>
-
-        <!-- Text alternative for the diagram (always visible) -->
-        <details>
-          <summary>Architecture layer descriptions</summary>
-          <ol>
-            <li><strong>UI Layer</strong> — React Native (mobile) and Tauri (desktop) front-ends sharing a common component library.</li>
-            <li><strong>API Gateway</strong> — Local REST or IPC bridge; no external calls in default configuration.</li>
-            <li><strong>Core Services</strong> — Rust for performance-critical paths; Python for data processing and ML inference.</li>
-            <li><strong>Local Storage</strong> — SQLite for structured data; file system for media and artefacts. No cloud sync by default.</li>
-          </ol>
-        </details>
-      </section>
-
-      <!-- 5. Capabilities and experience -->
-      <section id="capabilities" aria-labelledby="capabilities-heading">
-        <h2 id="capabilities-heading">Capabilities</h2>
-        <ul class="capability-list" role="list">
-          <li>
-            <h3>Systems Architecture</h3>
-            <p>Distributed systems, platform design, service boundaries, and observable infrastructure.</p>
-          </li>
-          <li>
-            <h3>Developer Experience</h3>
-            <p>CI/CD pipelines, reproducible environments, shared tooling, and quality automation.</p>
-          </li>
-          <li>
-            <h3>Privacy-First Engineering</h3>
-            <p>On-device data, schema-validated inputs, public-data boundaries, and audit trails.</p>
-          </li>
-          <li>
-            <h3>AI / ML Integration</h3>
-            <p>Local language model pipelines, reinforcement learning experiments, and production-safe inference.</p>
-          </li>
-          <li>
-            <h3>Open Source</h3>
-            <p>Shipped contributions, merged PRs, and publicly documented architectural decisions.</p>
-          </li>
-        </ul>
-      </section>
-
-      <!-- 6. Creative technology / music -->
-      <section id="creative" aria-labelledby="creative-heading">
-        <h2 id="creative-heading">Creative Technology</h2>
-        <p>
-          Music production and sound design are a long-standing creative practice,
-          exploring the intersection of technology and art.
-          <a href="https://soundcloud.com/szmyty" rel="noopener" aria-label="Alan Szmyt on SoundCloud">
-            Listen on SoundCloud
-          </a>.
-        </p>
-      </section>
-
-      <!-- 7. Contact -->
-      <section id="contact" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">Contact</h2>
-        <ul class="contact-list" role="list">
-          <li>
-            <a href="https://github.com/szmyty" rel="noopener">
-              GitHub — github.com/szmyty
+          <li class="project-card" data-evidence-id="repo-reflector">
+            <h3><a href="https://github.com/egohygiene/reflector" rel="noopener">Reflector</a></h3>
+            <p>Research software for governed, auditable AI-assisted engineering, with a manuscript workflow and DOI-backed archive.</p>
+            <a class="project-link" href="https://github.com/egohygiene/reflector" rel="noopener">
+              View public repository <span aria-hidden="true">→</span>
             </a>
           </li>
+
+          <li class="project-card" data-evidence-id="repo-renderflow">
+            <h3><a href="https://github.com/egohygiene/renderflow" rel="noopener">Renderflow</a></h3>
+            <p>A Rust, specification-driven document rendering engine built around graph-planned transformations.</p>
+            <a class="project-link" href="https://github.com/egohygiene/renderflow" rel="noopener">
+              View public repository <span aria-hidden="true">→</span>
+            </a>
+          </li>
+
+          <li class="project-card" data-evidence-id="repo-relay">
+            <h3><a href="https://github.com/egohygiene/relay" rel="noopener">Relay</a></h3>
+            <p>Versioned GitHub Actions, reusable workflows, and CI contracts for the Ego Hygiene ecosystem.</p>
+            <a class="project-link" href="https://github.com/egohygiene/relay" rel="noopener">
+              View public repository <span aria-hidden="true">→</span>
+            </a>
+          </li>
+
+          <li class="project-card" data-evidence-id="repo-optiflow">
+            <h3><a href="https://github.com/egohygiene/optiflow" rel="noopener">Optiflow</a></h3>
+            <p>A local-first, read-only Rust CLI for media inventory and evidence-backed duplicate planning.</p>
+            <a class="project-link" href="https://github.com/egohygiene/optiflow" rel="noopener">
+              View public repository <span aria-hidden="true">→</span>
+            </a>
+          </li>
+
         </ul>
+      </section>
+
+      <section id="approach" aria-labelledby="approach-heading">
+        <p class="eyebrow">Responsible AI-assisted work</p>
+        <h2 id="approach-heading">How I work</h2>
+        <p class="feature-statement">I use AI-assisted implementation inside bounded, reviewable workflows. I own the architecture, constraints, review, validation, and release decisions.</p>
+      </section>
+
+      <section id="lab" aria-labelledby="lab-heading">
+        <p class="eyebrow">Open engineering</p>
+        <h2 id="lab-heading">Ego Hygiene</h2>
+        <div class="lab-panel">
+          <p>Ego Hygiene is Alan Szmyt's public engineering and research lab.</p>
+          <p>Platform engineering, developer experience, research software, and creative technology.</p>
+          <a href="https://github.com/egohygiene" rel="noopener">
+            Explore the public lab <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="creative" aria-labelledby="creative-heading">
+        <p class="eyebrow">Creative practice</p>
+        <h2 id="creative-heading">Music</h2>
         <p>
-          <a href="https://github.com/szmyty/szmyty" rel="noopener">
-            View the source for this site
+          <a href="https://soundcloud.com/playfunction" rel="noopener">
+            Listen on the verified SoundCloud profile
+            <span aria-hidden="true">→</span>
           </a>
         </p>
       </section>
 
+      <section id="contact" aria-labelledby="contact-heading">
+        <p class="eyebrow">Get in touch</p>
+        <h2 id="contact-heading">Contact</h2>
+        <p>
+          For professional inquiries, use the
+          <a href="https://szmyty.vercel.app" rel="noopener">contact route on my portfolio</a>.
+          For project-specific questions, open an issue in the relevant public
+          repository.
+        </p>
+        <p class="source-links">
+          <a href="https://github.com/szmyty/szmyty" rel="noopener">View this site's source</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/szmyty/szmyty/blob/master/LICENSE" rel="noopener">MIT License</a>
+        </p>
+      </section>
     </main>
 
     <footer role="contentinfo">
-      <p>
-        &copy; 2026 Alan Szmyt.
-        <a href="https://github.com/szmyty/szmyty/blob/main/LICENSE" rel="noopener">MIT License</a>.
-      </p>
+      <p>Alan Szmyt · Evidence-backed profile companion.</p>
     </footer>
 
     <script src="js/main.js"></script>

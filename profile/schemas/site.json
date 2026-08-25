@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/szmyty/szmyty/profile/schemas/site.json",
+  "title": "SiteCompanionConfig",
+  "description": "Schema for profile/content/site.yml",
+  "type": "object",
+  "required": ["schema_version", "site", "evidence", "selected_systems"],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "site": {
+      "type": "object",
+      "required": ["canonical_url", "source_url", "default_branch"],
+      "properties": {
+        "canonical_url": {
+          "type": "string",
+          "pattern": "^https://.+/$"
+        },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https://github\\.com/[^/]+/[^/]+$"
+        },
+        "default_branch": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._/-]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "name",
+        "role",
+        "positioning",
+        "lanes",
+        "ai_disclosure",
+        "public_lab",
+        "github",
+        "contact",
+        "creative"
+      ],
+      "properties": {
+        "name": {"$ref": "#/definitions/evidence_id"},
+        "role": {"$ref": "#/definitions/evidence_id"},
+        "positioning": {"$ref": "#/definitions/evidence_id"},
+        "lanes": {"$ref": "#/definitions/evidence_id"},
+        "ai_disclosure": {"$ref": "#/definitions/evidence_id"},
+        "public_lab": {"$ref": "#/definitions/evidence_id"},
+        "github": {"$ref": "#/definitions/evidence_id"},
+        "contact": {"$ref": "#/definitions/evidence_id"},
+        "creative": {"$ref": "#/definitions/evidence_id"}
+      },
+      "additionalProperties": false
+    },
+    "selected_systems": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["name", "evidence_id"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "evidence_id": {"$ref": "#/definitions/evidence_id"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "definitions": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    }
+  },
+  "additionalProperties": false
+}

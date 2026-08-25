@@ -383,12 +383,15 @@ records:
       Optiflow, the writing profile, and the .play() music profile.
 
   - id: profile-ai-disclosure
-    claim: "Uses AI-assisted implementation inside bounded, reviewable workflows while owning architecture, constraints, review, validation, and release decisions"
+    claim: >-
+      I use AI-assisted implementation inside bounded, reviewable workflows. I
+      own the architecture, constraints, review, validation, and release
+      decisions
     evidence_type: url
     url: "https://github.com/szmyty/szmyty/issues/141"
     status: verified
     sensitivity: public
-    last_reviewed: "2026-08-21"
+    last_reviewed: "2026-08-25"
     notes: >
       Owner-approved disclosure. Do not imply that generated volume alone
       demonstrates quality, judgment, adoption, or impact.

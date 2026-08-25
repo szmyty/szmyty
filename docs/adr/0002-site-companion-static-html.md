@@ -1,156 +1,110 @@
-# ADR 0002: Profile Companion Site — Static HTML over Vite/React
+# ADR 0002: Profile Companion Site — Generated Static HTML
 
-**Status:** Accepted
+**Status:** Accepted, amended 2026-08-25
+
 **Date:** 2026-08-09
+
 **Stable queue key:** `szmyty-profile-rebuild-11`
-**Closes:** szmyty/szmyty#76
+
+**Original issue:** `szmyty/szmyty#76`
+
+**Current-content amendment:** `szmyty/szmyty#169`
 
 ---
 
 ## Context
 
-The incomplete staged dashboard under `.staging/dashboard-app/` is a Vite +
-React + TypeScript application scaffolded from the default Vite starter.  It
-includes:
+The original companion-site work replaced an incomplete Vite and React starter
+with a framework-free page under `site/`. That kept the runtime small and the
+deployment simple, but the first implementation left its professional copy,
+repository links, metadata, and architecture narrative hand-authored in
+`site/index.html`.
 
-- Axios for runtime HTTP requests to profile APIs.
-- Default Vite/React starter copy and placeholder assets.
-- No real profile content.
-- No accessibility, performance, or build-time validation.
+By August 2026, that copy had drifted from the approved README and evidence
+catalog. It included retired repositories, an unsupported staff-level title, a
+placeholder architecture diagram, a stale SoundCloud path, a missing social
+card image, and a license URL bound to the wrong default branch. The page could
+no longer meet its stated same-source contract.
 
-The issue (`szmyty/szmyty#76`) requires a companion site that:
-
-1. Consumes the same reviewed public content used by the README.
-2. Works as a static deployment with no browser-side calls to private APIs.
-3. Contains no health, biometric, location, or weather modules.
-4. Includes responsive, keyboard, reduced-motion, high-contrast, and
-   focus-state behavior.
-5. Defines build-time schema validation and fails on unreviewed/private data.
-6. Adds metadata: title, description, canonical URL, Open Graph/Twitter cards,
-   favicon, robots policy, and structured data.
-7. Remains optional; the README must still tell the complete professional story.
-8. Is deployed only through a dedicated least-privilege GitHub Pages workflow.
-
----
+The companion still provides useful responsive navigation, theme controls, and
+structured metadata, so retiring it is not necessary if drift is prevented.
 
 ## Decision
 
-**Reject the Vite/React application** in `.staging/dashboard-app/` and instead
-implement the companion site as **plain HTML + CSS** under `site/`.
+Keep the companion as plain HTML, CSS, and progressive JavaScript, but treat
+`site/index.html` as a generated and committed artifact.
 
-### Rationale
-
-| Criterion | Vite/React | Static HTML/CSS |
-|-----------|-----------|-----------------|
-| Build complexity | High — bundler, TS compiler, JSX transform | Low — no bundler required |
-| JavaScript footprint | Large (React runtime) | Zero or minimal (progressive enhancement only) |
-| No-JavaScript experience | Blank page | Full content |
-| Accessibility baseline | Requires explicit ARIA instrumentation | Semantic HTML is accessible by default |
-| Reduced-motion | Requires `prefers-reduced-motion` implementation across components | Single CSS rule |
-| Content-source coupling | Runtime fetch or bundled duplication | Build-time template render from the same `profile/` inputs |
-| Default starter junk | Present in `.staging/dashboard-app/` | None |
-| Runtime Axios calls | Present in `.staging/dashboard-app/` | None |
-| Deployment readiness | Requires CI build step | Single `site/index.html` is immediately deployable |
-| Browser support | Depends on bundler target | Unrestricted |
-
-### What the static site provides that the README cannot
-
-- Richer visual layout (CSS grid, responsive typography, dark/light theme).
-- Animated but reduced-motion-safe transitions.
-- Keyboard-navigable project cards and architecture diagrams.
-- Open Graph / Twitter card metadata.
-- Structured data (JSON-LD for `Person` and `SoftwareApplication`).
-- Sitemap and canonical URL.
-
-### Explicitly rejected
-
-| Rejected feature | Reason |
-|-----------------|--------|
-| Axios or `fetch()` to private APIs | No browser network call may require a secret |
-| React / Vue / Svelte runtime | No interactivity requires a component framework |
-| Canvas-only architecture diagrams | Must be keyboard-inspectable and have alt text |
-| Analytics | Requires a separate, explicit privacy decision |
-| Health / biometric / location / weather modules | Prohibited by issue requirements |
-| Default Vite starter assets | Not relevant to this profile |
-
----
-
-## Architecture: `site/` boundary
-
-```
-site/
-  index.html          # Single entry point; all sections in semantic HTML
-  css/
-    tokens.css        # Design tokens (color, typography, spacing, motion)
-    base.css          # Reset and baseline styles
-    layout.css        # Responsive grid and section layout
-    components.css    # Cards, badges, code blocks, diagrams
-    theme.css         # Light/dark theme via CSS custom properties
-    print.css         # Print stylesheet
-  js/
-    main.js           # Progressive-enhancement only; no framework
-  assets/
-    favicon.svg       # Profile mark / favicon
-    og-image.png      # Open Graph image (1200×630)
-  data/
-    profile.json      # Build-time-generated; derived from profile/ inputs
-  robots.txt          # Disallow nothing; allow crawlers
-  sitemap.xml         # Single-page sitemap
-  manifest.webmanifest  # PWA manifest (optional; name, icons, display)
+```text
+profile/content/evidence.yml
+          +
+profile/content/site.yml
+          +
+profile/templates/site-index.html.j2
+          |
+          v
+tools/modules/site_companion.py
+          |
+          v
+site/index.html
 ```
 
-### Information architecture (section order)
+The responsibilities are deliberately separate:
 
-1. **Hero and positioning** — name, title, one-line summary, primary CTA.
-2. **Selected impact** — three to five measurable outcomes from the README.
-3. **Flagship system case studies** — project cards with inspectable links.
-4. **Ego Hygiene architecture** — interactive but accessible diagram (SVG +
-   ARIA roles, keyboard navigation, text alternative).
-5. **Capabilities and experience** — skill areas aligned to the README.
-6. **Creative technology / music** — SoundCloud embed or text link only.
-7. **Contact** — GitHub link, email, no tracking pixels.
+| Input | Responsibility |
+|---|---|
+| `evidence.yml` | Reviewed claim text, verification status, sensitivity, and public proof URL |
+| `site.yml` | Evidence-ID selection, canonical URL, source repository, and default branch |
+| `site-index.html.j2` | Semantic presentation and metadata structure |
+| `site_companion.py` | Validation, evidence resolution, HTML escaping, and deterministic rendering |
+| `site/index.html` | Immediately deployable build artifact |
 
-### Content ownership
+The generator rejects evidence that is missing, not verified, not public, or
+missing a URL where the page needs a destination. The Pages workflow runs the
+generator in `--check` mode and fails if the committed HTML is stale.
 
-- All text is rendered at build time from `profile/content/` YAML inputs.
-- The build step fails if any required content key is missing or fails schema
-  validation (`profile/schemas/`).
-- No content is duplicated manually between `README.md` and `site/index.html`.
+## Information architecture
 
-### Performance budgets
+The current page is intentionally narrower than the original draft:
 
-| Asset category | Budget |
-|---------------|--------|
-| HTML | ≤ 50 KB uncompressed |
-| CSS (total) | ≤ 30 KB uncompressed |
-| JS (total) | ≤ 10 KB uncompressed |
-| Images (total) | ≤ 300 KB |
-| Fonts | System fonts preferred; web fonts ≤ 50 KB per face |
-| LCP | ≤ 2.5 s on 4G simulated |
-| CLS | < 0.1 |
-| FID/INP | ≤ 200 ms |
+1. Approved positioning and portfolio/GitHub actions.
+2. Reflector, Renderflow, Relay, and Optiflow as the current proof set.
+3. The approved AI-assisted-work disclosure.
+4. The public Ego Hygiene lab relationship and approved professional lanes.
+5. Verified creative-work and professional-contact destinations.
+6. Repository source and a default-branch-safe license link.
 
-### Accessibility requirements
+The speculative architecture diagram and generic capability claims were
+removed. Future architecture claims require their own verified public evidence
+before they can enter the projection.
 
-- WCAG 2.1 AA minimum.
-- All interactive elements keyboard-reachable with visible focus indicator.
-- `prefers-reduced-motion` removes or stills all animations.
-- `prefers-contrast: more` switches to high-contrast palette.
-- Semantic landmarks: `<header>`, `<main>`, `<nav>`, `<section>`, `<footer>`.
-- All images have meaningful `alt` text or `role="presentation"` if decorative.
-- Color is not the sole carrier of information.
+## Metadata and asset policy
 
----
+- The page title, description, Open Graph fields, Twitter fields, and JSON-LD
+  use the approved identity and positioning records.
+- The canonical URL is declared once in `site.yml`.
+- Social-card image fields are omitted until a reviewed image is committed.
+- Repository file links derive their branch from `site.yml`; they must not
+  assume `main`.
+- Local asset references and page anchors are covered by deterministic tests.
+
+## Runtime and privacy boundaries
+
+- No React, Vue, Svelte, or other component runtime.
+- No browser-side `fetch()` or Axios calls to private APIs.
+- No analytics or tracking pixels.
+- No health, biometric, location, or weather content.
+- No direct personal mailbox; professional inquiries route through the public
+  portfolio.
+- The document remains usable without JavaScript. JavaScript only enhances the
+  theme control and active navigation state.
 
 ## Consequences
 
-- `.staging/dashboard-app/` is archived (marked `ARCHIVE` in
-  `docs/MIGRATION.md`); the directory remains as historical evidence but is
-  not promoted.
-- A new `site/` directory is created with the documented structure.
-- The site is deployed only through `.github/workflows/pages.yml`, which keeps
-  GitHub Pages permissions isolated to the deployment job.
-- Future JavaScript enrichment (e.g., a filter or search widget) may be added
-  via vanilla JS in `site/js/main.js` without introducing a framework.
-- If requirements change to require a framework, a new ADR must be filed before
-  any framework code is merged.
+- Stable copy is edited in the evidence catalog, not in generated HTML.
+- Selecting a different public system requires a reviewed evidence record and a
+  small `site.yml` projection change.
+- Contributors must regenerate `site/index.html` after relevant input changes.
+- CI prevents source/output drift before a Pages deployment.
+- The static deployment remains simple, cacheable, accessible, and independent
+  of private services.
+- A framework or runtime data source still requires a new ADR.

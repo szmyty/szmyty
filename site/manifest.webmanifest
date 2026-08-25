@@ -1,7 +1,7 @@
 {
   "name": "Alan Szmyt",
   "short_name": "szmyty",
-  "description": "Alan Szmyt — Software Architect profile companion site",
+  "description": "Alan Szmyt — Software Engineer profile companion site",
   "start_url": "/szmyty/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -63,7 +63,8 @@ Useful targeted tests:
 poetry run python -m pytest tests/test_weather.py
 poetry run python -m pytest tests/test_steam_cards.py
 poetry run python -m pytest tests/test_oura_trends.py
-poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
+poetry run python -m tools.modules.site_companion --check
+poetry run python -m pytest tests/test_site_companion.py tests/test_workflows.py
 ```
 
 Live providers are never required by tests. Provider calls must be mocked or
@@ -245,7 +246,7 @@ and last-known-good fallback.
 | YAML lint | `poetry run yamllint .github/workflows .github/dependabot.yml Taskfile.yml` |
 | Tests | `poetry run python -m pytest` |
 | README render | `poetry run python -m tools.modules.update_readme` |
-| Pages checks | `poetry run python -m pytest tests/test_workflows.py -k "workflow or site"` |
+| Pages checks | `task validate-site` |
 
 `act` is best-effort only. Hosted GitHub token behavior, secrets, scheduled-event
 payloads, Pages OIDC, and deployment environments are not fully reproducible

@@ -75,9 +75,10 @@ tasks:
       - python -m tools.modules.update_readme
 
   validate-site:
-    desc: Validate Pages workflow and committed site inputs
+    desc: Validate evidence-backed Pages output and deployment inputs
     preconditions:
       - sh: command -v pytest >/dev/null 2>&1
         msg: "pytest is not installed. Run: poetry install --with test"
     cmds:
-      - python -m pytest tests/test_workflows.py -k "workflow or site"
+      - python -m tools.modules.site_companion --check
+      - python -m pytest tests/test_site_companion.py tests/test_workflows.py

@@ -33,6 +33,13 @@
     }
   }
 
+  function getPreferredTheme() {
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  }
+
   function applyTheme(theme) {
     if (theme === "dark") {
       html.setAttribute("data-theme", "dark");
@@ -41,24 +48,26 @@
     } else {
       html.removeAttribute("data-theme");
     }
+    const effectiveTheme = theme || getPreferredTheme();
     if (themeButton) {
-      themeButton.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+      themeButton.setAttribute(
+        "aria-pressed",
+        effectiveTheme === "dark" ? "true" : "false"
+      );
       themeButton.setAttribute(
         "aria-label",
-        theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+        effectiveTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"
       );
     }
   }
 
-  // Apply stored preference on load (before first paint where possible).
+  // Apply stored or operating-system preference on load.
   const storedTheme = getStoredTheme();
-  if (storedTheme) {
-    applyTheme(storedTheme);
-  }
+  applyTheme(storedTheme);
 
   if (themeButton) {
     themeButton.addEventListener("click", function () {
-      const current = html.getAttribute("data-theme");
+      const current = html.getAttribute("data-theme") || getPreferredTheme();
       const next = current === "dark" ? "light" : "dark";
       applyTheme(next);
       setStoredTheme(next);

@@ -313,7 +313,8 @@ a privacy incident under the current #149 contract.
 3. Validate:
 
    ```sh
-   poetry run python -m pytest tests/test_workflows.py -k "workflow or site"
+   poetry run python -m tools.modules.site_companion --check
+   poetry run python -m pytest tests/test_site_companion.py tests/test_workflows.py
    ```
 
 4. Commit the rollback with a conventional commit and let `pages.yml` redeploy.
