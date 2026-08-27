@@ -6,8 +6,14 @@
     {
       "name": "Agent 64: Spies Never Die",
       "appid": 1574480,
-      "playtime_2weeks": 914,
+      "playtime_2weeks": 927,
       "store_url": "https://store.steampowered.com/app/1574480/"
+    },
+    {
+      "name": "Monster Girls: You Can't Say No 🔞",
+      "appid": 4588700,
+      "playtime_2weeks": 60,
+      "store_url": "https://store.steampowered.com/app/4588700/"
     },
     {
       "name": "Post Void",
@@ -23,5 +29,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-08-26T06:10:37.876580+00:00"
+  "data_at": "2026-08-27T09:04:56.424417+00:00"
 }
