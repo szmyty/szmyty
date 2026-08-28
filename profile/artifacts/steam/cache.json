@@ -10,16 +10,16 @@
       "store_url": "https://store.steampowered.com/app/1574480/"
     },
     {
+      "name": "Post Void",
+      "appid": 1285670,
+      "playtime_2weeks": 94,
+      "store_url": "https://store.steampowered.com/app/1285670/"
+    },
+    {
       "name": "Monster Girls: You Can't Say No 🔞",
       "appid": 4588700,
       "playtime_2weeks": 60,
       "store_url": "https://store.steampowered.com/app/4588700/"
-    },
-    {
-      "name": "Post Void",
-      "appid": 1285670,
-      "playtime_2weeks": 18,
-      "store_url": "https://store.steampowered.com/app/1285670/"
     },
     {
       "name": "FLESHCANCER",
@@ -29,5 +29,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-08-27T09:04:56.424417+00:00"
+  "data_at": "2026-08-28T09:09:01.442645+00:00"
 }
