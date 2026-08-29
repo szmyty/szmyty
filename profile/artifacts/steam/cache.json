@@ -6,14 +6,20 @@
     {
       "name": "Agent 64: Spies Never Die",
       "appid": 1574480,
-      "playtime_2weeks": 927,
+      "playtime_2weeks": 833,
       "store_url": "https://store.steampowered.com/app/1574480/"
     },
     {
       "name": "Post Void",
       "appid": 1285670,
-      "playtime_2weeks": 94,
+      "playtime_2weeks": 100,
       "store_url": "https://store.steampowered.com/app/1285670/"
+    },
+    {
+      "name": "Cat Quest III",
+      "appid": 2305840,
+      "playtime_2weeks": 75,
+      "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
       "name": "Monster Girls: You Can't Say No 🔞",
@@ -22,12 +28,12 @@
       "store_url": "https://store.steampowered.com/app/4588700/"
     },
     {
-      "name": "FLESHCANCER",
-      "appid": 4484420,
-      "playtime_2weeks": 1,
-      "store_url": "https://store.steampowered.com/app/4484420/"
+      "name": "Shadow Man Remastered",
+      "appid": 1413870,
+      "playtime_2weeks": 29,
+      "store_url": "https://store.steampowered.com/app/1413870/"
     }
   ],
   "data_source": "live",
-  "data_at": "2026-08-28T09:09:01.442645+00:00"
+  "data_at": "2026-08-29T06:11:53.960776+00:00"
 }
