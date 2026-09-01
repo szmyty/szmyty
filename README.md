@@ -86,12 +86,12 @@ These systems meet inside [**Ego Hygiene**](https://github.com/egohygiene), my p
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
   <img
     src="./profile/artifacts/github-dashboard/card-light.svg"
-    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6564 publicly starred repositories, releases, and language distribution for @szmyty."
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6567 publicly starred repositories, releases, and language distribution for @szmyty."
     width="100%"
   >
 </picture>
 
-_First-party public GitHub data · trailing 365 days · refreshed 2026-08-31. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
+_First-party public GitHub data · trailing 365 days · refreshed 2026-09-01. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
 <!-- END:github-dashboard -->
 
 ---
@@ -111,7 +111,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Overcast, 68 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Mainly clear, 65 degrees Fahrenheit."
     width="100%"
   >
 </picture>
