@@ -12,7 +12,7 @@
     {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 356,
+      "playtime_2weeks": 402,
       "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-03T06:14:54.414228+00:00"
+  "data_at": "2026-09-04T06:14:02.181059+00:00"
 }
