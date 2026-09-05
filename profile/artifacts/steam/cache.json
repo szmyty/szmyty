@@ -4,16 +4,16 @@
   "steam_level": 11,
   "recent_games": [
     {
-      "name": "Agent 64: Spies Never Die",
-      "appid": 1574480,
-      "playtime_2weeks": 617,
-      "store_url": "https://store.steampowered.com/app/1574480/"
-    },
-    {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 402,
+      "playtime_2weeks": 541,
       "store_url": "https://store.steampowered.com/app/2305840/"
+    },
+    {
+      "name": "Agent 64: Spies Never Die",
+      "appid": 1574480,
+      "playtime_2weeks": 522,
+      "store_url": "https://store.steampowered.com/app/1574480/"
     },
     {
       "name": "Post Void",
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-04T06:14:02.181059+00:00"
+  "data_at": "2026-09-05T06:12:38.073727+00:00"
 }
