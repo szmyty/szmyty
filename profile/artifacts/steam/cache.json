@@ -6,13 +6,13 @@
     {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 541,
+      "playtime_2weeks": 607,
       "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
       "name": "Agent 64: Spies Never Die",
       "appid": 1574480,
-      "playtime_2weeks": 522,
+      "playtime_2weeks": 501,
       "store_url": "https://store.steampowered.com/app/1574480/"
     },
     {
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-05T06:12:38.073727+00:00"
+  "data_at": "2026-09-06T06:12:33.242086+00:00"
 }
