@@ -12,13 +12,13 @@
     {
       "name": "Agent 64: Spies Never Die",
       "appid": 1574480,
-      "playtime_2weeks": 159,
+      "playtime_2weeks": 131,
       "store_url": "https://store.steampowered.com/app/1574480/"
     },
     {
       "name": "Post Void",
       "appid": 1285670,
-      "playtime_2weeks": 98,
+      "playtime_2weeks": 81,
       "store_url": "https://store.steampowered.com/app/1285670/"
     },
     {
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-07T06:17:28.892931+00:00"
+  "data_at": "2026-09-08T06:13:59.031550+00:00"
 }
