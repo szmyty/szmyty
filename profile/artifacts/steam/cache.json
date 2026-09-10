@@ -12,7 +12,7 @@
     {
       "name": "Cavern of Dreams",
       "appid": 2059660,
-      "playtime_2weeks": 163,
+      "playtime_2weeks": 280,
       "store_url": "https://store.steampowered.com/app/2059660/"
     },
     {
@@ -22,18 +22,18 @@
       "store_url": "https://store.steampowered.com/app/1285670/"
     },
     {
-      "name": "Agent 64: Spies Never Die",
-      "appid": 1574480,
-      "playtime_2weeks": 73,
-      "store_url": "https://store.steampowered.com/app/1574480/"
+      "name": "Shadow Man Remastered",
+      "appid": 1413870,
+      "playtime_2weeks": 29,
+      "store_url": "https://store.steampowered.com/app/1413870/"
     },
     {
-      "name": "Monster Girls: You Can't Say No 🔞",
-      "appid": 4588700,
-      "playtime_2weeks": 60,
-      "store_url": "https://store.steampowered.com/app/4588700/"
+      "name": "Don't Stop, Girlypop!",
+      "appid": 2610650,
+      "playtime_2weeks": 12,
+      "store_url": "https://store.steampowered.com/app/2610650/"
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-09T06:13:41.135588+00:00"
+  "data_at": "2026-09-10T10:26:24.507241+00:00"
 }
