@@ -6,34 +6,28 @@
     {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 671,
+      "playtime_2weeks": 650,
       "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
       "name": "Cavern of Dreams",
       "appid": 2059660,
-      "playtime_2weeks": 307,
+      "playtime_2weeks": 434,
       "store_url": "https://store.steampowered.com/app/2059660/"
     },
     {
-      "name": "Shadow Man Remastered",
-      "appid": 1413870,
-      "playtime_2weeks": 29,
-      "store_url": "https://store.steampowered.com/app/1413870/"
+      "name": "Fuzz Dungeon",
+      "appid": 1506080,
+      "playtime_2weeks": 7,
+      "store_url": "https://store.steampowered.com/app/1506080/"
     },
     {
-      "name": "Don't Stop, Girlypop!",
-      "appid": 2610650,
-      "playtime_2weeks": 12,
-      "store_url": "https://store.steampowered.com/app/2610650/"
-    },
-    {
-      "name": "Eclipsium",
-      "appid": 2419670,
-      "playtime_2weeks": 9,
-      "store_url": "https://store.steampowered.com/app/2419670/"
+      "name": "AlienAfterlife",
+      "appid": 1014570,
+      "playtime_2weeks": 1,
+      "store_url": "https://store.steampowered.com/app/1014570/"
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-11T10:28:53.096806+00:00"
+  "data_at": "2026-09-12T09:57:12.968102+00:00"
 }
