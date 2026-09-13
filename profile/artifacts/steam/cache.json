@@ -6,13 +6,13 @@
     {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 650,
+      "playtime_2weeks": 714,
       "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
       "name": "Cavern of Dreams",
       "appid": 2059660,
-      "playtime_2weeks": 434,
+      "playtime_2weeks": 456,
       "store_url": "https://store.steampowered.com/app/2059660/"
     },
     {
@@ -22,12 +22,18 @@
       "store_url": "https://store.steampowered.com/app/1506080/"
     },
     {
-      "name": "AlienAfterlife",
-      "appid": 1014570,
-      "playtime_2weeks": 1,
-      "store_url": "https://store.steampowered.com/app/1014570/"
+      "name": "Valkie 64",
+      "appid": 2190590,
+      "playtime_2weeks": 5,
+      "store_url": "https://store.steampowered.com/app/2190590/"
+    },
+    {
+      "name": "JEF",
+      "appid": 1188760,
+      "playtime_2weeks": 2,
+      "store_url": "https://store.steampowered.com/app/1188760/"
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-12T09:57:12.968102+00:00"
+  "data_at": "2026-09-13T10:57:58.529253+00:00"
 }
