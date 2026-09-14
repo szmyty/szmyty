@@ -6,34 +6,34 @@
     {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 714,
+      "playtime_2weeks": 697,
       "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
       "name": "Cavern of Dreams",
       "appid": 2059660,
-      "playtime_2weeks": 456,
+      "playtime_2weeks": 510,
       "store_url": "https://store.steampowered.com/app/2059660/"
+    },
+    {
+      "name": "Eclipsium",
+      "appid": 2419670,
+      "playtime_2weeks": 96,
+      "store_url": "https://store.steampowered.com/app/2419670/"
     },
     {
       "name": "Fuzz Dungeon",
       "appid": 1506080,
-      "playtime_2weeks": 7,
+      "playtime_2weeks": 53,
       "store_url": "https://store.steampowered.com/app/1506080/"
-    },
-    {
-      "name": "Valkie 64",
-      "appid": 2190590,
-      "playtime_2weeks": 5,
-      "store_url": "https://store.steampowered.com/app/2190590/"
     },
     {
       "name": "JEF",
       "appid": 1188760,
-      "playtime_2weeks": 2,
+      "playtime_2weeks": 26,
       "store_url": "https://store.steampowered.com/app/1188760/"
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-13T10:57:58.529253+00:00"
+  "data_at": "2026-09-14T11:33:12.394978+00:00"
 }
