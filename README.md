@@ -47,6 +47,20 @@
 
 ---
 
+## Ego Hygiene — platform progress
+
+<a href="https://github.com/egohygiene" title="Explore the Ego Hygiene organization">
+  <img
+    src="assets/profile/egohygiene-platform-progress.webp"
+    alt="High-level Ego Hygiene roadmap visual showing Vision, Foundation, and Automation as established; Intelligence as active; and Productization and Scale as next stages."
+    width="100%"
+  >
+</a>
+
+_Human-maintained roadmap framing, not a computed completion score. [Approved scope and public evidence →](https://github.com/szmyty/szmyty/issues/179)_
+
+---
+
 ## Selected systems
 
 <table>
