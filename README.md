@@ -100,12 +100,12 @@ _Human-maintained roadmap framing, not a computed completion score. [Approved sc
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/github-dashboard/card-light.svg">
   <img
     src="./profile/artifacts/github-dashboard/card-light.svg"
-    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6574 publicly starred repositories, releases, and language distribution for @szmyty."
+    alt="GitHub Engineering dashboard showing trailing-year public contributions, streaks, repository inventory, 6577 publicly starred repositories, releases, and language distribution for @szmyty."
     width="100%"
   >
 </picture>
 
-_First-party public GitHub data · trailing 365 days · refreshed 2026-09-16. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
+_First-party public GitHub data · trailing 365 days · refreshed 2026-09-17. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
 <!-- END:github-dashboard -->
 
 ---
@@ -125,7 +125,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Clear sky, 65 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Clear sky, 63 degrees Fahrenheit."
     width="100%"
   >
 </picture>
