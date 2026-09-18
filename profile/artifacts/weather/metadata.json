@@ -1,10 +1,10 @@
 {
   "module_name": "weather",
   "version": "1.0",
-  "generated_at": "2026-09-18T18:31:23.826571+00:00",
+  "generated_at": "2026-09-18T23:20:05.650599+00:00",
   "state": "fresh",
   "data_source": "live",
-  "data_at": "2026-09-18T18:31:23.825672+00:00",
+  "data_at": "2026-09-18T23:20:05.649727+00:00",
   "data_hash": null,
   "ttl_seconds": null,
   "is_stale": false,
