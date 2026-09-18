@@ -12,7 +12,7 @@
     {
       "name": "Cat Quest III",
       "appid": 2305840,
-      "playtime_2weeks": 433,
+      "playtime_2weeks": 388,
       "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
@@ -24,7 +24,7 @@
     {
       "name": "Fuzz Dungeon",
       "appid": 1506080,
-      "playtime_2weeks": 140,
+      "playtime_2weeks": 182,
       "store_url": "https://store.steampowered.com/app/1506080/"
     },
     {
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-17T10:51:00.643311+00:00"
+  "data_at": "2026-09-18T10:26:03.891818+00:00"
 }
