@@ -10,21 +10,21 @@
       "store_url": "https://store.steampowered.com/app/2059660/"
     },
     {
-      "name": "Cat Quest III",
-      "appid": 2305840,
-      "playtime_2weeks": 248,
-      "store_url": "https://store.steampowered.com/app/2305840/"
-    },
-    {
       "name": "Eclipsium",
       "appid": 2419670,
-      "playtime_2weeks": 191,
+      "playtime_2weeks": 199,
       "store_url": "https://store.steampowered.com/app/2419670/"
+    },
+    {
+      "name": "Cat Quest III",
+      "appid": 2305840,
+      "playtime_2weeks": 182,
+      "store_url": "https://store.steampowered.com/app/2305840/"
     },
     {
       "name": "Fuzz Dungeon",
       "appid": 1506080,
-      "playtime_2weeks": 182,
+      "playtime_2weeks": 174,
       "store_url": "https://store.steampowered.com/app/1506080/"
     },
     {
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-19T10:10:32.494119+00:00"
+  "data_at": "2026-09-20T10:29:30.014925+00:00"
 }
