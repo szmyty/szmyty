@@ -105,7 +105,7 @@ _Human-maintained roadmap framing, not a computed completion score. [Approved sc
   >
 </picture>
 
-_First-party public GitHub data · trailing 365 days · refreshed 2026-09-20. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
+_First-party public GitHub data · trailing 365 days · refreshed 2026-09-21. Starred repositories are shown as an exploration index, not an authorship or proficiency claim._
 <!-- END:github-dashboard -->
 
 ---
@@ -125,7 +125,7 @@ These cards are generated first-party from public or explicitly approved API dat
   <source media="(prefers-color-scheme: light)" srcset="./profile/artifacts/weather/card-light.svg">
   <img
     src="./profile/artifacts/weather/card-light.svg"
-    alt="Current weather for Boston, Massachusetts: Drizzle, 60 degrees Fahrenheit."
+    alt="Current weather for Boston, Massachusetts: Overcast, 55 degrees Fahrenheit."
     width="100%"
   >
 </picture>
