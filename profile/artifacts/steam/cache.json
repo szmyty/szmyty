@@ -6,13 +6,13 @@
     {
       "name": "Cavern of Dreams",
       "appid": 2059660,
-      "playtime_2weeks": 510,
+      "playtime_2weeks": 492,
       "store_url": "https://store.steampowered.com/app/2059660/"
     },
     {
       "name": "Eclipsium",
       "appid": 2419670,
-      "playtime_2weeks": 313,
+      "playtime_2weeks": 325,
       "store_url": "https://store.steampowered.com/app/2419670/"
     },
     {
@@ -35,5 +35,5 @@
     }
   ],
   "data_source": "live",
-  "data_at": "2026-09-21T11:46:41.759233+00:00"
+  "data_at": "2026-09-22T10:49:34.665667+00:00"
 }
